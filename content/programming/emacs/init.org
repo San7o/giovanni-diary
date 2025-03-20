@@ -1,0 +1,630 @@
+#+property: header-args :tangle "init.el"
+#+startup: content indent
+
+* Welcome
+
+Welcome to my humble emacs configuration file. This is my daily emacs
+setup, do not expect anything remarcable, just some lisp code :)
+
+Use =M-x load-file= to load this configuration. You can also use
+=eval-buffer= inside this buffer.
+
+* Repositories
+
+Those are the usual emacs repositories. Once in a while, you may have
+to run =M-x package-refresh-contents= to update the repositories,
+expecially if the package manager can find a package but not Its
+sources during fetching.
+
+#+begin_src emacs-lisp
+(require 'package)
+(setq package-archives '(
+	     ("GNU" . "http://elpa.gnu.org/packages/")
+	     ("MELPA" . "http://melpa.org/packages/")
+	     ))
+(unless package--initialized (package-initialize))
+#+end_src
+
+* Theme
+
+I really like the high-contrast =modus-vivendi= theme which is
+built in into emacs. It follows the higher standards of redibility,
+they are also well customizable.
+
+You can switch between light and dark mode with =modus-themes-toggle=.
+Yes, sometimes I use light mode when I am outside, and I never feel
+ashamed about it, I can do whatever I want.
+
+#+begin_src emacs-lisp
+  (load-theme 'modus-vivendi t)
+  ;; Default theme is white, unless the time is after 18 (6 pm)
+  (when (< (decoded-time-hour (decode-time)) 18)
+    (modus-themes-toggle))
+  
+  (customize-set-variable 'modus-themes-common-palette-overrides
+                          `(
+                            ;; Make the mode-line borderless
+                            (bg-mode-line-active bg-inactive)
+                            (fg-mode-line-active fg-main)
+                            (bg-mode-line-inactive bg-inactive)
+                            (fg-mode-line-inactive fg-dim)
+                            (border-mode-line-active bg-inactive)
+                            (border-mode-line-inactive bg-nactive)
+                            ))
+#+end_src
+
+* Packages
+** Use package
+
+I use =use-package= to manage all my packages.
+
+#+begin_src emacs-lisp
+(when (< emacs-major-version 29)
+  (unless (package-installed-p 'use-package)
+    ;;(unless package-archive-contents
+     ;; (package-refresh-contents))
+    (package-install 'use-package)))
+#+end_src
+
+** Org mode
+
+Org mode settings. I use org mode everywhere in my life.
+
+Run =org-todo= to update a TODO keywork.
+#+begin_src emacs-lisp
+  (use-package org
+    :ensure nil ; do not try to install it as it is built-in
+    :config
+    (setq org-todo-keywords
+          '((sequence "TODO(t)" "WAIT(w!)" "|" "CANCEL(c!)" "DONE(d!)"))))
+#+end_src
+
+** Markdown mode
+
+I use markdown mode when editing markdown document, mostly on
+github because that is the defacto standard format to use.
+
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :ensure t)
+#+end_src
+
+** ggtags
+
+GNU Global on emacs.
+
+Shortcuts:
+- =C-c f=: jump to definition.
+
+#+begin_src emacs-lisp
+  (use-package ggtags
+    :ensure t
+    :config
+    (global-set-key (kbd "C-c f") 'ggtags-find-definition))
+#+end_src
+
+** Which-key
+
+This package displays the key bindings following an incomplete
+command, very useful if you do not remember one of the few shortcuts
+that you can use.
+
+#+begin_src emacs-lisp
+  (use-package which-key
+    :ensure t
+    :hook (after-init . which-key-mode))
+#+end_src
+
+** Markdown-mode
+
+Enables markdown highlights on emacs.
+
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :ensure t)
+#+end_src
+
+** Ivy
+
+Ivy is a generic completition mechanism for emacs.
+
+#+begin_src emacs-lisp
+  (use-package ivy
+    :ensure t
+    :hook (after-init . ivy-mode)
+    :config
+    (setq ivy-use-virtual-buffers t)
+    (setq enable-recursive-minibuffers t))
+#+end_src
+
+** Avy
+
+Jump to visible text using a char-based decision tree. Lovely!
+
+#+begin_src emacs-lisp
+  (use-package avy
+    :ensure t
+    :bind
+    ("C-:" . avy-goto-char))
+  ;; Alternative way of setting a keybinding:
+  ;;(global-set-key (kbd "C-:") 'avy-goto-char)
+#+end_src
+
+** Diff-hl
+
+Highlights uncommitted changes on the left of the buffer window.
+
+#+begin_src emacs-lisp
+  (use-package diff-hl
+    :ensure t
+    :hook (after-init . global-diff-hl-mode))
+#+end_src
+
+** Emms
+
+Emms is an emacs music player.
+
+#+begin_src emacs-lisp
+  (use-package emms
+    :ensure t
+    :hook (after-init . emms-all)
+    :config
+    (setq emms-player-list '(emms-player-vlc)
+          emms-info-functions '(emms-info-native)))
+ #+end_src
+ 
+** Gnus
+
+THE best email / rss client EVER. I read all my mailing lists and
+blogs here.
+
+Some useful shortcuts:
+- =t=: topic view
+- =T n=: create a new topic
+- =T m=: move to topic
+- =^=: list sources
+- =u=: subscribe / unsubscribe to source
+- =A u=: show all sources
+- =G R=: register a new rss feed
+
+Some blogs use Atom feeds instead of RSS feeds, and Gnus does not
+support them. As a temporay solution, I am subscribing to them
+via newsticker. I will write some code to convert Atom into rss
+so that gnus can read them.
+
+#+begin_src emacs-lisp
+  (require 'newsticker)
+  (setq newsticker-url-list
+        '(("Eli Bendersky" "https://eli.thegreenplace.net/feeds/all.atom.xml")
+          ("Emacs Redux" "https://emacsredux.com/atom.xml")))
+
+  (defvar my-gnus-emacs-list
+    '("nntp+news.gmane.io:gmane.emacs.announce"
+      "nntp+news.gmane.io:gwene.com.sachachua"
+      "nntp+news.gmane.io:gwene.org.irreal.blog"
+      "nnrss:Protesilaos Stavrou: Master feed with all updates"))
+
+  (defvar my-gnus-linux-list
+    '("nntp+news.gmane.io:gmane.emacs.announce"
+      "nntp+news.gmane.io:gwene.net.lwn.headlines"
+      "nntp+news.gmane.io:gmane.linux.kernel.bpf"
+          "nnrss:Linux Kernel Monkey Log"))
+
+  (defvar my-gnus-blogs-list
+    '("nnrss:Blog System.5"
+      "nnrss:https://www.usebox.net/jjm/blog/index.xml"
+      "nnrss:https://alexschroeder.ch/view/index.rss"))
+
+  (defvar my-gnus-misc-list
+    '("nnrss:Seeds of Science"
+      "nntp+news.gmane.io:gwene.io.kubernetes"
+      "nntp+news.gmane.io:gmane.culture.internet.history"
+      "nntp+news.gmane.io:gmane.announcxe"))
+
+    (use-package gnus
+      :ensure t
+      :config
+      (setq gnus-select-method '(nntp "news.gmane.io"))
+      (setq gnus-directory "~/.emacs.d/news/")
+      ;;(setq gnus-startup-file "~/.emacs.d/.newsrc.eld") ;; Not working
+      (add-to-list 'gnus-topic-alist
+                   (add-to-list 'my-gnus-emacs-list "Emacs") t)
+      (add-to-list 'gnus-topic-alist
+                   (add-to-list 'my-gnus-linux-list "Linux") t)
+      (add-to-list 'gnus-topic-alist
+                   (add-to-list 'my-gnus-blogs-list "Blogs") t)
+      (add-to-list 'gnus-topic-alist
+                   (add-to-list 'my-gnus-misc-list "Misc") t))
+#+end_src
+
+Read atom feeds with gnus. Stolen from the emacswiki, you need to
+download =atom2rss.xsl= first from https://atom.geekhood.net/.
+
+#+begin_src emacs-lisp
+  (require 'mm-url)
+  (defadvice mm-url-insert (after DE-convert-atom-to-rss () )
+    "Converts atom to RSS by calling xsltproc."
+    (when (re-search-forward "xmlns=\"http://www.w3.org/.*/Atom\"" 
+           nil t)
+      (goto-char (point-min))
+      (message "Converting Atom to RSS... ")
+      (call-process-region (point-min) (point-max) 
+         "xsltproc" 
+         t t nil 
+         (expand-file-name "~/.emacs.d/atom2rss.xsl") "-")
+      (goto-char (point-min))
+      (message "Converting Atom to RSS... done")))
+
+  (ad-activate 'mm-url-insert)
+#+end_src
+
+** Yasnippet
+
+Create macros "snippets" for text. Really really cool.
+
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :ensure t)
+#+end_src
+
+** Olivetti
+
+Center text in the window.
+
+#+begin_src emacs-lisp
+  (use-package olivetti
+    :ensure t)
+#+end_src
+
+** Marginalia
+
+Add commands' description to minibuffer.
+
+#+begin_src emacs-lisp
+    (use-package marginalia
+      :ensure t
+      :hook (after-init . marginalia-mode))
+#+end_src
+
+** Nerd-icons
+
+The first time, the user must run =M-x nerd-icons-install-fonts=.
+
+#+begin_src emacs-lisp
+  (use-package nerd-icons
+    :ensure t)
+
+  (use-package nerd-icons-completion
+    :ensure t
+    :after marginalia
+    :config
+    (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+
+  (use-package nerd-icons-corfu
+    :ensure t
+    :after corfu
+    :config
+    (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+  
+    (use-package nerd-icons-dired
+      :ensure t
+      :hook (dired-mode . nerd-icons-dired-mode))
+#+end_src
+
+** Swiper
+
+Grep in minibuffer.
+
+#+begin_src emacs-lisp
+  (use-package swiper
+    :ensure t)
+#+end_src
+
+** Kubernetes
+
+Manage kubernetes clusters in emacs.
+
+#+begin_src emacs-lisp
+(use-package kubernetes
+  :ensure t)
+#+end_src
+
+** Ox-publish + simple-httpd
+
+Generate static websites from org-mode.
+
+#+begin_src emacs-lisp
+  ;;(use-package ox-publish
+  ;;  :ensure t)
+  (use-package simple-httpd
+    :ensure t)
+#+end_src
+
+* Customization
+** Cleanup the screen
+ 
+ #+begin_src emacs-lisp
+   (menu-bar-mode -1)
+   (scroll-bar-mode -1)
+   (tool-bar-mode -1)
+   (display-time-mode 1)
+#+end_src
+
+** Startup screen
+
+#+begin_src emacs-lisp
+   (setq-default inhibit-startup-screen t)
+   (setq inhibit-splash-screen t)
+   (setq inhibit-startup-message t)
+   (setq initial-scratch-message "")
+#+end_src
+
+** Dired
+
+#+begin_src emacs-lisp
+(use-package dired
+  :hook ((dired-mode . dired-hide-details-mode)))
+#+end_src
+
+** Line numbers
+
+#+begin_src emacs-lisp
+   (global-display-line-numbers-mode)
+   (setq display-line-numbers 'relative)
+#+end_src
+
+** Time
+
+#+begin_src emacs-lisp
+  (setq display-time-format "%I:%M")
+#+end_src
+
+** Battery
+
+  #+begin_src emacs-lisp
+    (require 'battery)
+    (when (and battery-status-function
+               (not (string-match-p "N/A"
+                                    (battery-format "%B"
+                                                    (funcall battery-status-function)))))
+      (display-battery-mode 1))
+    #+end_src
+
+** Font
+    
+#+begin_src emacs-lisp
+    (set-face-attribute 'default nil :height 130)
+#+end_src
+
+** TLS
+
+#+begin_src emacs-lisp
+  (setq-default gnutls-trustfiles (list "~/.emacs.d/cacert.pem"
+                                       "/etc/pki/tls/certs/ca-bundle.pem"))
+#+end_src
+
+** Column Line
+
+#+begin_src emacs-lisp
+  (global-display-fill-column-indicator-mode 1)
+  (setq global-display-fill-column-indicator-column 80)
+#+end_src
+
+** Clean ~ files
+
+#+begin_src emacs-lisp
+  (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+    backup-by-copying t    ; Don't delink hardlinks
+    version-control t      ; Use version numbers on backups
+    delete-old-versions t  ; Automatically delete excess backups
+    kept-new-versions 20   ; how many of the newest versions to keep
+    kept-old-versions 5    ; and how many of the old
+   )
+#+end_src
+
+** Move Autogenerated Code
+
+Emacs has a graphical interface to configure emacs. The generated
+code should live in a separate file.
+
+#+begin_src emacs-lisp
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file :no-error-if-file-is-missing)
+#+end_src
+
+** Save Session
+
+#+begin_src emacs-lisp
+(desktop-save-mode 1)
+#+end_src
+
+** Tabs size
+
+Change the tab size as 2 spaces.
+
+#+begin_src emacs-lisp
+  (setq-default tab-width 2)
+#+end_src
+
+* Games
+
+A collection of some games.
+
+#+begin_src emacs-lisp
+  ;; Monkey-type game
+  ;;(require 'typit)
+#+end_src
+
+* Shortcuts
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c c") 'compile)
+#+end_src
+
+* Depricated
+** Undo Tree
+
+Show and manage history as a tree of changes.
+Try =undo-tree-visualize=.
+
+#+begin_src emacs-lisp
+;;(require 'undo-tree)
+;;(global-undo-tree-mode)
+#+end_src
+
+** Obsidian
+
+I dont use this anymore. Also, It did not work.
+
+#+begin_src emacs-lisp
+  ;;(require 'obsidian)
+  ;;(obsidian-specify-path "~/ObsidianVault")
+#+end_src
+
+** Elfeed
+
+Local Rss feed reader. I like it and It works fine, but I moved
+to gnus.
+
+#+begin_src emacs-lisp
+  ;;(require 'elfeed)
+  ;;(require 'elfeed-dashboard)
+  ;;(setq elfeed-feeds
+  ;;      '("http://www.kroah.com/log/index.rss"
+  ;;        "https://www.dragonflydigest.com/feed/"
+  ;;        "https://protesilaos.com/master.xml"
+  ;;        "http://feeds.feedburner.com/linuxquestions/latest"))
+#+end_src
+
+** PDF Reader
+
+#+begin_src emacs-lisp
+  ;;(pdf-tools-install)
+  ;;(pdf-loader-install)
+#+end_src
+
+** LSP
+
+Who needs a language server, pff.
+
+#+begin_src emacs-lisp
+  ;; LSP
+  ;;(require 'lsp-mode)
+  ;;(require 'helm-lsp)
+  ;;(require 'helm-mode)
+  ;;(require 'helm-xref)
+#+end_src
+
+** C3
+
+Sometime I use this, but It does not belong in the main init file.
+
+#+begin_src emacs-lisp
+  ;; Language highlight
+  ;;(setq treesit-language-source-alist
+  ;;  '((c3 "https://github.com/c3lang/tree-sitter-c3")))
+
+  ;;(add-to-list 'load-path "~/.emacs.d/c3-ts-mode")
+  ;;(require 'c3-ts-mode)
+#+end_src
+** Evil
+
+I am happy to say that I don't use evil anymore, the transition
+is now complete.
+
+#+begin_src emacs-lisp
+;;  (use-package evil
+;;    :ensure t)
+#+end_src
+
+** EXWM
+
+Emacs' X window manager. I have used this for a while, but
+sometimes emacs would bug and It needed to be restarted. With
+EXWM, this means closing everything and starting again, which
+is unfortunate. So I changed to the good old i3 and now I am
+a heppy human being.
+
+#+begin_src emacs-lisp
+  ;; ############## EXWM BEGIN ##################
+  ;; Emac's X window manager, works fine
+
+  ;;(require 'exwm)
+    ;; Set the default number of workspaces
+  ;;  (setq exwm-workspace-number 5)
+
+    ;; When window "class" updates, use it to set the buffer name
+    ;; (add-hook 'exwm-update-class-hook #'efs/exwm-update-class)
+
+    ;; These keys should always pass through to Emacs
+  ;;  (setq exwm-input-prefix-keys
+  ;;    '(?\C-x
+  ;;      ?\C-u
+  ;;      ?\C-h
+  ;;      ?\M-x
+  ;;      ?\M-`
+  ;;      ?\M-&
+  ;;      ?\M-:
+  ;;      ?\C-\M-j  ;; Buffer list
+  ;;      ?\C-\ ))  ;; Ctrl+Space
+
+    ;; Ctrl+Q will enable the next key to be sent directly
+  ;;  (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
+
+    ;; Set up global key bindings.  These always work, no matter the input state!
+    ;; Keep in mind that changing this list after EXWM initializes has no effect.
+  ;;  (setq exwm-input-global-keys
+  ;;       `(
+            ;; Reset to line-mode (C-c C-k switches to char-mode via exwm-input-release-keyboard)
+  ;;          ([?\s-r] . exwm-reset)
+
+            ;; Move between windows
+  ;;          ([s-left] . windmove-left)
+  ;;          ([s-right] . windmove-right)
+  ;;          ([s-up] . windmove-up)
+  ;;          ([s-down] . windmove-down)
+
+            ;; Launch applications via shell command
+  ;;          ([?\s-&] . (lambda (command)
+  ;;                       (interactive (list (read-shell-command "$ ")))
+  ;;                       (start-process-shell-command command nil command)))
+
+            ;; Switch workspace
+  ;;          ([?\s-w] . exwm-workspace-switch)
+
+            ;; 's-N': Switch to certain workspace with Super (Win) plus a number key (0 - 9)
+  ;;          ,@(mapcar (lambda (i)
+  ;;                      `(,(kbd (format "s-%d" i)) .
+  ;;                        (lambda ()
+  ;;                          (interactive)
+  ;;                          (exwm-workspace-switch-create ,i))))
+  ;;                    (number-sequence 0 9))
+
+            ;; Audio keys
+  ;;          ([XF86AudioRaiseVolume] . (lambda ()
+  ;;				      (interactive)
+  ;;				      (shell-command "amixer set Master 5%+")))
+  ;;          ([XF86AudioLowerVolume] . (lambda ()
+  ;;				      (interactive)
+  ;;				      (shell-command "amixer set Master 5%-")))
+
+  ;;          ([XF86AudioMute] . (lambda()
+  ;;			       (interactive)
+  ;;			       (shell-command "amixer set Master toggle")))
+  ;;          ([XF86AudioMicMute] . (lambda()
+  ;;				   (interactive)
+  ;;				   (shell-command "amixer set Master toggle")))
+            ;; Brightness
+  ;;          ([XF86MonBrightnessUp] . (lambda()
+  ;;				   (interactive)
+  ;;				   (shell-command "echo $(( $(cat /sys/class/backlight/intel_backlight/brightness) + 10000)) > /sys/class/backlight/intel_backlight/brightness")))
+  ;;          ([XF86MonBrightnessDown] . (lambda()
+  ;;				   (interactive)
+  ;;				   (shell-command "echo $(( $(cat /sys/class/backlight/intel_backlight/brightness) - 10000)) > /sys/class/backlight/intel_backlight/brightness")))
+  ;;      ))
+
+  ;;  (exwm-enable)
+  ;; ############### EXWM END ##################
+
+ #+end_src
+ 

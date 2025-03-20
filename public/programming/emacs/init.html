@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+</head>
+<body>
+<div id="content" class="content">
+
+<div id="outline-container-orgb67c53a" class="outline-2">
+<h2 id="orgb67c53a">Welcome</h2>
+<div class="outline-text-2" id="text-orgb67c53a">
+<p>
+Welcome to my humble emacs configuration file. This is my daily emacs
+setup, do not expect anything remarcable, just some lisp code :)
+</p>
+
+<p>
+Use <code>M-x load-file</code> to load this configuration. You can also use
+<code>eval-buffer</code> inside this buffer.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0f5aeb5" class="outline-2">
+<h2 id="org0f5aeb5">Repositories</h2>
+<div class="outline-text-2" id="text-org0f5aeb5">
+<p>
+Those are the usual emacs repositories. Once in a while, you may have
+to run <code>M-x package-refresh-contents</code> to update the repositories,
+expecially if the package manager can find a package but not Its
+sources during fetching.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(require 'package)
+(setq package-archives '(
+             ("GNU" . "http://elpa.gnu.org/packages/")
+             ("MELPA" . "http://melpa.org/packages/")
+             ))
+(unless package--initialized (package-initialize))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org17f6e06" class="outline-2">
+<h2 id="org17f6e06">Theme</h2>
+<div class="outline-text-2" id="text-org17f6e06">
+<p>
+I really like the high-contrast <code>modus-vivendi</code> theme which is
+built in into emacs. It follows the higher standards of redibility,
+they are also well customizable.
+</p>
+
+<p>
+You can switch between light and dark mode with <code>modus-themes-toggle</code>.
+Yes, sometimes I use light mode when I am outside, and I never feel
+ashamed about it, I can do whatever I want.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(load-theme 'modus-vivendi t)
+;; Default theme is white, unless the time is after 18 (6 pm)
+(when (&lt; (decoded-time-hour (decode-time)) 18)
+  (modus-themes-toggle))
+
+(customize-set-variable 'modus-themes-common-palette-overrides
+                        `(
+                          ;; Make the mode-line borderless
+                          (bg-mode-line-active bg-inactive)
+                          (fg-mode-line-active fg-main)
+                          (bg-mode-line-inactive bg-inactive)
+                          (fg-mode-line-inactive fg-dim)
+                          (border-mode-line-active bg-inactive)
+                          (border-mode-line-inactive bg-nactive)
+                          ))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0a133fa" class="outline-2">
+<h2 id="org0a133fa">Packages</h2>
+<div class="outline-text-2" id="text-org0a133fa">
+</div>
+<div id="outline-container-orge9aa311" class="outline-3">
+<h3 id="orge9aa311">Use package</h3>
+<div class="outline-text-3" id="text-orge9aa311">
+<p>
+I use <code>use-package</code> to manage all my packages.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(when (&lt; emacs-major-version 29)
+  (unless (package-installed-p 'use-package)
+    ;;(unless package-archive-contents
+     ;; (package-refresh-contents))
+    (package-install 'use-package)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org46556d9" class="outline-3">
+<h3 id="org46556d9">Org mode</h3>
+<div class="outline-text-3" id="text-org46556d9">
+<p>
+Org mode settings. I use org mode everywhere in my life.
+</p>
+
+<p>
+Run <code>org-todo</code> to update a TODO keywork.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package org
+  :ensure nil ; do not try to install it as it is built-in
+  :config
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "WAIT(w!)" "|" "CANCEL(c!)" "DONE(d!)"))))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga7d0044" class="outline-3">
+<h3 id="orga7d0044">Markdown mode</h3>
+<div class="outline-text-3" id="text-orga7d0044">
+<p>
+I use markdown mode when editing markdown document, mostly on
+github because that is the defacto standard format to use.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package markdown-mode
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org36e1827" class="outline-3">
+<h3 id="org36e1827">ggtags</h3>
+<div class="outline-text-3" id="text-org36e1827">
+<p>
+GNU Global on emacs.
+</p>
+
+<p>
+Shortcuts:
+</p>
+<ul class="org-ul">
+<li><code>C-c f</code>: jump to definition.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package ggtags
+  :ensure t
+  :config
+  (global-set-key (kbd "C-c f") 'ggtags-find-definition))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc7e4568" class="outline-3">
+<h3 id="orgc7e4568">Which-key</h3>
+<div class="outline-text-3" id="text-orgc7e4568">
+<p>
+This package displays the key bindings following an incomplete
+command, very useful if you do not remember one of the few shortcuts
+that you can use.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package which-key
+  :ensure t
+  :hook (after-init . which-key-mode))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org34cc5fe" class="outline-3">
+<h3 id="org34cc5fe">Markdown-mode</h3>
+<div class="outline-text-3" id="text-org34cc5fe">
+<p>
+Enables markdown highlights on emacs.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package markdown-mode
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org19e2eaa" class="outline-3">
+<h3 id="org19e2eaa">Ivy</h3>
+<div class="outline-text-3" id="text-org19e2eaa">
+<p>
+Ivy is a generic completition mechanism for emacs.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package ivy
+  :ensure t
+  :hook (after-init . ivy-mode)
+  :config
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge410e17" class="outline-3">
+<h3 id="orge410e17">Avy</h3>
+<div class="outline-text-3" id="text-orge410e17">
+<p>
+Jump to visible text using a char-based decision tree. Lovely!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package avy
+  :ensure t
+  :bind
+  ("C-:" . avy-goto-char))
+;; Alternative way of setting a keybinding:
+;;(global-set-key (kbd "C-:") 'avy-goto-char)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9ac2b9e" class="outline-3">
+<h3 id="org9ac2b9e">Diff-hl</h3>
+<div class="outline-text-3" id="text-org9ac2b9e">
+<p>
+Highlights uncommitted changes on the left of the buffer window.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package diff-hl
+  :ensure t
+  :hook (after-init . global-diff-hl-mode))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgca6b08e" class="outline-3">
+<h3 id="orgca6b08e">Emms</h3>
+<div class="outline-text-3" id="text-orgca6b08e">
+<p>
+Emms is an emacs music player.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package emms
+  :ensure t
+  :hook (after-init . emms-all)
+  :config
+  (setq emms-player-list '(emms-player-vlc)
+        emms-info-functions '(emms-info-native)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org20e7ea3" class="outline-3">
+<h3 id="org20e7ea3">Gnus</h3>
+<div class="outline-text-3" id="text-org20e7ea3">
+<p>
+THE best email / rss client EVER. I read all my mailing lists and
+blogs here.
+</p>
+
+<p>
+Some useful shortcuts:
+</p>
+<ul class="org-ul">
+<li><code>t</code>: topic view</li>
+<li><code>T n</code>: create a new topic</li>
+<li><code>T m</code>: move to topic</li>
+<li><code>^</code>: list sources</li>
+<li><code>u</code>: subscribe / unsubscribe to source</li>
+<li><code>A u</code>: show all sources</li>
+<li><code>G R</code>: register a new rss feed</li>
+</ul>
+
+<p>
+Some blogs use Atom feeds instead of RSS feeds, and Gnus does not
+support them. As a temporay solution, I am subscribing to them
+via newsticker. I will write some code to convert Atom into rss
+so that gnus can read them.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(require 'newsticker)
+(setq newsticker-url-list
+      '(("Eli Bendersky" "https://eli.thegreenplace.net/feeds/all.atom.xml")
+        ("Emacs Redux" "https://emacsredux.com/atom.xml")))
+
+(defvar my-gnus-emacs-list
+  '("nntp+news.gmane.io:gmane.emacs.announce"
+    "nntp+news.gmane.io:gwene.com.sachachua"
+    "nntp+news.gmane.io:gwene.org.irreal.blog"
+    "nnrss:Protesilaos Stavrou: Master feed with all updates"))
+
+(defvar my-gnus-linux-list
+  '("nntp+news.gmane.io:gmane.emacs.announce"
+    "nntp+news.gmane.io:gwene.net.lwn.headlines"
+    "nntp+news.gmane.io:gmane.linux.kernel.bpf"
+        "nnrss:Linux Kernel Monkey Log"))
+
+(defvar my-gnus-blogs-list
+  '("nnrss:Blog System.5"
+    "nnrss:https://www.usebox.net/jjm/blog/index.xml"
+    "nnrss:https://alexschroeder.ch/view/index.rss"))
+
+(defvar my-gnus-misc-list
+  '("nnrss:Seeds of Science"
+    "nntp+news.gmane.io:gwene.io.kubernetes"
+    "nntp+news.gmane.io:gmane.culture.internet.history"
+    "nntp+news.gmane.io:gmane.announcxe"))
+
+  (use-package gnus
+    :ensure t
+    :config
+    (setq gnus-select-method '(nntp "news.gmane.io"))
+    (setq gnus-directory "~/.emacs.d/news/")
+    ;;(setq gnus-startup-file "~/.emacs.d/.newsrc.eld") ;; Not working
+    (add-to-list 'gnus-topic-alist
+                 (add-to-list 'my-gnus-emacs-list "Emacs") t)
+    (add-to-list 'gnus-topic-alist
+                 (add-to-list 'my-gnus-linux-list "Linux") t)
+    (add-to-list 'gnus-topic-alist
+                 (add-to-list 'my-gnus-blogs-list "Blogs") t)
+    (add-to-list 'gnus-topic-alist
+                 (add-to-list 'my-gnus-misc-list "Misc") t))
+</pre>
+</div>
+
+<p>
+Read atom feeds with gnus. Stolen from the emacswiki, you need to
+download <code>atom2rss.xsl</code> first from <a href="https://atom.geekhood.net/">https://atom.geekhood.net/</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(require 'mm-url)
+(defadvice mm-url-insert (after DE-convert-atom-to-rss () )
+  "Converts atom to RSS by calling xsltproc."
+  (when (re-search-forward "xmlns=\"http://www.w3.org/.*/Atom\"" 
+         nil t)
+    (goto-char (point-min))
+    (message "Converting Atom to RSS... ")
+    (call-process-region (point-min) (point-max) 
+       "xsltproc" 
+       t t nil 
+       (expand-file-name "~/.emacs.d/atom2rss.xsl") "-")
+    (goto-char (point-min))
+    (message "Converting Atom to RSS... done")))
+
+(ad-activate 'mm-url-insert)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf25ca08" class="outline-3">
+<h3 id="orgf25ca08">Yasnippet</h3>
+<div class="outline-text-3" id="text-orgf25ca08">
+<p>
+Create macros "snippets" for text. Really really cool.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package yasnippet
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge8fbe19" class="outline-3">
+<h3 id="orge8fbe19">Olivetti</h3>
+<div class="outline-text-3" id="text-orge8fbe19">
+<p>
+Center text in the window.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package olivetti
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgafae68b" class="outline-3">
+<h3 id="orgafae68b">Marginalia</h3>
+<div class="outline-text-3" id="text-orgafae68b">
+<p>
+Add commands' description to minibuffer.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package marginalia
+  :ensure t
+  :hook (after-init . marginalia-mode))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0fbcec6" class="outline-3">
+<h3 id="org0fbcec6">Nerd-icons</h3>
+<div class="outline-text-3" id="text-org0fbcec6">
+<p>
+The first time, the user must run <code>M-x nerd-icons-install-fonts</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package nerd-icons
+  :ensure t)
+
+(use-package nerd-icons-completion
+  :ensure t
+  :after marginalia
+  :config
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+
+(use-package nerd-icons-corfu
+  :ensure t
+  :after corfu
+  :config
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+
+  (use-package nerd-icons-dired
+    :ensure t
+    :hook (dired-mode . nerd-icons-dired-mode))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbbbb60e" class="outline-3">
+<h3 id="orgbbbb60e">Swiper</h3>
+<div class="outline-text-3" id="text-orgbbbb60e">
+<p>
+Grep in minibuffer.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package swiper
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6ff16d6" class="outline-3">
+<h3 id="org6ff16d6">Kubernetes</h3>
+<div class="outline-text-3" id="text-org6ff16d6">
+<p>
+Manage kubernetes clusters in emacs.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package kubernetes
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge790b27" class="outline-3">
+<h3 id="orge790b27">Ox-publish + simple-httpd</h3>
+<div class="outline-text-3" id="text-orge790b27">
+<p>
+Generate static websites from org-mode.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;(use-package ox-publish
+;;  :ensure t)
+(use-package simple-httpd
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org84a0bd3" class="outline-2">
+<h2 id="org84a0bd3">Customization</h2>
+<div class="outline-text-2" id="text-org84a0bd3">
+</div>
+<div id="outline-container-org8d007a2" class="outline-3">
+<h3 id="org8d007a2">Cleanup the screen</h3>
+<div class="outline-text-3" id="text-org8d007a2">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(display-time-mode 1)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4415495" class="outline-3">
+<h3 id="org4415495">Startup screen</h3>
+<div class="outline-text-3" id="text-org4415495">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(setq-default inhibit-startup-screen t)
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
+(setq initial-scratch-message "")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd21e330" class="outline-3">
+<h3 id="orgd21e330">Dired</h3>
+<div class="outline-text-3" id="text-orgd21e330">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package dired
+  :hook ((dired-mode . dired-hide-details-mode)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3888956" class="outline-3">
+<h3 id="org3888956">Line numbers</h3>
+<div class="outline-text-3" id="text-org3888956">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-display-line-numbers-mode)
+(setq display-line-numbers 'relative)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0c195ff" class="outline-3">
+<h3 id="org0c195ff">Time</h3>
+<div class="outline-text-3" id="text-org0c195ff">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(setq display-time-format "%I:%M")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8556d93" class="outline-3">
+<h3 id="org8556d93">Battery</h3>
+<div class="outline-text-3" id="text-org8556d93">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(require 'battery)
+(when (and battery-status-function
+           (not (string-match-p "N/A"
+                                (battery-format "%B"
+                                                (funcall battery-status-function)))))
+  (display-battery-mode 1))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfa6d000" class="outline-3">
+<h3 id="orgfa6d000">Font</h3>
+<div class="outline-text-3" id="text-orgfa6d000">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(set-face-attribute 'default nil :height 130)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8b7669b" class="outline-3">
+<h3 id="org8b7669b">TLS</h3>
+<div class="outline-text-3" id="text-org8b7669b">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(setq-default gnutls-trustfiles (list "~/.emacs.d/cacert.pem"
+                                     "/etc/pki/tls/certs/ca-bundle.pem"))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf086ef6" class="outline-3">
+<h3 id="orgf086ef6">Column Line</h3>
+<div class="outline-text-3" id="text-orgf086ef6">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-display-fill-column-indicator-mode 1)
+(setq global-display-fill-column-indicator-column 80)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdc5230c" class="outline-3">
+<h3 id="orgdc5230c">Clean ~ files</h3>
+<div class="outline-text-3" id="text-orgdc5230c">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+  backup-by-copying t    ; Don't delink hardlinks
+  version-control t      ; Use version numbers on backups
+  delete-old-versions t  ; Automatically delete excess backups
+  kept-new-versions 20   ; how many of the newest versions to keep
+  kept-old-versions 5    ; and how many of the old
+ )
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org35d912a" class="outline-3">
+<h3 id="org35d912a">Move Autogenerated Code</h3>
+<div class="outline-text-3" id="text-org35d912a">
+<p>
+Emacs has a graphical interface to configure emacs. The generated
+code should live in a separate file.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file :no-error-if-file-is-missing)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb72d467" class="outline-3">
+<h3 id="orgb72d467">Save Session</h3>
+<div class="outline-text-3" id="text-orgb72d467">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(desktop-save-mode 1)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgaa1b0fb" class="outline-3">
+<h3 id="orgaa1b0fb">Tabs size</h3>
+<div class="outline-text-3" id="text-orgaa1b0fb">
+<p>
+Change the tab size as 2 spaces.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(setq-default tab-width 2)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga029803" class="outline-2">
+<h2 id="orga029803">Games</h2>
+<div class="outline-text-2" id="text-orga029803">
+<p>
+A collection of some games.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;; Monkey-type game
+;;(require 'typit)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org532e252" class="outline-2">
+<h2 id="org532e252">Shortcuts</h2>
+<div class="outline-text-2" id="text-org532e252">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-set-key (kbd "C-c c") 'compile)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcb2ae8e" class="outline-2">
+<h2 id="orgcb2ae8e">Depricated</h2>
+<div class="outline-text-2" id="text-orgcb2ae8e">
+</div>
+<div id="outline-container-orgc5bb6b6" class="outline-3">
+<h3 id="orgc5bb6b6">Undo Tree</h3>
+<div class="outline-text-3" id="text-orgc5bb6b6">
+<p>
+Show and manage history as a tree of changes.
+Try <code>undo-tree-visualize</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;(require 'undo-tree)
+;;(global-undo-tree-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge5fe2bd" class="outline-3">
+<h3 id="orge5fe2bd">Obsidian</h3>
+<div class="outline-text-3" id="text-orge5fe2bd">
+<p>
+I dont use this anymore. Also, It did not work.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;(require 'obsidian)
+;;(obsidian-specify-path "~/ObsidianVault")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge022d73" class="outline-3">
+<h3 id="orge022d73">Elfeed</h3>
+<div class="outline-text-3" id="text-orge022d73">
+<p>
+Local Rss feed reader. I like it and It works fine, but I moved
+to gnus.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;(require 'elfeed)
+;;(require 'elfeed-dashboard)
+;;(setq elfeed-feeds
+;;      '("http://www.kroah.com/log/index.rss"
+;;        "https://www.dragonflydigest.com/feed/"
+;;        "https://protesilaos.com/master.xml"
+;;        "http://feeds.feedburner.com/linuxquestions/latest"))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5de3e0d" class="outline-3">
+<h3 id="org5de3e0d">PDF Reader</h3>
+<div class="outline-text-3" id="text-org5de3e0d">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;(pdf-tools-install)
+;;(pdf-loader-install)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2381db0" class="outline-3">
+<h3 id="org2381db0">LSP</h3>
+<div class="outline-text-3" id="text-org2381db0">
+<p>
+Who needs a language server, pff.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;; LSP
+;;(require 'lsp-mode)
+;;(require 'helm-lsp)
+;;(require 'helm-mode)
+;;(require 'helm-xref)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org378bcf5" class="outline-3">
+<h3 id="org378bcf5">C3</h3>
+<div class="outline-text-3" id="text-org378bcf5">
+<p>
+Sometime I use this, but It does not belong in the main init file.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;; Language highlight
+;;(setq treesit-language-source-alist
+;;  '((c3 "https://github.com/c3lang/tree-sitter-c3")))
+
+;;(add-to-list 'load-path "~/.emacs.d/c3-ts-mode")
+;;(require 'c3-ts-mode)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6c72289" class="outline-3">
+<h3 id="org6c72289">Evil</h3>
+<div class="outline-text-3" id="text-org6c72289">
+<p>
+I am happy to say that I don't use evil anymore, the transition
+is now complete.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;  (use-package evil
+;;    :ensure t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc41acda" class="outline-3">
+<h3 id="orgc41acda">EXWM</h3>
+<div class="outline-text-3" id="text-orgc41acda">
+<p>
+Emacs' X window manager. I have used this for a while, but
+sometimes emacs would bug and It needed to be restarted. With
+EXWM, this means closing everything and starting again, which
+is unfortunate. So I changed to the good old i3 and now I am
+a heppy human being.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;; ############## EXWM BEGIN ##################
+;; Emac's X window manager, works fine
+
+;;(require 'exwm)
+  ;; Set the default number of workspaces
+;;  (setq exwm-workspace-number 5)
+
+  ;; When window "class" updates, use it to set the buffer name
+  ;; (add-hook 'exwm-update-class-hook #'efs/exwm-update-class)
+
+  ;; These keys should always pass through to Emacs
+;;  (setq exwm-input-prefix-keys
+;;    '(?\C-x
+;;      ?\C-u
+;;      ?\C-h
+;;      ?\M-x
+;;      ?\M-`
+;;      ?\M-&amp;
+;;      ?\M-:
+;;      ?\C-\M-j  ;; Buffer list
+;;      ?\C-\ ))  ;; Ctrl+Space
+
+  ;; Ctrl+Q will enable the next key to be sent directly
+;;  (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
+
+  ;; Set up global key bindings.  These always work, no matter the input state!
+  ;; Keep in mind that changing this list after EXWM initializes has no effect.
+;;  (setq exwm-input-global-keys
+;;       `(
+          ;; Reset to line-mode (C-c C-k switches to char-mode via exwm-input-release-keyboard)
+;;          ([?\s-r] . exwm-reset)
+
+          ;; Move between windows
+;;          ([s-left] . windmove-left)
+;;          ([s-right] . windmove-right)
+;;          ([s-up] . windmove-up)
+;;          ([s-down] . windmove-down)
+
+          ;; Launch applications via shell command
+;;          ([?\s-&amp;] . (lambda (command)
+;;                       (interactive (list (read-shell-command "$ ")))
+;;                       (start-process-shell-command command nil command)))
+
+          ;; Switch workspace
+;;          ([?\s-w] . exwm-workspace-switch)
+
+          ;; 's-N': Switch to certain workspace with Super (Win) plus a number key (0 - 9)
+;;          ,@(mapcar (lambda (i)
+;;                      `(,(kbd (format "s-%d" i)) .
+;;                        (lambda ()
+;;                          (interactive)
+;;                          (exwm-workspace-switch-create ,i))))
+;;                    (number-sequence 0 9))
+
+          ;; Audio keys
+;;          ([XF86AudioRaiseVolume] . (lambda ()
+;;				      (interactive)
+;;				      (shell-command "amixer set Master 5%+")))
+;;          ([XF86AudioLowerVolume] . (lambda ()
+;;				      (interactive)
+;;				      (shell-command "amixer set Master 5%-")))
+
+;;          ([XF86AudioMute] . (lambda()
+;;			       (interactive)
+;;			       (shell-command "amixer set Master toggle")))
+;;          ([XF86AudioMicMute] . (lambda()
+;;				   (interactive)
+;;				   (shell-command "amixer set Master toggle")))
+          ;; Brightness
+;;          ([XF86MonBrightnessUp] . (lambda()
+;;				   (interactive)
+;;				   (shell-command "echo $(( $(cat /sys/class/backlight/intel_backlight/brightness) + 10000)) &gt; /sys/class/backlight/intel_backlight/brightness")))
+;;          ([XF86MonBrightnessDown] . (lambda()
+;;				   (interactive)
+;;				   (shell-command "echo $(( $(cat /sys/class/backlight/intel_backlight/brightness) - 10000)) &gt; /sys/class/backlight/intel_backlight/brightness")))
+;;      ))
+
+;;  (exwm-enable)
+;; ############### EXWM END ##################
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

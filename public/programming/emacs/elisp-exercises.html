@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+</head>
+<body>
+<div id="content" class="content">
+
+<div id="outline-container-org44302fc" class="outline-2">
+<h2 id="org44302fc">Emacs-lisp Exercises</h2>
+<div class="outline-text-2" id="text-org44302fc">
+<p>
+Here is a collection of some emacs lisp exercises that I come up by
+myself when learning the syntax. Emacs lisp is quite a simple
+language, and It is very powerful because It integrates with emacs
+"natively". You can easily manage buffers, windows, keys and UI with
+ease, so I want to dedicate some time into this.
+</p>
+</div>
+
+<div id="outline-container-orgb6f0414" class="outline-3">
+<h3 id="orgb6f0414">Basics</h3>
+<div class="outline-text-3" id="text-orgb6f0414">
+<p>
+Define a variable a using <code>setq</code> with the value "Hello World".
+Variables are used to store the state such as the current
+configuration of a package, so changing a variable's value
+directly changes the configuration.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(setq a "Hello-World")
+</pre>
+</div>
+
+<p>
+Lists are the most common data structures in lisp. To declare a
+list, you need to prepend the white space separated elements
+enclosed int parenthesys <code>( )</code> with a <code>'</code> character.
+By default, a list does not evaluate It's element when the list
+itself gets evaluated. To break this rule, you can use the <code>`</code>
+character to represent a list that may be "escaped" with the <code>,</code>
+character.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">'(1 2 3)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgafa8ca4" class="outline-3">
+<h3 id="orgafa8ca4">Functions</h3>
+<div class="outline-text-3" id="text-orgafa8ca4">
+<p>
+Sum two numbers toghether. You can use the <code>+</code> function which
+takes any number of arguments that are either numbers or markers.
+To call a function, you surround the function name and Its
+argument in parenthesys <code>(...)</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(+ 1 2)  
+</pre>
+</div>
+
+<p>
+Call the <code>message</code> function to write a message to the message
+buffer. The message function works similarly to libc's printf.
+</p>
+
+<p>
+To get information about function, you can call <code>describe-function</code>
+from the minibuffer.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(message "Hello World")
+</pre>
+</div>
+
+<p>
+Define a function to write hello and another to write bye to the
+message buffer. Use <code>defun</code>, followed by the function name,
+arguments, and body.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun print-hello ()
+  (message "Hello World!"))
+(defun print-bye ()
+  (message "Bye bye!"))
+</pre>
+</div>
+
+<p>
+Define a function that says either hello or bye depending on
+whether the number of iteration taken from the user is odd or
+even.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun hello-or-bye (iterations)
+  (setq a iterations)
+  (while (&gt;= a 0)
+    (if (= 0 (% a 2))
+        (print-hello)
+      (print-bye))
+    (setq a (- a 1))))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf23a9da" class="outline-3">
+<h3 id="orgf23a9da">Iteration</h3>
+<div class="outline-text-3" id="text-orgf23a9da">
+<p>
+Define a function to iterate over a list supplied by the user and
+output to a buffer in another window.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun iterate-now (list)
+  "Print elements of a list"
+  (setq mybuff (generate-new-buffer "*my output*"))
+  (while list
+    (print (car list) mybuff)
+    (setq list (cdr list)))
+  (switch-to-buffer-other-window mybuff))
+
+;; Call that function
+;;(iterate-now '(c c++ rust c3))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org29ec83c" class="outline-3">
+<h3 id="org29ec83c">Custom types</h3>
+<div class="outline-text-3" id="text-org29ec83c">
+<p>
+Define a variable with <code>defvar</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defvar food-list '(bread pasta pizza) "A list of Italian food")
+</pre>
+</div>
+
+<p>
+Define a variable with defcustom.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defgroup italian nil "Italian things")
+(defcustom city-list '("Rome" "Milan" "Trento")
+  "A list of Italian cities"
+  :group 'italian
+  :type '(repeat string))
+;;(iterate-now city-list)
+</pre>
+</div>
+
+<p>
+Define a function that returns true only if Its argument is a
+list of strings.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(require 'cl-lib)
+(defun is-string-list (obj)
+  "Find out if the argument is a list of string"
+  (and (listp obj)
+       (cl-every #'stringp obj)))
+
+;; Test the function
+(if (not (is-string-list city-list))
+    (message "upsie")
+  (message "ok"))
+(if (is-string-list 123)
+    (message "upsie 2")
+  (message "ok"))
+</pre>
+</div>
+
+<p>
+Of course, the language goes really deep and I barely scratched
+the surface. I will keep doing exercises untill I feel satisfied.
+</p>
+
+<p>
+Go Back: <a href="emacs.html">emacs.html</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
