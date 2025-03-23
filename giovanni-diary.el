@@ -2,10 +2,20 @@
 (require 'ox-publish)
 (require 'org-agenda)
 
+(defgroup giovanni-diary nil
+	"Options for giovanni-diary"
+	:tag "giovanni-diary"
+	:group 'giovanni-diary)
+
+(defcustom giovanni-diary-root-dir "~/giovanni-diary/"
+	"Root directory of the diary."
+	:group 'giovanni-diary
+	:type 'string)
+
 (defun giovanni-diary-rebuild-site ()
 	"Rebuild the entire website with default options."
 	(interactive)
-	(setq default-directory "~/giovanni-diary/")
+	(setq default-directory giovanni-diary-root-dir)
 	(shell-command "./prepare-build.sh")
 	(setq org-publish-project-alist
 				(list
@@ -29,11 +39,11 @@
 	(org-publish-all t)
 	(message "Build complete!"))
 
-(defun giovanni-diary-set-org-agenda-files (giovanni-diary-root-dir)
+(defun giovanni-diary-set-org-agenda-files ()
 	"Set the agenda files with all the files names wishlist.org
   under the diary directory.
 	Then call the function ==org-agenda== to list the TODO items.
 	All the items are tagged besed on the subject for easy filtering."
 	(interactive)
 	(setq org-agenda-files
-				(directory-files-recursively (concat giovanni-diary-toot-dir "content/") "wishlist.org$" t)))
+				(directory-files-recursively (concat giovanni-diary-root-dir "content/") "wishlist.org$" t)))
