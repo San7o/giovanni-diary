@@ -8,35 +8,14 @@ this wiki has It's own wishlist which you cann access from the
 home pages.
 
 ** TODO Setup rss feed for this blog
-I could use the following backend for =ox-export=:
-https://github.com/emacsmirror/ox-rss
-Update: I set up the rss and It appears to work wonderfully for
-a single page, meaning that an rss xml file is generated for each
-org file. This means that I should create a "blog" section where
-I put the posts that I want the feed to be generated.
+Finish writing tiny-rss.
 
-I don't really like this. Also, this does not work because only
-one item in the rss feed is generated, which is not practical
-since I want multiple items in the feed. I should merge all the
-feeds. Moreover, the paths are all wrong if we enable the
-recursive mode, unless we accept that all the org files for the
-feed are in the same directory.
+** TODO Redesign the look of the website
+Right now, the wesite is using very simple css stilying. While I
+like simple things, I want to explore different looks while
+remaining as minimalistic and readable as possible. I should
+probably take inspiraton from themes in emacs that I like.
 
-My own RSS generator:
-Parse the whole project for notes with the tag =RSS=, then add
-them automatically to the list! The tags would look something
-like this:
-
-:PROPERTIES:
-:Title: Just a Test
-:RSS: 1
-:Date: 22-03-2025
-:Category: Tech
-:END:
-
-This would be parsed using the property api:
-https://orgmode.org/manual/Using-the-Property-API.html
-Then, the rss would be generated from all of those. The content's
-body of the rss will be simple html generated with =ox-html=.
+---
 
 Go Back: file:index.org
