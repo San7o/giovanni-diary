@@ -12,9 +12,9 @@
 <body>
 <div id="content" class="content">
 
-<div id="outline-container-org88033de" class="outline-2">
-<h2 id="org88033de">Emacs-lisp Exercises</h2>
-<div class="outline-text-2" id="text-org88033de">
+<div id="outline-container-org1217451" class="outline-2">
+<h2 id="org1217451">Emacs-lisp Exercises</h2>
+<div class="outline-text-2" id="text-org1217451">
 <p>
 Here is a collection of some emacs lisp exercises that I come up by
 myself when learning the syntax. Emacs lisp is quite a simple
@@ -24,9 +24,9 @@ ease, so I want to dedicate some time into this.
 </p>
 </div>
 
-<div id="outline-container-org0acc37a" class="outline-3">
-<h3 id="org0acc37a">Basics</h3>
-<div class="outline-text-3" id="text-org0acc37a">
+<div id="outline-container-org1e70f64" class="outline-3">
+<h3 id="org1e70f64">Basics</h3>
+<div class="outline-text-3" id="text-org1e70f64">
 <p>
 Define a variable a using <code>setq</code> with the value "Hello World".
 Variables are used to store the state such as the current
@@ -35,7 +35,7 @@ directly changes the configuration.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">setq</span> a <span style="color: #79a8ff;">"Hello-World"</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #5317ac;">setq</span> a <span style="color: #2544bb;">"Hello-World"</span>)
 </pre>
 </div>
 
@@ -56,9 +56,9 @@ character.
 </div>
 </div>
 
-<div id="outline-container-orgbc02ec2" class="outline-3">
-<h3 id="orgbc02ec2">Functions</h3>
-<div class="outline-text-3" id="text-orgbc02ec2">
+<div id="outline-container-orgc9d6c0c" class="outline-3">
+<h3 id="orgc9d6c0c">Functions</h3>
+<div class="outline-text-3" id="text-orgc9d6c0c">
 <p>
 Sum two numbers toghether. You can use the <code>+</code> function which
 takes any number of arguments that are either numbers or markers.
@@ -82,7 +82,7 @@ from the minibuffer.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(message <span style="color: #79a8ff;">"Hello World"</span>)
+<pre class="src src-emacs-lisp">(message <span style="color: #2544bb;">"Hello World"</span>)
 </pre>
 </div>
 
@@ -93,10 +93,10 @@ arguments, and body.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">defun</span> <span style="color: #feacd0;">print-hello</span> ()
-  (message <span style="color: #79a8ff;">"Hello World!"</span>))
-(<span style="color: #b6a0ff;">defun</span> <span style="color: #feacd0;">print-bye</span> ()
-  (message <span style="color: #79a8ff;">"Bye bye!"</span>))
+<pre class="src src-emacs-lisp">(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">print-hello</span> ()
+  (message <span style="color: #2544bb;">"Hello World!"</span>))
+(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">print-bye</span> ()
+  (message <span style="color: #2544bb;">"Bye bye!"</span>))
 </pre>
 </div>
 
@@ -107,51 +107,51 @@ even.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">defun</span> <span style="color: #feacd0;">hello-or-bye</span> (iterations)
-  (<span style="color: #b6a0ff;">setq</span> a iterations)
-  (<span style="color: #b6a0ff;">while</span> (&gt;= a 0)
-    (<span style="color: #b6a0ff;">if</span> (= 0 (% a 2))
+<pre class="src src-emacs-lisp">(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">hello-or-bye</span> (iterations)
+  (<span style="color: #5317ac;">setq</span> a iterations)
+  (<span style="color: #5317ac;">while</span> (&gt;= a 0)
+    (<span style="color: #5317ac;">if</span> (= 0 (% a 2))
   (print-hello)
       (print-bye))
-    (<span style="color: #b6a0ff;">setq</span> a (- a 1))))
+    (<span style="color: #5317ac;">setq</span> a (- a 1))))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org3c4000a" class="outline-3">
-<h3 id="org3c4000a">Iteration</h3>
-<div class="outline-text-3" id="text-org3c4000a">
+<div id="outline-container-org508da80" class="outline-3">
+<h3 id="org508da80">Iteration</h3>
+<div class="outline-text-3" id="text-org508da80">
 <p>
 Define a function to iterate over a list supplied by the user and
 output to a buffer in another window.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">defun</span> <span style="color: #feacd0;">iterate-now</span> (list)
-  <span style="color: #b0d6f5;">"Print elements of a list"</span>
-  (<span style="color: #b6a0ff;">setq</span> mybuff (generate-new-buffer <span style="color: #79a8ff;">"*my output*"</span>))
-  (<span style="color: #b6a0ff;">while</span> list
+<pre class="src src-emacs-lisp">(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">iterate-now</span> (list)
+  <span style="color: #2a486a;">"Print elements of a list"</span>
+  (<span style="color: #5317ac;">setq</span> mybuff (generate-new-buffer <span style="color: #2544bb;">"*my output*"</span>))
+  (<span style="color: #5317ac;">while</span> list
     (print (car list) mybuff)
-    (<span style="color: #b6a0ff;">setq</span> list (cdr list)))
+    (<span style="color: #5317ac;">setq</span> list (cdr list)))
   (switch-to-buffer-other-window mybuff))
 
-<span style="color: #a8a8a8;">;; </span><span style="color: #a8a8a8;">Call that function</span>
-<span style="color: #a8a8a8;">;;</span><span style="color: #a8a8a8;">(iterate-now '(c c++ rust c3))</span>
+<span style="color: #505050;">;; </span><span style="color: #505050;">Call that function</span>
+<span style="color: #505050;">;;</span><span style="color: #505050;">(iterate-now '(c c++ rust c3))</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org9d0d08f" class="outline-3">
-<h3 id="org9d0d08f">Custom types</h3>
-<div class="outline-text-3" id="text-org9d0d08f">
+<div id="outline-container-orge0d5cb9" class="outline-3">
+<h3 id="orge0d5cb9">Custom types</h3>
+<div class="outline-text-3" id="text-orge0d5cb9">
 <p>
 Define a variable with <code>defvar</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">defvar</span> <span style="color: #00d3d0;">food-list</span> '(bread pasta pizza) <span style="color: #b0d6f5;">"A list of Italian food"</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #5317ac;">defvar</span> <span style="color: #00538b;">food-list</span> '(bread pasta pizza) <span style="color: #2a486a;">"A list of Italian food"</span>)
 </pre>
 </div>
 
@@ -160,12 +160,12 @@ Define a variable with defcustom.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">defgroup</span> <span style="color: #6ae4b9;">italian</span> nil <span style="color: #b0d6f5;">"Italian things"</span>)
-(<span style="color: #b6a0ff;">defcustom</span> <span style="color: #00d3d0;">city-list</span> '(<span style="color: #79a8ff;">"Rome"</span> <span style="color: #79a8ff;">"Milan"</span> <span style="color: #79a8ff;">"Trento"</span>)
-  <span style="color: #b0d6f5;">"A list of Italian cities"</span>
-  <span style="color: #f78fe7;">:group</span> 'italian
-  <span style="color: #f78fe7;">:type</span> '(repeat string))
-<span style="color: #a8a8a8;">;;</span><span style="color: #a8a8a8;">(iterate-now city-list)</span>
+<pre class="src src-emacs-lisp">(<span style="color: #5317ac;">defgroup</span> <span style="color: #005a5f;">italian</span> nil <span style="color: #2a486a;">"Italian things"</span>)
+(<span style="color: #5317ac;">defcustom</span> <span style="color: #00538b;">city-list</span> '(<span style="color: #2544bb;">"Rome"</span> <span style="color: #2544bb;">"Milan"</span> <span style="color: #2544bb;">"Trento"</span>)
+  <span style="color: #2a486a;">"A list of Italian cities"</span>
+  <span style="color: #8f0075;">:group</span> 'italian
+  <span style="color: #8f0075;">:type</span> '(repeat string))
+<span style="color: #505050;">;;</span><span style="color: #505050;">(iterate-now city-list)</span>
 </pre>
 </div>
 
@@ -175,19 +175,19 @@ list of strings.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">require</span> '<span style="color: #00bcff;">cl-lib</span>)
-(<span style="color: #b6a0ff;">defun</span> <span style="color: #feacd0;">is-string-list</span> (obj)
-  <span style="color: #b0d6f5;">"Find out if the argument is a list of string"</span>
-  (<span style="color: #b6a0ff;">and</span> (listp obj)
+<pre class="src src-emacs-lisp">(<span style="color: #5317ac;">require</span> '<span style="color: #0000c0;">cl-lib</span>)
+(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">is-string-list</span> (obj)
+  <span style="color: #2a486a;">"Find out if the argument is a list of string"</span>
+  (<span style="color: #5317ac;">and</span> (listp obj)
        (cl-every #'stringp obj)))
 
-<span style="color: #a8a8a8;">;; </span><span style="color: #a8a8a8;">Test the function</span>
-(<span style="color: #b6a0ff;">if</span> (not (is-string-list city-list))
-    (message <span style="color: #79a8ff;">"upsie"</span>)
-  (message <span style="color: #79a8ff;">"ok"</span>))
-(<span style="color: #b6a0ff;">if</span> (is-string-list 123)
-    (message <span style="color: #79a8ff;">"upsie 2"</span>)
-  (message <span style="color: #79a8ff;">"ok"</span>))
+<span style="color: #505050;">;; </span><span style="color: #505050;">Test the function</span>
+(<span style="color: #5317ac;">if</span> (not (is-string-list city-list))
+    (message <span style="color: #2544bb;">"upsie"</span>)
+  (message <span style="color: #2544bb;">"ok"</span>))
+(<span style="color: #5317ac;">if</span> (is-string-list 123)
+    (message <span style="color: #2544bb;">"upsie 2"</span>)
+  (message <span style="color: #2544bb;">"ok"</span>))
 </pre>
 </div>
 

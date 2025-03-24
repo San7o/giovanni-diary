@@ -340,6 +340,19 @@ Generate static websites from org-mode.
     :ensure t)
 #+end_src
 
+** Mastodon
+
+Mastodon client in emacs.
+
+#+begin_src emacs-lisp
+  (use-package mastodon
+    :ensure t
+    :config
+    (setq mastodon-instance-url "https://mastodon.social"
+          mastodon-active-user "santo7"))
+#+end_src
+
+
 * Customization
 ** Cleanup the screen
  
@@ -459,6 +472,7 @@ A collection of some games.
 
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c c") 'compile)
+  (global-set-key (kbd "C-c v") 'modus-themes-toggle)
 #+end_src
 
 * Depricated
