@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+</head>
+<body>
+<div id="content" class="content">
+<div id="outline-container-org25ad8d3" class="outline-2">
+<h2 id="org25ad8d3">23-03-2025</h2>
+<div class="outline-text-2" id="text-org25ad8d3">
+<p>
+I just wanted to share a thing that made me laugh for some time. I
+am currently developing a kubernetes application for my ""internship"",
+most of the code is in go, and some is in c. I am not an expert in go,
+however the application is INCREDIBLY slow to compile and it weights
+A LOT for being just a simple client that makes some api calls to
+kubernetes. So, I was reporting this to one of my "supervisors":
+</p>
+
+<pre class="example">
+Me:
+The only complaint I have at the moment is that building the operator
+inside the docker container before pushing It to the local repository
+takes 105 seconds on average on my laptop (i3-1110G4 CPU) and it
+weights 92M which is outrageous (by comparison, my linux kernel 6.11.4
+image is 16M), and I am using the default makefile from operator-sdk...
+I guess this is because operator-sdk downloaded a big number of
+dependencies but I wonder if the application actually needs all of them
+or if they can be compiled once and dynamically linked later to speed
+up compile times.
+</pre>
+
+<p>
+I felt this was a reasonable thing to complain. I got this in response:
+</p>
+
+<pre class="example">
+Well, I see your point, but it's considered a "feature" of Go to
+produce a single binary, which includes all dependencies, but this
+also makes the binaries huge :'D
+</pre>
+
+<p>
+A FEATURE? I really don't know if I should take this language
+seriously or just laught at It, beacuse many things are just laughable.
+Being able to dynamically link executable has always been one of the
+most basic things, It is incredible to me that people consider go as
+a language for system programming. Maybe I am just too used to C, but
+com' on I cannot have the most simple client of 92MB!
+I still have the best intentions of keep learning and write ideomatic
+code in go, maybe I just have to understand that modern software has
+to suck to become a real go programmer.
+</p>
+
+<p>
+Also I call this ""intenship"" with many quotes because I am basically
+developing this application completely on my own, my teacher is not
+even answering my mails. Many of my fellow colleagues are in the same
+situation. Still, I was not surpriced since I always think realistically
+and honestly I didn't expect much from university, but It surely is
+sad. The funny thing is that the internship was supposed to happen with
+a company, but then they said It could not continue with them for
+various legal reasons (I had to move to the USA) so I am proceeding to
+develop what I was suppoed to on my own.
+</p>
+
+<p>
+Emacs lisp is very cool, I am writing tiny-rss and I am having a lot
+of fun. Firther, today I have redesigned by blog and It looks awesome,
+exactly what I wanted! It's really really simple, which I find
+aesthetically pleasing.
+</p>
+
+<p>
+&#x2014;
+</p>
+
+<p>
+Go Back: <a href="ephemeris.html">ephemeris.html</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>
