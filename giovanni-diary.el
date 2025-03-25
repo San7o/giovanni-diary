@@ -17,6 +17,7 @@
 	(interactive)
 	(setq default-directory giovanni-diary-root-dir)
 	(shell-command "./prepare-build.sh")
+	(giovanni-diary-generate-rss default-directory)
 	(setq org-publish-project-alist
 				(list
 				 (list "org-site:main"
@@ -47,3 +48,13 @@
 	(interactive)
 	(setq org-agenda-files
 				(directory-files-recursively (concat giovanni-diary-root-dir "content/") "wishlist.org$" t)))
+
+(defun giovanni-diary-generate-rss (root-dir)
+	"Generate RSS feed for Giovanni's Diary."
+	(load (concat root-dir "tiny-rss/tiny-rss.el"))
+	(tiny-rss-generate
+	 :input-directory (concat root-dir "/content")
+	 :output-directory (concat root-dir "/public/feeds")
+	 :title "Giovanni's Diary"
+	 :link "giovanni-diary.netlify.app"
+	 :description "RSS Feed for Giovanni's Diary"))
