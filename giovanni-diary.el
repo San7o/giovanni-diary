@@ -17,7 +17,7 @@
 	(interactive)
 	(setq default-directory giovanni-diary-root-dir)
 	(shell-command "./prepare-build.sh")
-	(giovanni-diary-generate-rss default-directory)
+	;;(giovanni-diary-generate-rss default-directory)
 	(setq org-publish-project-alist
 				(list
 				 (list "org-site:main"

@@ -8,3 +8,6 @@ echo -e "\n---\n\n Go Back: file:emacs.org" >> content/programming/emacs/init.or
 
 cp style/simple-giovanni.css public/
 cp style/favicon.ico public/
+
+mkdir -p public/reading/surroundings
+cp -r content/reading/surroundings/images public/reading/surroundings/
