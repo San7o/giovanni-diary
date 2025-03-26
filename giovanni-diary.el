@@ -49,8 +49,10 @@
 	(setq org-agenda-files
 				(directory-files-recursively (concat giovanni-diary-root-dir "content/") "wishlist.org$" t)))
 
-(defun giovanni-diary-generate-rss (root-dir)
+(defun giovanni-diary-generate-rss ()
 	"Generate RSS feed for Giovanni's Diary."
+	(interactive)
+	(setq root-dir giovanni-diary-root-dir)
 	(load (concat root-dir "tiny-rss/tiny-rss.el"))
 	(tiny-rss-generate
 	 :input-directory (concat root-dir "/content")
