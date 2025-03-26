@@ -72,11 +72,23 @@ Org mode settings. I use org mode everywhere in my life.
 
 Run =org-todo= to update a TODO keywork.
 #+begin_src emacs-lisp
-  (use-package org
-    :ensure nil ; do not try to install it as it is built-in
-    :config
-    (setq org-todo-keywords
-          '((sequence "TODO(t)" "WAIT(w!)" "|" "CANCEL(c!)" "DONE(d!)"))))
+    (use-package org
+      :ensure nil ; do not try to install it as it is built-in
+      :config
+      (setq org-todo-keywords
+            '((sequence "TODO(t)" "WAIT(w!)" "|" "CANCEL(c!)" "DONE(d!)"))))
+  
+  ;; Automatically toggle Latex
+    (use-package org-fragtog
+      :ensure t
+      :config
+      (setq org-format-latex-options
+          '(:foreground "White" 
+                        :background "Transparent" 
+                        :scale 3.0      ;; Base scaling factor
+                        :html-scale 1.5 ;; For HTML export
+                        :matchers ("begin" "$1" "$" "\\(" "\\["))))
+    (add-hook 'org-mode-hook 'org-fragtog-mode)
 #+end_src
 
 ** Markdown mode
@@ -352,6 +364,15 @@ Mastodon client in emacs.
           mastodon-active-user "santo7"))
 #+end_src
 
+** auto-complete
+
+Available by default in emacs 30.
+#+begin_src emacs-lisp
+    (when (< emacs-major-version 30)
+      (use-package auto-complete
+        :ensure t
+        :hook (after-init . auto-complete-mode)))
+#+end_src
 
 * Customization
 ** Cleanup the screen
