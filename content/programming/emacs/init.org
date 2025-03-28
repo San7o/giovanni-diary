@@ -466,17 +466,12 @@ code should live in a separate file.
 (load custom-file :no-error-if-file-is-missing)
 #+end_src
 
-** Save Session
-
-#+begin_src emacs-lisp
-(desktop-save-mode 1)
-#+end_src
-
 ** Tabs size
 
 Change the tab size as 2 spaces.
 
 #+begin_src emacs-lisp
+  (setq-default indent-tabs-mode nil)
   (setq-default tab-width 2)
 #+end_src
 
@@ -570,6 +565,11 @@ is now complete.
 #+begin_src emacs-lisp
 ;;  (use-package evil
 ;;    :ensure t)
+#+end_src
+** Save Session
+
+#+begin_src emacs-lisp
+;;(desktop-save-mode 1)
 #+end_src
 
 ** EXWM
