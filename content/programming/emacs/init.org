@@ -9,6 +9,26 @@ setup, do not expect anything remarcable, just some lisp code :)
 Use =M-x load-file= to load this configuration. You can also use
 =eval-buffer= inside this buffer.
 
+* Early Init
+
+This code gets executed very early during emacs' startup sequence.
+It is useful to speedup the startup process.
+
+What I am doing here is to temporarely increase the treshold for the
+garbage collector for reduce Its frequency. The value
+=most-positive-fixnm= represents the biffest positive integer that
+Emacs can handle. After the startup, we want to restore the GC
+treshold to a more sane amount, but still bigger than the default
+one. I am setting this to 50MB, the default one is 800000 bytes, or
+0.79MB.
+
+#+begin_src emacs-lisp :tangle early-init.el
+  (setq gc-cons-threshold most-positive-fixnum)
+
+  (add-hook 'emacs-startup-hook
+            (lambda () (setq gc-cons-threshold (* 50 1024 1024))))
+#+end_src
+
 * Repositories
 
 Those are the usual emacs repositories. Once in a while, you may have
