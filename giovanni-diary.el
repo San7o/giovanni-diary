@@ -57,6 +57,12 @@
 	(tiny-rss-generate
 	 :input-directory (concat root-dir "/content")
 	 :output-directory (concat root-dir "/public/feeds")
-	 :title "Giovanni's Diary"
-	 :link "giovanni-diary.netlify.app"
-	 :description "RSS Feed for Giovanni's Diary"))
+   :category-info '((:category "Ephemeris"
+                               :title "Giovanni's Diary Ephemeris"
+                               :link "giovanni-diary.netlify.app/ephemeris/ephemeris.html"
+                               :description "Ephemeris (ἐφημερίς) is an ancient greek word meaning diary, journal. In astronomy, ephemeris refers to a book of tables describing the trajectory of astronomical objects. Here I will keep a sort of public diary with various thoughts and stuff I find interesting for the record.")
+                    (:category "Surroundings"
+                               :title "Giovanni's Diary Surroundings"
+                               :link "giovanni-diary.netlify.com/reading/surroundings/surroundings.html"
+                               :description "Surroundings is a series of descriptions of places I find myself into. It is a raw translation of what my eyes see looking outward, filtered by my own mind, in the historical period I live in. The purpose of those writings is to provide a testimony of what a place looks like and feels like in a certain moment. It indirectly records what I, Giovanni, notice and pay attention to and feel, in this particular moment of my life. "))
+   :enforce-rfc822 t))
