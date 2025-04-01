@@ -56,21 +56,28 @@ Yes, sometimes I use light mode when I am outside, and I never feel
 ashamed about it, I can do whatever I want.
 
 #+begin_src emacs-lisp
-  (load-theme 'modus-vivendi t)
-  ;; Default theme is white, unless the time is after 18 (6 pm)
-  (when (< (decoded-time-hour (decode-time)) 18)
-    (modus-themes-toggle))
-  
-  (customize-set-variable 'modus-themes-common-palette-overrides
-                          `(
-                            ;; Make the mode-line borderless
-                            (bg-mode-line-active bg-inactive)
-                            (fg-mode-line-active fg-main)
-                            (bg-mode-line-inactive bg-inactive)
-                            (fg-mode-line-inactive fg-dim)
-                            (border-mode-line-active bg-inactive)
-                            (border-mode-line-inactive bg-nactive)
-                            ))
+  ;; (load-theme 'modus-vivendi t)
+  ;; ;; Default theme is white, unless the time is after 18 (6 pm)
+  ;; (when (< (decoded-time-hour (decode-time)) 18)
+  ;;   (modus-themes-toggle))
+
+  ;; (customize-set-variable 'modus-themes-common-palette-overrides
+  ;;                         `(
+  ;;                           ;; Make the mode-line borderless
+  ;;                           (bg-mode-line-active bg-inactive)
+  ;;                           (fg-mode-line-active fg-main)
+  ;;                           (bg-mode-line-inactive bg-inactive)
+  ;;                           (fg-mode-line-inactive fg-dim)
+  ;;                           (border-mode-line-active bg-inactive)
+  ;;                           (border-mode-line-inactive bg-nactive)
+  ;;                           ))
+#+end_src
+
+Add a directory for my custom themes:
+
+#+begin_src emacs-lisp
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+  (load-theme 'giovanni-base)
 #+end_src
 
 * Packages
@@ -107,7 +114,7 @@ Run =org-todo= to update a TODO keywork.
                         :background "Transparent" 
                         :scale 3.0      ;; Base scaling factor
                         :html-scale 1.5 ;; For HTML export
-                        :matchers ("begin" "$1" "$" "\\(" "\\["))))
+                        :matchers ("begin" "$1" "$" "$$" "\\(" "\\["))))
     (add-hook 'org-mode-hook 'org-fragtog-mode)
 #+end_src
 
@@ -392,6 +399,20 @@ Available by default in emacs 30.
       (use-package auto-complete
         :ensure t
         :hook (after-init . auto-complete-mode)))
+#+end_src
+
+** Flycheck
+
+Modern on-the-fly syntax checking extension for GNU Emacs.
+
+#+begin_src emacs-lisp
+  (use-package flycheck
+    :ensure
+    :commands flycheck-mode
+    :config
+    (setq flycheck-check-syntax-automatically
+          '(save mode-enabled))
+    :hook (flycheck-error-list-mode-hook . visual-line-mode))
 #+end_src
 
 * Customization
