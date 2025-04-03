@@ -11,3 +11,4 @@ cp style/favicon.ico public/
 
 mkdir -p public/reading/surroundings
 cp -r content/reading/surroundings/images public/reading/surroundings/
+cp -r content/ephemeris/images public/ephemeris

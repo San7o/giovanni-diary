@@ -415,6 +415,18 @@ Modern on-the-fly syntax checking extension for GNU Emacs.
     :hook (flycheck-error-list-mode-hook . visual-line-mode))
 #+end_src
 
+** rfc-mode
+
+Browse and read RFC documents.
+
+#+begin_src emacs-lisp
+  (use-package rfc-mode
+    :ensure t
+    :config
+    (setq rfc-mode-directory (expand-file-name "~/.emacs.d/rfc/")))
+#+end_src
+
+
 * Customization
 ** Cleanup the screen
  
