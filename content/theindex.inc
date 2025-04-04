@@ -28,6 +28,7 @@
         - [[file:reading/surroundings/mount-san-martino.org::*Mount San Martino][Mount San Martino]]
         - [[file:reading/surroundings/san-marco-garden.org::*San Marco Garden][San Marco Garden]]
         - [[file:reading/surroundings/sant-agata-church.org::*Sant Agata Church][Sant Agata Church]]
+        - [[file:reading/surroundings/sant-apollinare-church.org::*Sant'Apollinare Church][Sant'Apollinare Church]]
       - [[file:reading/wishlist.org::*Wish list][Wishlist]]
     - [[file:videogames/videogames.org::*Videogames][Videogames]]
       - [[file:videogames/disco/disco-elysium.org::*Disco Elysium][Disco Elysium]]
