@@ -28,6 +28,7 @@
 							 :with-author nil           ;; Don't include author name
 							 :with-creator nil          ;; Don't include Emacs and Org versions in footer
 							 :with-toc nil              ;; Don't include a table of contents
+               :makeindex t               ;; Generate the index
 							 :section-numbers nil       ;; Don't include section numbers
 							 :time-stamp-file nil)))    ;; Don't include time stamp in file
 	;; Customize the HTML output
@@ -38,6 +39,7 @@
 				org-html-head "<link rel=\"stylesheet\" href=\"/simple.css\" />")
 	;; Generate the site output
 	(org-publish-all t)
+  (shell-command "./after-build.sh")
 	(message "Build complete!"))
 
 (defun giovanni-diary-set-org-agenda-files ()
