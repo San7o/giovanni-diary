@@ -25,6 +25,7 @@
         - [[file:reading/mauro-corona/mauro-corona-la-casa-dei-sette-ponti.org::*La casa dei sette ponti][La casa dei sette ponti]]
       - [[file:reading/surroundings/surroundings.org::*Surroundings][Surroundings]]
         - [[file:reading/surroundings/doss-trento.org::*Doss Trento][Doss Trento]]
+        - [[file:reading/surroundings/mount-celva.org::*Mount Celva][Mount Celva]]
         - [[file:reading/surroundings/mount-san-martino.org::*Mount San Martino][Mount San Martino]]
         - [[file:reading/surroundings/san-marco-garden.org::*San Marco Garden][San Marco Garden]]
         - [[file:reading/surroundings/sant-agata-church.org::*Sant Agata Church][Sant Agata Church]]
