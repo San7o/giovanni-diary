@@ -75,17 +75,16 @@
   (setq default-directory giovanni-diary-root-dir)
   (setq org-publish-project-alist
 				(list
-				 (list "org-site:surroundings-pdf"
-							 :recursive t
-							 :base-directory "./content"
-							 :publishing-function 'org-latex-export-to-pdf
-               :base-extension "org"
-							 :publishing-directory "./latex"
-							 :with-author nil           ;; Don't include author name
-							 :with-creator nil          ;; Don't include Emacs and Org versions in footer
-							 :with-toc nil              ;; Don't include a table of contents
-               :makeindex t               ;; Generate the index
-							 :section-numbers nil       ;; Don't include section numbers
-							 :time-stamp-file nil)))    ;; Don't include time stamp in file
+         (list "org-site:latex"
+             :recursive t
+             :base-directory "./latex"
+             :publishing-function 'org-latex-publish-to-latex
+             :publishing-directory "./latex"
+             :with-author nil
+             :with-creator nil
+             :with-toc nil
+             :makeindex t
+             :section-numbers nil
+             :time-stamp-file nil)))    ;; Don't include time stamp in file
 	(org-publish-all t)
   (message "Latex build completed"))
