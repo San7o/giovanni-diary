@@ -68,3 +68,24 @@
                                :link "giovanni-diary.netlify.com/reading/surroundings/surroundings.html"
                                :description "Surroundings is a series of descriptions of places I find myself into. It is a raw translation of what my eyes see looking outward, filtered by my own mind, in the historical period I live in. The purpose of those writings is to provide a testimony of what a place looks like and feels like in a certain moment. It indirectly records what I, Giovanni, notice and pay attention to and feel, in this particular moment of my life. "))
    :enforce-rfc822 t))
+
+(defun giovanni-diary-export-latex ()
+  "Generate Latex book."
+  (interactive)
+  (setq default-directory giovanni-diary-root-dir)
+  (setq org-publish-project-alist
+				(list
+				 (list "org-site:surroundings-pdf"
+							 :recursive t
+							 :base-directory "./content"
+							 :publishing-function 'org-latex-export-to-pdf
+               :base-extension "org"
+							 :publishing-directory "./latex"
+							 :with-author nil           ;; Don't include author name
+							 :with-creator nil          ;; Don't include Emacs and Org versions in footer
+							 :with-toc nil              ;; Don't include a table of contents
+               :makeindex t               ;; Generate the index
+							 :section-numbers nil       ;; Don't include section numbers
+							 :time-stamp-file nil)))    ;; Don't include time stamp in file
+	(org-publish-all t)
+  (message "Latex build completed"))

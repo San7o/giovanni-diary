@@ -1,6 +1,7 @@
 * G
   - [[file:index.org::*Giovanni's Diary][Giovanni's Diary]]
     - [[file:about.org::*About Me][About Me]]
+    - [[file:changelog.org::*Changelog][Changelog]]
     - [[file:ephemeris/ephemeris.org::*Ephemeris][Ephemeris]]
       - [[file:ephemeris/03-04-2025.org::*03-04-2025][03-04-2025]]
       - [[file:ephemeris/16-03-2025.org::*16-03-2025][16-03-2025]]
