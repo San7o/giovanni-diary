@@ -29,7 +29,7 @@ sed -i '4i\\\usepackage{float}\
 
 sed -i 's/\[htbp\]//g' latex/surroundings-final.tex
 
-sed -i 's/---/\\newpage/g' latex/surroundings-final.tex
+sed -i 's/-----/\\newpage/g' latex/surroundings-final.tex
 
 cd latex
 xelatex surroundings-final.tex

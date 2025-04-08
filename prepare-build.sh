@@ -6,7 +6,7 @@
 mkdir -p public
 
 cp $HOME/.emacs.d/init.org content/programming/emacs/init.org
-echo -e "\n---\n\n Travel: [[file:emacs.org][Emacs]], [[file:../../theindex.org][Index]]" >> content/programming/emacs/init.org
+echo -e "\n-----\n\n Travel: [[file:emacs.org][Emacs]], [[file:../../theindex.org][Index]]" >> content/programming/emacs/init.org
 
 # Style
 cp style/simple-giovanni.css public/simple.css
