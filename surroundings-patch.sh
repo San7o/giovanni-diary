@@ -4,27 +4,28 @@
 # It add various modifications to the tex file and compiles It to
 # pdf using elatex.
 
-sed -i '25i\\\begin{titlepage}\
+
+sed -i '24i\\\begin{titlepage}\
   \\centering\
   {\\Huge\\bfseries Surroundings \\par}\
   Giovannis Diary\
 \\end{titlepage}' latex/surroundings-final.tex
 
-sed -i '4i\\\usepackage{float}\
-\\let\\origfigure\\figure\
-\\let\\endorigfigure\\endfigure\
-\\renewenvironment{figure}[1][H]{\\origfigure[#1]}{\\endorigfigure}' latex/surroundings-final.tex
-
-sed -i '3i\
+sed -i '15i\
 \\usepackage{fontspec}\
-\\setmainfont{Inconsolata}[\
+\\setmainfont{Inconsolata_SemiExpanded}[\
     Path = ../fonts/Inconsolata/static/,\
     Extension = .ttf,\
-    UprightFont = *-Regular,\
+    UprightFont = *-Light,\
     BoldFont = *-Bold,\
     ItalicFont = *-Bold,\
     BoldItalicFont = *-Bold\
 ]' latex/surroundings-final.tex
+
+sed -i '4i\\\usepackage{float}\
+\\let\\origfigure\\figure\
+\\let\\endorigfigure\\endfigure\
+\\renewenvironment{figure}[1][H]{\\origfigure[#1]}{\\endorigfigure}' latex/surroundings-final.tex
 
 sed -i 's/\[htbp\]//g' latex/surroundings-final.tex
 
