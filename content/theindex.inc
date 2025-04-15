@@ -10,6 +10,7 @@
       - [[file:ephemeris/2025-04-03.org::*2025-04-03][2025-04-03]]
       - [[file:ephemeris/2025-04-07.org::*2025-04-07][2025-04-07]]
     - [[file:feeds.org::*RSS Feed][Feeds]]
+    - [[file:my-public-diary.org::*My Public Diary][My public Diary]]
     - [[file:photography/photography.org::*Photography][Photography]]
       - [[file:photography/alpe-susi.org::*Alpe Susi][Alpe Susi]]
       - [[file:photography/caldonazzo.org::*Caldonazzo][Caldonazzo]]

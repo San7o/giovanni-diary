@@ -11,14 +11,15 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0b5ee9e">1. What you should know</a></li>
-<li><a href="#org7577eaf">2. Understand what consumes the most</a></li>
-<li><a href="#org5632800">3. Save yourself time: TLP</a></li>
-<li><a href="#org3ac7df7">4. Specific Settings</a></li>
-<li><a href="#org0e7e48a">5. Helpful tips</a>
+<li><a href="#orga374961">1. ACPI Specification</a></li>
+<li><a href="#orga9e297c">2. Linux's ACPI</a></li>
+<li><a href="#orga254776">3. Understand what consumes the most</a></li>
+<li><a href="#orgd3e9ab9">4. Save yourself time: TLP</a></li>
+<li><a href="#org38ac6d7">5. Kernel Settings</a></li>
+<li><a href="#orgfcc04fd">6. Helpful tips</a>
 <ul>
-<li><a href="#org9ea6d89">5.1. Light graphics session</a></li>
-<li><a href="#org55da072">5.2. Have less background processes running</a></li>
+<li><a href="#org36200a3">6.1. Light graphics session</a></li>
+<li><a href="#org04b94b8">6.2. Have less background processes running</a></li>
 </ul>
 </li>
 </ul>
@@ -32,18 +33,18 @@ longer. Here is a list of things I did to get closer to this goal.
 </p>
 
 <p>
-This guide is focused on laptops but you can get value even for
-dektop servers.
+This guide is focused on laptops but you can get value even for dektop
+servers.
 </p>
 
-<div id="outline-container-org0b5ee9e" class="outline-2">
-<h2 id="org0b5ee9e"><span class="section-number-2">1.</span> What you should know</h2>
+<div id="outline-container-orga374961" class="outline-2">
+<h2 id="orga374961"><span class="section-number-2">1.</span> ACPI Specification</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Before thinkering with your system, you should have a decent
 understanding of how the system works, both in hardware and software,
-in the context of power management. I will give you a quick overview
-of power consumption on a linux system running on the x86
+in the context of power management. I will now give you a quick
+overview of power consumption on a linux system running on the x86
 architecture.
 </p>
 
@@ -74,11 +75,29 @@ throttling, giving us more opportunity for optimizations.
 Hardware may send interrupts that can wake up a processor from a
 sleeping state, therefore you should try to minimize the number of
 events (by disabling devices) or balance them efficiently across cores
-(using something like <a href="https://linux.die.net/man/1/irqbalance">irqbalance</a>, for example). Going back to ACPI,
-hardware other than processors have "device power states" D0 to D3
-where D0 means that the device is fully on, D3 that It is off. ACPI
-further defines those states for many device types (network,
+(using something like <a href="https://linux.die.net/man/1/irqbalance">irqbalance</a>, for example).
+</p>
+
+<p>
+Going back to ACPI, devices are also a great source of power
+consumption. Hardware other than processors have "device power states"
+D0 to D3 where D0 means that the device is fully on, D3 that It is
+off. ACPI further defines those states for many device types (network,
 storage&#x2026;).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga9e297c" class="outline-2">
+<h2 id="orga9e297c"><span class="section-number-2">2.</span> Linux's ACPI</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+An overview of the Linux's ACPI implementation can be foind <a href="https://www.kernel.org/doc/ols/2005/ols2005v1-pages-59-76.pdf">here</a>.
+Briefly, It is composed of an OS Service Layer which abstracts
+the hardware, an user interface via sysfs and procfs, the core
+implementation which includes an AML interpreter which is used
+is used as a language between the firmware and the operating
+system, and other components.
 </p>
 
 <p>
@@ -92,8 +111,8 @@ linux distribution you may have something similar already installed.
 </p>
 
 <p>
-Obviously, the more stuff you are doning with your computer, the more
-energy It will consume. You should prefer light software compiled in
+Obviously, the more stuff you are doing with your computer, the more
+energy It will consume. You should prefer light software compiled to
 machine code, with optimizations enabled and stripped debug
 information. We will discuss more what other optimizations you can
 implement.
@@ -101,9 +120,9 @@ implement.
 </div>
 </div>
 
-<div id="outline-container-org7577eaf" class="outline-2">
-<h2 id="org7577eaf"><span class="section-number-2">2.</span> Understand what consumes the most</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-orga254776" class="outline-2">
+<h2 id="orga254776"><span class="section-number-2">3.</span> Understand what consumes the most</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 While you may try to thinker with configurations files and settings
 following common heuristics (such as "less processes = less power
@@ -131,9 +150,9 @@ time between logs, and so on.
 </div>
 </div>
 
-<div id="outline-container-org5632800" class="outline-2">
-<h2 id="org5632800"><span class="section-number-2">3.</span> Save yourself time: TLP</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgd3e9ab9" class="outline-2">
+<h2 id="orgd3e9ab9"><span class="section-number-2">4.</span> Save yourself time: TLP</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 To save yourself some time configuring your system, you can use <a href="https://linrunner.de/tlp/introduction.html">TLP</a>
 (or any similar tool) which automatically configures the kernel with
@@ -169,9 +188,9 @@ There are plenty of utilities like this, use them at your own risk.
 </div>
 </div>
 
-<div id="outline-container-org3ac7df7" class="outline-2">
-<h2 id="org3ac7df7"><span class="section-number-2">4.</span> Specific Settings</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org38ac6d7" class="outline-2">
+<h2 id="org38ac6d7"><span class="section-number-2">5.</span> Kernel Settings</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 There are many settings you can tune on linux, which will mostly
 depend on your hardware and drivers. A decent list can be found in the
@@ -249,29 +268,41 @@ the settings, <code>tlp.conf</code> is a good place to start.
 <p>
 You can choose a frequency scaling governor to manage throttling.
 This will dynamically change the clock's frequency and voltage
-cofiguration via P-states. To list the available governors, run:
+cofiguration via P-states. Assuming you are using TLP, to list the
+available governors you can run:
 </p>
 
 <div class="org-src-container">
 <pre class="src src-bash">sudo tlp-stat -p | grep governor
 </pre>
 </div>
+
+<p>
+To increase battery life, It is recommended to reduce the maximum
+charge level below 100% and prevent the charging process to happen for
+every short discharge from the maximum. By default, TLP does not set
+this. To enable it, set the variables <code>START_CHARGE_THRESH_BATx</code> and
+<code>START_CHARGE_THRESH_BATx</code> to something like <code>75</code> and <code>80</code>, where <code>x</code>
+represent the number of the battery in your laptop.  Sadly, on some
+laptops (lime my HP one) this is not supported and the command
+<code>tlp-stat -b</code> would output
+<code>/sys/class/power_supply/BAT1/charge_control_start_threshold (not available)</code>.
+</p>
 </div>
 </div>
 
-
-<div id="outline-container-org0e7e48a" class="outline-2">
-<h2 id="org0e7e48a"><span class="section-number-2">5.</span> Helpful tips</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgfcc04fd" class="outline-2">
+<h2 id="orgfcc04fd"><span class="section-number-2">6.</span> Helpful tips</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 Here is a list of other helpful things that will make your operating
 system lighter and more efficient.
 </p>
 </div>
 
-<div id="outline-container-org9ea6d89" class="outline-3">
-<h3 id="org9ea6d89"><span class="section-number-3">5.1.</span> Light graphics session</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-org36200a3" class="outline-3">
+<h3 id="org36200a3"><span class="section-number-3">6.1.</span> Light graphics session</h3>
+<div class="outline-text-3" id="text-6-1">
 <p>
 If you are using a graphical environment, chances are that you do not
 need a full blown desktop environment to manage the position of your
@@ -292,14 +323,14 @@ are the best.
 </div>
 </div>
 
-<div id="outline-container-org55da072" class="outline-3">
-<h3 id="org55da072"><span class="section-number-3">5.2.</span> Have less background processes running</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-org04b94b8" class="outline-3">
+<h3 id="org04b94b8"><span class="section-number-3">6.2.</span> Have less background processes running</h3>
+<div class="outline-text-3" id="text-6-2">
 <p>
 If you are using a linux distribution instead of compiling your system
 on your own, chances are that the maintainers of said distribution
 have enabled a buch of stuff you don't really need. This goes from
-kernel modules for various hardware, which you do not need, and
+kernel modules for various hardware, which you do not need, to
 background daemons to do things like reporting crashes.
 </p>
 

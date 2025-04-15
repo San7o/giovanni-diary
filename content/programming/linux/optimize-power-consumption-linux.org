@@ -15,15 +15,15 @@ battery life on my linux laptop. I don't use my laptop for
 computational-expensive tasks, I'd rather prefer my battery to last
 longer. Here is a list of things I did to get closer to this goal.
 
-This guide is focused on laptops but you can get value even for
-dektop servers.
+This guide is focused on laptops but you can get value even for dektop
+servers.
 
-*** What you should know
+*** ACPI Specification
 
 Before thinkering with your system, you should have a decent
 understanding of how the system works, both in hardware and software,
-in the context of power management. I will give you a quick overview
-of power consumption on a linux system running on the x86
+in the context of power management. I will now give you a quick
+overview of power consumption on a linux system running on the x86
 architecture.
 
 Let's start from the CPU, obviously you have read the [[https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html][intel manuals]],
@@ -46,11 +46,22 @@ throttling, giving us more opportunity for optimizations.
 Hardware may send interrupts that can wake up a processor from a
 sleeping state, therefore you should try to minimize the number of
 events (by disabling devices) or balance them efficiently across cores
-(using something like [[https://linux.die.net/man/1/irqbalance][irqbalance]], for example). Going back to ACPI,
-hardware other than processors have "device power states" D0 to D3
-where D0 means that the device is fully on, D3 that It is off. ACPI
-further defines those states for many device types (network,
+(using something like [[https://linux.die.net/man/1/irqbalance][irqbalance]], for example).
+
+Going back to ACPI, devices are also a great source of power
+consumption. Hardware other than processors have "device power states"
+D0 to D3 where D0 means that the device is fully on, D3 that It is
+off. ACPI further defines those states for many device types (network,
 storage...).
+
+*** Linux's ACPI
+
+An overview of the Linux's ACPI implementation can be foind [[https://www.kernel.org/doc/ols/2005/ols2005v1-pages-59-76.pdf][here]].
+Briefly, It is composed of an OS Service Layer which abstracts
+the hardware, an user interface via sysfs and procfs, the core
+implementation which includes an AML interpreter which is used
+is used as a language between the firmware and the operating
+system, and other components.
 
 On Linux, userspace can interact with the ACPI subsystem via sysfs in
 =/sys/devices/LNXSYSTM:00= or =/sys/bus/acpi/devices= (if ACPI support
@@ -60,8 +71,8 @@ them such as the status or the voltage. You may want to use something
 like =acpid= or =upower= to dump ACPI info, if you are using some
 linux distribution you may have something similar already installed.
 
-Obviously, the more stuff you are doning with your computer, the more
-energy It will consume. You should prefer light software compiled in
+Obviously, the more stuff you are doing with your computer, the more
+energy It will consume. You should prefer light software compiled to
 machine code, with optimizations enabled and stripped debug
 information. We will discuss more what other optimizations you can
 implement.
@@ -112,7 +123,7 @@ following:
 
 There are plenty of utilities like this, use them at your own risk.
 
-*** Specific Settings
+*** Kernel Settings
 
 There are many settings you can tune on linux, which will mostly
 depend on your hardware and drivers. A decent list can be found in the
@@ -180,12 +191,22 @@ the settings, =tlp.conf= is a good place to start.
 
 You can choose a frequency scaling governor to manage throttling.
 This will dynamically change the clock's frequency and voltage
-cofiguration via P-states. To list the available governors, run:
+cofiguration via P-states. Assuming you are using TLP, to list the
+available governors you can run:
 
 #+begin_src bash
    sudo tlp-stat -p | grep governor
 #+end_src
 
+To increase battery life, It is recommended to reduce the maximum
+charge level below 100% and prevent the charging process to happen for
+every short discharge from the maximum. By default, TLP does not set
+this. To enable it, set the variables =START_CHARGE_THRESH_BATx= and
+=START_CHARGE_THRESH_BATx= to something like =75= and =80=, where =x=
+represent the number of the battery in your laptop.  Sadly, on some
+laptops (lime my HP one) this is not supported and the command
+=tlp-stat -b= would output
+=/sys/class/power_supply/BAT1/charge_control_start_threshold (not available)=.
 
 *** Helpful tips
 
@@ -213,7 +234,7 @@ are the best.
 If you are using a linux distribution instead of compiling your system
 on your own, chances are that the maintainers of said distribution
 have enabled a buch of stuff you don't really need. This goes from
-kernel modules for various hardware, which you do not need, and
+kernel modules for various hardware, which you do not need, to
 background daemons to do things like reporting crashes.
 
 If your system uses systemd, you can check active services using the

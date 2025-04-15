@@ -12,9 +12,9 @@
 <body>
 <div id="content" class="content">
 
-<div id="outline-container-orgdb02056" class="outline-2">
-<h2 id="orgdb02056">Optimize power consumption on Linux</h2>
-<div class="outline-text-2" id="text-orgdb02056">
+<div id="outline-container-orgb2fefcf" class="outline-2">
+<h2 id="orgb2fefcf">Optimize power consumption on Linux</h2>
+<div class="outline-text-2" id="text-orgb2fefcf">
 <p>
 This documents contains notes regarding my attempts to increase
 battery life on my linux laptop. I don't use my laptop for
@@ -23,19 +23,19 @@ longer. Here is a list of things I did to get closer to this goal.
 </p>
 
 <p>
-This guide is focused on laptops but you can get value even for
-dektop servers.
+This guide is focused on laptops but you can get value even for dektop
+servers.
 </p>
 </div>
 
-<div id="outline-container-orgbe1e4f3" class="outline-4">
-<h4 id="orgbe1e4f3">What you should know</h4>
-<div class="outline-text-4" id="text-orgbe1e4f3">
+<div id="outline-container-orgda31c68" class="outline-4">
+<h4 id="orgda31c68">ACPI Specification</h4>
+<div class="outline-text-4" id="text-orgda31c68">
 <p>
 Before thinkering with your system, you should have a decent
 understanding of how the system works, both in hardware and software,
-in the context of power management. I will give you a quick overview
-of power consumption on a linux system running on the x86
+in the context of power management. I will now give you a quick
+overview of power consumption on a linux system running on the x86
 architecture.
 </p>
 
@@ -66,11 +66,29 @@ throttling, giving us more opportunity for optimizations.
 Hardware may send interrupts that can wake up a processor from a
 sleeping state, therefore you should try to minimize the number of
 events (by disabling devices) or balance them efficiently across cores
-(using something like <a href="https://linux.die.net/man/1/irqbalance">irqbalance</a>, for example). Going back to ACPI,
-hardware other than processors have "device power states" D0 to D3
-where D0 means that the device is fully on, D3 that It is off. ACPI
-further defines those states for many device types (network,
+(using something like <a href="https://linux.die.net/man/1/irqbalance">irqbalance</a>, for example).
+</p>
+
+<p>
+Going back to ACPI, devices are also a great source of power
+consumption. Hardware other than processors have "device power states"
+D0 to D3 where D0 means that the device is fully on, D3 that It is
+off. ACPI further defines those states for many device types (network,
 storage&#x2026;).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0fefb0c" class="outline-4">
+<h4 id="org0fefb0c">Linux's ACPI</h4>
+<div class="outline-text-4" id="text-org0fefb0c">
+<p>
+An overview of the Linux's ACPI implementation can be foind <a href="https://www.kernel.org/doc/ols/2005/ols2005v1-pages-59-76.pdf">here</a>.
+Briefly, It is composed of an OS Service Layer which abstracts
+the hardware, an user interface via sysfs and procfs, the core
+implementation which includes an AML interpreter which is used
+is used as a language between the firmware and the operating
+system, and other components.
 </p>
 
 <p>
@@ -84,8 +102,8 @@ linux distribution you may have something similar already installed.
 </p>
 
 <p>
-Obviously, the more stuff you are doning with your computer, the more
-energy It will consume. You should prefer light software compiled in
+Obviously, the more stuff you are doing with your computer, the more
+energy It will consume. You should prefer light software compiled to
 machine code, with optimizations enabled and stripped debug
 information. We will discuss more what other optimizations you can
 implement.
@@ -93,9 +111,9 @@ implement.
 </div>
 </div>
 
-<div id="outline-container-orgb947ff5" class="outline-4">
-<h4 id="orgb947ff5">Understand what consumes the most</h4>
-<div class="outline-text-4" id="text-orgb947ff5">
+<div id="outline-container-orgc76298e" class="outline-4">
+<h4 id="orgc76298e">Understand what consumes the most</h4>
+<div class="outline-text-4" id="text-orgc76298e">
 <p>
 While you may try to thinker with configurations files and settings
 following common heuristics (such as "less processes = less power
@@ -123,9 +141,9 @@ time between logs, and so on.
 </div>
 </div>
 
-<div id="outline-container-orgfbdc036" class="outline-4">
-<h4 id="orgfbdc036">Save yourself time: TLP</h4>
-<div class="outline-text-4" id="text-orgfbdc036">
+<div id="outline-container-orgbe3dee2" class="outline-4">
+<h4 id="orgbe3dee2">Save yourself time: TLP</h4>
+<div class="outline-text-4" id="text-orgbe3dee2">
 <p>
 To save yourself some time configuring your system, you can use <a href="https://linrunner.de/tlp/introduction.html">TLP</a>
 (or any similar tool) which automatically configures the kernel with
@@ -161,9 +179,9 @@ There are plenty of utilities like this, use them at your own risk.
 </div>
 </div>
 
-<div id="outline-container-org4d084a1" class="outline-4">
-<h4 id="org4d084a1">Specific Settings</h4>
-<div class="outline-text-4" id="text-org4d084a1">
+<div id="outline-container-orgbe62c96" class="outline-4">
+<h4 id="orgbe62c96">Kernel Settings</h4>
+<div class="outline-text-4" id="text-orgbe62c96">
 <p>
 There are many settings you can tune on linux, which will mostly
 depend on your hardware and drivers. A decent list can be found in the
@@ -241,20 +259,32 @@ the settings, <code>tlp.conf</code> is a good place to start.
 <p>
 You can choose a frequency scaling governor to manage throttling.
 This will dynamically change the clock's frequency and voltage
-cofiguration via P-states. To list the available governors, run:
+cofiguration via P-states. Assuming you are using TLP, to list the
+available governors you can run:
 </p>
 
 <div class="org-src-container">
 <pre class="src src-bash">sudo tlp-stat -p | grep governor
 </pre>
 </div>
+
+<p>
+To increase battery life, It is recommended to reduce the maximum
+charge level below 100% and prevent the charging process to happen for
+every short discharge from the maximum. By default, TLP does not set
+this. To enable it, set the variables <code>START_CHARGE_THRESH_BATx</code> and
+<code>START_CHARGE_THRESH_BATx</code> to something like <code>75</code> and <code>80</code>, where <code>x</code>
+represent the number of the battery in your laptop.  Sadly, on some
+laptops (lime my HP one) this is not supported and the command
+<code>tlp-stat -b</code> would output
+<code>/sys/class/power_supply/BAT1/charge_control_start_threshold (not available)</code>.
+</p>
 </div>
 </div>
 
-
-<div id="outline-container-org132553d" class="outline-4">
-<h4 id="org132553d">Helpful tips</h4>
-<div class="outline-text-4" id="text-org132553d">
+<div id="outline-container-org5d95ddf" class="outline-4">
+<h4 id="org5d95ddf">Helpful tips</h4>
+<div class="outline-text-4" id="text-org5d95ddf">
 <p>
 Here is a list of other helpful things that will make your operating
 system lighter and more efficient.
@@ -262,8 +292,8 @@ system lighter and more efficient.
 </div>
 
 <ul class="org-ul">
-<li><a id="orgd003aca"></a>Light graphics session<br />
-<div class="outline-text-5" id="text-orgd003aca">
+<li><a id="org7f35d33"></a>Light graphics session<br />
+<div class="outline-text-5" id="text-org7f35d33">
 <p>
 If you are using a graphical environment, chances are that you do not
 need a full blown desktop environment to manage the position of your
@@ -284,13 +314,13 @@ are the best.
 </div>
 </li>
 
-<li><a id="org32ae93b"></a>Have less background processes running<br />
-<div class="outline-text-5" id="text-org32ae93b">
+<li><a id="orgd0469d5"></a>Have less background processes running<br />
+<div class="outline-text-5" id="text-orgd0469d5">
 <p>
 If you are using a linux distribution instead of compiling your system
 on your own, chances are that the maintainers of said distribution
 have enabled a buch of stuff you don't really need. This goes from
-kernel modules for various hardware, which you do not need, and
+kernel modules for various hardware, which you do not need, to
 background daemons to do things like reporting crashes.
 </p>
 
