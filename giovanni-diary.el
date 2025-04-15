@@ -66,7 +66,11 @@
                     (:category "Surroundings"
                                :title "Giovanni's Diary Surroundings"
                                :link "giovanni-diary.netlify.com/reading/surroundings/surroundings.html"
-                               :description "Surroundings is a series of descriptions of places I find myself into. It is a raw translation of what my eyes see looking outward, filtered by my own mind, in the historical period I live in. The purpose of those writings is to provide a testimony of what a place looks like and feels like in a certain moment. It indirectly records what I, Giovanni, notice and pay attention to and feel, in this particular moment of my life. "))
+                               :description "Surroundings is a series of descriptions of places I find myself into. It is a raw translation of what my eyes see looking outward, filtered by my own mind, in the historical period I live in. The purpose of those writings is to provide a testimony of what a place looks like and feels like in a certain moment. It indirectly records what I, Giovanni, notice and pay attention to and feel, in this particular moment of my life. ")
+                    (:category "Programming"
+                               :title "Giovanni's Diary Programming"
+                               :link "giovanni-diary.netlify.com/programming/programming.html"
+                               :description "Giovanni's programmer diary."))
    :enforce-rfc822 t))
 
 (defun giovanni-diary-export-latex ()

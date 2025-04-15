@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # This script is supposed to be run after generating the .tex file.
-# It add various modifications to the tex file and compiles It to
+# It adds various modifications to the tex file and compiles It to
 # pdf using elatex.
 
 

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+</head>
+<body>
+<div id="content" class="content">
+
+<div id="outline-container-orgdb02056" class="outline-2">
+<h2 id="orgdb02056">Optimize power consumption on Linux</h2>
+<div class="outline-text-2" id="text-orgdb02056">
+<p>
+This documents contains notes regarding my attempts to increase
+battery life on my linux laptop. I don't use my laptop for
+computational-expensive tasks, I'd rather prefer my battery to last
+longer. Here is a list of things I did to get closer to this goal.
+</p>
+
+<p>
+This guide is focused on laptops but you can get value even for
+dektop servers.
+</p>
+</div>
+
+<div id="outline-container-orgbe1e4f3" class="outline-4">
+<h4 id="orgbe1e4f3">What you should know</h4>
+<div class="outline-text-4" id="text-orgbe1e4f3">
+<p>
+Before thinkering with your system, you should have a decent
+understanding of how the system works, both in hardware and software,
+in the context of power management. I will give you a quick overview
+of power consumption on a linux system running on the x86
+architecture.
+</p>
+
+<p>
+Let's start from the CPU, obviously you have read the <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html">intel manuals</a>,
+in particular volume 3B chapter 16, It explains how the CPU manages
+power. Similarly to other hardware components, intel CPUs implement
+the <a href="https://uefi.org/htmlspecs/ACPI_Spec_6_4_html/">ACPI</a> specfication which enables an ACPI compatible operating
+system to interface with hardware devices on performance.
+</p>
+
+<p>
+For processors, ACPI defines different power states within the global
+working state G0, and they are called "Cx states": C0 means that the
+processor is executing instructions, C1 to Cn are sleeping states
+where the processor consumes less; C3 consumes less than C2 which
+consumes less than C1 (but this is not specified from C4 to Cn).
+</p>
+
+<p>
+Furthermore, ACPI defines "Px states" which are other states inside
+C0, where P0 is maximum performance. Operating systems can change the
+performance state of a core "on the fly" which is known as CPU
+throttling, giving us more opportunity for optimizations.
+</p>
+
+<p>
+Hardware may send interrupts that can wake up a processor from a
+sleeping state, therefore you should try to minimize the number of
+events (by disabling devices) or balance them efficiently across cores
+(using something like <a href="https://linux.die.net/man/1/irqbalance">irqbalance</a>, for example). Going back to ACPI,
+hardware other than processors have "device power states" D0 to D3
+where D0 means that the device is fully on, D3 that It is off. ACPI
+further defines those states for many device types (network,
+storage&#x2026;).
+</p>
+
+<p>
+On Linux, userspace can interact with the ACPI subsystem via sysfs in
+<code>/sys/devices/LNXSYSTM:00</code> or <code>/sys/bus/acpi/devices</code> (if ACPI support
+is enabled). Inside, you will find directories that represent ACPI
+devices, for each device the directory contains informations about
+them such as the status or the voltage. You may want to use something
+like <code>acpid</code> or <code>upower</code> to dump ACPI info, if you are using some
+linux distribution you may have something similar already installed.
+</p>
+
+<p>
+Obviously, the more stuff you are doning with your computer, the more
+energy It will consume. You should prefer light software compiled in
+machine code, with optimizations enabled and stripped debug
+information. We will discuss more what other optimizations you can
+implement.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb947ff5" class="outline-4">
+<h4 id="orgb947ff5">Understand what consumes the most</h4>
+<div class="outline-text-4" id="text-orgb947ff5">
+<p>
+While you may try to thinker with configurations files and settings
+following common heuristics (such as "less processes = less power
+consumption"), It is more productive to evaluate the power consumption
+of your operating system and make changes to the most power-draining
+sources in order to have a greater impact on the overall power
+consumption.
+</p>
+
+<p>
+A general tool that works well is <a href="https://linux.die.net/man/8/powertop">powertop</a> which will give you
+per-process power consumption and information about CPU states,
+devices and tunable settings to decrease power consumption. You
+can calibrate the tool with <code>powertop --calibrate</code> (only on laptops)
+and then wait for It to collect data for about one hour and generate
+power estimation figures.
+</p>
+
+<p>
+From the overview tab you can easily see which processes are
+consuming more power so that you can look into them individually.
+If you find that systemd is logging too much, try to increase the
+time between logs, and so on.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfbdc036" class="outline-4">
+<h4 id="orgfbdc036">Save yourself time: TLP</h4>
+<div class="outline-text-4" id="text-orgfbdc036">
+<p>
+To save yourself some time configuring your system, you can use <a href="https://linrunner.de/tlp/introduction.html">TLP</a>
+(or any similar tool) which automatically configures the kernel with
+power saving settings. It is supposed to work well out of the box but
+you can manually configure the settings via a configuration file in
+<code>/etc/tlp.conf</code>. Please refer to the documentation for further
+details.
+</p>
+
+<p>
+The installation is quite strait forward, check your package
+manager. To apply a power manager profile, run the following
+command (do this every time you change the configuration file):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo tlp start
+</pre>
+</div>
+
+<p>
+To get system information and the status of the tool, run the
+following:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">tlp-stat -s
+</pre>
+</div>
+
+<p>
+There are plenty of utilities like this, use them at your own risk.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4d084a1" class="outline-4">
+<h4 id="org4d084a1">Specific Settings</h4>
+<div class="outline-text-4" id="text-org4d084a1">
+<p>
+There are many settings you can tune on linux, which will mostly
+depend on your hardware and drivers. A decent list can be found in the
+Archlinux's <a href="https://wiki.archlinux.org/title/Power_management">Power Management</a> page.
+</p>
+
+<p>
+To access the ACPI subsystem you need to have the following
+enabled in your kernel (from the gentoo wiki):
+</p>
+
+<pre class="example">
+Power management and ACPI options ---&gt;
+-*- Device power management core functionality
+[*] ACPI (Advanced Configuration and Power Interface) Support ---&gt;
+  &lt;*&gt; AC Adapter
+  &lt;*&gt; Battery
+  -*- Button
+  -*- Video
+  &lt;*&gt; Fan
+  &lt;*&gt; Processor
+  &lt;*&gt; Thermal Zone
+
+[*] CPU Frequency scaling ---&gt;
+      Default CPUFreq governor (ondemand)  ---&gt;
+  -*- 'performance' governor
+  &lt;*&gt; 'powersave' governor
+  &lt;*&gt; 'userspace' governor for userspace frequency scaling
+  -*- 'ondemand' cpufreq policy governor
+  &lt;*&gt; 'conservative' cpufreq governor
+  &lt;*&gt; ACPI Processor P-States driver
+</pre>
+
+<p>
+Additionally, enable Thermal and Powercap sysfs for your CPU:
+</p>
+
+<pre class="example">
+Device Drivers ---&gt;
+-*- Thermal drivers ---&gt;
+  (0)   Emergency poweroff delay in milli-seconds                                                                              
+  [*]   Expose thermal sensors as hwmon device                                                                                
+  -*-   Enable writable trip points                                                                                          
+        Default Thermal governor (step_wise)  ---&gt;                                                                           
+  [*]   Fair-share thermal governor                                                                                           
+  -*-   Step_wise thermal governor                                                                                            
+  -*-   Bang Bang thermal governor                                                                                            
+  -*-   User_space thermal governor                                                                                           
+  [ ]   Thermal emulation mode support
+  [*]   Power allocator thermal governor   
+  Intel Thermal drivers ---&gt;
+      &lt;M&gt;   Intel PowerClamp idle injection driver
+      &lt;M&gt;   X86 package temperature thermal driver
+      &lt; &gt;   Intel SoCs DTS thermal driver
+      &lt;M&gt;   Intel PCH Thermal Reporting Driver
+      ACPI INT340X thermal drivers  ---&gt;                                                                                     
+          &lt;M&gt; ACPI INT340X thermal drivers
+</pre>
+
+<p>
+And rapl, which gives additional information about the processor:
+</p>
+
+<pre class="example">
+Device Drivers ---&gt;
+[*] Generic powercap sysfs driver ---&gt;
+  &lt;M&gt;   Intel RAPL Support
+</pre>
+
+<p>
+Now you should have all the requirements to start playing with
+the settings, <code>tlp.conf</code> is a good place to start.
+</p>
+
+<p>
+You can choose a frequency scaling governor to manage throttling.
+This will dynamically change the clock's frequency and voltage
+cofiguration via P-states. To list the available governors, run:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo tlp-stat -p | grep governor
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org132553d" class="outline-4">
+<h4 id="org132553d">Helpful tips</h4>
+<div class="outline-text-4" id="text-org132553d">
+<p>
+Here is a list of other helpful things that will make your operating
+system lighter and more efficient.
+</p>
+</div>
+
+<ul class="org-ul">
+<li><a id="orgd003aca"></a>Light graphics session<br />
+<div class="outline-text-5" id="text-orgd003aca">
+<p>
+If you are using a graphical environment, chances are that you do not
+need a full blown desktop environment to manage the position of your
+windows. The lighter your window manager, the better. My argument is
+that all you need is a program that can create windows and move them;
+such program should be simple and small, understandable and hackable.
+Everything else is bloated software, I would suggest something like
+<a href="https://dwm.suckless.org/">dwm</a> or <a href="https://www.ctwm.org/index.html">ctwm</a>.
+</p>
+
+<p>
+I did not compare Wayland-based window managers against X11, I found
+some benchmarks <a href="https://www.phoronix.com/news/GNOME-Xorg-Wayland-AMD-Renoir">online</a> and they are similar in power consumption but
+the benchmarks were with Gnome. Unless you find a really minimal
+window manager using wayland, the good old simple X11 window managers
+are the best.
+</p>
+</div>
+</li>
+
+<li><a id="org32ae93b"></a>Have less background processes running<br />
+<div class="outline-text-5" id="text-org32ae93b">
+<p>
+If you are using a linux distribution instead of compiling your system
+on your own, chances are that the maintainers of said distribution
+have enabled a buch of stuff you don't really need. This goes from
+kernel modules for various hardware, which you do not need, and
+background daemons to do things like reporting crashes.
+</p>
+
+<p>
+If your system uses systemd, you can check active services using the
+<code>systemctl status</code> command. Even though many of them may be idle and
+may not contribute much to the overall power consumption, they still
+consume resources so It is helpful to have less things running in
+your system.
+</p>
+
+<p>
+Disable things like bluetooth if you don't need it, crash reporting
+daemons, etc&#x2026;
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="./linux.html">Linux</a>, <a href="../../theindex.html">Index</a>
+</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>

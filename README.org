@@ -16,3 +16,19 @@ To build everything, run =giovanni-diary-rebuild-site= after
 evaluating =giovanni-diary.el=. This file registers some other helper
 functions all prepended with the string =giovanni-diary=.
 Note that you need =ox-publish= and, of course, =emacs= to run this.
+
+** Files
+
+- =after-build.sh=: This script is run after generating the html files
+- =prepare-build.sh=: This script is run before parsing the org files
+- =surroundings.sh=: Amalgamate all the org files from the surroundings
+  directory
+- =surroundings-patch.sh=: This script is run after converting the org
+  files into .tex
+- =giovanni-diary.el=: Elisp functions to generate the static content
+  and other utilities for the website
+- =content=: Locations of the source org files
+- =public=: html files for the static website
+- =style=: css files for the html website
+- =fonts=: Fonts for the html view and latex books
+- =Makefile=: other useful commands

@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Generate the Surroundings amalgamated file from the .org files in
-# content/reading/surroundings to latex/
+# Generate the Surroundings amalgamated org file from the .org files
+# from content/reading/surroundings to latex/
 
 # 0. Create the latex directory
 rm -rf latex 2&>/dev/null
