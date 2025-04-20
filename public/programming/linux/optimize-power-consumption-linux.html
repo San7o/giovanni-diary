@@ -11,10 +11,13 @@
 </head>
 <body>
 <div id="content" class="content">
+<p>
+<a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt;
+</p>
 
-<div id="outline-container-orgc230e7c" class="outline-2">
-<h2 id="orgc230e7c">Optimize power consumption on Linux</h2>
-<div class="outline-text-2" id="text-orgc230e7c">
+<div id="outline-container-orge7b6fae" class="outline-2">
+<h2 id="orge7b6fae">Optimize power consumption on Linux</h2>
+<div class="outline-text-2" id="text-orge7b6fae">
 <p>
 This documents contains notes regarding my attempts to increase
 battery life on my linux laptop. I don't use my laptop for
@@ -28,9 +31,9 @@ servers.
 </p>
 </div>
 
-<div id="outline-container-org74fe081" class="outline-4">
-<h4 id="org74fe081">ACPI Specification</h4>
-<div class="outline-text-4" id="text-org74fe081">
+<div id="outline-container-org44f5aec" class="outline-4">
+<h4 id="org44f5aec">ACPI Specification</h4>
+<div class="outline-text-4" id="text-org44f5aec">
 <p>
 Before thinkering with your system, you should have a decent
 understanding of how the system works, both in hardware and software,
@@ -79,9 +82,9 @@ storage&#x2026;).
 </div>
 </div>
 
-<div id="outline-container-orgd8b5672" class="outline-4">
-<h4 id="orgd8b5672">Linux's ACPI</h4>
-<div class="outline-text-4" id="text-orgd8b5672">
+<div id="outline-container-org4ac200d" class="outline-4">
+<h4 id="org4ac200d">Linux's ACPI</h4>
+<div class="outline-text-4" id="text-org4ac200d">
 <p>
 An overview of the Linux's ACPI implementation can be foind <a href="https://www.kernel.org/doc/ols/2005/ols2005v1-pages-59-76.pdf">here</a>.
 Briefly, It is composed of an OS Service Layer which abstracts
@@ -111,9 +114,9 @@ implement.
 </div>
 </div>
 
-<div id="outline-container-orgfa077be" class="outline-4">
-<h4 id="orgfa077be">Understand what consumes the most</h4>
-<div class="outline-text-4" id="text-orgfa077be">
+<div id="outline-container-org9cf152b" class="outline-4">
+<h4 id="org9cf152b">Understand what consumes the most</h4>
+<div class="outline-text-4" id="text-org9cf152b">
 <p>
 While you may try to thinker with configurations files and settings
 following common heuristics (such as "less processes = less power
@@ -141,9 +144,9 @@ time between logs, and so on.
 </div>
 </div>
 
-<div id="outline-container-org6dd6564" class="outline-4">
-<h4 id="org6dd6564">Save yourself time: TLP</h4>
-<div class="outline-text-4" id="text-org6dd6564">
+<div id="outline-container-orgd0e2c87" class="outline-4">
+<h4 id="orgd0e2c87">Save yourself time: TLP</h4>
+<div class="outline-text-4" id="text-orgd0e2c87">
 <p>
 To save yourself some time configuring your system, you can use <a href="https://linrunner.de/tlp/introduction.html">TLP</a>
 (or any similar tool) which automatically configures the kernel with
@@ -179,9 +182,9 @@ There are plenty of utilities like this, use them at your own risk.
 </div>
 </div>
 
-<div id="outline-container-org5ebc91d" class="outline-4">
-<h4 id="org5ebc91d">Kernel Settings</h4>
-<div class="outline-text-4" id="text-org5ebc91d">
+<div id="outline-container-orga78e0b4" class="outline-4">
+<h4 id="orga78e0b4">Kernel Settings</h4>
+<div class="outline-text-4" id="text-orga78e0b4">
 <p>
 There are many settings you can tune on linux, which will mostly
 depend on your hardware and drivers. A decent list can be found in the
@@ -282,9 +285,9 @@ laptops (lime my HP one) this is not supported and the command
 </div>
 </div>
 
-<div id="outline-container-orgf4ff137" class="outline-4">
-<h4 id="orgf4ff137">Helpful tips</h4>
-<div class="outline-text-4" id="text-orgf4ff137">
+<div id="outline-container-org7cf8f56" class="outline-4">
+<h4 id="org7cf8f56">Helpful tips</h4>
+<div class="outline-text-4" id="text-org7cf8f56">
 <p>
 Here is a list of other helpful things that will make your operating
 system lighter and more efficient.
@@ -292,8 +295,8 @@ system lighter and more efficient.
 </div>
 
 <ul class="org-ul">
-<li><a id="orgd889890"></a>Light graphics session<br />
-<div class="outline-text-5" id="text-orgd889890">
+<li><a id="org707248b"></a>Light graphics session<br />
+<div class="outline-text-5" id="text-org707248b">
 <p>
 If you are using a graphical environment, chances are that you do not
 need a full blown desktop environment to manage the position of your
@@ -314,8 +317,8 @@ are the best.
 </div>
 </li>
 
-<li><a id="org7e80bda"></a>Have less background processes running<br />
-<div class="outline-text-5" id="text-org7e80bda">
+<li><a id="org5f4f6d1"></a>Have less background processes running<br />
+<div class="outline-text-5" id="text-org5f4f6d1">
 <p>
 If you are using a linux distribution instead of compiling your system
 on your own, chances are that the maintainers of said distribution
