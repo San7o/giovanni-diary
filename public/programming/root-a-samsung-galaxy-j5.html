@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../index.html">
+Giovanni's Diary</a> &gt; <a href="programming.html">Programming</a> &gt;
+</p>
+
+<div id="outline-container-org88af9bb" class="outline-2">
+<h2 id="org88af9bb">How to root a Samsung Galaxy J5 (2016)</h2>
+<div class="outline-text-2" id="text-org88af9bb">
+</div>
+<div id="outline-container-org8447e07" class="outline-4">
+<h4 id="org8447e07">Index</h4>
+<div class="outline-text-4" id="text-org8447e07">
+<ul class="org-ul">
+<li>The processs</li>
+<li>1. Boot a custom recovery image</li>
+<li>2. Install a special applications</li>
+<li>3. Enjoy the power</li>
+<li>Installing an alternative OS</li>
+</ul>
+
+<p>
+Rooting android your first time is a frustrating experience at best.
+It took me more than necessary to get root priviledges on my phone,
+therefore I am writing a quick guide for my future self when he will
+need my assistance. This document explanins the steps I took to
+succesfully root my android phone.
+</p>
+
+<p>
+Note that the process may vary in several ways, mainly depending on
+the model of the phone you are trying to root. This guide is written
+specifically for the Samsung Galaxy J5 (2016), however most of the
+steps should be similar hopefully. It is advised to read this article
+first before attempting to root your phone.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga09906f" class="outline-4">
+<h4 id="orga09906f">The process</h4>
+<div class="outline-text-4" id="text-orga09906f">
+<p>
+To root a phone we need something else with root priviledges to grant
+us the same status. Of course, stock Android will never let us get
+even a glimpse of this power for security reasons so we need to find a
+workaround.  The solution is to boot a cusom recovery image, which has
+high priviledges, to install some applications with root status. We
+can leverage this to install a special app that gives permissions to
+other apps during normal system execution.
+</p>
+
+<p>
+To recap, we need to do the following to achieve root:
+</p>
+<ol class="org-ol">
+<li>Boot a custom recovery image</li>
+<li>Install a special application</li>
+<li>Enjoy the power</li>
+</ol>
+
+<p>
+Note that you might mess things up and lose all your data, so be
+prepared.  Probably you will also lose your device's warranty.
+</p>
+
+<p>
+You have been warned :-)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5764cb8" class="outline-4">
+<h4 id="org5764cb8">1. Boot a custom recovery image</h4>
+<div class="outline-text-4" id="text-org5764cb8">
+<p>
+We need to download a custom recovery image for your phone model.
+There are many cool looking alternatives, I used TWRP and It can be
+downloaded from the official website. Note that you need to choose the
+right version based on your phone.  I downloaded the <code>.img</code> file,
+compressed it in a tar archive and renamed it <code>recovery.tar</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">wget https://.../something.img
+tar -cf something.tar something.img
+mv something.img recovery.zip
+</pre>
+</div>
+
+<p>
+Now we need to put this into our device. We need to boot into download
+mode which on my smartphone is <code>VOL_DOWN + HOME + POWER</code>. After this
+we can interact with the device, I used <code>odin4</code> (linux version) for
+this. To check that oding can talk to the device, run <code>odin4 -l</code> and
+expect some output. If it does not show anything I cannot help you, It
+is probably a driver problem, good luck, I believe in you, trust in
+yourself, you are strong. If you get some permission error, you need
+to set something on your udev, just foollow closely the help output
+and you should be good to go.
+</p>
+
+<p>
+Then load the recovery mode with <code>odin4 -a recovery.zip</code> and,
+IMMEDIATELY after it finishes, you need to boot in recovery mode,
+which on my phone is done via <code>VOL_UP + HOME + POWER</code>. You need to be
+QUICK, REALLY QUICK!!! Keep trying until you manage to do this. If
+everything was succesfull, you are now greeted with a cool recovery
+program.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf062762" class="outline-4">
+<h4 id="orgf062762">2. Install a special application</h4>
+<div class="outline-text-4" id="text-orgf062762">
+<p>
+We now need to install something that will make other things root. We
+can use Magisk, you can download the apk from the official github
+releases and rename it to a <code>.zip</code> file. We need to send It to the
+device and we will use <code>adb</code> from the official platform tools. Just
+extract the archive.
+</p>
+
+<p>
+On the device, select <code>advanced -&gt; sideload -&gt; swipe to start
+sideload</code>.  On your pc, run <code>adb sideload app-release.zip</code>, this
+should install magisk and it should show the installation on the
+phone. After this finishes, reboot your phone, go to your apps and
+open Magisk, It may ask to be installed again, just say yes, follow
+the installation instructions (just tap two buttons), maybe close it
+and reopen it, reboot and&#x2026;  we are root!
+</p>
+
+<p>
+You can check this by installing RootChecker.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2ef73d1" class="outline-4">
+<h4 id="org2ef73d1">3. Enjoy the power</h4>
+<div class="outline-text-4" id="text-org2ef73d1">
+<p>
+Now that you are root you can do a bunch of cool things like wipe out
+everything and install gentoo. A more useful thing would be to install
+an adblocker (I'd suggest <code>adAway</code>) so that you can actually read blogs
+and news in peace.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd1a1470" class="outline-4">
+<h4 id="orgd1a1470">Installing an alternative OS</h4>
+<div class="outline-text-4" id="text-orgd1a1470">
+<p>
+There are plenty of alternatives and variations of Android out there,
+the only constraint is that they need to support your phone.  You
+could theoretically make your own build but I have no idea how you
+would resolve drivers. I aplogise for my ignorance, you'll have to
+figure It out some day.  I found <a href="https://community.e.foundation/t/unofficial-builds-samsung-galaxy-j5-series-for-e-os-r/56461/3">this</a> unofficial build of /e/OS,
+hopefully the liks still works.
+</p>
+
+<p>
+After you have installed the custom recovery media, you can start the
+sideload just as you did for Makisk in the previous section, and load
+the downloaded archive. That is really it, you should have a working
+OS.  If the process fails and you cannot boot the OS correctly, you
+should be able to access the recovery mode on startup assuming that
+you can turn off your device. In my experience, when the boot broke, I
+could not power It off so I just removed the battery and
+rebooted. Unfortunately, you cannot do this in new phones (sight), so
+you may try to make It discharge until ti powerd off, gook luck.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="programming.html">Programming</a>, <a href="../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
