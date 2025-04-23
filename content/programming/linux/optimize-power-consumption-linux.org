@@ -13,26 +13,49 @@
 #+INDEX: Giovanni's Diary!Programming!Linux!Optimize power consumption on Linux
 
 This documents contains notes regarding my attempts to increase
-battery life on my linux laptop. I don't use my laptop for
-computational-expensive tasks, I'd rather prefer my battery to last
-longer. Here is a list of things I did to get closer to this goal.
+battery life on my linux laptop[s]. I don't use my laptop for
+computational-expensive tasks, I'd rather prefer the battery to last
+longer. Here is a list of things I did to optimize for lower power
+consumption.
 
 This guide is focused on laptops but you can get value even for dektop
-servers.
+servers. If you have any comment / correction / suggestion please let
+me know by sending me an email at [[mailto:giovanni.santini@proton.me][giovanni.santini@proton.me]] or message
+me on Mastodon [[https://mastodon.social/@santo7][@santo7@mastodon.social]].
+
+*** Index
+
+- ACPI Specification
+- Linux's ACPI
+- Understand what consumes the most
+  - Powertop
+  - Iotop
+  - Plot power usage
+- Save yourself some time: TLP
+- Kernel Settings
+  - Frequency scaling
+  - Maximum charge level
+  - Omit Scheduling-Clock ticks for idle CPUs
+  - Disable Atime in BTRFS
+  - Kernel flags
+- Helpful tips
+  - Light graphical sessions
+  - Have less background processes running
+  - Lower the backlight
+- Conclusions
 
 *** ACPI Specification
 
 Before thinkering with your system, you should have a decent
-understanding of how the system works, both in hardware and software,
-in the context of power management. I will now give you a quick
-overview of power consumption on a linux system running on the x86
-architecture.
+understanding of how the operating system works in the context of
+power management. I will now give you a quick overview of power
+consumption on a linux system running on the x86 architecture.
 
-Let's start from the CPU, obviously you have read the [[https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html][intel manuals]],
-in particular volume 3B chapter 16, It explains how the CPU manages
-power. Similarly to other hardware components, intel CPUs implement
-the [[https://uefi.org/htmlspecs/ACPI_Spec_6_4_html/][ACPI]] specfication which enables an ACPI compatible operating
-system to interface with hardware devices on performance.
+Let's start with the hardware and how we can interact with It, more
+specifically the CPU. Similarly to other hardware components, intel
+CPUs implement the [[https://uefi.org/htmlspecs/ACPI_Spec_6_4_html/][ACPI]] specfication which enables an ACPI compatible
+operating system to interface with hardware devices to finetune
+performance.
 
 For processors, ACPI defines different power states within the global
 working state G0, and they are called "Cx states": C0 means that the
@@ -46,11 +69,12 @@ performance state of a core "on the fly" which is known as CPU
 throttling, giving us more opportunity for optimizations.
 
 Hardware may send interrupts that can wake up a processor from a
-sleeping state, therefore you should try to minimize the number of
-events (by disabling devices) or balance them efficiently across cores
-(using something like [[https://linux.die.net/man/1/irqbalance][irqbalance]], for example).
+sleeping or low-power state, therefore you should try to minimize the
+number of interrupts (by disabling devices) or balance them
+efficiently across cores (using something like [[https://linux.die.net/man/1/irqbalance][irqbalance]], for
+example).
 
-Going back to ACPI, devices are also a great source of power
+Going back to ACPI, other devices are also a great source of power
 consumption. Hardware other than processors have "device power states"
 D0 to D3 where D0 means that the device is fully on, D3 that It is
 off. ACPI further defines those states for many device types (network,
@@ -59,11 +83,11 @@ storage...).
 *** Linux's ACPI
 
 An overview of the Linux's ACPI implementation can be foind [[https://www.kernel.org/doc/ols/2005/ols2005v1-pages-59-76.pdf][here]].
-Briefly, It is composed of an OS Service Layer which abstracts
-the hardware, an user interface via sysfs and procfs, the core
-implementation which includes an AML interpreter which is used
-is used as a language between the firmware and the operating
-system, and other components.
+Briefly, It is composed of an OS Service Layer which abstracts the
+hardware, an user interface via sysfs and procfs, the core
+implementation which includes an AML interpreter which is used as a
+language between the firmware and the operating system, and other
+components.
 
 On Linux, userspace can interact with the ACPI subsystem via sysfs in
 =/sys/devices/LNXSYSTM:00= or =/sys/bus/acpi/devices= (if ACPI support
@@ -81,24 +105,105 @@ implement.
 
 *** Understand what consumes the most
 
-While you may try to thinker with configurations files and settings
+While you may try to thinker with configuration files and settings
 following common heuristics (such as "less processes = less power
 consumption"), It is more productive to evaluate the power consumption
 of your operating system and make changes to the most power-draining
 sources in order to have a greater impact on the overall power
 consumption.
 
+**** Powertop
+
 A general tool that works well is [[https://linux.die.net/man/8/powertop][powertop]] which will give you
 per-process power consumption and information about CPU states,
-devices and tunable settings to decrease power consumption. You
-can calibrate the tool with =powertop --calibrate= (only on laptops)
-and then wait for It to collect data for about one hour and generate
-power estimation figures.
+devices and tunable settings to decrease power consumption. It is good
+practice to calibrate the tool with =powertop --calibrate= (only on
+laptops) before collecting data, this will setup the tool to show
+correct estimations about power consumption.
 
-From the overview tab you can easily see which processes are
-consuming more power so that you can look into them individually.
-If you find that systemd is logging too much, try to increase the
-time between logs, and so on.
+From the overview tab you can easily see which processes are consuming
+more power so that you can look into them individually.  For example,
+If you find that systemd is logging too much, try to increase the time
+between logs, and so on.
+
+**** Iotop
+
+Another useful tool is [[https://www.man7.org/linux/man-pages/man8/iotop.8.html][iotop]] which will give you information about
+disk usage. Even though this does not directly list power
+consumption, there is a correlation between disk usage and power
+consumption so it is beneficial to look into this.
+
+You may start playing around with filesystems and mount options,
+later we'll see an option in BTRFS that improves performance.
+
+**** Plot power usage
+
+To evaluate a change in your system, you can log and graph different
+statistics and compare changes. The following script records
+Watts consumption each second:
+
+#+begin_src lua
+#!/bin/bash
+
+OUTFILE="power_log.csv"
+GNUPLOT_SCRIPT="plot_power.gp"
+INTERVAL=1  # seconds
+
+echo "timestamp,power_watts" > "$OUTFILE"
+
+prev_energy=$(< /sys/class/powercap/intel-rapl:0/energy_uj)
+prev_time=$(date +%s)
+
+while true; do
+    sleep "$INTERVAL"
+
+    curr_energy=$(< /sys/class/powercap/intel-rapl:0/energy_uj)
+    curr_time=$(date +%s)
+
+    delta_energy=$((curr_energy - prev_energy))
+    delta_time=$((curr_time - prev_time))
+
+    # Handle energy wraparound (32-bit counter)
+    if [[ $delta_energy -lt 0 ]]; then
+        delta_energy=$(( (2**32 + delta_energy) ))
+    fi
+
+    # Convert to watts
+    power=$(awk "BEGIN { printf \"%.2f\", ($delta_energy / 1000000) / $delta_time }")
+    timestamp=$(date +"%H:%M:%S")
+    echo "$timestamp,$power" >> "$OUTFILE"
+
+    prev_energy=$curr_energy
+    prev_time=$curr_time
+done
+#+end_src
+
+You can then graph it with gnuplot:
+
+#+begin_src bash
+  set datafile separator ","
+  set xdata time
+  set timefmt "%H:%M:%S"
+  set format x "%H:%M:%S"
+  set xlabel "Time"
+  set ylabel "Power (Watts)"
+  set title "Power Consumption Over Time"
+  set grid
+  set term pngcairo size 800,400
+  set output "power_plot.png"
+
+  plot "power_log.csv" using 1:2 with lines title "Power (W)"
+#+end_src
+
+
+#+CAPTION: Gnuplot output
+#+NAME:   fig:gnuplot
+#+ATTR_ORG: :align center
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 600px
+#+ATTR_ORG: :width 600px
+[[../../ephemeris/images/gnuplot-power.jpeg]]
+
 
 *** Save yourself time: TLP
 
@@ -106,11 +211,11 @@ To save yourself some time configuring your system, you can use [[https://linrun
 (or any similar tool) which automatically configures the kernel with
 power saving settings. It is supposed to work well out of the box but
 you can manually configure the settings via a configuration file in
-=/etc/tlp.conf=. Please refer to the documentation for further
+=/etc/tlp.conf=. Please refer to the [[https://linrunner.de/tlp/index.html][documentation]] for further
 details.
 
 The installation is quite strait forward, check your package
-manager. To apply a power manager profile, run the following
+manager. To apply a power profile, run the following
 command (do this every time you change the configuration file):
 
 #+begin_src bash
@@ -132,7 +237,7 @@ depend on your hardware and drivers. A decent list can be found in the
 Archlinux's [[https://wiki.archlinux.org/title/Power_management][Power Management]] page.
 
 To access the ACPI subsystem you need to have the following
-enabled in your kernel (from the gentoo wiki):
+enabled in your [[https://wiki.gentoo.org/wiki/Power_management/Guide][kernel]]:
 
 #+begin_src
   Power management and ACPI options --->
@@ -180,7 +285,7 @@ Additionally, enable Thermal and Powercap sysfs for your CPU:
             <M> ACPI INT340X thermal drivers
 #+end_src
 
-And rapl, which gives additional information about the processor:
+And RAPL, which gives additional information about the processor:
 
 #+begin_src
   Device Drivers --->
@@ -191,6 +296,8 @@ And rapl, which gives additional information about the processor:
 Now you should have all the requirements to start playing with
 the settings, =tlp.conf= is a good place to start.
 
+**** Frequency Scaling
+
 You can choose a frequency scaling governor to manage throttling.
 This will dynamically change the clock's frequency and voltage
 cofiguration via P-states. Assuming you are using TLP, to list the
@@ -200,22 +307,85 @@ available governors you can run:
    sudo tlp-stat -p | grep governor
 #+end_src
 
+By default, Fedora 41 has "performance" and "powersave", so I choose
+powersave in tlp's settings (which is the default setting).
+
+**** Maximum charge level
+
 To increase battery life, It is recommended to reduce the maximum
 charge level below 100% and prevent the charging process to happen for
 every short discharge from the maximum. By default, TLP does not set
 this. To enable it, set the variables =START_CHARGE_THRESH_BATx= and
 =START_CHARGE_THRESH_BATx= to something like =75= and =80=, where =x=
 represent the number of the battery in your laptop.  Sadly, on some
-laptops (lime my HP one) this is not supported and the command
+laptops (like my HP one) this is not supported and the command
 =tlp-stat -b= would output
 =/sys/class/power_supply/BAT1/charge_control_start_threshold (not available)=.
 
+**** Omit Scheduling-Clock ticks for idle CPUs
+
+If you are doing mostly lightwaight work with long idle periods, you
+can limit the scheduling-clock interrupt to prevent weaking up some
+cores when It is not needed. The linux kernel [[https://www.kernel.org/doc/html/latest/timers/no_hz.html#omit-scheduling-clock-ticks-for-cpus-with-only-one-runnable-task][documentation]] says that
+if scheduling is set to periodic, the system would drain 2-3 times
+faster compared to a kernel with this disabled, so It is quite a big
+deal. You may need it if you are running aggressive real-time
+response constraints, but this is not our case.
+
+Enable the following in your kenrel configuration:
+
+#+begin_src
+  CONFIG_NO_HZ_IDLE=y
+  CONFIG_HZ_100=y 
+#+end_src
+
+**** Disable Atime in BTRFS
+
+BTRFS is a popular filesystem. A part of Its design is the CoW
+(Copy on Write) where a certain file would get copied in another
+location when a modification is made, this is necessary for
+the snapshotting functionality of the filesystem. However, this
+causes the broblem where a file yould get copied even if you
+just read it, just by updating the last access timestamp. [[https://lwn.net/Articles/499293/][This]]
+LWN article from Jonathan Corbet explains this well:
+
+#+BEGIN_QUOTE
+  If somebody takes a snapshot of a filesystem, then performs a
+  recursive grep on that filesystem, the last-access time of every
+  file touched may be updated. That, in turn, can cause copy-on-write
+  operations on each file's inode structure, with the result that many
+  or all of the inodes in the filesystem may be duplicated. That can
+  increase the space consumption of the filesystem considerably;
+  Alexander posted an example where a recursive grep caused 2.2GB of
+  free space to disappear. That is a surprising result for what is
+  meant to be a read-only operation.
+#+END_QUOTE
+
+To disable the Atime feature, you need to put the =noatime= option
+on the BTRFS entries in =/etc/fstab=.
+
+**** Kernel Flags
+
+You can add the following kernel flags when booting your system:
+- =pcie_aspm=force=: force PCIe Active State Power Management
+  to put PCIe devices into low-power states. Some devices may
+  stop working if they are not implemented correctly, so do your
+  own tests.
+- For intel GPUs:
+  - =i915.enable_dc=2=: enable the display engine to enter
+    low-power states.
+  - =i915.enable_fbc=1=: enables Frame Buffer Compression (FBC),
+    reducing memory bandwidth when the screen content is static
+  - =i915.enable_psr=1=: enables Panel Self Refresh (PSR) — lets the
+    display refresh from its own memory instead of continuously
+    redrawing.
+    
 *** Helpful tips
 
 Here is a list of other helpful things that will make your operating
 system lighter and more efficient.
 
-**** Light graphics session
+**** Light graphical session
 
 If you are using a graphical environment, chances are that you do not
 need a full blown desktop environment to manage the position of your
@@ -227,7 +397,7 @@ Everything else is bloated software, I would suggest something like
 
 I did not compare Wayland-based window managers against X11, I found
 some benchmarks [[https://www.phoronix.com/news/GNOME-Xorg-Wayland-AMD-Renoir][online]] and they are similar in power consumption but
-the benchmarks were with Gnome. Unless you find a really minimal
+the benchmarks were made with Gnome. Unless you find a really minimal
 window manager using wayland, the good old simple X11 window managers
 are the best.
 
@@ -247,6 +417,17 @@ your system.
 
 Disable things like bluetooth if you don't need it, crash reporting
 daemons, etc...
+
+**** Lower the backlight
+
+Lower the backlight of your laptop as much as you are comfortable
+with.
+
+*** Conclusions
+
+I hope you learned something new from this article. I will keep this
+updated with new information I gain overtime, if you have any
+suggestion to improve the work I'd be happy to hear it.
 
 -----
 

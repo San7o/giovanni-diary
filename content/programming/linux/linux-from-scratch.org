@@ -1,0 +1,132 @@
+#+startup: content indent
+
+[[file:../../index.org][Giovanni's Diary]] > [[file:../programming.org][Programming]] > [[file:linux.org][Linux]] >
+
+* The Linux From Scratch Experience
+:PROPERTIES:
+:RSS: true
+:DATE: 23 Apr 2025 00:00:00 GMT
+:CATEGORY: Programming
+:AUTHOR: Giovanni Santini
+:LINK: https://giovanni-diary.netlify.app/programming/linux/linux-from-scratch.html
+:END:
+#+INDEX: Giovanni's Diary!Programming!Linux!Linux From Scratch
+
+In this article I want to talk about one of the best educational
+projects I have ever done: Linux From Scratch.
+
+The Linux From Scratch experience is a hell of a long and boring
+ride into manual dependency management, patching build scripts,
+kernel panics, and a lot of time spent compiling. But as
+hard times develop one's character, running LFS daily will strengthen
+your patience and make you a competent power user.
+
+Jokes aside, this project made me appreciate more the work of package
+management and understand all the different parts of Linux's
+userspace. I learned how to fearelessly own the kernel or get owned
+and totally humiliated by the same technology you utter human being
+wrote. It gave me experience in working directly with the core
+userspace technologies, cutting down on high abstractions and
+pre-configured linux distributions by making my own "distribution".
+
+
+*** Index
+
+- What is LFS
+- Motivation
+- Humble beginnings
+- Level up
+- Maintaining the build
+
+*** What is LFS
+
+The idea is that you compile all your system from scratch by yourself,
+without a packet manager. This is what distinguisces LFS from a
+project like Gentoo, where it is true that you compile everything from
+scratch but all the steps were laredy prepared and you just execute
+them.
+
+Practically, LFS is a manual with instructions to compile a bootable
+system. This is expanded in Beyond Linux From Scratch (BLFS) which
+adds additional programs like a graphics session or a browser.
+
+*** Motivation
+
+It all started at the end of october 2024. I was really frustrated
+with NixOS because of how you need to do everything "then NixOS
+way". I could not play and mess with the system as if I were in a
+cage, I needed a change of mindset. With this push for freedom and
+independence, I wanted to get to the extreme and try Linux From
+Scratch which I have had in the back of my mind for a while.
+
+Furthermore, I belived in the educational value of this project.
+I already felt comfortable installing Archlinux or Gentoo and I
+wanted something more challenging.
+
+*** Humble beginnings
+
+You start off as with any distribution by setting up the partitions
+from a live environment. Then, you start compiling your compiler, gcc,
+which is done in three steps. This is because to compile the compiler
+you need a compiler... duh. So you use an external one to compile a very
+tiny gcc, which is used to compile a very tiny glibc, which is needed
+for a better gcc, and again another time. Once you have gcc and glibc
+you can really get started.
+
+You proceed to install all the useful programs that you always find
+like gnutils, dhcp, the boot manager (I did grub with UEFI) and of
+course the Linux kernel. It takes special care for the kernel because
+if you start with a minimal kernel, you need to manually enable all
+the features you need to interface with the various devices, and It is
+not always obvious which option you need to enable.
+
+After all of this, you have a bootable kernel, congratulations.  You
+just spent a week of your life to have a minimal system barely usable.
+
+Now the real experience begins.
+
+*** Level up
+
+One big thing you probably need is a graphical session, and this is no
+joke. Compiling all the dependencies for i3 took a while, but
+eventually I had it. The next thing is what transitioned my system to
+the next level.. a web browser (DUN DUN DUUUN).
+
+Compiling firefox has so many dependencies, expecially if you
+want all the optional ones, just to make sure it works. In my
+list of installed programs, firefox is at the 300th line. This
+means that I compiled a total of 299 libraries / programs before
+I could use firefox. All of this manually.
+
+Once you have a browser you are good to go on your own. The book
+does not help you much anymore and you developed the skills to
+build everything without a guide. Only after all those weeks of
+hard work you can start using your system "normally".
+
+Obviously every time you need to install something, you think
+twice if you really really need It of if It is just a short term
+desire that will not greately improve your life.
+
+*** Maintaining the build
+
+You can now focus on maintaining your system. You should subscribe to
+some security updates mailing lists and update programs when some
+critical vulnerability is found or a new version of some important
+software comes out. I was following compilers like llvm, gcc, core
+libraries like SDL, programs I use everyday like firefox and emacs,
+and some more.
+
+To make my life easier, I maintained a list of all the installed
+programs with their version. I wrote a little package manager
+called [[https://github.com/San7o/mapkg][mapkg]] but I never fully committed to It. I kept a backup
+of all the configuration files in a github [[https://github.com/San7o/lfs][repo]].
+
+I kept this build for about 3-4 months, the I got bored and
+installed Fedora because It was too much to make everything work.
+Still, I will probably get back into it, It will surely be easier
+with all the experience I gained.
+
+-----
+
+Travel: [[file:./linux.org][Linux]], [[../../theindex.org][Index]]
+

@@ -3,6 +3,201 @@
 <link>giovanni-diary.netlify.com/programming/programming.html</link>
 <description><![CDATA[Giovanni's programmer diary.]]></description>
 <item>
+<title>The Linux From Scratch Experience</title>
+<link>https://giovanni-diary.netlify.app/programming/linux/linux-from-scratch.html</link>
+<author>Giovanni Santini</author>
+<pubDate>23 Apr 2025 00:00:00 GMT</pubDate>
+<description><![CDATA[<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9e5538d">1. Index</a></li>
+<li><a href="#orgc92dc70">2. What is LFS</a></li>
+<li><a href="#org78949c1">3. Motivation</a></li>
+<li><a href="#org3a29c01">4. Humble beginnings</a></li>
+<li><a href="#org9894840">5. Level up</a></li>
+<li><a href="#orgaecdbb3">6. Maintaining the build</a></li>
+</ul>
+</div>
+</div>
+<p>
+In this article I want to talk about one of the best educational
+projects I have ever done: Linux From Scratch.
+</p>
+
+<p>
+The Linux From Scratch experience is a hell of a long and boring
+ride into manual dependency management, patching build scripts,
+kernel panics, and a lot of time spent compiling. But as
+hard times develop one's character, running LFS daily will strengthen
+your patience and make you a competent power user.
+</p>
+
+<p>
+Jokes aside, this project made me appreciate more the work of package
+management and understand all the different parts of Linux's
+userspace. I learned how to fearelessly own the kernel or get owned
+and totally humiliated by the same technology you utter human being
+wrote. It gave me experience in working directly with the core
+userspace technologies, cutting down on high abstractions and
+pre-configured linux distributions by making my own "distribution".
+</p>
+
+
+<div id="outline-container-org9e5538d" class="outline-2">
+<h2 id="org9e5538d"><span class="section-number-2">1.</span> Index</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>What is LFS</li>
+<li>Motivation</li>
+<li>Humble beginnings</li>
+<li>Level up</li>
+<li>Maintaining the build</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc92dc70" class="outline-2">
+<h2 id="orgc92dc70"><span class="section-number-2">2.</span> What is LFS</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+The idea is that you compile all your system from scratch by yourself,
+without a packet manager. This is what distinguisces LFS from a
+project like Gentoo, where it is true that you compile everything from
+scratch but all the steps were laredy prepared and you just execute
+them.
+</p>
+
+<p>
+Practically, LFS is a manual with instructions to compile a bootable
+system. This is expanded in Beyond Linux From Scratch (BLFS) which
+adds additional programs like a graphics session or a browser.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org78949c1" class="outline-2">
+<h2 id="org78949c1"><span class="section-number-2">3.</span> Motivation</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+It all started at the end of october 2024. I was really frustrated
+with NixOS because of how you need to do everything "then NixOS
+way". I could not play and mess with the system as if I were in a
+cage, I needed a change of mindset. With this push for freedom and
+independence, I wanted to get to the extreme and try Linux From
+Scratch which I have had in the back of my mind for a while.
+</p>
+
+<p>
+Furthermore, I belived in the educational value of this project.
+I already felt comfortable installing Archlinux or Gentoo and I
+wanted something more challenging.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3a29c01" class="outline-2">
+<h2 id="org3a29c01"><span class="section-number-2">4.</span> Humble beginnings</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+You start off as with any distribution by setting up the partitions
+from a live environment. Then, you start compiling your compiler, gcc,
+which is done in three steps. This is because to compile the compiler
+you need a compiler&#x2026; duh. So you use an external one to compile a very
+tiny gcc, which is used to compile a very tiny glibc, which is needed
+for a better gcc, and again another time. Once you have gcc and glibc
+you can really get started.
+</p>
+
+<p>
+You proceed to install all the useful programs that you always find
+like gnutils, dhcp, the boot manager (I did grub with UEFI) and of
+course the Linux kernel. It takes special care for the kernel because
+if you start with a minimal kernel, you need to manually enable all
+the features you need to interface with the various devices, and It is
+not always obvious which option you need to enable.
+</p>
+
+<p>
+After all of this, you have a bootable kernel, congratulations.  You
+just spent a week of your life to have a minimal system barely usable.
+</p>
+
+<p>
+Now the real experience begins.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9894840" class="outline-2">
+<h2 id="org9894840"><span class="section-number-2">5.</span> Level up</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+One big thing you probably need is a graphical session, and this is no
+joke. Compiling all the dependencies for i3 took a while, but
+eventually I had it. The next thing is what transitioned my system to
+the next level.. a web browser (DUN DUN DUUUN).
+</p>
+
+<p>
+Compiling firefox has so many dependencies, expecially if you
+want all the optional ones, just to make sure it works. In my
+list of installed programs, firefox is at the 300th line. This
+means that I compiled a total of 299 libraries / programs before
+I could use firefox. All of this manually.
+</p>
+
+<p>
+Once you have a browser you are good to go on your own. The book
+does not help you much anymore and you developed the skills to
+build everything without a guide. Only after all those weeks of
+hard work you can start using your system "normally".
+</p>
+
+<p>
+Obviously every time you need to install something, you think
+twice if you really really need It of if It is just a short term
+desire that will not greately improve your life.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgaecdbb3" class="outline-2">
+<h2 id="orgaecdbb3"><span class="section-number-2">6.</span> Maintaining the build</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+You can now focus on maintaining your system. You should subscribe to
+some security updates mailing lists and update programs when some
+critical vulnerability is found or a new version of some important
+software comes out. I was following compilers like llvm, gcc, core
+libraries like SDL, programs I use everyday like firefox and emacs,
+and some more.
+</p>
+
+<p>
+To make my life easier, I maintained a list of all the installed
+programs with their version. I wrote a little package manager
+called <a href="https://github.com/San7o/mapkg">mapkg</a> but I never fully committed to It. I kept a backup
+of all the configuration files in a github <a href="https://github.com/San7o/lfs">repo</a>.
+</p>
+
+<p>
+I kept this build for about 3-4 months, the I got bored and
+installed Fedora because It was too much to make everything work.
+Still, I will probably get back into it, It will surely be easier
+with all the experience I gained.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="./linux.html">Linux</a>, <a href="../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+]]></description>
+</item>
+<item>
 <title>Optimize power consumption on Linux</title>
 <link>https://giovanni-diary.netlify.app/programming/linux/optimize-power-consumption-linux.html</link>
 <author>Giovanni Santini</author>
@@ -11,49 +206,100 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdd5e55c">1. ACPI Specification</a></li>
-<li><a href="#org4917128">2. Linux's ACPI</a></li>
-<li><a href="#org943e56e">3. Understand what consumes the most</a></li>
-<li><a href="#org813866e">4. Save yourself time: TLP</a></li>
-<li><a href="#org319e124">5. Kernel Settings</a></li>
-<li><a href="#org5438e00">6. Helpful tips</a>
+<li><a href="#org4961242">1. Index</a></li>
+<li><a href="#org30ea3f9">2. ACPI Specification</a></li>
+<li><a href="#org978571d">3. Linux's ACPI</a></li>
+<li><a href="#orgee2b4a3">4. Understand what consumes the most</a>
 <ul>
-<li><a href="#orgbc3b70b">6.1. Light graphics session</a></li>
-<li><a href="#org0053db2">6.2. Have less background processes running</a></li>
+<li><a href="#org3f752ce">4.1. Powertop</a></li>
+<li><a href="#org6189ea2">4.2. Iotop</a></li>
+<li><a href="#org4c8f6da">4.3. Plot power usage</a></li>
 </ul>
 </li>
+<li><a href="#orgf0af920">5. Save yourself time: TLP</a></li>
+<li><a href="#orgac1f23f">6. Kernel Settings</a>
+<ul>
+<li><a href="#org7b932d4">6.1. Frequency Scaling</a></li>
+<li><a href="#org46cf956">6.2. Maximum charge level</a></li>
+<li><a href="#org46208bc">6.3. Omit Scheduling-Clock ticks for idle CPUs</a></li>
+<li><a href="#org840c0bd">6.4. Disable Atime in BTRFS</a></li>
+<li><a href="#org91c8ebc">6.5. Kernel Flags</a></li>
+</ul>
+</li>
+<li><a href="#orge197224">7. Helpful tips</a>
+<ul>
+<li><a href="#orgad570e7">7.1. Light graphical session</a></li>
+<li><a href="#org9bd40c5">7.2. Have less background processes running</a></li>
+<li><a href="#org5e428fb">7.3. Lower the backlight</a></li>
+</ul>
+</li>
+<li><a href="#org2b1a26a">8. Conclusions</a></li>
 </ul>
 </div>
 </div>
 <p>
 This documents contains notes regarding my attempts to increase
-battery life on my linux laptop. I don't use my laptop for
-computational-expensive tasks, I'd rather prefer my battery to last
-longer. Here is a list of things I did to get closer to this goal.
+battery life on my linux laptop[s]. I don't use my laptop for
+computational-expensive tasks, I'd rather prefer the battery to last
+longer. Here is a list of things I did to optimize for lower power
+consumption.
 </p>
 
 <p>
 This guide is focused on laptops but you can get value even for dektop
-servers.
+servers. If you have any comment / correction / suggestion please let
+me know by sending me an email at <a href="mailto:giovanni.santini@proton.me">giovanni.santini@proton.me</a> or message
+me on Mastodon <a href="https://mastodon.social/@santo7">@santo7@mastodon.social</a>.
 </p>
 
-<div id="outline-container-orgdd5e55c" class="outline-2">
-<h2 id="orgdd5e55c"><span class="section-number-2">1.</span> ACPI Specification</h2>
+<div id="outline-container-org4961242" class="outline-2">
+<h2 id="org4961242"><span class="section-number-2">1.</span> Index</h2>
 <div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>ACPI Specification</li>
+<li>Linux's ACPI</li>
+<li>Understand what consumes the most
+<ul class="org-ul">
+<li>Powertop</li>
+<li>Iotop</li>
+<li>Plot power usage</li>
+</ul></li>
+<li>Save yourself some time: TLP</li>
+<li>Kernel Settings
+<ul class="org-ul">
+<li>Frequency scaling</li>
+<li>Maximum charge level</li>
+<li>Omit Scheduling-Clock ticks for idle CPUs</li>
+<li>Disable Atime in BTRFS</li>
+<li>Kernel flags</li>
+</ul></li>
+<li>Helpful tips
+<ul class="org-ul">
+<li>Light graphical sessions</li>
+<li>Have less background processes running</li>
+<li>Lower the backlight</li>
+</ul></li>
+<li>Conclusions</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org30ea3f9" class="outline-2">
+<h2 id="org30ea3f9"><span class="section-number-2">2.</span> ACPI Specification</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 Before thinkering with your system, you should have a decent
-understanding of how the system works, both in hardware and software,
-in the context of power management. I will now give you a quick
-overview of power consumption on a linux system running on the x86
-architecture.
+understanding of how the operating system works in the context of
+power management. I will now give you a quick overview of power
+consumption on a linux system running on the x86 architecture.
 </p>
 
 <p>
-Let's start from the CPU, obviously you have read the <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html">intel manuals</a>,
-in particular volume 3B chapter 16, It explains how the CPU manages
-power. Similarly to other hardware components, intel CPUs implement
-the <a href="https://uefi.org/htmlspecs/ACPI_Spec_6_4_html/">ACPI</a> specfication which enables an ACPI compatible operating
-system to interface with hardware devices on performance.
+Let's start with the hardware and how we can interact with It, more
+specifically the CPU. Similarly to other hardware components, intel
+CPUs implement the <a href="https://uefi.org/htmlspecs/ACPI_Spec_6_4_html/">ACPI</a> specfication which enables an ACPI compatible
+operating system to interface with hardware devices to finetune
+performance.
 </p>
 
 <p>
@@ -73,13 +319,14 @@ throttling, giving us more opportunity for optimizations.
 
 <p>
 Hardware may send interrupts that can wake up a processor from a
-sleeping state, therefore you should try to minimize the number of
-events (by disabling devices) or balance them efficiently across cores
-(using something like <a href="https://linux.die.net/man/1/irqbalance">irqbalance</a>, for example).
+sleeping or low-power state, therefore you should try to minimize the
+number of interrupts (by disabling devices) or balance them
+efficiently across cores (using something like <a href="https://linux.die.net/man/1/irqbalance">irqbalance</a>, for
+example).
 </p>
 
 <p>
-Going back to ACPI, devices are also a great source of power
+Going back to ACPI, other devices are also a great source of power
 consumption. Hardware other than processors have "device power states"
 D0 to D3 where D0 means that the device is fully on, D3 that It is
 off. ACPI further defines those states for many device types (network,
@@ -88,16 +335,16 @@ storage&#x2026;).
 </div>
 </div>
 
-<div id="outline-container-org4917128" class="outline-2">
-<h2 id="org4917128"><span class="section-number-2">2.</span> Linux's ACPI</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org978571d" class="outline-2">
+<h2 id="org978571d"><span class="section-number-2">3.</span> Linux's ACPI</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 An overview of the Linux's ACPI implementation can be foind <a href="https://www.kernel.org/doc/ols/2005/ols2005v1-pages-59-76.pdf">here</a>.
-Briefly, It is composed of an OS Service Layer which abstracts
-the hardware, an user interface via sysfs and procfs, the core
-implementation which includes an AML interpreter which is used
-is used as a language between the firmware and the operating
-system, and other components.
+Briefly, It is composed of an OS Service Layer which abstracts the
+hardware, an user interface via sysfs and procfs, the core
+implementation which includes an AML interpreter which is used as a
+language between the firmware and the operating system, and other
+components.
 </p>
 
 <p>
@@ -120,51 +367,150 @@ implement.
 </div>
 </div>
 
-<div id="outline-container-org943e56e" class="outline-2">
-<h2 id="org943e56e"><span class="section-number-2">3.</span> Understand what consumes the most</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgee2b4a3" class="outline-2">
+<h2 id="orgee2b4a3"><span class="section-number-2">4.</span> Understand what consumes the most</h2>
+<div class="outline-text-2" id="text-4">
 <p>
-While you may try to thinker with configurations files and settings
+While you may try to thinker with configuration files and settings
 following common heuristics (such as "less processes = less power
 consumption"), It is more productive to evaluate the power consumption
 of your operating system and make changes to the most power-draining
 sources in order to have a greater impact on the overall power
 consumption.
 </p>
+</div>
 
+<div id="outline-container-org3f752ce" class="outline-3">
+<h3 id="org3f752ce"><span class="section-number-3">4.1.</span> Powertop</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 A general tool that works well is <a href="https://linux.die.net/man/8/powertop">powertop</a> which will give you
 per-process power consumption and information about CPU states,
-devices and tunable settings to decrease power consumption. You
-can calibrate the tool with <code>powertop --calibrate</code> (only on laptops)
-and then wait for It to collect data for about one hour and generate
-power estimation figures.
+devices and tunable settings to decrease power consumption. It is good
+practice to calibrate the tool with <code>powertop --calibrate</code> (only on
+laptops) before collecting data, this will setup the tool to show
+correct estimations about power consumption.
 </p>
 
 <p>
-From the overview tab you can easily see which processes are
-consuming more power so that you can look into them individually.
-If you find that systemd is logging too much, try to increase the
-time between logs, and so on.
+From the overview tab you can easily see which processes are consuming
+more power so that you can look into them individually.  For example,
+If you find that systemd is logging too much, try to increase the time
+between logs, and so on.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org813866e" class="outline-2">
-<h2 id="org813866e"><span class="section-number-2">4.</span> Save yourself time: TLP</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org6189ea2" class="outline-3">
+<h3 id="org6189ea2"><span class="section-number-3">4.2.</span> Iotop</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Another useful tool is <a href="https://www.man7.org/linux/man-pages/man8/iotop.8.html">iotop</a> which will give you information about
+disk usage. Even though this does not directly list power
+consumption, there is a correlation between disk usage and power
+consumption so it is beneficial to look into this.
+</p>
+
+<p>
+You may start playing around with filesystems and mount options,
+later we'll see an option in BTRFS that improves performance.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4c8f6da" class="outline-3">
+<h3 id="org4c8f6da"><span class="section-number-3">4.3.</span> Plot power usage</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+To evaluate a change in your system, you can log and graph different
+statistics and compare changes. The following script records
+Watts consumption each second:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lua"><span style="color: #ff7f24;">#!/bin/bash</span>
+
+OUTFILE=<span style="color: #ffa07a;">"power_log.csv"</span>
+GNUPLOT_SCRIPT=<span style="color: #ffa07a;">"plot_power.gp"</span>
+INTERVAL=1  # seconds
+
+echo <span style="color: #ffa07a;">"timestamp,power_watts"</span> &gt; <span style="color: #ffa07a;">"$OUTFILE"</span>
+
+prev_energy=$(&lt; /sys/class/powercap/intel-rapl:0/energy_uj)
+prev_time=$(date +%s)
+
+<span style="color: #00ffff;">while</span> <span style="color: #7fffd4;">true</span>; <span style="color: #00ffff;">do</span>
+    sleep <span style="color: #ffa07a;">"$INTERVAL"</span>
+
+    curr_energy=$(&lt; /sys/class/powercap/intel-rapl:0/energy_uj)
+    curr_time=$(date +%s)
+
+    delta_energy=$((curr_energy - prev_energy))
+    delta_time=$((curr_time - prev_time))
+
+    # Handle energy wraparound (32-bit counter)
+    <span style="color: #00ffff;">if</span> <span style="color: #ffa07a;">[[ $delta_energy -lt 0 ]]</span>; <span style="color: #00ffff;">then</span>
+        delta_energy=$(( (2**32 + delta_energy) ))
+    fi
+
+    # Convert to watts
+    power=$(awk <span style="color: #ffa07a;">"BEGIN { printf \"%.2f\", ($delta_energy / 1000000) / $delta_time }"</span>)
+    timestamp=$(date +<span style="color: #ffa07a;">"%H:%M:%S"</span>)
+    echo <span style="color: #ffa07a;">"$timestamp,$power"</span> &gt;&gt; <span style="color: #ffa07a;">"$OUTFILE"</span>
+
+    prev_energy=$curr_energy
+    prev_time=$curr_time
+done
+</pre>
+</div>
+
+<p>
+You can then graph it with gnuplot:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #b0c4de;">set</span> datafile separator <span style="color: #ffa07a;">","</span>
+<span style="color: #b0c4de;">set</span> xdata time
+<span style="color: #b0c4de;">set</span> timefmt <span style="color: #ffa07a;">"%H:%M:%S"</span>
+<span style="color: #b0c4de;">set</span> format x <span style="color: #ffa07a;">"%H:%M:%S"</span>
+<span style="color: #b0c4de;">set</span> xlabel <span style="color: #ffa07a;">"Time"</span>
+<span style="color: #b0c4de;">set</span> ylabel <span style="color: #ffa07a;">"Power (Watts)"</span>
+<span style="color: #b0c4de;">set</span> title <span style="color: #ffa07a;">"Power Consumption Over Time"</span>
+<span style="color: #b0c4de;">set</span> grid
+<span style="color: #b0c4de;">set</span> term pngcairo size 800,400
+<span style="color: #b0c4de;">set</span> output <span style="color: #ffa07a;">"power_plot.png"</span>
+
+plot <span style="color: #ffa07a;">"power_log.csv"</span> using 1:2 with lines title <span style="color: #ffa07a;">"Power (W)"</span>
+</pre>
+</div>
+
+
+
+<div id="org4098f63" class="figure">
+<p><img src="../../ephemeris/images/gnuplot-power.jpeg" alt="gnuplot-power.jpeg" width="600px" align="center" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Gnuplot output</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgf0af920" class="outline-2">
+<h2 id="orgf0af920"><span class="section-number-2">5.</span> Save yourself time: TLP</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 To save yourself some time configuring your system, you can use <a href="https://linrunner.de/tlp/introduction.html">TLP</a>
 (or any similar tool) which automatically configures the kernel with
 power saving settings. It is supposed to work well out of the box but
 you can manually configure the settings via a configuration file in
-<code>/etc/tlp.conf</code>. Please refer to the documentation for further
+<code>/etc/tlp.conf</code>. Please refer to the <a href="https://linrunner.de/tlp/index.html">documentation</a> for further
 details.
 </p>
 
 <p>
 The installation is quite strait forward, check your package
-manager. To apply a power manager profile, run the following
+manager. To apply a power profile, run the following
 command (do this every time you change the configuration file):
 </p>
 
@@ -188,9 +534,9 @@ There are plenty of utilities like this, use them at your own risk.
 </div>
 </div>
 
-<div id="outline-container-org319e124" class="outline-2">
-<h2 id="org319e124"><span class="section-number-2">5.</span> Kernel Settings</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgac1f23f" class="outline-2">
+<h2 id="orgac1f23f"><span class="section-number-2">6.</span> Kernel Settings</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 There are many settings you can tune on linux, which will mostly
 depend on your hardware and drivers. A decent list can be found in the
@@ -199,7 +545,7 @@ Archlinux's <a href="https://wiki.archlinux.org/title/Power_management">Power Ma
 
 <p>
 To access the ACPI subsystem you need to have the following
-enabled in your kernel (from the gentoo wiki):
+enabled in your <a href="https://wiki.gentoo.org/wiki/Power_management/Guide">kernel</a>:
 </p>
 
 <pre class="example">
@@ -251,7 +597,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-And rapl, which gives additional information about the processor:
+And RAPL, which gives additional information about the processor:
 </p>
 
 <pre class="example">
@@ -264,7 +610,11 @@ Device Drivers ---&gt;
 Now you should have all the requirements to start playing with
 the settings, <code>tlp.conf</code> is a good place to start.
 </p>
+</div>
 
+<div id="outline-container-org7b932d4" class="outline-3">
+<h3 id="org7b932d4"><span class="section-number-3">6.1.</span> Frequency Scaling</h3>
+<div class="outline-text-3" id="text-6-1">
 <p>
 You can choose a frequency scaling governor to manage throttling.
 This will dynamically change the clock's frequency and voltage
@@ -278,31 +628,125 @@ available governors you can run:
 </div>
 
 <p>
+By default, Fedora 41 has "performance" and "powersave", so I choose
+powersave in tlp's settings (which is the default setting).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org46cf956" class="outline-3">
+<h3 id="org46cf956"><span class="section-number-3">6.2.</span> Maximum charge level</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
 To increase battery life, It is recommended to reduce the maximum
 charge level below 100% and prevent the charging process to happen for
 every short discharge from the maximum. By default, TLP does not set
 this. To enable it, set the variables <code>START_CHARGE_THRESH_BATx</code> and
 <code>START_CHARGE_THRESH_BATx</code> to something like <code>75</code> and <code>80</code>, where <code>x</code>
 represent the number of the battery in your laptop.  Sadly, on some
-laptops (lime my HP one) this is not supported and the command
+laptops (like my HP one) this is not supported and the command
 <code>tlp-stat -b</code> would output
 <code>/sys/class/power_supply/BAT1/charge_control_start_threshold (not available)</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org5438e00" class="outline-2">
-<h2 id="org5438e00"><span class="section-number-2">6.</span> Helpful tips</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org46208bc" class="outline-3">
+<h3 id="org46208bc"><span class="section-number-3">6.3.</span> Omit Scheduling-Clock ticks for idle CPUs</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+If you are doing mostly lightwaight work with long idle periods, you
+can limit the scheduling-clock interrupt to prevent weaking up some
+cores when It is not needed. The linux kernel <a href="https://www.kernel.org/doc/html/latest/timers/no_hz.html#omit-scheduling-clock-ticks-for-cpus-with-only-one-runnable-task">documentation</a> says that
+if scheduling is set to periodic, the system would drain 2-3 times
+faster compared to a kernel with this disabled, so It is quite a big
+deal. You may need it if you are running aggressive real-time
+response constraints, but this is not our case.
+</p>
+
+<p>
+Enable the following in your kenrel configuration:
+</p>
+
+<pre class="example">
+CONFIG_NO_HZ_IDLE=y
+CONFIG_HZ_100=y 
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org840c0bd" class="outline-3">
+<h3 id="org840c0bd"><span class="section-number-3">6.4.</span> Disable Atime in BTRFS</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+BTRFS is a popular filesystem. A part of Its design is the CoW
+(Copy on Write) where a certain file would get copied in another
+location when a modification is made, this is necessary for
+the snapshotting functionality of the filesystem. However, this
+causes the broblem where a file yould get copied even if you
+just read it, just by updating the last access timestamp. <a href="https://lwn.net/Articles/499293/">This</a>
+LWN article from Jonathan Corbet explains this well:
+</p>
+
+<blockquote>
+<p>
+If somebody takes a snapshot of a filesystem, then performs a
+recursive grep on that filesystem, the last-access time of every
+file touched may be updated. That, in turn, can cause copy-on-write
+operations on each file's inode structure, with the result that many
+or all of the inodes in the filesystem may be duplicated. That can
+increase the space consumption of the filesystem considerably;
+Alexander posted an example where a recursive grep caused 2.2GB of
+free space to disappear. That is a surprising result for what is
+meant to be a read-only operation.
+</p>
+</blockquote>
+
+<p>
+To disable the Atime feature, you need to put the <code>noatime</code> option
+on the BTRFS entries in <code>/etc/fstab</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org91c8ebc" class="outline-3">
+<h3 id="org91c8ebc"><span class="section-number-3">6.5.</span> Kernel Flags</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+You can add the following kernel flags when booting your system:
+</p>
+<ul class="org-ul">
+<li><code>pcie_aspm=force</code>: force PCIe Active State Power Management
+to put PCIe devices into low-power states. Some devices may
+stop working if they are not implemented correctly, so do your
+own tests.</li>
+<li>For intel GPUs:
+<ul class="org-ul">
+<li><code>i915.enable_dc=2</code>: enable the display engine to enter
+low-power states.</li>
+<li><code>i915.enable_fbc=1</code>: enables Frame Buffer Compression (FBC),
+reducing memory bandwidth when the screen content is static</li>
+<li><code>i915.enable_psr=1</code>: enables Panel Self Refresh (PSR) — lets the
+display refresh from its own memory instead of continuously
+redrawing.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge197224" class="outline-2">
+<h2 id="orge197224"><span class="section-number-2">7.</span> Helpful tips</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 Here is a list of other helpful things that will make your operating
 system lighter and more efficient.
 </p>
 </div>
 
-<div id="outline-container-orgbc3b70b" class="outline-3">
-<h3 id="orgbc3b70b"><span class="section-number-3">6.1.</span> Light graphics session</h3>
-<div class="outline-text-3" id="text-6-1">
+<div id="outline-container-orgad570e7" class="outline-3">
+<h3 id="orgad570e7"><span class="section-number-3">7.1.</span> Light graphical session</h3>
+<div class="outline-text-3" id="text-7-1">
 <p>
 If you are using a graphical environment, chances are that you do not
 need a full blown desktop environment to manage the position of your
@@ -316,16 +760,16 @@ Everything else is bloated software, I would suggest something like
 <p>
 I did not compare Wayland-based window managers against X11, I found
 some benchmarks <a href="https://www.phoronix.com/news/GNOME-Xorg-Wayland-AMD-Renoir">online</a> and they are similar in power consumption but
-the benchmarks were with Gnome. Unless you find a really minimal
+the benchmarks were made with Gnome. Unless you find a really minimal
 window manager using wayland, the good old simple X11 window managers
 are the best.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org0053db2" class="outline-3">
-<h3 id="org0053db2"><span class="section-number-3">6.2.</span> Have less background processes running</h3>
-<div class="outline-text-3" id="text-6-2">
+<div id="outline-container-org9bd40c5" class="outline-3">
+<h3 id="org9bd40c5"><span class="section-number-3">7.2.</span> Have less background processes running</h3>
+<div class="outline-text-3" id="text-7-2">
 <p>
 If you are using a linux distribution instead of compiling your system
 on your own, chances are that the maintainers of said distribution
@@ -346,13 +790,34 @@ your system.
 Disable things like bluetooth if you don't need it, crash reporting
 daemons, etc&#x2026;
 </p>
+</div>
+</div>
+
+<div id="outline-container-org5e428fb" class="outline-3">
+<h3 id="org5e428fb"><span class="section-number-3">7.3.</span> Lower the backlight</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+Lower the backlight of your laptop as much as you are comfortable
+with.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2b1a26a" class="outline-2">
+<h2 id="org2b1a26a"><span class="section-number-2">8.</span> Conclusions</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+I hope you learned something new from this article. I will keep this
+updated with new information I gain overtime, if you have any
+suggestion to improve the work I'd be happy to hear it.
+</p>
 
 <hr />
 
 <p>
 Travel: <a href="./linux.html">Linux</a>, <a href="../../theindex.html">Index</a>
 </p>
-</div>
 </div>
 </div>
 ]]></description>

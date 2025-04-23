@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt;
+</p>
+
+<div id="outline-container-orgb9b7bff" class="outline-2">
+<h2 id="orgb9b7bff">The Linux From Scratch Experience</h2>
+<div class="outline-text-2" id="text-orgb9b7bff">
+<p>
+In this article I want to talk about one of the best educational
+projects I have ever done: Linux From Scratch.
+</p>
+
+<p>
+The Linux From Scratch experience is a hell of a long and boring
+ride into manual dependency management, patching build scripts,
+kernel panics, and a lot of time spent compiling. But as
+hard times develop one's character, running LFS daily will strengthen
+your patience and make you a competent power user.
+</p>
+
+<p>
+Jokes aside, this project made me appreciate more the work of package
+management and understand all the different parts of Linux's
+userspace. I learned how to fearelessly own the kernel or get owned
+and totally humiliated by the same technology you utter human being
+wrote. It gave me experience in working directly with the core
+userspace technologies, cutting down on high abstractions and
+pre-configured linux distributions by making my own "distribution".
+</p>
+</div>
+
+
+<div id="outline-container-orgeafc89b" class="outline-4">
+<h4 id="orgeafc89b">Index</h4>
+<div class="outline-text-4" id="text-orgeafc89b">
+<ul class="org-ul">
+<li>What is LFS</li>
+<li>Motivation</li>
+<li>Humble beginnings</li>
+<li>Level up</li>
+<li>Maintaining the build</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org58deaa8" class="outline-4">
+<h4 id="org58deaa8">What is LFS</h4>
+<div class="outline-text-4" id="text-org58deaa8">
+<p>
+The idea is that you compile all your system from scratch by yourself,
+without a packet manager. This is what distinguisces LFS from a
+project like Gentoo, where it is true that you compile everything from
+scratch but all the steps were laredy prepared and you just execute
+them.
+</p>
+
+<p>
+Practically, LFS is a manual with instructions to compile a bootable
+system. This is expanded in Beyond Linux From Scratch (BLFS) which
+adds additional programs like a graphics session or a browser.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org134d2af" class="outline-4">
+<h4 id="org134d2af">Motivation</h4>
+<div class="outline-text-4" id="text-org134d2af">
+<p>
+It all started at the end of october 2024. I was really frustrated
+with NixOS because of how you need to do everything "then NixOS
+way". I could not play and mess with the system as if I were in a
+cage, I needed a change of mindset. With this push for freedom and
+independence, I wanted to get to the extreme and try Linux From
+Scratch which I have had in the back of my mind for a while.
+</p>
+
+<p>
+Furthermore, I belived in the educational value of this project.
+I already felt comfortable installing Archlinux or Gentoo and I
+wanted something more challenging.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3b26b28" class="outline-4">
+<h4 id="org3b26b28">Humble beginnings</h4>
+<div class="outline-text-4" id="text-org3b26b28">
+<p>
+You start off as with any distribution by setting up the partitions
+from a live environment. Then, you start compiling your compiler, gcc,
+which is done in three steps. This is because to compile the compiler
+you need a compiler&#x2026; duh. So you use an external one to compile a very
+tiny gcc, which is used to compile a very tiny glibc, which is needed
+for a better gcc, and again another time. Once you have gcc and glibc
+you can really get started.
+</p>
+
+<p>
+You proceed to install all the useful programs that you always find
+like gnutils, dhcp, the boot manager (I did grub with UEFI) and of
+course the Linux kernel. It takes special care for the kernel because
+if you start with a minimal kernel, you need to manually enable all
+the features you need to interface with the various devices, and It is
+not always obvious which option you need to enable.
+</p>
+
+<p>
+After all of this, you have a bootable kernel, congratulations.  You
+just spent a week of your life to have a minimal system barely usable.
+</p>
+
+<p>
+Now the real experience begins.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7c861ae" class="outline-4">
+<h4 id="org7c861ae">Level up</h4>
+<div class="outline-text-4" id="text-org7c861ae">
+<p>
+One big thing you probably need is a graphical session, and this is no
+joke. Compiling all the dependencies for i3 took a while, but
+eventually I had it. The next thing is what transitioned my system to
+the next level.. a web browser (DUN DUN DUUUN).
+</p>
+
+<p>
+Compiling firefox has so many dependencies, expecially if you
+want all the optional ones, just to make sure it works. In my
+list of installed programs, firefox is at the 300th line. This
+means that I compiled a total of 299 libraries / programs before
+I could use firefox. All of this manually.
+</p>
+
+<p>
+Once you have a browser you are good to go on your own. The book
+does not help you much anymore and you developed the skills to
+build everything without a guide. Only after all those weeks of
+hard work you can start using your system "normally".
+</p>
+
+<p>
+Obviously every time you need to install something, you think
+twice if you really really need It of if It is just a short term
+desire that will not greately improve your life.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0faf947" class="outline-4">
+<h4 id="org0faf947">Maintaining the build</h4>
+<div class="outline-text-4" id="text-org0faf947">
+<p>
+You can now focus on maintaining your system. You should subscribe to
+some security updates mailing lists and update programs when some
+critical vulnerability is found or a new version of some important
+software comes out. I was following compilers like llvm, gcc, core
+libraries like SDL, programs I use everyday like firefox and emacs,
+and some more.
+</p>
+
+<p>
+To make my life easier, I maintained a list of all the installed
+programs with their version. I wrote a little package manager
+called <a href="https://github.com/San7o/mapkg">mapkg</a> but I never fully committed to It. I kept a backup
+of all the configuration files in a github <a href="https://github.com/San7o/lfs">repo</a>.
+</p>
+
+<p>
+I kept this build for about 3-4 months, the I got bored and
+installed Fedora because It was too much to make everything work.
+Still, I will probably get back into it, It will surely be easier
+with all the experience I gained.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="./linux.html">Linux</a>, <a href="../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
