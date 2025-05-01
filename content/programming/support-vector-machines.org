@@ -4,7 +4,7 @@
 
 * Support Vector Machines
 #+INDEX: Giovanni's Diary!Programming!Support Vector Machines
-Linear classifiers assume the data can be linearly separable. If this
+Linear classifiers assume that data can be linearly separable. If this
 does not hold, the chosen hyperplane will keep adjusting at each
 iteration without ever converging. Let's now discuss a particular type
 of classifier: support vector machines (SVM).
@@ -16,9 +16,10 @@ classification hyperplane to the closest points of either class. We
 call **large margin classifiers** the classifiers that attempt to
 maximise this measure.
 
-We call the sets of "closest points" from the hyperplane with **support
-vectors**. Note that for n dimensions, there will be at least n+1
-support vectors; this is because a plane is identified by three points.
+We call the sets of "closest points" from the hyperplane with
+**support vectors**. Note that for n dimensions, there will be at
+least n+1 support vectors; this is because a plane in n dimensions
+identified by n+1 points.
 
 Therefore, large margin classifiers only use support vectors and
 ignore all other training data.
