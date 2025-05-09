@@ -1,0 +1,378 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:fisica.org][Fisica]] >
+
+* Lavoro ed Energia
+#+INDEX: Giovanni's Diary!Programming!Notes!Fisica!Lavoro ed Energia
+
+
+** Lavoro di una forza
+
+*** Definizione
+
+Definiamo il lavoro come:
+
+$$W_{F, \gamma} =^{def} \int_{\gamma} \vec{F}*d\vec{l}$$
+
+- $d\vec{l}$ e' un piccolo spostamento sulla curva
+- Il lavoro rappresenta quanto una forza contribuisce allo
+  spostamento. Per questa ragione proiettiamo il vettore della forza
+  su quello dello spostamento tramite il coseno. Si potrebbe dire che
+  e' una coincidenza che questo risulta nel prodotto scalare.
+
+Parametrizzando nel tempo:
+
+$$W(t) = \int_{t_A}^{t_B} F(\gamma (t)) * \gamma(t)' dt $$
+
+- $F$ e' una funzione da $R^3$ a $R^3$ (campo vettoriale)
+- vale che $\gamma (t)'dt$ e' $ds$, ossia il vettore della curva
+  $\gamma$ nell'intervallo $dt$. Infatti $ds = \frac{ds}{dt}dt =
+  s(t)'ds$.
+- $*$ e' il prodotto scalare
+
+*** Tipi di lavoro
+Distinguiamo tre tipi di lavori:
+
+- **lavoro Motore**: $dW > 0$
+- **lavoro resistente**: $dW < 0$
+- **lavoro nullo**: $dW = 0$
+	- Per esempio, la forza centripeta è sempre ortogonale allo
+    spostamento, dunque non contribuisce mai lo spostamento perciò il
+    suo lavoro e' nullo.
+
+*** Analisi dimensionale
+
+Dimensionalmente abbiamo che:
+
+$$ [dW] = [Fdr] = [M\frac{L}{T^2}L] = [M(\frac{L}{T})^2] $$
+
+- nel sistema internazionale usiamo il joule per descrivere il lavoro:
+  $1\ J = 1Nm = 1 Kg m^2 / s^2$
+
+** Lavoro della forza peso
+
+Il lavoro della forza peso è:
+
+$$ W_{A\rightarrow B} = mgh $$
+
+Dimostriamo ora quanto sopra. Osservo che il lavoro totale è la somma
+do tutti i lavori nei vari momenti; con infiniti momenti sempre più
+piccoli posso utilizzare l'integrale.
+
+$$ W_{A->B} = \int_A^B dW $$
+
+- A e B sono due punti. $dW$ e' il lavoro in un microspostamento
+
+Si prenda come classico esempio una persona che va sul Bondone,
+concentrandoci sul $dW$ dato dalla forza peso:
+
+$$ dW = \vec{P} \cdot d\vec{r} = |\vec{P}| \cdot |d\vec{r}|cos(\theta)$$Osservo che $|dr|cos(\theta)$ è la proiezione di $dr$ su $P$, che è la forza peso. Dato che la forza peso e' sempre verticale, l'unica componente dello spostamento che contribuisce al lavoro e' la componente verticale. La somma ti tutti gli spostamenti verticali è lo spostamento verticale totale $h$:
+$$ W_{A->B} = \int_{A}^{B}\vec{P} \cdot d\vec{r} = \int_{A}^{B}mg * dh = mgh $$
+
+** Teorema dell'energia cinetica o delle forze vive
+
+Definiamo l'energia cinetica $E_k$ come:
+
+$$ E_K =^{def} \frac{1}{2}mv^2 $$
+
+Vale:
+
+$$ dW^{TOT} = dE_K$$
+$$ W_{i\to f}^{TOT} = E_{Kf} - E_{ki} $$
+
+- Il lavoro totale è dato dalla risultante di tutte le forze.
+
+Dimostriamo ora quanto detto sopra. Sia nota la seconda legge della
+dinamica, che può essere riscritta come:
+
+$$ F=m\frac{d\vec{v}}{dt} $$ Moltiplico a destra e a sinistra per il
+prodotto scalare dello spostamento otteniamo:
+
+$$ F \cdot d\vec{s} = m \frac{d\vec{v}}{dt}\cdot d\vec{s}$$
+
+Sposto il $dt$ (non ditelo ai matematici che si arrabbiano):
+
+$$ dW = m d\vec{v}\cdot \frac{d\vec{s}}{dt} $$
+
+La derivata dello spazio è la velocità, dunque:
+
+$$ dW = m\vec{v}\cdot d\vec{v} $$
+
+Espandiamo il prodotto scalare abbiamo:
+
+$$ m \vec{v} \cdot d \vec{v} = m(\vec{v_x}d\vec{v_x} + \vec{v_y}d\vec{v_y} + ...) $$
+
+Osservo che:
+$$ \int xdx = \int dy\ ,\ con\ y=\frac{x^2}{2} \longrightarrow \int d[\frac{x^2}{2}]$$
+$$ \vec{v_x}d\vec{v_x} = d[\frac{\vec{v_x}^2}{2}] $$
+
+Dunque 
+
+$$ dW = m(d[\frac{\vec{v_x^2}}{2}] + d[\frac{\vec{v_y^2}}{2}] + ...) = md[\frac{\vec{v^2}}{2}] $$
+$$ dW = d[\frac{1}{2}mv^2] $$
+
+Vale:
+
+$$W_{F, i\rightarrow f}\vec{F} d\vec{s} = \int_i^f dW = \int_i^f \frac{1}{2} m d[v^2]$$
+
+Dunque:
+
+$$W_{F, i\rightarrow f} = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2$$
+
+Definiamo:
+
+$$ E_K =^{def} \ \frac{1}{2}mv^2 $$
+
+Allora:
+
+$$W_{F, i\rightarrow f} = \Delta E_k$$
+
+** Forze conservative e non conservative
+
+Una forza è conservativa se vale almeno una delle seguenti proposizioni:
+
+1. Qualunque sia il percorso, vale:
+
+$$ W_{F, A\rightarrow A}^{Forze\ Cons.}= 0 $$
+	Anche scritto come:
+$$\oint \vec{F} d\vec{s} = 0$$
+
+2. Il lavoro della forza non di pende dal percorso, ma solo da i suoi
+   estremi.
+
+3. Esiste una primitiva U detta **energia potenziale** tale che
+
+$$ W_{A\rightarrow B}^{F.C.} = -[U(\vec{x_B}) - U(\vec{x_A})] = - \Delta U_{A\rightarrow B}  $$
+
+Dimostriamo ora $(1) \rightarrow (2), (3)$. Assumiamo vera $(1)$,
+dunque vale:
+
+$$ W_{A\rightarrow A}[\vec{F}] = \int_{A}^{A}\vec{F}\cdot d\vec{s} = 0 $$
+
+Prendiamo ora un percorso chiuso, e due punti A e B in questo percorso. Vale:
+
+$$ \int_{A}^{A}\vec{F}\cdot d\vec{s} = \int_{A}^{B}\vec{F}\cdot \vec d{s} + \int_{B}^{A}\vec{F}\cdot d\vec{s} =^{hp} 0 $$
+Allora:
+
+$$ \int_{A}^{B}\vec{F}\cdot \vec d{s} = - \int_{B}^{A}\vec{F}\cdot d\vec{s} $$
+
+Osserviamo che, i due percorsi A->B e B->A hanno lo stesso lavoro in
+valore assoluto: l'integrale nella curva è lo stesso, nonostante la
+scelta di andare verso destra o verso sinistra.  Il lavoro totale che
+è dato dalla somma dei due sarà quindi indipendente dal percorso
+scelto (2)
+
+Dimostriamo ora (3) assumendo (1) e (2). Si sappia che l'integrale è
+una funzione lineare, dunque per definizione è data dalla somma /
+differenza di polinomi. Andiamo ad analizzare le due casistiche:
+
+$$ \int_{A}^{B}\vec{F}\cdot d\vec{s} = f(A, B) = c_AA+c_bB $$
+$$ \int_{A}^{B}\vec{F}\cdot d\vec{s} = f(A, B) = c_AA-c_bB $$
+
+Osserviamo che il lavoro necessario per andare da A a B è diverso dal
+lavoro necessario per andare da B ad A, dunque, se prendessimo il
+primo polinomio, verrebbe:
+
+$$ \int_{A}^{B}\vec{F}\cdot d\vec{s} = f(A, B) = c_AA+c_bB $$
+$$ \int_{B}^{A}\vec{F}\cdot d\vec{s} = f(B, A) = c_bB+c_AA $$
+
+Osserviamo che:
+
+$$ c_AA+c_BB = c_BB+c_AA $$
+
+Ma questo andrebbe contro quello che è stato detto in precedenza.
+Prendendo, invece, in considerazione il secondo caso, vale:
+
+$$ \int_{A}^{B}\vec{F}\cdot d\vec{s} = f(A, B) = c_AA-c_bB $$
+$$ \int_{B}^{A}\vec{F}\cdot d\vec{s} = f(B, A) = c_bB-c_AA $$
+$$ c_AA-c_BB \ne c_BB-c_AA $$
+
+Dunque il lavoro può essere scritto nella seguente forma, con le
+dovute sostituzioni di variabili:
+
+$$ W_{A->B} = c_AA-b_BB = -[ U(B) - U(A) ] $$
+
+Banalmente si può dimostrare che vale anche $(2) \rightarrow (1)$,
+$(3) \rightarrow (2)$ etc.
+
+Mostriamo ora una considerazione interessante. Dalla $(3)$ vale:
+
+$$ -W_{A->B}^{Forze\ Cons.} = U(B) - U(A) = \Delta U_{A->B} $$
+$$  U(B) = U(A) + \Delta U_{A->B} $$
+
+Notiamo che l'energia potenziale in un punto dipende (è in funzione
+di) un punto di riferimento A. Si prenda un punto di riferimento $O$:
+
+$$ \Delta U_{O->A} = U(A)-U(O) $$
+$$ \Delta U_{O->B} = U(B)-U(O) $$
+$$ \Delta U_{O->B} - \Delta U_{O->A}= U(B) - U(O) - U(A) + U(O) = U(B) - U(A) $$
+
+La $\Delta U$ non dipende dal punto di riferimento.
+
+*** Caso peso
+
+Si consideri un oggetto con massa m che viene lanciato dalla base di
+un piano inclinato: l'oggetto salirà, si fermerà, e poi tornerà
+indietro.  Il lavoro della forza peso è nullo, è infatti uguale al
+lavoro per salire più il lavoro per scendere. Se sviluppiamo i
+calcoli:
+
+$$ W = \int P_{//}\cdot d\vec{s} = \int_{salita} P_{//} \cdot d\vec{s} + \int_{discesa}P_{//}\cdot d\vec{s} = $$
+$$ = P_{//}(\int_{s}d\vec{s}cos(\theta_1)+\int_{d}d\vec{s}cos(\theta_2)) = P_{//} (L-L) = 0$$
+
+Vale la $(1)$, dunque questa è una forza conservativa.
+
+*** Caso attrito
+Si consideri poi il lavoro della forza di attrito:
+
+$$ W = \int P_{//}\cdot d\vec{s} = \int_{salita} P_{//}\cdot d\vec{s} + \int_{discesa}P_{//}\cdot d\vec{s} = $$
+$$  = P_{//}(\int_{s}d\vec{s}cos(\theta)+\int_{d}d\vec{s}cos(\theta)) = P_{//} (L+L) $$
+
+La (1) non vale. Non è una forza conservativa.
+
+*** Caso molla
+Calcoliamo il lavoro della forza elastica:
+
+$$W_{el}^{A\rightarrow B} = \int_{A}^{B}\vec{F_{el}}\cdot d\vec{s} = \int_{A}^{B}-K\vec{x}\cdot d\vec{x} = \int_{A}^{B} -Kxdx = -\frac{1}{2}K(x_B^2 -x_A^2)$$
+$$W_{el} = -\frac{1}{2}K\Delta x^2$$
+
+La (1) vale. Dunque questa è un'altra forza conservativa.
+
+** Teorema di conservazione dell'energia meccanica
+
+Sia noto:
+
+$$(1)\ W_{i->f}^{tot} = \Delta E_{k_{i->f}} = E_{k_f} - E_{k_i}  $$
+$$ (2)\ W_{i\rightarrow f}^{F.C.} = -\Delta U_{i\rightarrow f} = -(U_f - U_i) $$
+
+- $(1)$ dal teorema delle forze vive
+- $(2)$ dalla definizione di forze conservative
+
+Inoltre vale che il lavoro totale in un sistema e' la somma del lavoro
+delle forze conservative e il lavoro delle forze non conservative:
+
+$$ W_{i->f}^{Tot} = W_{i\rightarrow f}^{F.N.C.} + W_{i \rightarrow f}^{F.C.} $$
+$$ W_{i\rightarrow f}^{F.N.C.} = W_{i->f}^{Tot} - W_{i \rightarrow f}^{F.C.} = E_{k_f}-E_{k_i} + (U_f - U_i) = \Delta E_k + \Delta U$$
+
+Definiamo l'energia meccanica come:
+
+$$ E =^{def} U + E_k$$
+
+Concludiamo:
+
+$$ W_{i\rightarrow f}^{F.N.C.} = E_f - E_i$$
+
+- Nel caso di assenza di forze non conservative, **l'energia meccanica
+  si conserva**:
+
+$$ E_f = E_i $$
+$$ \Delta E_k = -\Delta U $$
+
+** Potenza
+
+Definiamo potenza (media) come:
+
+$$P=\frac{W}{\Delta t}$$
+
+Allora:
+
+$$P_{istantanea}=\frac{dW}{dt} [\frac{J}{S}] = \frac{\vec{F}*d\vec{s}}{dt} = \vec{F}*\vec{v} $$
+
+Misuriamo la potenza in **Watt** dove 1 Watt e' 1 Joule in 1
+secondo. A volte viene usata anche la caloria, che vale $1 cal = 4,18
+J$.
+
+** Legge di conservazione della quantità di moto
+
+Assumiamo un sistema isolato e dunque inerziale, vale la terza legge
+della dinamica:
+
+$$ \vec{F}_{1 \rightarrow 2} = -\vec{F}_{2 \rightarrow 1} $$
+
+Possiamo esprimere questo usando la forza impulsiva vista in precedenza:
+
+$$\frac{\vec{J}_{1\rightarrow 2}}{dt} = -\frac{\vec{J}_{2\rightarrow 1}}{dt}$$
+$$ \frac{d\vec{p}_2}{dt} = -\frac{d\vec{p}_1}{dt} $$
+
+Da notare che nel precedente passaggio ho messo $\vec{p_2}$ come la
+quantità di moto di $\vec{J}_{1\rightarrow 2}$ infatti l'impulso
+appartiene al secondo oggetto, applicata dal primo. Continuando con i
+passaggi:
+
+$$d\vec{p_2} = -d\vec{p_1}$$
+$$ d[\vec{p_2} + \vec{p_1}] = 0 $$
+$$ d\vec{p} = 0 $$
+
+La differenza di quantità di moto del sistema è zero: **la quantità di
+moto si conserva**. Questa osservazione deriva direttamente dalla
+terza legge della dinamica, vale sempre in sistemi inerziali.
+
+Con una formula più pratica:
+
+$$ m_1\vec{v}_{1, i} + m_2\vec{v}_{2, i} = m_1\vec{v}_{2, f} + m_2 \vec{v}_{2, f} $$
+
+E' da ricordare, inoltre, che nel centro di massa la quantità di moto
+si conserva.
+
+** Urti
+
+*** Urto elastico
+
+Nell'urto elastico vale la conservazione dell'energia cinetica:
+
+$$E_{k,i} = E_{k, f}$$
+$$ m_1 \vec{v}_{1, i}^2 + m_2\vec{v}_{2, i}^2 = m_1 \vec{v}_{1, f}^2 + m_2\vec{v}_{2, f}^2 $$
+
+Assumiamo di avere due masse in posizione $x_1$ e $x_2$ con velocità e prendiamo come sistema di riferimento il centro di massa.
+
+- $x_{CM}=\frac{m_1x_{1i}+m_2x_{2i}}{m_1+m_2}$
+- $x_{1i}'=x_{1i}-x_{CM}=\frac{m_2(x_{1i}-x_{2i})}{m_1+m_2}$
+- $x_{2i}'=x_{2i}-x_{CM}= ''$
+
+allo stesso modo vale per le velocità. Allora:
+
+$$p_i' = m_1v_{1i}' + m_2v_{2i}' = \frac{m_1m_2}{m_1+m_2}(v_1-v_2) + \frac{m_1m_2}{m_1+m_2}(v_2-v_1) = 0$$
+
+vale che la quantità di moto nel centro di massa e' nulla.
+
+Per quanto riguarda l'energia cinetica:
+
+$$E_{k,i}' = \frac{1}{2}m_iv_{1i}'^2 + \frac{1}{2}m_2v_{2i}'^2 = ... = \frac{1}{2}\frac{m_1m_2}{m_1+m_2}(v_1-v_2)^2$$
+
+*** Urto Anelastico
+
+L'energia cinetica non si conserva.
+
+$$E_{k,i} \ne E_{k, f}$$
+
+Vale sempre la conservazione della quantità di moto:
+
+$$ \vec{p}_{1, i} + \vec{p}_{2,i} = \vec{p}_{1, f} + \vec{p}_{2, f} $$
+
+Solo per gli urti **completamente anelastici**, vale inoltre che i due corpi rimangono attaccati:
+
+$$ m_1\vec{v}_i + m_2\vec{v}_2 = (m_1 + m_2)\vec{v}_f $$
+
+Se impostiamo il sistema di riferimento nel punto del centro di massa,
+allora la sua velocità è zero e anche la sua quantità di moto è 0
+
+Analizzando la situazione iniziale, vale:
+$$ E_{k,i} = E_{k1,i} + E_{k2,i} = \frac{1}{2}m_1\vec{v}_{1,i}^2 + \frac{1}{2}m_2\vec{v}_{2,i}^2$$
+Utilizzando un sistema di riferimento centrato sul centro di massa:
+
+$$ v_{1,i} = \vec{v}_{cm} + \vec{v}_{1, sismema\ cm} $$
+$$ \frac{1}{2}m_1(\vec{v}_{cm} + \vec{v}_{1, i\ sistema\ cm})^2 + \frac{1}{2}m_2(\vec{v}_{cm} + \vec{v}_{2, i\ sistema\ cm})^2 $$
+$$ \frac{1}{2}(m_1+m_2)\vec{v}_{cm}^2 + E_{k,i}' $$
+
+Invece la situazione finale vale:
+
+$$ E_{k,f} = \frac{1}{2}m_3\vec{v}_{3, f}^2 = \frac{1}{2}(m_1 + m_2)\vec{v}_{cm}^2 $$
+
+Dunque:
+
+$$ E_{k,i} > E_{k,f} $$
+
+
+-----
+
+Travel: [[file:fisica.org][Fisica]], [[file:../../../theindex.org][Index]]

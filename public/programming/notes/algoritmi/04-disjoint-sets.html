@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
+</p>
+
+<div id="outline-container-org74b1ddf" class="outline-2">
+<h2 id="org74b1ddf">Disjoint Sets</h2>
+<div class="outline-text-2" id="text-org74b1ddf">
+<p>
+API:
+</p>
+
+<pre class="example">
+% Crea n componenti {1},...,{n}
+MFSET Mfset(int n)
+
+% Restituisce il rappresentante della componente contentente x
+int find(int x)
+
+% Unisce le componenti che contengono x e y
+merge(int x, int y)
+</pre>
+
+<p>
+Un'esempio di applicazione e' risolvere il problema di trovare le
+componenti connesse di un grafo non orientato dinamico, ossia che
+cambia nel tempo. Osserviamo che possiamo iterare su tutti i nodi, e
+chiamare merge su tutti i suoi nodi adiacenti qualora non avessero lo
+stesso rappresentante. Questo ha una complessità di \(O(n)+m\) volte
+\(merge()\).
+</p>
+</div>
+
+<div id="outline-container-org6244d22" class="outline-3">
+<h3 id="org6244d22">Implementazione su liste</h3>
+<div class="outline-text-3" id="text-org6244d22">
+<p>
+Possiamo implementare disjoint sets in modo tale che ogni insieme
+viene rappresentato da una lista concatenata, dove il primo elemento
+e' il rappresentante dell'insieme e ogni nodo ha un puntatore al
+rappresentante, un puntatore all'oggetto successivo e l'oggetto
+stesso.
+</p>
+
+<ul class="org-ul">
+<li>\(find(x)\) richiede \(O(1)\)</li>
+<li>\(merge(x)\) richiede \(O(n)\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga3e6368" class="outline-3">
+<h3 id="orga3e6368">Implementazione su alberi</h3>
+<div class="outline-text-3" id="text-orga3e6368">
+<p>
+Possiamo implementare disjoint sets in modo tale che ogni insieme
+viene rappresentato da un albero, dove la radice e' il rappresentante
+dell'insieme e ogni cono contiene un oggetto ed un puntatore al
+padre. Senza ribilanciare l'albero al merge, vale:
+</p>
+
+<ul class="org-ul">
+<li>\(find(x)\) richiede \(O(n)\)</li>
+<li>\(merge(x)\) richiede \(O(1)\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgfa4266e" class="outline-3">
+<h3 id="orgfa4266e">Euristiche</h3>
+<div class="outline-text-3" id="text-orgfa4266e">
+<p>
+Le tecniche euristiche vengono utilizzate per trovare una soluzione
+approssimata, qualora i metodi classici falliscano nel trovare una
+soluzione esatta.
+</p>
+
+<p>
+Possiamo applicare tre euristiche nel caso degli insiemi disgiunti:
+</p>
+
+<ul class="org-ul">
+<li>Euristica sul peso (Liste)</li>
+<li>Euristica del rango (Alberi)</li>
+<li>Euristica della compressione dei cammini (Alberi)</li>
+<li>Rango + Compressione dei Cammini</li>
+</ul>
+</div>
+
+<div id="outline-container-org2c937a6" class="outline-4">
+<h4 id="org2c937a6">Euristica sul peso (Liste)</h4>
+<div class="outline-text-4" id="text-org2c937a6">
+<p>
+Durante la \(merge()\) si aggancia la lista più' corta a quella più
+lunga, salvandosi la lunghezza della lista. E' possibile dimostrare
+che il costo di \(merge()\) e' limitato superiormente da \(O(logn)\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org57c6a2d" class="outline-4">
+<h4 id="org57c6a2d">Euristica del rango (Alberi)</h4>
+<div class="outline-text-4" id="text-org57c6a2d">
+<p>
+Ogni nodo \(x\) mantiene informazioni sul proprio rango ossia l'altezza
+tra \(x\) e la foglia più bassa discendente da \(x\). Quando facciamo
+\(merge()\) si aggancia l'albero con rango più basso all'albero con
+rango più alto. Vale che un albero con radice \(r\) ottenuto tramite
+euristica sul rango ha almeno \(2_{rank[r]}\) nodi. Dimostriamo questo
+in modo induttivo, partendo dal caso base dove tutti gli alberi hanno
+un nodo singolo con rank 0, infatti \(2^0=1\), e per induzione assumendo
+la tesi e mergando due alberi \(x\) e \(y\) (sia con i loro rank uguali
+che diversi) il cui numero di nodi e' \(\ge 2^{rank[x]}+2^{rank[y]}\) e'
+sicuramente maggiore di \(2^{rank[x]}\). Ne consegue che il rank e' più
+piccolo di \(log(n)\) dunque l'operazione \(find(x)\) ha costo \(O(logn)\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf3bf0bf" class="outline-4">
+<h4 id="orgf3bf0bf">Euristica della compressione dei cammini (Alberi)</h4>
+<div class="outline-text-4" id="text-orgf3bf0bf">
+<p>
+L'albero viene "appiattito" in modo che ricerche successive di \(x\)
+siano svolte in \(O(1)\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgec38c11" class="outline-4">
+<h4 id="orgec38c11">Rango + compressione dei cammini</h4>
+<div class="outline-text-4" id="text-orgec38c11">
+<p>
+Se applichiamo entrambe le ultime due euristiche, vale che il rango
+non e' più l'altezza del nodo, ma il limite superiore all'altezza del
+nodo (non c'e' più bisogno di calcolare il rango corretto). Questo ha
+una complessita' di \(O(m*\alpha (n))\) dove \(\alpha (n)\) e' la funzione
+inversa di Ackermann e cresce lentamente.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="algoritmi.html">Algoritmi</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

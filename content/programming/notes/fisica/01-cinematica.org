@@ -1,0 +1,286 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:fisica.org][Fisica]] >
+
+* Cinematica
+#+INDEX: Giovanni's Diary!Programming!Notes!Fisica!Cinematica
+
+La cinematica e' quella branca della meccanica che studia il moto dei
+corpi ricorrendo esclusivamente alle nozioni di spazio e di tempo,
+indipendentemente dalle cause (forze) del moto stesso di cui si occupa
+invece la dinamica.
+
+** Vettori
+Un vettore e' caratterizzato da:
+
+- verso ("punta")
+- direzione (retta)
+- lunghezza (o modulo)
+
+Operazioni tra vettori:
+
+1. **Somma**: $\vec{c} = \vec{a} + \vec{b}$ e' uguale alla somma degli elementi individuali
+	- graficamente questo so può rappresentare con il metodo del
+    parallelogramma o il metodo del punta-coda
+2. **Prodotto**: $\vec{w}=c\vec{v}$ e' uguale al prodotto di tutti gli
+   elementi di v
+	- $|v^2|=\sum_{i=0}^{N} v_i^2$
+3. **Sottrazione**: $\vec{d}=\vec{a}-\vec{b} = \vec{a} - -1 * \vec{b}$
+4. **Prodotto scalare**: $s = \vec{a} * \vec{b}$ 
+	- $\vec{a} * \vec{b} = cos(\theta) * |\vec{a}| * |\vec{b}|$
+
+** Moto rettilineo uniforme
+
+La legge oraria del moto uniforme, ossia lo spazio in funzione del
+tempo, e' la seguente:
+
+$$ \vec{X}(t) = \vec{X_0} + \vec{v}(t-t_0) $$
+
+** Moto rettilineo uniformemente accelerato
+
+Nel moto rettilineo uniformemente accelerato, l'accelerazione non e'
+nulla. La funzione della velocità e dello spazio sono le seguenti:
+
+$$ (1)\ \vec v(t) = \vec{v_i} + a\Delta t$$
+$$ (2)\ \vec{X}(t) = \vec{X_i} + \vec{v_i}\Delta t + \frac{1}{2}a\Delta t^2 $$
+
+*** Equazione della velocita'
+
+Sappiamo che, per definizione:
+$$ \vec{a} = \lim_{\Delta t \to 0} \frac{\Delta \vec{v}}{\Delta t} = \frac{d\vec{v}}{dt}$$
+$$ \vec{a}\ dt = d\vec{v} $$
+
+Integriamo ora a destra e a sinistra:
+
+$$ \int a\ dt = \int d\vec{v} $$
+
+Per la proprietà fondamentale degli integrali, l'integrale di $dt$ è proprio $\Delta t$. Lo stesso discorso vale per delta v:
+
+$$ \vec{a} \Delta t = \Delta \vec{v} $$
+
+Dunque 
+
+$$ \vec{v_f} = \vec{v_i} + a\Delta t $$
+
+*** Equazione dello spazio
+
+Per  il moto rettilineo uniforme, vale:
+
+$$ \vec{X}(t) = \vec{X_0} + \vec{v}\Delta t$$
+$$ \vec{X}(t) = \vec{X_0} + \vec{v} \int_{0}^{t_f} dt $$
+$$ \vec{X}(t) = \vec{X_0} + \int_{0}^{t_f}\vec{v}dt $$
+
+Sostituisco $v$ con quanto risultato precedentemente:
+
+$$ \vec{X}(t) = \vec{X_0} + \int_{0}^{t_f} (\vec{v_i} +a \Delta t) dt $$
+$$ \vec{X}(t) = \vec{X_0} + \int_{0}^{t_f}\vec{v_i} dt + \int_{0}^{t_f} a\Delta t dt $$
+$$ \vec{X}(t) = \vec{X_0} + \vec{v_i}\Delta t + \frac{1}{2}a\Delta t^2 $$
+
+** Moto Parabolico
+
+Osserviamo che il moto parabolico può essere visto come l'unione di
+due moti rettilinei:
+
+- sull'asse $x$, un moto rettilineo uniforme
+- sull'asse $y$, un moto rettilineo uniformemente accelerato
+
+$$x=v_{0x}t$$
+$$y=v_{oy}t -\frac{1}{2}gt^2$$
+Allora:
+$$y = -\frac{g}{2v_{ox}^2}x^2 + \frac{v_{0y}}{v_0x}x+0$$
+Infatti l'equazione rappresenta proprio il moto di una parabola.
+$$y = ax^2 + bx + c$$
+
+- $a$ e' sempre minore di 0
+- $b = tan(\alpha)$
+- $x_{max}$ si ottiene ponendo la derivata dello spazio a 0
+- la gittata si ottiene ponendo $y$ a 0
+
+** Moto armonico
+La funzione oraria del moto armonico e' sa seguente:
+$$ X(t) = A sin(\omega t + \phi) $$
+Dove chiamiamo:
+
+- $A$: ampiezza di oscillazione
+- $w$: pulsazione
+- $\phi$: fase
+
+La $\phi$ rappresenta la traslazione dallo 0 sull'asse del
+tempo. Osservando l'analisi dimensionale, vale che $A$ e' una
+lunghezza e $wt$ e' una quantità non dimensionale. Di conseguenza
+omega delve essere $|\frac{1}{t}|$ scritto anche $T^{-1}$. Nella
+prossima sezione mostreremo che vale $\omega T = 2 \pi$ dunque omega
+si può misurare anche in $\frac{rad}{s}$.
+
+*** Periodo del moto armonico
+
+Una funzione f(x) si dice periodica con periodo T se
+$$ f(x+T) = f(x)\ \forall x \in D_f $$
+
+Per quale T vale:
+$$ sin(\omega t + \phi) =?\ sin(\omega (T+t) +\phi)$$
+Assumiamo la fase nulla. Deve valere che
+$$ sin(\omega (T+t)) = sin(\omega t + 2 \pi) $$
+Questo si verifica se
+$$ \omega (T+t) = \omega t +2\pi $$
+$$ \omega T = 2 \pi $$
+$$ T = \frac{2 \pi}{\omega} $$
+
+*** Velocità e accelerazione del moto armonico
+Possiamo derivare lo spazio per ottenere l'equazione della velocità:
+$$ v(t) = \omega A cos(\omega T + \phi) $$
+E deriviamo ulteriormente per ottenere l'accelerazione:
+$$ -w^2 A cos(\omega T + \phi) $$
+
+Possiamo fare delle altre osservazioni, per esempio che il punto di
+velocità massima e' quando l'equazione dello spazio tocca lo zero,
+questo perché quando il seno e' 0, il suo coseno e' 1. L'accelerazione
+e' specchiata rispetto all'asse x allo spazio.
+
+*** Equazione differenziale del moto armonico
+Osserviamo che l'equazione del moto armonico vista in precedenza e' la
+soluzione dell'equazione differenziale:
+
+$$ \theta'' + \omega^2\theta = 0 $$
+
+Questa osservazione ci e' molto utile per trovare $w$ sia nel moto del
+pendolo che nel moto della molla.
+
+** Moto circolare
+
+Un caso di moto armonico e' il moto circolare, dove entrambe le
+direzioni $x$ ed $y$ seguono il moto armonico.
+
+*** Coordinate polari
+
+In un **moto circolare**, e' utile identificare un punto nello spazio
+in funzione del raggio $\rho$ e dell'angolo $\phi$
+
+$$(x, y) \rightarrow (\rho, \phi)$$
+
+Vale:
+
+$$(\rho, \phi) = (\sqrt{x^2 + y^2},\ atan(\frac{x}{y}))$$
+$$(x, y) = (\rho\ cos(\phi), \rho \ sin(\phi))$$
+
+per casa: calcolare velocità e accelerazione.
+
+*** Accelerazione nel moto circolare
+
+La velocità, per definizione, e' sempre **tangente alla traiettoria**,
+infatti descrive la direzione dello spostamento nel prossimo istante.
+
+$$\frac{v_x}{v_y} = \frac{\frac{dx}{dt}}{\frac{dy}{dy}}=\frac{dx}{dy} = y'(x)$$
+
+Sia $\hat{u}_t$ il versore della tangente, posso scrivere:
+
+$$\vec{v} = |\vec{v}| \hat{u}_t$$
+
+Allo stesso modo l'accelerazione:
+
+$$\vec{a} = \frac{d\vec{v}}{dt} = \frac{d}{dt}(|\vec{v}|\hat{u}_t)=\frac{d|\vec{v}|}{dt}\hat{u}_t + |\vec{v}|\frac{d\vec{u}_t}{dt}$$
+
+Vale:
+
+$$\frac{d\hat{u}_t}{dt} = \frac{ \hat{u}_t' - \hat{u}_t}{dt}=\frac{d\phi}{dt}\hat{u}_{normale}$$
+
+infatti, la differenza infinitesima tra le tangenti di due velocità
+vicine nel tempo, sara' il vettore perpendicolare alla velocità (per
+la regola dei parallelogrammi) anche detto vettore **normale**. E'
+molto semplice una dimostrazione grafica.  Osserviamo che lo spazio
+tra due $\phi$ molto vicini nel tempo può essere **approssimato** ad
+un arco di circonferenza di raggio $r$ (anche se il percorso più in
+grande e' un circuito di formula 1), **usando un sistema di
+riferimento che meglio approssima la circonferenza**.
+
+Vale anche:
+
+$$\frac{d\phi}{dt} = \frac{d\phi}{dS} \frac{dS}{dt} = \frac{v}{r}$$
+
+Avendo usato la formula per calcolare l'arco di circonferenza (che
+viene approssimato qua):
+
+$$r\ d\phi=dS \rightarrow \frac{d\phi}{dS}=d\phi$$
+
+Quindi riportando questo all'equazione dell'accelerazione:
+
+$$\vec{a}=\frac{dv}{dt}\hat{u}_t + \frac{v^2}{r}\hat{u}_{normale}$$
+
+Dunque abbiamo 3 vettori:
+
+- **accelerazione tangenziale** $\hat{v}_t$ 
+- **accelerazione normale** con verso $\hat{u}_{normale}$
+- il raggio di curvatura $r$
+
+
+*** Moto Circolare Uniforme
+
+Con velocita' costante, l'accelerazione normale dalla formula
+precedente diventa:
+
+$$\hat{a}=\frac{v^2}{R}\hat{u}_n$$
+
+Con accelerazione normale e velocita' costante, anche il raggio e'
+costante. Chiamiamo l'accelerazione normale come **accelerazione
+centripeda**.  Definiamo la **velocita' angolare** come:
+
+$$\omega =^{def} \frac{d\phi}{dt} =^{arco\ di\ circ.} \frac{v}{R}$$
+
+Sia P un punto nella circonferenza di raggio R.  Ricordando che il
+moto circolare e' la composizione di due moti armonici, vale:
+
+$$ X_p = Rcos(\alpha) $$
+$$ Y_p = Rsin(\alpha) $$
+
+Inoltre, dato che:
+
+$$ \alpha = \omega t $$
+
+Vale:
+$$ X_p = Rcos(\omega t) $$
+$$ Y_p = Rsin(\omega p) $$
+
+Deriviamo ora lo spazio, trovando la velocità:
+
+$$ v_{xp} = -\omega Rsin(\omega t) $$
+
+$$ v_{yp} = \omega Rcos(\omega t) $$
+Derivando ancora troviamo l'accelerazione:
+
+$$ a_{xp} = -\omega ^2 Rcos(\omega t) $$
+$$ a_{yp} = -\omega ^2Rsin(\omega t) $$
+
+Osserviamo che possiamo sostituire $R\ cos(wt)$ con $X$, allo stesso
+modo $Y$:
+
+$$ a_{xp} = -\omega ^2X_p $$
+$$ a_{yp} = -\omega ^2Y_p $$
+Sommando ora le componenti:
+
+$$ |\vec{a_p}| = \sqrt{a_{xp}^2 + a_{yp}^2} $$
+$$ |\vec{a_p}| = \sqrt{\omega ^4 X_p^2 + \omega ^4 Y_p^2} $$
+$$ \vec{a_p} = \omega ^2 \sqrt{X_p^2 + Y_p^2}$$
+
+Concludiamo che:
+
+$$ a = \omega ^ 2R $$
+
+** Definizioni importanti
+
+Definiamo:
+
+- velocità tangenziale: $v = \frac{C}{T} = \frac{2\pi R}{T}$
+- velocità angolare istantanea: $\omega = \frac{2\pi}{T}\ (\frac{rad}{s})$
+- $a_c = \frac{\Delta \vec{v}}{\Delta t}$
+
+Ne deriviamo che:
+
+- $v = \omega R$
+- $a_{centripeta} = \omega ^ 2R = \frac{v^2}{R}$
+- $\vec{F}_c = m\vec{a}_c$
+- L'accelerazione centripeta è sempre rivolta verso il centro.
+
+
+-----
+
+Travel: [[file:fisica.org][Fisica]], [[file:../../../theindex.org][Index]]

@@ -1,0 +1,346 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:algoritmi.org][Algoritmi]] >
+
+* Greedy
+#+INDEX: Giovanni's Diary!Programming!Notes!Algoritmi!Greedy
+
+La tecnica greedy può essere utilizzata se fra le molte scelte
+possibili, ne può essere facilmente individuata una che porta
+sicuramente alla soluzione ottima.  Inoltre il problema deve avere
+sottostruttura ottima: fatta tale scelta, resta un sottoproblema con
+la stessa struttura del problema principale.
+
+L'approccio greedy si riassume in:
+
+- Evidenziare i "passi di decisione" trasformando il problema di
+  ottimizzazione in un problema di scelte sucecssive.
+- Evidenziare una possibile scelta ingorda dimostrandola rispetto al
+  "principio della scelta ingorda".
+- Evidenziare la sottostruttura ottima dimostrando che la soluzione
+  ottima del problema "residuo" dopo la scelta ingorda può essere
+  unito a tale scelta.
+- Scrittura codice: top-down, anche in maniera iterativa e con
+  possibile pre-processing dell'input.
+
+** Insieme indipendente di intervalli
+
+Sia $S=\{ 1, 2, .., n \}$ un insieme di intervalli della retta
+reale. Ogni intervallo $[a_i, b_i)$, con $i\in S$, e' chiuso a
+sinistra e aperto a destra con $a_i$ tempo di inizio e $b_i$ tempo di
+fine. Un insieme indipendente massimale e' un **sottoinsieme di
+massima cardinalità** formato da intervalli tutti disgiunti tra loro.
+
+Possiamo risolvere questo problema con la programmazione dinamica,
+oppure possiamo dimostrare che esiste una scelta ingorda che porta
+alla soluzione ottima. Vediamo entrambi gli approcci
+
+*** Soluzione con Programmazione Dinamica
+
+Si assuma che gli intervalli siano ordinati per tempo di
+fine. Definiamo il sottoproblema$S[i..j]$ come l'insieme di
+intervalli che iniziano dopo la fine di $i$ e finiscono prima
+dell'inizio di $j$:
+
+$$S[i..j] = \{ k | b_i \le a_k < b_k \le a_j \}$$
+
+Aggiungiamo due intervalli fittizi:
+
+- intervallo $0: b_i = -\inf$:
+- intervallo $n+1: a_{n+1}=+\inf$
+
+Allora il problema iniziale corrisponde al problema
+$S[0,n+1]$. Supponiamo che $A[i..j]$ sia una soluzione ottimale di
+$S[i..j]$ e sia $k$ un intervallo che appartiene a $A[i..j]$; allora:
+
+- Il problema $S[i..j]$ viene suddiviso in due sottoproblemi $S[i..k]$
+  e $S[k..j]$.
+- $A[i..j]$ contiene le soluzioni ottimali di $S[i..k]$ e $S[k..j]$.
+
+Questo si dimostra utilizzando il metodo cut-and-paste.
+
+$$DP[i][j] =
+\begin{cases}
+0 & S[i..j]=\emptyset \\
+max_{k\in S[i..j]}(DP[i][k]+DP[k][j]+1) & altrimenti
+\end{cases}$$
+
+Complessità $O(n^3)$. Un'alternativa potrebbe essere utilizzare la
+soluzione $O(nlogn)$ già vista nel caso di intervalli pesati, ponendo
+il peso a 1.
+
+*** Soluzione Greedy
+
+Teorema: Sia $S[i..j]$ un sottoproblema non vuoto, e $m$ l'intervallo
+di $S[i..j]$ con **minor tempo di fine**, allora:
+
+- il sottoproblema $S[i..m]$ e' vuoto
+- $m$ e' compreso in qualche soluzione ottima di $S[i..j]$
+
+Dimostrazione: Vale:
+
+- per definizione di intervallo: $a_m < b_m$ 
+- dato che $m$ ha minor tempo di fine: $\forall k\in S[i..j]: b_m \le
+  b_k$
+- dalle precedenti, per transitività' vale anche: $\forall k\in
+  S[i..j]: a_m < b_k$
+
+Se nessun intervallo in $S[i..j]$ termina prima di $a_m$ allora
+$S[i..m] = \emptyset$. Sia $A'[i..j]$ una soluzione ottima di
+$S[i..j]$. Sia $m'$ l'intervallo con minor tempo di fine in
+$A'[i..j]$. Sia $A[i..j]=(A'[i..j]-\{ m' \})\cup \{ m \}$ una nuova
+soluzione ottenuta togliendo $m'$ e aggiungendo $m$ ad
+$A'[i..j]$. Allora $A[i..j]$ e' una soluzione ottima che contiene $m$,
+in quanto ha la stessa dimensione di $A'[i..j]$ e gli intervalli sono
+indipendenti.
+
+Posso fare una scelta ingorda selezionando l'attivita' $m$ con il
+minor tempo di fine.
+
+#+begin_src
+Set independentSet(int[] a, int[] b)
+	{ordina a e b in modo che b[1] <= b[2] <= .. <= b[n]}
+	Set S = Set()
+	S.insert(1)
+	int last = 1
+	for i=2 to n do
+		if a[i]>=b[last] then
+			S.insert(i)
+			last = i
+	return S
+#+end_src
+
+Costo $O(nlogn)$ se l'input non e' ordinato, altrimenti $O(n)$.
+
+** Resto
+
+Dato un'insieme di "tagli" di monete memorizzati in un vettore di
+interi positivi $t[1..n]$ e un intero $R$ rappresentante il resto che
+dobbiamo restituire. Trovare il più piccolo numero intero di pezzi
+necessari per dare un resto di $R$ centesimi utilizzando i tagli
+disponibili, assumendo di avere un numero illimitato di monete per
+ogni taglio. Formalmente, trovare un vettore $x$ di interi non
+negativi tale che $R=\sum_{i=1}^n x[i]t[i]$ e $m=\sum_{i=1}^nx[i]$ ha
+valore minimo.
+
+Risolviamo prima il problema con la programmazione dinamica.
+Sottostruttura ottima: Sia $S(i)$ il problema di dare un resto pari ad
+$i$. Sia $A(i)$ una soluzione ottima del problema $S(i)$,
+rappresentata da un multi-insieme; sia $j\in A(i)$. Allora,
+$S(i-t[j])$ e' un sottoproblema di $S(i)$, la cui soluzione ottima e'
+data da $A(i)-\{ j \}$.
+
+$$DP[i]= \begin{cases} 0 & i=0 \\
+min_{j\in R\ and\ t[j]<i}(DP[i-t[j]])+1 & altrimenti
+\end{cases}$$
+
+Complessità $O(nR)$.
+
+Proviamo ora a dimostrare una soluzione ingorda. Deve essere
+dimostrata per ogni scelta di monete, prendiamo come esempio $t=[50,
+10, 5, 1]$.
+
+Sia $x$ una qualunque soluzione ottima, quindi $R=\sum_{i=1}^n
+x[i]t[i]$ e $m=\sum_{i=1}^nx[i]$ ha valore minimo. Sappiamo che
+$t[k]x[k] < t[k-1]$, altrimenti basterebbe sostituire un certo numero
+di monete di taglia $t[k]$ con quelle del taglio $t[k-1]$.
+
+- $t[2]x[2] = 10x[2] < t[1]=50 \rightarrow x[2] < 5$
+- $t[3]x[3]=5x[3]<t[2]=10\rightarrow x[3]<2$
+- $t[4]x[4]=1x[4]<t[3]=5\rightarrow x[4]<5$
+
+Sia $m_k$ la somma delle monete di taglio inferiore a $t[k]$: $m_k =
+\sum_{i=k+1}^4x[i]t[i]$. Se dimostriamo che $\forall k: m_k < t[k]$,
+allora la soluzione (ottima) e' proprio quella calcolata
+dall'algoritmo.
+
+- $m_4 = 0 < 1 = t[4]$
+- $m_3 = x[4]*1 + m_4 \le 4*1+m_4 < 4+1 = 5 = t[3]$
+- $m_2 = x[3]*5+m_3 \le 1*5+m_3 < 5+5 = 10 = t[2]$
+- $m_1 = x[2]*10+m_2 \le 4*10+m_2 < 40+10 = 50 = t[1]$
+
+** Scheduling
+
+Supponiamo di avere un processore e $n$ job da eseguire su di esso,
+ognuno caratterizzato da un tempo di esecuzione $t[i]$ noto a
+priori. Trovare una sequenza di esecuzione che minimizzi il tempo di
+completamento medio definito come $\frac{1}{n}\sum_{j=0}^n
+\sum_{i=1}^jt[A[i]]$ dove il vettore $A[1..n]$ contiene una
+permutazione di $\{ 1, ..., n \}$.
+
+Teorema: Scelta greedy: esiste una soluzione ottima $A$ in cui il job
+con minor tempo di fine $m$ si trova in prima posizione ($A[1]=m$).
+Teorema: sottostruttura ottima: Sia $A$ una soluzione ottima di un
+problema con $n$ job, in cui il job con minor tempo di fine $m$ si
+trova in prima posizione. La permutazione dei seguenti $n-1$ job in
+$A$ e' una soluzione ottima al sottoproblema in cui il job $m$ non
+viene considerato.
+
+Dimostrazione: Si consideri una permutazione ottima $A$, sia $m$ la
+posizione in $A$ in cui si trova il job con minor tempo di fine. Si
+consideri una permutazione $A'$ in cui il jon in posizione 1, $m$
+vengono scambiati. Il tempo di completamento medio di $A'$ e' minore o
+uguale al tempo di completamento medio di $A$. Poiche' $A$ e; ottima,
+$A'$ non puo' avere tempo di completamento minore e quindi anche $A'$
+e' ottima.
+
+** Zaino frazionario
+
+Dati un'intero positivo $C$ che rappresenta la capacita' dello zaino,
+e $n$ oggetti ognuno con un profitto $p$ e un peso $w$ in
+$\mathbb{Z^+}$.
+
+Zaino 0/1: Trovare un sottoinsieme $S$ di $\{ 1, ..., n \}$ di oggetti
+tale che il loro peso totale non superi la capacita' massima e il loro
+profitto totale sia massimo.
+
+Zaino reale (o frazionario): e' possibile prendere frazioni di
+oggetti.
+
+Scelta ingorda: Si possono ordinare gli oggetti per il rapporto
+profitto su peso e prenderli in questo ordine, se vi e' abbastanza
+capacita'.
+
+** Compressione di Huffman
+
+In un codice a prefisso, **nessun codice e' prefisso di un altro
+codice**. Ad esempio con $a\rightarrow 0,\ b\rightarrow 10,\
+c\rightarrow 11$ possiamo codificare $ababca$ con $100100110$.
+
+L'algoritmo di Huffman e' ottimo per costruire codici prefissi.
+
+L'algoritmo di decodifica può essere visto come l'attraversamento di
+un albero binario, ed e' il seguente:
+
+#+begin_src
+parti dalla radice
+while file non e' finito do
+	leggi un bit
+	if bit e' zero then
+		vai a sinistra
+	else
+		vai a destra
+	if nodo foglia then
+		stampa il carattere
+		torna alla radice
+#+end_src
+
+Dato un file $F$ composto da caratteri nell'alfabeto $\sum$. Vogliamo
+minimizzare la lunghezza dei caratteri che compaiono più
+frequentemente.
+
+Possiamo procedere nel seguente modo:
+
+- costruiamo un nodo foglia per ogni carattere, etichettato con la
+  propria frequenza
+- rimuoviamo i due nodi con frequenza minore $f_x, f_y$
+- creiamo un nodo con etichetta "-" e frequenza $f_x+f_y$
+- colleghiamo i due nodi rimossi con il nuovo nodo
+- aggiungiamo il nodo cosi' creato all'insieme
+- si termina quanto resta un solo nodo sul primo livello
+- al termine, si etichettano gli archi dell'albero con un bit $0,1$.
+
+Algoritmo:
+
+#+begin_src
+Tree hiffman(int[] c, int[] f, int n)
+	PriorityQueue Q = MinPriorityQueue()
+	for i=1 to n do
+		Q.insert(Tree(c[i], f[i]), f[i])
+	for i=1 to n-1 do
+		z1 = Q.deleteMin()
+		z2 = Q.deleteMin()
+		z = Tree(nil, z1.freq + z2.freq)
+		z.left = z1
+		z.right = z2
+		Q.insert(z, z.freq)
+	return Q.deleteMin()	
+#+end_src
+
+La dimostrazione non viene qui riportata. Intuitivamente, si assume di
+prendere i due caratteri con frequenza più bassa $x$ e $y$ e si
+dimostra che esiste un prefisso ottimo dove i due caratteri hanno la
+stessa profondità massima e i loro codici differiscono solo per
+l'ultimo bit. Per dimostrare ciò si suppone di avere un codice ottimo
+e, scambiando i due caratteri, abbiamo ancora una soluzione ottima.
+
+** Alberi di copertura di peso minimo
+
+Dato un grafo pesato, determinare come interconnettere tutti i suoi
+nodi minimizzando il costo del peso associato ai suoi archi.
+
+*** Algoritmo Generico
+
+Definizioni:
+
+- Un arco (u, v) è detto **sicuro** per A se $A \cup {(u, v)}$ è
+  ancora un sottoinsieme di qualche albero di connessione minimo
+- Un **taglio** di un grafo non orientato e' una partizione dei suoi
+  nodi in due sottoinsiemi disgiunti.
+- Un arco che attraversa un taglio e' detto **leggero** se il suo peso
+  e' minimo fra i pesi degli archi che attraversano il taglio.
+
+Teorema: Sia $G=(V,E)$ un grafo non orientato e connesso. Sia $w:
+V\times V\rightarrow \mathbb{R}$. Sia $A\subseteq E$ un sottoinsieme
+contenuto in un qualche albero di copertura minimo per $G$, sia $(S,
+V-S)$ un qualunque taglio che rispetta $A$. Sia $(u, v)$ un arco
+leggero che attraversa il taglio. Allora l'arco $(u, v)$ e' sicuro per
+$A$.
+
+Dimostrazione:
+Sia T un albero di copertura minimo che contiene A. Esistono due casi
+
+- $(u, v) \in T$, allora $(u, v)$ e' sicuro per A
+- $(u, v)\notin T$: trasformiamo T in un albero T' contenente $(u, v)$
+  e dimostriamo che T' e' un albero di copertura minimo.
+
+Se (u, v) non appartengono a T, allora ci deve essere un arco $(x, y)$
+che appartiene e chiude il taglio. Allora rimuovo $(x, y)$ e aggiungo
+$(u, v)$ e lo chiamo $T'$. Per definizione, $(u, v)$ e' un arco
+leggero (e' il minimo tra tutti gli archi tra i due tagli), allora
+$T'$ e' minimo.
+
+*** Algoritmo di Kruskal
+
+Ordiniamo gli alberi in modo crescente. Ogni volta, aggiungo alla
+foresta l'arco di peso minimo fino ad avere n-1 archi, evitando cicli.
+NOTA: Uso MFSET.
+
+#+begin_src
+Set kruskal(Edge[] A, int n, int m)
+	Set T = Set()
+	Mfset M = Mfset(n)
+	% ordina A per peso
+	int count = 0
+	int i=1
+	% Termina quando l'albero ha n-1 archi
+	% o non ci sono piu' archi
+	while count < n-1 and i <= m do
+		if M.find(A[i].i) != M.find(A[i].v) then
+			M.merge(A[i].w, A[i].v)
+			T.insert(A[i])
+			count = count + 1
+		i = i + 1
+	return T
+#+end_src
+
+gist: itero su n-1 archi in ordine. Li aggiungo alla soluzione se
+connettono due componenti sconnesse tra di loro.
+
+Tempo computazionale: $O(mlogn)$
+
+*** Algoritmo di Primm
+
+L'algoritmo di Prim procede mantenendo in $A$ un singolo albero la cui
+frontiera cresce fino a quando non ricopre tutti i vertici.
+
+- parto da un nodo a caso e prendo il minimo tra tutti gli edges nella
+  frontiera senza fare cicli (sono tutti gli archi che posso
+  attraversare da qualsiasi nodo nella mia componente). Continuo
+  avanti finché non ho collegato tutti i nodi.
+
+Uno una coda di priorità. Tempo $O(mlogn)$
+
+-----
+
+Travel: [[file:algoritmi.org][Algoritmi]], [[file:../../../theindex.org][Index]]

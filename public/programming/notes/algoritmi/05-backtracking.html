@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
+</p>
+
+<div id="outline-container-org01a7456" class="outline-2">
+<h2 id="org01a7456">Backtracking</h2>
+<div class="outline-text-2" id="text-org01a7456">
+<p>
+In alcuni problemi e' richiesto o necessario esplorare l'intero spazio
+delle soluzioni ammissibili:
+</p>
+
+<ul class="org-ul">
+<li><b><b>Enumerazione</b></b>: elencare tutte le soluzioni ammissibili</li>
+<li><b><b>Ricerca</b></b>: Trovare una soluzione ammissibile in uno spazio delle
+soluzioni molto grande</li>
+<li><b><b>Conteggio</b></b>: Contare tutte le soluzioni ammissibili</li>
+<li><b><b>Ottimizzazione</b></b>: trovare una delle soluzioni ammissibili migliori
+rispetto ad un certo criterio di valutazione</li>
+</ul>
+
+<p>
+L'idea dietro a Backtracking e' "prova a fare qualcosa; se non va
+bene, disfalo e prova qualcos'altro".
+</p>
+</div>
+
+<div id="outline-container-org62ffc8a" class="outline-3">
+<h3 id="org62ffc8a">Enumerazione</h3>
+<div class="outline-text-3" id="text-org62ffc8a">
+<p>
+Schema generale dell'algoritmo:
+</p>
+
+<pre class="example">
+enumeration(&lt;Dati&gt;, Item[] S, int i, &lt;dati_parziali&gt;)
+  % Verifica se S[1..i-1] contiene una soluzione ammissibile
+  if accept(&lt;Dati&gt;, S, i, &lt;dati_parziali&gt;) then
+    processSolution(&lt;Dati&gt;, S, i, &lt;dati_parziali&gt;)
+  else
+    % Calcola l'insieme delle scelte
+    Set C = choices(&lt;Dati&gt;, S, i, &lt;dati_parziali&gt;)
+    for c in C do
+      S[i] = c
+      enumeration(&lt;Dati&gt;, S, i+1, &lt;dati_parziali&gt;)
+</pre>
+</div>
+
+<div id="outline-container-org1fcf3c9" class="outline-4">
+<h4 id="org1fcf3c9">Sottoinsiemi e permutazioni</h4>
+<div class="outline-text-4" id="text-org1fcf3c9">
+<p>
+Elencare tutti i sottoinsiemi dell'insieme \(\{ 1, ..., n \}\).
+</p>
+
+<pre class="example">
+subsets(int n)
+  int[] S = new int[1...n]
+  subsetRec(n, S, 1)
+
+subsetRec(int n, int[] S, int i)
+  if i &gt; n then
+    print(S, n)
+  else
+    Set C = {0, 1}
+    foreach c in C do
+      S[i] = c
+      subsetRec(n, S, i+1)
+</pre>
+
+<p>
+Tempo computazionale \(\Theta (n2^n)\).
+Stampa tutte le permutazioni di un insieme A
+</p>
+
+<pre class="example">
+permutations(Set A)
+  int n = size(A)
+  int[] S = new int[1..n]
+  permRec(A, S, 1)
+
+permRec(Set A,  Item[] S, int i)
+  if A.isEmpty() then
+    print S
+  else
+    Set C = copy(A)
+    foreach c in C do
+      S[i] = c
+      A.remove(c)
+      permRec(A, S, i+1)
+      A.insert(c)
+</pre>
+
+<p>
+Con costo di stampa \(\Theta (n)\), Costo delle copie lungo un cammino
+radice-foglia \(O(n^2)\) e numero di foglie \(n!\) otteniamo una
+complessità \(O(n^2n!)\).
+</p>
+
+<p>
+Una soluzione alternativa allo stesso problema sarebbe la seguente:
+</p>
+
+<pre class="example">
+permRec(Item[] S, int i)
+  if i == 1 then
+    println S
+  else
+    for j=1 to i do
+      swap(S, i, j)
+      permRec(S, i-1)
+      swap(S, i, j)
+</pre>
+
+<p>
+Costo totale: \(\Theta (n n!)\).
+</p>
+
+<p>
+Se invece volessi elencare tutti i sottoinsiemi di \(k\) elementi in un
+insieme \(\{ 1, ..., n \}\) potrei tagliare tutti i sotto alberi che
+superano \(k\) elementi. Mi salvo una variabile "missing" che mi conta
+quanti ancora posso inserire e viene decrementata se la mia scelta e'
+di prendere l'elemento. Quanto missing e' pari a 0 non ha più senso
+continuare e posso stampare la soluzione.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org05aaea1" class="outline-4">
+<h4 id="org05aaea1">Subset sum</h4>
+<div class="outline-text-4" id="text-org05aaea1">
+<p>
+Dati un vettore \(A\) contenente \(n\) interi positivi ed un intero
+positivo \(k\), esiste un sottoinsieme \(S \subseteq \{ 1...n \}\) tale
+che \(\sum_{i\in S} a[i]=k\)?
+</p>
+
+<p>
+Possiamo risolvere questo problema tramite backtracking in tempo
+\(O(2^n)\), anche se invece di esplorare tutte le possibilità ci
+possiamo fermare alla prima. Questo potrebbe essere risolto dalla
+programmazione dinamica in tempo \(O(kn)\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org00f43d2" class="outline-4">
+<h4 id="org00f43d2">Problema delle otto regine</h4>
+<div class="outline-text-4" id="text-org00f43d2">
+<p>
+Posizionare \(n\) regine in una scacchiera \(n \times n\), in modo tale
+che nessuna regina ne "minacci" un'altra. Delle ottimizzazioni che
+possiamo fare sono:
+</p>
+
+<ul class="org-ul">
+<li>non mettere regine in caselle precedenti a quelle gia' scelte</li>
+<li>ogni riga della scacchiera deve contenere esattamente una regina</li>
+<li>anche ogni colonna deve contenere esattamente una regine</li>
+</ul>
+
+<p>
+Un'altro approccio euristico sarebbe considerare che partendo da una
+soluzione "ragionevolmente buona" si possano muovere le regine con il
+più grande numero di conflitti nella casella che genera il numero più'
+piccolo di conflitti, finché questi non vi sono più.
+</p>
+
+<p>
+Altri problemi menzionati:
+</p>
+
+<ul class="org-ul">
+<li>sudoku</li>
+<li>copertura di una scacchiera con una forma</li>
+<li>knight tour</li>
+<li>generazione labirinti</li>
+</ul>
+
+<hr />
+
+<p>
+Travel: <a href="algoritmi.html">Algoritmi</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

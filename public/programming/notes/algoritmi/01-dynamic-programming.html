@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
+</p>
+
+<div id="outline-container-org72af91e" class="outline-2">
+<h2 id="org72af91e">Dynamic Programming</h2>
+<div class="outline-text-2" id="text-org72af91e">
+<p>
+Approccio generale per decidere che tecnica utilizzare:
+</p>
+
+<ul class="org-ul">
+<li>Se non contiene sotto-problemi ripetuti: divide et impera</li>
+<li>Se invece bisogna risolverli tutti: programmazione dinamica</li>
+<li>Se bisogna risolverne solo alcuni: memoization</li>
+</ul>
+</div>
+
+<div id="outline-container-orgf17ebd9" class="outline-3">
+<h3 id="orgf17ebd9">Domino</h3>
+<div class="outline-text-3" id="text-orgf17ebd9">
+<p>
+Scrivere un algoritmo efficiente che prenda in input un intero \(n\) e
+restituisca il numero di possibili disposizioni di \(n\) tessere di
+dimensione \(2\times 1\) in un rettangolo \(2 \times n\).
+</p>
+
+<p>
+Definiamo una formula ricorsiva \(DP[n]\) che permetta di calcolare il
+numero di disposizioni possibili quando si hanno \(n\) tessere.  \[DP[n]
+= \begin{cases} 1 & n \le 1 \\ DP[n-2]+DP[n-1] & n > 1 \end{cases}\]
+L'equazione di ricorrenza associata e':
+\[T(n) = \begin{cases} 1 & n \le 1 \\ T(n-1) + T(n-2) + 1 & n > 1 \end{cases}\]
+La complessità sarebbe \(\Theta (2^n)\), ma dato che utilizziamo la tabella \(DP\) per
+memorizzare i risultati possiamo ottenere una complessità sul tempo di
+\(O(n)\) e su spazio di \(O(n)\).
+</p>
+
+<pre class="example">
+int domino(int n)
+  DP = new int[0..n]
+  DP[0] = DP[1] = 1
+  for i=2 to n do
+    DP[i] = DP[i-1]+DP[i-2]
+  return DP[n]
+</pre>
+
+<p>
+Posso migliorare ancora lo spazio salvandomi soltanto i due risultati
+precedenti durante il ciclo for cosi da avere uno spazio costante su
+\(n\) per ottenere uno spazio che cresce come \(O(1)\).
+</p>
+
+<pre class="example">
+int domino(int n)
+  int DP0 = 1
+  int DP1 = 1
+  int DP2 = 1
+  for i=2 to n do
+    DP0 = DP1
+    DP1 = DP2
+    DP2 = DP0 + DP1
+  return DP2
+</pre>
+
+<p>
+Da notare che posso adottare un modello di costo logaritmico per
+contare anche il numero di bit necessari per memorizzare i dati di
+input, che fa crescere la complessità di tempo e di spazio di un
+fattore \(n\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1897649" class="outline-3">
+<h3 id="org1897649">Hateville</h3>
+<div class="outline-text-3" id="text-org1897649">
+<p>
+Ogni abitante di Hateville \(i\) ha intenzione di donare una quantità
+\(D[i]\). ma non intende partecipare ad una raccolta fondi a cui
+partecipano uno o entrambi i propri vicini.
+</p>
+
+<p>
+Scrivere un algoritmo che dato il vettore di case \(D\), restituisca la
+quantità massima di fondi che può essere raccolta.
+</p>
+
+<p>
+\[DP[i] =
+\begin{cases}
+0 & i=0 \\
+DP[i] & i=1 \\
+max(DP[i-1], DP[i-2] + D[i])
+\end{cases}\]
+</p>
+
+<pre class="example">
+int hateville(int[] D, int n)
+  int[] DP = new int[0..n]
+  DP[0]=0
+  DP[1]=D[1]
+  for i=2 to n do
+    DP[i]=max(DP[i-1],DP[i-2]+D[i])
+  return DP[n]
+</pre>
+
+<ul class="org-ul">
+<li>Tempo computazionale: \(\Theta(n)\)</li>
+<li>Spazio computazionale: \(\Theta(n)\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb17fecd" class="outline-3">
+<h3 id="orgb17fecd">Zaino</h3>
+<div class="outline-text-3" id="text-orgb17fecd">
+<p>
+Dato un insieme di oggetti, ognuno caratterizzato da un peso e un
+profitto, e uno zaino con un limite di capacita', individuate un
+sottoinsieme di oggetti:
+</p>
+
+<ul class="org-ul">
+<li>il cui peso sia inferiore alla capacita' dello zaino</li>
+<li>il valore totale degli oggetti sia massimale</li>
+</ul>
+
+<p>
+Siano \(w[i]\) il vettore di pesi, e \(p[i]\) il vettore di
+profitti. Definisco \(DP[i]\) come il valore massimo di uno zaino con
+capienza \(i\) e i primi \(j\) oggetti.
+</p>
+
+<p>
+\[DP[i][j] = \begin{cases} 0 & i=0\ ||\ j=0 \\ - \inf\ & i < 0 \\
+max(DP[i - w[i]][j-1] + p[i], DP[i][j-1]) & altrimenti
+\end{cases}\]
+</p>
+
+<pre class="example">
+int knapsack(int[] w, int[] p, int n, int c)
+  int[] DP = new int[0..c][0..n]
+  for i=0 to c do
+    for j=0 to n do
+      if w[i] &lt;= c then
+        DP[i][j] = max(DP[i-w[i]][j-1] + [i], DP[i][j-1])
+      else
+        DP[i][j] = DP[i][j-1]
+  return DP[c][n]
+</pre>
+
+<p>
+Complessità computazionale: \(O(nc)\)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6c40888" class="outline-3">
+<h3 id="org6c40888">Zaino senza limiti</h3>
+<div class="outline-text-3" id="text-org6c40888">
+<p>
+Dato uno zaino con capacita' \(C\) e \(n\) oggetti caratterizzati da un
+peso \(w\) e un profitto \(p\), definiamo \(DP[c]\) come il massimo profitto
+che può essere ottenuto in uno zaino di capacita' \(c \le C\), senza
+porre limiti al numero di volte che un oggetto può essere selezionato.
+</p>
+
+<p>
+\[DP[i] = 
+\begin{cases}
+0 & i=0\ ||\ j=0 \\
+-\inf & j < 0 \\
+argmax_{j \in [0,n)\ and\ w[j] < i }(DP[i-w[j]]+p[j])
+\end{cases}\]
+</p>
+
+<pre class="example">
+int knapsack(int[] w, int[] p, int n, int C)
+  int[] DP = new int[0..C] = {-1}
+  return knapsackRec(w, p, n, C, DP)
+
+int knapsackRec(int[] w, int[] p, int n, int c, int[] DP)
+  if c==0 then
+    return 0
+  if DP[c] &lt; 0 then
+    int maxSoFar = 0
+    for i =1 to n do
+      if w[i] &lt;= c then
+        int val = knapsackRec(w, p, n, c-w[i], DP) + p[i]
+        maxSoFar = max(maxSoFar, val)
+    DP[c] = maxSoFar
+  return DP[c]
+</pre>
+
+<p>
+Complessità temporale \(O(nC)\) e spaziale \(\Theta (C)\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb73db76" class="outline-3">
+<h3 id="orgb73db76">Sottosequenza comune massimale</h3>
+<div class="outline-text-3" id="text-orgb73db76">
+<p>
+Una sequenza \(P\) e' una sottosequenza di \(T\) se \(P\) e' ottenuto da \(T\)
+rimuovendo uno o più dei suoi elementi. La sequenza vuota e'
+sottosequenza di ogni altra sequenza.  Un sequenza \(X\) e' una
+sottosequenza comune di due sequenze \(T\), \(U\) se e' sottosequenza dia
+di \(T\) che di \(U\). Una sequenza comune a \(T\) e \(U\) e' detta
+sottosequenza comune massimale se non esiste altra sottosequenza
+comune \(Y\) tale che \(Y\) sia più lunga di \(X\).
+</p>
+
+<p>
+Problema: Date due sequenze \(T\) e \(U\), trovare la più lunga
+sottosequenza comune tra \(T\) e \(U\).
+</p>
+
+<p>
+Definisco \(DP[i][j]\) come la sottosequenza comune massimale tra le
+prime \(i\) lettere di \(T\) e le prime \(j\) lettere di \(U\).
+</p>
+
+<p>
+\[DP[i][j]
+= \begin{cases} 0 & i=0\ ||\ j=0 \\ concat(DP[i-1][j-1], T[i]) & T[i]
+= U[j] \\ maxlen(DP[i-1][j], DP[i][j-1]) & altrimenti \end{cases}\]
+</p>
+
+<p>
+Dimostrazione per assurdo. Date due sequenze \(T\) e \(U\) e una loro
+sottosequenza comune massimale \(X\), sono dati i tre casi:
+</p>
+
+<ol class="org-ol">
+<li>si assuma che i caratteri finali sono uguali. Se \(X\) non comprende
+il carattere finale, io posso concatenare \(X\) con il carattere
+finale ed ottenere una sottosequenza comune massimale di più grande
+di quella massima, che e' assurdo.</li>
+<li>si assuma ora che i caratteri finali siano diversi. Per assurdo,
+assumiamo che il massimo tra \(T(n-1)\) e \(U(n-1)\) non appartenga
+alla soluzione \(X\), allora posso trovare una sottostringa che
+appartiene alla soluzione ed e' più grande di X che e' assurdo.</li>
+</ol>
+
+<p>
+Versione che restituisce la lunghezza:
+</p>
+
+<pre class="example">
+int lcs(Item[] T, Item[] U, int n, int m)
+  int[][] DP = new int[0..n][0..m]
+  for i=1 to n do
+    DP[i][0]=0
+  for j=0 to m do
+    DP[0][j]=0
+  for i=1 to n do
+    for j=1 to m do
+      if T[i]==U[j] then
+        DP[i][j] = DP[i-1][j-1]+1
+      else
+        DP[i][j] = max(DP[i-1][j], DP[i][j-1])
+  return DP[n][m]
+</pre>
+
+<p>
+La soluzione può essere ricostruita riguardando la tabella \(DP\).
+</p>
+
+<p>
+Complessità \(O(nm)\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org011b9ef" class="outline-3">
+<h3 id="org011b9ef">String matching approssimato</h3>
+<div class="outline-text-3" id="text-org011b9ef">
+<p>
+Siano \(P\) e \(T\) due stringhe. Un'occorrenza k-approssimata di \(P\) in
+\(T\) e' una copia di \(P\) in \(T\) in cui sono ammessi k "errori" tra \(P\)
+e \(T\), del seguente tipo:
+</p>
+<ul class="org-ul">
+<li>i corrispondenti caratteri in \(P\),\(T\) sono diversi (sostituzione)</li>
+<li>un carattere in \(P\) non e' incluso in \(T\) (inserimento)</li>
+<li>un carattere in \(T\) non e' incluso in \(P\) (cancellazione)</li>
+</ul>
+
+<p>
+Trovare un'occorrenza k-approssimata di \(P\) in \(T\) con k minimo.
+</p>
+
+<p>
+Definisco \(DP[i][j]\) come il numero minimo di errori della
+sottostringa di \(i\) caratteri di \(P\) sulla sottostringa di \(j\)
+caratteri di \(T\).
+</p>
+
+<p>
+\[DP[i][j] =
+\begin{cases}
+0 & i=0 \\
+i & j=0 \\
+DP[i-1][j-1] & P[i]=T[j] \\
+min(DP[i-1][j-1], DP[i][j-1], DP[i-1][j-1]) + 1 & altrimenti
+\end{cases}\]
+</p>
+
+<p>
+Si potrebbe dimostrare per assurdo come nell'algoritmo precedente. Intuitivamente, se i caratteri sono uguali non abbiamo un errore, altrimenti l'errore può essere di sostituzione (sostituiamo entrambi dunque aggiungiamo un errore alle sottostringhe più piccole di 1), inserimento su T o su P, cancellazione che e' simile all'inserimento.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1f35c08" class="outline-3">
+<h3 id="org1f35c08">Prodotto di catena di matrici</h3>
+<div class="outline-text-3" id="text-org1f35c08">
+<p>
+Data una sequenza di \(n\) matrici \(A_n\) compatibili due a due al
+prodotto, vogliamo calcolare il loro prodotto impiegando il più basso
+numero possibile di moltiplicazioni scalari.
+</p>
+
+<p>
+Osservo che questo problema si riduce ad un problema di
+parantesizzazione dove devo trovare il modo migliore di aprire e
+chiudere parentesi, ad esempio \(((A*(B*C))*D)\). Posso trovare la
+parantesizzazione ottima ricorsivamente, dividendo il problema in
+sottoproblemi più piccoli per l'intero input.  Infatti posso dividere
+una parantesizzazione \(P\) di \(A\) all'indice \(k\) tale che:
+\[P[i..j]=P[i..k] * P[k+1..j]\] posso iterare su tutti i k per trovare
+la parantesizzazione ottima.
+</p>
+
+<p>
+Definisco \(DP[i][j]\) come il minimo numero di moltiplicazioni scalari
+necessarie per calcolare il prodotto \(A[i..j]\):
+</p>
+
+<p>
+\[DP[i][j]
+= \begin{cases} 0 & i=j \\ min_{i\le k < j}(DP[i][k] + DP[k+1][j] +
+c_{i-1}*c_k*c_j) & i < j \end{cases}\]
+</p>
+
+<p>
+Costo computazionale \(O(n^3)\).  Possiamo ricostruire la soluzione
+salvandoci \(last[i][j]\) che contiene la parantizzazione ottima dopo
+aver iterato su \(k\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9740333" class="outline-3">
+<h3 id="org9740333">Insieme indipendente di intervalli pesati</h3>
+<div class="outline-text-3" id="text-org9740333">
+<p>
+Siano dati \(n\) intervalli distinti della retta reale, aperti a destra,
+dove all'intervallo \(i\) e' associato un profitto \(w_i\).  Trovare un
+insieme indipendente di peso massimo, ovvero un sottoinsieme di
+intervalli disgiunti tra loro tale che la somma dei loro profitti sia
+la più grande possibile.
+</p>
+
+<p>
+Osservo che posso ordinare gli intervalli per valore massimo poi
+applicare dynamic programming:
+</p>
+
+<p>
+\[DP[i] = \begin{cases} 0 & i=0
+\\ max(DP[pred[i]] + w[i], DP[i-1]) \end{cases}\]
+</p>
+
+<p>
+Dove \(pred(i)\) e' un vettore pre-calcolato utilizzando binary search
+sui primi \(i\) intervalli e contiene l'intervallo che si avvicina di
+più all'intervallo \(i\).  Dato che devo ordinare, calcolare i
+precedenti e iterare su \(DP\) la complessità sarà \(O(nlogn + nlogn + n)
+= O(nlogn)\).
+</p>
+
+
+<hr />
+
+<p>
+Travel: <a href="algoritmi.html">Algoritmi</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

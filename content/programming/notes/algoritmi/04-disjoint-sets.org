@@ -1,0 +1,98 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:algoritmi.org][Algoritmi]] >
+
+* Disjoint Sets
+#+INDEX: Giovanni's Diary!Programming!Notes!Algoritmi!Disjoint Sets
+
+
+API:
+
+#+begin_src
+% Crea n componenti {1},...,{n}
+MFSET Mfset(int n)
+
+% Restituisce il rappresentante della componente contentente x
+int find(int x)
+
+% Unisce le componenti che contengono x e y
+merge(int x, int y)
+#+end_src
+
+Un'esempio di applicazione e' risolvere il problema di trovare le
+componenti connesse di un grafo non orientato dinamico, ossia che
+cambia nel tempo. Osserviamo che possiamo iterare su tutti i nodi, e
+chiamare merge su tutti i suoi nodi adiacenti qualora non avessero lo
+stesso rappresentante. Questo ha una complessità di $O(n)+m$ volte
+$merge()$.
+
+** Implementazione su liste
+
+Possiamo implementare disjoint sets in modo tale che ogni insieme
+viene rappresentato da una lista concatenata, dove il primo elemento
+e' il rappresentante dell'insieme e ogni nodo ha un puntatore al
+rappresentante, un puntatore all'oggetto successivo e l'oggetto
+stesso.
+
+- $find(x)$ richiede $O(1)$
+- $merge(x)$ richiede $O(n)$
+
+** Implementazione su alberi
+
+Possiamo implementare disjoint sets in modo tale che ogni insieme
+viene rappresentato da un albero, dove la radice e' il rappresentante
+dell'insieme e ogni cono contiene un oggetto ed un puntatore al
+padre. Senza ribilanciare l'albero al merge, vale:
+
+- $find(x)$ richiede $O(n)$ 
+- $merge(x)$ richiede $O(1)$
+
+** Euristiche
+
+Le tecniche euristiche vengono utilizzate per trovare una soluzione
+approssimata, qualora i metodi classici falliscano nel trovare una
+soluzione esatta.
+
+Possiamo applicare tre euristiche nel caso degli insiemi disgiunti:
+
+- Euristica sul peso (Liste)
+- Euristica del rango (Alberi)
+- Euristica della compressione dei cammini (Alberi)
+- Rango + Compressione dei Cammini
+
+*** Euristica sul peso (Liste)
+
+Durante la $merge()$ si aggancia la lista più' corta a quella più
+lunga, salvandosi la lunghezza della lista. E' possibile dimostrare
+che il costo di $merge()$ e' limitato superiormente da $O(logn)$.
+
+*** Euristica del rango (Alberi)
+
+Ogni nodo $x$ mantiene informazioni sul proprio rango ossia l'altezza
+tra $x$ e la foglia più bassa discendente da $x$. Quando facciamo
+$merge()$ si aggancia l'albero con rango più basso all'albero con
+rango più alto. Vale che un albero con radice $r$ ottenuto tramite
+euristica sul rango ha almeno $2_{rank[r]}$ nodi. Dimostriamo questo
+in modo induttivo, partendo dal caso base dove tutti gli alberi hanno
+un nodo singolo con rank 0, infatti $2^0=1$, e per induzione assumendo
+la tesi e mergando due alberi $x$ e $y$ (sia con i loro rank uguali
+che diversi) il cui numero di nodi e' $\ge 2^{rank[x]}+2^{rank[y]}$ e'
+sicuramente maggiore di $2^{rank[x]}$. Ne consegue che il rank e' più
+piccolo di $log(n)$ dunque l'operazione $find(x)$ ha costo $O(logn)$.
+
+*** Euristica della compressione dei cammini (Alberi)
+
+L'albero viene "appiattito" in modo che ricerche successive di $x$
+siano svolte in $O(1)$.
+
+*** Rango + compressione dei cammini
+
+Se applichiamo entrambe le ultime due euristiche, vale che il rango
+non e' più l'altezza del nodo, ma il limite superiore all'altezza del
+nodo (non c'e' più bisogno di calcolare il rango corretto). Questo ha
+una complessita' di $O(m*\alpha (n))$ dove $\alpha (n)$ e' la funzione
+inversa di Ackermann e cresce lentamente.
+
+-----
+
+Travel: [[file:algoritmi.org][Algoritmi]], [[file:../../../theindex.org][Index]]

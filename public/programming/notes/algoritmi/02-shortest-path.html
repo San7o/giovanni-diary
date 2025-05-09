@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
+</p>
+
+<div id="outline-container-orgfc05f1c" class="outline-2">
+<h2 id="orgfc05f1c">Shortest Path</h2>
+<div class="outline-text-2" id="text-orgfc05f1c">
+<p>
+Dato un grafo orientato \(G=(V, E)\), un nodo sorgente s e una funzione
+di peso \(w: E \rightarrow R\), trovare un cammino \(p=<v_1, v_2, ...,
+v_k>\) con \(k>1\) con costo minimo. Il costo e' dato da
+\(w(p)=\sum_{i=2}^k w(v_{i-1}, v_i)\).
+</p>
+</div>
+
+<div id="outline-container-org6e437b5" class="outline-3">
+<h3 id="org6e437b5">Sorgente singola</h3>
+<div class="outline-text-3" id="text-org6e437b5">
+<p>
+Definiamo l'albero dei cammini minimi l'albero di copertura radicato
+in \(s\) avente un cammino da \(s\) a tutti i nodi raggiungibili da
+\(s\). Una soluzione ammissibile può essere descritta da un albero di
+copertura \(T\) radicato in \(s\) e da un vettore di distanza \(d\), i cui
+valori \(d[u]\) rappresentano il costo del cammino da \(s\) a \(u\) in \(T\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9bb8aef" class="outline-3">
+<h3 id="org9bb8aef">Teorema di Bellman</h3>
+<div class="outline-text-3" id="text-org9bb8aef">
+<p>
+Una soluzione ammissibile \(T\) e' ottima se e solo se:
+</p>
+<ul class="org-ul">
+<li>\(d[v]=d[u]+w(u, v)\) per ogni arco \((u, v)\in T\)</li>
+<li>\(d[v]\le d[u]+w(u, v)\) per ogni arco \((u, v)\in E\)</li>
+</ul>
+<p>
+Dimostriamo per assurdo. Nel primo caso, se l'arco non si trova in \(T\)
+allora esisterebbe un grafo \(G\) con un cammino da \(s\) a \(v\) più corto
+di \(T\) che e' assurdo. Nel secondo caso, assumendo che non valga posso
+trovare un arco che mi rende il percorso più corto di quello minimo
+che e' assurdo.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9e54cd2" class="outline-3">
+<h3 id="org9e54cd2">Algoritmo Generico</h3>
+<div class="outline-text-3" id="text-org9e54cd2">
+<pre class="example">
+shortestPath(Graph G, Node s)
+  DataStructure S = DataStructure(); S.add(s)
+  while not S.isEmpty() do
+    int u = S.extract()
+    b[u] = false
+    foreach v in G.adj(u) do
+      if  d[u]+G.w(u, v) &lt; d[v] then
+        if not b[v] then
+          S.add(v)
+          b[v] = true
+        else
+          % Azione da svolgere nel caso v sia gia presente in S
+        T[v] = u
+        d[v] = d[u]+G.w(u, v)
+  return (T, d)
+</pre>
+</div>
+
+<div id="outline-container-org0d322ef" class="outline-4">
+<h4 id="org0d322ef">Implementazione con Priority Queue</h4>
+<div class="outline-text-4" id="text-org0d322ef">
+<pre class="example">
+shortestPath(Graph G, Node s)
+  DataStructure Q = PriorityQueue(); Q.insert(s, 0)
+  while not Q.isEmpty() do
+    int u = Q.deleteMin()
+    b[u] = false
+    foreach v in G.adj(u) do
+      if  d[u]+G.w(u, v) &lt; d[v] then
+        if not b[v] then
+          Q.insert(v, d[u]+G.w(u, v))
+          b[v] = true
+        else
+          Q.decrease(v, d[u]+G.w(u, v))
+        T[v] = u
+        d[v] = d[u]+G.w(u, v)
+  return (T, d)
+</pre>
+
+<p>
+Costo computazionale con priority queue basata su:
+</p>
+
+<ul class="org-ul">
+<li>vettore (<b><b>Dijkstra</b></b>): \(O(n^2)\).</li>
+<li>heap binario (<b><b>Johnson</b></b>): \(O(mlong)\)</li>
+<li>Heap di Fibonacci (<b><b>Fredman-Tarjan</b></b>): \(O(m+nlogn)\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org816e459" class="outline-4">
+<h4 id="org816e459">Coda - Bellam-Ford-Moore</h4>
+<div class="outline-text-4" id="text-org816e459">
+<p>
+Computazionalmente più pesante di Dijkstra ma funziona anche con archi
+di peso negativo.
+</p>
+
+<pre class="example">
+shortestPath(Graph G, Mode s)
+  Queue Q = Queue(); Q.enqueue(s)
+  while not Q.isEmpty() do
+    u = Q.dequeue()
+    b[u]=false
+    foreach v in G.adj(u) do
+      if d[u]+G.w(u, v) &lt; d[v] then
+        if not b[v] then
+          Q.enqueue(v)
+          b[v]=true
+        T[v]=u
+        d[v]=d[u]+G.w(u, v)
+  return (T, d)
+</pre>
+
+<p>
+Costo: \(O(nm)\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb84d754" class="outline-4">
+<h4 id="orgb84d754">Casi speciali - DAG</h4>
+<div class="outline-text-4" id="text-orgb84d754">
+<p>
+I cammini minimi di un DAG sono sempre ben definiti; anche in presenza di pesi negativi, non esistono cicli negativi. E' possibile rilassare gli archi in ordine topologico, una volta sola.
+</p>
+
+<pre class="example">
+(int[], int[]) shortestPath(Graph G, Node s)
+  int[] d = new int[1...G.n]
+  int[] T = new int[1...G.n]
+  foreach u in G.V()-{s} do
+    T[u]=nil
+    d[i]=+inf
+  T[s]=nil
+  d[s]=0
+  Stack S = topsort(G)
+  while not S.isEmpty() do
+    u = S.pop()
+    foreach v in G.adj(u) do
+      if d[u]+G.w(u, v) &lt; d[u] then
+        T[v]=u
+        d[v]=d[u]+G.w(u, v)
+  return (T, d)
+</pre>
+
+<p>
+Riassunto:
+</p>
+
+<ul class="org-ul">
+<li>BFS: \(O(m+n)\) senza pesi</li>
+<li>Dijkstra: \(O(n^2)\) pesi positivi, grafi densi</li>
+<li>Johnson: \(O(mlogn)\) pesi positivi, grafi sparsi</li>
+<li>Fredman-Tarjan: \(O(m+nlogn)\) pesi positivi, grafi densi, dimensioni molto grandi</li>
+<li>Bellman-Ford: \(O(mn)\) Pesi negativi</li>
+<li>DAG: \(O(m+n)\)</li>
+<li>Bernstein, Nanongkai Willf-Nilsen: \(O(mlog^8nlogW)\) pesi negativi, interi</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org962c51d" class="outline-3">
+<h3 id="org962c51d">Sorgente multipla</h3>
+<div class="outline-text-3" id="text-org962c51d">
+<p>
+Posso ripetere gli algoritmi precedenti più volte.
+</p>
+
+<ul class="org-ul">
+<li>Dijkstra: \(O(n * n^2)\) pesi positivi, grafi densi</li>
+<li>Johnson: \(O(n * mlogn)\) pesi positivi, grafi sparsi</li>
+<li>Bellman-Ford: \(O(n * mn)\) Pesi negativi</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5bbeda9" class="outline-3">
+<h3 id="org5bbeda9">Floyd-Warshall</h3>
+<div class="outline-text-3" id="text-org5bbeda9">
+<p>
+Sia \(k\) un valore in \(\{ 0,...,n \}\). Diciamo che un cammino
+\(p_{xy}^k\) e' un cammino minimo k-vincolato fra \(x\) e \(y\) se esso ha
+il costo minimo fra tutti i cammini fra \(x\) e \(y\) che non passano per
+nessun vertice in \(v_{k+1}, ..., v_n\). Assumiamo che esista un
+ordinamento fra i nodi del grafo. Denotiamo con \(d^k[x][y]\) il costo
+totale del cammino minimo k-vincolato fra \(x\) e \(y\) se esiste.
+</p>
+
+<p>
+\[d^k[x][y] =
+\begin{cases}
+w(x, y) & k=0 \\
+min(d^{k-1}[x][y], d^{k-1}[x][k] + d^{k-1}[k][y]) & k > 0
+\end{cases}\]
+</p>
+</div>
+
+<div id="outline-container-orgd759228" class="outline-4">
+<h4 id="orgd759228">Chiusura transitiva</h4>
+<div class="outline-text-4" id="text-orgd759228">
+<p>
+La chiusura transitiva \(G*=(V, E*)\) di un grafo \(G=(V, E)\) e' il grafo
+orientato tale che \((u, v)\in E*\) se e solo se esiste un cammino da
+\(u\) a \(v\) in \(G\).
+</p>
+
+<p>
+\[M^k[x][y] =
+\begin{cases}
+M[x][y] & k=0 \\
+M^{k-1}[x][y]\ or\ (M^{k-1}[x][k]\ and\ M^{k-1}[k][y]) & k > 0
+\end{cases}\]
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="algoritmi.html">Algoritmi</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

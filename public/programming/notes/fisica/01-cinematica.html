@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="fisica.html">Fisica</a> &gt;
+</p>
+
+<div id="outline-container-orgd7111f8" class="outline-2">
+<h2 id="orgd7111f8">Cinematica</h2>
+<div class="outline-text-2" id="text-orgd7111f8">
+<p>
+La cinematica e' quella branca della meccanica che studia il moto dei
+corpi ricorrendo esclusivamente alle nozioni di spazio e di tempo,
+indipendentemente dalle cause (forze) del moto stesso di cui si occupa
+invece la dinamica.
+</p>
+</div>
+
+<div id="outline-container-orgc6635e2" class="outline-3">
+<h3 id="orgc6635e2">Vettori</h3>
+<div class="outline-text-3" id="text-orgc6635e2">
+<p>
+Un vettore e' caratterizzato da:
+</p>
+
+<ul class="org-ul">
+<li>verso ("punta")</li>
+<li>direzione (retta)</li>
+<li>lunghezza (o modulo)</li>
+</ul>
+
+<p>
+Operazioni tra vettori:
+</p>
+
+<ol class="org-ol">
+<li><b><b>Somma</b></b>: \(\vec{c} = \vec{a} + \vec{b}\) e' uguale alla somma degli elementi individuali
+<ul class="org-ul">
+<li>graficamente questo so può rappresentare con il metodo del
+parallelogramma o il metodo del punta-coda</li>
+</ul></li>
+<li><b><b>Prodotto</b></b>: \(\vec{w}=c\vec{v}\) e' uguale al prodotto di tutti gli
+elementi di v
+<ul class="org-ul">
+<li>\(|v^2|=\sum_{i=0}^{N} v_i^2\)</li>
+</ul></li>
+<li><b><b>Sottrazione</b></b>: \(\vec{d}=\vec{a}-\vec{b} = \vec{a} - -1 * \vec{b}\)</li>
+<li><b><b>Prodotto scalare</b></b>: \(s = \vec{a} * \vec{b}\) 
+<ul class="org-ul">
+<li>\(\vec{a} * \vec{b} = cos(\theta) * |\vec{a}| * |\vec{b}|\)</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org69f168d" class="outline-3">
+<h3 id="org69f168d">Moto rettilineo uniforme</h3>
+<div class="outline-text-3" id="text-org69f168d">
+<p>
+La legge oraria del moto uniforme, ossia lo spazio in funzione del
+tempo, e' la seguente:
+</p>
+
+<p>
+\[ \vec{X}(t) = \vec{X_0} + \vec{v}(t-t_0) \]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org42c97c7" class="outline-3">
+<h3 id="org42c97c7">Moto rettilineo uniformemente accelerato</h3>
+<div class="outline-text-3" id="text-org42c97c7">
+<p>
+Nel moto rettilineo uniformemente accelerato, l'accelerazione non e'
+nulla. La funzione della velocità e dello spazio sono le seguenti:
+</p>
+
+<p>
+\[ (1)\ \vec v(t) = \vec{v_i} + a\Delta t\]
+\[ (2)\ \vec{X}(t) = \vec{X_i} + \vec{v_i}\Delta t + \frac{1}{2}a\Delta t^2 \]
+</p>
+</div>
+
+<div id="outline-container-orgd56d0cd" class="outline-4">
+<h4 id="orgd56d0cd">Equazione della velocita'</h4>
+<div class="outline-text-4" id="text-orgd56d0cd">
+<p>
+Sappiamo che, per definizione:
+\[ \vec{a} = \lim_{\Delta t \to 0} \frac{\Delta \vec{v}}{\Delta t} = \frac{d\vec{v}}{dt}\]
+\[ \vec{a}\ dt = d\vec{v} \]
+</p>
+
+<p>
+Integriamo ora a destra e a sinistra:
+</p>
+
+<p>
+\[ \int a\ dt = \int d\vec{v} \]
+</p>
+
+<p>
+Per la proprietà fondamentale degli integrali, l'integrale di \(dt\) è proprio \(\Delta t\). Lo stesso discorso vale per delta v:
+</p>
+
+<p>
+\[ \vec{a} \Delta t = \Delta \vec{v} \]
+</p>
+
+<p>
+Dunque 
+</p>
+
+<p>
+\[ \vec{v_f} = \vec{v_i} + a\Delta t \]
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd3d0703" class="outline-4">
+<h4 id="orgd3d0703">Equazione dello spazio</h4>
+<div class="outline-text-4" id="text-orgd3d0703">
+<p>
+Per  il moto rettilineo uniforme, vale:
+</p>
+
+<p>
+\[ \vec{X}(t) = \vec{X_0} + \vec{v}\Delta t\]
+\[ \vec{X}(t) = \vec{X_0} + \vec{v} \int_{0}^{t_f} dt \]
+\[ \vec{X}(t) = \vec{X_0} + \int_{0}^{t_f}\vec{v}dt \]
+</p>
+
+<p>
+Sostituisco \(v\) con quanto risultato precedentemente:
+</p>
+
+<p>
+\[ \vec{X}(t) = \vec{X_0} + \int_{0}^{t_f} (\vec{v_i} +a \Delta t) dt \]
+\[ \vec{X}(t) = \vec{X_0} + \int_{0}^{t_f}\vec{v_i} dt + \int_{0}^{t_f} a\Delta t dt \]
+\[ \vec{X}(t) = \vec{X_0} + \vec{v_i}\Delta t + \frac{1}{2}a\Delta t^2 \]
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org98837f0" class="outline-3">
+<h3 id="org98837f0">Moto Parabolico</h3>
+<div class="outline-text-3" id="text-org98837f0">
+<p>
+Osserviamo che il moto parabolico può essere visto come l'unione di
+due moti rettilinei:
+</p>
+
+<ul class="org-ul">
+<li>sull'asse \(x\), un moto rettilineo uniforme</li>
+<li>sull'asse \(y\), un moto rettilineo uniformemente accelerato</li>
+</ul>
+
+<p>
+\[x=v_{0x}t\]
+\[y=v_{oy}t -\frac{1}{2}gt^2\]
+Allora:
+\[y = -\frac{g}{2v_{ox}^2}x^2 + \frac{v_{0y}}{v_0x}x+0\]
+Infatti l'equazione rappresenta proprio il moto di una parabola.
+\[y = ax^2 + bx + c\]
+</p>
+
+<ul class="org-ul">
+<li>\(a\) e' sempre minore di 0</li>
+<li>\(b = tan(\alpha)\)</li>
+<li>\(x_{max}\) si ottiene ponendo la derivata dello spazio a 0</li>
+<li>la gittata si ottiene ponendo \(y\) a 0</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org38d3629" class="outline-3">
+<h3 id="org38d3629">Moto armonico</h3>
+<div class="outline-text-3" id="text-org38d3629">
+<p>
+La funzione oraria del moto armonico e' sa seguente:
+\[ X(t) = A sin(\omega t + \phi) \]
+Dove chiamiamo:
+</p>
+
+<ul class="org-ul">
+<li>\(A\): ampiezza di oscillazione</li>
+<li>\(w\): pulsazione</li>
+<li>\(\phi\): fase</li>
+</ul>
+
+<p>
+La \(\phi\) rappresenta la traslazione dallo 0 sull'asse del
+tempo. Osservando l'analisi dimensionale, vale che \(A\) e' una
+lunghezza e \(wt\) e' una quantità non dimensionale. Di conseguenza
+omega delve essere \(|\frac{1}{t}|\) scritto anche \(T^{-1}\). Nella
+prossima sezione mostreremo che vale \(\omega T = 2 \pi\) dunque omega
+si può misurare anche in \(\frac{rad}{s}\).
+</p>
+</div>
+
+<div id="outline-container-orgcf43441" class="outline-4">
+<h4 id="orgcf43441">Periodo del moto armonico</h4>
+<div class="outline-text-4" id="text-orgcf43441">
+<p>
+Una funzione f(x) si dice periodica con periodo T se
+\[ f(x+T) = f(x)\ \forall x \in D_f \]
+</p>
+
+<p>
+Per quale T vale:
+\[ sin(\omega t + \phi) =?\ sin(\omega (T+t) +\phi)\]
+Assumiamo la fase nulla. Deve valere che
+\[ sin(\omega (T+t)) = sin(\omega t + 2 \pi) \]
+Questo si verifica se
+\[ \omega (T+t) = \omega t +2\pi \]
+\[ \omega T = 2 \pi \]
+\[ T = \frac{2 \pi}{\omega} \]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6c6012e" class="outline-4">
+<h4 id="org6c6012e">Velocità e accelerazione del moto armonico</h4>
+<div class="outline-text-4" id="text-org6c6012e">
+<p>
+Possiamo derivare lo spazio per ottenere l'equazione della velocità:
+\[ v(t) = \omega A cos(\omega T + \phi) \]
+E deriviamo ulteriormente per ottenere l'accelerazione:
+\[ -w^2 A cos(\omega T + \phi) \]
+</p>
+
+<p>
+Possiamo fare delle altre osservazioni, per esempio che il punto di
+velocità massima e' quando l'equazione dello spazio tocca lo zero,
+questo perché quando il seno e' 0, il suo coseno e' 1. L'accelerazione
+e' specchiata rispetto all'asse x allo spazio.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga2b64b1" class="outline-4">
+<h4 id="orga2b64b1">Equazione differenziale del moto armonico</h4>
+<div class="outline-text-4" id="text-orga2b64b1">
+<p>
+Osserviamo che l'equazione del moto armonico vista in precedenza e' la
+soluzione dell'equazione differenziale:
+</p>
+
+<p>
+\[ \theta'' + \omega^2\theta = 0 \]
+</p>
+
+<p>
+Questa osservazione ci e' molto utile per trovare \(w\) sia nel moto del
+pendolo che nel moto della molla.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org95f3bdb" class="outline-3">
+<h3 id="org95f3bdb">Moto circolare</h3>
+<div class="outline-text-3" id="text-org95f3bdb">
+<p>
+Un caso di moto armonico e' il moto circolare, dove entrambe le
+direzioni \(x\) ed \(y\) seguono il moto armonico.
+</p>
+</div>
+
+<div id="outline-container-org3a7adf2" class="outline-4">
+<h4 id="org3a7adf2">Coordinate polari</h4>
+<div class="outline-text-4" id="text-org3a7adf2">
+<p>
+In un <b><b>moto circolare</b></b>, e' utile identificare un punto nello spazio
+in funzione del raggio \(\rho\) e dell'angolo \(\phi\)
+</p>
+
+<p>
+\[(x, y) \rightarrow (\rho, \phi)\]
+</p>
+
+<p>
+Vale:
+</p>
+
+<p>
+\[(\rho, \phi) = (\sqrt{x^2 + y^2},\ atan(\frac{x}{y}))\]
+\[(x, y) = (\rho\ cos(\phi), \rho \ sin(\phi))\]
+</p>
+
+<p>
+per casa: calcolare velocità e accelerazione.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org596da17" class="outline-4">
+<h4 id="org596da17">Accelerazione nel moto circolare</h4>
+<div class="outline-text-4" id="text-org596da17">
+<p>
+La velocità, per definizione, e' sempre <b><b>tangente alla traiettoria</b></b>,
+infatti descrive la direzione dello spostamento nel prossimo istante.
+</p>
+
+<p>
+\[\frac{v_x}{v_y} = \frac{\frac{dx}{dt}}{\frac{dy}{dy}}=\frac{dx}{dy} = y'(x)\]
+</p>
+
+<p>
+Sia \(\hat{u}_t\) il versore della tangente, posso scrivere:
+</p>
+
+<p>
+\[\vec{v} = |\vec{v}| \hat{u}_t\]
+</p>
+
+<p>
+Allo stesso modo l'accelerazione:
+</p>
+
+<p>
+\[\vec{a} = \frac{d\vec{v}}{dt} = \frac{d}{dt}(|\vec{v}|\hat{u}_t)=\frac{d|\vec{v}|}{dt}\hat{u}_t + |\vec{v}|\frac{d\vec{u}_t}{dt}\]
+</p>
+
+<p>
+Vale:
+</p>
+
+<p>
+\[\frac{d\hat{u}_t}{dt} = \frac{ \hat{u}_t' - \hat{u}_t}{dt}=\frac{d\phi}{dt}\hat{u}_{normale}\]
+</p>
+
+<p>
+infatti, la differenza infinitesima tra le tangenti di due velocità
+vicine nel tempo, sara' il vettore perpendicolare alla velocità (per
+la regola dei parallelogrammi) anche detto vettore <b><b>normale</b></b>. E'
+molto semplice una dimostrazione grafica.  Osserviamo che lo spazio
+tra due \(\phi\) molto vicini nel tempo può essere <b><b>approssimato</b></b> ad
+un arco di circonferenza di raggio \(r\) (anche se il percorso più in
+grande e' un circuito di formula 1), <b><b>usando un sistema di
+riferimento che meglio approssima la circonferenza</b></b>.
+</p>
+
+<p>
+Vale anche:
+</p>
+
+<p>
+\[\frac{d\phi}{dt} = \frac{d\phi}{dS} \frac{dS}{dt} = \frac{v}{r}\]
+</p>
+
+<p>
+Avendo usato la formula per calcolare l'arco di circonferenza (che
+viene approssimato qua):
+</p>
+
+<p>
+\[r\ d\phi=dS \rightarrow \frac{d\phi}{dS}=d\phi\]
+</p>
+
+<p>
+Quindi riportando questo all'equazione dell'accelerazione:
+</p>
+
+<p>
+\[\vec{a}=\frac{dv}{dt}\hat{u}_t + \frac{v^2}{r}\hat{u}_{normale}\]
+</p>
+
+<p>
+Dunque abbiamo 3 vettori:
+</p>
+
+<ul class="org-ul">
+<li><b><b>accelerazione tangenziale</b></b> \(\hat{v}_t\)</li>
+<li><b><b>accelerazione normale</b></b> con verso \(\hat{u}_{normale}\)</li>
+<li>il raggio di curvatura \(r\)</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org278f8aa" class="outline-4">
+<h4 id="org278f8aa">Moto Circolare Uniforme</h4>
+<div class="outline-text-4" id="text-org278f8aa">
+<p>
+Con velocita' costante, l'accelerazione normale dalla formula
+precedente diventa:
+</p>
+
+<p>
+\[\hat{a}=\frac{v^2}{R}\hat{u}_n\]
+</p>
+
+<p>
+Con accelerazione normale e velocita' costante, anche il raggio e'
+costante. Chiamiamo l'accelerazione normale come <b><b>accelerazione
+centripeda</b></b>.  Definiamo la <b><b>velocita' angolare</b></b> come:
+</p>
+
+<p>
+\[\omega =^{def} \frac{d\phi}{dt} =^{arco\ di\ circ.} \frac{v}{R}\]
+</p>
+
+<p>
+Sia P un punto nella circonferenza di raggio R.  Ricordando che il
+moto circolare e' la composizione di due moti armonici, vale:
+</p>
+
+<p>
+\[ X_p = Rcos(\alpha) \]
+\[ Y_p = Rsin(\alpha) \]
+</p>
+
+<p>
+Inoltre, dato che:
+</p>
+
+<p>
+\[ \alpha = \omega t \]
+</p>
+
+<p>
+Vale:
+\[ X_p = Rcos(\omega t) \]
+\[ Y_p = Rsin(\omega p) \]
+</p>
+
+<p>
+Deriviamo ora lo spazio, trovando la velocità:
+</p>
+
+<p>
+\[ v_{xp} = -\omega Rsin(\omega t) \]
+</p>
+
+<p>
+\[ v_{yp} = \omega Rcos(\omega t) \]
+Derivando ancora troviamo l'accelerazione:
+</p>
+
+<p>
+\[ a_{xp} = -\omega ^2 Rcos(\omega t) \]
+\[ a_{yp} = -\omega ^2Rsin(\omega t) \]
+</p>
+
+<p>
+Osserviamo che possiamo sostituire \(R\ cos(wt)\) con \(X\), allo stesso
+modo \(Y\):
+</p>
+
+<p>
+\[ a_{xp} = -\omega ^2X_p \]
+\[ a_{yp} = -\omega ^2Y_p \]
+Sommando ora le componenti:
+</p>
+
+<p>
+\[ |\vec{a_p}| = \sqrt{a_{xp}^2 + a_{yp}^2} \]
+\[ |\vec{a_p}| = \sqrt{\omega ^4 X_p^2 + \omega ^4 Y_p^2} \]
+\[ \vec{a_p} = \omega ^2 \sqrt{X_p^2 + Y_p^2}\]
+</p>
+
+<p>
+Concludiamo che:
+</p>
+
+<p>
+\[ a = \omega ^ 2R \]
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6d6ba96" class="outline-3">
+<h3 id="org6d6ba96">Definizioni importanti</h3>
+<div class="outline-text-3" id="text-org6d6ba96">
+<p>
+Definiamo:
+</p>
+
+<ul class="org-ul">
+<li>velocità tangenziale: \(v = \frac{C}{T} = \frac{2\pi R}{T}\)</li>
+<li>velocità angolare istantanea: \(\omega = \frac{2\pi}{T}\ (\frac{rad}{s})\)</li>
+<li>\(a_c = \frac{\Delta \vec{v}}{\Delta t}\)</li>
+</ul>
+
+<p>
+Ne deriviamo che:
+</p>
+
+<ul class="org-ul">
+<li>\(v = \omega R\)</li>
+<li>\(a_{centripeta} = \omega ^ 2R = \frac{v^2}{R}\)</li>
+<li>\(\vec{F}_c = m\vec{a}_c\)</li>
+<li>L'accelerazione centripeta è sempre rivolta verso il centro.</li>
+</ul>
+
+
+<hr />
+
+<p>
+Travel: <a href="fisica.html">Fisica</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

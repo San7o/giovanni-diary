@@ -1,0 +1,172 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:algoritmi.org][Algoritmi]] >
+
+* Shortest Path
+#+INDEX: Giovanni's Diary!Programming!Notes!Algoritmi!Shortest Path
+
+Dato un grafo orientato $G=(V, E)$, un nodo sorgente s e una funzione
+di peso $w: E \rightarrow R$, trovare un cammino $p=<v_1, v_2, ...,
+v_k>$ con $k>1$ con costo minimo. Il costo e' dato da
+$w(p)=\sum_{i=2}^k w(v_{i-1}, v_i)$.
+
+** Sorgente singola
+
+Definiamo l'albero dei cammini minimi l'albero di copertura radicato
+in $s$ avente un cammino da $s$ a tutti i nodi raggiungibili da
+$s$. Una soluzione ammissibile può essere descritta da un albero di
+copertura $T$ radicato in $s$ e da un vettore di distanza $d$, i cui
+valori $d[u]$ rappresentano il costo del cammino da $s$ a $u$ in $T$.
+
+** Teorema di Bellman
+
+Una soluzione ammissibile $T$ e' ottima se e solo se:
+- $d[v]=d[u]+w(u, v)$ per ogni arco $(u, v)\in T$
+- $d[v]\le d[u]+w(u, v)$ per ogni arco $(u, v)\in E$
+Dimostriamo per assurdo. Nel primo caso, se l'arco non si trova in $T$
+allora esisterebbe un grafo $G$ con un cammino da $s$ a $v$ più corto
+di $T$ che e' assurdo. Nel secondo caso, assumendo che non valga posso
+trovare un arco che mi rende il percorso più corto di quello minimo
+che e' assurdo.
+
+** Algoritmo Generico
+
+#+begin_src
+shortestPath(Graph G, Node s)
+	DataStructure S = DataStructure(); S.add(s)
+	while not S.isEmpty() do
+		int u = S.extract()
+		b[u] = false
+		foreach v in G.adj(u) do
+			if  d[u]+G.w(u, v) < d[v] then
+				if not b[v] then
+					S.add(v)
+					b[v] = true
+				else
+					% Azione da svolgere nel caso v sia gia presente in S
+				T[v] = u
+				d[v] = d[u]+G.w(u, v)
+	return (T, d)
+#+end_src
+
+*** Implementazione con Priority Queue
+
+#+begin_src
+shortestPath(Graph G, Node s)
+	DataStructure Q = PriorityQueue(); Q.insert(s, 0)
+	while not Q.isEmpty() do
+		int u = Q.deleteMin()
+		b[u] = false
+		foreach v in G.adj(u) do
+			if  d[u]+G.w(u, v) < d[v] then
+				if not b[v] then
+					Q.insert(v, d[u]+G.w(u, v))
+					b[v] = true
+				else
+					Q.decrease(v, d[u]+G.w(u, v))
+				T[v] = u
+				d[v] = d[u]+G.w(u, v)
+	return (T, d)
+#+end_src
+
+Costo computazionale con priority queue basata su:
+
+- vettore (**Dijkstra**): $O(n^2)$.
+- heap binario (**Johnson**): $O(mlong)$
+- Heap di Fibonacci (**Fredman-Tarjan**): $O(m+nlogn)$
+
+*** Coda - Bellam-Ford-Moore
+
+Computazionalmente più pesante di Dijkstra ma funziona anche con archi
+di peso negativo.
+
+#+begin_src
+shortestPath(Graph G, Mode s)
+	Queue Q = Queue(); Q.enqueue(s)
+	while not Q.isEmpty() do
+		u = Q.dequeue()
+		b[u]=false
+		foreach v in G.adj(u) do
+			if d[u]+G.w(u, v) < d[v] then
+				if not b[v] then
+					Q.enqueue(v)
+					b[v]=true
+				T[v]=u
+				d[v]=d[u]+G.w(u, v)
+	return (T, d)
+#+end_src
+
+Costo: $O(nm)$.
+
+*** Casi speciali - DAG
+
+I cammini minimi di un DAG sono sempre ben definiti; anche in presenza di pesi negativi, non esistono cicli negativi. E' possibile rilassare gli archi in ordine topologico, una volta sola.
+
+#+begin_src
+(int[], int[]) shortestPath(Graph G, Node s)
+	int[] d = new int[1...G.n]
+	int[] T = new int[1...G.n]
+	foreach u in G.V()-{s} do
+		T[u]=nil
+		d[i]=+inf
+	T[s]=nil
+	d[s]=0
+	Stack S = topsort(G)
+	while not S.isEmpty() do
+		u = S.pop()
+		foreach v in G.adj(u) do
+			if d[u]+G.w(u, v) < d[u] then
+				T[v]=u
+				d[v]=d[u]+G.w(u, v)
+	return (T, d)
+#+end_src
+
+Riassunto:
+
+- BFS: $O(m+n)$ senza pesi
+- Dijkstra: $O(n^2)$ pesi positivi, grafi densi
+- Johnson: $O(mlogn)$ pesi positivi, grafi sparsi
+- Fredman-Tarjan: $O(m+nlogn)$ pesi positivi, grafi densi, dimensioni molto grandi
+- Bellman-Ford: $O(mn)$ Pesi negativi
+- DAG: $O(m+n)$
+- Bernstein, Nanongkai Willf-Nilsen: $O(mlog^8nlogW)$ pesi negativi, interi
+
+** Sorgente multipla
+
+Posso ripetere gli algoritmi precedenti più volte.
+
+- Dijkstra: $O(n * n^2)$ pesi positivi, grafi densi
+- Johnson: $O(n * mlogn)$ pesi positivi, grafi sparsi
+- Bellman-Ford: $O(n * mn)$ Pesi negativi
+
+** Floyd-Warshall
+
+Sia $k$ un valore in $\{ 0,...,n \}$. Diciamo che un cammino
+$p_{xy}^k$ e' un cammino minimo k-vincolato fra $x$ e $y$ se esso ha
+il costo minimo fra tutti i cammini fra $x$ e $y$ che non passano per
+nessun vertice in $v_{k+1}, ..., v_n$. Assumiamo che esista un
+ordinamento fra i nodi del grafo. Denotiamo con $d^k[x][y]$ il costo
+totale del cammino minimo k-vincolato fra $x$ e $y$ se esiste.
+
+$$d^k[x][y] =
+\begin{cases}
+w(x, y) & k=0 \\
+min(d^{k-1}[x][y], d^{k-1}[x][k] + d^{k-1}[k][y]) & k > 0
+\end{cases}$$
+
+*** Chiusura transitiva
+
+La chiusura transitiva $G*=(V, E*)$ di un grafo $G=(V, E)$ e' il grafo
+orientato tale che $(u, v)\in E*$ se e solo se esiste un cammino da
+$u$ a $v$ in $G$.
+
+$$M^k[x][y] =
+\begin{cases}
+M[x][y] & k=0 \\
+M^{k-1}[x][y]\ or\ (M^{k-1}[x][k]\ and\ M^{k-1}[k][y]) & k > 0
+\end{cases}$$
+
+-----
+
+Travel: [[file:algoritmi.org][Algoritmi]], [[file:../../../theindex.org][Index]]
+

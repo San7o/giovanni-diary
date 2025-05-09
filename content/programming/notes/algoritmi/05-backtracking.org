@@ -1,0 +1,140 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:algoritmi.org][Algoritmi]] >
+
+* Backtracking
+#+INDEX: Giovanni's Diary!Programming!Notes!Algoritmi!Backtracking
+
+
+In alcuni problemi e' richiesto o necessario esplorare l'intero spazio
+delle soluzioni ammissibili:
+
+- **Enumerazione**: elencare tutte le soluzioni ammissibili
+- **Ricerca**: Trovare una soluzione ammissibile in uno spazio delle
+  soluzioni molto grande
+- **Conteggio**: Contare tutte le soluzioni ammissibili
+- **Ottimizzazione**: trovare una delle soluzioni ammissibili migliori
+  rispetto ad un certo criterio di valutazione
+
+L'idea dietro a Backtracking e' "prova a fare qualcosa; se non va
+bene, disfalo e prova qualcos'altro".
+
+** Enumerazione
+
+Schema generale dell'algoritmo:
+
+#+begin_src
+enumeration(<Dati>, Item[] S, int i, <dati_parziali>)
+	% Verifica se S[1..i-1] contiene una soluzione ammissibile
+	if accept(<Dati>, S, i, <dati_parziali>) then
+		processSolution(<Dati>, S, i, <dati_parziali>)
+	else
+		% Calcola l'insieme delle scelte
+		Set C = choices(<Dati>, S, i, <dati_parziali>)
+		for c in C do
+			S[i] = c
+			enumeration(<Dati>, S, i+1, <dati_parziali>)
+#+end_src
+
+*** Sottoinsiemi e permutazioni
+
+Elencare tutti i sottoinsiemi dell'insieme $\{ 1, ..., n \}$.
+
+#+begin_src
+subsets(int n)
+	int[] S = new int[1...n]
+	subsetRec(n, S, 1)
+
+subsetRec(int n, int[] S, int i)
+	if i > n then
+		print(S, n)
+	else
+		Set C = {0, 1}
+		foreach c in C do
+			S[i] = c
+			subsetRec(n, S, i+1)
+#+end_src
+
+Tempo computazionale $\Theta (n2^n)$.
+Stampa tutte le permutazioni di un insieme A
+
+#+begin_src
+permutations(Set A)
+	int n = size(A)
+	int[] S = new int[1..n]
+	permRec(A, S, 1)
+
+permRec(Set A,  Item[] S, int i)
+	if A.isEmpty() then
+		print S
+	else
+		Set C = copy(A)
+		foreach c in C do
+			S[i] = c
+			A.remove(c)
+			permRec(A, S, i+1)
+			A.insert(c)
+#+end_src
+
+Con costo di stampa $\Theta (n)$, Costo delle copie lungo un cammino
+radice-foglia $O(n^2)$ e numero di foglie $n!$ otteniamo una
+complessità $O(n^2n!)$.
+
+Una soluzione alternativa allo stesso problema sarebbe la seguente:
+
+#+begin_src
+permRec(Item[] S, int i)
+	if i == 1 then
+		println S
+	else
+		for j=1 to i do
+			swap(S, i, j)
+			permRec(S, i-1)
+			swap(S, i, j)
+#+end_src
+
+Costo totale: $\Theta (n n!)$.
+
+Se invece volessi elencare tutti i sottoinsiemi di $k$ elementi in un
+insieme $\{ 1, ..., n \}$ potrei tagliare tutti i sotto alberi che
+superano $k$ elementi. Mi salvo una variabile "missing" che mi conta
+quanti ancora posso inserire e viene decrementata se la mia scelta e'
+di prendere l'elemento. Quanto missing e' pari a 0 non ha più senso
+continuare e posso stampare la soluzione.
+
+*** Subset sum
+
+Dati un vettore $A$ contenente $n$ interi positivi ed un intero
+positivo $k$, esiste un sottoinsieme $S \subseteq \{ 1...n \}$ tale
+che $\sum_{i\in S} a[i]=k$?
+
+Possiamo risolvere questo problema tramite backtracking in tempo
+$O(2^n)$, anche se invece di esplorare tutte le possibilità ci
+possiamo fermare alla prima. Questo potrebbe essere risolto dalla
+programmazione dinamica in tempo $O(kn)$.
+
+*** Problema delle otto regine
+
+Posizionare $n$ regine in una scacchiera $n \times n$, in modo tale
+che nessuna regina ne "minacci" un'altra. Delle ottimizzazioni che
+possiamo fare sono:
+
+- non mettere regine in caselle precedenti a quelle gia' scelte
+- ogni riga della scacchiera deve contenere esattamente una regina
+- anche ogni colonna deve contenere esattamente una regine
+
+Un'altro approccio euristico sarebbe considerare che partendo da una
+soluzione "ragionevolmente buona" si possano muovere le regine con il
+più grande numero di conflitti nella casella che genera il numero più'
+piccolo di conflitti, finché questi non vi sono più.
+
+Altri problemi menzionati:
+
+- sudoku
+- copertura di una scacchiera con una forma
+- knight tour
+- generazione labirinti
+
+-----
+
+Travel: [[file:algoritmi.org][Algoritmi]], [[file:../../../theindex.org][Index]]

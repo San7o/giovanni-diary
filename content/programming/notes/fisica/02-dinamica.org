@@ -1,0 +1,391 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:fisica.org][Fisica]] >
+
+* Dinamica
+#+INDEX: Giovanni's Diary!Programming!Notes!Fisica!Dinamica
+
+
+La dinamica si occupa dello studio delle forze.
+
+** Statica
+
+In statica, la risultante delle forze $\vec{R}$ e' pari a $0$.  Si
+immagini un'oggetto su un piano in assenza di movimento. Il corpo e'
+soggetto all forza peso, che deve essere annullata da un'altra forza
+$N$ detta **reazione vincolare**.
+
+$$ \vec{R} = \vec{F}_p + \vec{N} = 0 $$
+
+Quando ci si sposta da una condizione di equilibrio, si può
+generalizzare una certa **forza di richiamo**, anche detta **forza
+elastica**:
+
+$$F_{richiamo} = -k \Delta S$$
+
+- viene direttamente dalla terza legge della dinamica, esprimendo
+  l'accelerazione come la doppia derivata dello spazio.
+
+** Leggi della dinamica
+
+*** Prima legge della dinamica - Legge di inerzia
+
+Un corpo permane nel suo stato di quiete e moto rettilineo uniforme
+finché non intervenga un agente esterno.  Similmente, lo stato di moto
+di un corpo non varia se non per l'azione di un agente esterno.
+
+- un sistema in cui questo principio vale e' detto sistema inerziale
+
+*** Seconda legge della dinamica - Legge di Newton
+Ricordando che, per definizione:
+
+$$ a =^{def} \lim_{\Delta t \to 0 } \frac{\Delta v}{\Delta t} $$
+
+**In un sistema inerziale**, vale:
+
+$$ F = ma $$
+
+Più precisamente, per il principio di sovrapposizione, vale che la
+forza risultante e':
+
+$$ \vec{R}_c = \sum_{i = 0}^{N} \vec{F}_{i \rightarrow c} = m \sum_{i = 0}^{N} a_i = m \vec{a}_{tot} $$
+
+attenzione: questi principi non si dimostrano, sono verità' della
+natura (a differenza dei teoremi).
+
+- Questa forza e' l'agente esterno di cui parla il primo principio.
+- La sua unita' di misura e' $kgm/s^2$ o $N$ (Newton).
+
+**** Excursus sulla massa
+
+La massa della legge di newton e' detta massa inerziale. La massa
+serve per bilanciare il rapporto tra la forza e l'accelerazione,
+rappresenta la capacita' di un corpo di partecipare al moto. Questa e'
+la sua ragion d'esistere.  In un corpo in caduta, vale che $\vec{F} =
+m_{gravitazionale} \vec{a}$, da notare che qui si parla di massa
+gravitazionale. In altri contesti questa variabile viene chiamata in
+modo diverso (da vedere la sezione sulla legge di gravitazione
+universale). Solo sperimentalmente vale che il valore e' uguale alla
+massa inerziale, ma da un punto di vista puramente teorico e
+concettuale questa uguaglianza non e' ovvia.
+
+*** Terza legge della dinamica - Principio di Azione Reazione
+
+$$ \vec{F}_{1->2} = - \vec{F}_{2->1} $$
+
+Nota: non è vero che allora le accelerazioni sono opposte (lo
+sarebbero solo con masse uguali).
+
+- **Esempio**: Rinculo. Ad una forza al proiettile corrisponde la
+  stessa forza sull'uomo che spara. Ma le accelerazioni sono diverse:
+  il proiettile accelera molto mentre l'uomo meno.
+
+** Quantità di moto e impulso
+Definiamo la quantità' di moto $\vec{p}$ come:
+
+$$\vec{p}=m\vec{v}$$
+Definiamo impulso $\vec{J}$ come:
+
+$$\vec{J} = \vec{p}_f - \vec{p}_i = \Delta \vec{p} = m \Delta \vec{v}$$
+
+Allora:
+
+$$\vec{F} = \frac{d\vec{p}}{dt}$$
+
+questa ultima formula e' la forma più generale della legge di Newton.
+
+** Moto del pendolo
+
+Supponiamo di avere un filo sospeso da un soffitto con una massa
+attaccata all'altra estremità'. Si assuma che valgano i seguenti
+punti:
+
+- il vincolo tra il filo e il soffitto non presenta attrito
+- il filo e' inestensibile, puntiforme (non ha fattori geometrici che
+  oppongono resistenza all'aria) e senza massa
+- la massa si trova nel vuoto (assenza di aria)
+- ci troviamo in un campo di forze uniforme (ad esempio, la forza peso
+  e' la stessa in ogni punto)
+
+*** Velocità angolare del pendolo
+Osserviamo che il pendolo compie un moto circolare, dunque ha un'accelerazione normale $a_n = \frac{v^2}{R}$. Questa forza viene esercitata dal filo ed e' massima quando la velocità' e' massima e nulla quando la velocità' e' nulla (nel punto più' alto).
+
+Vale:
+
+$$ a_t = \frac{d\vec{v}}{dt} = \frac{d^2(S)}{dt^2} = \frac{d^2(L\theta)}{dt^2} =L\frac{d^2\theta}{dt^2} $$
+
+Notiamo che l'accelerazione dipende da $\theta$. Considerando un
+sistema di riferimento centrato della massa in movimento, con l'asse y
+positivo verso l'alto e l'asse x positivo verso la direzione di
+moto. Allora vale:
+
+$$ a_t = g_{//} = -gsin(\theta) $$
+
+Dunque, mettendoli a sistema:
+
+$$ L\frac{d^2\theta}{dt^2} + gsin(\theta) = 0 $$
+
+Anche scritta come:
+
+$$\theta '' + \frac{g}{l}sin(\theta) = 0$$
+
+Consideriamo ora una differenza di tempo infinitesimamente piccola (**ipotesi delle piccole oscillazioni**), possiamo applicare le serie di Taylor sul valore del seno, dunque:
+
+$$ L\frac{d\theta^2}{dt^2}+g\theta = 0 $$
+$$ L\frac{d\theta^2}{dt^2}+g\theta \frac{L}{L} = 0 $$
+$$ \frac{d\theta^2}{dt^2}+\frac{g}{L} \theta = 0 $$
+
+Osserviamo che questa si riconduce all'equazione differenziale del
+moto armonico già vista in precedenza $\theta '' + \omega ^2 \theta
+=0$. Allora, in senso fisico, per questo moto, definiamo:
+
+$$ \omega^2 =^{def} \frac{g}{L}$$
+
+Per $\omega = \frac{2\pi}{T}$, vale:
+
+$$T = 2\pi \sqrt{\frac{L}{g}}$$
+
+Notiamo che:
+
+> Se gli angoli sono piccoli, il periodo non dipende dall'ampiezza
+> dell'oscillazione
+
+** Forza elastica
+
+Si consideri una molla, ancorata ad una parete stabile da un lato e
+con una massa dall'altro. Assumiamo non ci sia attrito, possiamo
+osservare che la massa e' completamente irrilevante in assenza di
+attrito.  Come nel moto del pendolo, possiamo arrivare all'equazione
+fondamentale del moto armonico in questo modo:
+
+$$ F= ma = m\frac{dv}{dt} = m\frac{dX^2}{dt^2} $$
+
+E' un sistema lineare, possiamo dire che la forza e' proporzionale
+alla differenza di spostamento. Chiamiamo la costante di
+proporzionalità $k$:
+
+$$ F_{richiamo\ all\ equilibrio} = -kX $$
+
+Il meno viene dal sistema di riferimento, con lo 0 posto sulla massa
+attaccata alla molla.
+
+Mettendole a sistema otteniamo:
+
+$$ m\frac{dX^2}{dt} +  kX = 0 $$
+$$ \frac{dX^2}{dt} + \frac{k}{m}X = 0$$
+
+Questa si rifa all'equazione armonica, ossia:
+
+$$X+\omega ^2 x = 0$$
+
+Che nel caso della molla vale, in senso fisico vale:
+
+$$ \omega ^2 =^{def} \frac{k}{m} $$
+
+Da $\omega = \frac{2\pi}{T}$ otteniamo:
+
+$$ T = 2 \pi \sqrt{\frac{m}{k}} $$
+
+** Attrito
+L'attrito e' un fenomeno che dissipa energia in modo
+**irreversibile**. Tutti i macro oggetti hanno attrito (ecco perché
+non esistono macchine di movimento perpetuo).
+
+$$ \vec{F_A} = \mu |\vec{N}| \hat a $$
+
+Dove N è la forza normale o reazione vincolare, a è il versore che da
+la direzione **tangente allo spostamento**. Dall'analisi dimensionale
+vediamo che $\mu$ e' un numero puro.
+
+*** Caso statica
+
+$$ \vec{F_{as}} = -\vec{F_{applicata}} $$
+$$ |\vec{F_{as}^{max}}| = \mu_{statico} |\vec{N}| $$
+
+*** Caso dinamica
+
+$$ |\vec{F_{ad}}| = -\mu_{dinamico}|\vec{N}|\hat{v} $$
+
+** Legge di gravitazione universale
+
+La forza gravitazionale tra due masse a distanza r vale:
+
+$$ \vec{F}_G = - G \frac{m_{G_1} m_{G_2}}{\vec{r}^2_{1-2}} \hat{r}_{1-2} $$
+
+Dove $\hat r$ è il versore della **congiungente** tra le due masse.
+La natura della massa nel secondo principio della dinamica rispetto
+all forza gravitazionale è fondamentalmente diversa. Nella seconda, la
+massa è una certa carica, una certa disponibilità, una qualità del
+corpo nel partecipare alla forza di gravitazione.  Ci accorgiamo che
+questa formula è una "template" della natura, infatti:
+
+$$ \vec{F}_{coulomb} = G_{elet} \frac{q_1 q_2}{\vec{r}_{1-2}^2}\hat{r}_{1-2}$$
+
+*** Forza di gravita' sulla terra
+
+Torniamo sulla forza gravitazionale, usando le prime due equazioni nei
+corpi C (corpo) e T (terra):
+
+$$ m_{I_C}\vec{a} = -G\frac{m_{G_C} m_{G_T}}{\vec{r}_{ct}^2}\hat{r}_{ct} $$
+semplificando togliendo il verso:
+
+$$ m_{I_C}a = G\frac{m_{G_C} m_{G_T}}{\vec{r}_{ct}^2} $$
+
+Possiamo poi approssimare nel seguente modo:
+$$ r_{CT} = R_T + h = R(1+\frac{h}{R_T})$$
+$$ r_{CT}^2 \approx R_T^2(1+2\frac{h}{R_T}) $$
+
+ho sviluppato il quadrato e ho trascurato l'ultimo termine perché è di
+un'ordine di grandezza molto piccolo:
+
+$$ \frac{1}{r_{CT}^2} = \frac{1}{R_{CT}^2}(1-2\frac{h}{R_T}) \approx \frac{1}{R^2_{CT}} $$
+
+Allora:
+
+$$ a = \frac{m_{Gc}}{m_{Ic}}G\frac{m_{G_T}}{R_T^2} $$
+Per noi che siamo ignoranti e non dei fisici veri, $m_g = m_i$, dunque:
+
+$$ a = g = G\frac{m_{G_T}}{R_T^2} $$
+$$ G = 6.67 \cdot 10^{-11} \frac{Nm^2}{Kg^2} $$
+$$ R_T = 6.74\cdot 10^6 m $$
+
+Interessante il discorso filosofico tra la massa gravitazionale e la
+massa inerziale, che non sono le stesse ma in esperimento lo sono.  La
+forza di gravitazione e' una delle quattro **forze fondamentali**, che
+non dipendono da altre e dunque sono leggi della natura. Qui il prof
+si masturba con idee filosofiche ed estetiche.
+
+** Centro di massa
+
+Definizione del **centro di massa** come media pesata dei punti nello
+spazio in base alla massa:
+
+$$\vec{X}_{CM} = \sum_{i=1}^N \frac{m_i}{M_{TOT}}\vec{x}_i$$
+
+in modo simile, esiste la velocità nel centro di massa e
+l'accelerazione.
+
+Dimostrazione:
+Sia $\vec{R}$ l'insieme di tutte le forze che agiscono nel sistema:
+
+$$ \vec{R}_i = m_i \vec{a}_i  $$
+$$ \vec{R} = \sum_{i = 1}^{N} \vec{R}_i $$
+
+Dividiamo le forze del sistema in due famiglie:
+
+- forze interne
+- forze esterne
+
+$$ \vec{R}_i =  \vec{R}_i^{Esterne} + \vec{R}_i^{Interne} $$
+$$ \vec{R}^{Esterne} = \sum_{k=1}^{M} \vec{R}_i^{Esterne} =^{def} \sum_{i=1}^{N} \sum_{k=1}^{M} \vec{F}_{k \rightarrow i}^{Esterne} $$
+$$ \vec{R}^{Interne} = \sum_{j=1, i \ne j}^{N} \vec{R}_i^{Interne} =^{def} \sum_{i=1}^{N} \sum_{j=1, i \ne j}^{N} \vec{F}_{j \rightarrow i}^{Interne} = 0 $$
+
+Le forze interne, sommate, si annullano a vicenda (per la terza legge
+della dinamica). Dunque:
+
+$$ \vec{R} = \vec{R}^{Interne} + \vec{R}^{Esterne} = \sum_{i=1}^{N} \vec{R}_i^{Esterne} = \sum_{i=1}^{N} m_i \vec{a}_i $$
+$$ = \sum_{i=1}^{N} m_i \frac{d^2 \vec{X}_i}{dt^2} = \frac{d^2}{dt^2}[\sum_{i=1}^{N}m_i \vec{x}_i] $$
+
+Definiamo il **centro di massa** come:
+
+$$ \vec{X}_{C.M.} =^{def}  \frac{\sum_{i=1}^{N} m_i \vec{x}_i}{\sum_{i=1}^{N} m_i} = \sum_{i=1}^{N} \frac{m_i}{M}\vec{x}_i $$
+
+- $M$ è la massa del sistema (somma di tutte le masse)
+- in altre parole, la somma di masse per la distanze, diviso la somma
+  delle masse
+- sapendo la X del centro di massa, possiamo trovare la velocità e
+  l'accelerazione semplicemente derivando:
+
+$$ \vec{R}^{Esterne} = M\frac{d^2 \vec{X}_{cm}}{dt^2} = M \vec{a}_{cm} $$
+
+- In un sistema isolato, le forze esterne sono nulle:
+
+$$ \vec{R}^{Esterne} = 0 $$
+
+Dunque l'accelerazione è 0, e la velocità è costante. Concludiamo che la quantità di moto si conserva.
+$$ \vec{p}_{cm} = \vec{cost} $$
+
+** Il sistema di riferimento
+
+Anzitutto, assumiamo:
+
+- nessuna rotazione dell'oggetto, solo translazioni
+- nessuna rotazione dei sistema di riferimento
+
+Un punto può essere rappresentato come un raggio-vettore che parte da un certo sistema di riferimento. Siano $O$ e $O'$ due sistemi di riferimento, possiamo descrivere il punto $P$ come il vettore $r$ e $r'$. Ci interessano le equazioni per esprimere le leggi da un sistema all'altro. 
+Se i due sistemi sono fermi tra loro, posso definirmi il vettore $\vec{OO'}$. Allora vale (per la regola del parallelogramma):
+
+$$ \vec{r} = \vec{OO'} +\vec{r'} $$
+
+Se derivo l'equazione assumendo la distanza tra $O$ e $O'$ costante:
+
+$$ \vec{v} = 0 + \vec{v'} $$
+
+Chiamerò questa velocità come la **velocità di trascinamento**. Attenzione alla differenza tra le notazioni.
+
+$$ \vec{v}_A \ne \vec{v}_{A'} \ne \vec{v}_A' $$
+
+Se invece la distanza tra i sistemi di riferimento è variabile:
+
+$$ \vec{v} = \vec{v}_{O'} + \vec{v'} $$
+$$ \vec{a} = \vec{a}_{O'} + \vec{a'} $$
+
+Consideriamo il sistema come isolato e centrato nel centro di massa:
+
+$$ \vec{r} = \vec{r}_{cm} + \vec{r}_{sistema\ cm} $$
+$$ \vec{p}_{cm} = \vec{cons} $$
+
+Dunque la quantità di moto si conserva, anche se non è un sistema
+inerziale.  Supponiamo di avere un sistema di riferimento *S* che
+viaggia in moto rettilineo uniforme con velocità v e un sistema S' che
+si muove in m. r. u. e con velocità v' Dalle formule precedenti, vale:
+
+$$ \vec{v}' = \vec{v} - \vec{v}_{o'} $$
+
+Questi sono sistemi di riferimento inerziali collegati, detta **classe
+di sistemi di riferimento inerziali** dove vale:
+
+** Principio di Relatività Galileiana
+
+$$ \vec{x} = \vec{x}' + \vec{OO'} $$
+$$ \vec{v} = \vec{v}' + \vec{v}_{o'} $$
+
+Questo principio mostra che le leggi della fisica funzionano in equal
+modo in un **sistema di riferimento inerziale**. Non esiste un sistema
+di riferimento giusto o sbagliato, sono tutti equivalenti.
+- esempio del naviglio: non posso rendermi conto se dentro una nave
+  sono fermo o mi sto muovendo con una certa velocità costante
+
+** Forze esterne ed apparenti
+
+Se esco da un sistema di riferimento inerziale, cambiano le leggi
+della dinamica. Se io guardo un giubbotto e corro, o sono fermo, mi
+appare che il giubbotto abbia una certa accelerazione. Per
+un'accelerazione c'è bisogno di una forza ma il giubbotto è
+fermo. Dobbiamo distinguere due tipi di forze: quelle **esterne** e
+quelle **apparenti**
+
+$$ \vec{F} = m\vec{a} \rightarrow^{S\rightarrow S'} \vec{F} = m(\vec{a}' + \vec{a}_{o'}) $$
+$$ \vec{F} = m\vec{a}' + m\vec{a}_{o'} $$
+$$ \vec{F}_{ext} + \vec{F}_{app} = m\vec{a}' $$
+
+Questa è la formula generale della seconda legge della dinamica,
+valida anche per i sistemi di riferimento non inerziali.
+
+> Esistono forze apparenti se esiste un'accelerazione tra i sistemi di
+> riferimento
+
+Ogni forza **esterna** si può ricondurre a una delle 4 forze della natura
+
+- **Forza gravitazionale**: la meno intenza di tutte, la prima ad
+  essere stata scoperta
+- **Forza elettromagnetica**
+- **Forza debole:** responsabile del decadimento nucleare
+- **Forza forte / nucleare**: tiene insieme la materia
+
+Invece le forze apparenti sono effetto dell'accelerazione
+dell'osservatore.
+
+-----
+
+Travel: [[file:fisica.org][Fisica]], [[file:../../../theindex.org][Index]]
