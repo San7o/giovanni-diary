@@ -51,6 +51,7 @@
       - [[file:reading/blogs.org::*Blogs][Blogs]]
       - [[file:reading/mauro-corona/mauro-corona.org::*Mauro Corona][Mauro Corona]]
         - [[file:reading/mauro-corona/mauro-corona-la-casa-dei-sette-ponti.org::*La casa dei sette ponti][La casa dei sette ponti]]
+        - [[file:reading/mauro-corona/mauro-corona-la-via-del-sole.org::*La via del sole][La via del sole]]
         - [[file:reading/mauro-corona/mauro-corona-le-voci-del-bosco.org::*Le voci del bosco][Le voci del bosco]]
         - [[file:reading/mauro-corona/mauro-corona-lunario-sentimentale.org::*Lunario Sentimentale][Lunario Sentimentale]]
       - [[file:reading/stoicism/stoicism.org::*Stoicism][Stoicism]]
