@@ -47,9 +47,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-orgd1ff86c" class="outline-2">
-<h2 id="orgd1ff86c">Support Vector Machines</h2>
-<div class="outline-text-2" id="text-orgd1ff86c">
+<div id="outline-container-org2960a1c" class="outline-2">
+<h2 id="org2960a1c">Support Vector Machines</h2>
+<div class="outline-text-2" id="text-org2960a1c">
 <p>
 Linear classifiers assume that data can be linearly separable. If this
 does not hold, the chosen hyperplane will keep adjusting at each
@@ -58,14 +58,14 @@ of classifier: support vector machines (SVM).
 </p>
 </div>
 
-<div id="outline-container-org4930108" class="outline-4">
-<h4 id="org4930108">Large margin classifiers</h4>
-<div class="outline-text-4" id="text-org4930108">
+<div id="outline-container-org0e47f75" class="outline-4">
+<h4 id="org0e47f75">Large margin classifiers</h4>
+<div class="outline-text-4" id="text-org0e47f75">
 <p>
 We define the <b><b>margin</b></b> of a classifier as the distance from the
 classification hyperplane to the closest points of either class. We
 call <b><b>large margin classifiers</b></b> the classifiers that attempt to
-maximise this measure.
+maximize this measure.
 </p>
 
 <p>
@@ -143,7 +143,7 @@ the modulo function uses the generalized pythagorean theorem, we get:
 We just demonstrated the formula for finding the distance between a
 point and a plane.  We now define the <b><b>classification function</b></b> as
 \(f(x)= sign(\vec{w}\vec{x} + b)\), It will be +1 or -1 based on the
-sign of the quation. Intuitively, points on one side of the plane
+sign of the equation. Intuitively, points on one side of the plane
 should have a positive output and points on the other side should have
 a negative one. We decide to multiply the hyperplane equation times
 the expected classification to get the <b><b>functional margin</b></b> for each
@@ -172,13 +172,13 @@ For the support vectors, the following holds:
 </div>
 </div>
 
-<div id="outline-container-orge4e9863" class="outline-4">
-<h4 id="orge4e9863">Maximizing the margin</h4>
-<div class="outline-text-4" id="text-orge4e9863">
+<div id="outline-container-org7cfabdc" class="outline-4">
+<h4 id="org7cfabdc">Maximizing the margin</h4>
+<div class="outline-text-4" id="text-org7cfabdc">
 <p>
-We want to maximise this margin, therefore we need to minimize \(||\vec{w}||\)
+We want to maximize this margin, therefore we need to minimize \(||\vec{w}||\)
 with the constraint that \(y_i(\vec{w}\vec{x_i} \ge 1 \forall i\). We
-may aswell minimize \(||\vec{w}||^2\) which is an example of a <b><b>quadratic
+may as well minimize \(||\vec{w}||^2\) which is an example of a <b><b>quadratic
 optimization problem</b></b>
 </p>
 
@@ -188,9 +188,9 @@ optimization problem</b></b>
 </div>
 </div>
 
-<div id="outline-container-org1b0247f" class="outline-4">
-<h4 id="org1b0247f">Soft margin classification</h4>
-<div class="outline-text-4" id="text-org1b0247f">
+<div id="outline-container-org0008635" class="outline-4">
+<h4 id="org0008635">Soft margin classification</h4>
+<div class="outline-text-4" id="text-org0008635">
 <p>
 We may have data that is not perfect, for example we may have some
 values that lay on one side of the hyperplane but they are classified
@@ -201,7 +201,7 @@ the opposite.
 
 <p>
 To address this cases, we introduce <b><b>slack variabes</b></b> which are
-scalar values assigned for each x<sub>i</sub>, and the <b><b>regularizaion
+scalar values assigned for each x<sub>i</sub>, and the <b><b>regularization
 parameter</b></b> \(C > 0\):
 </p>
 
@@ -225,9 +225,9 @@ other side of the hyperplane if \(\zeta > 1\).
 between the slack variable penalty and the margin.
 </p>
 <ul class="org-ul">
-<li>small C allows constraings to be easily ignored in order to have a
+<li>small C allows constrains to be easily ignored in order to have a
 larger margin</li>
-<li>large C make constrainst hard to ignore to get a narrow maring
+<li>large C make constraints hard to ignore to get a narrow margin
 <ul class="org-ul">
 <li>if C goes to infinity, we have hard margins.</li>
 </ul></li>
@@ -242,7 +242,7 @@ value has not been misclassified, then we don't need any correction and
 the other side, plus the distance to the margin 1, so \(1 -
 y_i(\vec{w}\vec{x_i}+b)\). We are subtracting because if the value is
 misclassified, then It's distance from the hyperplane times It's label
-is going to be a negative value (one of them nedds to be positive and
+is going to be a negative value (one of them needs to be positive and
 the other negative in order to have a misclassification).
 </p>
 
@@ -279,16 +279,15 @@ With this result, the objective is now to minimize the following:
 </div>
 </div>
 
-
-<div id="outline-container-orgffcdbd4" class="outline-3">
-<h3 id="orgffcdbd4">Non linearly separable data</h3>
-<div class="outline-text-3" id="text-orgffcdbd4">
+<div id="outline-container-org6e32621" class="outline-3">
+<h3 id="org6e32621">Non linearly separable data</h3>
+<div class="outline-text-3" id="text-org6e32621">
 </div>
-<div id="outline-container-org8ab5c63" class="outline-4">
-<h4 id="org8ab5c63">Cases of optimization problems</h4>
-<div class="outline-text-4" id="text-org8ab5c63">
+<div id="outline-container-orgcd888fe" class="outline-4">
+<h4 id="orgcd888fe">Cases of optimization problems</h4>
+<div class="outline-text-4" id="text-orgcd888fe">
 <p>
-For future analisys, It is useful to discuss what are the main classes
+For future analysis, It is useful to discuss what are the main classes
 of optimization problems:
 </p>
 
@@ -318,12 +317,12 @@ transpose of x.</li>
 </div>
 </div>
 
-<div id="outline-container-orgd71e71c" class="outline-4">
-<h4 id="orgd71e71c">Solving quadratic problems - Lagrange multipliers</h4>
-<div class="outline-text-4" id="text-orgd71e71c">
+<div id="outline-container-org13010dc" class="outline-4">
+<h4 id="org13010dc">Solving quadratic problems - Lagrange multipliers</h4>
+<div class="outline-text-4" id="text-org13010dc">
 <p>
 Quadratic optimization problems such as the one discussed above are a
-wll-known class of mathematical programming models with several
+well-known class of mathematical programming models with several
 algorithms. We will now introduce a method so solve such problems
 using the Lagrange multiplier, that is a strategy for finding the local
 maxima and minima of a function subject to equation constraints.
@@ -331,7 +330,7 @@ maxima and minima of a function subject to equation constraints.
 
 <p>
 Given a function to optimize \(f(x)\), a constraint \(g(x)\) and an
-optimal solution x<sub>*</sub> of the function that respects the contraints, there
+optimal solution x<sub>*</sub> of the function that respects the constraints, there
 exists a <b><b>lagrangian multiplier</b></b> \(\lambda\) such that:
 </p>
 
@@ -368,7 +367,7 @@ multiplier:
 <p>
 This is an example of Lagrangian dual problem, where we need to
 maximize the lagrangian multipliers to minimize w and b. We now
-derivate with respect to w and b and set them equial to 0:
+derivative with respect to w and b and set them equal to 0:
 </p>
 
 <p>
@@ -429,9 +428,9 @@ vector.</li>
 </div>
 </div>
 
-<div id="outline-container-orgaac04cf" class="outline-3">
-<h3 id="orgaac04cf">Non linear SVM - Kernel Trick</h3>
-<div class="outline-text-3" id="text-orgaac04cf">
+<div id="outline-container-org5744b79" class="outline-3">
+<h3 id="org5744b79">Non linear SVM - Kernel Trick</h3>
+<div class="outline-text-3" id="text-org5744b79">
 <p>
 What if the data is not linearly separable? In such situation we can
 map data to a higher-dimensional space where the training set is
@@ -478,8 +477,8 @@ There are multiple types of kernels, such as
 </p>
 <ul class="org-ul">
 <li>linear: \(K(x_i, x_j) = x_i^T x_j\)</li>
-<li>polinomial of power p: \(K(x_i, x_j) = (1+x_i^T x_j)^p\)</li>
-<li>gaussian: \(K(x_i, x_j) = e^{\frac{|x_i-x_j|^2}{2\sigma ^2}}\)</li>
+<li>polynomial of power p: \(K(x_i, x_j) = (1+x_i^T x_j)^p\)</li>
+<li>Gaussian: \(K(x_i, x_j) = e^{\frac{|x_i-x_j|^2}{2\sigma ^2}}\)</li>
 </ul>
 
 <p>

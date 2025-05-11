@@ -6,7 +6,7 @@
 #+INDEX: Giovanni's Diary!Programming!Notes!Intro to Machine Learning!Decision Trees
 
 Decision trees are simple, intuitive and powerful supervised learning
-algorithmms. They make predictions by recursively splitting on
+algorithms. They make predictions by recursively splitting on
 different attributes according to a **tree structure**. For continuous
 attributes, splitting is based on less than or greater than some
 threshold instead.
@@ -126,7 +126,7 @@ gain will be selected for splitting.
 *** Gini index
 
 Gini Index is another widely used metric for choosing a good split in
-decision trees Gini index measures the "impurity" (or non-homoneneity)
+decision trees Gini index measures the "impurity" (or non-homogeneity)
 at a given modes as $$GINI(R)=1-\sum_j [p(j|R)]^2$$ where $p(j|R)$ is
 the class frequency of class j in region R
 
@@ -149,14 +149,14 @@ Chose attribute and value that gives:
 - decision trees have a structure that is determined by the data
 - as a result they are flexible and can easily fit the training set,
   with high risk of overfitting
-- what we can do is cut branches of the tree and replaceing it by a
-  leath node (**pruning**)
+- what we can do is cut branches of the tree and replacing it by a
+  leave node (**pruning**)
 
 ** Limitations
 
 - you have exponentially less data al lower levels
 - a large tree can overfit the data
-- decision trees do not necessarly reach the global minima
+- decision trees do not necessarily reach the global minima
 - mistakes at top-level propagate down tree
 
 Decision trees can also be used for regression on real-valued outputs
@@ -165,7 +165,7 @@ by choosing the squared error rather that maximize information gain.
 ** Comparison to KNN
 Advantages and Decision Trees over KNN
 
-- good with descrete attributes
+- good with discrete attributes
 - easily deals with missing vales
 - robust to scale of inputs
 - good when there are lots of attributes, but only a few are important
@@ -200,7 +200,7 @@ decision trees on different bootstrapped samples and averaging their
 outputs (for regression) or majority voting (for classification)
 
 - In addition to bootstrapping, Random Forests introduce feature
-  randomness, this descreases the correlation between each DT and
+  randomness, this decreases the correlation between each DT and
   increases its predictive accuracy on average. In other words, avoid
   very string predictive features that lead to similar split in trees
 

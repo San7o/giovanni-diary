@@ -18,7 +18,7 @@ computational-expensive tasks, I'd rather prefer the battery to last
 longer. Here is a list of things I did to optimize for lower power
 consumption.
 
-This guide is focused on laptops but you can get value even for dektop
+This guide is focused on laptops but you can get value even for desktop
 servers. If you have any comment / correction / suggestion please let
 me know by sending me an email at [[mailto:giovanni.santini@proton.me][giovanni.santini@proton.me]] or message
 me on Mastodon [[https://mastodon.social/@santo7][@santo7@mastodon.social]].
@@ -46,15 +46,15 @@ me on Mastodon [[https://mastodon.social/@santo7][@santo7@mastodon.social]].
 
 *** ACPI Specification
 
-Before thinkering with your system, you should have a decent
+Before tinkering with your system, you should have a decent
 understanding of how the operating system works in the context of
 power management. I will now give you a quick overview of power
 consumption on a linux system running on the x86 architecture.
 
 Let's start with the hardware and how we can interact with It, more
 specifically the CPU. Similarly to other hardware components, intel
-CPUs implement the [[https://uefi.org/htmlspecs/ACPI_Spec_6_4_html/][ACPI]] specfication which enables an ACPI compatible
-operating system to interface with hardware devices to finetune
+CPUs implement the [[https://uefi.org/htmlspecs/ACPI_Spec_6_4_html/][ACPI]] specification which enables an ACPI compatible
+operating system to interface with hardware devices to fine tune
 performance.
 
 For processors, ACPI defines different power states within the global
@@ -82,7 +82,7 @@ storage...).
 
 *** Linux's ACPI
 
-An overview of the Linux's ACPI implementation can be foind [[https://www.kernel.org/doc/ols/2005/ols2005v1-pages-59-76.pdf][here]].
+An overview of the Linux's ACPI implementation can be found [[https://www.kernel.org/doc/ols/2005/ols2005v1-pages-59-76.pdf][here]].
 Briefly, It is composed of an OS Service Layer which abstracts the
 hardware, an user interface via sysfs and procfs, the core
 implementation which includes an AML interpreter which is used as a
@@ -92,7 +92,7 @@ components.
 On Linux, userspace can interact with the ACPI subsystem via sysfs in
 =/sys/devices/LNXSYSTM:00= or =/sys/bus/acpi/devices= (if ACPI support
 is enabled). Inside, you will find directories that represent ACPI
-devices, for each device the directory contains informations about
+devices, for each device the directory contains information about
 them such as the status or the voltage. You may want to use something
 like =acpid= or =upower= to dump ACPI info, if you are using some
 linux distribution you may have something similar already installed.
@@ -300,7 +300,7 @@ the settings, =tlp.conf= is a good place to start.
 
 You can choose a frequency scaling governor to manage throttling.
 This will dynamically change the clock's frequency and voltage
-cofiguration via P-states. Assuming you are using TLP, to list the
+configuration via P-states. Assuming you are using TLP, to list the
 available governors you can run:
 
 #+begin_src bash
@@ -324,15 +324,15 @@ laptops (like my HP one) this is not supported and the command
 
 **** Omit Scheduling-Clock ticks for idle CPUs
 
-If you are doing mostly lightwaight work with long idle periods, you
-can limit the scheduling-clock interrupt to prevent weaking up some
+If you are doing mostly lightweight work with long idle periods, you
+can limit the scheduling-clock interrupt to prevent waking up some
 cores when It is not needed. The linux kernel [[https://www.kernel.org/doc/html/latest/timers/no_hz.html#omit-scheduling-clock-ticks-for-cpus-with-only-one-runnable-task][documentation]] says that
 if scheduling is set to periodic, the system would drain 2-3 times
 faster compared to a kernel with this disabled, so It is quite a big
 deal. You may need it if you are running aggressive real-time
 response constraints, but this is not our case.
 
-Enable the following in your kenrel configuration:
+Enable the following in your kernel configuration:
 
 #+begin_src
   CONFIG_NO_HZ_IDLE=y
@@ -345,7 +345,7 @@ BTRFS is a popular filesystem. A part of Its design is the CoW
 (Copy on Write) where a certain file would get copied in another
 location when a modification is made, this is necessary for
 the snapshotting functionality of the filesystem. However, this
-causes the broblem where a file yould get copied even if you
+causes the problem where a file would get copied even if you
 just read it, just by updating the last access timestamp. [[https://lwn.net/Articles/499293/][This]]
 LWN article from Jonathan Corbet explains this well:
 
@@ -405,7 +405,7 @@ are the best.
 
 If you are using a linux distribution instead of compiling your system
 on your own, chances are that the maintainers of said distribution
-have enabled a buch of stuff you don't really need. This goes from
+have enabled a bunch of stuff you don't really need. This goes from
 kernel modules for various hardware, which you do not need, to
 background daemons to do things like reporting crashes.
 
@@ -415,7 +415,7 @@ may not contribute much to the overall power consumption, they still
 consume resources so It is helpful to have less things running in
 your system.
 
-Disable things like bluetooth if you don't need it, crash reporting
+Disable things like Bluetooth if you don't need it, crash reporting
 daemons, etc...
 
 **** Lower the backlight

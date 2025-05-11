@@ -47,16 +47,16 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org82980ae" class="outline-2">
-<h2 id="org82980ae">Gradient Descent</h2>
-<div class="outline-text-2" id="text-org82980ae">
+<div id="outline-container-org6deedd5" class="outline-2">
+<h2 id="org6deedd5">Gradient Descent</h2>
+<div class="outline-text-2" id="text-org6deedd5">
 </div>
 
-<div id="outline-container-orgc19900c" class="outline-3">
-<h3 id="orgc19900c">Model-Based Machine Learning</h3>
-<div class="outline-text-3" id="text-orgc19900c">
+<div id="outline-container-org07deed2" class="outline-3">
+<h3 id="org07deed2">Model-Based Machine Learning</h3>
+<div class="outline-text-3" id="text-org07deed2">
 <ol class="org-ol">
-<li>Pick a model (hyperplace, decision tree&#x2026;)</li>
+<li>Pick a model (hyperplane, decision tree&#x2026;)</li>
 <li>Pick a criterion to optimize</li>
 <li>Develop a learning algorithm
 <ul class="org-ul">
@@ -99,9 +99,9 @@ Find \(w\) and \(b\) that minimize the 0/1 loss (i.e. training error)
 </div>
 </div>
 
-<div id="outline-container-orga458651" class="outline-3">
-<h3 id="orga458651">Loss Functions</h3>
-<div class="outline-text-3" id="text-orga458651">
+<div id="outline-container-orgcce13e5" class="outline-3">
+<h3 id="orgcce13e5">Loss Functions</h3>
+<div class="outline-text-3" id="text-orgcce13e5">
 <p>
 How do we minimize the 0/1 loss. Finding \(w\) and \(b\) that optimize the
 0/1 loss is hard (in fact, NP-hard)
@@ -130,16 +130,16 @@ many such functions, we use the notation \(y\) as the correct value and
 </div>
 </div>
 
-<div id="outline-container-org717e9e3" class="outline-3">
-<h3 id="org717e9e3">Gradient Descent</h3>
-<div class="outline-text-3" id="text-org717e9e3">
+<div id="outline-container-orgf8c2a30" class="outline-3">
+<h3 id="orgf8c2a30">Gradient Descent</h3>
+<div class="outline-text-3" id="text-orgf8c2a30">
 <p>
 Pick a starting point \(w\). Repeat until loss doesn't decrease in any
 dimension:
 </p>
 
 <ul class="org-ul">
-<li>pick a dimensoin</li>
+<li>pick a dimension</li>
 <li>move a small amount in that dimension towards decreasing loss</li>
 </ul>
 <p>
@@ -178,11 +178,11 @@ curve downwards.</li>
 </div>
 </div>
 
-<div id="outline-container-orgad11866" class="outline-3">
-<h3 id="orgad11866">Gradient</h3>
-<div class="outline-text-3" id="text-orgad11866">
+<div id="outline-container-org6e3aa14" class="outline-3">
+<h3 id="org6e3aa14">Gradient</h3>
+<div class="outline-text-3" id="text-org6e3aa14">
 <p>
-The gradient is the vector of partial derivates w.r.t all the
+The gradient is the vector of partial derivatives w.r.t all the
 coordinates of the weights. For \(f: \mathbb{R}^n \rightarrow R\) its
 gradient \(\nabla f:\mathbb{R}^n \rightarrow \mathbb{R}^n\) is defined
 at the point \(p=(x_1, ..., x_n)\) in n-dimensional space as the vector:

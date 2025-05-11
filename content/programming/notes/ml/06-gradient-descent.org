@@ -7,7 +7,7 @@
 
 ** Model-Based Machine Learning
 
-1. Pick a model (hyperplace, decision tree...)
+1. Pick a model (hyperplane, decision tree...)
 2. Pick a criterion to optimize
 3. Develop a learning algorithm
 	- this should try and minimize the criteria, sometimes in a
@@ -54,7 +54,7 @@ $y'$ as the predicted value:
 Pick a starting point $w$. Repeat until loss doesn't decrease in any
 dimension:
 
-- pick a dimensoin
+- pick a dimension
 - move a small amount in that dimension towards decreasing loss
 $$w_j = w_j - \mu \frac{d}{dw_j}loss$$
 - $\mu$ is the learning rate
@@ -78,7 +78,7 @@ $$w_j = w_j + \mu \sum_{i=1}^n -y_ix_{ij}exp(-y_i(wx_i+b))$$
 
 ** Gradient
 
-The gradient is the vector of partial derivates w.r.t all the
+The gradient is the vector of partial derivatives w.r.t all the
 coordinates of the weights. For $f: \mathbb{R}^n \rightarrow R$ its
 gradient $\nabla f:\mathbb{R}^n \rightarrow \mathbb{R}^n$ is defined
 at the point $p=(x_1, ..., x_n)$ in n-dimensional space as the vector:

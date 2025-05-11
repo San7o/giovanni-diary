@@ -15,7 +15,7 @@ of classifier: support vector machines (SVM).
 We define the **margin** of a classifier as the distance from the
 classification hyperplane to the closest points of either class. We
 call **large margin classifiers** the classifiers that attempt to
-maximise this measure.
+maximize this measure.
 
 We call the sets of "closest points" from the hyperplane with
 **support vectors**. Note that for n dimensions, there will be at
@@ -63,7 +63,7 @@ the modulo function uses the generalized pythagorean theorem, we get:
 We just demonstrated the formula for finding the distance between a
 point and a plane.  We now define the **classification function** as
 $f(x)= sign(\vec{w}\vec{x} + b)$, It will be +1 or -1 based on the
-sign of the quation. Intuitively, points on one side of the plane
+sign of the equation. Intuitively, points on one side of the plane
 should have a positive output and points on the other side should have
 a negative one. We decide to multiply the hyperplane equation times
 the expected classification to get the **functional margin** for each
@@ -83,9 +83,9 @@ For the support vectors, the following holds:
 
 *** Maximizing the margin
 
-We want to maximise this margin, therefore we need to minimize $||\vec{w}||$
+We want to maximize this margin, therefore we need to minimize $||\vec{w}||$
 with the constraint that $y_i(\vec{w}\vec{x_i} \ge 1 \forall i$. We
-may aswell minimize $||\vec{w}||^2$ which is an example of a **quadratic
+may as well minimize $||\vec{w}||^2$ which is an example of a **quadratic
 optimization problem**
 
     $$ min_{w, b} ||w||^2,\ y_i(\vec{w}\vec{x_i}+b) \ge 1 \forall i $$
@@ -99,7 +99,7 @@ hold since you may have $\vec{w}\vec{x_i}+b \le 1$ and $y_i \ge 1$ or
 the opposite.
 
 To address this cases, we introduce **slack variabes** which are
-scalar values assigned for each x_i, and the **regularizaion
+scalar values assigned for each x_i, and the **regularization
 parameter** $C > 0$:
 
           $$ min_{w, b} ||\vec{w}||^2 + C \sum_{i} \zeta_i $$
@@ -113,9 +113,9 @@ margin is reduced by $\zeta$ if $\zeta < 1$ or are moved to the
 other side of the hyperplane if $\zeta > 1$.
 $C$ determines how strong are those corrections, that is the "trade off"
 between the slack variable penalty and the margin.
-- small C allows constraings to be easily ignored in order to have a
+- small C allows constrains to be easily ignored in order to have a
   larger margin
-- large C make constrainst hard to ignore to get a narrow maring
+- large C make constraints hard to ignore to get a narrow margin
   - if C goes to infinity, we have hard margins.
   
 We are now interested into calculating those slack variables. The
@@ -126,7 +126,7 @@ $\zeta = 0$. Otherwise, we want to correct the value by moving it on
 the other side, plus the distance to the margin 1, so $1 -
 y_i(\vec{w}\vec{x_i}+b)$. We are subtracting because if the value is
 misclassified, then It's distance from the hyperplane times It's label
-is going to be a negative value (one of them nedds to be positive and
+is going to be a negative value (one of them needs to be positive and
 the other negative in order to have a misclassification).
 
 Therefore:
@@ -146,12 +146,11 @@ With this result, the objective is now to minimize the following:
 
 $$min_{w, b} ||\vec{w}||^2 + C \sum_i max(0, 1 - y_i(\vec{w}\vec{x_i} +b))$$
 
-
 ** Non linearly separable data
 
 *** Cases of optimization problems
 
-For future analisys, It is useful to discuss what are the main classes
+For future analysis, It is useful to discuss what are the main classes
 of optimization problems:
 
 - **linear programming (LP)**: linear problem, linear constraints.
@@ -171,13 +170,13 @@ $$min_{x} c^Tx + \frac{1}{2}x^TQx\ s.t\ Ax = b, Cx \ge d$$
 *** Solving quadratic problems - Lagrange multipliers
 
 Quadratic optimization problems such as the one discussed above are a
-wll-known class of mathematical programming models with several
+well-known class of mathematical programming models with several
 algorithms. We will now introduce a method so solve such problems
 using the Lagrange multiplier, that is a strategy for finding the local
 maxima and minima of a function subject to equation constraints.
 
 Given a function to optimize $f(x)$, a constraint $g(x)$ and an
-optimal solution x_* of the function that respects the contraints, there
+optimal solution x_* of the function that respects the constraints, there
 exists a **lagrangian multiplier** $\lambda$ such that:
      
     $$\frac{df(x_*)}{dx_*} = \lambda \frac{dg(x_*)}{dx_*},\ g(x) = 0$$
@@ -198,7 +197,7 @@ exists a **lagrangian multiplier** $\lambda$ such that:
  
  This is an example of Lagrangian dual problem, where we need to
  maximize the lagrangian multipliers to minimize w and b. We now
- derivate with respect to w and b and set them equial to 0:
+ derivative with respect to w and b and set them equal to 0:
  
           $$(b)\ 2\vec{w} - \sum_i a_i y_i x_i = 0$$
           $$(c)\ \sum_i a_n y_n = 0$$
@@ -262,8 +261,8 @@ kernel.
 
 There are multiple types of kernels, such as
 - linear: $K(x_i, x_j) = x_i^T x_j$
-- polinomial of power p: $K(x_i, x_j) = (1+x_i^T x_j)^p$
-- gaussian: $K(x_i, x_j) = e^{\frac{|x_i-x_j|^2}{2\sigma ^2}}$
+- polynomial of power p: $K(x_i, x_j) = (1+x_i^T x_j)^p$
+- Gaussian: $K(x_i, x_j) = e^{\frac{|x_i-x_j|^2}{2\sigma ^2}}$
 
 Support Vector Machines are often used in object recognition in
 computer vision.

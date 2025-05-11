@@ -47,9 +47,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-orgd0cf775" class="outline-2">
-<h2 id="orgd0cf775">Neural Networks</h2>
-<div class="outline-text-2" id="text-orgd0cf775">
+<div id="outline-container-org00f7889" class="outline-2">
+<h2 id="org00f7889">Neural Networks</h2>
+<div class="outline-text-2" id="text-org00f7889">
 <p>
 An artificial neuron, for example a perceptron, is a non-linear
 parameterized function with restricted output range. It predicts the
@@ -102,9 +102,9 @@ by <b><b>backpropagation</b></b>.
 </p>
 </div>
 
-<div id="outline-container-orgcffe72c" class="outline-3">
-<h3 id="orgcffe72c">Task</h3>
-<div class="outline-text-3" id="text-orgcffe72c">
+<div id="outline-container-org29d6d95" class="outline-3">
+<h3 id="org29d6d95">Task</h3>
+<div class="outline-text-3" id="text-org29d6d95">
 <p>
 Given training samples \(T=\{ (x_1, y_1), (x_2, y_2), ..., (x_n, y_n)
 \}\) adjust all the weights of the network \(\Theta\) such that a cost
@@ -123,9 +123,9 @@ compute the gradient efficiently.
 </div>
 </div>
 
-<div id="outline-container-orgb8a6680" class="outline-3">
-<h3 id="orgb8a6680">Training</h3>
-<div class="outline-text-3" id="text-orgb8a6680">
+<div id="outline-container-org0874bb1" class="outline-3">
+<h3 id="org0874bb1">Training</h3>
+<div class="outline-text-3" id="text-org0874bb1">
 <p>
 To train a feed-forward network we need to define:
 </p>
@@ -140,7 +140,7 @@ function \(\sigma (z)_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}\)
 probabilities, for this reason It is often used the softmax function
 as seed before.</li>
 <li>activation functions: we want to apply a non-linear function
-elementwise. A common one is <b><b>Rectified Linear Units</b></b> (RELU) which
+element wise. A common one is <b><b>Rectified Linear Units</b></b> (RELU) which
 is defined as \(h(x)=max(0, x)\), note that there are variations of
 this where the function behaves differently below 0.</li>
 <li>architecture (number of layers etc): often done empirically.</li>
@@ -149,9 +149,9 @@ this where the function behaves differently below 0.</li>
 </div>
 </div>
 
-<div id="outline-container-org81cfaf8" class="outline-3">
-<h3 id="org81cfaf8">Error Backpropagation</h3>
-<div class="outline-text-3" id="text-org81cfaf8">
+<div id="outline-container-org6aba97c" class="outline-3">
+<h3 id="org6aba97c">Error Backpropagation</h3>
+<div class="outline-text-3" id="text-org6aba97c">
 <p>
 To learn the weights we use an algorithm called backpropagation, which
 is composed of the following steps:
@@ -263,9 +263,9 @@ If we substitute the definition of \(\delta\) and \(a_j\), and make use of
 </div>
 </div>
 
-<div id="outline-container-orgeeabb32" class="outline-3">
-<h3 id="orgeeabb32">Example</h3>
-<div class="outline-text-3" id="text-orgeeabb32">
+<div id="outline-container-org791a21a" class="outline-3">
+<h3 id="org791a21a">Example</h3>
+<div class="outline-text-3" id="text-org791a21a">
 <p>
 Consider a two-layer network (that does not count the input
 layer). Given:
@@ -319,9 +319,9 @@ second-layer weights are given by:
 </div>
 </div>
 
-<div id="outline-container-orge5f4c8a" class="outline-3">
-<h3 id="orge5f4c8a">Optimization</h3>
-<div class="outline-text-3" id="text-orge5f4c8a">
+<div id="outline-container-org0827e95" class="outline-3">
+<h3 id="org0827e95">Optimization</h3>
+<div class="outline-text-3" id="text-org0827e95">
 <p>
 The function \(f\) is a composition of multiple functions:
 </p>
@@ -356,9 +356,9 @@ It is often useful to compute the gradient os set of samples
 </div>
 </div>
 
-<div id="outline-container-orgc468069" class="outline-3">
-<h3 id="orgc468069">Convolutional Neural Networks</h3>
-<div class="outline-text-3" id="text-orgc468069">
+<div id="outline-container-org3aef6cf" class="outline-3">
+<h3 id="org3aef6cf">Convolutional Neural Networks</h3>
+<div class="outline-text-3" id="text-org3aef6cf">
 <p>
 Convolutional neural networks are simply neural networks that use
 convolution in place of general matrix multiplication in at least one
@@ -380,7 +380,7 @@ together, producing a <b><b>feature map</b></b>.
 Inspired by mammalian visual cortex, convolutional neural networks are
 feedforward neural networks with specialized connectivity
 structure. In particular, the network is composed of a set of filters
-that cover a spacially small portion of the input data and that are
+that cover a specially small portion of the input data and that are
 convoluted over It. Intuitively, the network will learn filters that
 activate when they see some specific type of feature at some spatial
 position in the input.
@@ -394,9 +394,9 @@ spacial size of the representation to reduce the amount of parameters.
 </div>
 </div>
 
-<div id="outline-container-org1e566b4" class="outline-3">
-<h3 id="org1e566b4">Other neural networks</h3>
-<div class="outline-text-3" id="text-org1e566b4">
+<div id="outline-container-org360eca8" class="outline-3">
+<h3 id="org360eca8">Other neural networks</h3>
+<div class="outline-text-3" id="text-org360eca8">
 <ul class="org-ul">
 <li>Recurrent network: when nodes on the same layer influence each
 other, used in video frame prediction.</li>

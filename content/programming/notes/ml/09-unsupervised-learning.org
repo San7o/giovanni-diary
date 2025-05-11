@@ -154,11 +154,11 @@ information loss.
 
 Here is presented an alternative solution to PCA. Singular Value
 Decomposition is a factorization o a real or complex matrix into a
-rotation, followed by a rescaling followed by another rotation. It
+rotation, followed by a resealing followed by another rotation. It
 generalizes eigenvalue decomposition.
 
 $$A = USV^T$$
-Allgorithm:
+Algorithm:
 
 - Input: Data points $X=[x_1, ..., x_n]$
 - Centering: $\bar X = X - \frac{1}{n}X1_n1_n^T$
@@ -170,7 +170,7 @@ Allgorithm:
 ** Kernel PCA (KPCA)
 
 By using the kernel trick one can apply PCA in a higher dimensional
-space, yielding a non-linear transormation in the original space
+space, yielding a non-linear transformation in the original space
 
 ** Other dimensionality reduction techniques
 
@@ -230,7 +230,7 @@ minimum.
 - assignment: $O(kn)$ time
 - centroid computation: $O(n)$ time
 
-In this case, euclidian distance is not the best so we use **consine
+In this case, euclidean distance is not the best so we use **cosine
 similarity**
 
 $$sim(x, y)=\frac{x*y}{|x||y|}$$
