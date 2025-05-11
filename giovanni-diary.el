@@ -92,3 +92,25 @@
              :time-stamp-file nil)))    ;; Don't include time stamp in file
 	(org-publish-all t)
   (message "Latex build completed"))
+
+(defun giovanni-diary-new-note (note-path note-title)
+  "Create a new note"
+  (interactive "FNew note's name: \nsNew note's title:")
+  (let ((content "#+startup: content indent
+
+[[file:broken.org][TODO]] >
+
+* {{title}}
+#+INDEX: Giovanni's Diary!TODO!{{title}}
+
+TODO
+
+-----
+
+Travel: [[file:broken.org][TODO]], [[file:broken.org][Index]] 
+"))
+    (switch-to-buffer (find-file note-path))
+    (insert content)
+    (beginning-of-buffer)
+    (org-toggle-link-display)
+    (replace-regexp "\{\{title\}\}" note-title)))
