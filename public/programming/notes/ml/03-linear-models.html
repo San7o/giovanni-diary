@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
+</p>
+
+<div id="outline-container-org8631008" class="outline-2">
+<h2 id="org8631008">Linear Models</h2>
+<div class="outline-text-2" id="text-org8631008">
+<p>
+Some machine learning approaches make strong assumptions about the
+data. If the assumptions hold, this can lead to better
+performance. Otherwise, the model would fail.  Other approaches don't
+make any assumptions about the data, so they are very general but are
+prone to overfitting, for example K-NN.
+</p>
+</div>
+
+<div id="outline-container-org7cdccf5" class="outline-3">
+<h3 id="org7cdccf5">Bias</h3>
+<div class="outline-text-3" id="text-org7cdccf5">
+<p>
+The bias of a model is how strong the model assumptions are
+</p>
+
+<ul class="org-ul">
+<li>low-bias classifiers make minimal assumptions about the data</li>
+<li>high-bias classifiers make strong assumptions about the data</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgea122f4" class="outline-3">
+<h3 id="orgea122f4">Linear Model (Perceptron)</h3>
+<div class="outline-text-3" id="text-orgea122f4">
+<p>
+A strong high-bias assumption is linear separability
+</p>
+
+<ul class="org-ul">
+<li>the classes can be separated by a line in 2 dimensions</li>
+<li>in higher dimensions using hyperplanes</li>
+</ul>
+
+<p>
+Any hyperplane  defines a partition of the space.
+</p>
+
+<p>
+Any pair of values \((w_1, w_2)\) defined a line through the origin
+(using the Cartesian equation of a plane):
+</p>
+
+<p>
+\[0=w_1f_1+w_2f_2+b\]
+</p>
+
+<ul class="org-ul">
+<li>\(b\) is called the bias</li>
+</ul>
+
+<p>
+In n-dimensions, a hyperplane:
+\[0=b+\sum_{i=1}^{n}w_if_i\]
+We can classify a linear model by checking the sign.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5ac9d82" class="outline-3">
+<h3 id="org5ac9d82">How to train a linear model</h3>
+<div class="outline-text-3" id="text-org5ac9d82">
+<p>
+Differently from k-nn, linear models use online learning. Online
+learning are useful in:
+</p>
+
+<ul class="org-ul">
+<li>data streams</li>
+<li>large-scale dataset</li>
+<li>privacy-preserving applications</li>
+</ul>
+
+<p>
+To learn a linear model:
+</p>
+
+<ul class="org-ul">
+<li>the algorithm receives an unlabeled example \(x_i\)
+<ul class="org-ul">
+<li>\(w(1, 0),\ p(-1,1)\)</li>
+</ul></li>
+<li>the algorithm predicts a classification of this example
+<ul class="org-ul">
+<li>\(1*(-1)+0*1 = -1\)</li>
+</ul></li>
+<li>the algorithm is the told the correct answer \(y_i\) and update the model
+<ul class="org-ul">
+<li>idea: when a solution is wrong, to choose which weight to change,
+we can see what are the weights that contribute more to the wrong
+answer, and change them</li>
+</ul></li>
+</ul>
+
+<pre class="example">
+repeat until convergence (or some # of iterations):
+  for each random training example (f1, f2, ..., fn, label):
+    check if it is correct based on the current model
+    if not correct, update all the weights:
+      for each wi:
+        wi = wi + fi*label
+      b = b + label
+</pre>
+
+<p>
+The algorithm will converge only if the data can be linearly separated.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="intro-to-machine-learning.html">Intro to Machine Learning</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

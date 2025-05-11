@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
+</p>
+
+<div id="outline-container-org0dc664f" class="outline-2">
+<h2 id="org0dc664f">Gradient Descent</h2>
+<div class="outline-text-2" id="text-org0dc664f">
+</div>
+
+<div id="outline-container-orgc09bb70" class="outline-3">
+<h3 id="orgc09bb70">Model-Based Machine Learning</h3>
+<div class="outline-text-3" id="text-orgc09bb70">
+<ol class="org-ol">
+<li>Pick a model (hyperplace, decision tree&#x2026;)</li>
+<li>Pick a criterion to optimize</li>
+<li>Develop a learning algorithm
+<ul class="org-ul">
+<li>this should try and minimize the criteria, sometimes in a
+heuristic way, sometimes exactly</li>
+</ul></li>
+</ol>
+
+<p>
+Let's look at linear binary classification:
+</p>
+
+<ol class="org-ol">
+<li>Pick a model</li>
+</ol>
+
+<p>
+\[0 = b + \sum_{j=1}^{m}w_jf_j\]
+</p>
+
+<ol class="org-ol">
+<li>Pick a criteria to optimize (aka objective function)</li>
+</ol>
+
+<p>
+\[\sum_{i-1}^{n}\mathbb{1}[y_i(w*x_i+b) \le 0]\]
+</p>
+
+<ol class="org-ol">
+<li>Develop a learning algorithm</li>
+</ol>
+
+<p>
+\[argmin_{w, b}\sum_{i-1}^{n}\mathbb{1}[y_i(w*x_i+b) \le 0]\]
+</p>
+
+<p>
+Find \(w\) and \(b\) that minimize the 0/1 loss (i.e. training error)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1701270" class="outline-3">
+<h3 id="org1701270">Loss Functions</h3>
+<div class="outline-text-3" id="text-org1701270">
+<p>
+How do we minimize the 0/1 loss. Finding \(w\) and \(b\) that optimize the
+0/1 loss is hard (in fact, NP-hard)
+</p>
+
+<p>
+We want a differentiable (continuous) loss function so we get an
+indication of direction of minimization. This family of functions are
+called convex functions: the line segment between any two points on
+the function is above the function.
+</p>
+
+<p>
+Therefore, we want to find one such function that represents the 0/1
+loss function, which we call <b><b>surrogate loss function</b></b>. There are
+many such functions, we use the notation \(y\) as the correct value and
+\(y'\) as the predicted value:
+</p>
+
+<ul class="org-ul">
+<li>0/1 loss: \(l(y, y')=\mathbb{1}[yy' \le 0]\)</li>
+<li>Hinge \(l(y, y')= max(0,1-yy')\)</li>
+<li>Exponential: \(l(y, y') = exp(-yy')\)</li>
+<li>Squared loss: \(l(y, y') = (y -y')^2\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga4773e6" class="outline-3">
+<h3 id="orga4773e6">Gradient Descent</h3>
+<div class="outline-text-3" id="text-orga4773e6">
+<p>
+Pick a starting point \(w\). Repeat until loss doesn't decrease in any
+dimension:
+</p>
+
+<ul class="org-ul">
+<li>pick a dimensoin</li>
+<li>move a small amount in that dimension towards decreasing loss</li>
+</ul>
+<p>
+\[w_j = w_j - \mu \frac{d}{dw_j}loss\]
+</p>
+<ul class="org-ul">
+<li>\(\mu\) is the learning rate</li>
+</ul>
+
+<p>
+We calculate the derivative of the surrogate loss function, for
+example the exponential
+</p>
+
+<p>
+\[\frac{d}{dw_i} loss = \frac{d}{dw_j} \sum_{i=1}^{n}exp(-y_i(wx_i+b))\]
+\[ = \sum_{i=1}^{n}exp(-y_i(wx_i+b))\frac{d}{dw_i}-y_i(wx_i+b)\]
+\[= \sum_{i=1}^n -y_ix_{ij}exp(-y_i(wx_i+b))\]
+</p>
+
+<p>
+So with the exponential choice of loss function we have the following
+update rule:
+</p>
+
+<p>
+\[w_j = w_j + \mu \sum_{i=1}^n -y_ix_{ij}exp(-y_i(wx_i+b))\]
+</p>
+
+<ul class="org-ul">
+<li>this may descend to a local minima</li>
+<li>there may be <b><b>saddle points</b></b> where the gradient is 0 even if we
+are not in a minimum, where some directions curve upwards and some
+curve downwards.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org64af3c7" class="outline-3">
+<h3 id="org64af3c7">Gradient</h3>
+<div class="outline-text-3" id="text-org64af3c7">
+<p>
+The gradient is the vector of partial derivates w.r.t all the
+coordinates of the weights. For \(f: \mathbb{R}^n \rightarrow R\) its
+gradient \(\nabla f:\mathbb{R}^n \rightarrow \mathbb{R}^n\) is defined
+at the point \(p=(x_1, ..., x_n)\) in n-dimensional space as the vector:
+</p>
+
+<p>
+\[\nabla f(p) = [\frac{df}{dx_i}(p)\ ...\ \frac{df}{dx_n}(p) ]\]
+</p>
+
+<p>
+Explained like a programmer, the gradient is defined for each
+dimension and It is the vector where each element is the derivative
+with respect to that dimension.  Formally, the gradient of a scalar
+function \(f(x_1, x_2, x_3, ..., x_n)\) is denoted \(\nabla f\) where
+\(\nabla\) denotes the vector differential operator, del. The gradient
+of \(f\) is defined as the unique vector filed whose dot product with
+any vector \(v\) at each point \(x\) is the directional derivative of \(f\)
+along \(v\). That is,
+</p>
+
+<p>
+\[(\nabla f(x))*v = D_vf(x)\]
+</p>
+
+<p>
+For example, the gradient of the function \(f(x, y, z)=2x + 3y^2 -
+sin(z)\) is \(\nabla f(x, y, z)=[2, 6y, -cos(z)]\) or \(\nabla f(x, y,
+z)=2i+6yj-cos(z)k\) where \(i\), \(j\), \(k\) are the standard unit vectors
+in the direction \(x\), \(y\), \(z\).
+</p>
+
+<ul class="org-ul">
+<li>Each partial derivative measures how fast the loss changes in one
+direction</li>
+</ul>
+
+<hr />
+
+<p>
+Travel: <a href="intro-to-machine-learning.html">Intro to Machine Learning</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

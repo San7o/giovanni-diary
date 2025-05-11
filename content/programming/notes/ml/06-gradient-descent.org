@@ -1,0 +1,109 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:intro-to-machine-learning.org][Intro to Machine Learning]] >
+
+* Gradient Descent
+#+INDEX: Giovanni's Diary!Programming!Notes!Intro to Machine Learning!Gradient Descent
+
+** Model-Based Machine Learning
+
+1. Pick a model (hyperplace, decision tree...)
+2. Pick a criterion to optimize
+3. Develop a learning algorithm
+	- this should try and minimize the criteria, sometimes in a
+    heuristic way, sometimes exactly
+
+Let's look at linear binary classification:
+
+1. Pick a model
+   
+$$0 = b + \sum_{j=1}^{m}w_jf_j$$
+
+2. Pick a criteria to optimize (aka objective function)
+   
+$$\sum_{i-1}^{n}\mathbb{1}[y_i(w*x_i+b) \le 0]$$
+
+3. Develop a learning algorithm
+   
+$$argmin_{w, b}\sum_{i-1}^{n}\mathbb{1}[y_i(w*x_i+b) \le 0]$$
+
+   Find $w$ and $b$ that minimize the 0/1 loss (i.e. training error)
+
+** Loss Functions
+
+How do we minimize the 0/1 loss. Finding $w$ and $b$ that optimize the
+0/1 loss is hard (in fact, NP-hard)
+
+We want a differentiable (continuous) loss function so we get an
+indication of direction of minimization. This family of functions are
+called convex functions: the line segment between any two points on
+the function is above the function.
+
+Therefore, we want to find one such function that represents the 0/1
+loss function, which we call **surrogate loss function**. There are
+many such functions, we use the notation $y$ as the correct value and
+$y'$ as the predicted value:
+
+- 0/1 loss: $l(y, y')=\mathbb{1}[yy' \le 0]$
+- Hinge $l(y, y')= max(0,1-yy')$
+- Exponential: $l(y, y') = exp(-yy')$
+- Squared loss: $l(y, y') = (y -y')^2$
+
+** Gradient Descent
+
+Pick a starting point $w$. Repeat until loss doesn't decrease in any
+dimension:
+
+- pick a dimensoin
+- move a small amount in that dimension towards decreasing loss
+$$w_j = w_j - \mu \frac{d}{dw_j}loss$$
+- $\mu$ is the learning rate
+
+We calculate the derivative of the surrogate loss function, for
+example the exponential
+
+$$\frac{d}{dw_i} loss = \frac{d}{dw_j} \sum_{i=1}^{n}exp(-y_i(wx_i+b))$$
+$$ = \sum_{i=1}^{n}exp(-y_i(wx_i+b))\frac{d}{dw_i}-y_i(wx_i+b)$$
+$$= \sum_{i=1}^n -y_ix_{ij}exp(-y_i(wx_i+b))$$
+
+So with the exponential choice of loss function we have the following
+update rule:
+
+$$w_j = w_j + \mu \sum_{i=1}^n -y_ix_{ij}exp(-y_i(wx_i+b))$$
+
+- this may descend to a local minima
+- there may be **saddle points** where the gradient is 0 even if we
+  are not in a minimum, where some directions curve upwards and some
+  curve downwards.
+
+** Gradient
+
+The gradient is the vector of partial derivates w.r.t all the
+coordinates of the weights. For $f: \mathbb{R}^n \rightarrow R$ its
+gradient $\nabla f:\mathbb{R}^n \rightarrow \mathbb{R}^n$ is defined
+at the point $p=(x_1, ..., x_n)$ in n-dimensional space as the vector:
+
+$$\nabla f(p) = [\frac{df}{dx_i}(p)\ ...\ \frac{df}{dx_n}(p) ]$$
+
+Explained like a programmer, the gradient is defined for each
+dimension and It is the vector where each element is the derivative
+with respect to that dimension.  Formally, the gradient of a scalar
+function $f(x_1, x_2, x_3, ..., x_n)$ is denoted $\nabla f$ where
+$\nabla$ denotes the vector differential operator, del. The gradient
+of $f$ is defined as the unique vector filed whose dot product with
+any vector $v$ at each point $x$ is the directional derivative of $f$
+along $v$. That is,
+
+$$(\nabla f(x))*v = D_vf(x)$$
+
+For example, the gradient of the function $f(x, y, z)=2x + 3y^2 -
+sin(z)$ is $\nabla f(x, y, z)=[2, 6y, -cos(z)]$ or $\nabla f(x, y,
+z)=2i+6yj-cos(z)k$ where $i$, $j$, $k$ are the standard unit vectors
+in the direction $x$, $y$, $z$.
+
+- Each partial derivative measures how fast the loss changes in one
+  direction
+
+-----
+
+Travel: [[file:intro-to-machine-learning.org][Intro to Machine Learning]], [[file:../../../theindex.org][Index]]

@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
+</p>
+
+<div id="outline-container-org4d3bcc4" class="outline-2">
+<h2 id="org4d3bcc4">Machine Learning Basics</h2>
+<div class="outline-text-2" id="text-org4d3bcc4">
+<p>
+In machine learning we want the computer to automatically detect
+patterns and predict future data from other data. To do so, we perform
+a series of steps which we call a <b><b>pipeline</b></b>: data acquisition,
+preprocessing, dimensionality reduction, learning and testing.
+</p>
+
+<p>
+In particular:
+</p>
+
+<ul class="org-ul">
+<li><b><b>Data acquisition</b></b>: We want to collect the relevant data for the
+problems at hand.</li>
+<li><b><b>Preprocessing</b></b>: cleaning and preparing for analysis (missing
+values, formatting&#x2026;). Techniques include normalization, feature
+scaling, handling categorical variables.</li>
+<li><b><b>Dimensionality reduction</b></b>: selection methods can be applied to
+redice the number of features while preserving the most important
+information.</li>
+<li><b><b>Model learning</b></b>: a model is trained on the preprocessed data.</li>
+<li><b><b>Model testing</b></b>: the model is evaluated using a test set.</li>
+</ul>
+</div>
+
+<div id="outline-container-org1717420" class="outline-3">
+<h3 id="org1717420">Types of learning</h3>
+<div class="outline-text-3" id="text-org1717420">
+<p>
+Below are described the types of learning which will be discussed in
+this course:
+</p>
+</div>
+
+<div id="outline-container-orga589440" class="outline-4">
+<h4 id="orga589440">Supervised Learning</h4>
+<div class="outline-text-4" id="text-orga589440">
+<p>
+Given labeled examples, create the model to predict the label, and
+test if the predicted label is correct.
+</p>
+
+<ul class="org-ul">
+<li><p>
+<b><b>Classification</b></b>: there is a finite set of labels to predict.
+Given a training set \(T = \{(x1,y1),...,(xm,ym)\}\) of size m, learn
+a function to predict \(y\) given \(x\): \(f: R^d -> \{1, 2, ..., k\}\).
+\(x\) is generally multidimensional (multiple features), Applications
+include:
+</p>
+<ul class="org-ul">
+<li>Face recognition</li>
+<li>Character recognition</li>
+<li>Spam detection (classical problem)</li>
+<li>Medical diagnosis</li>
+<li>Biometrics</li>
+<li><b><b>Regression</b></b>: the label is real value:</li>
+</ul>
+
+<p>
+\[f: R^d -> R\]
+</p></li>
+
+<li><b><b>Ranking</b></b>: label indicates an order.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge0cd76e" class="outline-4">
+<h4 id="orge0cd76e">Unsupervised Learning</h4>
+<div class="outline-text-4" id="text-orge0cd76e">
+<p>
+The input is given with no labels. The main problems include:
+</p>
+
+<ul class="org-ul">
+<li><b><b>Clustering</b></b>: Given an input \(T = \{x1, ..., xm\}\), output the
+hidden structure behind the \(x\)'s, which represents the
+clusters. Possible applications are:
+<ul class="org-ul">
+<li>social network analysis</li>
+<li>genomics</li>
+<li>image segmentation</li>
+<li>anomaly detection</li>
+<li><b><b>Dimensionality Reduction</b></b>: reduce the number of features under
+consideration by mapping data into another low dimensional space.</li>
+</ul></li>
+</ul>
+
+<p>
+\[ f: R^d -> R^m, m << d \]
+</p>
+
+<ul class="org-ul">
+<li><b><b>Density estimation</b></b>: find a probability distribution that fits
+the data.</li>
+<li><b><b>Reinforcement learning</b></b>: idea: an <b><b>agent</b></b> learns from the
+<b><b>environment</b></b> by interacting with it and receiving <b><b>rewards</b></b> for
+performing <b><b>actions</b></b>.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orged0950e" class="outline-4">
+<h4 id="orged0950e">Other learning variations</h4>
+<div class="outline-text-4" id="text-orged0950e">
+<ul class="org-ul">
+<li><b><b>semi-supervised</b></b>: some data on which you have labels, and some
+data on which you don't.</li>
+<li><b><b>active learning</b></b>: the model learns a labeled dataset, and It
+interactively queries a human user to label new data points.</li>
+<li><b><b>batch (offline) learning</b></b>: the model learns from the entire
+dataset in one go and is updated only after processing all the data
+<ul class="org-ul">
+<li>Once the model is trained, it does not change.</li>
+<li>Typically used when the dataset fits into memory and can be
+processed efficiently as a whole.</li>
+</ul></li>
+<li><b><b>online learning</b></b>: the model learns incrementally from each new
+data point or small batches of data.
+<ul class="org-ul">
+<li>Allows the model to adapt to changes in the data distribution over
+time.</li>
+<li>Suitable for scenarios where data arrives sequentially and needs
+to be processed in real-time or where computational resources are
+limited.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6d1cd79" class="outline-3">
+<h3 id="org6d1cd79">Features</h3>
+<div class="outline-text-3" id="text-org6d1cd79">
+<p>
+Features are the questions we can ask about the examples. They are
+generally represented as <b><b>vectors</b></b>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org03a6a40" class="outline-3">
+<h3 id="org03a6a40">Generalization</h3>
+<div class="outline-text-3" id="text-org03a6a40">
+<p>
+"Machine learning is about generalization of data".
+</p>
+
+<p>
+Generalization in machine learning refers to the ability of a trained
+model to perform well on new, unseen data that was not used during the
+training process.
+</p>
+
+<p>
+This can be done only if there is a correlation between inputs and
+ouputs. More technically, we are going to use the <b><b>probabilistic
+model</b></b> of learning.
+</p>
+
+<ul class="org-ul">
+<li>there is some probability distribution over example / label pairs
+called the data generating distribution</li>
+<li>both the training data and the test set are generated based on the
+distribution</li>
+</ul>
+
+<p>
+A data <b><b>generating distribution</b></b> refers to the underlying
+probability distribution that generates the observed data points in a
+dataset.  Understanding this distribution is crucial for building
+accurate and generalizable machine learning models because It enables
+us to make informed assumptions about the data and to make predictions
+or decisions based on probabilistic reasoning.  This is valid for
+every kind of machine learning.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2263751" class="outline-3">
+<h3 id="org2263751">Learning process</h3>
+<div class="outline-text-3" id="text-org2263751">
+<p>
+The steps to take in order to learn a model are:
+</p>
+
+<ol class="org-ol">
+<li>Collect (annotated) data</li>
+<li>Define a family of models for the classification task</li>
+<li>Define an error function to measure how well a model fits the data</li>
+<li>Find the model that minimized the error, aka TRAIN or LEARN a model</li>
+</ol>
+
+<p>
+"Ingredients":
+</p>
+
+<ul class="org-ul">
+<li><b><b>task</b></b>: a task represents the type of prediction being made to
+solve a problem on some data. f: x -&gt; y
+<ul class="org-ul">
+<li>For example, in the classification case, f: x -&gt; {c1, &#x2026;, ck}.</li>
+<li>Similarly is clustering, where the output is a cluster index.</li>
+<li>Regression: f: R -&gt; R</li>
+<li>Dimensionality reduction: f: x -&gt; y, dim(y) &lt;&lt; dim(x)</li>
+<li>Density estimatoin: f: x -&gt; Delta(x)</li>
+</ul></li>
+<li><p>
+<b><b>data</b></b>: information about the problem to solve in the form of a
+distribution p which is tipically unknown.
+</p>
+<ul class="org-ul">
+<li>training set: the failure of a machine learning algorithm is</li>
+</ul>
+<p>
+often caused by a bad selection of training samples.
+</p>
+<ul class="org-ul">
+<li>validation set</li>
+<li>test set</li>
+</ul></li>
+<li><b><b>model hypotheses</b></b>: a model \(Ftask\) is an implementation of a
+function \(f\):</li>
+</ul>
+
+<p>
+\[f \in Ftask\]
+</p>
+
+<p>
+A set of models forms an hypothesis space:
+</p>
+
+<p>
+\[Hip \subseteq Ftask\]
+</p>
+
+<p>
+We use an hypothesis space to reduce the number of possible models
+in order to make our life easier.
+</p>
+<ul class="org-ul">
+<li><b><b>learning algorithm</b></b></li>
+<li><b><b>objective</b></b>: we want to minimize a (generalization) error function
+\(E(f, p)\).</li>
+</ul>
+
+<p>
+\[f* \in arg\ min(f,p), f \in Ftask\]
+</p>
+
+<p>
+\(Ftask\) is too big of a function space, we need an implementation
+(model hypotheses). So we define a model hypothesis space \(Hip \in
+	Ftask\) and seek a solution within that space.
+</p>
+
+<p>
+\[f_{Hip}*(D) \in arg\ min_{f \in Hip_M} E(f, D)\]
+</p>
+
+<p>
+With \(D=\{z_1, ..., z_n\}\) being the training data.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org97be48f" class="outline-3">
+<h3 id="org97be48f">Error function</h3>
+<div class="outline-text-3" id="text-org97be48f">
+<p>
+Let \(l(f, z)\) be a pointwise loss. The error is computed from a
+function (in an hypothesis space) and a training set.
+</p>
+
+<p>
+\[E(f, p) = \mathbb{E}_{z\sim pdata} [l(f, z)]\] \[E(f, D) =
+\frac{1}{n}\sum_{i=1}^{n}l(f, z_i)\] We want to minimize such error.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd20901b" class="outline-3">
+<h3 id="orgd20901b">Underfitting and Overfitting</h3>
+<div class="outline-text-3" id="text-orgd20901b">
+<ul class="org-ul">
+<li><b><b>Underfitting</b></b>: the error is very big, aka I am very far from what
+I want</li>
+<li><b><b>Overfitting</b></b>: there is a large gap between the generalization
+(validation) and the training phase.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgefa1be8" class="outline-3">
+<h3 id="orgefa1be8">How to improve generalization</h3>
+<div class="outline-text-3" id="text-orgefa1be8">
+<p>
+Common techniques to improve generalization include:
+</p>
+
+<ul class="org-ul">
+<li>avoid attaining the minimum on training error.</li>
+<li>reduce model capacity.</li>
+<li>change the objective with a regularization term:</li>
+</ul>
+<p>
+\[E_{reg}(f, D_n) = E(f, D_n)+\lambda \Omega (f)\]
+</p>
+
+<ul class="org-ul">
+<li>\(\lambda\) is the trade-off parameter</li>
+<li>For example:</li>
+</ul>
+
+<p>
+\[E_{reg}(f, D_n) = \frac{1}{n} \sum_{i=1}^{n} [f(x_i)-y_i]^2 +
+\frac{\lambda}{n} |w|^2\]
+</p>
+
+<ul class="org-ul">
+<li>inject noise in the learning algorithm.</li>
+<li>stop the learning algorithm before convergence.</li>
+<li>increase the amount of data:</li>
+</ul>
+
+<p>
+\[E(f, D_N) \rightarrow E(f, p_{data}),\ n \rightarrow \inf\]
+</p>
+
+<ul class="org-ul">
+<li>augmenting the training set with transformations (rotate the image,
+change brightness&#x2026;).</li>
+<li>combine predictions from multiple, decorrelated models (ensembling).
+<ul class="org-ul">
+<li>train different models on different subsets of data, and we
+average the final solution between all of them</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<p>
+Travel: <a href="intro-to-machine-learning.html">Intro to Machine Learning</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

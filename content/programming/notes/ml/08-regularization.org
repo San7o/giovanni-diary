@@ -1,0 +1,98 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:intro-to-machine-learning.org][Intro to Machine Learning]] >
+
+* Machine Learning Basics
+#+INDEX: Giovanni's Diary!Programming!Notes!Intro to Machine Learning!Basics
+
+A recap on model based machine learning:
+
+1. Pick a model
+   
+$$0=b+\sum_{j=1}^mw_if_i$$
+
+2. Pick a criteria to optimize
+
+$$\sum_{i=1}^n\mathbb{1}[y_i(wx_i+b)\le 0]$$
+
+3. Develop a learning algorithm
+
+$$argmin_{w, b}\sum_{i=1}^n\mathbb{1}[y_i(wx_i+b)\le 0]$$
+
+- repeat: pick a dimension and move a small amount towards the opposite of the derivative
+
+** Regularizer
+
+A **regularizer** is an additional criterion to the loss function to
+make sure that we do not **overfit**
+
+$$argmin_{w, b}\sum_{i=1}^nloss(yy')+\lambda regularizer(w, b)$$
+
+- we want to bias the model so that it prefers certain types of
+  weights over others
+- note that is I sum two convex functions, the result is also
+  convex. We want a convex regularizer. If the function is convex,
+  there is usually an easy solution.
+- **intuitively, we add some value to the function to be minimized so
+  that the result is not really the minimum error fro the data, but is
+  altered -> less overfitting**
+
+Generally, we do not want huge weights: if weights are large, a small
+change in a feature can result in a large change in the prediction
+
+So, how do we encourage small weights or penalize large weights?
+
+** Common regularizers
+
+Sum of the weights
+
+$$r(w, b)=\sum |w_j|$$
+
+Sum of the squared weights
+
+$$r(w, b)=\sqrt{\sum |w_j|^2}$$
+
+- this penalizes large values more compared to sum of weights
+
+In general, we can call this formula **p-norm** or Lp (L1, L2, ....):
+
+$$r(w, b)=\sqrt[p]{\sum |w_j|^p}=||w||^p$$
+
+- smaller values of p encourage sparser vectors.
+- intuitively, **with L2 we still get a parabola in the function to be
+  minimized. In L1 we get hard edges**
+- L1 is popular because it tends to result is sparse
+  solutions. However, It is not differentiable, so It only works for
+  gradient descent solvers
+- L2 is also popular because for some loss functions, it can be solved
+  directly
+- Lp is less popular since they don't tend to shrink the weights
+  enough
+
+Possible question: describe the difference between 1-norm and 2-norm regularizers.
+
+** Using Gradient Descent
+Example using 2-norm:
+
+$$argmin_{w, b}\sum_{i=1}^n exp(-y_i(wx_i+b))+\frac{\lambda}{2}||w||^2$$
+$$\frac{d}{dw_j}equation = -\sum_{i=1}^n y_ix_{ij}exp(-y_i(wx_i+b))+\lambda w_i$$
+
+We can multiply all of this by a constant to control the learning rate.
+
+Note that gradiant descent is not the only minimization method (for
+example SVM do not use gradiant descent).
+
+** Logistic Regression
+Lot loss or binary cross-entropy loss
+
+$$L(w) = -\sum_{i=1}^n [y_ilog(\hat{y_i})+(1-y_i)log(1-\hat{y_i})]$$
+
+where
+
+$$\hat{y_i} = \sigma (x_i^Tw)$$
+
+and $$\sigma (z)=\frac{1}{1+e^{-z}}$$
+
+-----
+
+Travel: [[file:intro-to-machine-learning.org][Intro to Machine Learning]], [[file:../../../theindex.org][Index]]

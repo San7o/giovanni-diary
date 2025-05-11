@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
+</p>
+
+<div id="outline-container-org4d6ce6a" class="outline-2">
+<h2 id="org4d6ce6a">The K-nearest neighbor algorithm</h2>
+<div class="outline-text-2" id="text-org4d6ce6a">
+<p>
+Given an n-dimensional partitioned space, and a new train value, we
+want to associate the new value with a partition. A simple solution
+could be to look at the nearest known data and their partition. To get
+a more representative result, we can check k nearest neighbors.
+</p>
+
+<p>
+More precisely, to classify an example \(d\):
+</p>
+
+<ul class="org-ul">
+<li>find k nearest neighbors of \(d\)</li>
+<li>choose as the label the majority label within the \(k\) nearest neighbors</li>
+</ul>
+</div>
+
+<div id="outline-container-org9331237" class="outline-3">
+<h3 id="org9331237">How do we measure "nearest"?</h3>
+<div class="outline-text-3" id="text-org9331237">
+<p>
+Measuring distance / similarity is a domain-specific problem and there
+are many different variations.
+</p>
+
+<ul class="org-ul">
+<li><b><b>similarity</b></b>: numerical measure of how alike two data objects are</li>
+<li><b><b>difference</b></b>: numerical measure of how different are two data objects</li>
+</ul>
+</div>
+
+<div id="outline-container-orgeb30820" class="outline-4">
+<h4 id="orgeb30820">Euclidean distance</h4>
+<div class="outline-text-4" id="text-orgeb30820">
+<p>
+\[D(a, b) = \sqrt{(a_i - b_i)^2 + (a_2 - b_2)^2}\]
+</p>
+
+<p>
+However, here we are assuming that all the labels are comparable
+aka. measured in the same range. Therefore, data should be
+<b><b>standardized</b></b>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd3454a0" class="outline-4">
+<h4 id="orgd3454a0">Standardization or Z-score normalization</h4>
+<div class="outline-text-4" id="text-orgd3454a0">
+<p>
+Rescale the data so that the mean is 0 and the standard deviation from
+the mean is 1
+</p>
+
+<p>
+\[x_{norm}=\frac{x-\mu}{\sigma}\]
+<b><b>Min-Max scaling</b></b>: scale the data to a fixed range - between 0 and 1
+</p>
+
+<p>
+\[x_{norm}=\frac{x-x_{min}}{x_{max}-x_{min}}\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcae0855" class="outline-4">
+<h4 id="orgcae0855">Minkowsky Distance</h4>
+<div class="outline-text-4" id="text-orgcae0855">
+<p>
+Generalization of the Euclidean distance:
+</p>
+
+<p>
+\[D(a, b) = (\sum_{k=1}^{p} |a_k - b_k|^r)^{\frac{1}{r}}\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9e02e96" class="outline-4">
+<h4 id="org9e02e96">Cosine Similarity</h4>
+<div class="outline-text-4" id="text-org9e02e96">
+<p>
+Given two different vectors:
+</p>
+
+<p>
+\[COS(d_1, d_2) = (d_1 * d_2) / ||d_1|| ||d_2||\]
+</p>
+<ul class="org-ul">
+<li>\(*\) is the dot product and \(||d||\) is the length of vector d</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdcb85b8" class="outline-3">
+<h3 id="orgdcb85b8">Decision Boundaries</h3>
+<div class="outline-text-3" id="text-orgdcb85b8">
+<p>
+The decision boundaries are places in the features space where the
+classification of a point / example changes.
+</p>
+</div>
+
+<div id="outline-container-org9b273fb" class="outline-4">
+<h4 id="org9b273fb">Voronoi Diagram / Partitioning</h4>
+<div class="outline-text-4" id="text-org9b273fb">
+<p>
+Describes the areas that are nearest to any given point, given a set
+of data
+</p>
+
+<ul class="org-ul">
+<li>each line segment is equidistant between two points</li>
+</ul>
+
+<p>
+However, k-NN does not explicitly compute decision boundaries, but
+form a subset of the Voronoi diagram for the training data.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org090a076" class="outline-3">
+<h3 id="org090a076">How to pick K</h3>
+<div class="outline-text-3" id="text-org090a076">
+<p>
+Some techniques to pick \(k\) include:
+</p>
+
+<ul class="org-ul">
+<li>common heuristics</li>
+<li>use validation set</li>
+<li>use cross validatoin</li>
+<li>rule of thumb is \(k < \sqrt{n}\) where n is the size of training
+examples</li>
+</ul>
+
+<p>
+k-NN variations: weighted k-NN.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgeec1888" class="outline-3">
+<h3 id="orgeec1888">Lazy Learner vs Eager Learner</h3>
+<div class="outline-text-3" id="text-orgeec1888">
+<p>
+k-NN belongs to the class of lazy learning algorithms
+</p>
+
+<ul class="org-ul">
+<li><b><b>lazy learning</b></b>: simply stores training data and operates when it
+is given a test example</li>
+<li><b><b>eager learning</b></b>: given a training set, constructs a
+classification model before receiving new test data to classify</li>
+</ul>
+
+<p>
+This means that k-NN is not really fast during inference, but no training is required.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org75c88ae" class="outline-3">
+<h3 id="org75c88ae">Curse of Dimensionality</h3>
+<div class="outline-text-3" id="text-org75c88ae">
+<p>
+In high dimensions almost all points are far away from each other
+</p>
+
+<ul class="org-ul">
+<li>the size of the data space grows exponentially with the number of dimensions</li>
+<li>this means that the size of the data set must also grow
+exponentially in order to keep the same density
+<ul class="org-ul">
+<li>the success of k-NN is very dependent on having a dense data set</li>
+<li>k-NN requires a point to be close in every single dimension</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8d6b0e6" class="outline-3">
+<h3 id="org8d6b0e6">Computational Cost</h3>
+<div class="outline-text-3" id="text-org8d6b0e6">
+<ul class="org-ul">
+<li>Linear algorithm (no preprocessing) is O(kN) to compute the distance
+for all N datapoints</li>
+<li>tree-based data structures: pre-processing often using K-D tree
+<ul class="org-ul">
+<li>divide the space in regions. To check which region a point belongs
+to, simply traverse a binary tree.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5b1b196" class="outline-3">
+<h3 id="org5b1b196">Parametric vs Non-parametric Models</h3>
+<div class="outline-text-3" id="text-org5b1b196">
+<ul class="org-ul">
+<li><b><b>Parametric models</b></b> have a finite number of parameters
+<ul class="org-ul">
+<li>linear regression, logistic regression, and linear support vector
+machines</li>
+</ul></li>
+<li><b><b>Nonparametric model</b></b>: the number of parameters is (potentially)
+infinite
+<ul class="org-ul">
+<li>k-nearest neighbor, decision trees, RBF kernel SVMs</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<p>
+Travel: <a href="intro-to-machine-learning.html">Intro to Machine Learning</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

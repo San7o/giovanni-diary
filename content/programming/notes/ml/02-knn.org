@@ -1,0 +1,125 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:intro-to-machine-learning.org][Intro to Machine Learning]] >
+
+* The K-nearest neighbor algorithm
+#+INDEX: Giovanni's Diary!Programming!Notes!Intro to Machine Learning!KNN
+
+
+Given an n-dimensional partitioned space, and a new train value, we
+want to associate the new value with a partition. A simple solution
+could be to look at the nearest known data and their partition. To get
+a more representative result, we can check k nearest neighbors.
+
+More precisely, to classify an example $d$:
+
+- find k nearest neighbors of $d$
+- choose as the label the majority label within the $k$ nearest neighbors
+
+** How do we measure "nearest"?
+
+Measuring distance / similarity is a domain-specific problem and there
+are many different variations.
+
+- **similarity**: numerical measure of how alike two data objects are
+- **difference**: numerical measure of how different are two data objects
+
+*** Euclidean distance
+
+$$D(a, b) = \sqrt{(a_i - b_i)^2 + (a_2 - b_2)^2}$$
+
+However, here we are assuming that all the labels are comparable
+aka. measured in the same range. Therefore, data should be
+**standardized**.
+
+*** Standardization or Z-score normalization
+
+Rescale the data so that the mean is 0 and the standard deviation from
+the mean is 1
+
+$$x_{norm}=\frac{x-\mu}{\sigma}$$
+**Min-Max scaling**: scale the data to a fixed range - between 0 and 1
+
+$$x_{norm}=\frac{x-x_{min}}{x_{max}-x_{min}}$$
+
+*** Minkowsky Distance
+
+Generalization of the Euclidean distance:
+
+$$D(a, b) = (\sum_{k=1}^{p} |a_k - b_k|^r)^{\frac{1}{r}}$$
+
+*** Cosine Similarity
+
+Given two different vectors:
+
+$$COS(d_1, d_2) = (d_1 * d_2) / ||d_1|| ||d_2||$$
+- $*$ is the dot product and $||d||$ is the length of vector d
+
+** Decision Boundaries
+
+The decision boundaries are places in the features space where the
+classification of a point / example changes.
+
+*** Voronoi Diagram / Partitioning
+
+Describes the areas that are nearest to any given point, given a set
+of data
+
+- each line segment is equidistant between two points
+
+However, k-NN does not explicitly compute decision boundaries, but
+form a subset of the Voronoi diagram for the training data.
+
+** How to pick K
+
+Some techniques to pick $k$ include:
+
+- common heuristics
+- use validation set
+- use cross validatoin
+- rule of thumb is $k < \sqrt{n}$ where n is the size of training
+  examples
+
+k-NN variations: weighted k-NN.
+
+** Lazy Learner vs Eager Learner
+
+k-NN belongs to the class of lazy learning algorithms
+
+- **lazy learning**: simply stores training data and operates when it
+  is given a test example
+- **eager learning**: given a training set, constructs a
+  classification model before receiving new test data to classify
+
+This means that k-NN is not really fast during inference, but no training is required.
+
+** Curse of Dimensionality
+
+In high dimensions almost all points are far away from each other
+
+- the size of the data space grows exponentially with the number of dimensions
+- this means that the size of the data set must also grow
+  exponentially in order to keep the same density
+	- the success of k-NN is very dependent on having a dense data set
+	- k-NN requires a point to be close in every single dimension
+
+** Computational Cost
+
+- Linear algorithm (no preprocessing) is O(kN) to compute the distance
+  for all N datapoints
+- tree-based data structures: pre-processing often using K-D tree
+	- divide the space in regions. To check which region a point belongs
+    to, simply traverse a binary tree.
+
+** Parametric vs Non-parametric Models
+
+- **Parametric models** have a finite number of parameters
+	- linear regression, logistic regression, and linear support vector
+    machines
+- **Nonparametric model**: the number of parameters is (potentially)
+  infinite
+	- k-nearest neighbor, decision trees, RBF kernel SVMs
+
+-----
+
+Travel: [[file:intro-to-machine-learning.org][Intro to Machine Learning]], [[file:../../../theindex.org][Index]]

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
+</p>
+
+<div id="outline-container-org3c0a445" class="outline-2">
+<h2 id="org3c0a445">Beyond binary classification</h2>
+<div class="outline-text-2" id="text-org3c0a445">
+</div>
+
+<div id="outline-container-orga1df09a" class="outline-3">
+<h3 id="orga1df09a">Binary Classification</h3>
+<div class="outline-text-3" id="text-orga1df09a">
+<p>
+In binary classification, given:
+</p>
+
+<ul class="org-ul">
+<li>an input space \(X\)</li>
+<li>an unknown distribution \(D\) over \(X \times \{ -1,+1 \}\)</li>
+<li>a training set D sampled from \(D\)</li>
+</ul>
+
+<p>
+Compute: A function \(f\) minimizing \(\mathbb{E}_{(x, y)\sim D}[f(x) \ne  y]\) 
+Example: linear classification, classify between two classes
+</p>
+</div>
+</div>
+
+<div id="outline-container-org137d81e" class="outline-3">
+<h3 id="org137d81e">Multi-class classification</h3>
+<div class="outline-text-3" id="text-org137d81e">
+<p>
+In multi-class classification, given:
+</p>
+
+<ul class="org-ul">
+<li>An input space \(X\) and number of classes \(K\)</li>
+<li>An unknown distribution \(D\) over \(X \times [K]\)</li>
+<li>A training set D sampled from \(D\)</li>
+</ul>
+
+<p>
+Compute: A function \(f\) minimizing \(\mathbb{E}_{(x, y)\sim D}[f(x) \ne  y]\) 
+Idea: one line does not suffice, but we can combine more lines
+</p>
+
+<p>
+There are two approaches to achieve multi-class classification which
+we will discuss:
+</p>
+
+<ul class="org-ul">
+<li>one vs all</li>
+<li>all vs all</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf4cd040" class="outline-3">
+<h3 id="orgf4cd040">One vs All (OVA)</h3>
+<div class="outline-text-3" id="text-orgf4cd040">
+<p>
+For each label \(k=1, ..., K\) define a binary problem where"
+</p>
+
+<ul class="org-ul">
+<li>all examples with label \(k\) are positive</li>
+<li>all other examples are negative</li>
+</ul>
+
+<p>
+In practice, learn \(K\) different classification models.
+</p>
+
+<p>
+To classify we pick the most confident positive, in none vote
+positive, pick least confident negative.
+</p>
+
+<pre class="example">
+OneVsAllTrain(D, BinaryTrain):
+  for i=1 to K do
+    D_1 = relabel D so class i is positive and \not i is negative
+    f_i = BinaryTrain(D_1)
+  end for
+  return f_1,...,f_k 
+</pre>
+
+<pre class="example">
+OneVsAllTest(f_1,...,f_k, x):
+  score = (0,...,0)
+  for i=1 to K do
+    y = f_1(x)
+    score[i] = score[i] + y
+  end for
+  return max(score)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org62fac4f" class="outline-3">
+<h3 id="org62fac4f">All vs All (AVA)</h3>
+<div class="outline-text-3" id="text-org62fac4f">
+<p>
+All vs All, sometimes called <b><b>all pairs</b></b>, It trains \(K(K-1)/2\)
+classifiers:
+</p>
+
+<ul class="org-ul">
+<li>the classifier \(F_{ij}\) receives all the examples of class \(i\) as
+positive and all the examples of class \(j\) as negative, for each
+pair \((i, j)\)</li>
+<li>every time \(F_{ij}\) predicts positive, the class \(i\) gets a vote,
+otherwise, class \(j\) gets a vote</li>
+<li>after running all \(K(K-1)/2\) classifiers, the class with the most
+votes wins</li>
+</ul>
+
+<p>
+Note: The teacher might ask to explain the algorithm in more detail
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdc329ef" class="outline-3">
+<h3 id="orgdc329ef">Ova vs Ava</h3>
+<div class="outline-text-3" id="text-orgdc329ef">
+<p>
+Train time:
+</p>
+
+<ul class="org-ul">
+<li>AVA learns more classifiers, however, they are trained on much
+smaller data this tends to make it faster if the labels are equally
+balanced</li>
+</ul>
+
+<p>
+Test time:
+</p>
+
+<ul class="org-ul">
+<li>AVA has more classifiers, so often is slower</li>
+</ul>
+
+<p>
+Error:
+</p>
+
+<ul class="org-ul">
+<li>AVA tests with more classifiers and therefore has more changes for
+errors</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org857081f" class="outline-3">
+<h3 id="org857081f">Macroaveraging vs Microaveraging</h3>
+<div class="outline-text-3" id="text-org857081f">
+<ul class="org-ul">
+<li>Microaveraging: average over examples</li>
+<li>Macroaveraging: calculate evaluation score (e.g. accuracy) for each
+label, then average over labels</li>
+</ul>
+
+<hr />
+
+<p>
+Travel: <a href="intro-to-machine-learning.html">Intro to Machine Learning</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

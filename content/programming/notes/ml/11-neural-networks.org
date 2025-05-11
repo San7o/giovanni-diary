@@ -1,0 +1,227 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:intro-to-machine-learning.org][Intro to Machine Learning]] >
+
+* Neural Networks
+#+INDEX: Giovanni's Diary!Programming!Notes!Intro to Machine Learning!Neural Networks
+
+An artificial neuron, for example a perceptron, is a non-linear
+parameterized function with restricted output range. It predicts the
+output by learning the weights while considering a bias, more
+specifically it associates one weight per input and multiplies them
+together.
+
+Minsky and Papert (1969) showed that an exclusive OR (XOR) cannot be
+solved with a perceptron because the problem is not linearly
+separable.
+
+This can be solved using **Multi-Layer perceptron** where we densely
+connect artificial neurons to realize compositions of non-linear
+functions. While a single layer perceptron has the form:
+
+$$y(x, w)=f ( \sum_{j=1}^M w_j\phi_j(x))$$
+
+where $f(.)$ is a nonlinear activation function in the case of
+classification and is the identity in the case of regression. A multi
+layer perceptron takes the form:
+
+$$y_k(x, w)=\sigma (\sum_{j=1}^M w_{kj}^{(2)}h(\sum_{i=1}^D w_{ji}^{(1)}x_i + w_{j0}^{(1)}) + w_{k0)^{(2)}}$$
+
+where $\sigma (a)$ is something like $\frac{1}{1+exp(-1)}$ and the
+superscript $w^{(1)}$ indicates that the corresponding parameters are
+in the first layer of the network. $w_{j0}^{(1)}$ are called biases
+and $w_{ji}^{(1)}$ are called weights. $h(.)$ is a non linear
+function. The process of evaluating the previous formula can be
+interpreted as forward propagation of information through the
+network. We call the layers between the input and the output as
+**hidden**.
+
+Yet we cannot train the MLP like a single perceptron because we cannot
+know the desired target for the hidden layers. This problem is solved
+by **backpropagation**.
+
+** Task
+
+Given training samples $T=\{ (x_1, y_1), (x_2, y_2), ..., (x_n, y_n)
+\}$ adjust all the weights of the network $\Theta$ such that a cost
+function is minimized.
+
+$$min_{\Theta} \sum _i L(y_i, f(x_i;\Theta))$$
+
+We define $L(.)$ later. We update the weights of each layer with
+gradient descent and use backpropagation of the error signal to
+compute the gradient efficiently.
+
+** Training
+
+To train a feed-forward network we need to define:
+
+- cost function: we can apply the square loss, for classification is
+  common to convert output into probabilities with the **softmax**
+  function $\sigma (z)_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}$
+  . Another popular choice is cross entropy $L_i = -\sum_k y_k
+  log(S(l_k)) = -log(S(l))$.
+- form of output: linear layers $y=W^Th+b$ produce unnormalized log
+  probabilities, for this reason It is often used the softmax function
+  as seed before.
+- activation functions: we want to apply a non-linear function
+  elementwise. A common one is **Rectified Linear Units** (RELU) which
+  is defined as $h(x)=max(0, x)$, note that there are variations of
+  this where the function behaves differently below 0.
+- architecture (number of layers etc): often done empirically.
+- optimizer
+
+** Error Backpropagation
+
+To learn the weights we use an algorithm called backpropagation, which
+is composed of the following steps:
+
+1. **Feedforward propagation**: Accept input $x_i$, pass through
+   intermediate stages and obtain output
+2. Use the computed output to **compute a scalar cost** depending on
+   the loss function.
+
+$$L(X;w)=\sum_{i=1}^N \frac{1}{2}(y_i-\hat y(x_i;w))^2$$
+
+3. **Backpropatation** allows information to flow backwards from cost
+   to compute the gradient
+
+We will now discuss backpropagation. In a general feed-forward
+network, each unit computes a weighted sum of its input of the form:
+
+$$a_j=\sum_i w_{ji}z_i$$
+
+The sum is then transformed by a non linear activation function
+$h(.)$: $z_j = h(a_j)$. The error function takes the form:
+
+$$E_n=\frac{1}{2}\sum_k (y_{nk}-t_{nk})^2$$
+
+The gradient of this error function with respect to a weight $w_{ji}$
+is given by:
+
+$$\frac{\partial E_n}{\partial w_{ji}}=(y_{nj}-t_{nj})x_{ni}$$
+
+We note that $E_n$ depends on the weight $w_{ji}$ only via the summed
+input $a_j$ to unit $j$. We can therefore apply the chain rule for
+partial derivatives to give:
+
+$$\frac{\partial E_n}{\partial w_{ji}}=\frac{\partial E_n}{\partial a_j}\frac{\partial a_j}{\partial w_{ji}}$$
+
+We now introduce a useful notation:
+
+$$\delta _j \equiv \frac{\partial E_n}{\partial a_j}$$
+
+where $\delta$'s are often referred to as errors. Using the definition
+of $a_j$ we can write:
+
+$$\frac{\partial a_j}{\partial w_{ji}}=z_i$$
+
+Substituting the last three equations we obtain:
+
+$$\frac{\partial E_n}{\partial w_{ji}}=\delta _jz_i$$
+
+For the output units, we have:
+
+$$d_k = y_k - t_k$$
+
+To evaluate $\delta$'s for hidden units, we make use of the chain rule
+for partial derivatives:
+
+$$\delta _j \equiv \frac{\partial E_n}{\partial a_j}=\sum _k \frac{\partial E_n}{\partial a_k} \frac{\partial a_k}{\partial a_j}$$
+
+If we substitute the definition of $\delta$ and $a_j$, and make use of
+$h(.)$, we obtain the following **backpropagation formula**:
+
+$$\delta _j = h'(a_j)\sum _kw_{kj}\delta _k$$
+
+** Example
+
+Consider a two-layer network (that does not count the input
+layer). Given:
+
+$$h(a)\equiv tanh(a)$$
+$$tanh(a)=\frac{e^a-e^{-a}}{e^a+e^{-a}}$$
+$$h'(a)=1-h(a)^2$$
+$$E_n = \frac{1}{2}\sum_{k=1}^K (y_k - t_k)^2$$
+
+where $y_k$ is the activation of output unit $k$, and $t_k$ is the
+corresponding target, for a particular input pattern $x_n$.
+
+For each pattern in the training set in turn, we first perform forward
+propagation using:
+
+$$a_j = \sum_{i=1}^D w_{ji}^{(1)}x_i$$
+$$z_j = tanh(a_j)$$
+$$y_k = \sum_{j=1}^M w_{kj}^{(2)}z_j$$
+Next we compute the $\delta$'s for each output unit using:
+
+$$\delta _k = y_k - t_k$$
+
+Then we backpropagate there to obtain $\delta$s for the hidden units
+using:
+
+$$\delta_j = (1-z_j^2)\sum_{k=1}^K w_{kj}d_k$$
+
+Finally, the derivatives with respect to the first-layer and
+second-layer weights are given by:
+
+$$\frac{\partial E_n}{\partial w_{ji}^{(1)}}=\delta_jx_i,\ \frac{\partial E_n}{\partial w_{kj}^{(2)}}=\delta _kz_j$$
+
+** Optimization
+
+The function $f$ is a composition of multiple functions:
+
+$$f(x)=f^{(3)}(f^{(2)}(f^{(1)}(x)))$$
+
+Feed-forward neural networks can be trained with Vanilla Gradient
+Descent, we use backpropagation to compute the gradient efficiently.
+
+There are two types of gradient descent:
+
+- **Batch Gradient Descent**: the estimates are stable however you
+  need to compute gradients over the entire training for one update.
+- **Stochastic Gradient Descent**: we sample only one datapoint from
+  the training set and compute the gradient. The learning rate changes
+  at each step, It typically decays linearly. A problem arises with
+  flat error surfaces where the error would jump vividly. We can
+  introduce a variable called **velocity** to counteract this, where
+  the gradient updates the velocity.
+
+It is often useful to compute the gradient os set of samples
+
+** Convolutional Neural Networks
+
+Convolutional neural networks are simply neural networks that use
+convolution in place of general matrix multiplication in at least one
+of their layers.
+
+A convolution is a general purpose filter operation for image where a
+kernel matrix is applied to an image where the central pixel is
+determined by adding the weighted valued of all its neighbors
+together, producing a **feature map**.
+
+$$S(i, j) = (I*K)(i, j) = \sum_m\sum_nI(m, n)K(i-m,j-n)$$
+
+Inspired by mammalian visual cortex, convolutional neural networks are
+feedforward neural networks with specialized connectivity
+structure. In particular, the network is composed of a set of filters
+that cover a spacially small portion of the input data and that are
+convoluted over It. Intuitively, the network will learn filters that
+activate when they see some specific type of feature at some spatial
+position in the input.
+
+After the convolution, it adds non-linearity by applying a non linear
+function $h(.)$. Lastly, It performs spacial pooling which reduces the
+spacial size of the representation to reduce the amount of parameters.
+
+** Other neural networks
+
+- Recurrent network: when nodes on the same layer influence each
+  other, used in video frame prediction.
+- Autoencoders: unsupervised approach for learning a lower-dimensional
+  feature representation from unlabeled training data. We can train a
+  decoder to do the opposite.
+
+-----
+
+Travel: [[file:intro-to-machine-learning.org][Intro to Machine Learning]], [[file:../../../theindex.org][Index]]

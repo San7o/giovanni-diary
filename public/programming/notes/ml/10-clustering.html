@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
+</p>
+
+<div id="outline-container-org36190dc" class="outline-2">
+<h2 id="org36190dc">Clustering</h2>
+<div class="outline-text-2" id="text-org36190dc">
+<p>
+Given unlabeled data, we want to group them into clusters.
+</p>
+
+<p>
+A well-known and popular clustering algorithm is k-means which works
+following this logic:
+</p>
+
+<ul class="org-ul">
+<li>start with some initial cluster centroids</li>
+<li>Iterate:
+<ul class="org-ul">
+<li>assign each example to the closest centroid</li>
+<li>recalculate center as the mean of the points in a cluster</li>
+</ul></li>
+</ul>
+
+<p>
+Some complications rise when discussing representation of data, how to
+measure similarity or distance, is it a flat clustering or
+hierarchical and is the number of clusters known a priori. We can also
+categorize <b><b>hard clustering</b></b> where each example belongs to exactly
+one cluster (k-means) and <b><b>soft clustering</b></b> where an example can
+belong to more than one cluster (probabilistic).
+</p>
+</div>
+
+<div id="outline-container-org0ac96cc" class="outline-3">
+<h3 id="org0ac96cc">Expectation Maximization</h3>
+<div class="outline-text-3" id="text-org0ac96cc">
+<p>
+If we restrain our problem by assuming that the clusters are formed as
+a mixture of Gaussians (elliptical data) and we assign data to a
+cluster with a certain probability (soft clustering) we can use the
+<b><b>Expectation Maximization</b></b> (EM) algoritm. The algorithm proceeds
+like the following:
+</p>
+
+<ul class="org-ul">
+<li>Start with some initial cluster centers</li>
+<li>Iterate
+<ul class="org-ul">
+<li>Soft assign points to each cluster by calculating the probability
+of each point belonging to each cluster \(p(\theta _c | x)\).</li>
+<li>Recalculate the cluster centers by calculating the maximum
+likelihood cluster centers given the current soft clustering
+\(\theta _c\).</li>
+</ul></li>
+</ul>
+
+<p>
+A Gaussian in 1 dimension is defined as:
+</p>
+
+<p>
+\[f(x)=\frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}\]
+</p>
+
+<p>
+A Gaussian in \(n\) dimensions is defined as:
+</p>
+
+<p>
+\[N[x;\mu , \Sigma] = \frac{1}{(2\pi)^{d/2}\sqrt{det(\Sigma)}}exp[-\frac{1}{2}(x-\mu)^T\Sigma ^{-1}(x-\mu)]\]
+</p>
+
+<p>
+Intuitively, each iteration of Expectation Maximization increases the
+likelihood of the data and is guaranteed to converge (though to a
+local optimum)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1568cf9" class="outline-3">
+<h3 id="org1568cf9">Non-Gaussian Data</h3>
+<div class="outline-text-3" id="text-org1568cf9">
+<p>
+In case of non-gaussian data, we can use a technique called spectral
+clustering where we group points based on links in a graph.
+</p>
+
+<p>
+We first create a fully connected graph or a k-nearest neighbor graph
+(each node is only connected to its K closest
+neighbors). Alternatively, we can create a graph with some notion of
+similarity among nodes, for example using a gaussian kernel: \(W(i,
+j)=exp[\frac{-|x_i-x_j|^2}{\sigma ^2}]\).
+</p>
+
+<p>
+We then partition the graph by butting the graph: we want to find a
+partition of the graph into two parts \(A\) and \(B\) where we minimize
+the sum of the weights of the set of edges that connect the two
+groups, aka \(Cut(A, B)\). We observe that this problem can be
+formalized as a discrete optimization problem and then relaxed in the
+continuous domain and become a generalized eigenvalue problem.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4e90c4a" class="outline-3">
+<h3 id="org4e90c4a">Hierarchical Clustering</h3>
+<div class="outline-text-3" id="text-org4e90c4a">
+<p>
+We are interested in producing a set of nested clusters organized as a
+hierarchical tree, also called <b><b>dendrogram</b></b>.
+</p>
+
+<ul class="org-ul">
+<li>Initially, each instance has its own cluster</li>
+<li>Repeat
+<ul class="org-ul">
+<li>Pick the two closest clusters</li>
+<li>Merge them into a new cluster</li>
+<li>Stop when there is only one cluster left</li>
+</ul></li>
+</ul>
+
+<p>
+The idea of the algorithm is to first mege very similar instances and
+then incrementally build larger clusters out of smaller clusters. The
+algorithm goes as follows:
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="intro-to-machine-learning.html">Intro to Machine Learning</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

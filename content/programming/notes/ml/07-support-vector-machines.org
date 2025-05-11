@@ -1,9 +1,10 @@
 #+startup: content indent
 
-[[file:../index.org][Giovanni's Diary]] > [[file:programming.org][Programming]] >
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:intro-to-machine-learning.org][Intro to Machine Learning]] >
 
 * Support Vector Machines
-#+INDEX: Giovanni's Diary!Programming!Support Vector Machines
+#+INDEX: Giovanni's Diary!Programming!Notes!Intro to Machine Learning!Support Vector Machines
+
 Linear classifiers assume that data can be linearly separable. If this
 does not hold, the chosen hyperplane will keep adjusting at each
 iteration without ever converging. Let's now discuss a particular type
@@ -146,7 +147,7 @@ With this result, the objective is now to minimize the following:
 $$min_{w, b} ||\vec{w}||^2 + C \sum_i max(0, 1 - y_i(\vec{w}\vec{x_i} +b))$$
 
 
-* Non linearly separable data
+** Non linearly separable data
 
 *** Cases of optimization problems
 
@@ -232,7 +233,7 @@ $$ L(x, \lambda) = \sum_i a_i -\frac{1}{2}\sum_i \sum_j \sum_j a_i a_j y_i y_j x
  - each non-zero a_i indicates that the corresponding x_i is a support
    vector.
  
-* Non linear SVM - Kernel Trick
+** Non linear SVM - Kernel Trick
 
 What if the data is not linearly separable? In such situation we can
 map data to a higher-dimensional space where the training set is
@@ -267,7 +268,6 @@ There are multiple types of kernels, such as
 Support Vector Machines are often used in object recognition in
 computer vision.
 
-
 -----
 
-Travel: [[file:programming.org][Programming]], [[file:../theindex.org][Index]]
+Travel: [[file:intro-to-machine-learning.org][Intro to Machine Learning]], [[file:../../../theindex.org][Index]]

@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
+</p>
+
+<div id="outline-container-org00b935d" class="outline-2">
+<h2 id="org00b935d">Support Vector Machines</h2>
+<div class="outline-text-2" id="text-org00b935d">
+<p>
+Linear classifiers assume that data can be linearly separable. If this
+does not hold, the chosen hyperplane will keep adjusting at each
+iteration without ever converging. Let's now discuss a particular type
+of classifier: support vector machines (SVM).
+</p>
+</div>
+
+<div id="outline-container-org3ebd7ed" class="outline-4">
+<h4 id="org3ebd7ed">Large margin classifiers</h4>
+<div class="outline-text-4" id="text-org3ebd7ed">
+<p>
+We define the <b><b>margin</b></b> of a classifier as the distance from the
+classification hyperplane to the closest points of either class. We
+call <b><b>large margin classifiers</b></b> the classifiers that attempt to
+maximise this measure.
+</p>
+
+<p>
+We call the sets of "closest points" from the hyperplane with
+<b><b>support vectors</b></b>. Note that for n dimensions, there will be at
+least n+1 support vectors; this is because a plane in n dimensions
+identified by n+1 points.
+</p>
+
+<p>
+Therefore, large margin classifiers only use support vectors and
+ignore all other training data.
+</p>
+
+<p>
+Let's formalize the large margin classifier with algebra.
+</p>
+
+<p>
+We uniquely identify the decision hyperplane by a normal vector w and a
+scalar b which determines which of the planes perpendicular to w to
+choose:
+</p>
+
+<p>
+\[\vec{w}\vec{x} + b = 0\]
+</p>
+
+<p>
+We are interested in maximizing the distance from the hyperplane to
+the support vectors. Let us first find the distance from the
+hyperplane to a point p. We know that the distance vector must be
+perpendicular to the hyperplane, therefore It is parallel to the
+normal vector w, which when normalized is \(\frac{\vec{w}}{||\vec{w}||}\).
+</p>
+
+<p>
+Therefore, the distance between the hyperplane and p1, referred to as
+r, is the difference between p1 and the closest point in
+the hyperplane p2, which is the intersection between the line parallel
+to the normal and point p1:
+</p>
+
+<p>
+\[(1)\ r\frac{\vec{w}}{||\vec{w}||} = \vec{p1} - \vec{p2}\]
+</p>
+
+<p>
+Moreover, since p2 lies on the hyperplane, It is ture that:
+</p>
+
+<p>
+\[(2)\ \vec{w}\vec{p2} + b = 0\]
+</p>
+
+<p>
+We find p2 from (1), \(p2 = p1 - r\frac{\vec{w}}{||w||}\). We substitute
+p2 in (2) and solve for r, the distance, and we get 
+</p>
+
+<p>
+\[r = \frac{(\vec{w}\vec{p1} + b) ||\vec{w}||}{\vec{w}\vec{w}}\]
+</p>
+
+<p>
+Since \(\vec{w}\vec{w}=|w|^2\), this can be easily demonstrated because
+the modulo function uses the generalized pythagorean theorem, we get:
+</p>
+
+<p>
+\[r = \frac{(\vec{w}\vec{p1} + b)}{||\vec{w}||}\]
+</p>
+
+<p>
+We just demonstrated the formula for finding the distance between a
+point and a plane.  We now define the <b><b>classification function</b></b> as
+\(f(x)= sign(\vec{w}\vec{x} + b)\), It will be +1 or -1 based on the
+sign of the quation. Intuitively, points on one side of the plane
+should have a positive output and points on the other side should have
+a negative one. We decide to multiply the hyperplane equation times
+the expected classification to get the <b><b>functional margin</b></b> for each
+point x<sub>i</sub> and classification y<sub>i</sub>:
+</p>
+
+<p>
+\[margin = \frac{y_i(\vec{w}\vec{x_i})}{||\vec{w}||}\]
+</p>
+
+<p>
+For convenience, we require that the distance between the hyperplane
+and the support vectors is 1, therefore \(y_i(\vec{w}\vec{x_i}+b) \ge 1 \forall i\)
+because negative distances will be multiplied by y<sub>i</sub> which is also
+negative, resulting in a positive value all the time, and greater
+than one because of the requirement.
+</p>
+
+<p>
+For the support vectors, the following holds:
+</p>
+
+<p>
+\[margin = \frac{1}{||\vec{w}||}\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd645c86" class="outline-4">
+<h4 id="orgd645c86">Maximizing the margin</h4>
+<div class="outline-text-4" id="text-orgd645c86">
+<p>
+We want to maximise this margin, therefore we need to minimize \(||\vec{w}||\)
+with the constraint that \(y_i(\vec{w}\vec{x_i} \ge 1 \forall i\). We
+may aswell minimize \(||\vec{w}||^2\) which is an example of a <b><b>quadratic
+optimization problem</b></b>
+</p>
+
+<p>
+\[ min_{w, b} ||w||^2,\ y_i(\vec{w}\vec{x_i}+b) \ge 1 \forall i \]
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd4c63a9" class="outline-4">
+<h4 id="orgd4c63a9">Soft margin classification</h4>
+<div class="outline-text-4" id="text-orgd4c63a9">
+<p>
+We may have data that is not perfect, for example we may have some
+values that lay on one side of the hyperplane but they are classified
+as the other, so \(y_i(\vec{w}\vec{x_i}+b) \ge 1 \forall i\) does not
+hold since you may have \(\vec{w}\vec{x_i}+b \le 1\) and \(y_i \ge 1\) or
+the opposite.
+</p>
+
+<p>
+To address this cases, we introduce <b><b>slack variabes</b></b> which are
+scalar values assigned for each x<sub>i</sub>, and the <b><b>regularizaion
+parameter</b></b> \(C > 0\):
+</p>
+
+<p>
+\[ min_{w, b} ||\vec{w}||^2 + C \sum_{i} \zeta_i \]
+</p>
+
+<p>
+subject to:
+</p>
+
+<p>
+\[y_i(\vec{w}\vec{x_i} + b) \ge 1 - \zeta_i \forall i, \zeta_i \ge 0\]
+</p>
+
+<p>
+with this correction, the values are "allowed to have mistakes", the
+margin is reduced by \(\zeta\) if \(\zeta < 1\) or are moved to the
+other side of the hyperplane if \(\zeta > 1\).
+\(C\) determines how strong are those corrections, that is the "trade off"
+between the slack variable penalty and the margin.
+</p>
+<ul class="org-ul">
+<li>small C allows constraings to be easily ignored in order to have a
+larger margin</li>
+<li>large C make constrainst hard to ignore to get a narrow maring
+<ul class="org-ul">
+<li>if C goes to infinity, we have hard margins.</li>
+</ul></li>
+</ul>
+
+<p>
+We are now interested into calculating those slack variables. The
+first observation we make is that if the constraint is already
+satisfied, meaning that if \(y_i(\vec{w}\vec{x_i} + b) \ge 1\) and the
+value has not been misclassified, then we don't need any correction and
+\(\zeta = 0\). Otherwise, we want to correct the value by moving it on
+the other side, plus the distance to the margin 1, so \(1 -
+y_i(\vec{w}\vec{x_i}+b)\). We are subtracting because if the value is
+misclassified, then It's distance from the hyperplane times It's label
+is going to be a negative value (one of them nedds to be positive and
+the other negative in order to have a misclassification).
+</p>
+
+<p>
+Therefore:
+</p>
+
+<p>
+\[\zeta = 0\ if\ y_i(\vec{w}\vec{x_i}+b) \ge 1\]
+\[\zeta = 1 - y_i(\vec{w}\vec{x_i}+b)\ otherwise\]
+</p>
+
+<p>
+which is the same as the following, using a notation introduced
+in previous lessons:
+</p>
+
+<p>
+\[\zeta = max(0, 1-y_i(\vec{w}\vec{x_i}+b)) = max(0, 1-yy')\]
+</p>
+
+<p>
+If you recall from the lesson of Gradiente Descente, this is the hinge
+loss function.
+</p>
+
+<p>
+With this result, the objective is now to minimize the following:
+</p>
+
+<p>
+\[min_{w, b} ||\vec{w}||^2 + C \sum_i max(0, 1 - y_i(\vec{w}\vec{x_i} +b))\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org9d6c9cb" class="outline-3">
+<h3 id="org9d6c9cb">Non linearly separable data</h3>
+<div class="outline-text-3" id="text-org9d6c9cb">
+</div>
+<div id="outline-container-orgdc1d79e" class="outline-4">
+<h4 id="orgdc1d79e">Cases of optimization problems</h4>
+<div class="outline-text-4" id="text-orgdc1d79e">
+<p>
+For future analisys, It is useful to discuss what are the main classes
+of optimization problems:
+</p>
+
+<ul class="org-ul">
+<li><b><b>linear programming (LP)</b></b>: linear problem, linear constraints.</li>
+</ul>
+
+<p>
+\[min_{x} c^Tx\ s.t.\ Ax = b, x \ge 0\]
+</p>
+
+<ul class="org-ul">
+<li><b><b>quadratic programming (QP)</b></b>: quadratic objective and linear
+constraints, it is convex if the matrix \(Q\) is positive
+semidefinite, that is the real number x<sup>TQx</sup> is positive or zero for
+every nonzero real column vector x, where x<sup>T</sup> is the row vector
+transpose of x.</li>
+</ul>
+
+<p>
+\[min_{x} c^Tx + \frac{1}{2}x^TQx\ s.t\ Ax = b, Cx \ge d\]
+</p>
+
+<ul class="org-ul">
+<li><b><b>nonlinear programming problem (NLP)</b></b>: in general non-convex.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7a00d74" class="outline-4">
+<h4 id="org7a00d74">Solving quadratic problems - Lagrange multipliers</h4>
+<div class="outline-text-4" id="text-org7a00d74">
+<p>
+Quadratic optimization problems such as the one discussed above are a
+wll-known class of mathematical programming models with several
+algorithms. We will now introduce a method so solve such problems
+using the Lagrange multiplier, that is a strategy for finding the local
+maxima and minima of a function subject to equation constraints.
+</p>
+
+<p>
+Given a function to optimize \(f(x)\), a constraint \(g(x)\) and an
+optimal solution x<sub>*</sub> of the function that respects the contraints, there
+exists a <b><b>lagrangian multiplier</b></b> \(\lambda\) such that:
+</p>
+
+<p>
+\[\frac{df(x_*)}{dx_*} = \lambda \frac{dg(x_*)}{dx_*},\ g(x) = 0\]
+</p>
+
+<p>
+Or equivalently:
+</p>
+
+<p>
+\[\frac{df(x_*)}{dx_*} - \lambda \frac{dg(x_*)}{dx_*} = 0,\ g(x) = 0\]
+</p>
+
+<p>
+We call this the lagrangian function or <b><b>Lagrangian</b></b>:
+</p>
+
+<p>
+\[L(x) = f(x) - \lambda g(x)\]
+</p>
+
+<p>
+Let's now apply this knowledge in our problem. Let \(f(x)=||\vec{w}||^2\)
+and \(g(x, b, w)=y_i(\vec{w}\vec{x_i}+b)-1\), using \(a\) as the lagrangian
+multiplier:
+</p>
+
+<p>
+\[(a) L(x, \vec{w}, b, \vec{a}) = ||\vec{w}||^2 - \sum_i a_i (y_i(\vec{w}\vec{x_i} + b) - 1)\]
+</p>
+
+<p>
+This is an example of Lagrangian dual problem, where we need to
+maximize the lagrangian multipliers to minimize w and b. We now
+derivate with respect to w and b and set them equial to 0:
+</p>
+
+<p>
+\[(b)\ 2\vec{w} - \sum_i a_i y_i x_i = 0\]
+\[(c)\ \sum_i a_n y_n = 0\]
+</p>
+
+
+<p>
+From (b) we get \(\vec{w} = -\frac{1}{2}\sum_i a_i y_i x_i\). We now
+substitute the new (b) in (a), observing that \(w^2 = ww\):
+</p>
+
+<p>
+\[L(x, \lambda, b) = \frac{1}{2}\sum_i \sum_j a_i a_j y_i y_j x_i x_j - (\sum_i \sum_j a_i a_j y_i y_j x_i x_j - b\sum_i a_i j_i - \sum_i a_i) \]
+</p>
+
+<p>
+\[ = -\frac{1}{2}\sum_i \sum_i \sum_j a_i a_j y_i y_j x_i x_j - b\sum_i a_i j_i - \sum_i a_i) \]
+</p>
+
+<p>
+The second term is 0 because of (c), so It can be eliminated, finally
+we have:
+</p>
+
+<p>
+\[ L(x, \lambda) = \sum_i a_i -\frac{1}{2}\sum_i \sum_j \sum_j a_i a_j y_i y_j x_i x_j \]
+</p>
+
+<p>
+such that \(\sum_i a_i y_i = 0, 0 \le a_i \le C\ \forall i\)
+</p>
+
+<p>
+This is the final equation that we need to maximize over a<sub>i</sub> to
+minimize w and b. To recap, we turned the original optimization
+problem \(min_{w, b} ||\vec{w}||^2\) to a problem depending only on
+lagrangian multipliers, which is faster to compute. We let the
+computer solve this and get the a<sub>i</sub> values, after that we can find w
+using (b) and b from \(y_k = wx_k + b\) for any k and using again w
+from (b).
+</p>
+
+<p>
+Finally, to make predictions, we use this same formula:
+</p>
+
+<p>
+\[(d) f(x) = \sum_i a_iy_i x_i x + b\]
+</p>
+
+<ul class="org-ul">
+<li>each non-zero a<sub>i</sub> indicates that the corresponding x<sub>i</sub> is a support
+vector.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge2aa611" class="outline-3">
+<h3 id="orge2aa611">Non linear SVM - Kernel Trick</h3>
+<div class="outline-text-3" id="text-orge2aa611">
+<p>
+What if the data is not linearly separable? In such situation we can
+map data to a higher-dimensional space where the training set is
+separable.
+</p>
+
+<p>
+\[\Phi: x \rightarrow \phi (x)\]
+</p>
+
+<p>
+We notice that the linear classifier (d) relies on the product between
+x<sub>i</sub> and x. We can abstract this product to happen in a higher dimension
+using a function called Kernel which computes the product over some
+higher-dimensional feature mapping function \(\phi(x)\):
+</p>
+
+<p>
+\[K(x_i, x_j) = \phi(x_i)^T \phi(x_j)\]
+</p>
+
+<p>
+Therefore (d) becomes:
+</p>
+
+<p>
+\[ f(x) = \sum_i a_iy_i K(x_i, x) + b \]
+</p>
+
+<ul class="org-ul">
+<li>note that we transposed the vector before the multiplication because
+of how matrix multiplication works. To clear misconceptions, all the
+above formulas do this implicitly every time you find a vector times
+itself.</li>
+</ul>
+
+<p>
+Mercer's Theorem: every positive semidefinite symmetric function is a
+kernel.
+</p>
+
+<p>
+There are multiple types of kernels, such as
+</p>
+<ul class="org-ul">
+<li>linear: \(K(x_i, x_j) = x_i^T x_j\)</li>
+<li>polinomial of power p: \(K(x_i, x_j) = (1+x_i^T x_j)^p\)</li>
+<li>gaussian: \(K(x_i, x_j) = e^{\frac{|x_i-x_j|^2}{2\sigma ^2}}\)</li>
+</ul>
+
+<p>
+Support Vector Machines are often used in object recognition in
+computer vision.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="intro-to-machine-learning.html">Intro to Machine Learning</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

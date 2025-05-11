@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
+</p>
+
+<div id="outline-container-org8972643" class="outline-2">
+<h2 id="org8972643">Machine Learning Basics</h2>
+<div class="outline-text-2" id="text-org8972643">
+<p>
+A recap on model based machine learning:
+</p>
+
+<ol class="org-ol">
+<li>Pick a model</li>
+</ol>
+
+<p>
+\[0=b+\sum_{j=1}^mw_if_i\]
+</p>
+
+<ol class="org-ol">
+<li>Pick a criteria to optimize</li>
+</ol>
+
+<p>
+\[\sum_{i=1}^n\mathbb{1}[y_i(wx_i+b)\le 0]\]
+</p>
+
+<ol class="org-ol">
+<li>Develop a learning algorithm</li>
+</ol>
+
+<p>
+\[argmin_{w, b}\sum_{i=1}^n\mathbb{1}[y_i(wx_i+b)\le 0]\]
+</p>
+
+<ul class="org-ul">
+<li>repeat: pick a dimension and move a small amount towards the opposite of the derivative</li>
+</ul>
+</div>
+
+<div id="outline-container-org26199c1" class="outline-3">
+<h3 id="org26199c1">Regularizer</h3>
+<div class="outline-text-3" id="text-org26199c1">
+<p>
+A <b><b>regularizer</b></b> is an additional criterion to the loss function to
+make sure that we do not <b><b>overfit</b></b>
+</p>
+
+<p>
+\[argmin_{w, b}\sum_{i=1}^nloss(yy')+\lambda regularizer(w, b)\]
+</p>
+
+<ul class="org-ul">
+<li>we want to bias the model so that it prefers certain types of
+weights over others</li>
+<li>note that is I sum two convex functions, the result is also
+convex. We want a convex regularizer. If the function is convex,
+there is usually an easy solution.</li>
+<li><b><b>intuitively, we add some value to the function to be minimized so
+that the result is not really the minimum error fro the data, but is
+altered -&gt; less overfitting</b></b></li>
+</ul>
+
+<p>
+Generally, we do not want huge weights: if weights are large, a small
+change in a feature can result in a large change in the prediction
+</p>
+
+<p>
+So, how do we encourage small weights or penalize large weights?
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbd84720" class="outline-3">
+<h3 id="orgbd84720">Common regularizers</h3>
+<div class="outline-text-3" id="text-orgbd84720">
+<p>
+Sum of the weights
+</p>
+
+<p>
+\[r(w, b)=\sum |w_j|\]
+</p>
+
+<p>
+Sum of the squared weights
+</p>
+
+<p>
+\[r(w, b)=\sqrt{\sum |w_j|^2}\]
+</p>
+
+<ul class="org-ul">
+<li>this penalizes large values more compared to sum of weights</li>
+</ul>
+
+<p>
+In general, we can call this formula <b><b>p-norm</b></b> or Lp (L1, L2, &#x2026;.):
+</p>
+
+<p>
+\[r(w, b)=\sqrt[p]{\sum |w_j|^p}=||w||^p\]
+</p>
+
+<ul class="org-ul">
+<li>smaller values of p encourage sparser vectors.</li>
+<li>intuitively, <b><b>with L2 we still get a parabola in the function to be
+minimized. In L1 we get hard edges</b></b></li>
+<li>L1 is popular because it tends to result is sparse
+solutions. However, It is not differentiable, so It only works for
+gradient descent solvers</li>
+<li>L2 is also popular because for some loss functions, it can be solved
+directly</li>
+<li>Lp is less popular since they don't tend to shrink the weights
+enough</li>
+</ul>
+
+<p>
+Possible question: describe the difference between 1-norm and 2-norm regularizers.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9fd6129" class="outline-3">
+<h3 id="org9fd6129">Using Gradient Descent</h3>
+<div class="outline-text-3" id="text-org9fd6129">
+<p>
+Example using 2-norm:
+</p>
+
+<p>
+\[argmin_{w, b}\sum_{i=1}^n exp(-y_i(wx_i+b))+\frac{\lambda}{2}||w||^2\]
+\[\frac{d}{dw_j}equation = -\sum_{i=1}^n y_ix_{ij}exp(-y_i(wx_i+b))+\lambda w_i\]
+</p>
+
+<p>
+We can multiply all of this by a constant to control the learning rate.
+</p>
+
+<p>
+Note that gradiant descent is not the only minimization method (for
+example SVM do not use gradiant descent).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf87e36c" class="outline-3">
+<h3 id="orgf87e36c">Logistic Regression</h3>
+<div class="outline-text-3" id="text-orgf87e36c">
+<p>
+Lot loss or binary cross-entropy loss
+</p>
+
+<p>
+\[L(w) = -\sum_{i=1}^n [y_ilog(\hat{y_i})+(1-y_i)log(1-\hat{y_i})]\]
+</p>
+
+<p>
+where
+</p>
+
+<p>
+\[\hat{y_i} = \sigma (x_i^Tw)\]
+</p>
+
+<p>
+and \[\sigma (z)=\frac{1}{1+e^{-z}}\]
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="intro-to-machine-learning.html">Intro to Machine Learning</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

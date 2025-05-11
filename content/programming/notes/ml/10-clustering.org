@@ -1,0 +1,88 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:intro-to-machine-learning.org][Intro to Machine Learning]] >
+
+* Clustering
+#+INDEX: Giovanni's Diary!Programming!Notes!Intro to Machine Learning!Clustering
+
+Given unlabeled data, we want to group them into clusters.
+
+A well-known and popular clustering algorithm is k-means which works
+following this logic:
+
+- start with some initial cluster centroids 
+- Iterate:
+	- assign each example to the closest centroid
+	- recalculate center as the mean of the points in a cluster
+
+Some complications rise when discussing representation of data, how to
+measure similarity or distance, is it a flat clustering or
+hierarchical and is the number of clusters known a priori. We can also
+categorize **hard clustering** where each example belongs to exactly
+one cluster (k-means) and **soft clustering** where an example can
+belong to more than one cluster (probabilistic).
+
+** Expectation Maximization
+
+If we restrain our problem by assuming that the clusters are formed as
+a mixture of Gaussians (elliptical data) and we assign data to a
+cluster with a certain probability (soft clustering) we can use the
+**Expectation Maximization** (EM) algoritm. The algorithm proceeds
+like the following:
+
+- Start with some initial cluster centers
+- Iterate
+	- Soft assign points to each cluster by calculating the probability
+    of each point belonging to each cluster $p(\theta _c | x)$.
+	- Recalculate the cluster centers by calculating the maximum
+    likelihood cluster centers given the current soft clustering
+    $\theta _c$.
+
+A Gaussian in 1 dimension is defined as:
+
+$$f(x)=\frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$
+
+A Gaussian in $n$ dimensions is defined as:
+
+$$N[x;\mu , \Sigma] = \frac{1}{(2\pi)^{d/2}\sqrt{det(\Sigma)}}exp[-\frac{1}{2}(x-\mu)^T\Sigma ^{-1}(x-\mu)]$$
+
+Intuitively, each iteration of Expectation Maximization increases the
+likelihood of the data and is guaranteed to converge (though to a
+local optimum)
+
+** Non-Gaussian Data
+
+In case of non-gaussian data, we can use a technique called spectral
+clustering where we group points based on links in a graph.
+
+We first create a fully connected graph or a k-nearest neighbor graph
+(each node is only connected to its K closest
+neighbors). Alternatively, we can create a graph with some notion of
+similarity among nodes, for example using a gaussian kernel: $W(i,
+j)=exp[\frac{-|x_i-x_j|^2}{\sigma ^2}]$.
+
+We then partition the graph by butting the graph: we want to find a
+partition of the graph into two parts $A$ and $B$ where we minimize
+the sum of the weights of the set of edges that connect the two
+groups, aka $Cut(A, B)$. We observe that this problem can be
+formalized as a discrete optimization problem and then relaxed in the
+continuous domain and become a generalized eigenvalue problem.
+
+** Hierarchical Clustering
+
+We are interested in producing a set of nested clusters organized as a
+hierarchical tree, also called **dendrogram**.
+
+- Initially, each instance has its own cluster
+- Repeat
+	- Pick the two closest clusters
+	- Merge them into a new cluster
+	- Stop when there is only one cluster left
+
+The idea of the algorithm is to first mege very similar instances and
+then incrementally build larger clusters out of smaller clusters. The
+algorithm goes as follows:
+
+-----
+
+Travel: [[file:intro-to-machine-learning.org][Intro to Machine Learning]], [[file:../../../theindex.org][Index]]

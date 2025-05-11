@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
+</p>
+
+<div id="outline-container-orgdaae18b" class="outline-2">
+<h2 id="orgdaae18b">Unsupervised Learning</h2>
+<div class="outline-text-2" id="text-orgdaae18b">
+<p>
+In unsupervised learning we observe data from an unknown distribution
+without class labels. It is quite useful for the following tasks:
+</p>
+
+<ul class="org-ul">
+<li><b><b>dimensionality reduction</b></b>: find \(f: x\rightarrow y\) such that \(dim(x)\lll dim(y)\)</li>
+<li><b><b>clustering</b></b>: find \(f: x\rightarrow \mathbb{N}\) that maps an input
+with a cluster index.</li>
+<li><b><b>density estimation</b></b>: find the probability distribution that best
+fits the data.</li>
+</ul>
+
+<p>
+A technique that is widely used for dimensionality reduction, lossy
+data compression, feature extraction and data visualization is called
+Principal Component Analysis, which we will now discuss.
+</p>
+</div>
+
+<div id="outline-container-orgb53580d" class="outline-3">
+<h3 id="orgb53580d">Principal Component Analysis</h3>
+<div class="outline-text-3" id="text-orgb53580d">
+<p>
+In Principal Component Analysis, or PCA for short, the data is
+linearly transformed onto a new coordinate system such that the
+directions (principal components) capturing the largest variation in
+the data can be easily identified. To reduce dimensionality, we
+consider \(k\) directions with largest variation and project the points
+onto those.
+</p>
+
+<p>
+The idea of the algorithm is the following:
+</p>
+
+<ol class="org-ol">
+<li>Find orthogonal directions of maximum variance (eigenvectors)</li>
+<li>change coordinate system</li>
+<li>drop dimensions of least variance</li>
+</ol>
+
+<p>
+To understand this, first we need to revise some linear algebra theory.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7776c2e" class="outline-3">
+<h3 id="org7776c2e">Recap: Linear algebra</h3>
+<div class="outline-text-3" id="text-org7776c2e">
+<p>
+The <b><b>variance</b></b> is the measure of the deviation from the mean of a
+point, and is calculated as:
+</p>
+
+<p>
+\[Var(X)= \mathbb{E}[(X-\mu)^2] = \frac{1}{n}\sum_{i=1}^n (x_i -
+\mathbb{E}[t])^2\] The <b><b>covariance</b></b> is the measure of the linear
+relationship between two variables with respect to each other and is
+calculated as:
+</p>
+
+<p>
+\[Cov(X, Y) = \mathbb{E}[(X- \mathbb{E}[X])(Y - \mathbb{E}[Y])]= \frac{1}{n}\sum_{i=1}^n (x_i - \bar x)(y_i -\bar y)^T\]
+</p>
+
+<p>
+You could think of variance as the covariance of a random variable
+with itself:
+</p>
+
+<p>
+\[Var(X)=Cov(X, X)\] 
+</p>
+
+<p>
+An <b><b>eigenvector</b></b> or <b><b>characteristic vector</b></b> is a vector that has
+its direction unchanged (or reversed) by a given linear
+transformation.  More precisely, an eigenvector \(v\) of a linear
+transformation \(T\) is scaled by a constant factor \(\lambda\) when the
+linear transformation is applied to it: \(Tv = \lambda v\). The
+corresponding <b><b>eigenvalue</b></b> or <b><b>characteristic value</b></b> is the
+multiplying factor \(\lambda\).
+</p>
+
+<p>
+Eigenvalues can be found by solving:
+</p>
+
+<p>
+\[det(A-\lambda I) = 0\]
+</p>
+
+<p>
+and eigenvectors by solving:
+</p>
+
+<p>
+\[(A-\lambda I)v =0\]
+</p>
+
+<p>
+Now suppose you have a matrix \(A\) with \(n\) linearly independent
+eigenvectors \(v_1, v_2, ..., v_n\) which associated eigenvalues
+\(\lambda _1, \lambda _2, ..., \lambda _n\). Define a square matrix \(Q\)
+whose columns are \(n\) linearly independent eigenvectors of \(A\),
+\(Q=[v_1 v_2 ... v_n]\). Since each column of \(Q\) is an eigenvector of
+\(A\), right multiplying \(A\) by \(Q\) scaled each column of \(Q\) by its
+associated eigenvalue: \(AQ = [\lambda_1 v_1\ \lambda_2 v_2\ ... \
+\lambda _n v_n]\). We define a diagonal matrix \(\Lambda\) where each
+diagonal element \(\Lambda _{ii}\) is the eigenvalue associated with the
+i-th column of \(Q\). Then:
+</p>
+
+
+<p>
+\[AQ=Q\Lambda\]
+</p>
+
+<p>
+therefore:
+\[A = Q\Lambda Q^{-1}\]
+</p>
+
+<p>
+moreover, if we assume that Q is a unit matrix, meaning \(QQ^T = Q^T Q
+= I\), then \(A = Q\Lambda Q^T\). This is referred to as <b><b>eigenvalue
+decomposition</b></b>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org37e2018" class="outline-3">
+<h3 id="org37e2018">Back to PCA</h3>
+<div class="outline-text-3" id="text-org37e2018">
+<p>
+Armed with this knowledge, we can finally proceed to discuss principal
+component analysis. The i-th principal component can be taken as a
+direction orthogonal to the first \(i-1\) principal components that
+maximizes the variance of the projected data. They can also be thought
+as a sequence of \(p\) unit vectors, where the i-th vector is the
+direction of a line that best fits the data while being orthogonal to
+the first \(i-1\) vectors. A best-fitting line is defined as the one
+that minimized the average squared perpendicular distance from the
+points to the line. We will use the first definition now.
+</p>
+
+<p>
+Let's take the projection \(t_i\) of a point \(x_i\) into the unit vector
+\(w\) centered in \(c\):
+</p>
+
+<p>
+\[t_i = (x_i-c)^Tw \]
+</p>
+
+<p>
+The variance of such points is then:
+</p>
+
+<p>
+\[Var(t)=\frac{1}{n}\sum_{i=1}^n (t_i - \mathbb{E}[t])^2 = \frac{1}{n}\sum_{i=1}^n [(x_i - \bar x )^T w]^2 = \]
+\[ =^{\bar x_i =^{def}x_i - \bar x} \frac{1}{n}\sum_{i=1}^n (\bar x_i^T w)^2 = w^T[\frac{1}{n}\bar X \bar X^T]w = w^TCw \]
+</p>
+
+<p>
+We are trying to minimize the variance:
+</p>
+
+<p>
+\[w_i \in argmax\{ w^T C w: w^Tw=1 \}\]
+</p>
+
+<p>
+It can be shown that the principal components are <b><b>eigenvectors of
+the data's covariance matrix</b></b>.
+</p>
+
+<ul class="org-ul">
+<li>the first principal component \(w_1\) is the corresponding eigenvector</li>
+</ul>
+
+<p>
+\[w_2 \in argmax \{ w^T C w: w^T w =1, w \bot w_1 \}\]
+</p>
+
+<ul class="org-ul">
+<li>this generalizes to i dimensions</li>
+</ul>
+
+<p>
+\[w_i \in argmax \{ w^T C w: w^T w =1, w \bot w_i\ for 1 \le j < i \}\]
+</p>
+
+<ul class="org-ul">
+<li>the i-th largest eigenvalue of C is the variance along the i-th
+principal component</li>
+<li>the i-th principal component is the corresponding eigenvector</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgdbb0f8e" class="outline-3">
+<h3 id="orgdbb0f8e">Principal Component Analysis using eigenvalue decomposition</h3>
+<div class="outline-text-3" id="text-orgdbb0f8e">
+<p>
+Algorithm:
+</p>
+
+<ul class="org-ul">
+<li>Input: Data points \(X=[x_1, ...., x_n]\)</li>
+<li>Centering: \(\bar X = X - \frac{1}{n}X1_n1_n^T\)</li>
+<li>Compute covariance matrix: \(C=\frac{1}{n}\bar X \bar X^T\)</li>
+<li>Eigenvalue decomposition: \(Q, \lambda = eig(C)\)</li>
+<li>output: Principal components \(W = Q = [q_1, ..., q_m]\) and variances
+\(\lambda = (\lambda _1, ..., \lambda _m)\)</li>
+</ul>
+
+<p>
+Now that we can calculate the principal components of some data
+points, we can take the first \(k\) and project the data onto those,
+with \(k\) smaller than the original number of dimensions. We can treat
+\(k\) as a parameter in our training process to find the best value. We
+could also compute the <b><b>cumulative proportion of explained
+variance</b></b>, which is given by \(\frac{\sum_{j=1}^k
+\lambda_j}{\sum_{j=1}^m C_{jj}}\), to estimate the amount of
+information loss.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org057c569" class="outline-3">
+<h3 id="org057c569">PCA using Singular Value Decomposition</h3>
+<div class="outline-text-3" id="text-org057c569">
+<p>
+Here is presented an alternative solution to PCA. Singular Value
+Decomposition is a factorization o a real or complex matrix into a
+rotation, followed by a rescaling followed by another rotation. It
+generalizes eigenvalue decomposition.
+</p>
+
+<p>
+\[A = USV^T\]
+Allgorithm:
+</p>
+
+<ul class="org-ul">
+<li>Input: Data points \(X=[x_1, ..., x_n]\)</li>
+<li>Centering: \(\bar X = X - \frac{1}{n}X1_n1_n^T\)</li>
+<li>SVD decomposition: \(U, S, V = SVD(\bar X)\)</li>
+<li>Output: Principal components \(U = [u_1, ..., u_k]\) and variances
+\((\frac{s_i^2}{n}, ..., \frac{s_k^2}{n})\) since \(C = \frac{1}{n}
+  \bar X \bar X^T = \frac{1}{n}USV^TUSV^T= U\frac{S^2}{n}U^T\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgadc032b" class="outline-3">
+<h3 id="orgadc032b">Kernel PCA (KPCA)</h3>
+<div class="outline-text-3" id="text-orgadc032b">
+<p>
+By using the kernel trick one can apply PCA in a higher dimensional
+space, yielding a non-linear transormation in the original space
+</p>
+</div>
+</div>
+
+<div id="outline-container-org97a17ce" class="outline-3">
+<h3 id="org97a17ce">Other dimensionality reduction techniques</h3>
+<div class="outline-text-3" id="text-org97a17ce">
+<ul class="org-ul">
+<li>PCA: find projection that maximize the variance</li>
+<li>Multidimensional Scaling: find projection that best preserves
+inter-point distances</li>
+<li>LDA (Linear Discriminan Analysis): Maximizing the component axes for
+class-separation.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3c7374a" class="outline-3">
+<h3 id="org3c7374a">Limitations</h3>
+<div class="outline-text-3" id="text-org3c7374a">
+<ul class="org-ul">
+<li>the data must be linearly separable (which is a strong assumption)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org724f59c" class="outline-3">
+<h3 id="org724f59c">K-means clustering</h3>
+<div class="outline-text-3" id="text-org724f59c">
+<p>
+Given the data and not the labels, the task is to to divide It in
+clusters. Here is presented a technique called <b><b>k-means clustering</b></b>.
+</p>
+
+<p>
+We are assuming that we know the number of clusters. NOTE: This is a
+strong assumption to make!
+</p>
+
+<p>
+Find a partition of data points into K sets minimizing the variation
+within each set:
+</p>
+
+<p>
+\[min_{C_1, ..., C_k}\sum_{j=1}^kV(C_j)\]
+</p>
+<ul class="org-ul">
+<li>the variation is typically given by \(V(C_j) = \sum_{i\in
+  C_j} ||x_i-u_j||^2\)</li>
+<li>the <b><b>centroid</b></b> is computed with \(u_j = \frac{1}{|C_j|}\sum_{i\in
+  C_j} x_i\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga57aef1" class="outline-3">
+<h3 id="orga57aef1">The algorithm</h3>
+<div class="outline-text-3" id="text-orga57aef1">
+<pre class="example">
+Initialization: Use some initialization strategy to get
+some initial cluster centroids u1,...,uk
+
+while clusters change, do
+  Assign each datapoint to the closest centroid forming
+  new clusters
+
+    Cj = i in N such taht j = argmin_l(xi - ul)
+
+  Compute cluster centroids u1,...,uk
+</pre>
+
+<p>
+The algorithm is guaranteed to converge, but not to find the global
+minimum.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org86c83f5" class="outline-3">
+<h3 id="org86c83f5">Initial Centroid Selection</h3>
+<div class="outline-text-3" id="text-org86c83f5">
+<ul class="org-ul">
+<li>random selection</li>
+<li>points least similar to any existing center</li>
+<li>try multiple starting points</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3cb63d9" class="outline-3">
+<h3 id="org3cb63d9">Running time</h3>
+<div class="outline-text-3" id="text-org3cb63d9">
+<ul class="org-ul">
+<li>assignment: \(O(kn)\) time</li>
+<li>centroid computation: \(O(n)\) time</li>
+</ul>
+
+<p>
+In this case, euclidian distance is not the best so we use <b><b>consine
+similarity</b></b>
+</p>
+
+<p>
+\[sim(x, y)=\frac{x*y}{|x||y|}\]
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="intro-to-machine-learning.html">Intro to Machine Learning</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

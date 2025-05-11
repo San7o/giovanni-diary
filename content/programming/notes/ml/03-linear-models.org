@@ -1,0 +1,75 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:intro-to-machine-learning.org][Intro to Machine Learning]] >
+
+* Linear Models
+#+INDEX: Giovanni's Diary!Programming!Notes!Intro to Machine Learning!Linear Models
+
+Some machine learning approaches make strong assumptions about the
+data. If the assumptions hold, this can lead to better
+performance. Otherwise, the model would fail.  Other approaches don't
+make any assumptions about the data, so they are very general but are
+prone to overfitting, for example K-NN.
+
+** Bias
+
+The bias of a model is how strong the model assumptions are
+
+- low-bias classifiers make minimal assumptions about the data
+- high-bias classifiers make strong assumptions about the data
+
+** Linear Model (Perceptron)
+
+A strong high-bias assumption is linear separability
+
+- the classes can be separated by a line in 2 dimensions
+- in higher dimensions using hyperplanes
+
+Any hyperplane  defines a partition of the space.
+
+Any pair of values $(w_1, w_2)$ defined a line through the origin
+(using the Cartesian equation of a plane):
+
+$$0=w_1f_1+w_2f_2+b$$
+
+- $b$ is called the bias
+
+In n-dimensions, a hyperplane:
+$$0=b+\sum_{i=1}^{n}w_if_i$$
+We can classify a linear model by checking the sign.
+
+** How to train a linear model
+
+Differently from k-nn, linear models use online learning. Online
+learning are useful in:
+
+- data streams
+- large-scale dataset
+- privacy-preserving applications
+
+To learn a linear model:
+
+- the algorithm receives an unlabeled example $x_i$
+	- $w(1, 0),\ p(-1,1)$
+- the algorithm predicts a classification of this example
+	- $1*(-1)+0*1 = -1$ 
+- the algorithm is the told the correct answer $y_i$ and update the model
+	- idea: when a solution is wrong, to choose which weight to change,
+    we can see what are the weights that contribute more to the wrong
+    answer, and change them
+
+#+begin_src
+repeat until convergence (or some # of iterations):
+	for each random training example (f1, f2, ..., fn, label):
+		check if it is correct based on the current model
+		if not correct, update all the weights:
+			for each wi:
+				wi = wi + fi*label
+			b = b + label
+#+end_src
+
+The algorithm will converge only if the data can be linearly separated.
+
+-----
+
+Travel: [[file:intro-to-machine-learning.org][Intro to Machine Learning]], [[file:../../../theindex.org][Index]]
