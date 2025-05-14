@@ -10,6 +10,7 @@
       - [[file:ephemeris/2025-04-03.org::*2025-04-03][2025-04-03]]
       - [[file:ephemeris/2025-04-07.org::*2025-04-07][2025-04-07]]
       - [[file:ephemeris/2025-04-19.org::*2025-04-19][2025-04-19]]
+      - [[file:ephemeris/2025-05-15.org::*2025-05-15 - The role of theater in my life][2025-05-15 - The role of theater in my life]]
     - [[file:feeds.org::*RSS Feed][Feeds]]
       - [[file:rss-feed-guide.org::*RSS Guide][RSS Guide]]
     - [[file:my-public-diary.org::*My Public Diary][My public Diary]]
