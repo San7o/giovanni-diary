@@ -36,7 +36,11 @@
 				org-html-head-include-scripts nil       ;; Use our own scripts
 				org-html-head-include-default-style nil ;; Use our own styles
 				;; org-html-head "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
-				org-html-head "<link rel=\"stylesheet\" href=\"/simple.css\" />")
+				org-html-head "<link rel=\"stylesheet\" href=\"/simple.css\" />
+<meta property=\"og:title\" content=\"Giovanni's Diary\">
+<meta property=\"og:description\" content=\"Diary of Giovanni's adventures.\">
+<meta property=\"og:image\" content=\"https://giovanni-diary.netlify.app/logo.png\">
+<meta property=\"og:url\" content=\"https://giovanni-diary.netlify.app/\">")
 	;; Generate the site output
 	(org-publish-all t)
   (shell-command "./after-build.sh")

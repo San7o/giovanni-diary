@@ -8,6 +8,10 @@
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
 <script>
   window.MathJax = {
     tex: {
@@ -47,14 +51,14 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org4cc6d2e" class="outline-2">
-<h2 id="org4cc6d2e">Beyond binary classification</h2>
-<div class="outline-text-2" id="text-org4cc6d2e">
+<div id="outline-container-org337f914" class="outline-2">
+<h2 id="org337f914">Beyond binary classification</h2>
+<div class="outline-text-2" id="text-org337f914">
 </div>
 
-<div id="outline-container-org320bc59" class="outline-3">
-<h3 id="org320bc59">Binary Classification</h3>
-<div class="outline-text-3" id="text-org320bc59">
+<div id="outline-container-orgf88bca9" class="outline-3">
+<h3 id="orgf88bca9">Binary Classification</h3>
+<div class="outline-text-3" id="text-orgf88bca9">
 <p>
 In binary classification, given:
 </p>
@@ -72,9 +76,9 @@ Example: linear classification, classify between two classes
 </div>
 </div>
 
-<div id="outline-container-org6a42445" class="outline-3">
-<h3 id="org6a42445">Multi-class classification</h3>
-<div class="outline-text-3" id="text-org6a42445">
+<div id="outline-container-org6ce803e" class="outline-3">
+<h3 id="org6ce803e">Multi-class classification</h3>
+<div class="outline-text-3" id="text-org6ce803e">
 <p>
 In multi-class classification, given:
 </p>
@@ -101,9 +105,9 @@ we will discuss:
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb4012ae" class="outline-3">
-<h3 id="orgb4012ae">One vs All (OVA)</h3>
-<div class="outline-text-3" id="text-orgb4012ae">
+<div id="outline-container-org435d219" class="outline-3">
+<h3 id="org435d219">One vs All (OVA)</h3>
+<div class="outline-text-3" id="text-org435d219">
 <p>
 For each label \(k=1, ..., K\) define a binary problem where"
 </p>
@@ -143,9 +147,9 @@ OneVsAllTest(f_1,...,f_k, x):
 </div>
 </div>
 
-<div id="outline-container-orgd41990d" class="outline-3">
-<h3 id="orgd41990d">All vs All (AVA)</h3>
-<div class="outline-text-3" id="text-orgd41990d">
+<div id="outline-container-orgf25fea7" class="outline-3">
+<h3 id="orgf25fea7">All vs All (AVA)</h3>
+<div class="outline-text-3" id="text-orgf25fea7">
 <p>
 All vs All, sometimes called <b><b>all pairs</b></b>, It trains \(K(K-1)/2\)
 classifiers:
@@ -167,9 +171,9 @@ Note: The teacher might ask to explain the algorithm in more detail
 </div>
 </div>
 
-<div id="outline-container-orgeea332b" class="outline-3">
-<h3 id="orgeea332b">Ova vs Ava</h3>
-<div class="outline-text-3" id="text-orgeea332b">
+<div id="outline-container-org39b9f97" class="outline-3">
+<h3 id="org39b9f97">Ova vs Ava</h3>
+<div class="outline-text-3" id="text-org39b9f97">
 <p>
 Train time:
 </p>
@@ -199,9 +203,9 @@ errors</li>
 </div>
 </div>
 
-<div id="outline-container-orge79b327" class="outline-3">
-<h3 id="orge79b327">Macroaveraging vs Microaveraging</h3>
-<div class="outline-text-3" id="text-orge79b327">
+<div id="outline-container-orgfa8eff2" class="outline-3">
+<h3 id="orgfa8eff2">Macroaveraging vs Microaveraging</h3>
+<div class="outline-text-3" id="text-orgfa8eff2">
 <ul class="org-ul">
 <li>Microaveraging: average over examples</li>
 <li>Macroaveraging: calculate evaluation score (e.g. accuracy) for each

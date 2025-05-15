@@ -8,6 +8,10 @@
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
 <script>
   window.MathJax = {
     tex: {
@@ -47,9 +51,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-orgdf66c80" class="outline-2">
-<h2 id="orgdf66c80">Unsupervised Learning</h2>
-<div class="outline-text-2" id="text-orgdf66c80">
+<div id="outline-container-orgba48748" class="outline-2">
+<h2 id="orgba48748">Unsupervised Learning</h2>
+<div class="outline-text-2" id="text-orgba48748">
 <p>
 In unsupervised learning we observe data from an unknown distribution
 without class labels. It is quite useful for the following tasks:
@@ -70,9 +74,9 @@ Principal Component Analysis, which we will now discuss.
 </p>
 </div>
 
-<div id="outline-container-org087b00f" class="outline-3">
-<h3 id="org087b00f">Principal Component Analysis</h3>
-<div class="outline-text-3" id="text-org087b00f">
+<div id="outline-container-org0ebc607" class="outline-3">
+<h3 id="org0ebc607">Principal Component Analysis</h3>
+<div class="outline-text-3" id="text-org0ebc607">
 <p>
 In Principal Component Analysis, or PCA for short, the data is
 linearly transformed onto a new coordinate system such that the
@@ -98,9 +102,9 @@ To understand this, first we need to revise some linear algebra theory.
 </div>
 </div>
 
-<div id="outline-container-org7723667" class="outline-3">
-<h3 id="org7723667">Recap: Linear algebra</h3>
-<div class="outline-text-3" id="text-org7723667">
+<div id="outline-container-orge58f8e0" class="outline-3">
+<h3 id="orge58f8e0">Recap: Linear algebra</h3>
+<div class="outline-text-3" id="text-orge58f8e0">
 <p>
 The <b><b>variance</b></b> is the measure of the deviation from the mean of a
 point, and is calculated as:
@@ -183,9 +187,9 @@ decomposition</b></b>.
 </div>
 </div>
 
-<div id="outline-container-orga7e70e8" class="outline-3">
-<h3 id="orga7e70e8">Back to PCA</h3>
-<div class="outline-text-3" id="text-orga7e70e8">
+<div id="outline-container-org1739015" class="outline-3">
+<h3 id="org1739015">Back to PCA</h3>
+<div class="outline-text-3" id="text-org1739015">
 <p>
 Armed with this knowledge, we can finally proceed to discuss principal
 component analysis. The i-th principal component can be taken as a
@@ -253,9 +257,9 @@ principal component</li>
 </div>
 </div>
 
-<div id="outline-container-org8a712ca" class="outline-3">
-<h3 id="org8a712ca">Principal Component Analysis using eigenvalue decomposition</h3>
-<div class="outline-text-3" id="text-org8a712ca">
+<div id="outline-container-orgb50ccea" class="outline-3">
+<h3 id="orgb50ccea">Principal Component Analysis using eigenvalue decomposition</h3>
+<div class="outline-text-3" id="text-orgb50ccea">
 <p>
 Algorithm:
 </p>
@@ -282,9 +286,9 @@ information loss.
 </div>
 </div>
 
-<div id="outline-container-orgd50cd89" class="outline-3">
-<h3 id="orgd50cd89">PCA using Singular Value Decomposition</h3>
-<div class="outline-text-3" id="text-orgd50cd89">
+<div id="outline-container-orgedd4817" class="outline-3">
+<h3 id="orgedd4817">PCA using Singular Value Decomposition</h3>
+<div class="outline-text-3" id="text-orgedd4817">
 <p>
 Here is presented an alternative solution to PCA. Singular Value
 Decomposition is a factorization o a real or complex matrix into a
@@ -308,9 +312,9 @@ Algorithm:
 </div>
 </div>
 
-<div id="outline-container-org0e61018" class="outline-3">
-<h3 id="org0e61018">Kernel PCA (KPCA)</h3>
-<div class="outline-text-3" id="text-org0e61018">
+<div id="outline-container-orga8447cc" class="outline-3">
+<h3 id="orga8447cc">Kernel PCA (KPCA)</h3>
+<div class="outline-text-3" id="text-orga8447cc">
 <p>
 By using the kernel trick one can apply PCA in a higher dimensional
 space, yielding a non-linear transformation in the original space
@@ -318,9 +322,9 @@ space, yielding a non-linear transformation in the original space
 </div>
 </div>
 
-<div id="outline-container-org6f03a4a" class="outline-3">
-<h3 id="org6f03a4a">Other dimensionality reduction techniques</h3>
-<div class="outline-text-3" id="text-org6f03a4a">
+<div id="outline-container-orgb597bef" class="outline-3">
+<h3 id="orgb597bef">Other dimensionality reduction techniques</h3>
+<div class="outline-text-3" id="text-orgb597bef">
 <ul class="org-ul">
 <li>PCA: find projection that maximize the variance</li>
 <li>Multidimensional Scaling: find projection that best preserves
@@ -331,18 +335,18 @@ class-separation.</li>
 </div>
 </div>
 
-<div id="outline-container-org43cd521" class="outline-3">
-<h3 id="org43cd521">Limitations</h3>
-<div class="outline-text-3" id="text-org43cd521">
+<div id="outline-container-org33fefd1" class="outline-3">
+<h3 id="org33fefd1">Limitations</h3>
+<div class="outline-text-3" id="text-org33fefd1">
 <ul class="org-ul">
 <li>the data must be linearly separable (which is a strong assumption)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd6c8362" class="outline-3">
-<h3 id="orgd6c8362">K-means clustering</h3>
-<div class="outline-text-3" id="text-orgd6c8362">
+<div id="outline-container-org9f54158" class="outline-3">
+<h3 id="org9f54158">K-means clustering</h3>
+<div class="outline-text-3" id="text-org9f54158">
 <p>
 Given the data and not the labels, the task is to to divide It in
 clusters. Here is presented a technique called <b><b>k-means clustering</b></b>.
@@ -370,9 +374,9 @@ within each set:
 </div>
 </div>
 
-<div id="outline-container-orgdecfccf" class="outline-3">
-<h3 id="orgdecfccf">The algorithm</h3>
-<div class="outline-text-3" id="text-orgdecfccf">
+<div id="outline-container-orga08ce59" class="outline-3">
+<h3 id="orga08ce59">The algorithm</h3>
+<div class="outline-text-3" id="text-orga08ce59">
 <pre class="example">
 Initialization: Use some initialization strategy to get
 some initial cluster centroids u1,...,uk
@@ -393,9 +397,9 @@ minimum.
 </div>
 </div>
 
-<div id="outline-container-org1ec4b6e" class="outline-3">
-<h3 id="org1ec4b6e">Initial Centroid Selection</h3>
-<div class="outline-text-3" id="text-org1ec4b6e">
+<div id="outline-container-org23ccff1" class="outline-3">
+<h3 id="org23ccff1">Initial Centroid Selection</h3>
+<div class="outline-text-3" id="text-org23ccff1">
 <ul class="org-ul">
 <li>random selection</li>
 <li>points least similar to any existing center</li>
@@ -404,9 +408,9 @@ minimum.
 </div>
 </div>
 
-<div id="outline-container-org5637101" class="outline-3">
-<h3 id="org5637101">Running time</h3>
-<div class="outline-text-3" id="text-org5637101">
+<div id="outline-container-orgc251afb" class="outline-3">
+<h3 id="orgc251afb">Running time</h3>
+<div class="outline-text-3" id="text-orgc251afb">
 <ul class="org-ul">
 <li>assignment: \(O(kn)\) time</li>
 <li>centroid computation: \(O(n)\) time</li>

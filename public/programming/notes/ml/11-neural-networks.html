@@ -8,6 +8,10 @@
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
 <script>
   window.MathJax = {
     tex: {
@@ -47,9 +51,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-orgb06398f" class="outline-2">
-<h2 id="orgb06398f">Neural Networks</h2>
-<div class="outline-text-2" id="text-orgb06398f">
+<div id="outline-container-orgd9ca90a" class="outline-2">
+<h2 id="orgd9ca90a">Neural Networks</h2>
+<div class="outline-text-2" id="text-orgd9ca90a">
 <p>
 An artificial neuron, for example a perceptron, is a non-linear
 parameterized function with restricted output range. It predicts the
@@ -102,9 +106,9 @@ by <b><b>backpropagation</b></b>.
 </p>
 </div>
 
-<div id="outline-container-orgbf988a1" class="outline-3">
-<h3 id="orgbf988a1">Task</h3>
-<div class="outline-text-3" id="text-orgbf988a1">
+<div id="outline-container-orge121623" class="outline-3">
+<h3 id="orge121623">Task</h3>
+<div class="outline-text-3" id="text-orge121623">
 <p>
 Given training samples \(T=\{ (x_1, y_1), (x_2, y_2), ..., (x_n, y_n)
 \}\) adjust all the weights of the network \(\Theta\) such that a cost
@@ -123,9 +127,9 @@ compute the gradient efficiently.
 </div>
 </div>
 
-<div id="outline-container-org443356a" class="outline-3">
-<h3 id="org443356a">Training</h3>
-<div class="outline-text-3" id="text-org443356a">
+<div id="outline-container-org814d96e" class="outline-3">
+<h3 id="org814d96e">Training</h3>
+<div class="outline-text-3" id="text-org814d96e">
 <p>
 To train a feed-forward network we need to define:
 </p>
@@ -149,9 +153,9 @@ this where the function behaves differently below 0.</li>
 </div>
 </div>
 
-<div id="outline-container-org5892bf2" class="outline-3">
-<h3 id="org5892bf2">Error Backpropagation</h3>
-<div class="outline-text-3" id="text-org5892bf2">
+<div id="outline-container-org1941fcd" class="outline-3">
+<h3 id="org1941fcd">Error Backpropagation</h3>
+<div class="outline-text-3" id="text-org1941fcd">
 <p>
 To learn the weights we use an algorithm called backpropagation, which
 is composed of the following steps:
@@ -263,9 +267,9 @@ If we substitute the definition of \(\delta\) and \(a_j\), and make use of
 </div>
 </div>
 
-<div id="outline-container-org558c7d0" class="outline-3">
-<h3 id="org558c7d0">Example</h3>
-<div class="outline-text-3" id="text-org558c7d0">
+<div id="outline-container-org97c97f5" class="outline-3">
+<h3 id="org97c97f5">Example</h3>
+<div class="outline-text-3" id="text-org97c97f5">
 <p>
 Consider a two-layer network (that does not count the input
 layer). Given:
@@ -319,9 +323,9 @@ second-layer weights are given by:
 </div>
 </div>
 
-<div id="outline-container-org1feac42" class="outline-3">
-<h3 id="org1feac42">Optimization</h3>
-<div class="outline-text-3" id="text-org1feac42">
+<div id="outline-container-org34ecaea" class="outline-3">
+<h3 id="org34ecaea">Optimization</h3>
+<div class="outline-text-3" id="text-org34ecaea">
 <p>
 The function \(f\) is a composition of multiple functions:
 </p>
@@ -356,9 +360,9 @@ It is often useful to compute the gradient os set of samples
 </div>
 </div>
 
-<div id="outline-container-org81fa676" class="outline-3">
-<h3 id="org81fa676">Convolutional Neural Networks</h3>
-<div class="outline-text-3" id="text-org81fa676">
+<div id="outline-container-org10cd684" class="outline-3">
+<h3 id="org10cd684">Convolutional Neural Networks</h3>
+<div class="outline-text-3" id="text-org10cd684">
 <p>
 Convolutional neural networks are simply neural networks that use
 convolution in place of general matrix multiplication in at least one
@@ -394,9 +398,9 @@ spacial size of the representation to reduce the amount of parameters.
 </div>
 </div>
 
-<div id="outline-container-org25022c0" class="outline-3">
-<h3 id="org25022c0">Other neural networks</h3>
-<div class="outline-text-3" id="text-org25022c0">
+<div id="outline-container-orgd8e3c16" class="outline-3">
+<h3 id="orgd8e3c16">Other neural networks</h3>
+<div class="outline-text-3" id="text-orgd8e3c16">
 <ul class="org-ul">
 <li>Recurrent network: when nodes on the same layer influence each
 other, used in video frame prediction.</li>

@@ -12,6 +12,7 @@ echo -e "\n-----\n\n Travel: [[file:emacs.org][Emacs]], [[file:../../theindex.or
 # Style
 cp style/simple-giovanni.css public/simple.css
 cp style/favicon.ico public/
+cp style/logo.png public/
 
 # Fonts
 mkdir -p public/fonts
