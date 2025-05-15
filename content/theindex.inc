@@ -22,6 +22,7 @@
       - [[file:photography/toblino.org::*Toblino][Toblino]]
     - [[file:programming/programming.org::*Programming][Programming]]
       - [[file:programming/contributing-to-openstreetmap.org::*Contributing to Openstreetmap][Contributing to Openstreetamp]]
+      - [[file:programming/cv.org::*Giovanni Santini - CV][CV]]
       - [[file:programming/emacs/emacs.org::*Emacs][Emacs]]
         - [[file:programming/emacs/elisp-exercises.org::*Emacs-lisp Exercises][Emacs-lisp Exercises]]
         - [[file:programming/emacs/init.org::*Welcome][Init]]
