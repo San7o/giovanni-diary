@@ -21,7 +21,7 @@ cp -r fonts/Inconsolata public/fonts/
 mkdir -p public/reading/surroundings
 cp -r content/reading/surroundings/images public/reading/surroundings/
 cp -r content/ephemeris/images public/ephemeris/images
-cp -r content/photography/images public/photography
+cp -r content/stash/photography/images public/stash/photography
 
 # Dump git commit history
 git log --pretty=format:"- %ad %s" --date=short > content/git-history.txt
