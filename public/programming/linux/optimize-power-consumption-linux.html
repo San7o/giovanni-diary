@@ -15,9 +15,9 @@
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt;
 </p>
 
-<div id="outline-container-org5dc3382" class="outline-2">
-<h2 id="org5dc3382">Optimize power consumption on Linux</h2>
-<div class="outline-text-2" id="text-org5dc3382">
+<div id="outline-container-org5216838" class="outline-2">
+<h2 id="org5216838">Optimize power consumption on Linux</h2>
+<div class="outline-text-2" id="text-org5216838">
 <p>
 This documents contains notes regarding my attempts to increase
 battery life on my linux laptop[s]. I don't use my laptop for
@@ -34,9 +34,9 @@ me on Mastodon <a href="https://mastodon.social/@santo7">@santo7@mastodon.social
 </p>
 </div>
 
-<div id="outline-container-org746a4f9" class="outline-4">
-<h4 id="org746a4f9">Index</h4>
-<div class="outline-text-4" id="text-org746a4f9">
+<div id="outline-container-org007e766" class="outline-4">
+<h4 id="org007e766">Index</h4>
+<div class="outline-text-4" id="text-org007e766">
 <ul class="org-ul">
 <li>ACPI Specification</li>
 <li>Linux's ACPI</li>
@@ -66,9 +66,9 @@ me on Mastodon <a href="https://mastodon.social/@santo7">@santo7@mastodon.social
 </div>
 </div>
 
-<div id="outline-container-orgbcca127" class="outline-4">
-<h4 id="orgbcca127">ACPI Specification</h4>
-<div class="outline-text-4" id="text-orgbcca127">
+<div id="outline-container-org512af51" class="outline-4">
+<h4 id="org512af51">ACPI Specification</h4>
+<div class="outline-text-4" id="text-org512af51">
 <p>
 Before tinkering with your system, you should have a decent
 understanding of how the operating system works in the context of
@@ -117,9 +117,9 @@ storage&#x2026;).
 </div>
 </div>
 
-<div id="outline-container-orge1c0cce" class="outline-4">
-<h4 id="orge1c0cce">Linux's ACPI</h4>
-<div class="outline-text-4" id="text-orge1c0cce">
+<div id="outline-container-orgfa70a7a" class="outline-4">
+<h4 id="orgfa70a7a">Linux's ACPI</h4>
+<div class="outline-text-4" id="text-orgfa70a7a">
 <p>
 An overview of the Linux's ACPI implementation can be found <a href="https://www.kernel.org/doc/ols/2005/ols2005v1-pages-59-76.pdf">here</a>.
 Briefly, It is composed of an OS Service Layer which abstracts the
@@ -149,9 +149,9 @@ implement.
 </div>
 </div>
 
-<div id="outline-container-orga134e2f" class="outline-4">
-<h4 id="orga134e2f">Understand what consumes the most</h4>
-<div class="outline-text-4" id="text-orga134e2f">
+<div id="outline-container-org45f2137" class="outline-4">
+<h4 id="org45f2137">Understand what consumes the most</h4>
+<div class="outline-text-4" id="text-org45f2137">
 <p>
 While you may try to thinker with configuration files and settings
 following common heuristics (such as "less processes = less power
@@ -163,8 +163,8 @@ consumption.
 </div>
 
 <ul class="org-ul">
-<li><a id="org346d368"></a>Powertop<br />
-<div class="outline-text-5" id="text-org346d368">
+<li><a id="orgd92e00d"></a>Powertop<br />
+<div class="outline-text-5" id="text-orgd92e00d">
 <p>
 A general tool that works well is <a href="https://linux.die.net/man/8/powertop">powertop</a> which will give you
 per-process power consumption and information about CPU states,
@@ -183,8 +183,8 @@ between logs, and so on.
 </div>
 </li>
 
-<li><a id="org5646c05"></a>Iotop<br />
-<div class="outline-text-5" id="text-org5646c05">
+<li><a id="org7b4e971"></a>Iotop<br />
+<div class="outline-text-5" id="text-org7b4e971">
 <p>
 Another useful tool is <a href="https://www.man7.org/linux/man-pages/man8/iotop.8.html">iotop</a> which will give you information about
 disk usage. Even though this does not directly list power
@@ -199,8 +199,8 @@ later we'll see an option in BTRFS that improves performance.
 </div>
 </li>
 
-<li><a id="org42a7676"></a>Plot power usage<br />
-<div class="outline-text-5" id="text-org42a7676">
+<li><a id="orgba3367c"></a>Plot power usage<br />
+<div class="outline-text-5" id="text-orgba3367c">
 <p>
 To evaluate a change in your system, you can log and graph different
 statistics and compare changes. The following script records
@@ -266,7 +266,7 @@ plot <span style="color: #ffa07a;">"power_log.csv"</span> using 1:2 with lines t
 
 
 
-<div id="org7268945" class="figure">
+<div id="orged19fce" class="figure">
 <p><img src="../../ephemeris/images/gnuplot-power.jpeg" alt="gnuplot-power.jpeg" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Gnuplot output</p>
@@ -277,9 +277,9 @@ plot <span style="color: #ffa07a;">"power_log.csv"</span> using 1:2 with lines t
 </div>
 
 
-<div id="outline-container-orga6082eb" class="outline-4">
-<h4 id="orga6082eb">Save yourself time: TLP</h4>
-<div class="outline-text-4" id="text-orga6082eb">
+<div id="outline-container-orgf13694f" class="outline-4">
+<h4 id="orgf13694f">Save yourself time: TLP</h4>
+<div class="outline-text-4" id="text-orgf13694f">
 <p>
 To save yourself some time configuring your system, you can use <a href="https://linrunner.de/tlp/introduction.html">TLP</a>
 (or any similar tool) which automatically configures the kernel with
@@ -315,9 +315,9 @@ There are plenty of utilities like this, use them at your own risk.
 </div>
 </div>
 
-<div id="outline-container-orgaa8ffc5" class="outline-4">
-<h4 id="orgaa8ffc5">Kernel Settings</h4>
-<div class="outline-text-4" id="text-orgaa8ffc5">
+<div id="outline-container-orgc3d300b" class="outline-4">
+<h4 id="orgc3d300b">Kernel Settings</h4>
+<div class="outline-text-4" id="text-orgc3d300b">
 <p>
 There are many settings you can tune on linux, which will mostly
 depend on your hardware and drivers. A decent list can be found in the
@@ -394,8 +394,8 @@ the settings, <code>tlp.conf</code> is a good place to start.
 </div>
 
 <ul class="org-ul">
-<li><a id="orgec604ec"></a>Frequency Scaling<br />
-<div class="outline-text-5" id="text-orgec604ec">
+<li><a id="orgeaa59b4"></a>Frequency Scaling<br />
+<div class="outline-text-5" id="text-orgeaa59b4">
 <p>
 You can choose a frequency scaling governor to manage throttling.
 This will dynamically change the clock's frequency and voltage
@@ -415,8 +415,8 @@ powersave in tlp's settings (which is the default setting).
 </div>
 </li>
 
-<li><a id="orgf862d6a"></a>Maximum charge level<br />
-<div class="outline-text-5" id="text-orgf862d6a">
+<li><a id="orgfdbbde2"></a>Maximum charge level<br />
+<div class="outline-text-5" id="text-orgfdbbde2">
 <p>
 To increase battery life, It is recommended to reduce the maximum
 charge level below 100% and prevent the charging process to happen for
@@ -431,8 +431,8 @@ laptops (like my HP one) this is not supported and the command
 </div>
 </li>
 
-<li><a id="orgef34bd2"></a>Omit Scheduling-Clock ticks for idle CPUs<br />
-<div class="outline-text-5" id="text-orgef34bd2">
+<li><a id="org95c64d9"></a>Omit Scheduling-Clock ticks for idle CPUs<br />
+<div class="outline-text-5" id="text-org95c64d9">
 <p>
 If you are doing mostly lightweight work with long idle periods, you
 can limit the scheduling-clock interrupt to prevent waking up some
@@ -454,8 +454,8 @@ CONFIG_HZ_100=y
 </div>
 </li>
 
-<li><a id="orge3a3d66"></a>Disable Atime in BTRFS<br />
-<div class="outline-text-5" id="text-orge3a3d66">
+<li><a id="orgbb8a7ec"></a>Disable Atime in BTRFS<br />
+<div class="outline-text-5" id="text-orgbb8a7ec">
 <p>
 BTRFS is a popular filesystem. A part of Its design is the CoW
 (Copy on Write) where a certain file would get copied in another
@@ -487,8 +487,8 @@ on the BTRFS entries in <code>/etc/fstab</code>.
 </div>
 </li>
 
-<li><a id="orga1b2d44"></a>Kernel Flags<br />
-<div class="outline-text-5" id="text-orga1b2d44">
+<li><a id="org02750ea"></a>Kernel Flags<br />
+<div class="outline-text-5" id="text-org02750ea">
 <p>
 You can add the following kernel flags when booting your system:
 </p>
@@ -513,9 +513,9 @@ redrawing.</li>
 </ul>
 </div>
 
-<div id="outline-container-org66137d8" class="outline-4">
-<h4 id="org66137d8">Helpful tips</h4>
-<div class="outline-text-4" id="text-org66137d8">
+<div id="outline-container-orgf02929b" class="outline-4">
+<h4 id="orgf02929b">Helpful tips</h4>
+<div class="outline-text-4" id="text-orgf02929b">
 <p>
 Here is a list of other helpful things that will make your operating
 system lighter and more efficient.
@@ -523,8 +523,8 @@ system lighter and more efficient.
 </div>
 
 <ul class="org-ul">
-<li><a id="orgf081171"></a>Light graphical session<br />
-<div class="outline-text-5" id="text-orgf081171">
+<li><a id="org826fb7d"></a>Light graphical session<br />
+<div class="outline-text-5" id="text-org826fb7d">
 <p>
 If you are using a graphical environment, chances are that you do not
 need a full blown desktop environment to manage the position of your
@@ -545,8 +545,8 @@ are the best.
 </div>
 </li>
 
-<li><a id="org00e6443"></a>Have less background processes running<br />
-<div class="outline-text-5" id="text-org00e6443">
+<li><a id="org868e7ab"></a>Have less background processes running<br />
+<div class="outline-text-5" id="text-org868e7ab">
 <p>
 If you are using a linux distribution instead of compiling your system
 on your own, chances are that the maintainers of said distribution
@@ -570,8 +570,8 @@ daemons, etc&#x2026;
 </div>
 </li>
 
-<li><a id="orgd951ddd"></a>Lower the backlight<br />
-<div class="outline-text-5" id="text-orgd951ddd">
+<li><a id="org64858d3"></a>Lower the backlight<br />
+<div class="outline-text-5" id="text-org64858d3">
 <p>
 Lower the backlight of your laptop as much as you are comfortable
 with.
@@ -581,9 +581,9 @@ with.
 </ul>
 </div>
 
-<div id="outline-container-org1e2d5e4" class="outline-4">
-<h4 id="org1e2d5e4">Conclusions</h4>
-<div class="outline-text-4" id="text-org1e2d5e4">
+<div id="outline-container-orgaa856b2" class="outline-4">
+<h4 id="orgaa856b2">Conclusions</h4>
+<div class="outline-text-4" id="text-orgaa856b2">
 <p>
 I hope you learned something new from this article. I will keep this
 updated with new information I gain overtime, if you have any
