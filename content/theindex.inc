@@ -53,6 +53,7 @@
           - [[file:programming/notes/ml/09-unsupervised-learning.org::*Unsupervised Learning][Unsupervised Learning]]
       - [[file:programming/offline-programming.org::*Offline Programming][Offline Programming]]
       - [[file:programming/root-a-samsung-galaxy-j5.org::*How to root a Samsung Galaxy J5 (2016)][Root a Samsung Galaxy j5]]
+      - [[file:programming/setup.org::*Setup][Setup]]
       - [[file:programming/usb-for-apocalypse.org::*USB for the apocalypse][Usb for the apocalypse]]
       - [[file:programming/wishlist.org::*Wishlist][Wishlist]]
     - [[file:reading/reading.org::*Reading][Reading]]
