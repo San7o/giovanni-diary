@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../index.html">Giovanni's Diary</a> &gt; <a href="ephemeris.html">Ephemeris</a> &gt;
+</p>
+
+
+<div id="outline-container-org2caccfe" class="outline-2">
+<h2 id="org2caccfe">2025-05-18 - Self Hosting</h2>
+<div class="outline-text-2" id="text-org2caccfe">
+<p>
+Hi,
+</p>
+
+<p>
+for unknown reasons, today I woke up with a lot of motivation to self
+host a bunch of services. And I know I have a lot to study and I need
+to prepare for the exams, but I thought I could install some things
+while studying (which did not work, but I at least I studied
+afterwards).
+</p>
+
+<p>
+Every time I think about self hosting, the first thing that comes to
+my mind is the fact that I cannot do It right now: first I cannot do
+port forwarding since I can't control the router of my dormitory,
+secondly the router uses the university's network which blocks a lot
+of traffic. This means that I cannot just open some port and access It
+on another machine, even if I am on the same network. Alternatively I
+could use a VPN, but It would probably cost a few bucks and I cannot
+afford to have any more expenses now, especially for recreational (and
+frankly useless) projects like this. This morning I searched the web
+for free VPNs and I found <a href="https://tailscale.com/">tailscale</a> which lets me connect up to 100
+devices on the same network with the free plan. I am not affiliated to
+them in any way but I have to say that the service is amazing and It
+works beautifully, kudos to them.
+</p>
+
+<p>
+Now that I can connect to my other computers remotely, I can have some
+fun. The computer I wanted to use as a server is my old desktop: It
+has an i5-6600K, 16GB DDR4, NVIDIA 1060 3G, 1TB M.2 SSD and 10 years
+of experience in the trenches. This was my first (and only) desktop
+computer I got when I was 12. I grew up with It, I played hundreds of
+games, spent days and nights on discord and It is still working
+nicely. It has installed Fedora 42 on the M.2 and Linux From Scratch
+on another SSD. So I booted up fedora, connected the network and ssh
+into it from my laptop. Time to have fun.
+</p>
+
+<p>
+Since my laptop is not really powerful, the first thing I did was
+installing ollama to play with some models. In particular, I installed
+llama3.2:3B and qwen2.5:3B (7B is already too slow, and more that this
+does not work at all). The difference in quality from last year's
+models is really incredible: 3B parameters were basically useless a
+few months ago and now they are good enough to use daily on my 10 year
+old computer, truly amazing. After installing the model, I wanted some
+kind of frontend to use and I downloaded <a href="https://docs.openwebui.com/">Open WebUI</a>. Installing It
+felt dystopic, It downloaded literally thousands of dependencies!
+Then, after downloading half of the pip repository, you can run the
+program just to download a few other hundreds of dependencies. All of
+this for a website with a text field that sends the text to an api,
+disgusting. But after all the application (to my surprise) managed to
+run and It was working flawlessly. It is probably the most feature
+rich LLM frontend out there, I have to say, but It is also quite
+bloated. Still, I don't feel comfortable running an application that
+depends on billions of lines of python and javascript code so I will
+seek something else.
+</p>
+
+<p>
+Another thing I installed is a minecraft server. I haven't played
+minecraft in a while (at least a few years) and I know they added so
+many things, playing It now would be like rediscovering everything
+from scratch. But for for today I have plenty to do so I just installed
+the server, joined to make sure It worked and moved on.
+</p>
+
+<p>
+I then wanted some kind of filemanager, but my experience was even
+worse than with Open WebUI. Most of the things I found online were
+completely bloated and difficult to install. Some of them didn't work
+because of various dependencies issues which I did not dare to
+debug. Fortunately, there is some good and I found <a href="https://tinyfilemanager.github.io/">Tiny File Manager</a>
+which is a single php file that implements the entire web app. I think
+many project should take this as an example: you get a full file
+manager just by creating a php server and accessing that file. Easy.
+</p>
+
+<p>
+I also wanted to install <a href="https://git.zx2c4.com/cgit/about/">cgit</a> as a frontend to access all my
+repositories. It took some time and struggles, I first tried to make
+It work with nginx but apparently It does not natively support CGI and
+I found issues in making the communication to the socket so I switched
+to apache and It worked well. I had some other issues with file
+permissions which I sort of solved, wonderful.
+</p>
+
+<p>
+Going forward, I want to upgrade my system and have a NAS and a rack,
+when I will have an economical possibility. I would also like to use
+my setup as a node to host some community services such as a mastodon
+node or contribute to a research project like the CENR's <a href="https://lhcathome.web.cern.ch/">@home</a>
+projects.
+</p>
+
+<p>
+I am also taking some time to reflect on the importance of self
+hosting and being independent from big predatory corporations. We are
+all so dependent on them and this makes us vulnerable and makes them
+money, If I can be a little more independent I will also be a little
+happier.
+</p>
+
+<p>
+&#x2013; Giovanni
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="ephemeris.html">Ephemeris</a>, <a href="../theindex.html">Index</a> 
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>
