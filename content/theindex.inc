@@ -13,6 +13,7 @@
       - [[file:ephemeris/2025-05-14.org::*2025-05-14 - The role of theater in my life][2025-05-14 - The role of theater in my life]]
       - [[file:ephemeris/2025-05-15.org::*2025-05-15 - Writing Giovanni's Diary][2025-05-15 - Writing Giovanni's Diary]]
       - [[file:ephemeris/2025-05-18.org::*2025-05-18 - Self Hosting][2025-05-18 - Self Hosting]]
+      - [[file:ephemeris/2025-05-19.org::*2025-05-19 - Setting up a local cluster][2025-05-19 - Setting up a local cluster]]
     - [[file:feeds.org::*RSS Feed][Feeds]]
       - [[file:rss-feed-guide.org::*RSS Guide][RSS Guide]]
     - [[file:my-public-diary.org::*My Public Diary][My public Diary]]

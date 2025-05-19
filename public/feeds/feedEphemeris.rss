@@ -334,7 +334,7 @@ added colors with gimp. The result is not that great but It's a start.
 </p>
 
 
-<div id="orgdacb7ce" class="figure">
+<div id="org3fe3d6d" class="figure">
 <p><img src="./images/jwst-ngc-3132.jpeg" alt="jwst-ngc-3132.jpeg" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>NGC 3132 Nebula</p>
@@ -410,7 +410,7 @@ that 3 hours long so It's a lot to enjoy.
 </p>
 
 
-<div id="org5c35549" class="figure">
+<div id="org88d13a8" class="figure">
 <p><img src="./images/library-window.jpg" alt="library-window.jpg" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>At the historical museum's library</p>
@@ -428,7 +428,7 @@ play It if I had time and a decent computer.
 </p>
 
 
-<div id="orgc4c3e94" class="figure">
+<div id="org2506aa1" class="figure">
 <p><img src="./images/choir.jpg" alt="choir.jpg" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Choir singing</p>
@@ -710,14 +710,14 @@ famous Latex's "\mathbb" to denote number sets.
 </p>
 
 
-<div id="org069f29b" class="figure">
+<div id="orgcf60668" class="figure">
 <p><img src="./images/logo-old.png" alt="logo-old.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Old favicon</p>
 </div>
 
 
-<div id="orgbfe453e" class="figure">
+<div id="org6e1705b" class="figure">
 <p><img src="./images/logo-new.png" alt="logo-new.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 2: </span>New favicon</p>
@@ -786,6 +786,286 @@ but I found some communities to get motivation and I feel lucky about
 It. I realized that want to promote the routine of keeping a diary or
 a blog through my writings and help others with the technical details
 since this is waht I know best.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="ephemeris.html">Ephemeris</a>, <a href="../theindex.html">Index</a> 
+</p>
+]]></description>
+</item>
+<item>
+<title>2025-05-18 - Self Hosting</title>
+<link>https://giovanni-diary.netlify.app/ephemeris/2025-05-18.html</link>
+<author>Giovanni Santini</author>
+<pubDate>18 May 2025 00:00 GMT</pubDate>
+<description><![CDATA[<p>
+Hi,
+</p>
+
+<p>
+for unknown reasons, today I woke up with a lot of motivation to self
+host a bunch of services. And I know I have a lot to study and I need
+to prepare for the exams, but I thought I could install some things
+while studying (which did not work, but I at least I studied
+afterwards).
+</p>
+
+<p>
+Every time I think about self hosting, the first thing that comes to
+my mind is the fact that I cannot do It right now: first I cannot do
+port forwarding since I can't control the router of my dormitory,
+secondly the router uses the university's network which blocks a lot
+of traffic. This means that I cannot just open some port and access It
+on another machine, even if I am on the same network. Alternatively I
+could use a VPN, but It would probably cost a few bucks and I cannot
+afford to have any more expenses now, especially for recreational (and
+frankly useless) projects like this. This morning I searched the web
+for free VPNs and I found <a href="https://tailscale.com/">tailscale</a> which lets me connect up to 100
+devices on the same network with the free plan. I am not affiliated to
+them in any way but I have to say that the service is amazing and It
+works beautifully, kudos to them.
+</p>
+
+<p>
+Now that I can connect to my other computers remotely, I can have some
+fun. The computer I wanted to use as a server is my old desktop: It
+has an i5-6600K, 16GB DDR4, NVIDIA 1060 3G, 1TB M.2 SSD and 10 years
+of experience in the trenches. This was my first (and only) desktop
+computer I got when I was 12. I grew up with It, I played hundreds of
+games, spent days and nights on discord and It is still working
+nicely. It has installed Fedora 42 on the M.2 and Linux From Scratch
+on another SSD. So I booted up fedora, connected the network and ssh
+into it from my laptop. Time to have fun.
+</p>
+
+<p>
+Since my laptop is not really powerful, the first thing I did was
+installing ollama to play with some models. In particular, I installed
+llama3.2:3B and qwen2.5:3B (7B is already too slow, and more that this
+does not work at all). The difference in quality from last year's
+models is really incredible: 3B parameters were basically useless a
+few months ago and now they are good enough to use daily on my 10 year
+old computer, truly amazing. After installing the model, I wanted some
+kind of frontend to use and I downloaded <a href="https://docs.openwebui.com/">Open WebUI</a>. Installing It
+felt dystopic, It downloaded literally thousands of dependencies!
+Then, after downloading half of the pip repository, you can run the
+program just to download a few other hundreds of dependencies. All of
+this for a website with a text field that sends the text to an api,
+disgusting. But after all the application (to my surprise) managed to
+run and It was working flawlessly. It is probably the most feature
+rich LLM frontend out there, I have to say, but It is also quite
+bloated. Still, I don't feel comfortable running an application that
+depends on billions of lines of python and javascript code so I will
+seek something else.
+</p>
+
+<p>
+Another thing I installed is a minecraft server. I haven't played
+minecraft in a while (at least a few years) and I know they added so
+many things, playing It now would be like rediscovering everything
+from scratch. But for for today I have plenty to do so I just installed
+the server, joined to make sure It worked and moved on.
+</p>
+
+<p>
+I then wanted some kind of filemanager, but my experience was even
+worse than with Open WebUI. Most of the things I found online were
+completely bloated and difficult to install. Some of them didn't work
+because of various dependencies issues which I did not dare to
+debug. Fortunately, there is some good and I found <a href="https://tinyfilemanager.github.io/">Tiny File Manager</a>
+which is a single php file that implements the entire web app. I think
+many project should take this as an example: you get a full file
+manager just by creating a php server and accessing that file. Easy.
+</p>
+
+<p>
+I also wanted to install <a href="https://git.zx2c4.com/cgit/about/">cgit</a> as a frontend to access all my
+repositories. It took some time and struggles, I first tried to make
+It work with nginx but apparently It does not natively support CGI and
+I found issues in making the communication to the socket so I switched
+to apache and It worked well. I had some other issues with file
+permissions which I sort of solved, wonderful.
+</p>
+
+<p>
+Going forward, I want to upgrade my system and have a NAS and a rack,
+when I will have an economical possibility. I would also like to use
+my setup as a node to host some community services such as a mastodon
+node or contribute to a research project like the CENR's <a href="https://lhcathome.web.cern.ch/">@home</a>
+projects.
+</p>
+
+<p>
+I am also taking some time to reflect on the importance of self
+hosting and being independent from big predatory corporations. We are
+all so dependent on them and this makes us vulnerable and makes them
+money, If I can be a little more independent I will also be a little
+happier.
+</p>
+
+<p>
+&#x2013; Giovanni
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="ephemeris.html">Ephemeris</a>, <a href="../theindex.html">Index</a> 
+</p>
+]]></description>
+</item>
+<item>
+<title>2025-05-19 - Setting up a local cluster</title>
+<link>https://giovanni-diary.netlify.app/ephemeris/2025-05-19.html</link>
+<author>Giovanni Santini</author>
+<pubDate>19 May 2025 00:00 GMT</pubDate>
+<description><![CDATA[<p>
+Hi,
+</p>
+
+<p>
+today I spent most of my day setting up a local cluster for
+kubernetes.  I thought this would be nice and simple but It wasn't,
+let me tell you why.
+</p>
+
+<p>
+The reason why I wanted to have my own custom cluster is mostly
+because I don't like popular solutions based on virtual machines. I
+have always done all my development in a cluster with Kind and that
+has been awesome, Kind is light weight and easy to setup. However,
+Kind uses docker containers and It works only locally. For my
+application, I need to test It on various cluster topologies,
+especially in multiple nodes running different kernels. I have this
+requirement because my application behaves differently based on the
+number of running kernels in the cluster since I need to load eBPF
+programs in the kernel.
+</p>
+
+<p>
+Well, I tried to use Minikube but both my laptop and my Desktop would
+completely freeze. Minikube is incredibly resource hungry and a lot of
+the drivers do not work at all. Additionally, I have so many problems
+on running particular topologies with multiple nodes and different
+images. I think Minikube is slow and heavy, and buggy. The
+alternatives do not satisfy me for similar reasons: I knew that I
+could setup a simple and light cluster on my own and have any kind of
+configuration I wanted, like 2 nodes on my desktop, one on my laptop
+and another one on my other laptop for example. So I started setting
+up everything by myself.
+</p>
+
+<p>
+My vision is to have any number of Linux images running via qemu and
+KVM, all connected to the same network. The images would then run the
+various kubernetes daemons and I would control everything from a
+tmuxed terminal. All of this is managed centrally using a bunch of
+scripts. Since I am bootstrapping everything, I have full control on
+any part of my cluster, making It simple to hack. However, I have to
+say that setting up this did not went exactly smoothly.
+</p>
+
+<p>
+To make the machines communicate with the internet and themselves I
+needed to setup some tap interface and connect them via a bridge. You
+need to do this correctly in order to make everything work, my final
+script to bootstrap the interface is the following:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">!/bin/</span><span style="color: #00ffff;">bash</span>
+<span style="color: #b0c4de;">set</span> -e
+
+<span style="color: #b0c4de;">echo</span> <span style="color: #ffa07a;">"Creating bridge br0..."</span>
+
+sudo ip link set br0 down 2&gt;/dev/null || true
+sudo ip link delete br0 type bridge 2&gt;/dev/null || true
+
+sudo ip link add name br0 type bridge
+sudo ip addr add 192.168.50.1/24 dev br0
+sudo ip link set br0 up
+
+<span style="color: #b0c4de;">echo</span> 1 | sudo tee /proc/sys/net/ipv4/ip_forward
+sudo iptables -t nat -A POSTROUTING -s 192.168.50.0/24 ! -o br0 -j MASQUERADE
+
+<span style="color: #00ffff;">for</span> i<span style="color: #00ffff;"> in</span> 0 1; <span style="color: #00ffff;">do</span>
+  <span style="color: #eedd82;">tap</span>=<span style="color: #ffa07a;">"tap$i"</span>
+
+  <span style="color: #b0c4de;">echo</span> <span style="color: #ffa07a;">"Setting up $tap..."</span>
+
+  sudo ip link set <span style="color: #ffa07a;">"$tap"</span> down 2&gt;/dev/null || true
+  sudo ip tuntap del <span style="color: #ffa07a;">"$tap"</span> mode tap 2&gt;/dev/null || true
+
+  sudo ip tuntap add dev <span style="color: #ffa07a;">"$tap"</span> mode tap
+  sudo ip link set <span style="color: #ffa07a;">"$tap"</span> up
+  sudo ip link set <span style="color: #ffa07a;">"$tap"</span> master br0
+<span style="color: #00ffff;">done</span>
+
+<span style="color: #b0c4de;">echo</span> <span style="color: #ffa07a;">"Bridge and tap devices ready."</span>
+</pre>
+</div>
+
+<p>
+I also made a script to clean everything and can be found on the
+<a href="https://github.com/San7o/hive-operator/tree/main/k8s-lab">project's repo</a>. Then I needed to setup a static IP in each machine and
+&#x2026; It didn't quite work. The problem was that I also needed to set a
+different MAC address for each virtual machine or the TCP/IP stack
+could not route the packets&#x2026; that took a LOONG time to figure out
+because nothing hinted that this was the problem. I basically tried
+random things for 3 hours until this worked, wonderful.
+</p>
+
+<p>
+Thankfully I endured that and now I am here to tell a beautiful story
+instead of being ashamed of my own incompetence. Anyway, now I have a
+bunch of VMs all connected to the same network that can ping each other
+and the internet. Next time I will make so that they will
+automatically install k3s (a kubernetes distribution) and we should be
+good to go.
+</p>
+
+<p>
+Another interesting thing I learned is <a href="https://cloudinit.readthedocs.io/en/latest/index.html">cloud-init</a> which helps setting
+up the userspace of the VMs from an external config file, which looks
+like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">cloud-config</span>
+<span style="color: #eedd82;">users</span>:
+    - <span style="color: #eedd82;">name</span>: fedora
+      <span style="color: #eedd82;">groups</span>: user,wheel
+      <span style="color: #eedd82;">hashed_passwd</span>: ...
+      <span style="color: #eedd82;">lock_passwd</span>: <span style="color: #7fffd4;">false</span>
+      <span style="color: #eedd82;">sudo</span>: ALL=(ALL) NOPASSWD:ALL
+<span style="color: #eedd82;">write_files</span>:
+  <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Enable password authentication in ssh</span>
+  - <span style="color: #eedd82;">path</span>: /etc/ssh/sshd_config.d/20-enable-passwords.conf
+    <span style="color: #eedd82;">content</span>: |
+      <span style="color: #ffa07a;">PasswordAuthentication yes</span>
+<span style="color: #eedd82;">runcmd</span>:
+  - systemctl restart NetworkManager
+  - systemctl restart sshd
+  - nmcli connection up static-ens3
+</pre>
+</div>
+
+<p>
+I find this very useful, thank you Fedora for letting me discover
+this.
+</p>
+
+<p>
+The rest of my day was spent signing an enormous amount of documents
+for my internship and doing physics exercises at the blackboards in
+my university until closing hour, had a lasagna and now back to study
+physics.
+</p>
+
+<p>
+&#x2013; Giovanni
 </p>
 
 <hr />

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../index.html">Giovanni's Diary</a> &gt; <a href="ephemeris.html">Ephemeris</a> &gt;
+</p>
+
+
+<div id="outline-container-org9dae1a4" class="outline-2">
+<h2 id="org9dae1a4">2025-05-19 - Setting up a local cluster</h2>
+<div class="outline-text-2" id="text-org9dae1a4">
+<p>
+Hi,
+</p>
+
+<p>
+today I spent most of my day setting up a local cluster for
+kubernetes.  I thought this would be nice and simple but It wasn't,
+let me tell you why.
+</p>
+
+<p>
+The reason why I wanted to have my own custom cluster is mostly
+because I don't like popular solutions based on virtual machines. I
+have always done all my development in a cluster with Kind and that
+has been awesome, Kind is light weight and easy to setup. However,
+Kind uses docker containers and It works only locally. For my
+application, I need to test It on various cluster topologies,
+especially in multiple nodes running different kernels. I have this
+requirement because my application behaves differently based on the
+number of running kernels in the cluster since I need to load eBPF
+programs in the kernel.
+</p>
+
+<p>
+Well, I tried to use Minikube but both my laptop and my Desktop would
+completely freeze. Minikube is incredibly resource hungry and a lot of
+the drivers do not work at all. Additionally, I have so many problems
+on running particular topologies with multiple nodes and different
+images. I think Minikube is slow and heavy, and buggy. The
+alternatives do not satisfy me for similar reasons: I knew that I
+could setup a simple and light cluster on my own and have any kind of
+configuration I wanted, like 2 nodes on my desktop, one on my laptop
+and another one on my other laptop for example. So I started setting
+up everything by myself.
+</p>
+
+<p>
+My vision is to have any number of Linux images running via qemu and
+KVM, all connected to the same network. The images would then run the
+various kubernetes daemons and I would control everything from a
+tmuxed terminal. All of this is managed centrally using a bunch of
+scripts. Since I am bootstrapping everything, I have full control on
+any part of my cluster, making It simple to hack. However, I have to
+say that setting up this did not went exactly smoothly.
+</p>
+
+<p>
+To make the machines communicate with the internet and themselves I
+needed to setup some tap interface and connect them via a bridge. You
+need to do this correctly in order to make everything work, my final
+script to bootstrap the interface is the following:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">!/bin/</span><span style="color: #00ffff;">bash</span>
+<span style="color: #b0c4de;">set</span> -e
+
+<span style="color: #b0c4de;">echo</span> <span style="color: #ffa07a;">"Creating bridge br0..."</span>
+
+sudo ip link set br0 down 2&gt;/dev/null || true
+sudo ip link delete br0 type bridge 2&gt;/dev/null || true
+
+sudo ip link add name br0 type bridge
+sudo ip addr add 192.168.50.1/24 dev br0
+sudo ip link set br0 up
+
+<span style="color: #b0c4de;">echo</span> 1 | sudo tee /proc/sys/net/ipv4/ip_forward
+sudo iptables -t nat -A POSTROUTING -s 192.168.50.0/24 ! -o br0 -j MASQUERADE
+
+<span style="color: #00ffff;">for</span> i<span style="color: #00ffff;"> in</span> 0 1; <span style="color: #00ffff;">do</span>
+  <span style="color: #eedd82;">tap</span>=<span style="color: #ffa07a;">"tap$i"</span>
+
+  <span style="color: #b0c4de;">echo</span> <span style="color: #ffa07a;">"Setting up $tap..."</span>
+
+  sudo ip link set <span style="color: #ffa07a;">"$tap"</span> down 2&gt;/dev/null || true
+  sudo ip tuntap del <span style="color: #ffa07a;">"$tap"</span> mode tap 2&gt;/dev/null || true
+
+  sudo ip tuntap add dev <span style="color: #ffa07a;">"$tap"</span> mode tap
+  sudo ip link set <span style="color: #ffa07a;">"$tap"</span> up
+  sudo ip link set <span style="color: #ffa07a;">"$tap"</span> master br0
+<span style="color: #00ffff;">done</span>
+
+<span style="color: #b0c4de;">echo</span> <span style="color: #ffa07a;">"Bridge and tap devices ready."</span>
+</pre>
+</div>
+
+<p>
+I also made a script to clean everything and can be found on the
+<a href="https://github.com/San7o/hive-operator/tree/main/k8s-lab">project's repo</a>. Then I needed to setup a static IP in each machine and
+&#x2026; It didn't quite work. The problem was that I also needed to set a
+different MAC address for each virtual machine or the TCP/IP stack
+could not route the packets&#x2026; that took a LOONG time to figure out
+because nothing hinted that this was the problem. I basically tried
+random things for 3 hours until this worked, wonderful.
+</p>
+
+<p>
+Thankfully I endured that and now I am here to tell a beautiful story
+instead of being ashamed of my own incompetence. Anyway, now I have a
+bunch of VMs all connected to the same network that can ping each other
+and the internet. Next time I will make so that they will
+automatically install k3s (a kubernetes distribution) and we should be
+good to go.
+</p>
+
+<p>
+Another interesting thing I learned is <a href="https://cloudinit.readthedocs.io/en/latest/index.html">cloud-init</a> which helps setting
+up the userspace of the VMs from an external config file, which looks
+like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">cloud-config</span>
+<span style="color: #eedd82;">users</span>:
+    - <span style="color: #eedd82;">name</span>: fedora
+      <span style="color: #eedd82;">groups</span>: user,wheel
+      <span style="color: #eedd82;">hashed_passwd</span>: ...
+      <span style="color: #eedd82;">lock_passwd</span>: <span style="color: #7fffd4;">false</span>
+      <span style="color: #eedd82;">sudo</span>: ALL=(ALL) NOPASSWD:ALL
+<span style="color: #eedd82;">write_files</span>:
+  <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Enable password authentication in ssh</span>
+  - <span style="color: #eedd82;">path</span>: /etc/ssh/sshd_config.d/20-enable-passwords.conf
+    <span style="color: #eedd82;">content</span>: |
+      <span style="color: #ffa07a;">PasswordAuthentication yes</span>
+<span style="color: #eedd82;">runcmd</span>:
+  - systemctl restart NetworkManager
+  - systemctl restart sshd
+  - nmcli connection up static-ens3
+</pre>
+</div>
+
+<p>
+I find this very useful, thank you Fedora for letting me discover
+this.
+</p>
+
+<p>
+The rest of my day was spent signing an enormous amount of documents
+for my internship and doing physics exercises at the blackboards in
+my university until closing hour, had a lasagna and now back to study
+physics.
+</p>
+
+<p>
+&#x2013; Giovanni
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="ephemeris.html">Ephemeris</a>, <a href="../theindex.html">Index</a> 
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

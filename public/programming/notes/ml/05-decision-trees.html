@@ -51,9 +51,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-orgb5cb2b1" class="outline-2">
-<h2 id="orgb5cb2b1">Decision Trees</h2>
-<div class="outline-text-2" id="text-orgb5cb2b1">
+<div id="outline-container-org7523079" class="outline-2">
+<h2 id="org7523079">Decision Trees</h2>
+<div class="outline-text-2" id="text-org7523079">
 <p>
 Decision trees are simple, intuitive and powerful supervised learning
 algorithms. They make predictions by recursively splitting on
@@ -72,9 +72,9 @@ Given a training dataset, we need to learn:
 </ul>
 </div>
 
-<div id="outline-container-orgb081303" class="outline-3">
-<h3 id="orgb081303">Classification and Regression</h3>
-<div class="outline-text-3" id="text-orgb081303">
+<div id="outline-container-org6b39073" class="outline-3">
+<h3 id="org6b39073">Classification and Regression</h3>
+<div class="outline-text-3" id="text-org6b39073">
 <p>
 Training examples that fall into the region \(R_m\)
 </p>
@@ -120,9 +120,9 @@ set of labels in the region, i.e.</li>
 </div>
 </div>
 
-<div id="outline-container-org7fa1558" class="outline-3">
-<h3 id="org7fa1558">How do we learn a decision tree</h3>
-<div class="outline-text-3" id="text-org7fa1558">
+<div id="outline-container-orgae0f225" class="outline-3">
+<h3 id="orgae0f225">How do we learn a decision tree</h3>
+<div class="outline-text-3" id="text-orgae0f225">
 <p>
 We want to find a simple tree that explains data well. A good enough
 approach would be resort to a greedy heuristic: <b><b>start with an empty
@@ -135,9 +135,9 @@ We will now discuss ways to decide which split is the best.
 </p>
 </div>
 
-<div id="outline-container-org50e2d3f" class="outline-4">
-<h4 id="org50e2d3f">Accuracy Gain</h4>
-<div class="outline-text-4" id="text-org50e2d3f">
+<div id="outline-container-org2d4d329" class="outline-4">
+<h4 id="org2d4d329">Accuracy Gain</h4>
+<div class="outline-text-4" id="text-org2d4d329">
 <p>
 A <b><b>gain</b></b> is defined based on change in some criteria before and
 after a split. Let us define <b><b>accuracy gain</b></b>.
@@ -173,9 +173,9 @@ use information theory.
 </div>
 </div>
 
-<div id="outline-container-org2408863" class="outline-4">
-<h4 id="org2408863">Basic of information theory and entropy</h4>
-<div class="outline-text-4" id="text-org2408863">
+<div id="outline-container-org9c9dfa1" class="outline-4">
+<h4 id="org9c9dfa1">Basic of information theory and entropy</h4>
+<div class="outline-text-4" id="text-org9c9dfa1">
 <p>
 Which coin result is more uncertain between those two?
 </p>
@@ -228,9 +228,9 @@ Entropy can be a better option than accuracy to measure certainty.
 </div>
 </div>
 
-<div id="outline-container-org4bc074f" class="outline-4">
-<h4 id="org4bc074f">Information Gain</h4>
-<div class="outline-text-4" id="text-org4bc074f">
+<div id="outline-container-org89cafaa" class="outline-4">
+<h4 id="org89cafaa">Information Gain</h4>
+<div class="outline-text-4" id="text-org89cafaa">
 <p>
 Information Gain measures the expected reduction in entropy. It is
 define as
@@ -254,9 +254,9 @@ gain will be selected for splitting.
 </div>
 </div>
 
-<div id="outline-container-orgd3bb304" class="outline-4">
-<h4 id="orgd3bb304">Gini index</h4>
-<div class="outline-text-4" id="text-orgd3bb304">
+<div id="outline-container-org8f03aa6" class="outline-4">
+<h4 id="org8f03aa6">Gini index</h4>
+<div class="outline-text-4" id="text-org8f03aa6">
 <p>
 Gini Index is another widely used metric for choosing a good split in
 decision trees Gini index measures the "impurity" (or non-homogeneity)
@@ -275,9 +275,9 @@ having misclassificaiton</li>
 </div>
 </div>
 
-<div id="outline-container-orgc4cfa22" class="outline-3">
-<h3 id="orgc4cfa22">Constructing Decisions Trees</h3>
-<div class="outline-text-3" id="text-orgc4cfa22">
+<div id="outline-container-org898acae" class="outline-3">
+<h3 id="org898acae">Constructing Decisions Trees</h3>
+<div class="outline-text-3" id="text-org898acae">
 <p>
 Chose attribute and value that gives:
 </p>
@@ -290,9 +290,9 @@ Chose attribute and value that gives:
 </div>
 </div>
 
-<div id="outline-container-org3b5e77f" class="outline-3">
-<h3 id="org3b5e77f">Overfitting</h3>
-<div class="outline-text-3" id="text-org3b5e77f">
+<div id="outline-container-orgb331ba5" class="outline-3">
+<h3 id="orgb331ba5">Overfitting</h3>
+<div class="outline-text-3" id="text-orgb331ba5">
 <ul class="org-ul">
 <li>decision trees have a structure that is determined by the data</li>
 <li>as a result they are flexible and can easily fit the training set,
@@ -303,9 +303,9 @@ leave node (<b><b>pruning</b></b>)</li>
 </div>
 </div>
 
-<div id="outline-container-orgcbbc593" class="outline-3">
-<h3 id="orgcbbc593">Limitations</h3>
-<div class="outline-text-3" id="text-orgcbbc593">
+<div id="outline-container-orgb2f70c9" class="outline-3">
+<h3 id="orgb2f70c9">Limitations</h3>
+<div class="outline-text-3" id="text-orgb2f70c9">
 <ul class="org-ul">
 <li>you have exponentially less data al lower levels</li>
 <li>a large tree can overfit the data</li>
@@ -320,9 +320,9 @@ by choosing the squared error rather that maximize information gain.
 </div>
 </div>
 
-<div id="outline-container-orgc49bbe9" class="outline-3">
-<h3 id="orgc49bbe9">Comparison to KNN</h3>
-<div class="outline-text-3" id="text-orgc49bbe9">
+<div id="outline-container-orgfc8c279" class="outline-3">
+<h3 id="orgfc8c279">Comparison to KNN</h3>
+<div class="outline-text-3" id="text-orgfc8c279">
 <p>
 Advantages and Decision Trees over KNN
 </p>
@@ -363,9 +363,9 @@ Disadvantages:
 </div>
 </div>
 
-<div id="outline-container-org8824dd1" class="outline-3">
-<h3 id="org8824dd1">Improvement to decision trees: Random Forests</h3>
-<div class="outline-text-3" id="text-org8824dd1">
+<div id="outline-container-org7f0d024" class="outline-3">
+<h3 id="org7f0d024">Improvement to decision trees: Random Forests</h3>
+<div class="outline-text-3" id="text-org7f0d024">
 <p>
 <b><b>Bootstrapping</b></b> is a resampling technique that involves repeatedly
 drawing samples from the dataset with replacement
