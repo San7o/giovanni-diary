@@ -1,0 +1,261 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:algoritmi.org][Algoritmi]] >
+
+* Flow Network
+#+INDEX: Giovanni's Diary!Programming!Notes!Algoritmi!Flow Network
+
+** Definizioni
+
+*** Rete di flusso
+
+Una **rete di flusso** $G=(V, E, s, t, c)$ e' data da:
+
+- un grafo orientato $G=(V, E)$
+- un nodo $s\in V$ detto sorgente
+- un dono $t\in V$ detto pozzo
+- una funzione di capacita' $c:V\times V \rightarrow \mathbb{R}^{\ge
+  0}$ tale che $(x, y)\notin E \Rightarrow c(x, y)=0$.
+
+Assumiamo che per ogni nodo $x\in V$, esiste un cammino dalla sorgente
+al pozzo attraversando il nodo $x$. Altrimenti questo nodo ci e'
+"inutile".
+
+*** Flusso
+
+Un **flusso** in $G$ e' una funzione $f:V\times V \rightarrow
+\mathbb{R}$ che soddisfa le seguenti proprietà:
+
+- **Vincolo sulla capacita'**: $\forall x, y\in V, f(x, y)\ge c(x, y)$
+- **Anti-simmetria**: $\forall x, y \in V, f(x, y)=-f(y, x)$
+- **Conservazione del flusso**: $\forall x\in V - \{ s, t \},\sum_{y\in V}f(x, y)=0$
+
+*** Valore di un flusso
+
+IL **valore di un flusso** $f$ e' definito come:
+
+$$|f|=\sum_{(x, y)\in E}f(s, x)$$
+
+ovvero come la quantità di flusso uscente da $s$.
+
+** Problema
+
+Data una rete $G=(V, E, s, t, c)$, trovare un flusso che abbia valore
+massimo fra tutti i flussi associabili alla rete.
+
+$$|f*|=max\{ |f| \}$$
+
+Intuitivamente: possiamo tagliare il grafo in due. Il taglio con
+flusso minimo e' uguale al flusso massimo dell'intero grafo, infatti
+ogni flusso deve passare per questo taglio, che agisce come "collo di
+bottiglia".
+
+*** Algoritmo
+
+Si memorizza un flusso corrente $f$, inizialmente nullo.
+Si ripetono le operazioni seguenti:
+
+- Si "sottrae" il flusso attuale dalla rete iniziale, ottenendo una
+  rete residua
+- Si cerca un flusso $g$ all'interno della rete residua
+- Si somma $g$ as $f$
+
+fino a quando non e' più possibile trovare un flusso positivo $g$.
+
+*** Flusso Nullo
+
+Definiamo **flusso nullo** la funzione $f_0:V\times V \rightarrow \mathbb{R}^{\ge 0}$ tale che:
+
+$$\forall x, y\in V: f(x, y)=0$$
+
+*** Flusso Somma
+
+Per ogni coppia di flussi $f_1$ e $f_2$ in $G$, definiamo il **flusso
+somma** $g=f_1+f_2$ come il flusso tale che:
+
+$$\forall x, y\in V: g(x, y)=f_1(x, y)+f_2(x, y)$$
+
+*** Capacita' residua
+
+Definiamo **capacita' residua** di un flusso $f$ in una rete $G=(V, E,
+s, t, c)$ una funzione $c_f:V\times V \rightarrow \mathbb{R}^{\ge 0}$
+tale che:
+
+$$\forall x, y\in V:c_f(x, y)=x(x, y)-f(x, y)$$
+
+*** Rete residua
+
+Data una rete di flusso $G=(V, E, s, t, c)$ e un flusso $f$ su $G$,
+possiamo costruire una **rete residua** $G_f=(V, E_f, s, t, c_f)$ tale
+per cui:
+
+$$\forall x, y\in V:(x, y)\in E_f \iff c_f(x, y)$$
+
+*** Lemma
+
+Lemma: Se $f$ e' un flusso in $G$ e $g$ e' un flusso in $G_f$, allora
+$f+g$ e' un flusso in $G$.
+
+Per dimostrare questo devo dimostrare che questo flusso rispetta le
+tre proprietà di un flusso.
+
+Conservazione:
+
+$$\sum_{y\in V}(f+g)(x, y)=\sum_{y\in V}(f(x, y)+f(x, y))=$$
+$$=\sum_{y\in V}f(x, y)+\sum_{y\in V}g(x, y)=0+0$$
+
+Anti-simmetria:
+
+$$f(x, y)+f(x, y)=-f(x, y)-g(x, y)$$
+$$f(x, y)+g(x, y)=-(f(x, y)+f(x, y))$$
+$$(f+g)(x, y)=-(f+g)(x, y)$$
+
+Vincolo sulla capacita':
+
+$$g(x, y)\le c_f(x, y)$$
+$$f(x, y)+g(x, y)\le c_f(x, y)$$
+$$(f+g)(x, y)\le c(x, y)-f(x,y)+f(x, y)$$
+$$(f+g)(x, y)\le c(x, y)$$
+
+** Flusso Aggiuntivo - Ford Fulkerson
+
+Come trovare un flusso aggiuntivo? Una soluzione potrebbe essere (1)
+prendere un cammino qualsiasi nella rete residua. (2) Si considera la
+minore capacita' degli archi incontrati come la capacita' del cammino
+e si imposta questa su tutto il cammino. (3) Aggiungo questo cammino
+alla soluzione. (4) Calcolo la capacita' residua della rete di
+flusso. (5) Ripeto il punti (1) finché il minimo non e' 0. Da notare
+che posso passare anche sugli archi all'indietro, in ogni caso il
+flusso finale non supererà mai il flusso massimo (correttezza).
+
+Ford-Fulkerson:
+
+#+begin_src
+int[][] maxFlow(Graph G, Node s, Node t, int[][] c)
+	f=f_0 % Flusso nullo
+	c_f = c % Capacita' redisua
+	repeat
+		g=trova un flusso (qualsiasi) in c_f tale
+		   che |g|>0, altrimenti f_0
+		f=f+g
+		c_f=Capacita' residua del flusso f in G
+	until g=f_0 % Il flusso ha come minimo 0
+	return f
+#+end_src
+
+** Dimostrazione formale
+
+*** Taglio
+
+Un **taglio** $(S, T)$ della rete di flusso $G=(V, E< s, t, c)$ e' una
+partizione di $V$ in due sottoinsiemi disgiunti $S, T$ tali che:
+
+$$S=V-T$$
+$$s\in S \land t\in T$$
+
+*** Capacita'
+
+La **capacita**' $C(S, T)$ attraverso il taglio $S, T$ e' pari a:
+
+$$C(S, T)=\sum_{x\in S, y\in T} c(x, y)$$
+
+*** Flusso netto
+
+Se $f$ e' un flusso in $G$, il **flusso netto** $F_f(S, T)$ attraverso $(S, T)$ e':
+
+$$F_f(S, T)=\sum_{s\in S, y\in T}f(x, y)$$
+
+*** Lemma
+
+Dato un flusso $f$ e un taglio $(S, T)$, la quantità' di flusso $F_f(S, T)$ che attraversa il taglio e' uguale a $|f|$.
+
+Dim:
+$$F_f(S, T)=\sum_{x\in S, y\in V}f(x, y)= \sum_{x\in S-\{ s \}, y\in V}f(x, y)+\sum_{y\in V}f(s, y)=$$
+$$= \sum_{x\in S-\{ s \}}\sum_{y\in V}f(x, y)+\sum_{y\in V}f(s, y)=^{(a)} \sum_{x\in S-\{ s \}}0+\sum_{y\in V}f(s, y)=$$
+$$=^{(b)} \sum_{y\in V}f(s, y)=|f|$$
+
+- $(a)$: Conservazione flusso 
+- $(b)$: Definizione valore flusso
+
+*** Lemma
+
+Il **flusso massimo** e' limitato superiormente dalla capacita' del taglio **minimo**, ovvero il taglio la cui capacita' e' minore fra tutti i tagli.
+
+$$\forall f: F_f(S, T)\le C(S, T),\ \forall (S, T)\ taglio\ di\ V$$
+
+Dimostrazione:
+
+$$\forall f: F_f(S, T)=\sum_{x\in S, y\in T} f(x, y)\le \sum_{x\in s, y\in T}x(x, y)=C(S, T)$$
+Il flusso che attraversa un taglio e' uguale al valore del flusso
+
+$$\forall f: |f|=F_f(S, T),\ \forall (S, T)\ taglio\ di\ V$$
+
+*** Lemma
+
+Le seguenti tre affermazioni sono equivalenti:
+
+- $f$ e' un **flusso massimo**
+- non esiste alcun cammino aumentante nella rete residua $G_f$
+- esiste un **taglio minimo** $(S, T)$ tale che $C(S, T)=|f|$
+
+Dimostreremo circolarmente: $(1)\Rightarrow (2)$, $(2)\Rightarrow (3)$, $(3)\Rightarrow (1)$.
+
+- $(1)\Rightarrow (2)$: Se esistesse un cammino aumentante, il flusso
+  potrebbe essere aumentato e quindi non sarebbe massimo (assurdo) .
+- $(2)\Rightarrow (3)$: Poiché non esiste nessun cammino aumentante
+  nella rete residua $G_f$, non esiste nessun cammino da $s$ a
+  $t$. Sia fatto un taglio tra gli elementi raggiungibili da $s$ e
+  quelli non raggiungibili. Osserviamo che, dato che non e' possibile
+  attraversare il taglio, tutti gli archi del taglio sono saturi. Per
+  il lemma del valore del flusso di un taglio vale che $|f|=\sum_{x\in
+  S, y\in T}f(x, y)$ e dato che i tagli sono saturi, $f(x, y)=c(x, y)\
+  \forall x\in S, y\in T$ e la somma di questi e' $C(S, T)$.
+- $(3)\Rightarrow (1)$: Poiché per un qualsiasi flusso $f$ e un
+  qualsiasi taglio $(S, T)$ vale la relazione $|f|\le C(S, T)$, il
+  flusso che soddisfa $|f|=C(S, T)$ deve essere massimo.
+
+** Limite superiore Complessità
+
+*** Ford-Fulkerson
+
+Se le capacità sono intere, l'algoritmo di Ford-Fulkerson ha
+complessità $O((V+E)|f*|)$ (liste) o $O(V^2|f*|)$ (matrice).
+
+Infatti l'algoritmo parte dal flusso nullo e termina quando il valore
+totale del flusso raggiunge $|f*|$. Ogni incremento del flusso aumenta
+il flusso di almeno un'unità. Ogni ricerca di un cammino richiede una
+visita del grafo, con costo $O(V+E)$ o $O(V^2)$. La somma dei flussi e
+il calcolo della rete residua può essere effettuato in tempo $O(V+E)$
+o $O(V^2)$.
+
+*** Edmonds e Karp
+
+Se le capacita' della rete sono intere, l'algoritmo di Edmonds e Karp
+ha complessità $O(VE^2)$.
+
+Entrambi i limiti superiori visti sono validi, dunque bisogna prendere
+il più piccolo dei due ("Se sono più basso di 2 metri e di 5 metri,
+prendo il 2").
+
+Dimostrazione: Vengono eseguiti $O(VE)$* aumenti di flusso, ognuno dei
+quali richiede una visita in ampiezza $O(V+E)$. La complessità' e'
+quindi $O(VE(V+E))$. Poiché' $E=\Omega (V)$ possiamo semplificare
+scrivendo che la complessità e' $O(VE^2)$.
+
+- $*$ lemma: il numero totale di aumenti di flusso eseguiti
+  dall'algoritmo di Edmonds e Karp e' $O(VE)$. Dimostrazione nelle
+  slides.
+
+** Problema - Job Assignment
+
+Un insieme $J$ contiene $n$ job. Un insieme $W$ contiene $m$
+worker. Una relazione $R\subseteq J \times W$, tale che $(j, w)\in R$
+se e solo se il job $j$ può essere eseguito dal worker $w$. Trovare il
+più grande sottoinsieme $O\subseteq R$ tale che:
+
+- ogni job venga assegnato al più ad un worker
+- ad ogni worker venga assegnato al più un job
+
+-----
+
+Travel: [[file:algoritmi.org][Algoritmi]], [[file:../../../theindex.org][Index]]

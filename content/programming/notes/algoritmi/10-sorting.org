@@ -1,0 +1,87 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../programming.org][Programming]] > [[file:../notes.org][Notes]] > [[file:algoritmi.org][Algoritmi]] >
+
+* Sorting
+#+INDEX: Giovanni's Diary!Programming!Notes!Algoritmi!Sorting
+
+
+Algoritmi noti:
+
+- SelectionSort: $\Theta (n^2)$
+- InsertionSort: $\Omega (n), O(n^2)$, iterativo. Adatto per piccoli
+  valori, sequenza quasi ordinate.
+- ShellSort: $\Omega (n), O(n^{\frac{3}{2}})$, adatto per piccoli
+  valori, sequenze quasi ordinate.
+- MergeSort: $\Theta (nlogn)$, richiede $O(n)$ spazio aggiuntivo,
+  ricorsivo. Buona performance in cache, buona parallelizzazione.
+- HeapSort: $\Theta (nlogn)$, sul posto, iterativo. Cattiva
+  performance in cache, cattiva parallelizzazione. Preferito in
+  sistemi embedded.
+- QuickSort: $\Omega (nlogn), O(n^2)$ ricorsivo. Buona performance in
+  cache, buona parallelizzazione, buoni fattori moltiplicativi.
+
+E' possibile dimostrare che qualunque algoritmo di ordinamento basato
+su confronti ha una complessità $\Omega (nlogn)$. Infatti si può
+immaginare un qualunque algoritmo basato sui confronti come un albero
+di decisione. L'altezza dell'albero rappresenta il numero di confronti
+eseguiti nel caso pessimo, questa e' almeno $logk$ con $k$ numero di
+foglie.
+
+** Counting Sort
+
+Assumiamo che i numeri da ordinare sono compresi in un intervallo
+$[1..k]$. Costruiamo un array $B[1..k]$ che conta il numero di volte
+che un valore compreso in $[1..k]$ compare in $A$. Ricolloca i valori
+cosi ottenuti nel vettore da ordinare $A$.
+
+#+begin_src
+countingSort(int[] A, int n, int k)
+	int[] B = new int[1..k]
+	for i=1 to k do
+		B[i]=0
+	for j=1 to n do
+		B[A[j]]++;
+	j=1
+	for i=1 to k do
+		while B[i]>0 do
+			A[j]=i
+			j=j+1
+			B[i]=B[i]-1
+#+end_src
+
+Complessità $O(n+k)$, se $k=O(n)$ allora la complessità e'
+$O(n)$. Richiede $O(k)$ memoria aggiuntiva.
+
+** Pigeonhole Sort
+
+Se i valori non sono numeri interi, ma record associati ad una chiave
+da ordinare, possiamo usare una lista concatenata per chiave e poi
+ordinare soltanto la chiave.
+
+Complessità $\Theta (n+k)$, richiede $O(n+k)$ memoria
+aggiuntiva. iterativo. Molto veloce quando $k=O(n)$.
+
+** Bucket Sort
+
+Allora possiamo dividere l'intervallo in $n$ sotto-intervalli di dimensione $\frac{1}{n}$ detti bucket e poi distribuire gli $n$ numeri nei bucket. Per l'ipotesi di uniformità, il numero atteso di valori nei bucket e' 1 dunque bucket può essere ordinato con Insertion Sort in $O(n)$ ammortizzato.
+
+Assumiamo che i valori siano reali ed uniformemente distribuiti
+nell'intervallo $[0,1)$ o che qualunque insieme di valori distribuiti
+uniformemente può essere normalizzato nell'intervallo $[0,1)$ in tempo
+lineare.
+
+** Proprietà degli algoritmi di ordinamento
+
+Un algoritmo di ordinamento e' detto **stabile** se preserva l'ordine
+iniziale tra due elementi con la stessa chiave.
+
+- Gli algoritmi stabili già visti sono: Insertion Sort, Merge Sort e
+  Pigeonhole Sort.
+
+Possiamo rendere qualunque algoritmo stabile usando come chiave di
+ordinamento la coppia $(chiave,\ posizione\ iniziale)$.
+
+-----
+
+Travel: [[file:algoritmi.org][Algoritmi]], [[file:../../../theindex.org][Index]]

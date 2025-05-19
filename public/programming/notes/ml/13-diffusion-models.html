@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
+</p>
+
+<div id="outline-container-orgd18f47f" class="outline-2">
+<h2 id="orgd18f47f">Diffusion Models</h2>
+<div class="outline-text-2" id="text-orgd18f47f">
+<p>
+To recap, generative models train a generator \(G\) from latent space to
+data space and approximate the real data distribution. Variational
+Autoencoders have the ability to generate new samples to regular
+Autoencoders and use a probabilistic latent space (assumed to be a
+multivariate Gaussian), while GAN have a generator that starts from
+Gaussian noise and generates a data point in order to fool the
+discriminator.
+</p>
+</div>
+
+<div id="outline-container-orgf9be96d" class="outline-3">
+<h3 id="orgf9be96d">Denoising diffusion</h3>
+<div class="outline-text-3" id="text-orgf9be96d">
+<p>
+Denoising diffusion models consists of two processes:
+</p>
+
+<ul class="org-ul">
+<li>forward process to add noise</li>
+<li>reverse precess denoises to generate data</li>
+</ul>
+
+<p>
+A <b><b>Markov chain</b></b> or Markov process is a stochastic model describing a
+sequence of possible events in which the probability of each event
+depends only on the state attained in the previous event.
+</p>
+
+<p>
+\[Pr(X_{n+1}=x|X_1=x_1, X_2 = x_2, ..., X_n = x_n)=Pr(X_{n+1}=x|X_{n}=x_n)\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge3d0444" class="outline-3">
+<h3 id="orge3d0444">Forward Process</h3>
+<div class="outline-text-3" id="text-orge3d0444">
+<p>
+A forward process gradually adds noise to the images over \(T\)
+timesteps.
+</p>
+
+<p>
+\[x_0\rightarrow x_1 \rightarrow x_2 \rightarrow ... \rightarrow x_T\]
+</p>
+
+<p>
+The model will also be tasked to undo this noise called the "reverse"
+prorocess. Often the forward process is fixed and the reverse process
+needs to be trained.
+</p>
+
+<p>
+A forward process has the following formulation:
+</p>
+
+<p>
+\[q(x_t|x_{t-1})=N(\sqrt{1-\beta_t}x_{t-1},\beta, I)\Rightarrow q(x_{1:T}|x_0)=\prod_{t=1}^Tq(x_t|x_{t-1})\]
+</p>
+
+<p>
+Define \(\alpha_t = (1-\beta_t)\), where \(\beta_t\) is the step size
+(schedule), then
+</p>
+
+<p>
+\[\bar{\alpha}_t=\prod_{s=1}^t(1-\beta_s)\Rightarrow q(x_t|x_0)=N(\sqrt{\bar{\alpha_t}}x_0, (1-\bar{\alpha_t})I)\]
+</p>
+
+<p>
+We can then sample directly at the desired timestep:
+</p>
+
+<p>
+\[x_t=\sqrt{\bar{\alpha}_t}x_0 + \sqrt{(1-\bar{\alpha}_t)}\epsilon,\ \epsilon \sim N(0, I)\]
+</p>
+
+<p>
+Formally we are applying a Gaussian convolution to the data at each
+timestep. Practically we are smoothening out the distribution to a
+Gaussian one.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4f738a7" class="outline-3">
+<h3 id="org4f738a7">Generation Process</h3>
+<div class="outline-text-3" id="text-org4f738a7">
+<p>
+Given that \(q(x_T)\approx N(0, I)\), a sample is \(x_T\sim N(0, I)\) and
+iteratively \(x_{t-1}=q(x_{t-1}|x_t)\).
+</p>
+
+<p>
+\(q(x_{i-1}|x+t) \propto q(x_{t-1})q(x_t|x_{t-1})\) is generally intractable, but we can approximate with another Gaussian.
+</p>
+
+<ul class="org-ul">
+<li>\(p(x_T)\sim N(0, I)\)</li>
+<li>\(p_{\theta}(x_{t-1}|x_t)\sim N(\mu_{\delta}(x_t, t), \sigma^2 I)\)</li>
+<li>then \(p_{\theta}(x_{0:T})=p(x_T)\prod_{t=1}^{T}p_{\theta}(x_{t-1}|x_t)\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb7334d6" class="outline-3">
+<h3 id="orgb7334d6">Noising shedule</h3>
+<div class="outline-text-3" id="text-orgb7334d6">
+<p>
+We can control the variance of the forward diffusion and reverse
+denoising processes respectively. Often a linear schedule is used for
+\(\beta_t\) and \(\sigma^2_t\) is set equal to \(\beta_b\).
+</p>
+
+<p>
+Kingma et al introduce a new parametrization of diffusion models using
+signal-to-noise ration (SNR), and show how to learn the noise schedule
+by minimizing the variance of the training objective.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb31ce27" class="outline-3">
+<h3 id="orgb31ce27">Connection to VAE, GANs</h3>
+<div class="outline-text-3" id="text-orgb31ce27">
+<ul class="org-ul">
+<li>Latent variables have the same dimensionality of data.</li>
+<li>The same model is applied across different timesteps.</li>
+<li>The model is trained by reveighing the variational bound.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org058f41e" class="outline-3">
+<h3 id="org058f41e">Training Parametrisation</h3>
+<div class="outline-text-3" id="text-org058f41e">
+<p>
+We can train the model in a similar fashion as VAE, with a Variational
+Upper Bound:
+</p>
+
+<p>
+\[L=\mathbb{E}_{q(x_0)}[-\log p_\theta (x_0)]\le \mathbb{E}_{q(x_0)q(x_{1:T}|x_0)}[-\log \frac{p_{\theta}(x_{0:T})}{q(x_{1:T}|x_0)}]\]
+</p>
+
+<p>
+These can be divided into three terms:
+</p>
+
+<p>
+\[L=\mathbb{E}_q[D_{KL}(q(x_T|x_0)||p(x_T))\]
+\[+\sum_{t>1}D_{KL}(q(x_{t-1|x_t}, x_0)||p_{\theta}(x_{t-1}|x_t))-\log\ p_{\theta}(x_0|x_1)]\]
+</p>
+
+<ul class="org-ul">
+<li>the first term is fixed</li>
+<li>the second term is just summing gaussians</li>
+</ul>
+
+<p>
+KL between Gaussians has a nice closed form, but Ho (with some math)
+proves the training can be simplified toa noise prediction problem,
+obraining a new loss:
+</p>
+
+<p>
+\[L_{simple}=\mathbb{E}_{x_0\sim q(x_0), \epsilon \sim N(0, I), t\sim U(1, T)}[||\epsilon - \epsilon_\theta(\sqrt{\bar{\alpha}_t}x_0+\sqrt{(1-\bar{\alpha}_t)}\epsilon, t)||]\]
+</p>
+
+<p>
+Training Algorithm:
+</p>
+
+<p>
+repeat
+</p>
+
+<ul class="org-ul">
+<li>\(x_0 \sim q(x_0)\)</li>
+<li>\(t \sim Uniform(\{ 1, ..., T \})\)</li>
+<li>\(\epsilon \sim N(0, I)\)</li>
+<li>Take gradient descent step on \(\nabla_\theta || \epsilon - \epsilon_\theta(\sqrt{\bar{\alpha}_t}x_0+\sqrt{1-\bar{\alpha}_t}\epsilon, t)||^2\)</li>
+</ul>
+
+<p>
+until converged
+</p>
+
+<p>
+Sampling algorithm:
+</p>
+
+<ul class="org-ul">
+<li>\(x_T \sim N(0, 1)\)</li>
+<li>for \(t=T, ..., 1\) do
+<ul class="org-ul">
+<li>\(x\sim N(0, I)\)</li>
+<li>\(x_{t-1}=\frac{1}{\sqrt{\alpha_t}}(x_t-\frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_\theta (x_t, t))+\sigma_t z\)</li>
+</ul></li>
+
+<li>end for</li>
+<li>return \(x_0\)</li>
+</ul>
+
+<p>
+The choice of the architecture is free. For images use U-NET.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgec3a8c1" class="outline-3">
+<h3 id="orgec3a8c1">U-NET</h3>
+<div class="outline-text-3" id="text-orgec3a8c1">
+<p>
+The U-NET architecture contains two paths.
+</p>
+
+<ul class="org-ul">
+<li>The first path is the contraction path (also called as the encoder)
+which is used to capture the context in the image. The encoder is
+just a traditional stack of convolutional and max pooling layers.</li>
+<li>The second path is the symmetric expanding path (also called as the
+decoder) which is used to enable precise localization using
+transposed convolutions</li>
+<li>It is an end-to-end fully convolutional network, i.e. It only
+contains Concolutional layers and does not contain any Dense layer
+because of which it can accept image of any size.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgfec0173" class="outline-3">
+<h3 id="orgfec0173">Generative Trilemma</h3>
+<div class="outline-text-3" id="text-orgfec0173">
+<p>
+Often fast sampling, mode coverage / diversiry and high quality
+samples are difficult to coexist together.
+</p>
+
+<ul class="org-ul">
+<li>GAN have fast sampling with high quality samples but not mode
+coverage / diversity.</li>
+<li>Likelihood-based models (Variational Autoencoders and Normalizing
+flows) offer fast sampling and mode coverage/diversirt but not high
+quality samples.</li>
+<li>Denoising diffusion models have mode coverage/diversity and high
+quality samples but not fast sampling.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd3c9c47" class="outline-3">
+<h3 id="orgd3c9c47">Diffusion GANs</h3>
+<div class="outline-text-3" id="text-orgd3c9c47">
+<p>
+Generative denoising diffusion models typically assume that the
+denoising distribution can be modeled by a Gaussian distribution. This
+assumption holds only foe small denoising steps, which in practice
+translates to thousands of denoising steps in the synthesis
+process. In diffusion GANs, the denoising model is represented using
+multimodal and complex conditional GANs, enabling to efficiently
+generate data in a few steps.
+</p>
+
+<p>
+Compared to a one-shot GAN generator:
+</p>
+
+<ul class="org-ul">
+<li>Both generateor and discriminator are solving a much simpler problem</li>
+<li>Stronger mode coverage</li>
+<li>Better training stability</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2f790f7" class="outline-3">
+<h3 id="org2f790f7">Distillation</h3>
+<div class="outline-text-3" id="text-org2f790f7">
+<p>
+Distill a deterministic DDIM sampler to the same model
+architecture. At each stage, a "student" model is learned to distill
+two adjacent sampling steps of the "teacher" model to one sampling
+step. At next stage, the "student" model from previous stage will
+serve as the new "teacher" model.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org875ca1d" class="outline-3">
+<h3 id="org875ca1d">Latent-space diffusion models</h3>
+<div class="outline-text-3" id="text-org875ca1d">
+<p>
+The distribution of latent embeddings is close to Normal distribution,
+giving simpler denoising and faster synthesis. They allow augmented
+latent space and tailored autoencoders (graphs, text. 3D data, etc).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org991b282" class="outline-3">
+<h3 id="org991b282">Text-to-image</h3>
+<div class="outline-text-3" id="text-org991b282">
+<p>
+Jointly train a text encoder and an image encoder. Traing by
+maximising the similarity between embeddings of (text, image)
+pairs. The resuling space has semantics for both images and text.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7127f14" class="outline-3">
+<h3 id="org7127f14">Diffusion usages</h3>
+<div class="outline-text-3" id="text-org7127f14">
+<ul class="org-ul">
+<li>super resolution</li>
+<li>image-to-image (color a black and white image, extend and image's
+borders)</li>
+<li>semantic segmentation</li>
+<li>image editing (add something to a portion of the image)</li>
+<li>video generation</li>
+<li>3d shape generation</li>
+</ul>
+
+<hr />
+
+<p>
+Travel: <a href="intro-to-machine-learning.html">Intro to Machine Learning</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
