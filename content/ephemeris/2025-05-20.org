@@ -1,0 +1,82 @@
+#+startup: content indent
+
+[[file:../index.org][Giovanni's Diary]] > [[file:ephemeris.org][Ephemeris]] >
+
+
+* 2025-05-20 - Struggles with NetworkManager
+:PROPERTIES:
+:RSS: true
+:DATE: 20 May 2025 00:00 GMT
+:CATEGORY: Ephemeris
+:AUTHOR: Giovanni Santini
+:LINK: https://giovanni-diary.netlify.app/ephemeris/2025-05-20.html
+:END:
+#+INDEX: Giovanni's Diary!Ephemeris!2025-05-20 - Struggles with NetworkManager
+
+Hi,
+
+today I continued what I left off yesterday with my local kubernetes
+cluster. To recap, I am bootstrapping a local cluster to test a
+kubernetes operator and I want to have full control of the cluster
+while being easy to hack.
+
+Yesterday I spawned up the virtual machines and connected them to the
+same network, today I wanted to configure the kubernetes daemons but
+something was pissing me off. During the first boot of the machine,
+NetworkManager spawns up and looks for available networks for about 1
+minute and 30 seconds. But since I need to manually setup a static ip,
+It fails and the kernel boots with error messages, not really
+pretty. Afterwards, cloud-init setups up the static ip, restarts
+NetworkManager and everything would work on next boots. Still this
+error was really bothering me, so I tried to fix this.
+
+The root of the problem is that I need to set a static ip before
+systemd starts the daemons, but I was not able to do so without the
+daemons (for example "nmcli connection up" would not work because I
+had no NetworkManager running). So I tried setting up the connection
+files for NetworkManager and networkd but they would be read only
+after initializing the service, so after hanging for one and an half
+minutes and showing the error. This problem got me for a while. My
+second idea was to disable those services completely but I was not
+able to do so before the first boot. And I tried, I even set all the
+/etc files with "NetworkManager" in the name to link to /dev/null but
+that did not stop the daemon from starting up and failing, so I tried
+to override them but that would not work either. I made sure there
+were no other services that would depend on NetowrkManager.
+
+I looked up online and I found out I could use cloud-init to setup the
+network, so I tried that but nothing would happen. I tried to change the
+configuration at least 20 times but I got no feedback so I started
+thinking that maybe the network configuration was not being applied at
+all. Some struggling later I found out that the network configuration
+could not stay in the same yaml file as the rest of the configuration,
+but It needed to be a separate file. Additionally, I needed to pass
+this file to a program called cloud-localds via the --network-config
+flag. I was using genisoimage previously and it does not have a
+similar flag, so I needed to use this other program. Very intuitive
+things. So this finally worked and I have a static ip at boot time.
+
+Maybe there were many ways to solve this, but for the entire day I
+basically got zero feedback on my attempts. Journalctl would not log
+anything, genisoimage would not hint that I couldn't configure the
+network in the user-data file, It wouldn't say anything even for
+spelling mistakes. NetworkManager and systemd was completely ignoring
+all the files that I changed or removed, everything was a black box to
+me. Error messages are important...
+
+So finally I could boot the images nicely, I can now setup kubernetes.
+I wrote scripts to automate this, then I got missing certificates
+and I called It a day, see you tomorrow.
+
+The rest of the day I studied flow algorithms and physics. A nice
+patch for linux 6.16 promises to improve swap operations by 20-30%
+which Is really impressive. Honestly, If I had infinite time and money
+I would work all day and night on my operating system, but I have to
+do things and start earning a salary so I will leave this for another
+day.
+
+-- Giovanni
+
+-----
+
+Travel: [[file:ephemeris.org][Ephemeris]], [[file:../theindex.org][Index]] 
