@@ -94,4 +94,5 @@
         - [[file:stash/photography/interrail.org::*Interrail][Interrail]]
         - [[file:stash/photography/sicily.org::*Sicily][Sicily]]
         - [[file:stash/photography/toblino.org::*Toblino][Toblino]]
+    - [[file:news.org::*What's New][What's New]]
     - [[file:wishlist.org::*Wish list][Wishlist]]
