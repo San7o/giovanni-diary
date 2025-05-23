@@ -25,6 +25,7 @@
         - [[file:programming/emacs/elisp-exercises.org::*Emacs-lisp Exercises][Emacs-lisp Exercises]]
         - [[file:programming/emacs/init.org::*Welcome][Init]]
         - [[file:programming/emacs/wishlist.org::*Emacs Wishlist :emacs][Wishlist]]
+      - [[file:programming/free-as-in-freedom.org::*Free as in Freedom][Free as in Freedom]]
       - [[file:programming/kubernetes/kubernetes.org::*Kubernetes][Kubernetes]]
         - [[file:programming/kubernetes/kubernetes-resources.org::*Kubernetes Resources][Resources]]
       - [[file:programming/linux/linux.org::*Linux][Linux]]
