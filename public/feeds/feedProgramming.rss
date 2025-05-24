@@ -3,6 +3,220 @@
 <link>giovanni-diary.netlify.com/programming/programming.html</link>
 <description><![CDATA[Giovanni's programmer diary.]]></description>
 <item>
+<title>Benchmarking on Linux</title>
+<link>https://giovanni-diary.netlify.app/programming/linux/benchmarking-on-linux.html</link>
+<author>Giovanni Santini</author>
+<pubDate>24 May 2025 00:00:00 GMT</pubDate>
+<description><![CDATA[<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb16688d">1. Overview</a></li>
+<li><a href="#org092fbad">2. Command line usage</a></li>
+<li><a href="#orge797db0">3. openbenchmarking.org</a></li>
+<li><a href="#orgdbb3b62">4. Phoromatic server</a></li>
+</ul>
+</div>
+</div>
+<p>
+Running benchmarks is ultimately the best way to compare two different
+systems or to assert that a particular modification has had any
+positive or negative effect on the system's performance. To do
+benchmarks I have been using the <a href="https://github.com/phoronix-test-suite/phoronix-test-suite">phoronix test suite</a>, in this document
+I will briefly explain what phoronix is and how It works.
+</p>
+
+<div id="outline-container-orgb16688d" class="outline-2">
+<h2 id="orgb16688d"><span class="section-number-2">1.</span> Overview</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Phoronix is the name of a famous <a href="https://www.phoronix.com/">website</a> founded by Michael Larabel in
+2004 where Michael has been publishing benchmarks and news of linux
+applications for the most part. I personally think his website is one
+of the most reliable sources of information regarding performance and
+news on latest software and hardware. Michael has also create his
+testing framework, the Phoronix Test Suite, which he uses for all his
+benchmarks.
+</p>
+
+<p>
+The Phoronix Test Suite is composed of an <a href="https://openbenchmarking.org/tests">immense number of benchmarks</a>
+supporting many operating systems including Linux, Windows, maxOS,
+Solaris and various BSD. Around this tool there is a community of
+people creating new tests and sharing results in the
+<a href="https://openbenchmarking.org/results/latest">openbenchmarking.org</a> website. Here, anybody can view and compare them
+via the web interface. Furthermore, you can schedule and run your
+custom test suites on multiple machines and visualize results in nice
+graphs of various kinds.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org092fbad" class="outline-2">
+<h2 id="org092fbad"><span class="section-number-2">2.</span> Command line usage</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+You can download the phoronix test suite from the official <a href="https://github.com/phoronix-test-suite/phoronix-test-suite">github</a>
+page, or through you favorite package manager. Fedora provides the
+package "phoronix-test-suite-$VERSION". Running the command will give
+you a bunch of possible flags you can enter.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite help
+</pre>
+</div>
+
+<p>
+For the most basic usage, you may want to select and run a test. Let's
+first list all the available tests:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite list-all-tests
+</pre>
+</div>
+
+<p>
+Let's pick for example "pts/unpack-linux", a popular test to unpack the
+linux kernel. To get more information about a single test, run:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite info pts/unpack-linux
+</pre>
+</div>
+
+<p>
+Some tests may depend on some programs which you need to have
+installed in your system, those programs are usually listed under the
+"Software Dependencies" voice on the infos.
+</p>
+
+<p>
+Let's try to run the test now. Note that the tests are lazily fetched
+meaning that you don't have all the tests downloaded in you system but
+you decide which one to download. When running a test it automatically
+gets downloaded.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite test pts/unpack-linux
+</pre>
+</div>
+
+<p>
+The program will ask if you want to save the results to a file, and to
+give an unique name for the test. The test will start running, often
+multiple times. After completion, you are asked if you want to view
+the results on a web page, otherwise you will be able to do so from
+the command line by starting the result viewer:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite start-result-viewer
+</pre>
+</div>
+
+<p>
+From here you get a web page where you can explore the results,
+compare them and export them in various formats such as pdf, html,
+json etc..
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge797db0" class="outline-2">
+<h2 id="orge797db0"><span class="section-number-2">3.</span> openbenchmarking.org</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+You can view other people's benchmarks and tests on
+<a href="https://openbenchmarking.org/">openbenchmarking.org</a>. It is particularly useful to download or compare
+the results directly through the browser by writing a comma separated
+list of the IDs of the benchmarks you want to compare on the url. It
+is easier to see with an example, the request with the following url
+will compare the results between the test "2505249-NE-RES42653018" and
+"2505242-NE-RES51774018", where each ID was generated when uploading a
+result to the website:
+</p>
+
+<pre class="example">
+https://openbenchmarking.org/result/2505249-NE-RES42653018,2505242-NE-RES51774018
+</pre>
+
+<p>
+The website is also useful to look for specific tests and their
+results over various systems averaged by all the tests from the
+community. You can find this information in the <a href="https://openbenchmarking.org/tests">tests</a> page.
+</p>
+
+
+<div id="org1b760f9" class="figure">
+<p><img src="../../ephemeris/images/openbenchmarking.png" alt="openbenchmarking.png" width="600px" align="center" />
+</p>
+<p><span class="figure-number">Figure 1: </span>A test on openbenchmarking.com</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdbb3b62" class="outline-2">
+<h2 id="orgdbb3b62"><span class="section-number-2">4.</span> Phoromatic server</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+The coolest think about phoronix in my opinion is the
+phoromatic-server. Using the same program we have been using to run
+the tests, we can host a server using:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite start-phoromatic-server
+</pre>
+</div>
+
+<p>
+This will start a web interface where you can remotely manage
+benchmarks on multiple machines. When you first open the web page,
+you can login or create an account (locally), then you will get an
+overview page with the state of the various machines you have
+connected and which benchmarks are running or are scheduled to run.
+</p>
+
+<p>
+From the "systems" page you can manage your machines. You will get
+a list of the connected machines with a description of their hardware
+and software. The page contains instructions to connect other machines,
+which looks like running a command similar to:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite phoromatic.connect 10.10.100.1:8484/VA9KRR
+</pre>
+</div>
+
+<p>
+From the "test" page you can browse tests, and from the "testing"
+page you can schedule them. You usually need to create a custom
+test suite which is just a collection of one or more tests to run. You
+can then run the suite and see the results in the "results" page.
+</p>
+
+<p>
+Even if the user interface does not look pretty, phoronix is a really
+powerful tool that does the job done. There are many more
+functionalities and I think It is worth the time to learn and explore
+what the tool is able to do.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="./linux.html">Linux</a>, <a href="../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+]]></description>
+</item>
+<item>
 <title>The Linux From Scratch Experience</title>
 <link>https://giovanni-diary.netlify.app/programming/linux/linux-from-scratch.html</link>
 <author>Giovanni Santini</author>
@@ -11,12 +225,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org544e5f5">1. Index</a></li>
-<li><a href="#org708be89">2. What is LFS</a></li>
-<li><a href="#orgaa8825c">3. Motivation</a></li>
-<li><a href="#orgec042e0">4. Humble beginnings</a></li>
-<li><a href="#org830520e">5. Level up</a></li>
-<li><a href="#org7f5c33e">6. Maintaining the build</a></li>
+<li><a href="#org213a929">1. Index</a></li>
+<li><a href="#org7d2ba6d">2. What is LFS</a></li>
+<li><a href="#orgc31f1e3">3. Motivation</a></li>
+<li><a href="#org4e98955">4. Humble beginnings</a></li>
+<li><a href="#orgbd5f434">5. Level up</a></li>
+<li><a href="#org0acdebf">6. Maintaining the build</a></li>
 </ul>
 </div>
 </div>
@@ -44,8 +258,8 @@ pre-configured linux distributions by making my own "distribution".
 </p>
 
 
-<div id="outline-container-org544e5f5" class="outline-2">
-<h2 id="org544e5f5"><span class="section-number-2">1.</span> Index</h2>
+<div id="outline-container-org213a929" class="outline-2">
+<h2 id="org213a929"><span class="section-number-2">1.</span> Index</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>What is LFS</li>
@@ -57,8 +271,8 @@ pre-configured linux distributions by making my own "distribution".
 </div>
 </div>
 
-<div id="outline-container-org708be89" class="outline-2">
-<h2 id="org708be89"><span class="section-number-2">2.</span> What is LFS</h2>
+<div id="outline-container-org7d2ba6d" class="outline-2">
+<h2 id="org7d2ba6d"><span class="section-number-2">2.</span> What is LFS</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The idea is that you compile all your system from scratch by yourself,
@@ -76,8 +290,8 @@ adds additional programs like a graphics session or a browser.
 </div>
 </div>
 
-<div id="outline-container-orgaa8825c" class="outline-2">
-<h2 id="orgaa8825c"><span class="section-number-2">3.</span> Motivation</h2>
+<div id="outline-container-orgc31f1e3" class="outline-2">
+<h2 id="orgc31f1e3"><span class="section-number-2">3.</span> Motivation</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 It all started at the end of October 2024. I was really frustrated
@@ -96,8 +310,8 @@ wanted something more challenging.
 </div>
 </div>
 
-<div id="outline-container-orgec042e0" class="outline-2">
-<h2 id="orgec042e0"><span class="section-number-2">4.</span> Humble beginnings</h2>
+<div id="outline-container-org4e98955" class="outline-2">
+<h2 id="org4e98955"><span class="section-number-2">4.</span> Humble beginnings</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 You start off as with any distribution by setting up the partitions
@@ -129,8 +343,8 @@ Now the real experience begins.
 </div>
 </div>
 
-<div id="outline-container-org830520e" class="outline-2">
-<h2 id="org830520e"><span class="section-number-2">5.</span> Level up</h2>
+<div id="outline-container-orgbd5f434" class="outline-2">
+<h2 id="orgbd5f434"><span class="section-number-2">5.</span> Level up</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 One big thing you probably need is a graphical session, and this is no
@@ -162,8 +376,8 @@ desire that will not greatly improve your life.
 </div>
 </div>
 
-<div id="outline-container-org7f5c33e" class="outline-2">
-<h2 id="org7f5c33e"><span class="section-number-2">6.</span> Maintaining the build</h2>
+<div id="outline-container-org0acdebf" class="outline-2">
+<h2 id="org0acdebf"><span class="section-number-2">6.</span> Maintaining the build</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 You can now focus on maintaining your system. You should subscribe to
@@ -206,9 +420,9 @@ Travel: <a href="./linux.html">Linux</a>, <a href="../../theindex.html">Index</a
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org187c338">1. Setting up node exporter</a></li>
-<li><a href="#orgdd65f19">2. Setting up Prometheus</a></li>
-<li><a href="#orgbdb05e8">3. Setting up Grafana</a></li>
+<li><a href="#orge4123c3">1. Setting up node exporter</a></li>
+<li><a href="#org50c05be">2. Setting up Prometheus</a></li>
+<li><a href="#orga427ea5">3. Setting up Grafana</a></li>
 </ul>
 </div>
 </div>
@@ -225,8 +439,8 @@ various system statistics which are fetched by node exporter. I will
 be using Fedora 42 as a base.
 </p>
 
-<div id="outline-container-org187c338" class="outline-2">
-<h2 id="org187c338"><span class="section-number-2">1.</span> Setting up node exporter</h2>
+<div id="outline-container-orge4123c3" class="outline-2">
+<h2 id="orge4123c3"><span class="section-number-2">1.</span> Setting up node exporter</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Node exporter is a service that collects various system information
@@ -246,8 +460,8 @@ The service will listen on port 9100.
 </div>
 </div>
 
-<div id="outline-container-orgdd65f19" class="outline-2">
-<h2 id="orgdd65f19"><span class="section-number-2">2.</span> Setting up Prometheus</h2>
+<div id="outline-container-org50c05be" class="outline-2">
+<h2 id="org50c05be"><span class="section-number-2">2.</span> Setting up Prometheus</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 You can download the latest version of Prometheus from GitHub:
@@ -307,8 +521,8 @@ following content to the file
 </div>
 </div>
 
-<div id="outline-container-orgbdb05e8" class="outline-2">
-<h2 id="orgbdb05e8"><span class="section-number-2">3.</span> Setting up Grafana</h2>
+<div id="outline-container-orga427ea5" class="outline-2">
+<h2 id="orga427ea5"><span class="section-number-2">3.</span> Setting up Grafana</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Install Grafana from your favorite package manager:
@@ -373,7 +587,7 @@ website</a>.
 
 
 
-<div id="org5a65b81" class="figure">
+<div id="org75bf3c2" class="figure">
 <p><img src="../../ephemeris/images/grafana.png" alt="grafana.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Grafana dashboard I found online</p>
@@ -398,34 +612,34 @@ Travel: <a href="./linux.html">Linux</a>, <a href="../../theindex.html">Index</a
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfa76ff2">1. Index</a></li>
-<li><a href="#org0b9e2f0">2. ACPI Specification</a></li>
-<li><a href="#orgbea12cd">3. Linux's ACPI</a></li>
-<li><a href="#org9c8414c">4. Understand what consumes the most</a>
+<li><a href="#org588a6a1">1. Index</a></li>
+<li><a href="#orga8a3d7b">2. ACPI Specification</a></li>
+<li><a href="#org5b67379">3. Linux's ACPI</a></li>
+<li><a href="#org879ff8c">4. Understand what consumes the most</a>
 <ul>
-<li><a href="#org7d38801">4.1. Powertop</a></li>
-<li><a href="#org15453ac">4.2. Iotop</a></li>
-<li><a href="#org8ebe459">4.3. Plot power usage</a></li>
+<li><a href="#org30a815e">4.1. Powertop</a></li>
+<li><a href="#orgb4a422b">4.2. Iotop</a></li>
+<li><a href="#org4726792">4.3. Plot power usage</a></li>
 </ul>
 </li>
-<li><a href="#orgf55f894">5. Save yourself time: TLP</a></li>
-<li><a href="#org445f637">6. Kernel Settings</a>
+<li><a href="#orgcefa897">5. Save yourself time: TLP</a></li>
+<li><a href="#orged18eb7">6. Kernel Settings</a>
 <ul>
-<li><a href="#org1b13359">6.1. Frequency Scaling</a></li>
-<li><a href="#orga61ca83">6.2. Maximum charge level</a></li>
-<li><a href="#orga49370a">6.3. Omit Scheduling-Clock ticks for idle CPUs</a></li>
-<li><a href="#orgbf0d0a4">6.4. Disable Atime in BTRFS</a></li>
-<li><a href="#org6301c48">6.5. Kernel Flags</a></li>
+<li><a href="#org2c574e1">6.1. Frequency Scaling</a></li>
+<li><a href="#orgb5d2abb">6.2. Maximum charge level</a></li>
+<li><a href="#org40a7806">6.3. Omit Scheduling-Clock ticks for idle CPUs</a></li>
+<li><a href="#org216186c">6.4. Disable Atime in BTRFS</a></li>
+<li><a href="#orga9a8569">6.5. Kernel Flags</a></li>
 </ul>
 </li>
-<li><a href="#org01c593a">7. Helpful tips</a>
+<li><a href="#orge6be5bb">7. Helpful tips</a>
 <ul>
-<li><a href="#orgd46b92b">7.1. Light graphical session</a></li>
-<li><a href="#org6ba9251">7.2. Have less background processes running</a></li>
-<li><a href="#orgd5d6474">7.3. Lower the backlight</a></li>
+<li><a href="#org0021954">7.1. Light graphical session</a></li>
+<li><a href="#org39a126e">7.2. Have less background processes running</a></li>
+<li><a href="#orgb941e37">7.3. Lower the backlight</a></li>
 </ul>
 </li>
-<li><a href="#org62a4963">8. Conclusions</a></li>
+<li><a href="#orgc7c6563">8. Conclusions</a></li>
 </ul>
 </div>
 </div>
@@ -444,8 +658,8 @@ me know by sending me an email at <a href="mailto:giovanni.santini@proton.me">gi
 me on Mastodon <a href="https://mastodon.social/@santo7">@santo7@mastodon.social</a>.
 </p>
 
-<div id="outline-container-orgfa76ff2" class="outline-2">
-<h2 id="orgfa76ff2"><span class="section-number-2">1.</span> Index</h2>
+<div id="outline-container-org588a6a1" class="outline-2">
+<h2 id="org588a6a1"><span class="section-number-2">1.</span> Index</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>ACPI Specification</li>
@@ -476,8 +690,8 @@ me on Mastodon <a href="https://mastodon.social/@santo7">@santo7@mastodon.social
 </div>
 </div>
 
-<div id="outline-container-org0b9e2f0" class="outline-2">
-<h2 id="org0b9e2f0"><span class="section-number-2">2.</span> ACPI Specification</h2>
+<div id="outline-container-orga8a3d7b" class="outline-2">
+<h2 id="orga8a3d7b"><span class="section-number-2">2.</span> ACPI Specification</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Before tinkering with your system, you should have a decent
@@ -527,8 +741,8 @@ storage&#x2026;).
 </div>
 </div>
 
-<div id="outline-container-orgbea12cd" class="outline-2">
-<h2 id="orgbea12cd"><span class="section-number-2">3.</span> Linux's ACPI</h2>
+<div id="outline-container-org5b67379" class="outline-2">
+<h2 id="org5b67379"><span class="section-number-2">3.</span> Linux's ACPI</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 An overview of the Linux's ACPI implementation can be found <a href="https://www.kernel.org/doc/ols/2005/ols2005v1-pages-59-76.pdf">here</a>.
@@ -559,8 +773,8 @@ implement.
 </div>
 </div>
 
-<div id="outline-container-org9c8414c" class="outline-2">
-<h2 id="org9c8414c"><span class="section-number-2">4.</span> Understand what consumes the most</h2>
+<div id="outline-container-org879ff8c" class="outline-2">
+<h2 id="org879ff8c"><span class="section-number-2">4.</span> Understand what consumes the most</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 While you may try to thinker with configuration files and settings
@@ -572,8 +786,8 @@ consumption.
 </p>
 </div>
 
-<div id="outline-container-org7d38801" class="outline-3">
-<h3 id="org7d38801"><span class="section-number-3">4.1.</span> Powertop</h3>
+<div id="outline-container-org30a815e" class="outline-3">
+<h3 id="org30a815e"><span class="section-number-3">4.1.</span> Powertop</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 A general tool that works well is <a href="https://linux.die.net/man/8/powertop">powertop</a> which will give you
@@ -593,8 +807,8 @@ between logs, and so on.
 </div>
 </div>
 
-<div id="outline-container-org15453ac" class="outline-3">
-<h3 id="org15453ac"><span class="section-number-3">4.2.</span> Iotop</h3>
+<div id="outline-container-orgb4a422b" class="outline-3">
+<h3 id="orgb4a422b"><span class="section-number-3">4.2.</span> Iotop</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Another useful tool is <a href="https://www.man7.org/linux/man-pages/man8/iotop.8.html">iotop</a> which will give you information about
@@ -610,8 +824,8 @@ later we'll see an option in BTRFS that improves performance.
 </div>
 </div>
 
-<div id="outline-container-org8ebe459" class="outline-3">
-<h3 id="org8ebe459"><span class="section-number-3">4.3.</span> Plot power usage</h3>
+<div id="outline-container-org4726792" class="outline-3">
+<h3 id="org4726792"><span class="section-number-3">4.3.</span> Plot power usage</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 To evaluate a change in your system, you can log and graph different
@@ -678,7 +892,7 @@ plot <span style="color: #ffa07a;">"power_log.csv"</span> using 1:2 with lines t
 
 
 
-<div id="orgec6f4b0" class="figure">
+<div id="org4ada6c4" class="figure">
 <p><img src="../../ephemeris/images/gnuplot-power.jpeg" alt="gnuplot-power.jpeg" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Gnuplot output</p>
@@ -688,8 +902,8 @@ plot <span style="color: #ffa07a;">"power_log.csv"</span> using 1:2 with lines t
 </div>
 
 
-<div id="outline-container-orgf55f894" class="outline-2">
-<h2 id="orgf55f894"><span class="section-number-2">5.</span> Save yourself time: TLP</h2>
+<div id="outline-container-orgcefa897" class="outline-2">
+<h2 id="orgcefa897"><span class="section-number-2">5.</span> Save yourself time: TLP</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 To save yourself some time configuring your system, you can use <a href="https://linrunner.de/tlp/introduction.html">TLP</a>
@@ -726,8 +940,8 @@ There are plenty of utilities like this, use them at your own risk.
 </div>
 </div>
 
-<div id="outline-container-org445f637" class="outline-2">
-<h2 id="org445f637"><span class="section-number-2">6.</span> Kernel Settings</h2>
+<div id="outline-container-orged18eb7" class="outline-2">
+<h2 id="orged18eb7"><span class="section-number-2">6.</span> Kernel Settings</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 There are many settings you can tune on linux, which will mostly
@@ -804,8 +1018,8 @@ the settings, <code>tlp.conf</code> is a good place to start.
 </p>
 </div>
 
-<div id="outline-container-org1b13359" class="outline-3">
-<h3 id="org1b13359"><span class="section-number-3">6.1.</span> Frequency Scaling</h3>
+<div id="outline-container-org2c574e1" class="outline-3">
+<h3 id="org2c574e1"><span class="section-number-3">6.1.</span> Frequency Scaling</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 You can choose a frequency scaling governor to manage throttling.
@@ -826,8 +1040,8 @@ powersave in tlp's settings (which is the default setting).
 </div>
 </div>
 
-<div id="outline-container-orga61ca83" class="outline-3">
-<h3 id="orga61ca83"><span class="section-number-3">6.2.</span> Maximum charge level</h3>
+<div id="outline-container-orgb5d2abb" class="outline-3">
+<h3 id="orgb5d2abb"><span class="section-number-3">6.2.</span> Maximum charge level</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 To increase battery life, It is recommended to reduce the maximum
@@ -843,8 +1057,8 @@ laptops (like my HP one) this is not supported and the command
 </div>
 </div>
 
-<div id="outline-container-orga49370a" class="outline-3">
-<h3 id="orga49370a"><span class="section-number-3">6.3.</span> Omit Scheduling-Clock ticks for idle CPUs</h3>
+<div id="outline-container-org40a7806" class="outline-3">
+<h3 id="org40a7806"><span class="section-number-3">6.3.</span> Omit Scheduling-Clock ticks for idle CPUs</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 If you are doing mostly lightweight work with long idle periods, you
@@ -867,8 +1081,8 @@ CONFIG_HZ_100=y
 </div>
 </div>
 
-<div id="outline-container-orgbf0d0a4" class="outline-3">
-<h3 id="orgbf0d0a4"><span class="section-number-3">6.4.</span> Disable Atime in BTRFS</h3>
+<div id="outline-container-org216186c" class="outline-3">
+<h3 id="org216186c"><span class="section-number-3">6.4.</span> Disable Atime in BTRFS</h3>
 <div class="outline-text-3" id="text-6-4">
 <p>
 BTRFS is a popular filesystem. A part of Its design is the CoW
@@ -901,8 +1115,8 @@ on the BTRFS entries in <code>/etc/fstab</code>.
 </div>
 </div>
 
-<div id="outline-container-org6301c48" class="outline-3">
-<h3 id="org6301c48"><span class="section-number-3">6.5.</span> Kernel Flags</h3>
+<div id="outline-container-orga9a8569" class="outline-3">
+<h3 id="orga9a8569"><span class="section-number-3">6.5.</span> Kernel Flags</h3>
 <div class="outline-text-3" id="text-6-5">
 <p>
 You can add the following kernel flags when booting your system:
@@ -927,8 +1141,8 @@ redrawing.</li>
 </div>
 </div>
 
-<div id="outline-container-org01c593a" class="outline-2">
-<h2 id="org01c593a"><span class="section-number-2">7.</span> Helpful tips</h2>
+<div id="outline-container-orge6be5bb" class="outline-2">
+<h2 id="orge6be5bb"><span class="section-number-2">7.</span> Helpful tips</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Here is a list of other helpful things that will make your operating
@@ -936,8 +1150,8 @@ system lighter and more efficient.
 </p>
 </div>
 
-<div id="outline-container-orgd46b92b" class="outline-3">
-<h3 id="orgd46b92b"><span class="section-number-3">7.1.</span> Light graphical session</h3>
+<div id="outline-container-org0021954" class="outline-3">
+<h3 id="org0021954"><span class="section-number-3">7.1.</span> Light graphical session</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 If you are using a graphical environment, chances are that you do not
@@ -959,8 +1173,8 @@ are the best.
 </div>
 </div>
 
-<div id="outline-container-org6ba9251" class="outline-3">
-<h3 id="org6ba9251"><span class="section-number-3">7.2.</span> Have less background processes running</h3>
+<div id="outline-container-org39a126e" class="outline-3">
+<h3 id="org39a126e"><span class="section-number-3">7.2.</span> Have less background processes running</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 If you are using a linux distribution instead of compiling your system
@@ -985,8 +1199,8 @@ daemons, etc&#x2026;
 </div>
 </div>
 
-<div id="outline-container-orgd5d6474" class="outline-3">
-<h3 id="orgd5d6474"><span class="section-number-3">7.3.</span> Lower the backlight</h3>
+<div id="outline-container-orgb941e37" class="outline-3">
+<h3 id="orgb941e37"><span class="section-number-3">7.3.</span> Lower the backlight</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 Lower the backlight of your laptop as much as you are comfortable
@@ -996,8 +1210,8 @@ with.
 </div>
 </div>
 
-<div id="outline-container-org62a4963" class="outline-2">
-<h2 id="org62a4963"><span class="section-number-2">8.</span> Conclusions</h2>
+<div id="outline-container-orgc7c6563" class="outline-2">
+<h2 id="orgc7c6563"><span class="section-number-2">8.</span> Conclusions</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 I hope you learned something new from this article. I will keep this
@@ -1064,7 +1278,7 @@ users who want to contribute to Openstreetmap.
 </p>
 
 
-<div id="orge1832a8" class="figure">
+<div id="org954ad12" class="figure">
 <p><img src="../ephemeris/images/streetcomplete-map.jpeg" alt="streetcomplete-map.jpeg" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Map view in StreetComplete</p>
@@ -1102,17 +1316,17 @@ Travel: <a href="programming.html">Programming</a>, <a href="../theindex.html">I
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge3f9fcd">1. Index</a></li>
-<li><a href="#orge039897">2. The process</a></li>
-<li><a href="#org1eae975">3. 1. Boot a custom recovery image</a></li>
-<li><a href="#orgb353247">4. 2. Install a special application</a></li>
-<li><a href="#org0f536fc">5. 3. Enjoy the power</a></li>
-<li><a href="#orgfeba6b6">6. Installing an alternative OS</a></li>
+<li><a href="#org4d98436">1. Index</a></li>
+<li><a href="#org9ac9244">2. The process</a></li>
+<li><a href="#org419b075">3. 1. Boot a custom recovery image</a></li>
+<li><a href="#org2a4ecf3">4. 2. Install a special application</a></li>
+<li><a href="#org93fff84">5. 3. Enjoy the power</a></li>
+<li><a href="#orgd5e57d0">6. Installing an alternative OS</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge3f9fcd" class="outline-2">
-<h2 id="orge3f9fcd"><span class="section-number-2">1.</span> Index</h2>
+<div id="outline-container-org4d98436" class="outline-2">
+<h2 id="org4d98436"><span class="section-number-2">1.</span> Index</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>The processes</li>
@@ -1140,8 +1354,8 @@ first before attempting to root your phone.
 </div>
 </div>
 
-<div id="outline-container-orge039897" class="outline-2">
-<h2 id="orge039897"><span class="section-number-2">2.</span> The process</h2>
+<div id="outline-container-org9ac9244" class="outline-2">
+<h2 id="org9ac9244"><span class="section-number-2">2.</span> The process</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 To root a phone we need something else with root privileges to grant
@@ -1173,8 +1387,8 @@ You have been warned :-)
 </div>
 </div>
 
-<div id="outline-container-org1eae975" class="outline-2">
-<h2 id="org1eae975"><span class="section-number-2">3.</span> 1. Boot a custom recovery image</h2>
+<div id="outline-container-org419b075" class="outline-2">
+<h2 id="org419b075"><span class="section-number-2">3.</span> 1. Boot a custom recovery image</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 We need to download a custom recovery image for your phone model.
@@ -1214,8 +1428,8 @@ program.
 </div>
 </div>
 
-<div id="outline-container-orgb353247" class="outline-2">
-<h2 id="orgb353247"><span class="section-number-2">4.</span> 2. Install a special application</h2>
+<div id="outline-container-org2a4ecf3" class="outline-2">
+<h2 id="org2a4ecf3"><span class="section-number-2">4.</span> 2. Install a special application</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 We now need to install something that will make other things root. We
@@ -1241,8 +1455,8 @@ You can check this by installing RootChecker.
 </div>
 </div>
 
-<div id="outline-container-org0f536fc" class="outline-2">
-<h2 id="org0f536fc"><span class="section-number-2">5.</span> 3. Enjoy the power</h2>
+<div id="outline-container-org93fff84" class="outline-2">
+<h2 id="org93fff84"><span class="section-number-2">5.</span> 3. Enjoy the power</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Now that you are root you can do a bunch of cool things like wipe out
@@ -1253,8 +1467,8 @@ and news in peace.
 </div>
 </div>
 
-<div id="outline-container-orgfeba6b6" class="outline-2">
-<h2 id="orgfeba6b6"><span class="section-number-2">6.</span> Installing an alternative OS</h2>
+<div id="outline-container-orgd5e57d0" class="outline-2">
+<h2 id="orgd5e57d0"><span class="section-number-2">6.</span> Installing an alternative OS</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 There are plenty of alternatives and variations of Android out there,

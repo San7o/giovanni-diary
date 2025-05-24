@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt;
+</p>
+
+<div id="outline-container-org03d97d2" class="outline-2">
+<h2 id="org03d97d2">Benchmarking on Linux</h2>
+<div class="outline-text-2" id="text-org03d97d2">
+<p>
+Running benchmarks is ultimately the best way to compare two different
+systems or to assert that a particular modification has had any
+positive or negative effect on the system's performance. To do
+benchmarks I have been using the <a href="https://github.com/phoronix-test-suite/phoronix-test-suite">phoronix test suite</a>, in this document
+I will briefly explain what phoronix is and how It works.
+</p>
+</div>
+
+<div id="outline-container-orgea22897" class="outline-3">
+<h3 id="orgea22897">Overview</h3>
+<div class="outline-text-3" id="text-orgea22897">
+<p>
+Phoronix is the name of a famous <a href="https://www.phoronix.com/">website</a> founded by Michael Larabel in
+2004 where Michael has been publishing benchmarks and news of linux
+applications for the most part. I personally think his website is one
+of the most reliable sources of information regarding performance and
+news on latest software and hardware. Michael has also create his
+testing framework, the Phoronix Test Suite, which he uses for all his
+benchmarks.
+</p>
+
+<p>
+The Phoronix Test Suite is composed of an <a href="https://openbenchmarking.org/tests">immense number of benchmarks</a>
+supporting many operating systems including Linux, Windows, maxOS,
+Solaris and various BSD. Around this tool there is a community of
+people creating new tests and sharing results in the
+<a href="https://openbenchmarking.org/results/latest">openbenchmarking.org</a> website. Here, anybody can view and compare them
+via the web interface. Furthermore, you can schedule and run your
+custom test suites on multiple machines and visualize results in nice
+graphs of various kinds.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga33141e" class="outline-3">
+<h3 id="orga33141e">Command line usage</h3>
+<div class="outline-text-3" id="text-orga33141e">
+<p>
+You can download the phoronix test suite from the official <a href="https://github.com/phoronix-test-suite/phoronix-test-suite">github</a>
+page, or through you favorite package manager. Fedora provides the
+package "phoronix-test-suite-$VERSION". Running the command will give
+you a bunch of possible flags you can enter.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite help
+</pre>
+</div>
+
+<p>
+For the most basic usage, you may want to select and run a test. Let's
+first list all the available tests:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite list-all-tests
+</pre>
+</div>
+
+<p>
+Let's pick for example "pts/unpack-linux", a popular test to unpack the
+linux kernel. To get more information about a single test, run:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite info pts/unpack-linux
+</pre>
+</div>
+
+<p>
+Some tests may depend on some programs which you need to have
+installed in your system, those programs are usually listed under the
+"Software Dependencies" voice on the infos.
+</p>
+
+<p>
+Let's try to run the test now. Note that the tests are lazily fetched
+meaning that you don't have all the tests downloaded in you system but
+you decide which one to download. When running a test it automatically
+gets downloaded.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite test pts/unpack-linux
+</pre>
+</div>
+
+<p>
+The program will ask if you want to save the results to a file, and to
+give an unique name for the test. The test will start running, often
+multiple times. After completion, you are asked if you want to view
+the results on a web page, otherwise you will be able to do so from
+the command line by starting the result viewer:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite start-result-viewer
+</pre>
+</div>
+
+<p>
+From here you get a web page where you can explore the results,
+compare them and export them in various formats such as pdf, html,
+json etc..
+</p>
+</div>
+</div>
+
+<div id="outline-container-org03fe2ff" class="outline-3">
+<h3 id="org03fe2ff">openbenchmarking.org</h3>
+<div class="outline-text-3" id="text-org03fe2ff">
+<p>
+You can view other people's benchmarks and tests on
+<a href="https://openbenchmarking.org/">openbenchmarking.org</a>. It is particularly useful to download or compare
+the results directly through the browser by writing a comma separated
+list of the IDs of the benchmarks you want to compare on the url. It
+is easier to see with an example, the request with the following url
+will compare the results between the test "2505249-NE-RES42653018" and
+"2505242-NE-RES51774018", where each ID was generated when uploading a
+result to the website:
+</p>
+
+<pre class="example">
+https://openbenchmarking.org/result/2505249-NE-RES42653018,2505242-NE-RES51774018
+</pre>
+
+<p>
+The website is also useful to look for specific tests and their
+results over various systems averaged by all the tests from the
+community. You can find this information in the <a href="https://openbenchmarking.org/tests">tests</a> page.
+</p>
+
+
+<div id="orgc781619" class="figure">
+<p><img src="../../ephemeris/images/openbenchmarking.png" alt="openbenchmarking.png" width="600px" align="center" />
+</p>
+<p><span class="figure-number">Figure 1: </span>A test on openbenchmarking.com</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5faf9e5" class="outline-3">
+<h3 id="org5faf9e5">Phoromatic server</h3>
+<div class="outline-text-3" id="text-org5faf9e5">
+<p>
+The coolest think about phoronix in my opinion is the
+phoromatic-server. Using the same program we have been using to run
+the tests, we can host a server using:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite start-phoromatic-server
+</pre>
+</div>
+
+<p>
+This will start a web interface where you can remotely manage
+benchmarks on multiple machines. When you first open the web page,
+you can login or create an account (locally), then you will get an
+overview page with the state of the various machines you have
+connected and which benchmarks are running or are scheduled to run.
+</p>
+
+<p>
+From the "systems" page you can manage your machines. You will get
+a list of the connected machines with a description of their hardware
+and software. The page contains instructions to connect other machines,
+which looks like running a command similar to:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">phoronix-test-suite phoromatic.connect 10.10.100.1:8484/VA9KRR
+</pre>
+</div>
+
+<p>
+From the "test" page you can browse tests, and from the "testing"
+page you can schedule them. You usually need to create a custom
+test suite which is just a collection of one or more tests to run. You
+can then run the suite and see the results in the "results" page.
+</p>
+
+<p>
+Even if the user interface does not look pretty, phoronix is a really
+powerful tool that does the job done. There are many more
+functionalities and I think It is worth the time to learn and explore
+what the tool is able to do.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="./linux.html">Linux</a>, <a href="../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

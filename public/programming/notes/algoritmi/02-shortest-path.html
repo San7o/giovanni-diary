@@ -51,9 +51,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
 </p>
 
-<div id="outline-container-org6fe6b31" class="outline-2">
-<h2 id="org6fe6b31">Shortest Path</h2>
-<div class="outline-text-2" id="text-org6fe6b31">
+<div id="outline-container-org0704399" class="outline-2">
+<h2 id="org0704399">Shortest Path</h2>
+<div class="outline-text-2" id="text-org0704399">
 <p>
 Dato un grafo orientato \(G=(V, E)\), un nodo sorgente s e una funzione
 di peso \(w: E \rightarrow R\), trovare un cammino \(p=<v_1, v_2, ...,
@@ -62,9 +62,9 @@ v_k>\) con \(k>1\) con costo minimo. Il costo e' dato da
 </p>
 </div>
 
-<div id="outline-container-org4bf342f" class="outline-3">
-<h3 id="org4bf342f">Sorgente singola</h3>
-<div class="outline-text-3" id="text-org4bf342f">
+<div id="outline-container-orgcb3cc1a" class="outline-3">
+<h3 id="orgcb3cc1a">Sorgente singola</h3>
+<div class="outline-text-3" id="text-orgcb3cc1a">
 <p>
 Definiamo l'albero dei cammini minimi l'albero di copertura radicato
 in \(s\) avente un cammino da \(s\) a tutti i nodi raggiungibili da
@@ -75,9 +75,9 @@ valori \(d[u]\) rappresentano il costo del cammino da \(s\) a \(u\) in \(T\).
 </div>
 </div>
 
-<div id="outline-container-org5f7f5c0" class="outline-3">
-<h3 id="org5f7f5c0">Teorema di Bellman</h3>
-<div class="outline-text-3" id="text-org5f7f5c0">
+<div id="outline-container-orgea0ec33" class="outline-3">
+<h3 id="orgea0ec33">Teorema di Bellman</h3>
+<div class="outline-text-3" id="text-orgea0ec33">
 <p>
 Una soluzione ammissibile \(T\) e' ottima se e solo se:
 </p>
@@ -95,9 +95,9 @@ che e' assurdo.
 </div>
 </div>
 
-<div id="outline-container-org44e75ce" class="outline-3">
-<h3 id="org44e75ce">Algoritmo Generico</h3>
-<div class="outline-text-3" id="text-org44e75ce">
+<div id="outline-container-org4351030" class="outline-3">
+<h3 id="org4351030">Algoritmo Generico</h3>
+<div class="outline-text-3" id="text-org4351030">
 <pre class="example">
 shortestPath(Graph G, Node s)
   DataStructure S = DataStructure(); S.add(s)
@@ -117,9 +117,9 @@ shortestPath(Graph G, Node s)
 </pre>
 </div>
 
-<div id="outline-container-org72c07da" class="outline-4">
-<h4 id="org72c07da">Implementazione con Priority Queue</h4>
-<div class="outline-text-4" id="text-org72c07da">
+<div id="outline-container-org8af46c9" class="outline-4">
+<h4 id="org8af46c9">Implementazione con Priority Queue</h4>
+<div class="outline-text-4" id="text-org8af46c9">
 <pre class="example">
 shortestPath(Graph G, Node s)
   DataStructure Q = PriorityQueue(); Q.insert(s, 0)
@@ -150,9 +150,9 @@ Costo computazionale con priority queue basata su:
 </div>
 </div>
 
-<div id="outline-container-org2e39251" class="outline-4">
-<h4 id="org2e39251">Coda - Bellam-Ford-Moore</h4>
-<div class="outline-text-4" id="text-org2e39251">
+<div id="outline-container-orgf0352a3" class="outline-4">
+<h4 id="orgf0352a3">Coda - Bellam-Ford-Moore</h4>
+<div class="outline-text-4" id="text-orgf0352a3">
 <p>
 Computazionalmente più pesante di Dijkstra ma funziona anche con archi
 di peso negativo.
@@ -180,9 +180,9 @@ Costo: \(O(nm)\).
 </div>
 </div>
 
-<div id="outline-container-orgddaec5f" class="outline-4">
-<h4 id="orgddaec5f">Casi speciali - DAG</h4>
-<div class="outline-text-4" id="text-orgddaec5f">
+<div id="outline-container-org8f04f75" class="outline-4">
+<h4 id="org8f04f75">Casi speciali - DAG</h4>
+<div class="outline-text-4" id="text-org8f04f75">
 <p>
 I cammini minimi di un DAG sono sempre ben definiti; anche in presenza di pesi negativi, non esistono cicli negativi. E' possibile rilassare gli archi in ordine topologico, una volta sola.
 </p>
@@ -223,9 +223,9 @@ Riassunto:
 </div>
 </div>
 
-<div id="outline-container-org672caae" class="outline-3">
-<h3 id="org672caae">Sorgente multipla</h3>
-<div class="outline-text-3" id="text-org672caae">
+<div id="outline-container-org4db03aa" class="outline-3">
+<h3 id="org4db03aa">Sorgente multipla</h3>
+<div class="outline-text-3" id="text-org4db03aa">
 <p>
 Posso ripetere gli algoritmi precedenti più volte.
 </p>
@@ -238,9 +238,9 @@ Posso ripetere gli algoritmi precedenti più volte.
 </div>
 </div>
 
-<div id="outline-container-org4f47f07" class="outline-3">
-<h3 id="org4f47f07">Floyd-Warshall</h3>
-<div class="outline-text-3" id="text-org4f47f07">
+<div id="outline-container-org62c9cef" class="outline-3">
+<h3 id="org62c9cef">Floyd-Warshall</h3>
+<div class="outline-text-3" id="text-org62c9cef">
 <p>
 Sia \(k\) un valore in \(\{ 0,...,n \}\). Diciamo che un cammino
 \(p_{xy}^k\) e' un cammino minimo k-vincolato fra \(x\) e \(y\) se esso ha
@@ -259,9 +259,9 @@ min(d^{k-1}[x][y], d^{k-1}[x][k] + d^{k-1}[k][y]) & k > 0
 </p>
 </div>
 
-<div id="outline-container-orgb2cbd87" class="outline-4">
-<h4 id="orgb2cbd87">Chiusura transitiva</h4>
-<div class="outline-text-4" id="text-orgb2cbd87">
+<div id="outline-container-org913f2d8" class="outline-4">
+<h4 id="org913f2d8">Chiusura transitiva</h4>
+<div class="outline-text-4" id="text-org913f2d8">
 <p>
 La chiusura transitiva \(G*=(V, E*)\) di un grafo \(G=(V, E)\) e' il grafo
 orientato tale che \((u, v)\in E*\) se e solo se esiste un cammino da
