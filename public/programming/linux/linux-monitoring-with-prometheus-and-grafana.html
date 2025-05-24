@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt;
+</p>
+
+
+<div id="outline-container-org3a86e7c" class="outline-2">
+<h2 id="org3a86e7c">Monitor your Linux system with Prometheus and Grafana</h2>
+<div class="outline-text-2" id="text-org3a86e7c">
+<p>
+If you are managing any system, you need to have an effective way to
+monitor, log and receive notifications about the state of the system.
+A classic solution for Linux based servers is the Prometheus +
+Grafana stack. In this document I will explain you how to setup this.
+</p>
+
+<p>
+We will see how to setup both Prometheus and Grafana to monitor
+various system statistics which are fetched by node exporter. I will
+be using Fedora 42 as a base.
+</p>
+</div>
+
+<div id="outline-container-org9459fed" class="outline-3">
+<h3 id="org9459fed">Setting up node exporter</h3>
+<div class="outline-text-3" id="text-org9459fed">
+<p>
+Node exporter is a service that collects various system information
+such as CPU load, ram usage and much more. Fedora already provides
+the package "node-exporter" and service "node exporter":
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo dnf install node-exporter
+sudo systemctl start node_exporter
+</pre>
+</div>
+
+<p>
+The service will listen on port 9100.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org109fd56" class="outline-3">
+<h3 id="org109fd56">Setting up Prometheus</h3>
+<div class="outline-text-3" id="text-org109fd56">
+<p>
+You can download the latest version of Prometheus from GitHub:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #eedd82;">LATEST</span>=$(curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | jq -cr .tag_name)
+wget https://github.com/prometheus/prometheus/releases/download/$<span style="color: #eedd82;">LATEST</span>/prometheus-<span style="color: #ffa07a;">"${LATEST:1}"</span>.linux-amd64.tar.gz
+tar -xf prometheus-*
+<span style="color: #b0c4de;">cd</span> prometheus-<span style="color: #ffa07a;">"${LATEST:1}"</span>.linux-amd64
+sudo cp prometheus /usr/local/bin/
+</pre>
+</div>
+
+<p>
+You need to add node exporter to the list of services to scrape, you
+should edit the "/etc/prometheus/prometheus.yml" file and add the
+following Item in the "scrape configs" section:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #eedd82;">scrape_configs</span>:
+  - <span style="color: #eedd82;">job_name</span>: <span style="color: #ffa07a;">'linux-server'</span>
+    <span style="color: #eedd82;">scrape_interval</span>: 5s
+    <span style="color: #eedd82;">static_configs</span>:
+      - <span style="color: #eedd82;">targets</span>: [<span style="color: #ffa07a;">'localhost:9100'</span>]
+</pre>
+</div>
+
+<p>
+You can start the server by running the command "prometheus". It will
+listen in port 9090 where you can access the html page. If you are not
+lazy you can add a systemd service for prometheus (or whatever daemon
+management you are using). To create a systemd service, add the
+following content to the file
+"/etc/systemd/system/prometheus.service":
+</p>
+
+<div class="org-src-container">
+<pre class="src src-toml">[<span style="color: #98fb98;">Unit</span>]
+<span style="color: #eedd82;">Description</span>=Prometheus
+<span style="color: #eedd82;">Documentation</span>=https://github.com/prometheus/prometheus
+<span style="color: #eedd82;">Wants</span>=network-online.target
+<span style="color: #eedd82;">After</span>=network-online.target
+
+[<span style="color: #98fb98;">Install</span>]
+<span style="color: #eedd82;">WantedBy</span>=multi-user.target
+
+[<span style="color: #98fb98;">Service</span>]
+<span style="color: #eedd82;">Type</span>=simple
+<span style="color: #eedd82;">User</span>=prometheus
+<span style="color: #eedd82;">Group</span>=prometheus
+<span style="color: #eedd82;">ExecReload</span>=/bin/kill -HUP $MAINPID
+<span style="color: #eedd82;">ExecStart</span>=/usr/local/bin/prometheus
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3d52a04" class="outline-3">
+<h3 id="org3d52a04">Setting up Grafana</h3>
+<div class="outline-text-3" id="text-org3d52a04">
+<p>
+Install Grafana from your favorite package manager:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo dnf install grafana
+</pre>
+</div>
+
+<p>
+Fedora already creates a systemd service so you can start it as usual,
+otherwise you can create the service yourself like we did before.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo systemctl start grafana-server
+</pre>
+</div>
+
+<p>
+If you are using the default Fedora's SELinux, in order to allow
+grafana to use the prometheus tcp socket we need to write a custom
+policy. Create the file "grafana<sub>websm.te</sub>" and add the following
+content:
+</p>
+
+<pre class="example">
+module grafana_websm 1.0;
+
+require {
+    type grafana_t;
+    type websm_port_t;
+    class tcp_socket name_connect;
+}
+
+# Allow Grafana to connect to ports labeled websm_port_t
+allow grafana_t websm_port_t:tcp_socket name_connect;
+</pre>
+
+<p>
+Then compile It and load It:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">checkmodule -M -m -o grafana_websm.mod grafana_websm.te
+semodule_package -o grafana_websm.pp -m grafana_websm.mod
+sudo semodule -i grafana_websm.pp
+</pre>
+</div>
+
+<p>
+You can finally go to "<a href="http://localhost:3000">http://localhost:3000</a>" and login with "admin"
+as the username and password and add prometheus as a source in Home &gt;
+Connections &gt; Add a new connection and search for prometheus.
+</p>
+
+<p>
+You can find already made dashboards for node exporter on the <a href="https://grafana.com/grafana/dashboards/?search=node+exporter">grafana
+website</a>.
+</p>
+
+
+
+<div id="org2ed3c51" class="figure">
+<p><img src="../../ephemeris/images/grafana.png" alt="grafana.png" width="600px" align="center" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Grafana dashboard I found online</p>
+</div>
+
+
+<hr />
+
+<p>
+Travel: <a href="./linux.html">Linux</a>, <a href="../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
