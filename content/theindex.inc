@@ -1,6 +1,7 @@
 * G
   - [[file:index.org::*Giovanni's Diary][Giovanni's Diary]]
-    - [[file:about.org::*About Me][About Me]]
+    - [[file:autobiography/about.org::*About Me][Autobiography]]
+      - [[file:autobiography/old-programs-cpp.org::*Old cpp programs][Old cpp programs]]
     - [[file:changelog.org::*Changelog][Changelog]]
     - [[file:documenting.org::*Documenting my Life][Documenting my Life]]
     - [[file:ephemeris/ephemeris.org::*Ephemeris][Ephemeris]]
