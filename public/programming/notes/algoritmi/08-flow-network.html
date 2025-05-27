@@ -51,18 +51,18 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
 </p>
 
-<div id="outline-container-orgc0a5b29" class="outline-2">
-<h2 id="orgc0a5b29">Flow Network</h2>
-<div class="outline-text-2" id="text-orgc0a5b29">
+<div id="outline-container-org6f57947" class="outline-2">
+<h2 id="org6f57947">Flow Network</h2>
+<div class="outline-text-2" id="text-org6f57947">
 </div>
 
-<div id="outline-container-org56cd176" class="outline-3">
-<h3 id="org56cd176">Definizioni</h3>
-<div class="outline-text-3" id="text-org56cd176">
+<div id="outline-container-orgbe8da6d" class="outline-3">
+<h3 id="orgbe8da6d">Definizioni</h3>
+<div class="outline-text-3" id="text-orgbe8da6d">
 </div>
-<div id="outline-container-org141cb59" class="outline-4">
-<h4 id="org141cb59">Rete di flusso</h4>
-<div class="outline-text-4" id="text-org141cb59">
+<div id="outline-container-org75c496d" class="outline-4">
+<h4 id="org75c496d">Rete di flusso</h4>
+<div class="outline-text-4" id="text-org75c496d">
 <p>
 Una <b><b>rete di flusso</b></b> \(G=(V, E, s, t, c)\) e' data da:
 </p>
@@ -83,9 +83,9 @@ al pozzo attraversando il nodo \(x\). Altrimenti questo nodo ci e'
 </div>
 </div>
 
-<div id="outline-container-org8934ae2" class="outline-4">
-<h4 id="org8934ae2">Flusso</h4>
-<div class="outline-text-4" id="text-org8934ae2">
+<div id="outline-container-org3b16f0e" class="outline-4">
+<h4 id="org3b16f0e">Flusso</h4>
+<div class="outline-text-4" id="text-org3b16f0e">
 <p>
 Un <b><b>flusso</b></b> in \(G\) e' una funzione \(f:V\times V \rightarrow
 \mathbb{R}\) che soddisfa le seguenti proprietà:
@@ -99,9 +99,9 @@ Un <b><b>flusso</b></b> in \(G\) e' una funzione \(f:V\times V \rightarrow
 </div>
 </div>
 
-<div id="outline-container-org4d83364" class="outline-4">
-<h4 id="org4d83364">Valore di un flusso</h4>
-<div class="outline-text-4" id="text-org4d83364">
+<div id="outline-container-orgb3dfc78" class="outline-4">
+<h4 id="orgb3dfc78">Valore di un flusso</h4>
+<div class="outline-text-4" id="text-orgb3dfc78">
 <p>
 IL <b><b>valore di un flusso</b></b> \(f\) e' definito come:
 </p>
@@ -117,9 +117,9 @@ ovvero come la quantità di flusso uscente da \(s\).
 </div>
 </div>
 
-<div id="outline-container-org25ca3bf" class="outline-3">
-<h3 id="org25ca3bf">Problema</h3>
-<div class="outline-text-3" id="text-org25ca3bf">
+<div id="outline-container-orgc1a0ebe" class="outline-3">
+<h3 id="orgc1a0ebe">Problema</h3>
+<div class="outline-text-3" id="text-orgc1a0ebe">
 <p>
 Data una rete \(G=(V, E, s, t, c)\), trovare un flusso che abbia valore
 massimo fra tutti i flussi associabili alla rete.
@@ -137,9 +137,9 @@ bottiglia".
 </p>
 </div>
 
-<div id="outline-container-org5bde860" class="outline-4">
-<h4 id="org5bde860">Algoritmo</h4>
-<div class="outline-text-4" id="text-org5bde860">
+<div id="outline-container-org2cfd256" class="outline-4">
+<h4 id="org2cfd256">Algoritmo</h4>
+<div class="outline-text-4" id="text-org2cfd256">
 <p>
 Si memorizza un flusso corrente \(f\), inizialmente nullo.
 Si ripetono le operazioni seguenti:
@@ -158,9 +158,9 @@ fino a quando non e' più possibile trovare un flusso positivo \(g\).
 </div>
 </div>
 
-<div id="outline-container-org7855ac2" class="outline-4">
-<h4 id="org7855ac2">Flusso Nullo</h4>
-<div class="outline-text-4" id="text-org7855ac2">
+<div id="outline-container-org5cc4d0a" class="outline-4">
+<h4 id="org5cc4d0a">Flusso Nullo</h4>
+<div class="outline-text-4" id="text-org5cc4d0a">
 <p>
 Definiamo <b><b>flusso nullo</b></b> la funzione \(f_0:V\times V \rightarrow \mathbb{R}^{\ge 0}\) tale che:
 </p>
@@ -171,9 +171,9 @@ Definiamo <b><b>flusso nullo</b></b> la funzione \(f_0:V\times V \rightarrow \ma
 </div>
 </div>
 
-<div id="outline-container-org403fef8" class="outline-4">
-<h4 id="org403fef8">Flusso Somma</h4>
-<div class="outline-text-4" id="text-org403fef8">
+<div id="outline-container-org615530e" class="outline-4">
+<h4 id="org615530e">Flusso Somma</h4>
+<div class="outline-text-4" id="text-org615530e">
 <p>
 Per ogni coppia di flussi \(f_1\) e \(f_2\) in \(G\), definiamo il <b><b>flusso
 somma</b></b> \(g=f_1+f_2\) come il flusso tale che:
@@ -185,9 +185,9 @@ somma</b></b> \(g=f_1+f_2\) come il flusso tale che:
 </div>
 </div>
 
-<div id="outline-container-org30b8215" class="outline-4">
-<h4 id="org30b8215">Capacita' residua</h4>
-<div class="outline-text-4" id="text-org30b8215">
+<div id="outline-container-orgb96fffb" class="outline-4">
+<h4 id="orgb96fffb">Capacita' residua</h4>
+<div class="outline-text-4" id="text-orgb96fffb">
 <p>
 Definiamo <b><b>capacita' residua</b></b> di un flusso \(f\) in una rete \(G=(V, E,
 s, t, c)\) una funzione \(c_f:V\times V \rightarrow \mathbb{R}^{\ge 0}\)
@@ -200,9 +200,9 @@ tale che:
 </div>
 </div>
 
-<div id="outline-container-orgbedacf0" class="outline-4">
-<h4 id="orgbedacf0">Rete residua</h4>
-<div class="outline-text-4" id="text-orgbedacf0">
+<div id="outline-container-orgfa4aff3" class="outline-4">
+<h4 id="orgfa4aff3">Rete residua</h4>
+<div class="outline-text-4" id="text-orgfa4aff3">
 <p>
 Data una rete di flusso \(G=(V, E, s, t, c)\) e un flusso \(f\) su \(G\),
 possiamo costruire una <b><b>rete residua</b></b> \(G_f=(V, E_f, s, t, c_f)\) tale
@@ -215,9 +215,9 @@ per cui:
 </div>
 </div>
 
-<div id="outline-container-orgf8f2e0e" class="outline-4">
-<h4 id="orgf8f2e0e">Lemma</h4>
-<div class="outline-text-4" id="text-orgf8f2e0e">
+<div id="outline-container-orgbefdccb" class="outline-4">
+<h4 id="orgbefdccb">Lemma</h4>
+<div class="outline-text-4" id="text-orgbefdccb">
 <p>
 Lemma: Se \(f\) e' un flusso in \(G\) e \(g\) e' un flusso in \(G_f\), allora
 \(f+g\) e' un flusso in \(G\).
@@ -261,9 +261,9 @@ Vincolo sulla capacita':
 </div>
 </div>
 
-<div id="outline-container-org782739a" class="outline-3">
-<h3 id="org782739a">Flusso Aggiuntivo - Ford Fulkerson</h3>
-<div class="outline-text-3" id="text-org782739a">
+<div id="outline-container-org0d47fe9" class="outline-3">
+<h3 id="org0d47fe9">Flusso Aggiuntivo - Ford Fulkerson</h3>
+<div class="outline-text-3" id="text-org0d47fe9">
 <p>
 Come trovare un flusso aggiuntivo? Una soluzione potrebbe essere (1)
 prendere un cammino qualsiasi nella rete residua. (2) Si considera la
@@ -294,13 +294,13 @@ int[][] maxFlow(Graph G, Node s, Node t, int[][] c)
 </div>
 </div>
 
-<div id="outline-container-org9f8af98" class="outline-3">
-<h3 id="org9f8af98">Dimostrazione formale</h3>
-<div class="outline-text-3" id="text-org9f8af98">
+<div id="outline-container-orgd1fa168" class="outline-3">
+<h3 id="orgd1fa168">Dimostrazione formale</h3>
+<div class="outline-text-3" id="text-orgd1fa168">
 </div>
-<div id="outline-container-org5b0dd87" class="outline-4">
-<h4 id="org5b0dd87">Taglio</h4>
-<div class="outline-text-4" id="text-org5b0dd87">
+<div id="outline-container-orgcea08c7" class="outline-4">
+<h4 id="orgcea08c7">Taglio</h4>
+<div class="outline-text-4" id="text-orgcea08c7">
 <p>
 Un <b><b>taglio</b></b> \((S, T)\) della rete di flusso \(G=(V, E< s, t, c)\) e' una
 partizione di \(V\) in due sottoinsiemi disgiunti \(S, T\) tali che:
@@ -313,9 +313,9 @@ partizione di \(V\) in due sottoinsiemi disgiunti \(S, T\) tali che:
 </div>
 </div>
 
-<div id="outline-container-org38481c0" class="outline-4">
-<h4 id="org38481c0">Capacita'</h4>
-<div class="outline-text-4" id="text-org38481c0">
+<div id="outline-container-org4bd3210" class="outline-4">
+<h4 id="org4bd3210">Capacita'</h4>
+<div class="outline-text-4" id="text-org4bd3210">
 <p>
 La <b><b>capacita</b></b>' \(C(S, T)\) attraverso il taglio \(S, T\) e' pari a:
 </p>
@@ -326,9 +326,9 @@ La <b><b>capacita</b></b>' \(C(S, T)\) attraverso il taglio \(S, T\) e' pari a:
 </div>
 </div>
 
-<div id="outline-container-org0eb87fd" class="outline-4">
-<h4 id="org0eb87fd">Flusso netto</h4>
-<div class="outline-text-4" id="text-org0eb87fd">
+<div id="outline-container-org1ca57a8" class="outline-4">
+<h4 id="org1ca57a8">Flusso netto</h4>
+<div class="outline-text-4" id="text-org1ca57a8">
 <p>
 Se \(f\) e' un flusso in \(G\), il <b><b>flusso netto</b></b> \(F_f(S, T)\) attraverso \((S, T)\) e':
 </p>
@@ -339,9 +339,9 @@ Se \(f\) e' un flusso in \(G\), il <b><b>flusso netto</b></b> \(F_f(S, T)\) attr
 </div>
 </div>
 
-<div id="outline-container-org605c86b" class="outline-4">
-<h4 id="org605c86b">Lemma</h4>
-<div class="outline-text-4" id="text-org605c86b">
+<div id="outline-container-org49559dc" class="outline-4">
+<h4 id="org49559dc">Lemma</h4>
+<div class="outline-text-4" id="text-org49559dc">
 <p>
 Dato un flusso \(f\) e un taglio \((S, T)\), la quantità' di flusso \(F_f(S, T)\) che attraversa il taglio e' uguale a \(|f|\).
 </p>
@@ -360,9 +360,9 @@ Dim:
 </div>
 </div>
 
-<div id="outline-container-org7879265" class="outline-4">
-<h4 id="org7879265">Lemma</h4>
-<div class="outline-text-4" id="text-org7879265">
+<div id="outline-container-org6143953" class="outline-4">
+<h4 id="org6143953">Lemma</h4>
+<div class="outline-text-4" id="text-org6143953">
 <p>
 Il <b><b>flusso massimo</b></b> e' limitato superiormente dalla capacita' del taglio <b><b>minimo</b></b>, ovvero il taglio la cui capacita' e' minore fra tutti i tagli.
 </p>
@@ -386,9 +386,9 @@ Il flusso che attraversa un taglio e' uguale al valore del flusso
 </div>
 </div>
 
-<div id="outline-container-orgc5f3e66" class="outline-4">
-<h4 id="orgc5f3e66">Lemma</h4>
-<div class="outline-text-4" id="text-orgc5f3e66">
+<div id="outline-container-org0734d98" class="outline-4">
+<h4 id="org0734d98">Lemma</h4>
+<div class="outline-text-4" id="text-org0734d98">
 <p>
 Le seguenti tre affermazioni sono equivalenti:
 </p>
@@ -422,13 +422,13 @@ flusso che soddisfa \(|f|=C(S, T)\) deve essere massimo.</li>
 </div>
 </div>
 
-<div id="outline-container-org30e607f" class="outline-3">
-<h3 id="org30e607f">Limite superiore Complessità</h3>
-<div class="outline-text-3" id="text-org30e607f">
+<div id="outline-container-org7bd2950" class="outline-3">
+<h3 id="org7bd2950">Limite superiore Complessità</h3>
+<div class="outline-text-3" id="text-org7bd2950">
 </div>
-<div id="outline-container-orgd16ea12" class="outline-4">
-<h4 id="orgd16ea12">Ford-Fulkerson</h4>
-<div class="outline-text-4" id="text-orgd16ea12">
+<div id="outline-container-org23fdff8" class="outline-4">
+<h4 id="org23fdff8">Ford-Fulkerson</h4>
+<div class="outline-text-4" id="text-org23fdff8">
 <p>
 Se le capacità sono intere, l'algoritmo di Ford-Fulkerson ha
 complessità \(O((V+E)|f*|)\) (liste) o \(O(V^2|f*|)\) (matrice).
@@ -445,9 +445,9 @@ o \(O(V^2)\).
 </div>
 </div>
 
-<div id="outline-container-org64670ac" class="outline-4">
-<h4 id="org64670ac">Edmonds e Karp</h4>
-<div class="outline-text-4" id="text-org64670ac">
+<div id="outline-container-org58823af" class="outline-4">
+<h4 id="org58823af">Edmonds e Karp</h4>
+<div class="outline-text-4" id="text-org58823af">
 <p>
 Se le capacita' della rete sono intere, l'algoritmo di Edmonds e Karp
 ha complessità \(O(VE^2)\).
@@ -475,9 +475,9 @@ slides.</li>
 </div>
 </div>
 
-<div id="outline-container-org5e8ff5f" class="outline-3">
-<h3 id="org5e8ff5f">Problema - Job Assignment</h3>
-<div class="outline-text-3" id="text-org5e8ff5f">
+<div id="outline-container-org78eb2e8" class="outline-3">
+<h3 id="org78eb2e8">Problema - Job Assignment</h3>
+<div class="outline-text-3" id="text-org78eb2e8">
 <p>
 Un insieme \(J\) contiene \(n\) job. Un insieme \(W\) contiene \(m\)
 worker. Una relazione \(R\subseteq J \times W\), tale che \((j, w)\in R\)
