@@ -81,7 +81,18 @@ Type=simple
 User=prometheus
 Group=prometheus
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/prometheus
+ExecStart=/usr/local/bin/prometheus \
+  --config.file=/etc/prometheus/prometheus.yml \
+  --storage.tsdb.path=/etc/prometheus/data \
+  --storage.tsdb.retention.time=30d
+#+end_src
+
+Then change permissions, reload the daemons and start the service:
+
+#+begin_src bash
+  sudo chown prometheus:prometheus -R /etc/prometheus
+  sudo systemctl daemon-reload
+  sudo systemctl start prometheus
 #+end_src
 
 ** Setting up Grafana
@@ -124,6 +135,16 @@ Then compile It and load It:
   semodule_package -o grafana_websm.pp -m grafana_websm.mod
   sudo semodule -i grafana_websm.pp
 #+end_src
+
+Additionally, if you are using a firewall and you want to access
+the port from another device, you need to enable the port 3000.
+On firewalld, you can use the following commands:
+
+#+begin_src bash
+  sudo firewall-cmd --permanent --add-port=30002/tcp
+  sudo firewall-cmd --reload
+#+end_src
+
 
 You can finally go to "http://localhost:3000" and login with "admin"
 as the username and password and add prometheus as a source in Home >

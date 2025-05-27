@@ -20,9 +20,9 @@
 </p>
 
 
-<div id="outline-container-org6753ee0" class="outline-2">
-<h2 id="org6753ee0">Monitor your Linux system with Prometheus and Grafana</h2>
-<div class="outline-text-2" id="text-org6753ee0">
+<div id="outline-container-org82b5732" class="outline-2">
+<h2 id="org82b5732">Monitor your Linux system with Prometheus and Grafana</h2>
+<div class="outline-text-2" id="text-org82b5732">
 <p>
 If you are managing any system, you need to have an effective way to
 monitor, log and receive notifications about the state of the system.
@@ -37,9 +37,9 @@ be using Fedora 42 as a base.
 </p>
 </div>
 
-<div id="outline-container-org5561544" class="outline-3">
-<h3 id="org5561544">Setting up node exporter</h3>
-<div class="outline-text-3" id="text-org5561544">
+<div id="outline-container-org7d4babb" class="outline-3">
+<h3 id="org7d4babb">Setting up node exporter</h3>
+<div class="outline-text-3" id="text-org7d4babb">
 <p>
 Node exporter is a service that collects various system information
 such as CPU load, ram usage and much more. Fedora already provides
@@ -58,9 +58,9 @@ The service will listen on port 9100.
 </div>
 </div>
 
-<div id="outline-container-orgd67e55f" class="outline-3">
-<h3 id="orgd67e55f">Setting up Prometheus</h3>
-<div class="outline-text-3" id="text-orgd67e55f">
+<div id="outline-container-org9784808" class="outline-3">
+<h3 id="org9784808">Setting up Prometheus</h3>
+<div class="outline-text-3" id="text-org9784808">
 <p>
 You can download the latest version of Prometheus from GitHub:
 </p>
@@ -113,15 +113,29 @@ following content to the file
 <span style="color: #eedd82;">User</span>=prometheus
 <span style="color: #eedd82;">Group</span>=prometheus
 <span style="color: #eedd82;">ExecReload</span>=/bin/kill -HUP $MAINPID
-<span style="color: #eedd82;">ExecStart</span>=/usr/local/bin/prometheus
+<span style="color: #eedd82;">ExecStart</span>=/usr/local/bin/prometheus \
+  <span style="color: #eedd82;">--config.file</span>=/etc/prometheus/prometheus.yml \
+  <span style="color: #eedd82;">--storage.tsdb.path</span>=/etc/prometheus/data \
+  <span style="color: #eedd82;">--storage.tsdb.retention.time</span>=30d
+</pre>
+</div>
+
+<p>
+Then change permissions, reload the daemons and start the service:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo chown prometheus:prometheus -R /etc/prometheus
+sudo systemctl daemon-reload
+sudo systemctl start prometheus
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org96c5334" class="outline-3">
-<h3 id="org96c5334">Setting up Grafana</h3>
-<div class="outline-text-3" id="text-org96c5334">
+<div id="outline-container-orga04db90" class="outline-3">
+<h3 id="orga04db90">Setting up Grafana</h3>
+<div class="outline-text-3" id="text-orga04db90">
 <p>
 Install Grafana from your favorite package manager:
 </p>
@@ -173,6 +187,19 @@ sudo semodule -i grafana_websm.pp
 </div>
 
 <p>
+Additionally, if you are using a firewall and you want to access
+the port from another device, you need to enable the port 3000.
+On firewalld, you can use the following commands:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo firewall-cmd --permanent --add-port=30002/tcp
+sudo firewall-cmd --reload
+</pre>
+</div>
+
+
+<p>
 You can finally go to "<a href="http://localhost:3000">http://localhost:3000</a>" and login with "admin"
 as the username and password and add prometheus as a source in Home &gt;
 Connections &gt; Add a new connection and search for prometheus.
@@ -185,7 +212,7 @@ website</a>.
 
 
 
-<div id="orgd32ba06" class="figure">
+<div id="org8dcb597" class="figure">
 <p><img src="../../ephemeris/images/grafana.png" alt="grafana.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Grafana dashboard I found online</p>
