@@ -122,31 +122,6 @@ To update completition percentage: =C-c C-c=.
     (add-hook 'org-mode-hook 'org-fragtog-mode)
 #+end_src
 
-** org-roam
-
-#+begin_src emacs-lisp
-  (use-package org-roam
-    :ensure t
-    :custom
-    (org-roam-directory "/home/santo/giovanni-diary/content")
-    :init
-    (setq org-roam-v2-ack t) ;; acknowledge v2
-    :config
-    (org-roam-db-autosync-mode))
-#+end_src
-
-#+begin_src emacs-lisp
-  ;; (use-package org-roam-ui
-  ;;   :ensure t
-  ;;   :after org-roam
-  ;;   :hook (after-init . org-roam-ui-mode)
-  ;;   :config
-  ;;   (setq org-roam-ui-sync-theme t
-  ;;         org-roam-ui-follow t
-  ;;         org-roam-ui-update-on-save t
-          ;; org-roam-ui-open-on-start t))
-#+end_src
-
 ** Markdown mode
 
 I use markdown mode when editing markdown document, mostly on

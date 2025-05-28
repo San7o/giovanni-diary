@@ -19,9 +19,9 @@
 <a href="../index.html">Giovanni's Diary</a> &gt; <a href="ephemeris.html">Ephemeris</a> &gt; <a href="entries.html">Entries</a> &gt;
 </p>
 
-<div id="outline-container-org40b2a82" class="outline-2">
-<h2 id="org40b2a82">2025-05-19 - Setting up a local cluster</h2>
-<div class="outline-text-2" id="text-org40b2a82">
+<div id="outline-container-org56aeea9" class="outline-2">
+<h2 id="org56aeea9">2025-05-19 - Setting up a local cluster</h2>
+<div class="outline-text-2" id="text-org56aeea9">
 <p>
 Hi,
 </p>
@@ -134,19 +134,19 @@ like this:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-yaml"><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">cloud-config</span>
-<span style="color: #eedd82;">users</span>:
-    - <span style="color: #eedd82;">name</span>: fedora
-      <span style="color: #eedd82;">groups</span>: user,wheel
-      <span style="color: #eedd82;">hashed_passwd</span>: ...
-      <span style="color: #eedd82;">lock_passwd</span>: <span style="color: #7fffd4;">false</span>
-      <span style="color: #eedd82;">sudo</span>: ALL=(ALL) NOPASSWD:ALL
-<span style="color: #eedd82;">write_files</span>:
-  <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Enable password authentication in ssh</span>
-  - <span style="color: #eedd82;">path</span>: /etc/ssh/sshd_config.d/20-enable-passwords.conf
-    <span style="color: #eedd82;">content</span>: |
-      <span style="color: #ffa07a;">PasswordAuthentication yes</span>
-<span style="color: #eedd82;">runcmd</span>:
+<pre class="src src-yaml">#cloud-config
+users:
+    - name: fedora
+      groups: user,wheel
+      hashed_passwd: ...
+      lock_passwd: false
+      sudo: ALL=(ALL) NOPASSWD:ALL
+write_files:
+  # Enable password authentication in ssh
+  - path: /etc/ssh/sshd_config.d/20-enable-passwords.conf
+    content: |
+      PasswordAuthentication yes
+runcmd:
   - systemctl restart NetworkManager
   - systemctl restart sshd
   - nmcli connection up static-ens3

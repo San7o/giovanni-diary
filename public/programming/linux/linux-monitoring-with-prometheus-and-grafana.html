@@ -20,9 +20,9 @@
 </p>
 
 
-<div id="outline-container-orgcb99071" class="outline-2">
-<h2 id="orgcb99071">Monitor your Linux system with Prometheus and Grafana</h2>
-<div class="outline-text-2" id="text-orgcb99071">
+<div id="outline-container-org2746b9e" class="outline-2">
+<h2 id="org2746b9e">Monitor your Linux system with Prometheus and Grafana</h2>
+<div class="outline-text-2" id="text-org2746b9e">
 <p>
 If you are managing any system, you need to have an effective way to
 monitor, log and receive notifications about the state of the system.
@@ -37,9 +37,9 @@ be using Fedora 42 as a base.
 </p>
 </div>
 
-<div id="outline-container-org2d5bec4" class="outline-3">
-<h3 id="org2d5bec4">Setting up node exporter</h3>
-<div class="outline-text-3" id="text-org2d5bec4">
+<div id="outline-container-org422e22c" class="outline-3">
+<h3 id="org422e22c">Setting up node exporter</h3>
+<div class="outline-text-3" id="text-org422e22c">
 <p>
 Node exporter is a service that collects various system information
 such as CPU load, ram usage and much more. Fedora already provides
@@ -58,15 +58,15 @@ The service will listen on port 9100.
 </div>
 </div>
 
-<div id="outline-container-org6525092" class="outline-3">
-<h3 id="org6525092">Setting up Prometheus</h3>
-<div class="outline-text-3" id="text-org6525092">
+<div id="outline-container-orgad6dc70" class="outline-3">
+<h3 id="orgad6dc70">Setting up Prometheus</h3>
+<div class="outline-text-3" id="text-orgad6dc70">
 <p>
 You can download the latest version of Prometheus from GitHub:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #eedd82;">LATEST</span>=$(curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | jq -cr .tag_name)
+<pre class="src src-bash"><span style="color: #eedd82;">LATEST</span>=$(<span style="color: #fa8072;">curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | jq -cr .tag_name</span>)
 wget https://github.com/prometheus/prometheus/releases/download/$<span style="color: #eedd82;">LATEST</span>/prometheus-<span style="color: #ffa07a;">"${LATEST:1}"</span>.linux-amd64.tar.gz
 tar -xf prometheus-*
 <span style="color: #b0c4de;">cd</span> prometheus-<span style="color: #ffa07a;">"${LATEST:1}"</span>.linux-amd64
@@ -81,11 +81,11 @@ following Item in the "scrape configs" section:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-yaml"><span style="color: #eedd82;">scrape_configs</span>:
-  - <span style="color: #eedd82;">job_name</span>: <span style="color: #ffa07a;">'linux-server'</span>
-    <span style="color: #eedd82;">scrape_interval</span>: 5s
-    <span style="color: #eedd82;">static_configs</span>:
-      - <span style="color: #eedd82;">targets</span>: [<span style="color: #ffa07a;">'localhost:9100'</span>]
+<pre class="src src-yaml">scrape_configs:
+  - job_name: 'linux-server'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9100']
 </pre>
 </div>
 
@@ -133,9 +133,9 @@ sudo systemctl start prometheus
 </div>
 </div>
 
-<div id="outline-container-org4c59b26" class="outline-3">
-<h3 id="org4c59b26">Setting up Grafana</h3>
-<div class="outline-text-3" id="text-org4c59b26">
+<div id="outline-container-org0045dbe" class="outline-3">
+<h3 id="org0045dbe">Setting up Grafana</h3>
+<div class="outline-text-3" id="text-org0045dbe">
 <p>
 Install Grafana from your favorite package manager:
 </p>
@@ -212,7 +212,7 @@ website</a>.
 
 
 
-<div id="org608ac9b" class="figure">
+<div id="org7763297" class="figure">
 <p><img src="../../ephemeris/images/grafana.png" alt="grafana.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Grafana dashboard I found online</p>

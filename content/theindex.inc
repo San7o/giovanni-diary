@@ -18,6 +18,7 @@
       - [[file:ephemeris/2025-05-19.org::*2025-05-19 - Setting up a local cluster][2025-05-19 - Setting up a local cluster]]
       - [[file:ephemeris/2025-05-20.org::*2025-05-20 - Struggles with NetworkManager][2025-05-20 - Struggles with NetworkManager]]
       - [[file:ephemeris/2025-05-26.org::*2025-05-26 - Two feelings][2025-05-26 - Two feelings]]
+      - [[file:ephemeris/2025-05-28.org::*2025-05-28 - Lucky and Unlucky][2025-05-28 - Lucky and Unlucky]]
       - [[file:ephemeris/entries.org::*Ephemeris Entries][Entries]]
     - [[file:feeds.org::*RSS Feed][Feeds]]
       - [[file:rss-feed-guide.org::*RSS Guide][RSS Guide]]
