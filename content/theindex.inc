@@ -107,6 +107,7 @@
         - [[file:stash/photography/sicily.org::*Sicily][Sicily]]
         - [[file:stash/photography/toblino.org::*Toblino][Toblino]]
       - [[file:stash/piano.org::*Piano][Piano]]
+      - [[file:stash/volunteering.org::*Volunteering][Volunteering]]
     - [[file:videogames/videogames.org::*Videogames][Videogames]]
     - [[file:news.org::*What's New][What's New]]
     - [[file:wishlist.org::*Wish list][Wishlist]]
