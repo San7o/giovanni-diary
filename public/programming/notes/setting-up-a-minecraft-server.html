@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="notes.html">Notes</a> &gt;
+</p>
+
+<div id="outline-container-org0139549" class="outline-2">
+<h2 id="org0139549">Setting up a Minecraft server</h2>
+<div class="outline-text-2" id="text-org0139549">
+<p>
+In this page I want to quickly explain how to setup a minecraft
+server. You can follow this document regardless of your platform
+since you only need the java virtual machine to run the server.
+</p>
+</div>
+
+<div id="outline-container-org022db15" class="outline-3">
+<h3 id="org022db15">Vanilla server</h3>
+<div class="outline-text-3" id="text-org022db15">
+<p>
+Setting up a vanilla server is very simple, just download the jar file
+from the <a href="https://www.minecraft.net/en-us/download/server">Mojang</a> website and move It on Its own directory (it will
+generate a bunch of garbage) and run it using the JVM:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">java -Xmx1024M -Xms1024M -jar server.jar nogui 
+</pre>
+</div>
+
+<p>
+You can set many flags to fine tune various aspects of the server
+such as how much resources does it use and multi threading. You can
+find some information <a href="https://docs.papermc.io/paper/aikars-flags/">here</a>.
+</p>
+
+<p>
+The first time you run the server, It will fail with error "Failed to
+load eula.txt". You are required to accept the eula agreement which
+you can find <a href="https://www.minecraft.net/en-us/eula">here</a>. If you want to proceed, you should edit a file
+named "eula.txt" in the same directory as the .jar file and set the
+"eula" value to true.
+</p>
+
+<pre class="example">
+eula=true
+</pre>
+
+<p>
+Then run the server again and you should see a message saying
+"Starting Minecraft server on *:25565" and the world being generated.
+Congratulations, you have your vanilla minecraft server. You can
+connect to the server via the IP of the machine in the network.
+</p>
+
+<p>
+Note that if you have a firewall, you need to check that the port is
+accessible from other machines. If you need the server to be reachable
+from other networks, you need to configure port forwarding on your
+router or use a VPN.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org41c15c9" class="outline-3">
+<h3 id="org41c15c9">PaperMC</h3>
+<div class="outline-text-3" id="text-org41c15c9">
+<p>
+<a href="https://docs.papermc.io/">PaperMC</a> is a popular server that enables the use of plugins. The
+experience is very similar to the vanilla server but you also get
+to configure all the plugins.
+</p>
+
+<p>
+You can download paper from the official website and run it with
+the JVM:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">java -Xmx1024M -Xms1024M -jar paper-1.21.4-231.jar nogui
+</pre>
+</div>
+
+<p>
+As always, you will need to edit the eula file that will be generated
+after the first run.
+</p>
+
+<p>
+You can browse and download plugins in the <a href="https://hangar.papermc.io/">Hangar</a> website, then
+move them in the "plugin" directory in your server's directory.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="notes.html">Programming Notes</a>, <a href="../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
