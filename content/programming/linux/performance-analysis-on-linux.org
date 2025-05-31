@@ -1,0 +1,174 @@
+#+startup: content indent
+
+[[file:../../index.org][Giovanni's Diary]] > [[file:../programming.org][Programming]] > [[file:linux.org][Linux]] > [[file:notes.org][Notes]] >
+
+* Performance analysis on Linux
+:PROPERTIES:
+:RSS: true
+:DATE: 31 May 2025 00:00:00 GMT
+:CATEGORY: Programming
+:AUTHOR: Giovanni Santini
+:LINK: https://giovanni-diary.netlify.app/programming/linux/performance-analysis-on-linux.html
+:END:
+#+INDEX: Giovanni's Diary!Programming!Linux!Performance analysis on Linux
+
+In this document I will discuss several method to analyze the
+performance of a process on a Linux system. This page will be
+incrementally updated as I get more experience over time, with the aim
+to be a useful resource to everyone.
+
+** Introduction
+
+Consider the following problem: given a native application, I want to
+know which parts or functions are impacting performance the most so
+that I have a better idea of where to look for when optimizing for
+performance.
+
+Here I will only discuss native (compiled) applications. Interpreted
+programs should have their own tools for performance analysis, which
+falls outside of the scope of this document. Regardless, you could
+always [[file:benchmarking-on-linux.org][benrchmark]] them as if the program was a black box.
+
+Instead, what I am more interested in is to break apart an application
+and understand where execution time is spent and where can I increase
+performance. We will see some powerful tools and how to use them
+in the following chapters.
+
+** Perf
+
+Perf is incredibly powerful tool for retrieving performance data on a
+Linux system. The userspace tool is maintained in the kernel source
+tree and it leverages perf events, which are in-kernel special
+instrumentation that perf can hook into. You can get a list of all the
+available events in your kernel via the command =perf list=.
+
+We will now focus out attention on two perf subcommands: =record= and
+=report=.
+
+In order to record performance data , you can use =perf record
+<command>=, or =perf record -p <PID> -- sleep 10= to attach to a
+certain process with PID =<PID>= for 10 seconds. This will generate a
+file "perf.data" containing all the information after execution. You
+can supply additional flags and attach to a running process via Its
+PID, refer to the man page of perf-record(1) for additional
+information.
+
+#+begin_src bash
+  perf record -F 4000 -a -g <command-here>
+#+end_src
+
+In the above example, I used the following flags:
+
+- =-F=: set the frequency, you can set this to "max" if you want.
+- =-a=: collect data from all CPUs
+- =-g=: record call graphs
+
+You can view the data using the following command:
+
+#+begin_src bash
+  perf report
+#+end_src
+
+If you compiled your program with debug information and with no
+optimization, perf will be able to retrieve names of functions and you
+will see something like this:
+
+#+CAPTION: perf report output
+#+NAME:   fig:perf-report
+#+ATTR_ORG: :align center
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 600px
+#+ATTR_ORG: :width 600px
+[[../../ephemeris/images/perf-report.png]]
+
+From here you can explore a list of all the functions and the
+percentage of execution time they used. Additionally, you can inspect
+each function deeper and see which assembly instructions are taking
+more time to run.
+
+#+CAPTION: assembly instructions and their usage
+#+NAME:   fig:perf-report
+#+ATTR_ORG: :align center
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 600px
+#+ATTR_ORG: :width 600px
+[[../../ephemeris/images/perf-report-asm.png]]
+
+Perf is really powerful and I think It is worth learning in more
+detail. If you want to learn more, you can start with the [[https://www.brendangregg.com/perf.html][perf
+examples]] from Brendan Gregg. You should also check out his [[https://www.brendangregg.com/linuxperf.html][other
+pages]] and his [[https://www.brendangregg.com/blog/index.html][blog]], he is an expert on performance analysis.
+
+*** Flamegraphs
+
+Flamegraphs are a different and more intuitive visualization of the
+same data: functions are represented as boxes and the width of the box
+indicates how much time was spent in that function. Therefore, longer
+boxes means longer execution time.
+
+To generate those pictures, you can use the [[https://github.com/brendangregg/FlameGraph][Flame Graph]] tool from
+Brendan Gregg. Usually, in order to produce flame graphs you need
+to perform 3 steps: record the data, fold the stacks and generate
+the final SVG. With perf, this looks like this:
+
+#+begin_src bash
+  perf record -F 4000 -a -g <command>
+  perf script > out.perf
+  stackcollapse-perf.pl out.perf > out.folded
+  flamegraph.pl out.kern_folded > kernel.svg
+#+end_src
+
+#+CAPTION: example flame graph
+#+NAME:   fig:perf-flame-graph
+#+ATTR_ORG: :align center
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 600px
+#+ATTR_ORG: :width 600px
+[[../../ephemeris/images/perf-flame-graph.svg]]
+
+*** Hotspot
+
+There are various GUI applications to visualize perf data. One
+good example if [[https://github.com/KDAB/hotspot][Hotspot]] which shows you flame graphs and a
+timeline. It is really easy to play around, check it out.
+
+#+CAPTION: hotspot screenshot
+#+NAME:   fig:perf-hotspot
+#+ATTR_ORG: :align center
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 600px
+#+ATTR_ORG: :width 600px
+[[../../ephemeris/images/perf-hotspot.png]]
+
+
+** Valgrind + kcachegrind
+
+Valgrind is another powerful program for debugging and profiling Linux
+executables. In the context of profiling, you can use the callgrind
+tool to collect the data:
+
+#+begin_src bash
+  valgrind --tool=callgrind --dump-instr=yes --simulate-cache=yes <program>
+#+end_src
+
+Then you can use a GUI tool like [[https://github.com/KDE/kcachegrind][kcachegrind]] to visualize the data.
+
+#+CAPTION: kcallgrind screenshot
+#+NAME:   fig:perf-hotspot
+#+ATTR_ORG: :align center
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 600px
+#+ATTR_ORG: :width 600px
+[[../../ephemeris/images/kcallgrind.png]]
+
+
+** Conclusions
+
+We have seen a few solutions to get performance information of our
+program. If you have any suggestion or comments about the page, please
+reach out to me via email at at [[mailto:giovanni.santini@proton.me][giovanni.santini@proton.me]] or message
+me on Mastodon [[https://mastodon.social/@santo7][@santo7@mastodon.social]].
+
+-----
+
+Travel: [[file:./notes.org][Linux Notes]], [[../../theindex.org][Index]]

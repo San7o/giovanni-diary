@@ -38,6 +38,7 @@
         - [[file:programming/linux/linux-monitoring-with-prometheus-and-grafana.org::*Monitor your Linux system with Prometheus and Grafana][Monitor your Linux system with Prometheus and Grafana]]
         - [[file:programming/linux/notes.org::*Linux Notes][Notes]]
         - [[file:programming/linux/optimize-power-consumption-linux.org::*Optimize power consumption on Linux][Optimize power consumption on Linux]]
+        - [[file:programming/linux/performance-analysis-on-linux.org::*Performance analysis on Linux][Performance analysis on Linux]]
       - [[file:programming/repositories.org::*My public repositories][My public repositories]]
       - [[file:programming/notes/notes.org::*Public Notes][Notes]]
         - [[file:programming/notes/algoritmi/algoritmi.org::*Algoritmi][Algoritmi]]
