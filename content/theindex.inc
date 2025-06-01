@@ -30,6 +30,7 @@
     - [[file:first-page.org][First Page]]
     - [[file:my-public-diary.org::*My Public Diary][My public Diary]]
     - [[file:programming/programming.org::*Programming][Programming]]
+      - [[file:programming/apue.org::*Advanced Programming in the Unix Environment][APUE]]
       - [[file:programming/cv.org::*Giovanni Santini - CV][CV]]
       - [[file:programming/emacs/emacs.org::*Emacs][Emacs]]
         - [[file:programming/emacs/elisp-exercises.org::*Emacs-lisp Exercises][Emacs-lisp Exercises]]
