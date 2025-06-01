@@ -6,6 +6,7 @@
       - [[file:autobiography/middle-school.org::*Middle School][Middle School]]
       - [[file:autobiography/old-programs-cpp.org::*Old cpp programs][Old cpp programs]]
       - [[file:autobiography/university.org::*University][University]]
+    - [[file:blog.org::*Blog][Blog]]
     - [[file:changelog.org::*Changelog][Changelog]]
     - [[file:contacts.org::*Contacts][Contacts]]
     - [[file:documenting.org::*Documenting my Life][Documenting my Life]]
