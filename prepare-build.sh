@@ -6,7 +6,7 @@
 mkdir -p public
 
 cp $HOME/.emacs.d/init.org content/programming/emacs/init.org
-sed -i '2i\[[file:../../index.org][Giovannis Diary]] > [[file:../programming.org][Programming]] > [[file:emacs.org][Emacs]] >' content/programming/emacs/init.org
+sed -i '2i\[[file:../../index.org][Giovannis Diary]] > [[file:../../subjects.org][Subjects]] > [[file:../programming.org][Programming]] > [[file:emacs.org][Emacs]] >' content/programming/emacs/init.org
 echo -e "\n-----\n\n Travel: [[file:emacs.org][Emacs]], [[file:../../theindex.org][Index]]" >> content/programming/emacs/init.org
 
 # Style
