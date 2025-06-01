@@ -75,6 +75,7 @@
         - [[file:programming/notes/setting-up-a-minecraft-server.org::*Setting up a Minecraft server][Setting up a Minecraft server]]
         - [[file:programming/notes/usb-for-apocalypse.org::*USB for the apocalypse][Usb for the apocalypse]]
       - [[file:programming/setup.org::*Setup][Setup]]
+      - [[file:programming/unix.org::*UNIX][UNIX]]
       - [[file:programming/wishlist.org::*Wishlist][Wishlist]]
     - [[file:reading/reading.org::*Reading][Reading]]
       - [[file:reading/blogs.org::*Blogs][Blogs]]
