@@ -7,6 +7,7 @@ sed -i '/G<\/h2>/d' public/theindex.html
 
 # Center the div vertically
 sed -i 's/<\/head>/<style>body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; } .outline2 { padding: 2rem; border-radius: 8px;} .content {text-align: center;} <\/style><\/head>/' public/index.html
+sed -i 's/<\/head>/<style>body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; } .outline2 { padding: 2rem; border-radius: 8px;} .content {text-align: center;} <\/style><\/head>/' public/order.html
 
 WORDS=$(find content/ -type f -name "*.org" -print0 | xargs -0 cat | wc -w)
 FILES=$(find content/ -type f | wc -l)

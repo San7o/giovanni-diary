@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="notes.html">Notes</a> &gt;
+</p>
+
+<div id="outline-container-org22ccbac" class="outline-2">
+<h2 id="org22ccbac">Setting up an IRC client</h2>
+<div class="outline-text-2" id="text-org22ccbac">
+<p>
+I have been playing with IRC lately. In this note I will explain how
+to setup your client to connect to an IRC server just in case I need
+to do It again, nothing difficult or impressive really.
+</p>
+</div>
+
+<div id="outline-container-org4593717" class="outline-3">
+<h3 id="org4593717">Bouncer</h3>
+<div class="outline-text-3" id="text-org4593717">
+<p>
+You want to have a bouncer running on your network, this is needed
+because when you close any IRC client you will loose all the messages.
+What a bouncer does is connecting to any IRC server for you, and you
+will connect to the bouncer instead of connecting directly to the IRC
+server. As long as the bouncer is live somewhere in your network, you
+won't loose messages and you can connect via different client and
+devices to the same bouncer.
+</p>
+
+<p>
+You can use <a href="https://wiki.znc.in/ZNC">ZNC</a> as a bouncer, It is already packaged in many
+distributions. On fedora, It is as easy as running:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo dnf install znc
+</pre>
+</div>
+
+<p>
+Fedora will also setup the systemd daemon that you can enable if
+you want. In order to setup the bouncer, run:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">znc --makeconf
+</pre>
+</div>
+
+<p>
+This will promp you a few settings. I will connect to libera and
+disable ssl because It gave me problems.
+</p>
+
+<pre class="example">
+$ znc --makeconf
+
+[ .. ] Checking for list of available modules...
+[ ** ]
+[ ** ] -- Global settings --
+[ ** ]
+[ ?? ] Listen on port (1025 to 65534): 1025
+[ ?? ] Listen using SSL (yes/no) [no]: no
+[ ?? ] Listen using both IPv4 and IPv6 (yes/no) [yes]: no
+[ .. ] Verifying the listener...
+[ ** ] Unable to locate pem file: [/home/santo/.znc/znc.pem], creating it
+[ .. ] Writing Pem file [/home/santo/.znc/znc.pem]...
+[ ** ] Enabled global modules [webadmin]
+[ ** ]
+[ ** ] -- Admin user settings --
+[ ** ]
+[ ?? ] Username (alphanumeric): santo_
+[ ?? ] Enter password:
+[ ?? ] Confirm password:
+[ ?? ] Nick [santo_]:
+[ ?? ] Alternate nick [santo__]:
+[ ?? ] Ident [santo_]:
+[ ?? ] Real name (optional):
+[ ?? ] Bind host (optional):
+[ ** ] Enabled user modules [chansaver, controlpanel]
+[ ** ]
+[ ?? ] Set up a network? (yes/no) [yes]: yes
+[ ** ]
+[ ** ] -- Network settings --
+[ ** ]
+[ ?? ] Name [libera]: libera
+[ ?? ] Server host (host only): irc.libera.chat
+[ ?? ] Server uses SSL? (yes/no) [no]: no
+[ ?? ] Server port (1 to 65535) [6697]:
+[ ?? ] Server password (probably empty):
+[ ?? ] Initial channels: #linux
+[ ** ] Enabled network modules [simple_away]
+[ ** ]
+[ .. ] Writing config [/home/santo/.znc/configs/znc.conf]...
+[ ** ]
+[ ** ] To connect to this ZNC you need to connect to it as your IRC server
+[ ** ] using the port that you supplied.  You have to supply your login info
+[ ** ] as the IRC server password like this: user/network:pass.
+[ ** ]
+[ ** ] Try something like this in your IRC client...
+[ ** ] /server &lt;znc_server_ip&gt; +1025 santo_:&lt;pass&gt;
+[ ** ]
+[ ** ] To manage settings, users and networks, point your web browser to
+[ ** ] https://&lt;znc_server_ip&gt;:1025/
+[ ** ]
+[ ?? ] Launch ZNC now? (yes/no) [yes]: no
+</pre>
+
+<p>
+You can finally run ZNC by running the command <code>znc</code>, <code>znc --debug</code>
+or via the systemd daemon. Check that you do not have firewall
+rules that may block binds to the port.
+</p>
+
+<p>
+Additionally, you can accesses an admin panel via http, as the
+output of makeconf suggested.
+</p>
+
+<pre class="example">
+https://&lt;znc_server_ip&gt;:1025/
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org1ba5a65" class="outline-3">
+<h3 id="org1ba5a65">Clients</h3>
+<div class="outline-text-3" id="text-org1ba5a65">
+<p>
+There are as many IRC clients as you want. I now use <a href="https://weechat.org/">weechat</a> which is
+tui based, It is usually already packaged by your distribution.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo dnf install weechat
+</pre>
+</div>
+
+<p>
+Once you run weechat, you can connect to your server by first
+adding a server and connecting to it:
+</p>
+
+<pre class="example">
+/server add local localhost/1025
+/connect local -username=santo_ -password=my-password
+</pre>
+
+<p>
+You should see a buffer opening eith a welcome message. If this is not
+the case, something went wrong. If you get the message "this nickname
+is registered. Please choose a different nickanme" you either are
+already registered with that nickname and you should login with <code>/mng
+NickServ IDENTIFY username password</code>, or someone already registered
+that nickname and you need to change it. In this case, you can
+directly edit the ZNC config file in <code>~/.znc/configs/znc.conf</code> and
+restart the server with a different nickname.
+</p>
+
+<p>
+To join a channel use the <code>join</code> command:
+</p>
+
+<pre class="example">
+/join #&lt;channel-name&gt;
+</pre>
+
+
+<p>
+A useful command in weechat is to enable mouse support:
+</p>
+
+<pre class="example">
+/mouse enable
+</pre>
+
+
+<hr />
+
+<p>
+Travel: <a href="notes.html">Programming Notes</a>, <a href="../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
