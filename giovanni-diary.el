@@ -20,7 +20,7 @@
 	;;(giovanni-diary-generate-rss default-directory)
 	(setq org-publish-project-alist
 				(list
-				 (list "org-site:main"
+				 (list "giovannis-diary"
 							 :recursive t
 							 :base-directory "./content"
 							 :publishing-function 'org-html-publish-to-html

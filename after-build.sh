@@ -13,3 +13,9 @@ WORDS=$(find content/ -type f -name "*.org" -print0 | xargs -0 cat | wc -w)
 FILES=$(find content/ -type f | wc -l)
 sed -i "s/WORDS/$WORDS/" public/first-page.html
 sed -i "s/FILES/$FILES/" public/first-page.html
+
+# Generate sitemap
+find public/ -type f | sed 's/public/https:\/\/giovanni-diary.netlify.app/g' > public/sitemap.txt
+
+# Copy robots.txt
+cp robots.txt public/
