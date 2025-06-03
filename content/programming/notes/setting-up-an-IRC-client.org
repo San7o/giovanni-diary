@@ -20,7 +20,7 @@ to do It again, nothing difficult or impressive really.
 
 You want to have a bouncer running on your network, this is needed
 because when you close any IRC client you will loose all the messages.
-What a bouncer does is connecting to any IRC server for you, and you
+What a bouncer does is connecting to any IRC server for you, then you
 will connect to the bouncer instead of connecting directly to the IRC
 server. As long as the bouncer is live somewhere in your network, you
 won't loose messages and you can connect via different client and
@@ -40,8 +40,8 @@ you want. In order to setup the bouncer, run:
   znc --makeconf
 #+end_src
 
-This will promp you a few settings. I will connect to libera and
-disable ssl because It gave me problems.
+This will prompt you a few settings. I will configure so that It will
+connect to libera and disable ssl because It gave me problems.
 
 #+begin_src
 $ znc --makeconf
@@ -110,8 +110,8 @@ output of makeconf suggested.
 
 ** Clients
 
-There are as many IRC clients as you want. I now use [[https://weechat.org/][weechat]] which is
-tui based, It is usually already packaged by your distribution.
+There are as many IRC clients as you want. Now I use [[https://weechat.org/][weechat]] which is
+tui based, It is probably already packaged by your distribution.
 
 #+begin_src bash
   sudo dnf install weechat
@@ -125,7 +125,7 @@ adding a server and connecting to it:
   /connect local -username=santo_ -password=my-password
 #+end_src
 
-You should see a buffer opening eith a welcome message. If this is not
+You should see a buffer opening with a welcome message. If this is not
 the case, something went wrong. If you get the message "this nickname
 is registered. Please choose a different nickanme" you either are
 already registered with that nickname and you should login with =/mng
