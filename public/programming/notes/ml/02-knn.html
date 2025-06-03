@@ -51,9 +51,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org0d85320" class="outline-2">
-<h2 id="org0d85320">The K-nearest neighbor algorithm</h2>
-<div class="outline-text-2" id="text-org0d85320">
+<div id="outline-container-orga3f2e85" class="outline-2">
+<h2 id="orga3f2e85">The K-nearest neighbor algorithm</h2>
+<div class="outline-text-2" id="text-orga3f2e85">
 <p>
 Given an n-dimensional partitioned space, and a new train value, we
 want to associate the new value with a partition. A simple solution
@@ -71,9 +71,9 @@ More precisely, to classify an example \(d\):
 </ul>
 </div>
 
-<div id="outline-container-org6805732" class="outline-3">
-<h3 id="org6805732">How do we measure "nearest"?</h3>
-<div class="outline-text-3" id="text-org6805732">
+<div id="outline-container-orga4a551b" class="outline-3">
+<h3 id="orga4a551b">How do we measure "nearest"?</h3>
+<div class="outline-text-3" id="text-orga4a551b">
 <p>
 Measuring distance / similarity is a domain-specific problem and there
 are many different variations.
@@ -85,9 +85,9 @@ are many different variations.
 </ul>
 </div>
 
-<div id="outline-container-org52f7f98" class="outline-4">
-<h4 id="org52f7f98">Euclidean distance</h4>
-<div class="outline-text-4" id="text-org52f7f98">
+<div id="outline-container-org0e24204" class="outline-4">
+<h4 id="org0e24204">Euclidean distance</h4>
+<div class="outline-text-4" id="text-org0e24204">
 <p>
 \[D(a, b) = \sqrt{(a_i - b_i)^2 + (a_2 - b_2)^2}\]
 </p>
@@ -100,9 +100,9 @@ aka. measured in the same range. Therefore, data should be
 </div>
 </div>
 
-<div id="outline-container-org63356fd" class="outline-4">
-<h4 id="org63356fd">Standardization or Z-score normalization</h4>
-<div class="outline-text-4" id="text-org63356fd">
+<div id="outline-container-org9c68833" class="outline-4">
+<h4 id="org9c68833">Standardization or Z-score normalization</h4>
+<div class="outline-text-4" id="text-org9c68833">
 <p>
 Rescale the data so that the mean is 0 and the standard deviation from
 the mean is 1
@@ -119,9 +119,9 @@ the mean is 1
 </div>
 </div>
 
-<div id="outline-container-org2c21a72" class="outline-4">
-<h4 id="org2c21a72">Minkowsky Distance</h4>
-<div class="outline-text-4" id="text-org2c21a72">
+<div id="outline-container-org79361a4" class="outline-4">
+<h4 id="org79361a4">Minkowsky Distance</h4>
+<div class="outline-text-4" id="text-org79361a4">
 <p>
 Generalization of the Euclidean distance:
 </p>
@@ -132,9 +132,9 @@ Generalization of the Euclidean distance:
 </div>
 </div>
 
-<div id="outline-container-org85ea3da" class="outline-4">
-<h4 id="org85ea3da">Cosine Similarity</h4>
-<div class="outline-text-4" id="text-org85ea3da">
+<div id="outline-container-org91c85dd" class="outline-4">
+<h4 id="org91c85dd">Cosine Similarity</h4>
+<div class="outline-text-4" id="text-org91c85dd">
 <p>
 Given two different vectors:
 </p>
@@ -149,18 +149,18 @@ Given two different vectors:
 </div>
 </div>
 
-<div id="outline-container-orgf82c7b1" class="outline-3">
-<h3 id="orgf82c7b1">Decision Boundaries</h3>
-<div class="outline-text-3" id="text-orgf82c7b1">
+<div id="outline-container-org862380a" class="outline-3">
+<h3 id="org862380a">Decision Boundaries</h3>
+<div class="outline-text-3" id="text-org862380a">
 <p>
 The decision boundaries are places in the features space where the
 classification of a point / example changes.
 </p>
 </div>
 
-<div id="outline-container-org702510c" class="outline-4">
-<h4 id="org702510c">Voronoi Diagram / Partitioning</h4>
-<div class="outline-text-4" id="text-org702510c">
+<div id="outline-container-orgb72ab79" class="outline-4">
+<h4 id="orgb72ab79">Voronoi Diagram / Partitioning</h4>
+<div class="outline-text-4" id="text-orgb72ab79">
 <p>
 Describes the areas that are nearest to any given point, given a set
 of data
@@ -178,9 +178,9 @@ form a subset of the Voronoi diagram for the training data.
 </div>
 </div>
 
-<div id="outline-container-orge175821" class="outline-3">
-<h3 id="orge175821">How to pick K</h3>
-<div class="outline-text-3" id="text-orge175821">
+<div id="outline-container-org504a0e0" class="outline-3">
+<h3 id="org504a0e0">How to pick K</h3>
+<div class="outline-text-3" id="text-org504a0e0">
 <p>
 Some techniques to pick \(k\) include:
 </p>
@@ -199,9 +199,9 @@ k-NN variations: weighted k-NN.
 </div>
 </div>
 
-<div id="outline-container-org32d81d4" class="outline-3">
-<h3 id="org32d81d4">Lazy Learner vs Eager Learner</h3>
-<div class="outline-text-3" id="text-org32d81d4">
+<div id="outline-container-orgb620427" class="outline-3">
+<h3 id="orgb620427">Lazy Learner vs Eager Learner</h3>
+<div class="outline-text-3" id="text-orgb620427">
 <p>
 k-NN belongs to the class of lazy learning algorithms
 </p>
@@ -219,9 +219,9 @@ This means that k-NN is not really fast during inference, but no training is req
 </div>
 </div>
 
-<div id="outline-container-orgd06cebb" class="outline-3">
-<h3 id="orgd06cebb">Curse of Dimensionality</h3>
-<div class="outline-text-3" id="text-orgd06cebb">
+<div id="outline-container-orgfc4cf76" class="outline-3">
+<h3 id="orgfc4cf76">Curse of Dimensionality</h3>
+<div class="outline-text-3" id="text-orgfc4cf76">
 <p>
 In high dimensions almost all points are far away from each other
 </p>
@@ -238,9 +238,9 @@ exponentially in order to keep the same density
 </div>
 </div>
 
-<div id="outline-container-org0309a78" class="outline-3">
-<h3 id="org0309a78">Computational Cost</h3>
-<div class="outline-text-3" id="text-org0309a78">
+<div id="outline-container-org8f46d4e" class="outline-3">
+<h3 id="org8f46d4e">Computational Cost</h3>
+<div class="outline-text-3" id="text-org8f46d4e">
 <ul class="org-ul">
 <li>Linear algorithm (no preprocessing) is O(kN) to compute the distance
 for all N datapoints</li>
@@ -253,9 +253,9 @@ to, simply traverse a binary tree.</li>
 </div>
 </div>
 
-<div id="outline-container-orgd8a4527" class="outline-3">
-<h3 id="orgd8a4527">Parametric vs Non-parametric Models</h3>
-<div class="outline-text-3" id="text-orgd8a4527">
+<div id="outline-container-orgc33060d" class="outline-3">
+<h3 id="orgc33060d">Parametric vs Non-parametric Models</h3>
+<div class="outline-text-3" id="text-orgc33060d">
 <ul class="org-ul">
 <li><b><b>Parametric models</b></b> have a finite number of parameters
 <ul class="org-ul">
