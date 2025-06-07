@@ -12,8 +12,8 @@
 :END:
 #+INDEX: Giovanni's Diary!Programming!Linux!Optimize power consumption on Linux
 
-This documents contains notes regarding my attempts to increase
-battery life on my linux laptop[s]. I don't use my laptop for
+This documents contains notes regarding my efforts to increase
+battery life on my Linux laptop[s]. I don't use my laptop for
 computational-expensive tasks, I'd rather prefer the battery to last
 longer. Here is a list of things I did to optimize for lower power
 consumption.
@@ -87,7 +87,7 @@ Briefly, It is composed of an OS Service Layer which abstracts the
 hardware, an user interface via sysfs and procfs, the core
 implementation which includes an AML interpreter which is used as a
 language between the firmware and the operating system, and other
-components.
+components which are irrelevant for our discussion.
 
 On Linux, userspace can interact with the ACPI subsystem via sysfs in
 =/sys/devices/LNXSYSTM:00= or =/sys/bus/acpi/devices= (if ACPI support
@@ -107,10 +107,17 @@ implement.
 
 While you may try to thinker with configuration files and settings
 following common heuristics (such as "less processes = less power
-consumption"), It is more productive to evaluate the power consumption
-of your operating system and make changes to the most power-draining
-sources in order to have a greater impact on the overall power
-consumption.
+consumption"), It is more effective to first evaluate the power
+consumption of your operating system and then make changes to the most
+power-draining sources in order to have a greater impact on the
+overall power consumption.
+
+The hard truth is that the best way to get accurate measurements is
+via some external power meters. You can use various types of smart
+plugs or usually your UPS for this, however I don't own any of this
+hardware so I will not give advice. Instead, I will focus on the
+software side of things and get best-effort data.  Even with software,
+what you can get greately depends on what your hardware provides.
 
 **** Powertop
 
@@ -136,30 +143,47 @@ consumption so it is beneficial to look into this.
 You may start playing around with filesystems and mount options,
 later we'll see an option in BTRFS that improves performance.
 
-**** Plot power usage
+**** Plot CPU power usage
 
 To evaluate a change in your system, you can log and graph different
-statistics and compare changes. The following script records
-Watts consumption each second:
+statistics and compare changes. The following script records CPU power
+consumption in Watts on intel systems, It uses intel-rapl to fetch the
+data, you may need to adapt the code if you are using a CPU from a
+different brand.
 
-#+begin_src lua
+#+begin_src bash
 #!/bin/bash
 
-OUTFILE="power_log.csv"
-GNUPLOT_SCRIPT="plot_power.gp"
-INTERVAL=1  # seconds
+set -e
 
+OUTFILE="power_log.csv"
+INTERVAL=1  # seconds
+ENERGY_PATH=/sys/class/powercap/intel-rapl:0/energy_uj
+
+function get_energy
+{
+	cat $ENERGY_PATH)
+}
+
+function get_time_seconds
+{
+	date +%s
+}
+
+# Overwrites $OUTFILE
 echo "timestamp,power_watts" > "$OUTFILE"
 
-prev_energy=$(< /sys/class/powercap/intel-rapl:0/energy_uj)
-prev_time=$(date +%s)
+prev_energy=$(get_energy)
+prev_time=$(get_time_seconds)
 
+# Calculate and append power consumption in watts to $OUTFILE with
+# a timestamp. Watts are calculated by dividing the difference in
+# energy between $INTERVAL by the $INTERVAL
 while true; do
     sleep "$INTERVAL"
 
-    curr_energy=$(< /sys/class/powercap/intel-rapl:0/energy_uj)
-    curr_time=$(date +%s)
-
+    curr_energy=$(get_energy)
+    curr_time=$(get_time_seconds)
     delta_energy=$((curr_energy - prev_energy))
     delta_time=$((curr_time - prev_time))
 
@@ -171,7 +195,7 @@ while true; do
     # Convert to watts
     power=$(awk "BEGIN { printf \"%.2f\", ($delta_energy / 1000000) / $delta_time }")
     timestamp=$(date +"%H:%M:%S")
-    echo "$timestamp,$power" >> "$OUTFILE"
+    echo "$timestamp,$power" | tee -a "$OUTFILE"
 
     prev_energy=$curr_energy
     prev_time=$curr_time
@@ -195,6 +219,10 @@ You can then graph it with gnuplot:
   plot "power_log.csv" using 1:2 with lines title "Power (W)"
 #+end_src
 
+#+begin_src bash
+  gnuplot plot_power.gp
+#+end_src
+
 
 #+CAPTION: Gnuplot output
 #+NAME:   fig:gnuplot
@@ -203,6 +231,71 @@ You can then graph it with gnuplot:
 #+ATTR_HTML: :width 600px
 #+ATTR_ORG: :width 600px
 [[../../ephemeris/images/gnuplot-power.jpeg]]
+
+Additionally, you could export the data to prometheus with a similar
+script so that it integrates with the [[file:linux-monitoring-with-prometheus-and-grafana.org][prometheus + grafana]] stack.
+
+#+begin_src bash
+  #!/bin/bash
+
+  set -e
+
+  ENERGY_PATH=/sys/class/powercap/intel-rapl:0/energy_uj
+  INTERVAL=1  # seconds
+  METRICS_FILE="/tmp/power_metrics.prom"
+  PORT=9200
+
+  function get_energy {
+      cat "$ENERGY_PATH"
+  }
+
+  function get_time {
+      date +%s
+  }
+
+  prev_energy=$(get_energy)
+  prev_time=$(get_time)
+
+  # Start background HTTP server
+  socat TCP-LISTEN:$PORT,reuseaddr,fork SYSTEM:"echo HTTP/1.0 200; echo Content-Type\: text/plain; echo; cat \"$METRICS_FILE\"" &
+
+  # Metrics writer loop
+  while true; do
+      sleep "$INTERVAL"
+
+      curr_energy=$(get_energy)
+      curr_time=$(get_time)
+
+      delta_energy=$((curr_energy - prev_energy))
+      delta_time=$((curr_time - prev_time))
+
+      # Handle 32-bit wraparound
+      if [[ $delta_energy -lt 0 ]]; then
+          delta_energy=$(( (2**32 + delta_energy) ))
+      fi
+
+      # Calculate power in watts
+      power=$(awk "BEGIN { printf \"%.2f\", ($delta_energy / 1000000) / $delta_time }")
+
+      cat <<EOF > "$METRICS_FILE"
+  # HELP node_power_watts Estimated power usage from RAPL
+  # TYPE node_power_watts gauge
+  node_power_watts $power
+  EOF
+
+      prev_energy=$curr_energy
+      prev_time=$curr_time
+  done
+#+end_src
+
+And you need to add this to the =prometheus.yaml= file:
+
+#+begin_src yaml
+  scrape_configs:
+  - job_name: 'cpu_power'
+    static_configs:
+      - targets: ['localhost:9200']
+#+end_src
 
 
 *** Save yourself time: TLP
@@ -362,7 +455,9 @@ LWN article from Jonathan Corbet explains this well:
 #+END_QUOTE
 
 To disable the Atime feature, you need to put the =noatime= option
-on the BTRFS entries in =/etc/fstab=.
+on the BTRFS entries in =/etc/fstab=. Note that some applications
+or test cases that rely on sensitive timestamps may break, so
+keep this in mind.
 
 **** Kernel Flags
 

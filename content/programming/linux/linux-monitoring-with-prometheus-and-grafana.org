@@ -16,17 +16,25 @@
 If you are managing any system, you need to have an effective way to
 monitor, log and receive notifications about the state of the system.
 A classic solution for Linux based servers is the Prometheus +
-Grafana stack. In this document I will explain you how to setup this.
+Grafana stack. In this document I will explain you how to setup this
+and how to create a custom prometheus exporter.
 
 We will see how to setup both Prometheus and Grafana to monitor
 various system statistics which are fetched by node exporter. I will
 be using Fedora 42 as a base.
 
+** Index
+
+- Setting up node exporter
+- Setting up Prometheus
+- Setting up Grafana
+- Custom exporter
+
 ** Setting up node exporter
 
 Node exporter is a service that collects various system information
-such as CPU load, ram usage and much more. Fedora already provides
-the package "node-exporter" and service "node exporter":
+such as CPU load, ram usage and much more. Fedora already provides the
+package "node-exporter" and service "node [underscore] exporter":
 
 #+begin_src bash
   sudo dnf install node-exporter
@@ -48,7 +56,7 @@ You can download the latest version of Prometheus from GitHub:
 #+end_src
 
 You need to add node exporter to the list of services to scrape, you
-should edit the "/etc/prometheus/prometheus.yml" file and add the
+should edit the =/etc/prometheus/prometheus.yml= file and add the
 following Item in the "scrape configs" section:
 
 #+begin_src yaml
@@ -95,6 +103,11 @@ Then change permissions, reload the daemons and start the service:
   sudo systemctl start prometheus
 #+end_src
 
+Prometheus has a web UI accessible by default at port =9090=, we will
+now see how to setup Grafana, a popular and powerful UI to visualize
+the data.
+
+
 ** Setting up Grafana
 
 Install Grafana from your favorite package manager:
@@ -112,8 +125,8 @@ otherwise you can create the service yourself like we did before.
 
 If you are using the default Fedora's SELinux, in order to allow
 grafana to use the prometheus tcp socket we need to write a custom
-policy. Create the file "grafana_websm.te" and add the following
-content:
+policy. Create the file "grafana [underscore] websm.te" and add the
+following content:
 
 #+begin_src
 module grafana_websm 1.0;
@@ -161,6 +174,75 @@ website]].
 #+ATTR_HTML: :width 600px
 #+ATTR_ORG: :width 600px
 [[../../ephemeris/images/grafana.png]]
+
+** Custom Exporter
+
+What if you wanted to log something custom to your dashboard, you
+can easily do this by starting a tcp server and serving the data you
+want prometheus to read. Then, you need to tell prometheus to fetch
+your service like we did for node exporter.
+
+One of the simplest way to create a server is using socat. For example,
+the following script creates a server that serves the system's load
+average metric for prometheus.
+
+#+begin_src bash
+  #!/bin/bash
+
+  set -e
+
+  INTERVAL=60  # seconds
+  METRICS_FILE="/tmp/power_metrics.prom"
+  PORT=9200
+  touch $METRICS_FILE
+
+  # Start background HTTP server
+  socat TCP-LISTEN:$PORT,reuseaddr,fork SYSTEM:"echo HTTP/1.0 200; echo Content-Type\: text/plain; echo; cat \"$METRICS_FILE\"" &
+
+  # Metrics writer loop
+  while true; do
+      sleep "$INTERVAL"
+
+      loadavg=$(cat /proc/loadavg | awk '{print $1 }')
+
+      cat <<EOF > "$METRICS_FILE"
+      # HELP loadavg Load Average
+      # TYPE loadavg gauge
+      loadavg $loadavg
+      EOF
+  done
+#+end_src
+
+And update the =prometheus.yml= file:
+
+#+begin_src yaml
+scrape_configs:
+  ...
+  - job_name: 'load-average'
+    scrape_interval: 60s
+    static_configs:
+      - targets: ['localhost:9200']
+#+end_src
+
+
+This script runs the tcp server in the background and updates the
+served content each =$INTERVAL= seconds and It exposes the =loadavg=
+metric with the value of the average system load in the last
+minute. You can now add a new dashboard in grafana from the dashboard
+section and clicking "New > New Dashboard > Add Visualization". You
+select prometheus as a source and you add your custom metric and clock
+"apply".
+
+#+CAPTION: Custom dashboard
+#+NAME:   fig:grafana-dashboard
+#+ATTR_ORG: :align center
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 600px
+#+ATTR_ORG: :width 600px
+[[../../ephemeris/images/grafana-custom.png]]
+
+You can create the http server in any other way, maybe integrate
+It with the application you have been working on, and so on.
 
 
 -----

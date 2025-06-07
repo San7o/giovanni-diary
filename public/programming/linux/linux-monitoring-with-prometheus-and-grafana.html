@@ -20,14 +20,15 @@
 </p>
 
 
-<div id="outline-container-orgcce815c" class="outline-2">
-<h2 id="orgcce815c">Monitor your Linux system with Prometheus and Grafana</h2>
-<div class="outline-text-2" id="text-orgcce815c">
+<div id="outline-container-org3ba9de2" class="outline-2">
+<h2 id="org3ba9de2">Monitor your Linux system with Prometheus and Grafana</h2>
+<div class="outline-text-2" id="text-org3ba9de2">
 <p>
 If you are managing any system, you need to have an effective way to
 monitor, log and receive notifications about the state of the system.
 A classic solution for Linux based servers is the Prometheus +
-Grafana stack. In this document I will explain you how to setup this.
+Grafana stack. In this document I will explain you how to setup this
+and how to create a custom prometheus exporter.
 </p>
 
 <p>
@@ -37,13 +38,25 @@ be using Fedora 42 as a base.
 </p>
 </div>
 
-<div id="outline-container-orgd3010fd" class="outline-3">
-<h3 id="orgd3010fd">Setting up node exporter</h3>
-<div class="outline-text-3" id="text-orgd3010fd">
+<div id="outline-container-org844901a" class="outline-3">
+<h3 id="org844901a">Index</h3>
+<div class="outline-text-3" id="text-org844901a">
+<ul class="org-ul">
+<li>Setting up node exporter</li>
+<li>Setting up Prometheus</li>
+<li>Setting up Grafana</li>
+<li>Custom exporter</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org18983d0" class="outline-3">
+<h3 id="org18983d0">Setting up node exporter</h3>
+<div class="outline-text-3" id="text-org18983d0">
 <p>
 Node exporter is a service that collects various system information
-such as CPU load, ram usage and much more. Fedora already provides
-the package "node-exporter" and service "node exporter":
+such as CPU load, ram usage and much more. Fedora already provides the
+package "node-exporter" and service "node [underscore] exporter":
 </p>
 
 <div class="org-src-container">
@@ -58,9 +71,9 @@ The service will listen on port 9100.
 </div>
 </div>
 
-<div id="outline-container-org985f271" class="outline-3">
-<h3 id="org985f271">Setting up Prometheus</h3>
-<div class="outline-text-3" id="text-org985f271">
+<div id="outline-container-org1a1ce67" class="outline-3">
+<h3 id="org1a1ce67">Setting up Prometheus</h3>
+<div class="outline-text-3" id="text-org1a1ce67">
 <p>
 You can download the latest version of Prometheus from GitHub:
 </p>
@@ -76,7 +89,7 @@ sudo cp prometheus /usr/local/bin/
 
 <p>
 You need to add node exporter to the list of services to scrape, you
-should edit the "/etc/prometheus/prometheus.yml" file and add the
+should edit the <code>/etc/prometheus/prometheus.yml</code> file and add the
 following Item in the "scrape configs" section:
 </p>
 
@@ -130,12 +143,19 @@ sudo systemctl daemon-reload
 sudo systemctl start prometheus
 </pre>
 </div>
+
+<p>
+Prometheus has a web UI accessible by default at port <code>9090</code>, we will
+now see how to setup Grafana, a popular and powerful UI to visualize
+the data.
+</p>
 </div>
 </div>
 
-<div id="outline-container-org3204e8a" class="outline-3">
-<h3 id="org3204e8a">Setting up Grafana</h3>
-<div class="outline-text-3" id="text-org3204e8a">
+
+<div id="outline-container-orgecaf119" class="outline-3">
+<h3 id="orgecaf119">Setting up Grafana</h3>
+<div class="outline-text-3" id="text-orgecaf119">
 <p>
 Install Grafana from your favorite package manager:
 </p>
@@ -158,8 +178,8 @@ otherwise you can create the service yourself like we did before.
 <p>
 If you are using the default Fedora's SELinux, in order to allow
 grafana to use the prometheus tcp socket we need to write a custom
-policy. Create the file "grafana<sub>websm.te</sub>" and add the following
-content:
+policy. Create the file "grafana [underscore] websm.te" and add the
+following content:
 </p>
 
 <pre class="example">
@@ -212,11 +232,94 @@ website</a>.
 
 
 
-<div id="orgaec8184" class="figure">
+<div id="orgd39ccef" class="figure">
 <p><img src="../../ephemeris/images/grafana.png" alt="grafana.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Grafana dashboard I found online</p>
 </div>
+</div>
+</div>
+
+<div id="outline-container-org5af2d58" class="outline-3">
+<h3 id="org5af2d58">Custom Exporter</h3>
+<div class="outline-text-3" id="text-org5af2d58">
+<p>
+What if you wanted to log something custom to your dashboard, you
+can easily do this by starting a tcp server and serving the data you
+want prometheus to read. Then, you need to tell prometheus to fetch
+your service like we did for node exporter.
+</p>
+
+<p>
+One of the simplest way to create a server is using socat. For example,
+the following script creates a server that serves the system's load
+average metric for prometheus.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">!/bin/</span><span style="color: #00ffff;">bash</span>
+
+<span style="color: #b0c4de;">set</span> -e
+
+<span style="color: #eedd82;">INTERVAL</span>=60  <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">seconds</span>
+<span style="color: #eedd82;">METRICS_FILE</span>=<span style="color: #ffa07a;">"/tmp/power_metrics.prom"</span>
+<span style="color: #eedd82;">PORT</span>=9200
+touch $<span style="color: #eedd82;">METRICS_FILE</span>
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Start background HTTP server</span>
+socat TCP-LISTEN:$<span style="color: #eedd82;">PORT</span>,reuseaddr,fork SYSTEM:<span style="color: #ffa07a;">"echo HTTP/1.0 200; echo Content-Type\: text/plain; echo; cat \"$METRICS_FILE\""</span> &amp;
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Metrics writer loop</span>
+<span style="color: #00ffff;">while</span> true; <span style="color: #00ffff;">do</span>
+    sleep <span style="color: #ffa07a;">"$INTERVAL"</span>
+
+    <span style="color: #eedd82;">loadavg</span>=$(<span style="color: #fa8072;">cat /proc/loadavg | awk '{print $1 }'</span>)
+
+    cat &lt;&lt;EOF &gt; <span style="color: #ffa07a;">"$METRICS_FILE"</span>
+<span style="color: #ffff00; font-weight: bold;">    # HELP loadavg Load Average</span>
+<span style="color: #ffff00; font-weight: bold;">    # TYPE loadavg gauge</span>
+<span style="color: #ffff00; font-weight: bold;">    loadavg $loadavg</span>
+<span style="color: #ffff00; font-weight: bold;">    EOF</span>
+<span style="color: #00ffff;">done</span>
+</pre>
+</div>
+
+<p>
+And update the <code>prometheus.yml</code> file:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yaml">scrape_configs:
+  ...
+  - job_name: 'load-average'
+    scrape_interval: 60s
+    static_configs:
+      - targets: ['localhost:9200']
+</pre>
+</div>
+
+
+<p>
+This script runs the tcp server in the background and updates the
+served content each <code>$INTERVAL</code> seconds and It exposes the <code>loadavg</code>
+metric with the value of the average system load in the last
+minute. You can now add a new dashboard in grafana from the dashboard
+section and clicking "New &gt; New Dashboard &gt; Add Visualization". You
+select prometheus as a source and you add your custom metric and clock
+"apply".
+</p>
+
+
+<div id="org3a409ab" class="figure">
+<p><img src="../../ephemeris/images/grafana-custom.png" alt="grafana-custom.png" width="600px" align="center" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Custom dashboard</p>
+</div>
+
+<p>
+You can create the http server in any other way, maybe integrate
+It with the application you have been working on, and so on.
+</p>
 
 
 <hr />
