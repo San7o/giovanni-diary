@@ -191,7 +191,7 @@ average metric for prometheus.
 
   set -e
 
-  INTERVAL=60  # seconds
+  INTERVAL=5  # seconds
   METRICS_FILE="/tmp/power_metrics.prom"
   PORT=9200
   touch $METRICS_FILE
@@ -219,7 +219,7 @@ And update the =prometheus.yml= file:
 scrape_configs:
   ...
   - job_name: 'load-average'
-    scrape_interval: 60s
+    scrape_interval: 5s
     static_configs:
       - targets: ['localhost:9200']
 #+end_src

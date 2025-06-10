@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="notes.html">Notes</a> &gt;
+</p>
+
+<div id="outline-container-orgdf18584" class="outline-2">
+<h2 id="orgdf18584">The Lagrange dual function</h2>
+<div class="outline-text-2" id="text-orgdf18584">
+<p>
+In this post we will delve into the realm of optimization and in
+particular we will look at the Lagrange dual function. I will be
+using the book "Convex Optimization" by Stephen Boyd and Lieven
+Vandenberghe as my reference.
+</p>
+</div>
+
+<div id="outline-container-orgbd82d05" class="outline-3">
+<h3 id="orgbd82d05">Index</h3>
+<div class="outline-text-3" id="text-orgbd82d05">
+<ul class="org-ul">
+<li>Optimization problems</li>
+<li>The Lagrangian</li>
+<li>The dual problem</li>
+<li>Convex optimization problems</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2ab9340" class="outline-3">
+<h3 id="org2ab9340">Optimization problems</h3>
+<div class="outline-text-3" id="text-org2ab9340">
+<p>
+A mathematical optimization problem, or just optimization problem, has
+the form:
+</p>
+
+<p>
+\[minimize\ f_0(x)\]
+</p>
+
+<p>
+subject to:
+</p>
+
+<p>
+\[f_i(x)\le b_i,\ i=1, ..., m\]
+\[h_i(x) = 0,\ i=1, ..., p\]
+</p>
+
+<p>
+Here the vector \(x=(x_1, ..., x_n)\) is the optimization variable of
+the problem, the function \(f_0: \mathbb{R}^n \rightarrow \mathbb{R}\)
+is the objective function, the functions \(f_i, h_i: \mathbb{R}^n \rightarrow
+\mathbb{R},\ i=1, ..., m\) are the constraint functions, and the
+constants \(b_i, ..., b_m\) are the limits, or bounds, of the
+constraints. A vector \(x*\) is called optimal, or a solution of the
+problem, if It has the smallest objective value among all vectors that
+satisfy the constraints.
+</p>
+
+<p>
+The optimal value \(x*\) of the above problem, also referred to as \(p*\),
+is defined as:
+</p>
+
+<p>
+\[x* = inf\{ f_0(x) | f_i(x) \le 0,\ i=1, ..., m,\ h_i(x)=0,\ i=1,
+..., p \}\]
+</p>
+
+<p>
+The optimal value for a maximization problem would be the greater
+value instead.
+</p>
+
+<p>
+The types of optimization problems can be divided into:
+</p>
+
+<ul class="org-ul">
+<li><b>linear programming</b> where the objective and all constraint
+functions are linear meaning they satisfy the equality \(f_i(\alpha
+  x+ \beta y) = \alpha f(x) + \beta f(y)\) for all \(x, y \in
+  \mathbb{R}^n\) and all \(\alpha, \beta \in \mathbb{R}\). There is no
+simple analytical formula for the solution of a linear program, but
+there are a variety of very effective methods including Dantzig's
+simplex method and interior-point methods.</li>
+
+<li><b>convex optimization</b> where the objective and constraint functions
+are convex meaning they satisfy the equation \(f_i(\alpha x+ \beta y)
+  \le \alpha f(x) + \beta f(y)\) for all \(x, y \in \mathbb{R}^n\) and
+all \(\alpha , \beta \in \mathbb{R},\ \alpha + \beta = 1, \alpha \ge
+  0, \beta \ge 0\). We say a function \(f\) is <b>concave</b> if \(-f\) is
+convex. If just the objective function is convex but not the
+constraints, the problem is called <b>quasiconvex</b>. Similar to linear
+programming, in general there is no analytical formula for solving
+these problems, but there are effective methods to do so like
+interior-point methods. Fortunately, those are quite efficient for
+computers and we are able to solve them quickly.</li>
+
+<li><b>non linear optimization</b> for problems with non linear objective or
+constraints which further divides into <b>local</b> optimization (finding
+a local best solution) or <b>global</b> optimization which is usually
+slower in terms of computation time. There is no general efficient
+solution.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgca286a3" class="outline-3">
+<h3 id="orgca286a3">The Lagrangian</h3>
+<div class="outline-text-3" id="text-orgca286a3">
+<p>
+Consider a minimization problem as defined above, we assume the domain
+\(D=\prod_{i=1}^m dom(f_i) \cap \prod_{i=1}^p dom(h_i)\) is non empty
+and denote the optimal value by \(p*\).
+</p>
+
+<p>
+The idea is to account for the constraints by augmenting the objective
+function with a weighted sum of the constraints. We define the
+<b>Lagrangian</b> \(L:\ \mathbb{R}^n \times \mathbb{R}^m \times \mathbb{R}^p
+\rightarrow \mathbb{R}\) as:
+</p>
+
+<p>
+\[L(x, \lambda, \nu) = f_0(x) + \sum_{i=1}^m \lambda_i f_i(x) +
+\sum_{i=1}^p \nu_i h_i(x)\]
+</p>
+
+<p>
+We refer to \(\lambda_i\) as the <b>Lagrange multiplier</b> associated with the
+i-th inequality constraint \(f_i\le 0\) and \(\nu_i\) as the Lagrange
+multiplier associated with the i-th equality constraint \(h_i(x)=0\). The
+vectors \(\lambda\) and \(\nu\) are called the dual variables or Lagrange
+multiplier vectors associated with the problem.
+</p>
+
+<p>
+We define the <b>Lagrange dual function</b> \(g: \mathbb{R}^m \times
+\mathbb{R}^p \rightarrow \mathbb{R}\) as the minimum value of the
+Lagrangian over \(x\) associated to the previous problem: for \(\lambda
+\in \mathbb{R}^n,\ \nu \in \mathbb{R}^p\),
+</p>
+
+<p>
+\[g(\lambda , \nu) = inf_{x\in D} L(x, \lambda , \nu ) = inf_{x\in
+D}(f_0(x) + \sum_{i=1}^m \lambda_i f_i(x) + \sum_{i=1}^p \nu_i
+h_i(x))\]
+</p>
+
+<p>
+It is easy to see that \(g(\lambda , \nu)\) is the lower bound of the
+optimal value \(p*\), in fact the sum of \(f_i(x)\) is negative and the
+sum of \(h_i(x)\) is zero for valid solutions, hence we are subtracting
+from \(f_0(x)\) and we are looking for the vectors \(\lambda\) and \(\nu\)
+that give the smaller valid value (or the greater subtraction), which
+is the lower bound.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3f0e708" class="outline-3">
+<h3 id="org3f0e708">The dual problem</h3>
+<div class="outline-text-3" id="text-org3f0e708">
+<p>
+We showed that \(g(\lambda , \nu)\) is the lower bound of the optimal
+value \(p*\). But to find the optimal value we need to find the highest
+lower bound. Hence, we need to maximize the dual function, meaning we need
+to solve the problem:
+</p>
+
+<p>
+\[maximize g(\lambda , \nu)\]
+</p>
+
+<p>
+subject to:
+</p>
+
+<p>
+\[\lambda \ge 0\]
+</p>
+
+<p>
+This problem is called the Lagrange dual problem associated with the
+original minimization problem. We refer to \((\lambda *, \nu *)\) as
+dual optimal or optimal Lagrange multipliers if they are optimal for
+the problem.
+</p>
+
+<p>
+The Lagrange dual problem is a <b>convex optimization problem</b>, since
+the objective to be maximized is concave (because "the dual function
+is the point-wise infium of a family of affine functions", gl) and the
+constraint is convex (indeed the constraint \(f(x) < \lambda_i\) has
+function \(f(x)=0\) which satisfies the definition of convex).  This is
+always the case whether or not the original problem (sometimes referred
+to as primal problem) is convex.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfb62354" class="outline-3">
+<h3 id="orgfb62354">Convex optimization problems</h3>
+<div class="outline-text-3" id="text-orgfb62354">
+<p>
+Let's now consider convex optimization problems. A fundamental
+property of convex optimization problems is that any locally optimal
+point is also globally optimal, this can be proven my contradiction.
+</p>
+
+<p>
+The convex optimization problem is called a quadratic program if the
+objective function is convex and quadratic, and the constraint
+functions are affine (linear). A quadratic program can be expressed in
+the form:
+</p>
+
+<p>
+\[minimize\ \frac{1}{2}x^TPx + q^Tx+r\]
+</p>
+
+<p>
+subject to:
+</p>
+
+<p>
+\[Gx \le h\]
+\[Ax=b\]
+</p>
+
+<p>
+where \(P\) is a symmetric positive matrix where \(x^TPx\) is always
+positive.
+</p>
+
+<p>
+There are many techniques to solve these kind of problems. If the
+problem is unconstrained, you can use backtracking (move in steps and
+reduce the step size incrementally), <a href="ml/06-gradient-descent.html">gradient descent</a>, steepest
+descent or newton's method. If It is also very simple, you can
+calculate the first and second derivatives and equal them to 0. In
+equality constrained problems you can use more sophisticated versions
+of the Newton step or using barriers.  In general, you can use the
+interior-point method.
+</p>
+
+<p>
+Explaining those falls outside of the scope of this blog, you can
+dig deeper if you want. I think gradient descent is the easier to
+understand and you can find my notes <a href="ml/06-gradient-descent.html">here</a>.
+</p>
+
+<p>
+What we talked about here is used in practice in various areas, such
+as <a href="ml/07-support-vector-machines.html">machine learning</a>.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="../programming.html">Programming</a>, <a href="../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

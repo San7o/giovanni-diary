@@ -84,6 +84,7 @@
         - [[file:programming/notes/root-a-samsung-galaxy-j5.org::*How to root a Samsung Galaxy J5 (2016)][Root a Samsung Galaxy j5]]
         - [[file:programming/notes/setting-up-a-minecraft-server.org::*Setting up a Minecraft server][Setting up a Minecraft server]]
         - [[file:programming/notes/setting-up-an-IRC-client.org::*Setting up an IRC client][Setting up an IRC client]]
+        - [[file:programming/notes/the-lagrange-dual-function.org::*The Lagrange dual function][The Lagrange dual function]]
         - [[file:programming/notes/usb-for-apocalypse.org::*USB for the apocalypse][Usb for the apocalypse]]
       - [[file:programming/setup.org::*Setup][Setup]]
       - [[file:programming/unix.org::*UNIX][UNIX]]
