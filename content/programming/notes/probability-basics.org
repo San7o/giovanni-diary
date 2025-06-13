@@ -1,0 +1,203 @@
+#+startup: content indent
+
+[[file:../../index.org][Giovanni's Diary]] > [[file:../../subjects.org][Subjects]] > [[file:../programming.org][Programming]] > [[file:notes.org][Notes]] >
+
+* Probability Basics
+:PROPERTIES:
+:RSS: true
+:DATE: 10 2un 2025 00:00:00 GMT
+:CATEGORY: Programming
+:AUTHOR: Giovanni Santini
+:LINK: https://giovanni-diary.netlify.app/programming/probability-basics.html
+:END:
+#+INDEX: Giovanni's Diary!Programming!Notes!Probability Basics
+
+In this document I will summarize the core ideas of probability
+theory.
+
+** Basic Definitions
+
+We define:
+
+- $\Omega$ as the sample space, It is composed of independent events
+- $A\subset 2^{\Omega}$ is a subset of the sample space of a problem
+- $a\in A$ is an event
+
+** Probability Function
+
+A function $P$ is a probability function if:
+
+- $P$ is non negative: $P(A)\ge 0\ \forall A\in \Omega$
+- $P$ is normalized: $P(\Omega)=1$
+- $P$ is $\sigma$ -additive: if $A_i \cap A_j \ne \emptyset,\ A\in \Omega$ then  $P(\cup_i A_i)=\sum_i P(A_i)$
+
+  From set theory, you can demonstrate that the following holds:
+
+$$P(A\cup B) = P(A) + P(B) - P(A\cap B)$$
+
+** Bayes Theorem:
+
+Bayes theorem is a foundamental theorem that correlates the probabilty
+of variables given another variable. First, we define $P(A|H)$ as the
+probability of A given H, and we can calculate this as:
+
+  $$P(A|H)=\frac{P(A\cap H)}{P(H)},\ P(H)>0$$
+
+The Bayes theorem states:
+  
+  $$P(A_i|B)=\frac{P(B|A_i)P(A_i)}{\sum_j P(B|A_j)P(A_j)}=\frac{P(B|A_i)P(A_i)}{P(B)}$$
+
+** Stochastic Independence
+
+Events $A\in \Omega$ are said to be independent if:
+
+$$P(A_{i1} \cap A_{i2} \cap ... \cap A_{ik}) = \prod_{j=1}^k P(A_{ij}) = P(A_{i1})\cdot P(A_{i2})\cdot ...\cdot P(A_{ik})$$
+
+The same applies to bivaraite functions:
+
+$$P_{X, Y}(x, y) = P_X(x)\cdot P_Y(y),\ \forall (x, y)\in R_x \times R_y$$
+
+moreover:
+
+$$P_{X|Y}(x|y) = P_X(x)$$
+$$P_{Y|X}(y|x) = P_Y(y)$$
+
+** Distribution Function
+
+A function $F$ is a probability distribution function if:
+
+- $F$ never decreases
+- $F$ is right-continuous
+- $F$ always has a left-limit
+- $\lim_{x\to - \infty} f(x)=0$
+- $\lim_{x\to\infty}f(x)=1$
+
+  Then $P((a, b])=^{(discrete)}F(b)-F(a^-) =^{(continuous)} \int_a^b f(x)dx$
+
+Where $f(x)$ is called density when if $F\in C^1$ in the continuous
+formulation.
+
+** Random Variable
+
+Random variables are a mathematical formalization used to model
+quantities which depend on random events, It lets us quantify
+random events so that we can make probability calculations.
+
+More formally, a random variable is a function that maps event in
+some sample space $\Omega$ to a set of outcomes in measurable space $E$,
+which is often $\mathbb{R}$.
+
+$$X:\Omega \to E$$
+
+The probability that $X$ takes on a value in a measurable set
+$S\subseteq E$ is written as
+
+$$P(X\in S) = P(\{ \omega \in \Omega \ |\ X(\omega)\in S \})$$
+
+** Notable Random Variables
+
+Some random variables appear more than others, so a few of them
+are worthy of their name. You will see those everywhere in nature,
+economics, populations, and more.
+
+Bernoulli:
+
+$$X(\omega)=\{0, 1\}$$
+
+Rademacher:
+
+$$Y(\omega)=\{ -1, 1 \}$$
+
+Binomial $X\sim Bin(n, p)$:
+
+$$P_x(J)=\{ \binom{n}{k}p^J(1-p)^{n-J},\ j=1...n\ |\ 0\ otherwise \}$$
+
+Poissont $X\sim Pois(\lambda)$:
+
+$$P_x\{\frac{\lambda^xe^{-\lambda}}{x!}, n\in \mathbb{N}\cup \{ 0 \}\ |\ 0\ otherwise\}$$
+
+Geometric:
+
+$$P(y)=\{ p(1-p)^{y-1},\ y\in \mathbb{N}\ |\ 0\ otherwise \}$$
+
+Uniform $X\sim Unif[a, b]$:
+
+$$f_x(x)=\{ \frac{1}{b-a},\ x\in [a, b]\ |\ 0\ otherwise \}$$
+
+Normal (Gaussian) $X\sim N(\mu , \sigma^2)$:
+
+$$f_x(x) = \frac{1}{\sqrt{2\pi \sigma^2}}e^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}}$$
+
+Exponential $X\sim Exp(\lambda)$:
+
+$$f_x(x)=\lambda e^{\lambda x}\mathbb{1}(x>0)$$
+
+** Expected Value
+
+We define the expected value in a discrete space as:
+
+$$\mathbb{E}(x) = \sum_{x\in R_x} xp_x(x)$$
+
+and in the continuous:
+
+$$\mathbb{E}(x)=\int_{-\infty}^{\infty} xf_x(x)dx $$
+
+The expected value is a linear function:
+
+$$E(aX+b) = a\mathbb{E}(x)+b$$
+$$E(g(x))=\sum_{x\in R_x} g(x)p_x(x)$$
+
+Known formulas for notable random variables:
+
+- Bernoulli: $\mathbb{E}(x)=p$
+- Binomial: $\mathbb{E}(x)=np$
+- Geometric: $\mathbb{E}(x)= \frac{1}{p}-1$
+- Normal: $\mathbb{E}(x)=\mu$
+- Exponential: $\mathbb{E}(x)=\frac{1}{\lambda}$
+- Poisson: $\mathbb{E}(x)=\lambda$
+
+** Variance
+
+We define variance as:
+
+$$\mathbb{V}ar(x)=\mathbb{E}(x^2)-\mathbb{E}(x)^2 = \mathbb{E}[(x-\mathbb{E}[x])^2]$$
+
+Moreover:
+
+$$\mathbb{V}ar(x)=\mathbb{E}(\mathbb{V}ar(x|y)) + \mathbb{V}ar(\mathbb{E}(x|y))$$
+
+** Covariance
+
+We define the covariance as:
+
+$$\mathbb{C}ov(x, y)=\mathbb{E}((x-\mathbb{E}(x))(y-\mathbb{E}(y)))=\mathbb{E}(XY)-\mathbb{E}(x)\mathbb{E}(y)$$
+
+** Standardization
+
+$$z=g(x)=\frac{x-\mathbb{E}(x)}{\sqrt{\mathbb{V}ar(x)}}$$
+
+After this transformation:
+
+- $\mathbb{E}(z)=0$
+- $\mathbb{V}ar(z)=1$
+
+The opposite can be achieved:
+
+$$x=\sigma z + \mu$$
+
+** Markov Inequality
+
+Let $Y$ be a random variable non negative, then $\forall a>0$:
+
+$$P(Y\ge a)\le \frac{\mathbb{E}(y)}{a}$$
+
+** Chebyshev Inequality
+
+Let $Y$ be a random variable, $\mu = \mathbb{E}(y)$,
+$\sigma^2=\mathbb{V}ar(y)$, then $\forall \epsilon > 0$:
+
+$$P(|Y-\mu| \ge \epsilon)\le \frac{\sigma^2}{\epsilon^2}$$
+
+-----
+
+Travel: [[file:../programming.org][Programming]], [[file:../../theindex.org][Index]]
