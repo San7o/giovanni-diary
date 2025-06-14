@@ -51,19 +51,19 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org2674d0b" class="outline-2">
-<h2 id="org2674d0b">Deep Generative Models</h2>
-<div class="outline-text-2" id="text-org2674d0b">
+<div id="outline-container-org53b9a73" class="outline-2">
+<h2 id="org53b9a73">Deep Generative Models</h2>
+<div class="outline-text-2" id="text-org53b9a73">
 </div>
 
 
-<div id="outline-container-org40639df" class="outline-3">
-<h3 id="org40639df">Definitions</h3>
-<div class="outline-text-3" id="text-org40639df">
+<div id="outline-container-org10840d4" class="outline-3">
+<h3 id="org10840d4">Definitions</h3>
+<div class="outline-text-3" id="text-org10840d4">
 </div>
-<div id="outline-container-orgfd2d695" class="outline-4">
-<h4 id="orgfd2d695">Generative Models</h4>
-<div class="outline-text-4" id="text-orgfd2d695">
+<div id="outline-container-org3525eee" class="outline-4">
+<h4 id="org3525eee">Generative Models</h4>
+<div class="outline-text-4" id="text-org3525eee">
 <p>
 <b><b>Generative models</b></b> are statistical models of the data distribution
 \(p_X\) or \(p_{XY}\) depending on the availability of target data.
@@ -71,9 +71,9 @@
 </div>
 </div>
 
-<div id="outline-container-org16926de" class="outline-4">
-<h4 id="org16926de">Discriminative models</h4>
-<div class="outline-text-4" id="text-org16926de">
+<div id="outline-container-orgefdeaea" class="outline-4">
+<h4 id="orgefdeaea">Discriminative models</h4>
+<div class="outline-text-4" id="text-orgefdeaea">
 <p>
 <b><b>Discriminative models</b></b> are statistical models of the conditional
 distribution \(p_{Y|X}\).
@@ -91,9 +91,9 @@ model via Bayes rule but not viceversa.
 </div>
 </div>
 
-<div id="outline-container-org3e38307" class="outline-3">
-<h3 id="org3e38307">Density Estimation</h3>
-<div class="outline-text-3" id="text-org3e38307">
+<div id="outline-container-org1a6bf8e" class="outline-3">
+<h3 id="org1a6bf8e">Density Estimation</h3>
+<div class="outline-text-3" id="text-org1a6bf8e">
 <p>
 Explicit problem: Find a probability distribution \(f\in \Delta (Z)\)
 that fits the data, where \(z\in Z\) is sampled from an unknown data
@@ -128,9 +128,9 @@ hypothesis \(q*\in H\) that best fits the data distributed according to
 </div>
 </div>
 
-<div id="outline-container-org99243d8" class="outline-3">
-<h3 id="org99243d8">Variational AutoEncoders (VAE)</h3>
-<div class="outline-text-3" id="text-org99243d8">
+<div id="outline-container-org58f6d17" class="outline-3">
+<h3 id="org58f6d17">Variational AutoEncoders (VAE)</h3>
+<div class="outline-text-3" id="text-org58f6d17">
 <p>
 Autoencoders are a way of decomposing high-dimensional data into a
 lower dimensional representation. A decoder reverses this and the
@@ -182,9 +182,9 @@ decoder do minimize the difference.
 </p>
 </div>
 
-<div id="outline-container-orgee80415" class="outline-4">
-<h4 id="orgee80415">Conditional VAE</h4>
-<div class="outline-text-4" id="text-orgee80415">
+<div id="outline-container-org71a7d9e" class="outline-4">
+<h4 id="org71a7d9e">Conditional VAE</h4>
+<div class="outline-text-4" id="text-org71a7d9e">
 <p>
 Assume we have side information \(y\in Y\) (e.g. digit labels,
 attributes, etc) and we want to generate new data conditioned on the
@@ -209,9 +209,9 @@ capacity, and blurry output data.
 </div>
 </div>
 
-<div id="outline-container-orgabc93b3" class="outline-4">
-<h4 id="orgabc93b3">VQ-VAE</h4>
-<div class="outline-text-4" id="text-orgabc93b3">
+<div id="outline-container-org3ef2593" class="outline-4">
+<h4 id="org3ef2593">VQ-VAE</h4>
+<div class="outline-text-4" id="text-org3ef2593">
 <p>
 VQ-VAE-2 is a image synthesis model based on Variational
 Autoencoders. It produces images that are high quality comparable to
@@ -221,9 +221,9 @@ big HANs models.
 </div>
 </div>
 
-<div id="outline-container-org650e328" class="outline-3">
-<h3 id="org650e328">Generative Adversial Networks (GAN)</h3>
-<div class="outline-text-3" id="text-org650e328">
+<div id="outline-container-orgc673d4d" class="outline-3">
+<h3 id="orgc673d4d">Generative Adversial Networks (GAN)</h3>
+<div class="outline-text-3" id="text-orgc673d4d">
 <p>
 GAN models are composed by two "adversarial" submodels: a generator
 and a discriminator. The term adversarial means that the two submodels
