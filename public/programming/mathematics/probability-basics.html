@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="mathematics.html">Mathematics</a> &gt; <a href="notes.html">Notes</a> &gt;
+</p>
+
+<div id="outline-container-org8d4cd25" class="outline-2">
+<h2 id="org8d4cd25">Probability Basics</h2>
+<div class="outline-text-2" id="text-org8d4cd25">
+<p>
+In this document I will summarize the core ideas of probability
+theory.
+</p>
+</div>
+
+<div id="outline-container-orge8f85e3" class="outline-3">
+<h3 id="orge8f85e3">Basic Definitions</h3>
+<div class="outline-text-3" id="text-orge8f85e3">
+<p>
+We define:
+</p>
+
+<ul class="org-ul">
+<li>\(\Omega\) as the sample space, It is composed of independent events</li>
+<li>\(A\subset 2^{\Omega}\) is a subset of the sample space of a problem</li>
+<li>\(a\in A\) is an event</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3bb6d5a" class="outline-3">
+<h3 id="org3bb6d5a">Probability Function</h3>
+<div class="outline-text-3" id="text-org3bb6d5a">
+<p>
+A function \(P\) is a probability function if:
+</p>
+
+<ul class="org-ul">
+<li>\(P\) is non negative: \(P(A)\ge 0\ \forall A\in \Omega\)</li>
+<li>\(P\) is normalized: \(P(\Omega)=1\)</li>
+<li><p>
+\(P\) is \(\sigma\) -additive: if \(A_i \cap A_j \ne \emptyset,\ A\in \Omega\) then  \(P(\cup_i A_i)=\sum_i P(A_i)\)
+</p>
+
+<p>
+From set theory, you can demonstrate that the following holds:
+</p></li>
+</ul>
+
+<p>
+\[P(A\cup B) = P(A) + P(B) - P(A\cap B)\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9f69a3f" class="outline-3">
+<h3 id="org9f69a3f">Bayes Theorem:</h3>
+<div class="outline-text-3" id="text-org9f69a3f">
+<p>
+Bayes theorem is a foundamental theorem that correlates the probabilty
+of variables given another variable. First, we define \(P(A|H)\) as the
+probability of A given H, and we can calculate this as:
+</p>
+
+<p>
+\[P(A|H)=\frac{P(A\cap H)}{P(H)},\ P(H)>0\]
+</p>
+
+<p>
+The Bayes theorem states:
+</p>
+
+<p>
+\[P(A_i|B)=\frac{P(B|A_i)P(A_i)}{\sum_j P(B|A_j)P(A_j)}=\frac{P(B|A_i)P(A_i)}{P(B)}\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd0efb0a" class="outline-3">
+<h3 id="orgd0efb0a">Stochastic Independence</h3>
+<div class="outline-text-3" id="text-orgd0efb0a">
+<p>
+Events \(A\in \Omega\) are said to be independent if:
+</p>
+
+<p>
+\[P(A_{i1} \cap A_{i2} \cap ... \cap A_{ik}) = \prod_{j=1}^k P(A_{ij}) = P(A_{i1})\cdot P(A_{i2})\cdot ...\cdot P(A_{ik})\]
+</p>
+
+<p>
+The same applies to bivaraite functions:
+</p>
+
+<p>
+\[P_{X, Y}(x, y) = P_X(x)\cdot P_Y(y),\ \forall (x, y)\in R_x \times R_y\]
+</p>
+
+<p>
+moreover:
+</p>
+
+<p>
+\[P_{X|Y}(x|y) = P_X(x)\]
+\[P_{Y|X}(y|x) = P_Y(y)\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5473315" class="outline-3">
+<h3 id="org5473315">Distribution Function</h3>
+<div class="outline-text-3" id="text-org5473315">
+<p>
+A function \(F\) is a probability distribution function if:
+</p>
+
+<ul class="org-ul">
+<li>\(F\) never decreases</li>
+<li>\(F\) is right-continuous</li>
+<li>\(F\) always has a left-limit</li>
+<li>\(\lim_{x\to - \infty} f(x)=0\)</li>
+<li><p>
+\(\lim_{x\to\infty}f(x)=1\)
+</p>
+
+<p>
+Then \(P((a, b])=^{(discrete)}F(b)-F(a^-) =^{(continuous)} \int_a^b f(x)dx\)
+</p></li>
+</ul>
+
+<p>
+Where \(f(x)\) is called density when if \(F\in C^1\) in the continuous
+formulation.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org34cfc1b" class="outline-3">
+<h3 id="org34cfc1b">Random Variable</h3>
+<div class="outline-text-3" id="text-org34cfc1b">
+<p>
+Random variables are a mathematical formalization used to model
+quantities which depend on random events, It lets us quantify
+random events so that we can make probability calculations.
+</p>
+
+<p>
+More formally, a random variable is a function that maps event in
+some sample space \(\Omega\) to a set of outcomes in measurable space \(E\),
+which is often \(\mathbb{R}\).
+</p>
+
+<p>
+\[X:\Omega \to E\]
+</p>
+
+<p>
+The probability that \(X\) takes on a value in a measurable set
+\(S\subseteq E\) is written as
+</p>
+
+<p>
+\[P(X\in S) = P(\{ \omega \in \Omega \ |\ X(\omega)\in S \})\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8fd8c5b" class="outline-3">
+<h3 id="org8fd8c5b">Notable Random Variables</h3>
+<div class="outline-text-3" id="text-org8fd8c5b">
+<p>
+Some random variables appear more than others, so a few of them
+are worthy of their name. You will see those everywhere in nature,
+economics, populations, and more.
+</p>
+
+<p>
+Bernoulli:
+</p>
+
+<p>
+\[X(\omega)=\{0, 1\}\]
+</p>
+
+<p>
+Rademacher:
+</p>
+
+<p>
+\[Y(\omega)=\{ -1, 1 \}\]
+</p>
+
+<p>
+Binomial \(X\sim Bin(n, p)\):
+</p>
+
+<p>
+\[P_x(J)=\{ \binom{n}{k}p^J(1-p)^{n-J},\ j=1...n\ |\ 0\ otherwise \}\]
+</p>
+
+<p>
+Poissont \(X\sim Pois(\lambda)\):
+</p>
+
+<p>
+\[P_x\{\frac{\lambda^xe^{-\lambda}}{x!}, n\in \mathbb{N}\cup \{ 0 \}\ |\ 0\ otherwise\}\]
+</p>
+
+<p>
+Geometric:
+</p>
+
+<p>
+\[P(y)=\{ p(1-p)^{y-1},\ y\in \mathbb{N}\ |\ 0\ otherwise \}\]
+</p>
+
+<p>
+Uniform \(X\sim Unif[a, b]\):
+</p>
+
+<p>
+\[f_x(x)=\{ \frac{1}{b-a},\ x\in [a, b]\ |\ 0\ otherwise \}\]
+</p>
+
+<p>
+Normal (Gaussian) \(X\sim N(\mu , \sigma^2)\):
+</p>
+
+<p>
+\[f_x(x) = \frac{1}{\sqrt{2\pi \sigma^2}}e^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}}\]
+</p>
+
+<p>
+Exponential \(X\sim Exp(\lambda)\):
+</p>
+
+<p>
+\[f_x(x)=\lambda e^{\lambda x}\mathbb{1}(x>0)\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc966653" class="outline-3">
+<h3 id="orgc966653">Expected Value</h3>
+<div class="outline-text-3" id="text-orgc966653">
+<p>
+We define the expected value in a discrete space as:
+</p>
+
+<p>
+\[\mathbb{E}(x) = \sum_{x\in R_x} xp_x(x)\]
+</p>
+
+<p>
+and in the continuous:
+</p>
+
+<p>
+\[\mathbb{E}(x)=\int_{-\infty}^{\infty} xf_x(x)dx \]
+</p>
+
+<p>
+The expected value is a linear function:
+</p>
+
+<p>
+\[E(aX+b) = a\mathbb{E}(x)+b\]
+\[E(g(x))=\sum_{x\in R_x} g(x)p_x(x)\]
+</p>
+
+<p>
+Known formulas for notable random variables:
+</p>
+
+<ul class="org-ul">
+<li>Bernoulli: \(\mathbb{E}(x)=p\)</li>
+<li>Binomial: \(\mathbb{E}(x)=np\)</li>
+<li>Geometric: \(\mathbb{E}(x)= \frac{1}{p}-1\)</li>
+<li>Normal: \(\mathbb{E}(x)=\mu\)</li>
+<li>Exponential: \(\mathbb{E}(x)=\frac{1}{\lambda}\)</li>
+<li>Poisson: \(\mathbb{E}(x)=\lambda\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf2d7742" class="outline-3">
+<h3 id="orgf2d7742">Variance</h3>
+<div class="outline-text-3" id="text-orgf2d7742">
+<p>
+We define variance as:
+</p>
+
+<p>
+\[\mathbb{V}ar(x)=\mathbb{E}(x^2)-\mathbb{E}(x)^2 = \mathbb{E}[(x-\mathbb{E}[x])^2]\]
+</p>
+
+<p>
+Moreover:
+</p>
+
+<p>
+\[\mathbb{V}ar(x)=\mathbb{E}(\mathbb{V}ar(x|y)) + \mathbb{V}ar(\mathbb{E}(x|y))\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0c3d153" class="outline-3">
+<h3 id="org0c3d153">Covariance</h3>
+<div class="outline-text-3" id="text-org0c3d153">
+<p>
+We define the covariance as:
+</p>
+
+<p>
+\[\mathbb{C}ov(x, y)=\mathbb{E}((x-\mathbb{E}(x))(y-\mathbb{E}(y)))=\mathbb{E}(XY)-\mathbb{E}(x)\mathbb{E}(y)\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbf046d8" class="outline-3">
+<h3 id="orgbf046d8">Standardization</h3>
+<div class="outline-text-3" id="text-orgbf046d8">
+<p>
+\[z=g(x)=\frac{x-\mathbb{E}(x)}{\sqrt{\mathbb{V}ar(x)}}\]
+</p>
+
+<p>
+After this transformation:
+</p>
+
+<ul class="org-ul">
+<li>\(\mathbb{E}(z)=0\)</li>
+<li>\(\mathbb{V}ar(z)=1\)</li>
+</ul>
+
+<p>
+The opposite can be achieved:
+</p>
+
+<p>
+\[x=\sigma z + \mu\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2cf3102" class="outline-3">
+<h3 id="org2cf3102">Markov Inequality</h3>
+<div class="outline-text-3" id="text-org2cf3102">
+<p>
+Let \(Y\) be a random variable non negative, then \(\forall a>0\):
+</p>
+
+<p>
+\[P(Y\ge a)\le \frac{\mathbb{E}(y)}{a}\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdaa6b8b" class="outline-3">
+<h3 id="orgdaa6b8b">Chebyshev Inequality</h3>
+<div class="outline-text-3" id="text-orgdaa6b8b">
+<p>
+Let \(Y\) be a random variable, \(\mu = \mathbb{E}(y)\),
+\(\sigma^2=\mathbb{V}ar(y)\), then \(\forall \epsilon > 0\):
+</p>
+
+<p>
+\[P(|Y-\mu| \ge \epsilon)\le \frac{\sigma^2}{\epsilon^2}\]
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="notes.html">Mathematics Notes</a>, <a href="../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

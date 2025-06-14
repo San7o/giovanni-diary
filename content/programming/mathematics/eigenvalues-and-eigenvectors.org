@@ -1,0 +1,54 @@
+#+startup: content indent
+
+[[file:../../index.org][Giovanni's Diary]] > [[file:../../subjects.org][Subjects]] > [[file:mathematics.org][Mathematics]] > [[file:notes.org][Notes]] >
+
+* Eigenvalues and Eigenvectors
+:PROPERTIES:
+:RSS: true
+:DATE: 10 2un 2025 00:00:00 GMT
+:CATEGORY: Programming
+:AUTHOR: Giovanni Santini
+:LINK: https://giovanni-diary.netlify.app/programming/eigenvalues-and-eigenvectors.html
+:END:
+#+INDEX: Giovanni's Diary!Mathematics!Eigenvalues and Eigenvectors
+
+Today we will look at Eigenvalues and Eigenvectors in linear
+algebra. I will use the great book "Algebra Lineare" by Marco Abate as
+my reference.
+
+Eigenvectors are an important theoretical and practical topic, they
+are is used in [[file:../notes/ml/09-unsupervised-learning.org][machine learning]] and are often used as the preferred
+axis for rotations or other transformations.
+
+** Definition
+
+Let $T: V\rightarrow V$ be an endomorphism (maps from a space to
+itself) of a vector space $V$. A vector $v_0 \ne 0$ of $V$ is an
+eigenvector of $T$ with respect to the *eigenvalue* $\lambda$ if:
+
+$$T(v_0)=\lambda v_0$$
+
+The set of *eigenvalues* is called the spectre of $T$. If $\lambda \in
+\ space(T)$ then the set:
+
+$$V_{\lambda} = \{ v\in T\ |\ T(v)=\lambda v \}$$
+
+is called *eigenspace*.
+
+Notice that from the definition follows:
+
+$$Tv_0 - \lambda v_0 = 0$$
+$$(T - \lambda I)v_0 = 0$$
+
+Therefore $(T-\lambda I)=0$ (is singular) and It's determinant
+is 0.
+
+$$det(T-\lambda I)=0$$
+
+This is very useful to compute the eigenvalues. Once you have those,
+and T, you can use them in the definition to get the eigenspace and
+the eigenvectors.
+
+-----
+
+Travel: [[file:notes.org][Mathematics Notes]], [[file:../../theindex.org][Index]]

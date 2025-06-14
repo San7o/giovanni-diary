@@ -1,0 +1,186 @@
+#+startup: content indent
+
+[[file:../../index.org][Giovanni's Diary]] > [[file:../../subjects.org][Subjects]] > [[file:mathematics.org][Mathematics]] > [[file:notes.org][Notes]] >
+
+* The Lagrange dual function
+:PROPERTIES:
+:RSS: true
+:DATE: 10 Jun 2025 00:00:00 GMT
+:CATEGORY: Programming
+:AUTHOR: Giovanni Santini
+:LINK: https://giovanni-diary.netlify.app/programming/the-lagrange-dual-function.html
+:END:
+#+INDEX: Giovanni's Diary!Mathematics!The Lagrange dual function
+
+In this post we will delve into the realm of optimization and in
+particular we will look at the Lagrange dual function. I will be
+using the book "Convex Optimization" by Stephen Boyd and Lieven
+Vandenberghe as my reference.
+
+** Index
+
+- Optimization problems
+- The Lagrangian
+- The dual problem
+- Convex optimization problems
+
+** Optimization problems
+
+A mathematical optimization problem, or just optimization problem, has
+the form:
+
+$$minimize\ f_0(x)$$
+
+subject to:
+
+$$f_i(x)\le b_i,\ i=1, ..., m$$
+$$h_i(x) = 0,\ i=1, ..., p$$
+
+Here the vector $x=(x_1, ..., x_n)$ is the optimization variable of
+the problem, the function $f_0: \mathbb{R}^n \rightarrow \mathbb{R}$
+is the objective function, the functions $f_i, h_i: \mathbb{R}^n \rightarrow
+\mathbb{R},\ i=1, ..., m$ are the constraint functions, and the
+constants $b_i, ..., b_m$ are the limits, or bounds, of the
+constraints. A vector $x*$ is called optimal, or a solution of the
+problem, if It has the smallest objective value among all vectors that
+satisfy the constraints.
+
+The optimal value $x*$ of the above problem, also referred to as $p*$,
+is defined as:
+
+$$x* = inf\{ f_0(x) | f_i(x) \le 0,\ i=1, ..., m,\ h_i(x)=0,\ i=1,
+..., p \}$$
+
+The optimal value for a maximization problem would be the greater
+value instead.
+
+The types of optimization problems can be divided into:
+
+- *linear programming* where the objective and all constraint
+  functions are linear meaning they satisfy the equality $f_i(\alpha
+  x+ \beta y) = \alpha f(x) + \beta f(y)$ for all $x, y \in
+  \mathbb{R}^n$ and all $\alpha, \beta \in \mathbb{R}$. There is no
+  simple analytical formula for the solution of a linear program, but
+  there are a variety of very effective methods including Dantzig's
+  simplex method and interior-point methods.
+
+- *convex optimization* where the objective and constraint functions
+  are convex meaning they satisfy the equation $f_i(\alpha x+ \beta y)
+  \le \alpha f(x) + \beta f(y)$ for all $x, y \in \mathbb{R}^n$ and
+  all $\alpha , \beta \in \mathbb{R},\ \alpha + \beta = 1, \alpha \ge
+  0, \beta \ge 0$. We say a function $f$ is *concave* if $-f$ is
+  convex. If just the objective function is convex but not the
+  constraints, the problem is called *quasiconvex*. Similar to linear
+  programming, in general there is no analytical formula for solving
+  these problems, but there are effective methods to do so like
+  interior-point methods. Fortunately, those are quite efficient for
+  computers and we are able to solve them quickly.
+
+- *non linear optimization* for problems with non linear objective or
+  constraints which further divides into *local* optimization (finding
+  a local best solution) or *global* optimization which is usually
+  slower in terms of computation time. There is no general efficient
+  solution.
+
+** The Lagrangian
+
+Consider a minimization problem as defined above, we assume the domain
+$D=\prod_{i=1}^m dom(f_i) \cap \prod_{i=1}^p dom(h_i)$ is non empty
+and denote the optimal value by $p*$.
+
+The idea is to account for the constraints by augmenting the objective
+function with a weighted sum of the constraints. We define the
+*Lagrangian* $L:\ \mathbb{R}^n \times \mathbb{R}^m \times \mathbb{R}^p
+\rightarrow \mathbb{R}$ as:
+
+$$L(x, \lambda, \nu) = f_0(x) + \sum_{i=1}^m \lambda_i f_i(x) +
+\sum_{i=1}^p \nu_i h_i(x)$$
+
+We refer to $\lambda_i$ as the *Lagrange multiplier* associated with the
+i-th inequality constraint $f_i\le 0$ and $\nu_i$ as the Lagrange
+multiplier associated with the i-th equality constraint $h_i(x)=0$. The
+vectors $\lambda$ and $\nu$ are called the dual variables or Lagrange
+multiplier vectors associated with the problem.
+
+We define the *Lagrange dual function* $g: \mathbb{R}^m \times
+\mathbb{R}^p \rightarrow \mathbb{R}$ as the minimum value of the
+Lagrangian over $x$ associated to the previous problem: for $\lambda
+\in \mathbb{R}^n,\ \nu \in \mathbb{R}^p$,
+
+$$g(\lambda , \nu) = inf_{x\in D} L(x, \lambda , \nu ) = inf_{x\in
+D}(f_0(x) + \sum_{i=1}^m \lambda_i f_i(x) + \sum_{i=1}^p \nu_i
+h_i(x))$$
+
+It is easy to see that $g(\lambda , \nu)$ is the lower bound of the
+optimal value $p*$, in fact the sum of $f_i(x)$ is negative and the
+sum of $h_i(x)$ is zero for valid solutions, hence we are subtracting
+from $f_0(x)$ and we are looking for the vectors $\lambda$ and $\nu$
+that give the smaller valid value (or the greater subtraction), which
+is the lower bound.
+
+** The dual problem
+
+We showed that $g(\lambda , \nu)$ is the lower bound of the optimal
+value $p*$. But to find the optimal value we need to find the highest
+lower bound. Hence, we need to maximize the dual function, meaning we need
+to solve the problem:
+
+$$maximize g(\lambda , \nu)$$
+
+subject to:
+
+$$\lambda \ge 0$$
+
+This problem is called the Lagrange dual problem associated with the
+original minimization problem. We refer to $(\lambda *, \nu *)$ as
+dual optimal or optimal Lagrange multipliers if they are optimal for
+the problem.
+
+The Lagrange dual problem is a *convex optimization problem*, since
+the objective to be maximized is concave (because "the dual function
+is the point-wise infium of a family of affine functions", gl) and the
+constraint is convex (indeed the constraint $f(x) < \lambda_i$ has
+function $f(x)=0$ which satisfies the definition of convex).  This is
+always the case whether or not the original problem (sometimes referred
+to as primal problem) is convex.
+
+** Convex optimization problems
+
+Let's now consider convex optimization problems. A fundamental
+property of convex optimization problems is that any locally optimal
+point is also globally optimal, this can be proven my contradiction.
+
+The convex optimization problem is called a quadratic program if the
+objective function is convex and quadratic, and the constraint
+functions are affine (linear). A quadratic program can be expressed in
+the form:
+
+$$minimize\ \frac{1}{2}x^TPx + q^Tx+r$$
+
+subject to:
+
+$$Gx \le h$$
+$$Ax=b$$
+
+where $P$ is a symmetric positive matrix where $x^TPx$ is always
+positive.
+
+There are many techniques to solve these kind of problems. If the
+problem is unconstrained, you can use backtracking (move in steps and
+reduce the step size incrementally), [[file:../notes/ml/06-gradient-descent.org][gradient descent]], steepest
+descent or newton's method. If It is also very simple, you can
+calculate the first and second derivatives and equal them to 0. In
+equality constrained problems you can use more sophisticated versions
+of the Newton step or using barriers.  In general, you can use the
+interior-point method.
+
+Explaining those falls outside of the scope of this blog, you can
+dig deeper if you want. I think gradient descent is the easier to
+understand and you can find my notes [[file:../notes/ml/06-gradient-descent.org][here]].
+
+What we talked about here is used in practice in various areas, such
+as [[file:../notes/ml/07-support-vector-machines.org][machine learning]].
+
+-----
+
+Travel: [[file:notes.org][Mathematics Notes]], [[file:../../theindex.org][Index]]
