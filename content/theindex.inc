@@ -26,6 +26,7 @@
       - [[file:ephemeris/2025-05-26.org::*2025-05-26 - Two feelings][2025-05-26 - Two feelings]]
       - [[file:ephemeris/2025-05-28.org::*2025-05-28 - Lucky and Unlucky][2025-05-28 - Lucky and Unlucky]]
       - [[file:ephemeris/2025-06-05.org::*2025-06-05 - Last University lesson][2025-06-05 - Last University lecture]]
+      - [[file:ephemeris/2025-06-21.org::*2025-06-21 - The world changes, and so do you][2025-06-21 - The world changes, and so do you]]
       - [[file:ephemeris/entries.org::*Ephemeris Entries][Entries]]
     - [[file:feeds.org::*RSS Feed][Feeds]]
       - [[file:rss-feed-guide.org::*RSS Guide][RSS Guide]]

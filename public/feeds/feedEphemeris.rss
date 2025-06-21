@@ -334,7 +334,7 @@ added colors with gimp. The result is not that great but It's a start.
 </p>
 
 
-<div id="orgde5cde3" class="figure">
+<div id="orgfc5afd6" class="figure">
 <p><img src="./images/jwst-ngc-3132.jpeg" alt="jwst-ngc-3132.jpeg" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>NGC 3132 Nebula</p>
@@ -410,7 +410,7 @@ that 3 hours long so It's a lot to enjoy.
 </p>
 
 
-<div id="org7e86005" class="figure">
+<div id="org863c2c6" class="figure">
 <p><img src="./images/library-window.jpg" alt="library-window.jpg" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>At the historical museum's library</p>
@@ -428,7 +428,7 @@ play It if I had time and a decent computer.
 </p>
 
 
-<div id="org08505e7" class="figure">
+<div id="org550814c" class="figure">
 <p><img src="./images/choir.jpg" alt="choir.jpg" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Choir singing</p>
@@ -710,14 +710,14 @@ famous Latex's "\mathbb" to denote number sets.
 </p>
 
 
-<div id="org8aeba8f" class="figure">
+<div id="orgbb6a2d3" class="figure">
 <p><img src="./images/logo-old.png" alt="logo-old.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Old favicon</p>
 </div>
 
 
-<div id="org185a445" class="figure">
+<div id="orgd110532" class="figure">
 <p><img src="./images/logo-new.png" alt="logo-new.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 2: </span>New favicon</p>
@@ -1033,19 +1033,19 @@ like this:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-yaml"><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">cloud-config</span>
-<span style="color: #eedd82;">users</span>:
-    - <span style="color: #eedd82;">name</span>: fedora
-      <span style="color: #eedd82;">groups</span>: user,wheel
-      <span style="color: #eedd82;">hashed_passwd</span>: ...
-      <span style="color: #eedd82;">lock_passwd</span>: <span style="color: #7fffd4;">false</span>
-      <span style="color: #eedd82;">sudo</span>: ALL=(ALL) NOPASSWD:ALL
-<span style="color: #eedd82;">write_files</span>:
-  <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Enable password authentication in ssh</span>
-  - <span style="color: #eedd82;">path</span>: /etc/ssh/sshd_config.d/20-enable-passwords.conf
-    <span style="color: #eedd82;">content</span>: |
-      <span style="color: #ffa07a;">PasswordAuthentication yes</span>
-<span style="color: #eedd82;">runcmd</span>:
+<pre class="src src-yaml">#cloud-config
+users:
+    - name: fedora
+      groups: user,wheel
+      hashed_passwd: ...
+      lock_passwd: false
+      sudo: ALL=(ALL) NOPASSWD:ALL
+write_files:
+  # Enable password authentication in ssh
+  - path: /etc/ssh/sshd_config.d/20-enable-passwords.conf
+    content: |
+      PasswordAuthentication yes
+runcmd:
   - systemctl restart NetworkManager
   - systemctl restart sshd
   - nmcli connection up static-ens3
@@ -1190,7 +1190,7 @@ feel demotivated from my environment.
 The first emotion is the feeling of unfitness. Yesterday I spent
 many hours rewriting several pages of this diary. I was in the mood
 of writing, I was focused and It felt really good, I guess a little
-writer is growing inside me. I can't help but stop writing honestly.
+writer is growing inside me. I can't help but write honestly.
 </p>
 
 <p>
@@ -1265,6 +1265,193 @@ recognize that I am vulnerable and emotional too.
 
 <p>
 &#x2013; Giovanni
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="ephemeris.html">Ephemeris</a>, <a href="../theindex.html">Index</a> 
+</p>
+]]></description>
+</item>
+<item>
+<title>2025-05-28 - Lucky and Unlucky</title>
+<link>https://giovanni-diary.netlify.app/ephemeris/2025-05-28.html</link>
+<author>Giovanni Santini</author>
+<pubDate>28 May 2025 00:00 GMT</pubDate>
+<description><![CDATA[<p>
+Hi,
+</p>
+
+<p>
+today was both the unluckiest and luckiest day that I have memory
+of. Let me explain why.
+</p>
+
+<p>
+This afternoon I had to present a demo of what I have been working on
+for my internship. Both a researcher from a company and my professor
+were present, It was the opportunity to show my work to my supervisors
+so It was a big moment.
+</p>
+
+<p>
+In the morning I went to university to follow lessons, then went back
+home and started preparing some slides. I setup the the local
+kubernetes cluster and the operator, everything was compiled,
+everything was working. Suddenly my laptop turns off, with no
+sign of life, 30 minutes before the presentation.
+</p>
+
+<p>
+Yes, this happened. All my development setup, the cluster, how could
+I demo the program without a computer? You don't.
+</p>
+
+<p>
+After 0.3 nanoseconds I booted up my desktop PC and began downloading
+all the dependencies, cloning all my repositories, logging in on all
+my accounts and finishing my slides. I had at least 4 terminals all
+running different things in parallel, and I was switching between them
+faster than I have ever done. I downloaded Kind and go, setup the
+local cluster, deployed the operator and tested it. And somehow&#x2026;
+everything worked! The internet connection, the fedora package
+manager, all the dependencies were working well without additional
+troubleshooting, the local cluster was online and ready, and my
+application was working as expected (obviously). I finished installing
+the last dependency the moment I joined the zoom call, that was
+incredibly close.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="ephemeris.html">Ephemeris</a>, <a href="../theindex.html">Index</a> 
+</p>
+]]></description>
+</item>
+<item>
+<title>2025-06-05 - Last University lesson</title>
+<link>https://giovanni-diary.netlify.app/ephemeris/2025-06-05.html</link>
+<author>Giovanni Santini</author>
+<pubDate>05 Jun 2025 00:00 GMT</pubDate>
+<description><![CDATA[<p>
+Yesterday I had my last class lecture of my bachelor degree in
+computer science. This concludes a period of three years where I
+dedicated all my time to studying and mastering my crafts.  From my
+part, I rarely skipped a lesson. In fact, I count less than 10 lessons
+I did not attend for various reasons often not in my control, I have
+always showed up even when I did not feel like going and that kept me
+motivated to push through all my exams. Now I will take some time to
+reflect on what has been, all while studying for my last three exams.
+</p>
+
+<p>
+What I am most grateful for is being able to dedicate to my studies
+fully, which is really a privilege and It won't happen again, I am on
+my own now. In three years I rarely "unfocused" and when that happens
+I would feel lost, thankfully I could dedicate my entire wake time and
+my energies to programming and studying programming and open source
+projects which is so important for me.
+</p>
+
+<p>
+Did everything go smoothly? Was everything the best It could have
+been? Absolutely no, yet I stopped thinking about what could have
+been and instead I learned to appreciate what I have now. Probably
+about 80% to 90% of my time getting this piece of paper of a degree
+was not worth It, I had so many terrible exams where I learned
+nothing, yet I did so much more outside university like a graphics
+engine, an operating system, I hacked with the Linux kernel for
+hundreds of hours and I have developed some expertise through these
+projects.
+</p>
+
+<p>
+If you don't know, Italian universities are very theoretical. I didn't
+do many projects, anyone could get this degree with very little
+knowledge of programming. Exams are hard, sometime unreasonably hard
+depending on the professor, and the future is really uncertain for
+students unless you emigrate to other nations. Such is the situation,
+or at least how I am perceiving this right now. You see me complaining
+now, however I rarely rant on things; I prefer getting things done
+without much talk.
+</p>
+
+<p>
+Even if I have so much to learn, I now know a little bit more than
+before. It never feels enough, but It is progress and I trust the
+process.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="ephemeris.html">Ephemeris</a>, <a href="../theindex.html">Index</a> 
+</p>
+]]></description>
+</item>
+<item>
+<title>2025-06-21 - The world changes, and so do you</title>
+<link>https://giovanni-diary.netlify.app/ephemeris/2025-06-21.html</link>
+<author>Giovanni Santini</author>
+<pubDate>21 Jun 2025 00:00 GMT</pubDate>
+<description><![CDATA[<p>
+I was taking a walk in a park near my room, I often go there when I
+want to breathe some fresh air after a long study session or when I
+feel anxious. The reason why I go to this specific park is, other than
+being easy to reach, the presence of a public book crossing
+shelf. There are many of those, scattered across the city, and people
+can go there and leave or take any book. If nobody is greedy and
+everyone leaves and takes the exact amount, then there would be a
+constant number of books always changing. In reality, some people are
+more generous than others and overall there is always a good amount of
+books, at least 20 in this one. As always, I am curious to see whether
+there are new books and if any of them interest me, so I go to the
+location. As a side note, I like this place so much that I marked It
+and other places in openstreetmap so that their location is registered
+for others to use.
+</p>
+
+<p>
+When I reached the little hose, what I found was a patch of dirt
+surrounded by grass. Maybe I was mistaken about the place, so I went
+back and forth on the street, but I was not mistaken. Indeed the shelf
+was not there anymore, apparently It was decided that It had to be
+removed from the park and It's now gone.
+</p>
+
+<p>
+This reminded me that everything, even good things change. Nothing is
+really forever. Obviously this is something I already knew and
+experienced, and I accepted It. Likewise, we humans change both as
+spices and as individuals in our short lifetime. Previously I was
+reading some entries of my diary from three years ago, I noticed that
+the things that moved me and the things I did as a consequence of
+these were completely different. Yet some things are still the same,
+It's always me but the perspective is different and how I perceived
+the world is different.
+</p>
+
+<p>
+When you look back at history you see how so many things change
+drastically. We went from horses as a means of transportation to space
+rockets in less than a century thanks to human ingenuity. When you
+look really back, think about the Roman Empire or civilizations now
+lost to time, the changes are so great that It is difficult even to
+imagine how the world was at that time. Yet some things are the same,
+the mountains that surround my city have been there for
+millennial. Once, these mountains were seen as obstacles that you
+needed to circumvent to reach other cities. During the first world war
+they were seen as a military fortress to protect the border, now they
+are seen as nature to protect.
+</p>
+
+<p>
+I now feel stoic about things changing, I see this as a rule of life
+so I don't feel bad when things do change. That works either way for
+things that disappear and things that appear. What I can do is to hold
+tight what I wish to keep with me longer to delay the inevitable.
 </p>
 
 <hr />
