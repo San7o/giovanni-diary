@@ -132,6 +132,7 @@
         - [[file:stash/photography/toblino.org::*Toblino][Toblino]]
       - [[file:stash/piano.org::*Piano][Piano]]
       - [[file:stash/volunteering.org::*Volunteering][Volunteering]]
+      - [[file:stash/youtube.org::*Youtube][Youtube]]
     - [[file:subjects.org::*Subjects][Subjects]]
     - [[file:videogames/videogames.org::*Videogames][Videogames]]
     - [[file:news.org::*What's New][What's New]]
