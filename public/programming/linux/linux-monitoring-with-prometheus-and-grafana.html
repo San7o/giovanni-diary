@@ -20,9 +20,9 @@
 </p>
 
 
-<div id="outline-container-org7898b87" class="outline-2">
-<h2 id="org7898b87">Monitor your Linux system with Prometheus and Grafana</h2>
-<div class="outline-text-2" id="text-org7898b87">
+<div id="outline-container-org09f9a11" class="outline-2">
+<h2 id="org09f9a11">Monitor your Linux system with Prometheus and Grafana</h2>
+<div class="outline-text-2" id="text-org09f9a11">
 <p>
 If you are managing any system, you need to have an effective way to
 monitor, log and receive notifications about the state of the system.
@@ -38,9 +38,9 @@ be using Fedora 42 as a base.
 </p>
 </div>
 
-<div id="outline-container-org50e3e80" class="outline-3">
-<h3 id="org50e3e80">Index</h3>
-<div class="outline-text-3" id="text-org50e3e80">
+<div id="outline-container-orgb0e38b0" class="outline-3">
+<h3 id="orgb0e38b0">Index</h3>
+<div class="outline-text-3" id="text-orgb0e38b0">
 <ul class="org-ul">
 <li>Setting up node exporter</li>
 <li>Setting up Prometheus</li>
@@ -50,9 +50,9 @@ be using Fedora 42 as a base.
 </div>
 </div>
 
-<div id="outline-container-org2a2812b" class="outline-3">
-<h3 id="org2a2812b">Setting up node exporter</h3>
-<div class="outline-text-3" id="text-org2a2812b">
+<div id="outline-container-orgc2165c4" class="outline-3">
+<h3 id="orgc2165c4">Setting up node exporter</h3>
+<div class="outline-text-3" id="text-orgc2165c4">
 <p>
 Node exporter is a service that collects various system information
 such as CPU load, ram usage and much more. Fedora already provides the
@@ -71,15 +71,15 @@ The service will listen on port 9100.
 </div>
 </div>
 
-<div id="outline-container-org070096f" class="outline-3">
-<h3 id="org070096f">Setting up Prometheus</h3>
-<div class="outline-text-3" id="text-org070096f">
+<div id="outline-container-orge55d8e7" class="outline-3">
+<h3 id="orge55d8e7">Setting up Prometheus</h3>
+<div class="outline-text-3" id="text-orge55d8e7">
 <p>
 You can download the latest version of Prometheus from GitHub:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #eedd82;">LATEST</span>=$(<span style="color: #fa8072;">curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | jq -cr .tag_name</span>)
+<pre class="src src-bash"><span style="color: #eedd82;">LATEST</span>=$(curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | jq -cr .tag_name)
 wget https://github.com/prometheus/prometheus/releases/download/$<span style="color: #eedd82;">LATEST</span>/prometheus-<span style="color: #ffa07a;">"${LATEST:1}"</span>.linux-amd64.tar.gz
 tar -xf prometheus-*
 <span style="color: #b0c4de;">cd</span> prometheus-<span style="color: #ffa07a;">"${LATEST:1}"</span>.linux-amd64
@@ -94,11 +94,11 @@ following Item in the "scrape configs" section:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-yaml">scrape_configs:
-  - job_name: 'linux-server'
-    scrape_interval: 5s
-    static_configs:
-      - targets: ['localhost:9100']
+<pre class="src src-yaml"><span style="color: #eedd82;">scrape_configs</span>:
+  - <span style="color: #eedd82;">job_name</span>: <span style="color: #ffa07a;">'linux-server'</span>
+    <span style="color: #eedd82;">scrape_interval</span>: 5s
+    <span style="color: #eedd82;">static_configs</span>:
+      - <span style="color: #eedd82;">targets</span>: [<span style="color: #ffa07a;">'localhost:9100'</span>]
 </pre>
 </div>
 
@@ -153,9 +153,9 @@ the data.
 </div>
 
 
-<div id="outline-container-org500cc64" class="outline-3">
-<h3 id="org500cc64">Setting up Grafana</h3>
-<div class="outline-text-3" id="text-org500cc64">
+<div id="outline-container-org3e00a36" class="outline-3">
+<h3 id="org3e00a36">Setting up Grafana</h3>
+<div class="outline-text-3" id="text-org3e00a36">
 <p>
 Install Grafana from your favorite package manager:
 </p>
@@ -232,7 +232,7 @@ website</a>.
 
 
 
-<div id="orga5dffe5" class="figure">
+<div id="org46b4294" class="figure">
 <p><img src="../../ephemeris/images/grafana.png" alt="grafana.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Grafana dashboard I found online</p>
@@ -240,9 +240,9 @@ website</a>.
 </div>
 </div>
 
-<div id="outline-container-org848bf71" class="outline-3">
-<h3 id="org848bf71">Custom Exporter</h3>
-<div class="outline-text-3" id="text-org848bf71">
+<div id="outline-container-orgf0336b3" class="outline-3">
+<h3 id="orgf0336b3">Custom Exporter</h3>
+<div class="outline-text-3" id="text-orgf0336b3">
 <p>
 What if you wanted to log something custom to your dashboard, you
 can easily do this by starting a tcp server and serving the data you
@@ -273,7 +273,7 @@ socat TCP-LISTEN:$<span style="color: #eedd82;">PORT</span>,reuseaddr,fork SYSTE
 <span style="color: #00ffff;">while</span> true; <span style="color: #00ffff;">do</span>
     sleep <span style="color: #ffa07a;">"$INTERVAL"</span>
 
-    <span style="color: #eedd82;">loadavg</span>=$(<span style="color: #fa8072;">cat /proc/loadavg | awk '{print $1 }'</span>)
+    <span style="color: #eedd82;">loadavg</span>=$(cat /proc/loadavg | awk <span style="color: #ffa07a;">'{print $1 }'</span>)
 
     cat &lt;&lt;EOF &gt; <span style="color: #ffa07a;">"$METRICS_FILE"</span>
 <span style="color: #ffff00; font-weight: bold;">    # HELP loadavg Load Average</span>
@@ -289,12 +289,12 @@ And update the <code>prometheus.yml</code> file:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-yaml">scrape_configs:
+<pre class="src src-yaml"><span style="color: #eedd82;">scrape_configs</span>:
   ...
-  - job_name: 'load-average'
-    scrape_interval: 5s
-    static_configs:
-      - targets: ['localhost:9200']
+  - <span style="color: #eedd82;">job_name</span>: <span style="color: #ffa07a;">'load-average'</span>
+    <span style="color: #eedd82;">scrape_interval</span>: 5s
+    <span style="color: #eedd82;">static_configs</span>:
+      - <span style="color: #eedd82;">targets</span>: [<span style="color: #ffa07a;">'localhost:9200'</span>]
 </pre>
 </div>
 
@@ -310,7 +310,7 @@ select prometheus as a source and you add your custom metric and clock
 </p>
 
 
-<div id="org1a307de" class="figure">
+<div id="orgf269bed" class="figure">
 <p><img src="../../ephemeris/images/grafana-custom.png" alt="grafana-custom.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Custom dashboard</p>

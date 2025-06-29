@@ -51,16 +51,16 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-orga8cd687" class="outline-2">
-<h2 id="orga8cd687">Gradient Descent</h2>
-<div class="outline-text-2" id="text-orga8cd687">
+<div id="outline-container-org9f3583a" class="outline-2">
+<h2 id="org9f3583a">Gradient Descent</h2>
+<div class="outline-text-2" id="text-org9f3583a">
 </div>
 
-<div id="outline-container-orgb7b9b40" class="outline-3">
-<h3 id="orgb7b9b40">Model-Based Machine Learning</h3>
-<div class="outline-text-3" id="text-orgb7b9b40">
+<div id="outline-container-orgff67ecc" class="outline-3">
+<h3 id="orgff67ecc">Model-Based Machine Learning</h3>
+<div class="outline-text-3" id="text-orgff67ecc">
 <ol class="org-ol">
-<li>Pick a model (hyperplane, decision tree&#x2026;)</li>
+<li>Pick a model (hyperplace, decision tree&#x2026;)</li>
 <li>Pick a criterion to optimize</li>
 <li>Develop a learning algorithm
 <ul class="org-ul">
@@ -70,45 +70,37 @@ heuristic way, sometimes exactly</li>
 </ol>
 
 <p>
-Let's look at linear binary classification:
+Let's look at linear binary classification
 </p>
 
 <ol class="org-ol">
 <li>Pick a model</li>
 </ol>
-
 <p>
 \[0 = b + \sum_{j=1}^{m}w_jf_j\]
 </p>
-
 <ol class="org-ol">
 <li>Pick a criteria to optimize (aka objective function)</li>
 </ol>
-
 <p>
 \[\sum_{i-1}^{n}\mathbb{1}[y_i(w*x_i+b) \le 0]\]
 </p>
-
 <ol class="org-ol">
 <li>Develop a learning algorithm</li>
 </ol>
-
 <p>
 \[argmin_{w, b}\sum_{i-1}^{n}\mathbb{1}[y_i(w*x_i+b) \le 0]\]
-</p>
-
-<p>
-Find \(w\) and \(b\) that minimize the 0/1 loss (i.e. training error)
+	Find \(w\) and \(b\) that minimize the 0/1 loss (i.e. training error)
 </p>
 </div>
 </div>
 
-<div id="outline-container-org2ed9cce" class="outline-3">
-<h3 id="org2ed9cce">Loss Functions</h3>
-<div class="outline-text-3" id="text-org2ed9cce">
+<div id="outline-container-org4335edf" class="outline-3">
+<h3 id="org4335edf">Loss Functions</h3>
+<div class="outline-text-3" id="text-org4335edf">
 <p>
-How do we minimize the 0/1 loss. Finding \(w\) and \(b\) that optimize the
-0/1 loss is hard (in fact, NP-hard)
+How do we minimize the 0/1 loss? Finding \(w\) and \(b\) that optimize the
+0/1 loss is hard (in fact, NP-hard).
 </p>
 
 <p>
@@ -120,9 +112,9 @@ the function is above the function.
 
 <p>
 Therefore, we want to find one such function that represents the 0/1
-loss function, which we call <b><b>surrogate loss function</b></b>. There are
-many such functions, we use the notation \(y\) as the correct value and
-\(y'\) as the predicted value:
+loss function, which we call <span class="underline">surrogate loss function</span>. There are many
+such functions, we use the notation \(y\) as the correct value and \(y'\)
+as the predicted value:
 </p>
 
 <ul class="org-ul">
@@ -134,12 +126,11 @@ many such functions, we use the notation \(y\) as the correct value and
 </div>
 </div>
 
-<div id="outline-container-orgd6d1fce" class="outline-3">
-<h3 id="orgd6d1fce">Gradient Descent</h3>
-<div class="outline-text-3" id="text-orgd6d1fce">
+<div id="outline-container-org30490ed" class="outline-3">
+<h3 id="org30490ed">Gradient Descent</h3>
+<div class="outline-text-3" id="text-org30490ed">
 <p>
-Pick a starting point \(w\). Repeat until loss doesn't decrease in any
-dimension:
+Pick a starting point \(w\). Repeat until loss doesn't decrease in any dimension:
 </p>
 
 <ul class="org-ul">
@@ -154,73 +145,69 @@ dimension:
 </ul>
 
 <p>
-We calculate the derivative of the surrogate loss function, for
-example the exponential
+For example, let's calculate the derivative of the loss function for
+the exponential:
 </p>
 
 <p>
 \[\frac{d}{dw_i} loss = \frac{d}{dw_j} \sum_{i=1}^{n}exp(-y_i(wx_i+b))\]
-\[ = \sum_{i=1}^{n}exp(-y_i(wx_i+b))\frac{d}{dw_i}-y_i(wx_i+b)\]
+\[ = \sum_{i=1}^{n}exp(-y_i(wx_i+b))\frac{d}{dw_i}\]
 \[= \sum_{i=1}^n -y_ix_{ij}exp(-y_i(wx_i+b))\]
-</p>
-
-<p>
-So with the exponential choice of loss function we have the following
-update rule:
-</p>
-
-<p>
+So with the exponential choice of loss function we have the following update rule:
 \[w_j = w_j + \mu \sum_{i=1}^n -y_ix_{ij}exp(-y_i(wx_i+b))\]
 </p>
 
 <ul class="org-ul">
-<li>this may descend to a local minima</li>
-<li>there may be <b><b>saddle points</b></b> where the gradient is 0 even if we
-are not in a minimum, where some directions curve upwards and some
-curve downwards.</li>
+<li>this may descend to a <span class="underline">local minima</span>.</li>
+<li>there may be <span class="underline">saddle points</span> where the gradient is 0 even if we are not in a minimum, where some directions curve upwards and some curve downwards.</li>
 </ul>
-</div>
-</div>
-
-<div id="outline-container-org0107a55" class="outline-3">
-<h3 id="org0107a55">Gradient</h3>
-<div class="outline-text-3" id="text-org0107a55">
-<p>
-The gradient is the vector of partial derivatives w.r.t all the
-coordinates of the weights. For \(f: \mathbb{R}^n \rightarrow R\) its
-gradient \(\nabla f:\mathbb{R}^n \rightarrow \mathbb{R}^n\) is defined
-at the point \(p=(x_1, ..., x_n)\) in n-dimensional space as the vector:
-</p>
 
 <p>
-\[\nabla f(p) = [\frac{df}{dx_i}(p)\ ...\ \frac{df}{dx_n}(p) ]\]
-</p>
-
-<p>
-Explained like a programmer, the gradient is defined for each
-dimension and It is the vector where each element is the derivative
-with respect to that dimension.  Formally, the gradient of a scalar
-function \(f(x_1, x_2, x_3, ..., x_n)\) is denoted \(\nabla f\) where
-\(\nabla\) denotes the vector differential operator, del. The gradient
-of \(f\) is defined as the unique vector filed whose dot product with
-any vector \(v\) at each point \(x\) is the directional derivative of \(f\)
-along \(v\). That is,
-</p>
-
-<p>
-\[(\nabla f(x))*v = D_vf(x)\]
-</p>
-
-<p>
-For example, the gradient of the function \(f(x, y, z)=2x + 3y^2 -
-sin(z)\) is \(\nabla f(x, y, z)=[2, 6y, -cos(z)]\) or \(\nabla f(x, y,
-z)=2i+6yj-cos(z)k\) where \(i\), \(j\), \(k\) are the standard unit vectors
-in the direction \(x\), \(y\), \(z\).
+There are two types of gradient descent:
 </p>
 
 <ul class="org-ul">
-<li>Each partial derivative measures how fast the loss changes in one
-direction</li>
+<li><span class="underline">Batch Gradient Descent</span>: the estimates are stable however you need to compute gradients over the entire training for one update.</li>
+<li><span class="underline">Stochastic Gradient Descent</span>: we sample only one data point from
+the training set and compute the gradient. The learning rate changes
+at each step, It typically decays linearly. A problem arises with
+flat error surfaces where the error would jump vividly. We can
+introduce a variable called <span class="underline">velocity</span> to counteract this, where the
+gradient updates the velocity.</li>
+</ul>
+
+<p>
+It is often useful to compute the gradient on set of samples.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org4dfee61" class="outline-3">
+<h3 id="org4dfee61">Gradient</h3>
+<div class="outline-text-3" id="text-org4dfee61">
+<p>
+The gradient is the vector of partial derivates w.r.t all the
+coordinates of the weights. For \(f: \mathbb{R}^n \rightarrow
+\mathbb{R}\) its gradient \(\nabla f:\mathbb{R}^n \rightarrow
+\mathbb{R}^n\) is defined at the point \(p=(x_1, ..., x_n)\) in
+n-dimensional space as the vector: \[\nabla f(p) =
+[\frac{df}{dx_i}(p)\ ...\ \frac{df}{dx_n}(p) ]\] Explained to a
+programmer, the gradient is defined for each dimension and It is the
+vector where each element is the derivative with respect to that
+dimension.  Formally, the gradient of a scalar function \(f(x_1, x_2,
+x_3, ..., x_n)\) is denoted \(\nabla f\) where \(\nabla\) is the vector
+differential operator (known as del or nabla). The gradient of \(f\) is
+defined as the unique vector filed whose dot product with any vector
+\(v\) at each point \(x\) is the directional derivative of \(f\) along
+\(v\). That is, \[(\nabla f(x))*v = D_vf(x)\] For example, the gradient
+of the function \(f(x, y, z)=2x + 3y^2 - sin(z)\) is \(\nabla f(x, y,
+z)=[2, 6y, -cos(z)]\) or \(\nabla f(x, y, z)=2i+6yj-cos(z)k\) where \(i\),
+\(j\), \(k\) are the standard unit vectors in the direction \(x\), \(y\), \(z\).
+</p>
+
+<ul class="org-ul">
+<li>Each partial derivative measures how fast the loss changes in one direction</li>
 </ul>
 
 <hr />

@@ -51,9 +51,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org3d54e9a" class="outline-2">
-<h2 id="org3d54e9a">Reinforcement Learning</h2>
-<div class="outline-text-2" id="text-org3d54e9a">
+<div id="outline-container-org6f30dbe" class="outline-2">
+<h2 id="org6f30dbe">Reinforcement Learning</h2>
+<div class="outline-text-2" id="text-org6f30dbe">
 <p>
 Reinforcement learning in inspired by research on psychology and
 animal learning. The problems involve an agent interacting with an
@@ -66,11 +66,11 @@ environment in order to maximize reward.
 </p>
 </div>
 
-<div id="outline-container-orgba04b52" class="outline-3">
-<h3 id="orgba04b52">Markov Decision Process</h3>
-<div class="outline-text-3" id="text-orgba04b52">
+<div id="outline-container-orgfde9978" class="outline-3">
+<h3 id="orgfde9978">Markov Decision Process</h3>
+<div class="outline-text-3" id="text-orgfde9978">
 <p>
-<b><b>Markov Decision Process</b></b> (MDP) is a framework used to help to make
+<span class="underline">Markov Decision Process</span> (MDP) is a framework used to help to make
 decisions on a stochastic environment. Our goal is to find a policy,
 which is a map that gives us all optimal actions on each state on our
 environment,
@@ -86,14 +86,13 @@ The components of MDP include:
 </p>
 
 <ul class="org-ul">
-<li><b><b>states</b></b> \(s\), beginning with initial state \(s_0\)</li>
-<li><b><b>Actions</b></b> \(a\)</li>
-<li><b><b>Transition model</b></b> \(P(s'|s, a)\)</li>
-<li><b><b>Markov assumption</b></b>: the probability of going to \(s'\) from \(s\)
+<li><span class="underline">states</span> \(s\), beginning with initial state \(s_0\)</li>
+<li><span class="underline">Actions</span> \(a\)</li>
+<li><span class="underline">Transition model</span> \(P(s'|s, a)\)</li>
+<li><span class="underline">Markov assumption</span>: the probability of going to \(s'\) from \(s\)
 depends only on \(s\) and not on any other past actions or states</li>
-<li><b><b>Reward function</b></b> \(r(s)\)</li>
-<li><b><b>Policy</b></b> \(\pi(s)\): the action that an agent takes in any given
-state</li>
+<li><span class="underline">Reward function</span> \(r(s)\)</li>
+<li><span class="underline">Policy</span> \(\pi(s)\): the action that an agent takes in any given state</li>
 </ul>
 
 <p>
@@ -126,9 +125,9 @@ term or long term actions.
 </div>
 </div>
 
-<div id="outline-container-org628ab83" class="outline-3">
-<h3 id="org628ab83">Loop</h3>
-<div class="outline-text-3" id="text-org628ab83">
+<div id="outline-container-org1eefbc7" class="outline-3">
+<h3 id="org1eefbc7">Loop</h3>
+<div class="outline-text-3" id="text-org1eefbc7">
 <p>
 In Supervised learning: given an input \(x_i\) sampled from data
 distribution, we use the model with parameters \(w\) to predict output
@@ -139,7 +138,7 @@ loss is differentiable.
 </p>
 
 <p>
-Instead, in Reinforcement Learning, given a state \(s\), we take an
+In Reinforcement Learning instead, given a state \(s\), we take an
 action \(a\) determined by policy \(\pi(s)\). The environment selects next
 state \(s'\) based on transition model \(P(s'|s, a)\) and gives a reward
 \(r(s)\) while setting the new state \(s'\). Rewards are not
@@ -148,12 +147,12 @@ the environment and help to determine next observation.
 </p>
 
 <p>
-There are two main approached for Reinforcement Learning:
+There are two main approaches for Reinforcement Learning:
 </p>
 
 <ul class="org-ul">
 <li>Value-based methods: the goal of the agent is to optimize the value
-function \(V(s)\) and the value of each state is the total amount of
+function \(V(s)\) where the value of each state is the total amount of
 the reward an RL agent can expect to collect over the future from a
 given state.</li>
 <li>Policy-based approach: we define a policy which we need to optimize
@@ -162,15 +161,15 @@ directly.</li>
 </div>
 </div>
 
-<div id="outline-container-org90417a8" class="outline-3">
-<h3 id="org90417a8">Value Based Methods</h3>
-<div class="outline-text-3" id="text-org90417a8">
+<div id="outline-container-org9375986" class="outline-3">
+<h3 id="org9375986">Value Based Methods</h3>
+<div class="outline-text-3" id="text-org9375986">
 </div>
-<div id="outline-container-orgf8ac2ec" class="outline-4">
-<h4 id="orgf8ac2ec">Value Function</h4>
-<div class="outline-text-4" id="text-orgf8ac2ec">
+<div id="outline-container-org979335b" class="outline-4">
+<h4 id="org979335b">Value Function</h4>
+<div class="outline-text-4" id="text-org979335b">
 <p>
-The <b><b>value function</b></b> gives the total amount of rewards the agent can
+The <span class="underline">value function</span> gives the total amount of rewards the agent can
 expect from a particular state to all possible states from that state.
 </p>
 
@@ -189,7 +188,7 @@ best possible policy:
 
 <p>
 It is more convenient to define the value of a state-action pair,
-called <b><b>Q-value function</b></b>:
+called <span class="underline">Q-value function</span>:
 </p>
 
 <p>
@@ -206,9 +205,9 @@ The optimal Q-value can be used to compute the optimal policy:
 </div>
 </div>
 
-<div id="outline-container-orgf67a6f3" class="outline-4">
-<h4 id="orgf67a6f3">Bellman Equation</h4>
-<div class="outline-text-4" id="text-orgf67a6f3">
+<div id="outline-container-org0df40d4" class="outline-4">
+<h4 id="org0df40d4">Bellman Equation</h4>
+<div class="outline-text-4" id="text-org0df40d4">
 <p>
 There is a recursive relationship between optimal values of succesive
 states and actions:
@@ -216,20 +215,20 @@ states and actions:
 
 <p>
 \[Q^*(s, a)=r(s)+\gamma \sum_{s'}P(s'|s, a)\max_{a'}Q^*(s', a')\]
-\[=\mathbb{E}_{s'\sim P(.|s, a)}[r(s)+\gamma\ max_{a'}Q^*(s', a')|s, a]\]
+\[=\mathbb{E}_{s'\sim P(\cdot|s, a)}[r(s)+\gamma\ max_{a'}Q^*(s', a')|s, a]\]
 </p>
 
 <p>
 if the optimal state-action values for the next time-step \(Q^*(s',
 a')\) are known, then the optimal strategy is to take the action that
-maximizes the epected value.
+maximizes the expected value.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org10cca6e" class="outline-4">
-<h4 id="org10cca6e">Algorithm</h4>
-<div class="outline-text-4" id="text-org10cca6e">
+<div id="outline-container-org01920d3" class="outline-4">
+<h4 id="org01920d3">Algorithm</h4>
+<div class="outline-text-4" id="text-org01920d3">
 <ul class="org-ul">
 <li>Initialize the matrix \(Q\) with zeros</li>
 <li>Select a random initial state</li>
@@ -239,8 +238,7 @@ and ends on the goal state)</li>
 <ul class="org-ul">
 <li>Select a random possible action for the current state</li>
 <li>Using this possible action consider going to this next state</li>
-<li>Get maximum \(Q\) value for this next state (All actions from this
-next state)</li>
+<li>Get maximum \(Q\) value for this next state (All actions from this next state)</li>
 <li>\(Q^*(s, a)=r(s, a)+\gamma\ max_a[Q^*(s', a')]\)</li>
 </ul></li>
 </ul>
@@ -259,7 +257,8 @@ To find the optimal policy:
 <p>
 The problem of this algorithm is that the state spaces are huge. To
 help, we can approximate Q-values using a parametric function \(Q^*(s,
-a)=Q_w(s, a)\): we train a deep neural network that approximates \(Q^*\).
+a)\approx Q_w(s, a)\): we train a deep neural network that approximates
+\(Q^*\).
 </p>
 
 <p>
@@ -284,7 +283,7 @@ The loss function would change at each iteration:
 
 <p>
 where \(\rho\) is a probability distribution over states \(s\) and actions
-\(a\) that we refer to as the <b><b>behaviour distribution</b></b>.
+\(a\) that we refer to as the <span class="underline">behaviour distribution</span>.
 </p>
 
 <p>
@@ -297,19 +296,18 @@ The gradient update then is:
 </p>
 
 <p>
-Instead of having expecatations, we sample <b><b>experiences</b></b> \((s, a,
-s')\) using behaviour distribution and transition model.
+Instead of having expecatations, we sample <span class="underline">experiences</span> \((s, a, s')\) using behaviour distribution and transition model.
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org62b8974" class="outline-3">
-<h3 id="org62b8974">Policy Gradient Methods</h3>
-<div class="outline-text-3" id="text-org62b8974">
+<div id="outline-container-org2cddb78" class="outline-3">
+<h3 id="org2cddb78">Policy Gradient Methods</h3>
+<div class="outline-text-3" id="text-org2cddb78">
 <p>
 We have seen that the space of the Q-value function can be very
-complicates. Instead of indirectly representing the policy using
+complicated. Instead of indirectly representing the policy using
 Q-values, it can be more efficient to parametrize \(\pi\) and learn it
 directly.
 </p>
@@ -321,18 +319,17 @@ directly.
 <p>
 The idea is to use a machine learning model that will learn a good
 policy from playing the game and receiving rewards. In particular, we
-need to find the best parameters \(\theta\) pf the policy to maximize
+need to find the best parameters \(\theta\) of the policy to maximize
 the expected reward:
 </p>
 
 <p>
-\[J(\theta)=\mathbb{E}[\sum_{t\ge 0}\gamma^tr_t|\pi_{\theta}]=\mathbb{E}_\tau[r(\tau)],\ \tau=(s_0, a_0, r_0, s_1, a_1, r_1, ...)\]
+\[maximize\ J(\theta)=\mathbb{E}[\sum_{t\ge 0}\gamma^tr_t|\pi_{\theta}]=\mathbb{E}_\tau[r(\tau)],\ \tau=(s_0, a_0, r_0, s_1, a_1, r_1, ...)\]
 \[=\int_{\tau}r(\tau)p(\tau; \theta)d\tau\]
 </p>
 
 <p>
-Where \(p(\tau; \theta)\) is the probability of trajectory \(\tau\) under
-policy with parameters \(\theta\):
+Where \(p(\tau; \theta)\) is the probability of trajectory \(\tau\) under policy with parameters \(\theta\):
 </p>
 
 <p>
@@ -340,15 +337,12 @@ policy with parameters \(\theta\):
 </p>
 
 <p>
-We can then use gradient decent:
+We can then use gradient ascent:
 </p>
 
 <p>
 \[\nabla J(\theta)=\mathbb{E}_{\tau}[r(\tau)\nabla_{\theta}\ \log\ p(\tau; \theta)]\]
 \[\nabla_\theta\ log\ p(\tau; \theta)=\sum_{t\ge0}\nabla_{\theta}\log\ \pi_{\theta}(s_t, a_t)\]
-</p>
-
-<p>
 Using a stochastic approximation by sampling \(n\) trajectories:
 </p>
 
@@ -357,20 +351,17 @@ Using a stochastic approximation by sampling \(n\) trajectories:
 </p>
 
 <p>
-Therefore the the steps to perform in order to optimize are:
+Therefore the steps to perform in order to optimize are:
 </p>
 
 <ol class="org-ol">
-<li>Sample \(N\) trajectories \(\tau_i\) using current policy
-\(\pi_{\theta}\)</li>
+<li>Sample \(N\) trajectories \(\tau_i\)  using current policy \(\pi_{\theta}\)</li>
 <li>Estimate the policy gradient \(\nabla_{\theta}J(\theta)\)</li>
-<li>Update parameters by gradient ascent \(\theta \leftarrow \theta +
-   \eta \nabla_{\theta}J(\theta)\)</li>
+<li>Update parameters by gradient ascent \(\theta \leftarrow \theta + \eta \nabla_{\theta}J(\theta)\)</li>
 </ol>
 
 <p>
-Intuitively, we want to go up the gradient to increase the total
-reward.
+Intuitively, we want to go up the gradient to increase the total reward.
 </p>
 
 <hr />

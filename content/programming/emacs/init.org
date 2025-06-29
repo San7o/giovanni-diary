@@ -5,16 +5,19 @@
 * Welcome
 #+INDEX: Giovanni's Diary!Programming!Emacs!Init
 
-Welcome to my humble emacs configuration file. This is my daily emacs
-setup, do not expect anything remarcable, just some lisp code :)
+Hello and welcome to my Emacs configuration file. I use Emacs daily
+for a lot of tasks such as coding, writing, reading mailing lists
+and blogs, and much more. This file contains my main configuration.
 
-Use =M-x load-file= to load this configuration. You can also use
-=eval-buffer= inside this buffer.
+To load this configuration you first need to generate the =.el= via
+=C-c C-v C-f= and selecting this file, then load the lisp code with
+=M-x load-file=.
 
 * Early Init
 
-This code gets executed very early during emacs' startup sequence.
-It is useful to speedup the startup process.
+This section generates the =early-init.el= file. This code gets
+executed very early during emacs' startup sequence.  It is useful to
+speedup the startup process.
 
 What I am doing here is to temporarely increase the treshold for the
 garbage collector for reduce Its frequency. The value
@@ -57,6 +60,9 @@ You can switch between light and dark mode with =modus-themes-toggle=.
 Yes, sometimes I use light mode when I am outside, and I never feel
 ashamed about it, I can do whatever I want.
 
+I currently have disabled them because I am using my custom theme (see
+below).
+
 #+begin_src emacs-lisp
   ;; (load-theme 'modus-vivendi t)
   ;; ;; Default theme is white, unless the time is after 18 (6 pm)
@@ -75,7 +81,7 @@ ashamed about it, I can do whatever I want.
   ;;                           ))
 #+end_src
 
-Add a directory for my custom themes:
+Add the directory for my custom themes:
 
 #+begin_src emacs-lisp
   (setq custom-safe-themes t)
@@ -120,6 +126,31 @@ To update completition percentage: =C-c C-c=.
                         :html-scale 1.5 ;; For HTML export
                         :matchers ("begin" "$1" "$" "$$" "\\(" "\\["))))
     (add-hook 'org-mode-hook 'org-fragtog-mode)
+#+end_src
+
+** org-roam
+
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :custom
+    (org-roam-directory "/home/santo/giovanni-diary/content")
+    :init
+    (setq org-roam-v2-ack t) ;; acknowledge v2
+    :config
+    (org-roam-db-autosync-mode))
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; (use-package org-roam-ui
+  ;;   :ensure t
+  ;;   :after org-roam
+  ;;   :hook (after-init . org-roam-ui-mode)
+  ;;   :config
+  ;;   (setq org-roam-ui-sync-theme t
+  ;;         org-roam-ui-follow t
+  ;;         org-roam-ui-update-on-save t
+          ;; org-roam-ui-open-on-start t))
 #+end_src
 
 ** Markdown mode
@@ -218,8 +249,8 @@ Emms is an emacs music player.
  
 ** Gnus
 
-THE best email / rss client EVER. I read all my mailing lists and
-blogs here.
+THE best email / rss client. I read all my mailing lists and blogs
+here.
 
 Some useful shortcuts:
 - =t=: topic view
@@ -240,44 +271,15 @@ so that gnus can read them.
   (setq newsticker-url-list
         '(("Eli Bendersky" "https://eli.thegreenplace.net/feeds/all.atom.xml")
           ("Emacs Redux" "https://emacsredux.com/atom.xml")))
-
-  (defvar my-gnus-emacs-list
-    '("nntp+news.gmane.io:gmane.emacs.announce"
-      "nntp+news.gmane.io:gwene.com.sachachua"
-      "nntp+news.gmane.io:gwene.org.irreal.blog"
-      "nnrss:Protesilaos Stavrou: Master feed with all updates"))
-
-  (defvar my-gnus-linux-list
-    '("nntp+news.gmane.io:gmane.emacs.announce"
-      "nntp+news.gmane.io:gwene.net.lwn.headlines"
-      "nntp+news.gmane.io:gmane.linux.kernel.bpf"
-          "nnrss:Linux Kernel Monkey Log"))
-
-  (defvar my-gnus-blogs-list
-    '("nnrss:Blog System.5"
-      "nnrss:https://www.usebox.net/jjm/blog/index.xml"
-      "nnrss:https://alexschroeder.ch/view/index.rss"))
-
-  (defvar my-gnus-misc-list
-    '("nnrss:Seeds of Science"
-      "nntp+news.gmane.io:gwene.io.kubernetes"
-      "nntp+news.gmane.io:gmane.culture.internet.history"
-      "nntp+news.gmane.io:gmane.announcxe"))
-
-    (use-package gnus
+  (use-package gnus
       :ensure t
       :config
       (setq gnus-select-method '(nntp "news.gmane.io"))
       (setq gnus-directory "~/.emacs.d/news/")
-      ;;(setq gnus-startup-file "~/.emacs.d/.newsrc.eld") ;; Not working
-      (add-to-list 'gnus-topic-alist
-                   (add-to-list 'my-gnus-emacs-list "Emacs") t)
-      (add-to-list 'gnus-topic-alist
-                   (add-to-list 'my-gnus-linux-list "Linux") t)
-      (add-to-list 'gnus-topic-alist
-                   (add-to-list 'my-gnus-blogs-list "Blogs") t)
-      (add-to-list 'gnus-topic-alist
-                   (add-to-list 'my-gnus-misc-list "Misc") t))
+      (setq gnus-home-directory "~/.emacs.d/")
+      (setq gnus-startup-file "~/.emacs.d/.newsrc")
+      (setq gnus-current-startup-file "~/.emacs.d/.newsrc")
+      (setq gnus-init-file "~/.emacs.d/"))
 #+end_src
 
 Read atom feeds with gnus. Stolen from the emacswiki, you need to
@@ -306,8 +308,10 @@ download =atom2rss.xsl= first from https://atom.geekhood.net/.
 Create macros "snippets" for text. Really really cool.
 
 #+begin_src emacs-lisp
-  (use-package yasnippet
-    :ensure t)
+      (use-package yasnippet
+        :ensure t
+        :config
+        (yas-global-mode 1))
 #+end_src
 
 ** Olivetti

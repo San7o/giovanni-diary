@@ -51,136 +51,241 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org3da7266" class="outline-2">
-<h2 id="org3da7266">The K-nearest neighbor algorithm</h2>
-<div class="outline-text-2" id="text-org3da7266">
+<div id="outline-container-orgdb7de83" class="outline-2">
+<h2 id="orgdb7de83">The K-nearest neighbor algorithm</h2>
+<div class="outline-text-2" id="text-orgdb7de83">
 <p>
-Given an n-dimensional partitioned space, and a new train value, we
-want to associate the new value with a partition. A simple solution
-could be to look at the nearest known data and their partition. To get
-a more representative result, we can check k nearest neighbors.
+In this chapter we will discuss our first supervised learning
+algorithm: <span class="underline">K-nearest neighbors</span>, aka <span class="underline">K-NN</span>. Remember that supervised
+learning means that the algorithm is given data in an $n$-dimensional
+space with labels, we will now focus on the classification problem
+where the algorithm should predict the label of new unseen data.
 </p>
 
 <p>
-More precisely, to classify an example \(d\):
+If we make the only assumption that data with similar labels are
+somehow "cose" together in the space, a simple solution to this
+problem could be to look at the nearest known data and their label. We
+will discuss the concept distance later. Moreover, we can average over
+\(k\) nearest neighbors to get a more representative result.
+</p>
+
+<p>
+More precisely, to <span class="underline">classify</span> an example \(d\):
 </p>
 
 <ul class="org-ul">
-<li>find k nearest neighbors of \(d\)</li>
+<li>find \(k\) nearest neighbors of \(d\)</li>
 <li>choose as the label the majority label within the \(k\) nearest neighbors</li>
 </ul>
+
+<p>
+An example speudocode:
+</p>
+
+<pre class="example">
+KNN(input, K, DATA) -&gt; {1, ..., m}:
+  int label_count[m] = {0}
+  bool used[#DATA] = {false}
+  for k=0 to K do:
+    int max_distance = 0
+    int max_input = 0
+    for x_i, y_i in DATA do:
+      d = distance(x_i, input)
+      if d &gt; max_distance and not used[x_i] then:
+        max_distance = d
+        max_input = x_i
+    label_count[DATA[x_i]] += 1
+    used[x_i] = true
+  return max_index(label_count)
+</pre>
 </div>
 
-<div id="outline-container-orgb7e0bbe" class="outline-3">
-<h3 id="orgb7e0bbe">How do we measure "nearest"?</h3>
-<div class="outline-text-3" id="text-orgb7e0bbe">
+<div id="outline-container-orga28c6f6" class="outline-3">
+<h3 id="orga28c6f6">How do we measure distance?</h3>
+<div class="outline-text-3" id="text-orga28c6f6">
 <p>
 Measuring distance / similarity is a domain-specific problem and there
-are many different variations.
+are many different alternatives. We will now see different methods to
+model distance.
+</p>
+</div>
+
+<div id="outline-container-orgde22c55" class="outline-4">
+<h4 id="orgde22c55">Euclidean distance</h4>
+<div class="outline-text-4" id="text-orgde22c55">
+<p>
+Euclidean distance is measured in \(n\) dimensions with the formula:
+</p>
+
+<p>
+\[D(a, b) = \sqrt{(a_1 - b_1)^2 + (a_2 - b_2)^2+...}\]
+</p>
+
+<p>
+Note that here we are assuming that all the labels are comparable,
+meaning measured in the same range. A trivial example can be made to
+motivate this: a certain dimension may represent the cost of an item
+in euros and some other dimension may measure It in dollars, to find
+the difference we need to first convert everything to the same
+currency. Therefore data should be <span class="underline">standardized</span>, we will now see two
+common transformations:
 </p>
 
 <ul class="org-ul">
-<li><b><b>similarity</b></b>: numerical measure of how alike two data objects are</li>
-<li><b><b>difference</b></b>: numerical measure of how different are two data objects</li>
-</ul>
-</div>
-
-<div id="outline-container-orgab03e23" class="outline-4">
-<h4 id="orgab03e23">Euclidean distance</h4>
-<div class="outline-text-4" id="text-orgab03e23">
-<p>
-\[D(a, b) = \sqrt{(a_i - b_i)^2 + (a_2 - b_2)^2}\]
-</p>
-
-<p>
-However, here we are assuming that all the labels are comparable
-aka. measured in the same range. Therefore, data should be
-<b><b>standardized</b></b>.
-</p>
-</div>
-</div>
-
-<div id="outline-container-org9eb5960" class="outline-4">
-<h4 id="org9eb5960">Standardization or Z-score normalization</h4>
-<div class="outline-text-4" id="text-org9eb5960">
-<p>
-Rescale the data so that the mean is 0 and the standard deviation from
-the mean is 1
+<li><p>
+<span class="underline">Standardization or Z-score normalization</span>: Rescale the data so that
+the mean is 0 and the standard deviation from the mean is 1.
 </p>
 
 <p>
 \[x_{norm}=\frac{x-\mu}{\sigma}\]
-<b><b>Min-Max scaling</b></b>: scale the data to a fixed range - between 0 and 1
+</p></li>
+
+<li><p>
+<span class="underline">Min-Max scaling</span>: scale the data to a fixed range - between 0 and 1.
 </p>
 
 <p>
 \[x_{norm}=\frac{x-x_{min}}{x_{max}-x_{min}}\]
-</p>
-</div>
-</div>
-
-<div id="outline-container-orgac9c789" class="outline-4">
-<h4 id="orgac9c789">Minkowsky Distance</h4>
-<div class="outline-text-4" id="text-orgac9c789">
-<p>
-Generalization of the Euclidean distance:
-</p>
-
-<p>
-\[D(a, b) = (\sum_{k=1}^{p} |a_k - b_k|^r)^{\frac{1}{r}}\]
-</p>
-</div>
-</div>
-
-<div id="outline-container-orgec8fb7f" class="outline-4">
-<h4 id="orgec8fb7f">Cosine Similarity</h4>
-<div class="outline-text-4" id="text-orgec8fb7f">
-<p>
-Given two different vectors:
-</p>
-
-<p>
-\[COS(d_1, d_2) = (d_1 * d_2) / ||d_1|| ||d_2||\]
-</p>
-<ul class="org-ul">
-<li>\(*\) is the dot product and \(||d||\) is the length of vector d</li>
+</p></li>
 </ul>
 </div>
 </div>
-</div>
 
-<div id="outline-container-orgf521d89" class="outline-3">
-<h3 id="orgf521d89">Decision Boundaries</h3>
-<div class="outline-text-3" id="text-orgf521d89">
+<div id="outline-container-orgbefdfda" class="outline-4">
+<h4 id="orgbefdfda">Manhatthan Distance</h4>
+<div class="outline-text-4" id="text-orgbefdfda">
 <p>
-The decision boundaries are places in the features space where the
-classification of a point / example changes.
+The Manhatthan distance is used to find the distance of two paths in a
+grid, It was originally invented for the city o Manatthan
+</p>
+
+<p>
+\[D(a, b)=\sum_i |a_i - b_i|\]
 </p>
 </div>
+</div>
 
-<div id="outline-container-orgbf71a2a" class="outline-4">
-<h4 id="orgbf71a2a">Voronoi Diagram / Partitioning</h4>
-<div class="outline-text-4" id="text-orgbf71a2a">
+<div id="outline-container-orgd7d3a40" class="outline-4">
+<h4 id="orgd7d3a40">Checysher Distance</h4>
+<div class="outline-text-4" id="text-orgd7d3a40">
 <p>
-Describes the areas that are nearest to any given point, given a set
-of data
+The checkysher distance is useful to calculate distances in the chess
+board, in particular the number of moved of the kind to reach a
+certain square.
+</p>
+
+<p>
+\[D(a, b)=max_i|a_i-b_i|\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9dd2704" class="outline-4">
+<h4 id="org9dd2704">Minkowsky distance</h4>
+<div class="outline-text-4" id="text-org9dd2704">
+<p>
+All the three aforementioned distances can be generalized with the
+following formula (Minkowsky Distance) also called $p$-norm or
+\(L_p\):
+</p>
+
+<p>
+\[D(a, b) = (\sum_{k=1}^{n} |a_k - b_k|^p)^{\frac{1}{p}}\]
 </p>
 
 <ul class="org-ul">
-<li>each line segment is equidistant between two points</li>
+<li>\(p=1\): Manhattan distance</li>
+<li>\(p=2\): Euclidean distance</li>
+<li>\(p\to\infty\): Checkysher distance</li>
 </ul>
 
 <p>
-However, k-NN does not explicitly compute decision boundaries, but
-form a subset of the Voronoi diagram for the training data.
+\(L_1\) is popular because it tends to result is sparse
+solutions. However, It is not differentiable, so It only works for
+gradient descent solvers. \(L_2\) is also popular because for some loss
+functions, it can be solved directly. \(L_p\) is less popular since they
+don't tend to shrink the weights enough.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4cb3133" class="outline-4">
+<h4 id="org4cb3133">Cosine Similarity</h4>
+<div class="outline-text-4" id="text-org4cb3133">
+<p>
+Given two different vectors \(d_1\) and \(d_2\), we can find the cosine
+\(cos\) with the formula:
+</p>
+
+<p>
+\[cos(d_1, d_2) = (d_1 \cdot d_2) / ||d_1|| ||d_2||\]
+</p>
+
+<ul class="org-ul">
+<li>where \(\cdot\) is the dot product and \(||d||\) is the length of vector \(d\)</li>
+</ul>
+
+<p>
+In fact, this formula is derived from the definition of dot product: \(d_1 \cdot d_2 = ||d_1||||d_2||cos(\theta)\)
+</p>
+
+<p>
+Cosine similarity does not depend on the magnitudes of the vectors,
+but only on their angle. For example, two proportional vectors have a
+cosine similarity of \(+1\), two orthogonal vectors have a similarity of
+\(0\), and two opposite vectors have a similarity of \(-1\).
+</p>
+
+<p>
+For example, in information retrieval and text mining, each word is
+assigned a different coordinate and a document is represented by the
+vector of the numbers of occurrences of each word in the
+document. Cosine similarity then gives a useful measure of how similar
+two documents are likely to be, in terms of their subject matter, and
+independently of the length of the documents.
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org0f6ed81" class="outline-3">
-<h3 id="org0f6ed81">How to pick K</h3>
-<div class="outline-text-3" id="text-org0f6ed81">
+<div id="outline-container-orgd4eebce" class="outline-3">
+<h3 id="orgd4eebce">Decision Boundaries</h3>
+<div class="outline-text-3" id="text-orgd4eebce">
+<p>
+The KNN algorithm can be thought of as assigning a label to an object
+withing the space enclosed by a <span class="underline">decision boundary</span>. Decision
+boundaries are places in the features space where the classification
+of a point / example changes.
+</p>
+</div>
+
+<div id="outline-container-orge807723" class="outline-4">
+<h4 id="orge807723">Voronoi Diagram / Partitioning</h4>
+<div class="outline-text-4" id="text-orge807723">
+<p>
+A Voronoi diagram describes the areas that are nearest to any given
+point, given a set of data where each line segment is equidistant
+between two points. More formally, the Voronoi region \(R_k\) associated
+with a subset of the points in the space \(P_k\) is defined as:
+</p>
+
+<p>
+\[R_k = \{ x\in X\ |\ d(x, P_K)\le d(x, P_j)\ for\ all\ j\ne k  \}\]
+</p>
+
+<p>
+KNN does not explicitly compute decision boundaries, but form a subset
+of the Voronoi diagram for the training data.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1e92ab3" class="outline-3">
+<h3 id="org1e92ab3">Choosing K</h3>
+<div class="outline-text-3" id="text-org1e92ab3">
 <p>
 Some techniques to pick \(k\) include:
 </p>
@@ -188,29 +293,29 @@ Some techniques to pick \(k\) include:
 <ul class="org-ul">
 <li>common heuristics</li>
 <li>use validation set</li>
-<li>use cross validation</li>
-<li>rule of thumb is \(k < \sqrt{n}\) where n is the size of training
-examples</li>
+<li>use cross validatoin</li>
+<li>rule of thumb is k &lt; sqrt(n) where n is the size of training examples</li>
 </ul>
 
 <p>
-k-NN variations: weighted k-NN.
+In general, bugger values of \(k\) give a smoother decision boundary.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgdb95a91" class="outline-3">
-<h3 id="orgdb95a91">Lazy Learner vs Eager Learner</h3>
-<div class="outline-text-3" id="text-orgdb95a91">
+<div id="outline-container-org6e61503" class="outline-3">
+<h3 id="org6e61503">Lazy Learner vs Eager Learner</h3>
+<div class="outline-text-3" id="text-org6e61503">
 <p>
-k-NN belongs to the class of lazy learning algorithms
+k-NN belongs to the class of lazy learning algorithms.
 </p>
 
 <ul class="org-ul">
-<li><b><b>lazy learning</b></b>: simply stores training data and operates when it
-is given a test example</li>
-<li><b><b>eager learning</b></b>: given a training set, constructs a
-classification model before receiving new test data to classify</li>
+<li><span class="underline">lazy learning</span>: simply stores training data and operates when it is
+given a test example. Note that if the data is large, the machine
+may run out of memory.</li>
+<li><span class="underline">eager learning</span>: given a training set, constructs a classification
+model before receiving new test data to classify</li>
 </ul>
 
 <p>
@@ -219,55 +324,55 @@ This means that k-NN is not really fast during inference, but no training is req
 </div>
 </div>
 
-<div id="outline-container-org6dc21eb" class="outline-3">
-<h3 id="org6dc21eb">Curse of Dimensionality</h3>
-<div class="outline-text-3" id="text-org6dc21eb">
+<div id="outline-container-orgec1e861" class="outline-3">
+<h3 id="orgec1e861">Curse of Dimensionality</h3>
+<div class="outline-text-3" id="text-orgec1e861">
 <p>
-In high dimensions almost all points are far away from each other
+There is a big problem in high dimensional data that may degrade the
+performance of the algorithm. That is, in high dimensions almost all
+points are far away from each other. I will now proceed to motivate
+this.
 </p>
 
-<ul class="org-ul">
-<li>the size of the data space grows exponentially with the number of dimensions</li>
-<li>this means that the size of the data set must also grow
-exponentially in order to keep the same density
-<ul class="org-ul">
-<li>the success of k-NN is very dependent on having a dense data set</li>
-<li>k-NN requires a point to be close in every single dimension</li>
-</ul></li>
-</ul>
+<p>
+Suppose you have a space in \(n\) dimensions where \(m\) points are
+distributed uniformly. The volume of the space would be \(S^n\) where
+\(S\) is a measure of a side or the size of a domain in space, assuming
+all have the same domain. You could quantify a certain data density
+quantity as \(\delta = \frac{m}{S^n}\). If we increase the dimensions by
+one, the density would decrease by a factor of \(S\), hence we need to
+have \(S\) times the original data size \(m\) to get the same density:
+\(\delta' = \frac{mS}{S^{n+1}}\). In general,
+\(\delta''=\frac{mS^k}{S^{n+k}}\), for this reason we say that the size
+of the input has to grow exponencially with the dimensions. A less
+dense space means that all the data is more spread apart, hence all
+points are far away from each other.
+</p>
+
+<p>
+The success of KNN is very dependent on having a dense data set since
+It requires points to be close in every dimension.
+</p>
 </div>
 </div>
 
-<div id="outline-container-org44ba2db" class="outline-3">
-<h3 id="org44ba2db">Computational Cost</h3>
-<div class="outline-text-3" id="text-org44ba2db">
+<div id="outline-container-orgcf1395b" class="outline-3">
+<h3 id="orgcf1395b">Computational Cost</h3>
+<div class="outline-text-3" id="text-orgcf1395b">
 <ul class="org-ul">
-<li>Linear algorithm (no preprocessing) is O(kN) to compute the distance
-for all N datapoints</li>
-<li>tree-based data structures: pre-processing often using K-D tree
+<li>Linear algorithm (no preprocessing) is \(O(kN)\) to compute the
+distance for all N datapoints</li>
+<li>\(O(klog(n))\) for tree-based data structures: pre-processing often
+using K-D tree
 <ul class="org-ul">
 <li>divide the space in regions. To check which region a point belongs
 to, simply traverse a binary tree.</li>
 </ul></li>
 </ul>
-</div>
-</div>
 
-<div id="outline-container-orgc3196db" class="outline-3">
-<h3 id="orgc3196db">Parametric vs Non-parametric Models</h3>
-<div class="outline-text-3" id="text-orgc3196db">
-<ul class="org-ul">
-<li><b><b>Parametric models</b></b> have a finite number of parameters
-<ul class="org-ul">
-<li>linear regression, logistic regression, and linear support vector
-machines</li>
-</ul></li>
-<li><b><b>Nonparametric model</b></b>: the number of parameters is (potentially)
-infinite
-<ul class="org-ul">
-<li>k-nearest neighbor, decision trees, RBF kernel SVMs</li>
-</ul></li>
-</ul>
+<p>
+k-NN variations: weighted k-NN where closest neighbors contribute the most.
+</p>
 
 <hr />
 

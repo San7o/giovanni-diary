@@ -51,15 +51,17 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org8d19f67" class="outline-2">
-<h2 id="org8d19f67">Decision Trees</h2>
-<div class="outline-text-2" id="text-org8d19f67">
+<div id="outline-container-orgebd133f" class="outline-2">
+<h2 id="orgebd133f">Decision Trees</h2>
+<div class="outline-text-2" id="text-orgebd133f">
 <p>
 Decision trees are simple, intuitive and powerful supervised learning
-algorithms. They make predictions by recursively splitting on
-different attributes according to a <b><b>tree structure</b></b>. For continuous
-attributes, splitting is based on less than or greater than some
-threshold instead.
+algorithms used for both classification and regression. They make
+predictions by recursively splitting on different attributes according
+to a <span class="underline">tree structure</span>. For continuous attributes splitting is based on
+less than or greater than some threshold. During testing time, the
+program will walk the tree from the root, based on the split condition
+at each intersection, until It reaches the leaf nodes.
 </p>
 
 <p>
@@ -72,110 +74,92 @@ Given a training dataset, we need to learn:
 </ul>
 </div>
 
-<div id="outline-container-orgd32c835" class="outline-3">
-<h3 id="orgd32c835">Classification and Regression</h3>
-<div class="outline-text-3" id="text-orgd32c835">
+<div id="outline-container-orgf7f38c8" class="outline-3">
+<h3 id="orgf7f38c8">Classification and Regression</h3>
+<div class="outline-text-3" id="text-orgf7f38c8">
 <p>
 Training examples that fall into the region \(R_m\)
-</p>
-
-<p>
 \[\{ (x^{m_1}, t^{m_1}),...,(x^{m_k}, t^{m_k}) \}\]
 </p>
 
 <p>
-<b><b>Classification</b></b> tree:
+<span class="underline">Classification</span> tree:
 </p>
 
 <ul class="org-ul">
 <li>discrete output \(y \in \{1, ..., C\}\)</li>
-<li>after traversing the tree, the final leaf value: \(y^m\) typically set
-to the most common value in \(\{t^{m_1}, ..., t^{m_k}\}\) which is the
-set of labels in the region, i.e.</li>
+<li>after traversing the tree, the final leaf value \(y^m\) is typically
+set to the most common value in \(\{t^{m_1}, ..., t^{m_k}\}\) which is
+the set of labels in the region, i.e.</li>
 </ul>
-
 <p>
 \[y^m = argmax_{t\in \{ 1, ..., C \}} \sum_{m_i}\mathbb{1}_{t} (t^{m_i}) \]
 	Where \(\mathbb{1} (x)\) is the indicator function defined as:
-</p>
-
-<p>
 \[\mathbb{1}_A: X\rightarrow \{ 0, 1 \}\]
 \[\mathbb{1}_A(x) \equiv
 \begin{cases}
 1,\ x\in A \\
 0,\ x \notin A
 \end{cases}\]
-</p>
-
-<p>
-<b><b>Regression tree:</b></b>
+<span class="underline">Regression</span> tree:
 </p>
 
 <ul class="org-ul">
 <li>continuous output: \(y\in \mathbb{R}\)</li>
-<li>the leaf value \(y^m\) typical set to the mean value in
-\(\{t^{m_1},...,t^{m_k}\}\)</li>
+<li>the leaf value \(y^m\) typical set to the mean value in \(\{t^{m_1},...,t^{m_k}\}\)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org3775772" class="outline-3">
-<h3 id="org3775772">How do we learn a decision tree</h3>
-<div class="outline-text-3" id="text-org3775772">
+<div id="outline-container-org96c1232" class="outline-3">
+<h3 id="org96c1232">Train a decision tree</h3>
+<div class="outline-text-3" id="text-org96c1232">
 <p>
 We want to find a simple tree that explains data well. A good enough
-approach would be resort to a greedy heuristic: <b><b>start with an empty
+approach would be to use a greedy heuristic: start with an empty
 decision tree and complete the training set by recursively "splitting"
-the best attributes.</b></b>
+the best attributes.
 </p>
 
 <p>
-We will now discuss ways to decide which split is the best.
+We will now discuss three ways to decide which split is the best.
 </p>
 </div>
 
-<div id="outline-container-orga2dcb80" class="outline-4">
-<h4 id="orga2dcb80">Accuracy Gain</h4>
-<div class="outline-text-4" id="text-orga2dcb80">
+<div id="outline-container-org9efc150" class="outline-4">
+<h4 id="org9efc150">Accuracy Gain</h4>
+<div class="outline-text-4" id="text-org9efc150">
 <p>
-A <b><b>gain</b></b> is defined based on change in some criteria before and
-after a split. Let us define <b><b>accuracy gain</b></b>.
+A <span class="underline">gain</span> is defined based on change in some criteria before and after
+a split. Let us define <span class="underline">accuracy gain</span>.
 </p>
 
 <ul class="org-ul">
-<li>suppose we have a region \(R\). Denote the misclassification error of
-that region as \(L(R)\) which is the fraction of incorrect
-classification</li>
+<li>suppose we have a region \(R\). Denote the misclassification error of that region as $L(R)  $ which is the fraction of incorrect classification</li>
 <li>we split \(R\) into two regions \(R_1\) and \(R_2\) based on some attribute</li>
-<li>the error after the split is:</li>
-</ul>
-
-<p>
+<li>the error after the split is:
 \[\frac{|R_1|}{|R|}L(R_1) + \frac{|R_2|}{|R|}L(R_2)\]
-</p>
-
-<p>
-where \(|R|\) is the number of samples in \(R\).
-</p>
-<ul class="org-ul">
-<li>Therefore, the <b><b>accuracy gain</b></b> is:</li>
+where \(|R|\) is the number of samples in \(R\).</li>
+<li>we define the accuracy gain as:
+\[AG = L(R) - \frac{|R_1| L(R_1) + |R_2|L(R_2)}{|R|}\]</li>
 </ul>
 
 <p>
-\[L(R) - \frac{|R_1| L(R_1) + |R_2|L(R_2)}{|R|}\]
+A big value of \(AG\) means that the split is good. If the error \(L(R)\)
+after the split is as good as before, \(AG\) is \(0\), and if the split
+introduced more error then \(AG\) is negative.
 </p>
 
 <p>
-But we need to decide what is a good split. Another option would be to
-use information theory.
+We defined a function to measure how good a split is, let's look at
+another possibility inspired by information theory.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgb459591" class="outline-4">
-<h4 id="orgb459591">Basic of information theory and entropy</h4>
-<div class="outline-text-4" id="text-orgb459591">
+<div id="outline-container-orge59b820" class="outline-4">
+<h4 id="orge59b820">Basic of information theory and entropy</h4>
+<div class="outline-text-4" id="text-orge59b820">
 <p>
 Which coin result is more uncertain between those two?
 </p>
@@ -186,17 +170,12 @@ Which coin result is more uncertain between those two?
 </ul>
 
 <p>
-Entropy is a measure of expected "surprise". How uncertain are we of
-the value of a draw from this distribution?
-</p>
-
-<p>
-\[H(X) = -\mathbb{E}_{X\sim p}[log_2 p(X)] = -\sum_{x\in X} p(x)log_2p(x)\]
+Entropy is a measure of expected "surprise". How uncertain are we of the value of a draw from this distribution?
+\[H(X) = -\mathbb{E}_{X\sim p}[\log_2 p(X)] = -\sum_{x\in X} p(x)\log_2p(x)\]
 </p>
 
 <ul class="org-ul">
-<li><b><b>the greater the entropy, the less certain we are. The more certain
-we are, the less entropy is</b></b>
+<li>the greater the entropy, the less certain we are. The more certain we are, the less entropy
 <ul class="org-ul">
 <li>remember that entropy is the measure of disorder</li>
 </ul></li>
@@ -204,8 +183,8 @@ we are, the less entropy is</b></b>
 
 <p>
 Meaning: we are taking the probability of the "surprise" of an event
-\(E\) with the formula \(log(\frac{1}{p(E)})\) which can be rewritten as
-\(-log(p(E))\). This formula means that the more likely the event, the
+\(E\) with the formula \(\log(\frac{1}{p(E)})\) which can be rewritten as
+\(-\log(p(E))\). This formula means that the more likely the event, the
 closes it's surprise will be 0. The opposite is true: the less
 probable the event, the greater the value of the log function. Since
 we are taking the expected value, the more unexpected is the
@@ -223,50 +202,44 @@ than others and do not surprise us).
 </p>
 
 <p>
-Entropy can be a better option than accuracy to measure certainty.
+Entropy can be a better option than accuracy gain to measure certainty.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org586322f" class="outline-4">
-<h4 id="org586322f">Information Gain</h4>
-<div class="outline-text-4" id="text-org586322f">
+<div id="outline-container-org178599b" class="outline-4">
+<h4 id="org178599b">Information Gain</h4>
+<div class="outline-text-4" id="text-org178599b">
 <p>
-Information Gain measures the expected reduction in entropy. It is
-define as
+Information Gain measures the expected reduction in entropy. It is defined as
 </p>
 
 <ul class="org-ul">
 <li>Entropy of region \(R\) or parent node before the split: \(H(R)\)</li>
-<li>entropy of region \(R_1\) and \(R_2\) or leaf nodes after the split:
-\(H(R_1)\) and \(H(R2)\)</li>
-<li>Information gain is defined as</li>
+<li>entropy of region \(R_1\) and \(R_2\) or leaf nodes after the split: \(H(R_1)\) and \(H(R2)\)</li>
+<li>Information gain is defined as
+\[IG = H(R) - \frac{|R_1|H(R_1) + |R_2|H(R_2)}{|R|}\]</li>
 </ul>
 
 <p>
-\[IG = H(R) - \{ \frac{|R_1|}{|R|}H(R_1) + \frac{|R_2|}{|R|}H(R_2) \}\]
-</p>
-
-<p>
-The feature and the corresponding value with the highest information
-gain will be selected for splitting.
+The feature and the corresponding value with the highest information gain will be selected for splitting.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org143b964" class="outline-4">
-<h4 id="org143b964">Gini index</h4>
-<div class="outline-text-4" id="text-org143b964">
+<div id="outline-container-org71f3fca" class="outline-4">
+<h4 id="org71f3fca">Gini index</h4>
+<div class="outline-text-4" id="text-org71f3fca">
 <p>
 Gini Index is another widely used metric for choosing a good split in
-decision trees Gini index measures the "impurity" (or non-homogeneity)
-at a given modes as \[GINI(R)=1-\sum_j [p(j|R)]^2\] where \(p(j|R)\) is
-the class frequency of class j in region R
+decision trees.  The Gini index measures the "impurity" (or
+non-homoneneity) at a given modes as \[GINI(R)=1-\sum_j [p(j|R)]^2\]
+where \(p(j|R)\) is the class frequency of class j in region R
 </p>
 
 <ul class="org-ul">
-<li>intuitively, it aims to measure <b><b>the probability of misclassifying
-a randomly chosen element</b></b></li>
+<li>intuitively, it aims to measure the probability of misclassifying a
+randomly chosen element</li>
 <li>greater the value of the Gini index, the greater the changes of
 having misclassificaiton</li>
 <li>thus, we will look for greater gini values</li>
@@ -275,60 +248,46 @@ having misclassificaiton</li>
 </div>
 </div>
 
-<div id="outline-container-orgc45b308" class="outline-3">
-<h3 id="orgc45b308">Constructing Decisions Trees</h3>
-<div class="outline-text-3" id="text-orgc45b308">
-<p>
-Chose attribute and value that gives:
-</p>
-
-<ul class="org-ul">
-<li>high accuracy gain OR</li>
-<li>highest information gain OR</li>
-<li>lowest GINI index</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-orgd7fd696" class="outline-3">
-<h3 id="orgd7fd696">Overfitting</h3>
-<div class="outline-text-3" id="text-orgd7fd696">
+<div id="outline-container-org9ecd472" class="outline-3">
+<h3 id="org9ecd472">Overfitting</h3>
+<div class="outline-text-3" id="text-org9ecd472">
 <ul class="org-ul">
 <li>decision trees have a structure that is determined by the data</li>
 <li>as a result they are flexible and can easily fit the training set,
 with high risk of overfitting</li>
-<li>what we can do is cut branches of the tree and replacing it by a
-leave node (<b><b>pruning</b></b>)</li>
+<li>what we can do is cut branches of the tree and replaceing it by a
+leath node (<sub>pruning</sub>_)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org44ea0ce" class="outline-3">
-<h3 id="org44ea0ce">Limitations</h3>
-<div class="outline-text-3" id="text-org44ea0ce">
+<div id="outline-container-org0767f13" class="outline-3">
+<h3 id="org0767f13">Limitations</h3>
+<div class="outline-text-3" id="text-org0767f13">
 <ul class="org-ul">
 <li>you have exponentially less data al lower levels</li>
 <li>a large tree can overfit the data</li>
-<li>decision trees do not necessarily reach the global minima</li>
+<li>decision trees do not necessarly reach the global minima</li>
 <li>mistakes at top-level propagate down tree</li>
 </ul>
 
 <p>
 Decision trees can also be used for regression on real-valued outputs
-by choosing the squared error rather that maximize information gain.
+by choosing the squared error rather than maximizing the information
+gain.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org2653592" class="outline-3">
-<h3 id="org2653592">Comparison to KNN</h3>
-<div class="outline-text-3" id="text-org2653592">
+<div id="outline-container-orga4aadb7" class="outline-3">
+<h3 id="orga4aadb7">Comparison to KNN</h3>
+<div class="outline-text-3" id="text-orga4aadb7">
 <p>
 Advantages and Decision Trees over KNN
 </p>
 
 <ul class="org-ul">
-<li>good with discrete attributes</li>
+<li>good with descrete attributes</li>
 <li>easily deals with missing vales</li>
 <li>robust to scale of inputs</li>
 <li>good when there are lots of attributes, but only a few are important</li>
@@ -337,8 +296,8 @@ Advantages and Decision Trees over KNN
 </ul>
 
 <p>
-If some features are more important than other, I may want to choose a
-decision tree
+If some features are more important than others, you may want to
+choose a decision tree.
 </p>
 
 <p>
@@ -362,31 +321,32 @@ Disadvantages:
 </ul>
 </div>
 </div>
+</div>
 
-<div id="outline-container-org84dbf24" class="outline-3">
-<h3 id="org84dbf24">Improvement to decision trees: Random Forests</h3>
-<div class="outline-text-3" id="text-org84dbf24">
+<div id="outline-container-orgff454d3" class="outline-2">
+<h2 id="orgff454d3">Improvement to decision trees: Random Forests</h2>
+<div class="outline-text-2" id="text-orgff454d3">
 <p>
-<b><b>Bootstrapping</b></b> is a resampling technique that involves repeatedly
-drawing samples from the dataset with replacement
+<span class="underline">Bootstrapping</span> is a resampling technique that involves repeatedly
+drawing samples from the dataset with replacement (the same element
+can be selected multiple times)
 </p>
 
 <ul class="org-ul">
-<li>creates multiple datasets that introduce variability, reducing
-overfitting in models</li>
+<li>this creates multiple datasets that introduce variability, reducing overfitting in models</li>
 </ul>
 
 <p>
-<b><b>Bagging</b></b> (or Bootstrap Aggregation) involves training multiple
+<span class="underline">Bagging</span> (or Bootstrap Aggregation) involves training multiple
 decision trees on different bootstrapped samples and averaging their
 outputs (for regression) or majority voting (for classification)
 </p>
 
 <ul class="org-ul">
 <li>In addition to bootstrapping, Random Forests introduce feature
-randomness, this decreases the correlation between each DT and
+randomness, this descreases the correlation between each DT and
 increases its predictive accuracy on average. In other words, avoid
-very string predictive features that lead to similar split in trees</li>
+very strong predictive features that lead to similar split in trees</li>
 </ul>
 
 <p>
@@ -395,21 +355,21 @@ Algorithm:
 
 <ol class="org-ol">
 <li>Draw multiple bootstrapped datasets from the original data</li>
-<li>Train A DT on each dataset using a random subset of \(sqrt(d)\)
+<li>Train a DT on each dataset using a random subset of \(sqrt(d)\)
 features at each split</li>
 <li>Aggregate predictions:
 <ol class="org-ol">
-<li>classification: majority cote</li>
+<li>classification: majority vote</li>
 <li>regression: average predictions</li>
 </ol></li>
 </ol>
+
 
 <hr />
 
 <p>
 Travel: <a href="intro-to-machine-learning.html">Intro to Machine Learning</a>, <a href="../../../theindex.html">Index</a>
 </p>
-</div>
 </div>
 </div>
 </div>

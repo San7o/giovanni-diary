@@ -51,31 +51,32 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-orga667f33" class="outline-2">
-<h2 id="orga667f33">Deep Generative Models</h2>
-<div class="outline-text-2" id="text-orga667f33">
+<div id="outline-container-org06a7709" class="outline-2">
+<h2 id="org06a7709">Deep Generative Models</h2>
+<div class="outline-text-2" id="text-org06a7709">
 </div>
 
 
-<div id="outline-container-org8836edc" class="outline-3">
-<h3 id="org8836edc">Definitions</h3>
-<div class="outline-text-3" id="text-org8836edc">
+<div id="outline-container-orge779c30" class="outline-3">
+<h3 id="orge779c30">Definitions</h3>
+<div class="outline-text-3" id="text-orge779c30">
 </div>
-<div id="outline-container-org3c843af" class="outline-4">
-<h4 id="org3c843af">Generative Models</h4>
-<div class="outline-text-4" id="text-org3c843af">
+<div id="outline-container-org9b1eb68" class="outline-4">
+<h4 id="org9b1eb68">Generative Models</h4>
+<div class="outline-text-4" id="text-org9b1eb68">
 <p>
-<b><b>Generative models</b></b> are statistical models of the data distribution
-\(p_X\) or \(p_{XY}\) depending on the availability of target data.
+<span class="underline">Generative models</span> are statistical models of the data distribution
+\(p_X\) or \(p_{XY}\), depending on the availability of target data, where
+\(Y\) is the label variable.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org591b3fa" class="outline-4">
-<h4 id="org591b3fa">Discriminative models</h4>
-<div class="outline-text-4" id="text-org591b3fa">
+<div id="outline-container-org2546232" class="outline-4">
+<h4 id="org2546232">Discriminative models</h4>
+<div class="outline-text-4" id="text-org2546232">
 <p>
-<b><b>Discriminative models</b></b> are statistical models of the conditional
+<span class="underline">Discriminative models</span> are statistical models of the conditional
 distribution \(p_{Y|X}\).
 </p>
 
@@ -91,18 +92,13 @@ model via Bayes rule but not viceversa.
 </div>
 </div>
 
-<div id="outline-container-orgb162c65" class="outline-3">
-<h3 id="orgb162c65">Density Estimation</h3>
-<div class="outline-text-3" id="text-orgb162c65">
+<div id="outline-container-org87a07da" class="outline-3">
+<h3 id="org87a07da">Density Estimation</h3>
+<div class="outline-text-3" id="text-org87a07da">
 <p>
 Explicit problem: Find a probability distribution \(f\in \Delta (Z)\)
 that fits the data, where \(z\in Z\) is sampled from an unknown data
 distribution \(p_{data}\in \Delta (Z)\).
-</p>
-
-<p>
-In the case of supervised learning, \(Z=X\times Y\) while in the case of
-unsupervised learning, \(Z=X\). We will discuss this last case.
 </p>
 
 <p>
@@ -111,6 +107,11 @@ data \(f(\omega)\in Z\) from an input \(w\) sampled from some predefined
 distribution \(p_\omega \in \Delta (\Omega)\) in a way that the
 distribution of generated samples fits the (unknown) data distribution
 \(p_{data}\in \Delta (Z)\).
+</p>
+
+<p>
+In the case of supervised learning, \(Z=X\times Y\) while in the case of
+unsupervised learning, \(Z=X\). We will discuss this last case.
 </p>
 
 <p>
@@ -123,25 +124,112 @@ hypothesis \(q*\in H\) that best fits the data distributed according to
 </p>
 
 <p>
-\[q*\in arg\ min\ dff_{q\in H}(p_{data}, q)\]
+\[q*\in arg\ min\ d_{q\in H}(p_{data}, q)\]
+</p>
+</div>
+
+<div id="outline-container-orga2979a6" class="outline-4">
+<h4 id="orga2979a6">KL-Divergence</h4>
+<div class="outline-text-4" id="text-orga2979a6">
+<p>
+Before continuing, It is worth taking some time to study KL-divergence
+since we will use this later. The Kullback–Leibler divergence, denoted
+as \(d_{kl}(P|Q)\) is a type of statistical distance that measures how
+much a model or theory probability distribution \(Q\) is different from
+a true probability distribution \(P\). It is defined as:
+</p>
+
+<p>
+\[d_{kl}(P|Q)=\sum_{x\in X}P(x)\log \frac{P(x)}{Q(x)}=\mathbb{E}[\log \frac{P(x)}{Q(x)}]\]
+</p>
+
+<p>
+A simple interpretation of the KL divergence of \(P\) from \(Q\) is the
+expected excess surprise from using \(Q\) as a model instead of \(P\) when
+the actual distribution is \(P\). If \(P\) and \(Q\) are the same
+distribution, the KL-divergence is \(0\).
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgeb0f220" class="outline-3">
-<h3 id="orgeb0f220">Variational AutoEncoders (VAE)</h3>
-<div class="outline-text-3" id="text-orgeb0f220">
+<div id="outline-container-orge71acd2" class="outline-4">
+<h4 id="orge71acd2">Jensen's Inequality</h4>
+<div class="outline-text-4" id="text-orge71acd2">
 <p>
-Autoencoders are a way of decomposing high-dimensional data into a
-lower dimensional representation. A decoder reverses this and the
-objective is to minimize the divergence between input and its
-reconstruction. Variational Autoencoders add a probabilistic spin to
-traditional Autoencoders.
+Jensen's inequality generalizes the definition of convex function as a
+function that satisfies the following inequality:
 </p>
 
 <p>
-\[q_\theta (x)=\mathbb{E}_{\omega \sim p^{\omega}}[q_\theta (x|\omega)]\]
-\[\theta^* \in arg\ min\ d(p_{data}, q_{\theta})\]
+\[f(\theta x_i + (1-\theta)x_2) \le \theta f(x_i)+(1-\theta)f(x_2)\]
+</p>
+
+<p>
+In the context of probability theory, this is stated as:
+</p>
+
+<p>
+\[\phi(\mathbb{E}[X])\le \mathbb{E}[\phi(X)]\]
+</p>
+
+<p>
+where \(\phi\) is a convex function.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgae687e4" class="outline-3">
+<h3 id="orgae687e4">Autoencoders</h3>
+<div class="outline-text-3" id="text-orgae687e4">
+<p>
+The basic idea behind autoencoders is to encode information (as in
+compress) automatically, hence the name. Autoencoders are neural
+network with the smallest layer at the center, and are symmetrical on
+the left and right. We call the part of the network from the input to
+the center an <span class="underline">encoder</span>, we call the other part a <span class="underline">decoder</span>. The
+network can be trained with backpropagation by feeding input and
+setting the error to be the difference between the input and what came
+out.
+</p>
+
+<p>
+The encoder can also be used for dimensionality reduction without the
+encoder, or as a supervised model. It will reduce the input to a much
+smaller latent space where another neural network can be connected to.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org55d8fb5" class="outline-3">
+<h3 id="org55d8fb5">Variational AutoEncoders (VAE)</h3>
+<div class="outline-text-3" id="text-org55d8fb5">
+<p>
+Variational Autoencoders add a "probabilistic spin" to traditional
+Autoencoders by finding a probability distribution in the latent space
+and using this to decode another probabilistic distribution that best
+matches the input's distribution.
+</p>
+
+<p>
+Let \(\omega\) be the distribution in the <span class="underline">latent space</span>,
+\(q_\theta(\omega|x)\) be an <span class="underline">encoder</span> distribution and
+\(q_\theta(x|\omega)\) be a <span class="underline">decoder</span> distribution. Then the objective
+is:
+</p>
+
+<p>
+\[\theta^* \in arg\ min_{\theta \in \Theta}\ d(p_{data}, q_{\theta})\]
+\[(1)\ q_\theta (x)=\mathbb{E}_{\omega \sim p^{\omega}}[q_\theta (x|\omega)]\]
+</p>
+
+<p>
+The two formulas above are really important. We want to find the best
+parameters that minimize the distance between the predicted \(q_\theta\)
+distribution and the actual real distribution \(p_{data}\). We find
+\(q_\theta(x)\) by taking the expected value of the decoder function
+\(q_\theta(x|\omega)\) where \(\omega\) is the distribution in the latent
+space.
 </p>
 
 <p>
@@ -150,8 +238,21 @@ As the divergence measure we will use the KL-Divergence:
 
 <p>
 \[d_{KL}(p_{data}, q_{\theta})=\mathbb{E}_{x\sim p_{data}}[\log \frac{p_{data}(x)}{q_{\theta (x)}}]=-\mathbb{E}_{x\sim p_{data}}[\log\ q_{\theta}(x)]+const\]
-\[= -\mathbb{E}_{x\sim p_{data}}[\log\ \mathbb{E}_{\omega \sim p_{\omega}}[q_{\theta (x|\omega)}]]+const\]
-\[\log\ \mathbb{E}_{\omega \sim p_{\omega}}[q_{\theta} (x|\omega)]=\log\ \mathbb{E}_{\omega \sim q_\psi (.|x)}[q_{\theta} (x|\omega)\frac{p_{\omega}(\omega)}{q_{\psi (\omega | x)}}]\]
+</p>
+
+<p>
+\[=^{(1)} -\mathbb{E}_{x\sim p_{data}}[\log\ \mathbb{E}_{\omega \sim p_{\omega}}[q_{\theta (x|\omega)}]]+const\]
+</p>
+
+<p>
+Let's focus on the argument of the outer expected value. Let
+\(q_\psi(\omega | x)\in \Delta (\Omega)\) denote an encoding probability
+distribution with parameters \(\psi\). We can change the expected value
+measure to this probability like this:
+</p>
+
+<p>
+\[\log\ \mathbb{E}_{\omega \sim p_{\omega}}[q_{\theta} (x|\omega)]=\log\ \mathbb{E}_{\omega \sim q_\psi (\cdot|x)}[q_{\theta} (x|\omega)\frac{p_{\omega}(\omega)}{q_{\psi (\omega | x)}}]\]
 </p>
 
 <p>
@@ -159,12 +260,15 @@ Thanks to the Jensen's inequality we can write:
 </p>
 
 <p>
-\[\ge \log\ \mathbb{E}_{\omega \sim q_\psi (.|x)}[\log(q_{\theta}(x|\omega)\frac{p_{\omega}(\omega)}{q_{\psi (\omega | x)}})] =\]
-\[=  \mathbb{E}_{\omega \sim q_\psi (.|x)}[\log\ q_\theta (x|\omega)]-d_{KL}(q_\psi (.|x), p_\omega)\]
+\[\ge \mathbb{E}_{\omega \sim q_\psi (\cdot|x)}[\log(q_{\theta}(x|\omega)\frac{p_{\omega}(\omega)}{q_{\psi (\omega | x)}})] =\]
+\[=  \mathbb{E}_{\omega \sim q_\psi (\cdot|x)}[\log\ q_\theta (x|\omega)]-d_{KL}(q_\psi (\cdot|x), p_\omega)\]
 </p>
 
 <p>
-Those two last terms are the "<b><b>Reconstruction</b></b>" and the "<b><b>Regularizer</b></b>". The first is still NP-hard to compute but we can estimate the gradients of the parameters, while the regularizer might have closed-form solution (for example, using Gaussian distribution).
+Those two last terms are the <span class="underline">Reconstruction</span> and the
+<span class="underline">Regularizer</span>. The first is still NP-hard to compute but we can
+estimate the gradients of the parameters, while the regularizer might
+have closed-form solution (for example, using Gaussian distribution).
 </p>
 
 <p>
@@ -172,19 +276,42 @@ In practice training is divided into several steps: first data samples
 are fed to an encoder which can be something like a normal neural
 network or a convolutional one. This encoder will reduce the
 dimensionality of the input into what's called a "latent space" which
-Is composed of fewer nodes than the input layer. We are interested in
-the distribution of this latent sapce, so we approximate It as a
-gaussian and we save the mean and the variance. We then feed this
-statistical model to the decoder which generates again some
-data. Finally, we compare the original samples with the generated data
-via a loss function and update the weights of both the encoder and
-decoder do minimize the difference.
+is composed of fewer nodes than the input layer. We are interested in
+the distribution of this latent space, so we assume that Its
+distribution follows a gaussian and we compute the mean and the
+covariance. We then feed this statistical model to the decoder which
+generates again some data. Finally, we compare the original samples
+with the generated data via a loss function and update the weights of
+both the encoder and decoder to minimize the difference.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf5f881d" class="outline-3">
+<h3 id="orgf5f881d">Issues with VAE</h3>
+<div class="outline-text-3" id="text-orgf5f881d">
+<p>
+The problem with this approach is underfitting, since at initial
+stages the regularizer is too strong and tends to annihilate the model
+capacity, and blurry output data.
+</p>
+
+<p>
+A modern approach to image generation is Vector Quantized VAE
+(VQ-VAE-2) which is a image synthesis model based on Variational
+Autoencoders. It produces images that are high quality by leveraging a
+<span class="underline">discrete latent space</span>.
 </p>
 </div>
 
-<div id="outline-container-org5b8522a" class="outline-4">
-<h4 id="org5b8522a">Conditional VAE</h4>
-<div class="outline-text-4" id="text-org5b8522a">
+<div id="outline-container-org639de1c" class="outline-4">
+<h4 id="org639de1c">Conditional VAE</h4>
+<div class="outline-text-4" id="text-org639de1c">
+<p>
+Variatonal Auto Encoders do not need lables. Conditional VAE are a
+variation of VAE that accept labels.
+</p>
+
 <p>
 Assume we have side information \(y\in Y\) (e.g. digit labels,
 attributes, etc) and we want to generate new data conditioned on the
@@ -200,40 +327,32 @@ obtaining \(q_{\psi}(\omega | x, y)\) and \(q_{\theta}(x|\omega, y)\).
 <p>
 Define priors conditioned on side information \(p_{\omega}(\omega |y)\).
 </p>
+</div>
+</div>
+</div>
 
+<div id="outline-container-org37cb529" class="outline-3">
+<h3 id="org37cb529">Generative Adversial Networks (GAN)</h3>
+<div class="outline-text-3" id="text-org37cb529">
 <p>
-The problem with this approach is underfitting, since at initial
-stages the regularizer is too strong and tends to annihilate the model
-capacity, and blurry output data.
+VAE are able to find explicit densities, GAN enables the possibility
+to find implicit ones.
 </p>
-</div>
-</div>
 
-<div id="outline-container-orge0983b1" class="outline-4">
-<h4 id="orge0983b1">VQ-VAE</h4>
-<div class="outline-text-4" id="text-orge0983b1">
 <p>
-VQ-VAE-2 is a image synthesis model based on Variational
-Autoencoders. It produces images that are high quality comparable to
-big HANs models.
+GAN models are composed by two "adversarial" submodels: a <span class="underline">generator</span>
+and a <span class="underline">discriminator</span>. The term adversarial means that the two
+submodels are in competition and there is one winner (a zero sum
+game).
 </p>
-</div>
-</div>
-</div>
 
-<div id="outline-container-orgd66f07a" class="outline-3">
-<h3 id="orgd66f07a">Generative Adversial Networks (GAN)</h3>
-<div class="outline-text-3" id="text-orgd66f07a">
 <p>
-GAN models are composed by two "adversarial" submodels: a generator
-and a discriminator. The term adversarial means that the two submodels
-are in competition and there is one winner (a zero sum game). The
-generator is tasked to generate fake images, while the discriminator
-is tasked to recognize if an image is fake or not. The generator
-generates images for the discriminator to check, mixing real images
-with generated ones. If the generator fools the discriminator, than
-the latter needs to update Its weights, otherwise the opposite will
-happen.
+The generator is tasked to generate fake images, while the
+discriminator is tasked to recognize if an image is fake or not. The
+generator generates images for the discriminator to check, mixing real
+images with generated ones. If the generator fools the discriminator,
+than the latter needs to update Its weights, otherwise the opposite
+will happen.
 </p>
 
 <p>
@@ -245,9 +364,11 @@ data points in \(X\) given a random element from \(\Omega\).
 
 <p>
 The density induced by the prior \(p_{\omega}\) and the generator
-\(g_{\omega}\) is given by \(q_{\theta}(x)=\mathbb{E}_{\omega \sim
+\(g_{\theta}\) is given by \(q_{\theta}(x)=\mathbb{E}_{\omega \sim
 p^{\omega}}\delta [g_\theta (\omega)-x]\), where \(\delta\) is the Dirac
-delta function.
+delta function. The Dirac function is a generalized function on the
+real numbers, whose value is zero everywhere except at zero, and whose
+integral over the entire real line is equal to one.
 </p>
 
 <p>
@@ -257,7 +378,9 @@ Jensen-Shannon divergence:
 </p>
 
 <p>
-\[\theta^* \in arg\ min_{\theta}\ d_{JS}(p_{data}, q_{\theta})\]
+\[d_{JS}(P, Q)=\frac{1}{2}d_{kl}(P|M)+\frac{1}{2}d_{kl}(Q|M),\
+M=\frac{1}{2}(P+Q)\] \[\theta^* \in arg\ min_{\theta}\
+d_{JS}(p_{data}, q_{\theta})\]
 </p>
 
 <p>
@@ -272,8 +395,13 @@ where
 </p>
 
 <p>
-Let \(t_\phi (x)\) be a classifier (or discriminator) for data point in
-the training set, we get the following lower bound on our objective
+The interpretation of the \(JS\) divergence is that this mixes how the
+two distributions depend on one another, not just one over the other;
+It is useful when there is not a true reference distribution.
+</p>
+
+<p>
+Let \(t_\phi (x)\) be a binary classifier (or discriminator) for data point in the training set predicting whether \(x\) came from \(p\) or \(q\), we get the following lower bound on our objective:
 </p>
 
 <p>
@@ -286,7 +414,17 @@ Which is minimized to obtain the generator's parameters:
 </p>
 
 <p>
-\[\theta^* \in argmin_\theta\ max_\phi \{ \mathbb{E}_{x\sim p}[\log\ t_\phi(x)] + \mathbb{E}_{x\sim q}[\log(1-t_\phi(x))] \}\]
+\[\theta^* \in argmin_\theta\ max_\phi \{ \mathbb{E}_{x\sim p}[\log\ t_\phi(x)] + \mathbb{E}_{x\sim q}[\log(1-t_\phi(g_{\theta}(x)))] \}\]
+</p>
+
+<p>
+In practice, during training both real data and generated data are
+passed to a classifier that estimates if the data is real or generated
+with the \(t\phi(x)\) function. The generator and the discriminators are
+opponents and this is modeled mathematically via the arg min-max
+function: the generator tries to minimize the parameters \(\theta\) and
+the classifier tries to maximize the parameter \(\phi\) to solve the
+equation.
 </p>
 
 <hr />

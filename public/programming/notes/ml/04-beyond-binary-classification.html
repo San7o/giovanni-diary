@@ -51,36 +51,12 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org7f2f793" class="outline-2">
-<h2 id="org7f2f793">Beyond binary classification</h2>
-<div class="outline-text-2" id="text-org7f2f793">
-</div>
-
-<div id="outline-container-orgbd4df60" class="outline-3">
-<h3 id="orgbd4df60">Binary Classification</h3>
-<div class="outline-text-3" id="text-orgbd4df60">
+<div id="outline-container-org7f1c2dd" class="outline-2">
+<h2 id="org7f1c2dd">Beyond binary classification</h2>
+<div class="outline-text-2" id="text-org7f1c2dd">
 <p>
-In binary classification, given:
-</p>
-
-<ul class="org-ul">
-<li>an input space \(X\)</li>
-<li>an unknown distribution \(D\) over \(X \times \{ -1,+1 \}\)</li>
-<li>a training set D sampled from \(D\)</li>
-</ul>
-
-<p>
-Compute: A function \(f\) minimizing \(\mathbb{E}_{(x, y)\sim D}[f(x) \ne  y]\) 
-Example: linear classification, classify between two classes
-</p>
-</div>
-</div>
-
-<div id="outline-container-org6b76afd" class="outline-3">
-<h3 id="org6b76afd">Multi-class classification</h3>
-<div class="outline-text-3" id="text-org6b76afd">
-<p>
-In multi-class classification, given:
+In multi-class classification problem, differently from binary
+classification, given:
 </p>
 
 <ul class="org-ul">
@@ -91,8 +67,11 @@ In multi-class classification, given:
 
 <p>
 Compute: A function \(f\) minimizing \(\mathbb{E}_{(x, y)\sim D}[f(x) \ne  y]\) 
-Idea: one line does not suffice, but we can combine more lines
 </p>
+
+<ul class="org-ul">
+<li>Idea: one line does not suffice, but we can combine more lines</li>
+</ul>
 
 <p>
 There are two approaches to achieve multi-class classification which
@@ -104,12 +83,12 @@ we will discuss:
 <li>all vs all</li>
 </ul>
 </div>
-</div>
-<div id="outline-container-org96277bf" class="outline-3">
-<h3 id="org96277bf">One vs All (OVA)</h3>
-<div class="outline-text-3" id="text-org96277bf">
+
+<div id="outline-container-org69f80da" class="outline-3">
+<h3 id="org69f80da">One vs All (OVA)</h3>
+<div class="outline-text-3" id="text-org69f80da">
 <p>
-For each label \(k=1, ..., K\) define a binary problem where"
+For each label \(k=1, ..., K\) define a binary problem where:
 </p>
 
 <ul class="org-ul">
@@ -147,12 +126,11 @@ OneVsAllTest(f_1,...,f_k, x):
 </div>
 </div>
 
-<div id="outline-container-org71f3fe9" class="outline-3">
-<h3 id="org71f3fe9">All vs All (AVA)</h3>
-<div class="outline-text-3" id="text-org71f3fe9">
+<div id="outline-container-org08c4d48" class="outline-3">
+<h3 id="org08c4d48">All vs All (AVA)</h3>
+<div class="outline-text-3" id="text-org08c4d48">
 <p>
-All vs All, sometimes called <b><b>all pairs</b></b>, It trains \(K(K-1)/2\)
-classifiers:
+All vs All, sometimes called <span class="underline">all pairs</span>, trains \(K(K-1)/2\) classifiers:
 </p>
 
 <ul class="org-ul">
@@ -171,9 +149,9 @@ Note: The teacher might ask to explain the algorithm in more detail
 </div>
 </div>
 
-<div id="outline-container-orgaab41a3" class="outline-3">
-<h3 id="orgaab41a3">Ova vs Ava</h3>
-<div class="outline-text-3" id="text-orgaab41a3">
+<div id="outline-container-org3ea44d9" class="outline-3">
+<h3 id="org3ea44d9">Ova vs Ava</h3>
+<div class="outline-text-3" id="text-org3ea44d9">
 <p>
 Train time:
 </p>
@@ -197,15 +175,14 @@ Error:
 </p>
 
 <ul class="org-ul">
-<li>AVA tests with more classifiers and therefore has more changes for
-errors</li>
+<li>AVA tests with more classifiers and therefore has more chances for errors</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org01a2369" class="outline-3">
-<h3 id="org01a2369">Macroaveraging vs Microaveraging</h3>
-<div class="outline-text-3" id="text-org01a2369">
+<div id="outline-container-orgc807cc4" class="outline-3">
+<h3 id="orgc807cc4">Macroaveraging vs Microaveraging</h3>
+<div class="outline-text-3" id="text-orgc807cc4">
 <ul class="org-ul">
 <li>Microaveraging: average over examples</li>
 <li>Macroaveraging: calculate evaluation score (e.g. accuracy) for each

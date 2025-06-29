@@ -5,34 +5,26 @@
 * Beyond binary classification
 #+INDEX: Giovanni's Diary!Programming!Notes!Intro to Machine Learning!Beyond Binary Classification
 
-** Binary Classification
-In binary classification, given:
-
-- an input space $X$
-- an unknown distribution $D$ over $X \times \{ -1,+1 \}$
-- a training set D sampled from $D$
-
-Compute: A function $f$ minimizing $\mathbb{E}_{(x, y)\sim D}[f(x) \ne  y]$ 
-Example: linear classification, classify between two classes
-
-** Multi-class classification
-In multi-class classification, given:
+In multi-class classification problem, differently from binary
+classification, given:
 
 - An input space $X$ and number of classes $K$
 - An unknown distribution $D$ over $X \times [K]$
 - A training set D sampled from $D$
 
 Compute: A function $f$ minimizing $\mathbb{E}_{(x, y)\sim D}[f(x) \ne  y]$ 
-Idea: one line does not suffice, but we can combine more lines
+
+- Idea: one line does not suffice, but we can combine more lines
 
 There are two approaches to achieve multi-class classification which
 we will discuss:
 
 - one vs all
 - all vs all
+
 ** One vs All (OVA)
 
-For each label $k=1, ..., K$ define a binary problem where"
+For each label $k=1, ..., K$ define a binary problem where:
 
 - all examples with label $k$ are positive
 - all other examples are negative
@@ -63,8 +55,7 @@ OneVsAllTest(f_1,...,f_k, x):
 
 ** All vs All (AVA)
 
-All vs All, sometimes called **all pairs**, It trains $K(K-1)/2$
-classifiers:
+All vs All, sometimes called _all pairs_, trains $K(K-1)/2$ classifiers:
 
 - the classifier $F_{ij}$ receives all the examples of class $i$ as
   positive and all the examples of class $j$ as negative, for each
@@ -90,8 +81,7 @@ Test time:
 
 Error:
 
-- AVA tests with more classifiers and therefore has more changes for
-  errors
+- AVA tests with more classifiers and therefore has more chances for errors
 
 ** Macroaveraging vs Microaveraging
 

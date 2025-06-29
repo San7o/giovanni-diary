@@ -5,70 +5,77 @@
 * Linear Models
 #+INDEX: Giovanni's Diary!Programming!Notes!Intro to Machine Learning!Linear Models
 
-Some machine learning approaches make strong assumptions about the
-data. If the assumptions hold, this can lead to better
-performance. Otherwise, the model would fail.  Other approaches don't
-make any assumptions about the data, so they are very general but are
-prone to overfitting, for example K-NN.
+We have seen the KNN algorithm for classification. Said algorithm
+works everywhere as long as there is some spacial correlation in the
+data, which is often the case. We will now focus on a stricter set of
+problems, we will consider data that is _linearly separable_.
 
-** Bias
+We say that labeled data is linearly separable if the classes can be
+binary separated by a line in 2 dimensions, or using hyperplanes in
+higher dimensions. In other words, a hyperplane defines a partition of
+the space and the data can be classified based on in which partition
+they live. This is a strong assumption to make and does not hold for
+many problems, we will see in a later chapter how we can circumvent
+this.
 
-The bias of a model is how strong the model assumptions are
+The equation of a plane in n dimensions looks like this
 
-- low-bias classifiers make minimal assumptions about the data
-- high-bias classifiers make strong assumptions about the data
+$$(1)\ b+\sum_{i=1}^{n}w_ix_i=0$$
 
-** Linear Model (Perceptron)
+Where $w_i$ are the values of the normal an $x_i$ are points in space
+in the dimension $i$.
 
-A strong high-bias assumption is linear separability
+We can classify a linear model by evaluating the equation $(1)$ with
+an input point and checking the sign of the output: positive values
+are classified as one thing, negative values as the other (remember
+that we are assuming binary classification).
 
-- the classes can be separated by a line in 2 dimensions
-- in higher dimensions using hyperplanes
+More formally, given:
 
-Any hyperplane  defines a partition of the space.
+- an input space $X$
+- an unknown distribution $D$ over $X \times \{ -1,+1 \}$
+- a training set D sampled from $D$
 
-Any pair of values $(w_1, w_2)$ defined a line through the origin
-(using the Cartesian equation of a plane):
+Compute: A function $f$ minimizing $\mathbb{E}_{(x, y)\sim D}[f(x) \ne  y]$ 
 
-$$0=w_1f_1+w_2f_2+b$$
+** Training a linear model
 
-- $b$ is called the bias
-
-In n-dimensions, a hyperplane:
-$$0=b+\sum_{i=1}^{n}w_if_i$$
-We can classify a linear model by checking the sign.
-
-** How to train a linear model
-
-Differently from k-nn, linear models use online learning. Online
-learning are useful in:
-
-- data streams
-- large-scale dataset
-- privacy-preserving applications
-
-To learn a linear model:
+Differently from KNN, linear models use _online learning_. The
+learning algorithm follows the following structure:
 
 - the algorithm receives an unlabeled example $x_i$
-	- $w(1, 0),\ p(-1,1)$
+	- For example: $w(1, 0),\ x_i(-1,1)$
 - the algorithm predicts a classification of this example
-	- $1*(-1)+0*1 = -1$ 
-- the algorithm is the told the correct answer $y_i$ and update the model
-	- idea: when a solution is wrong, to choose which weight to change,
-    we can see what are the weights that contribute more to the wrong
-    answer, and change them
+	- Evaluate the sum equation $b+\sum_{i=1}^n w_ix_i$: $1*(-1)+0*1 = -1$ 
+- the algorithm is them told the correct answer $y_i$ and It updates
+  the model only if the answer is incorrect
+	- check if the sign of the equation represents the right label, if
+    not, add to each weight the current input times the label
+    (assuming the label is either $+1$ or $-1$)
 
 #+begin_src
 repeat until convergence (or some # of iterations):
-	for each random training example (f1, f2, ..., fn, label):
-		check if it is correct based on the current model
+	for each random training example (x1, x2, ..., xn, label):
+		check if prediction is correct based on the current model
 		if not correct, update all the weights:
 			for each wi:
-				wi = wi + fi*label
+				wi = wi + xi*label
 			b = b + label
 #+end_src
 
-The algorithm will converge only if the data can be linearly separated.
+The algorithm will converge only if the data can be linearly
+separated. The reason why $w_i + f_i\cdot label$ improves the solution
+will be obvious later when we will discuss gradient descent.
+
+*** Learning Rate
+
+When the model makes an incorrect prediction, you hay have noticed
+that the correction of the weights are multiple of the label
+($f_i\cdot label$ is added to the weight). This may make convergence
+difficult if we need more precise weights, so we multiply this by a
+_learning rate_.
+
+$$w_i:=w_i+\lambda x_i*label$$
 
 -----
 

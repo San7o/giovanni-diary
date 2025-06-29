@@ -51,116 +51,117 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org2f05a44" class="outline-2">
-<h2 id="org2f05a44">Linear Models</h2>
-<div class="outline-text-2" id="text-org2f05a44">
+<div id="outline-container-org2d39bf6" class="outline-2">
+<h2 id="org2d39bf6">Linear Models</h2>
+<div class="outline-text-2" id="text-org2d39bf6">
 <p>
-Some machine learning approaches make strong assumptions about the
-data. If the assumptions hold, this can lead to better
-performance. Otherwise, the model would fail.  Other approaches don't
-make any assumptions about the data, so they are very general but are
-prone to overfitting, for example K-NN.
-</p>
-</div>
-
-<div id="outline-container-org816a012" class="outline-3">
-<h3 id="org816a012">Bias</h3>
-<div class="outline-text-3" id="text-org816a012">
-<p>
-The bias of a model is how strong the model assumptions are
-</p>
-
-<ul class="org-ul">
-<li>low-bias classifiers make minimal assumptions about the data</li>
-<li>high-bias classifiers make strong assumptions about the data</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-org940844d" class="outline-3">
-<h3 id="org940844d">Linear Model (Perceptron)</h3>
-<div class="outline-text-3" id="text-org940844d">
-<p>
-A strong high-bias assumption is linear separability
-</p>
-
-<ul class="org-ul">
-<li>the classes can be separated by a line in 2 dimensions</li>
-<li>in higher dimensions using hyperplanes</li>
-</ul>
-
-<p>
-Any hyperplane  defines a partition of the space.
+We have seen the KNN algorithm for classification. Said algorithm
+works everywhere as long as there is some spacial correlation in the
+data, which is often the case. We will now focus on a stricter set of
+problems, we will consider data that is <span class="underline">linearly separable</span>.
 </p>
 
 <p>
-Any pair of values \((w_1, w_2)\) defined a line through the origin
-(using the Cartesian equation of a plane):
+We say that labeled data is linearly separable if the classes can be
+binary separated by a line in 2 dimensions, or using hyperplanes in
+higher dimensions. In other words, a hyperplane defines a partition of
+the space and the data can be classified based on in which partition
+they live. This is a strong assumption to make and does not hold for
+many problems, we will see in a later chapter how we can circumvent
+this.
 </p>
 
 <p>
-\[0=w_1f_1+w_2f_2+b\]
+The equation of a plane in n dimensions looks like this
+</p>
+
+<p>
+\[(1)\ b+\sum_{i=1}^{n}w_ix_i=0\]
+</p>
+
+<p>
+Where \(w_i\) are the values of the normal an \(x_i\) are points in space
+in the dimension \(i\).
+</p>
+
+<p>
+We can classify a linear model by evaluating the equation \((1)\) with
+an input point and checking the sign of the output: positive values
+are classified as one thing, negative values as the other (remember
+that we are assuming binary classification).
+</p>
+
+<p>
+More formally, given:
 </p>
 
 <ul class="org-ul">
-<li>\(b\) is called the bias</li>
+<li>an input space \(X\)</li>
+<li>an unknown distribution \(D\) over \(X \times \{ -1,+1 \}\)</li>
+<li>a training set D sampled from \(D\)</li>
 </ul>
 
 <p>
-In n-dimensions, a hyperplane:
-\[0=b+\sum_{i=1}^{n}w_if_i\]
-We can classify a linear model by checking the sign.
+Compute: A function \(f\) minimizing \(\mathbb{E}_{(x, y)\sim D}[f(x) \ne  y]\) 
 </p>
 </div>
-</div>
 
-<div id="outline-container-org332525f" class="outline-3">
-<h3 id="org332525f">How to train a linear model</h3>
-<div class="outline-text-3" id="text-org332525f">
+<div id="outline-container-org816fc3c" class="outline-3">
+<h3 id="org816fc3c">Training a linear model</h3>
+<div class="outline-text-3" id="text-org816fc3c">
 <p>
-Differently from k-nn, linear models use online learning. Online
-learning are useful in:
-</p>
-
-<ul class="org-ul">
-<li>data streams</li>
-<li>large-scale dataset</li>
-<li>privacy-preserving applications</li>
-</ul>
-
-<p>
-To learn a linear model:
+Differently from KNN, linear models use <span class="underline">online learning</span>. The
+learning algorithm follows the following structure:
 </p>
 
 <ul class="org-ul">
 <li>the algorithm receives an unlabeled example \(x_i\)
 <ul class="org-ul">
-<li>\(w(1, 0),\ p(-1,1)\)</li>
+<li>For example: \(w(1, 0),\ x_i(-1,1)\)</li>
 </ul></li>
 <li>the algorithm predicts a classification of this example
 <ul class="org-ul">
-<li>\(1*(-1)+0*1 = -1\)</li>
+<li>Evaluate the sum equation \(b+\sum_{i=1}^n w_ix_i\): \(1*(-1)+0*1 = -1\)</li>
 </ul></li>
-<li>the algorithm is the told the correct answer \(y_i\) and update the model
+<li>the algorithm is them told the correct answer \(y_i\) and It updates
+the model only if the answer is incorrect
 <ul class="org-ul">
-<li>idea: when a solution is wrong, to choose which weight to change,
-we can see what are the weights that contribute more to the wrong
-answer, and change them</li>
+<li>check if the sign of the equation represents the right label, if
+not, add to each weight the current input times the label
+(assuming the label is either \(+1\) or \(-1\))</li>
 </ul></li>
 </ul>
 
 <pre class="example">
 repeat until convergence (or some # of iterations):
-  for each random training example (f1, f2, ..., fn, label):
-    check if it is correct based on the current model
+  for each random training example (x1, x2, ..., xn, label):
+    check if prediction is correct based on the current model
     if not correct, update all the weights:
       for each wi:
-        wi = wi + fi*label
+        wi = wi + xi*label
       b = b + label
 </pre>
 
 <p>
-The algorithm will converge only if the data can be linearly separated.
+The algorithm will converge only if the data can be linearly
+separated. The reason why \(w_i + f_i\cdot label\) improves the solution
+will be obvious later when we will discuss gradient descent.
+</p>
+</div>
+
+<div id="outline-container-org7355aa0" class="outline-4">
+<h4 id="org7355aa0">Learning Rate</h4>
+<div class="outline-text-4" id="text-org7355aa0">
+<p>
+When the model makes an incorrect prediction, you hay have noticed
+that the correction of the weights are multiple of the label
+(\(f_i\cdot label\) is added to the weight). This may make convergence
+difficult if we need more precise weights, so we multiply this by a
+<span class="underline">learning rate</span>.
+</p>
+
+<p>
+\[w_i:=w_i+\lambda x_i*label\]
 </p>
 
 <hr />
@@ -168,6 +169,7 @@ The algorithm will converge only if the data can be linearly separated.
 <p>
 Travel: <a href="intro-to-machine-learning.html">Intro to Machine Learning</a>, <a href="../../../theindex.html">Index</a>
 </p>
+</div>
 </div>
 </div>
 </div>

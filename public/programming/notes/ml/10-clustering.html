@@ -51,90 +51,156 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org0d59b05" class="outline-2">
-<h2 id="org0d59b05">Clustering</h2>
-<div class="outline-text-2" id="text-org0d59b05">
+<div id="outline-container-orgecdc95a" class="outline-2">
+<h2 id="orgecdc95a">Clustering</h2>
+<div class="outline-text-2" id="text-orgecdc95a">
 <p>
-Given unlabeled data, we want to group them into clusters.
+Given unlabeled data, we want to group them into clusters. The first
+thing to think about is how should these clusters be represented. We
+may want to model a cluster as a circumference where all the data
+inside It belongs to the same cluster, or maybe an ellipse may be a
+better choice for some problems. Some other data may need a completely
+another structure. Ultmatively, how we represent the cluster will
+characterize the algorithm that we will develop. In this chapter we
+will discuss four techniques to achive this.
 </p>
-
-<p>
-A well-known and popular clustering algorithm is k-means which works
-following this logic:
-</p>
-
-<ul class="org-ul">
-<li>start with some initial cluster centroids</li>
-<li>Iterate:
-<ul class="org-ul">
-<li>assign each example to the closest centroid</li>
-<li>recalculate center as the mean of the points in a cluster</li>
-</ul></li>
-</ul>
 
 <p>
 Some complications rise when discussing representation of data, how to
 measure similarity or distance, is it a flat clustering or
-hierarchical and is the number of clusters known a priori. We can also
-categorize <b><b>hard clustering</b></b> where each example belongs to exactly
-one cluster (k-means) and <b><b>soft clustering</b></b> where an example can
-belong to more than one cluster (probabilistic).
+hierarchical and is the number of clusters known a priori.
+</p>
+
+<p>
+Let's start by categorizing <span class="underline">hard clustering</span> where each example
+belongs to exactly one cluster, and <span class="underline">soft clustering</span> where an example
+can belong to more than one cluster (probabilistic).
 </p>
 </div>
 
-<div id="outline-container-orgb9a49fc" class="outline-3">
-<h3 id="orgb9a49fc">Expectation Maximization</h3>
-<div class="outline-text-3" id="text-orgb9a49fc">
+<div id="outline-container-org8068f4b" class="outline-3">
+<h3 id="org8068f4b">K-means clustering</h3>
+<div class="outline-text-3" id="text-org8068f4b">
+<p>
+First, we are assuming that we know the number of clusters. This is a
+strong assumption to make and may be impossible for some problems. Our
+goal is then to find an assignment of data points to clusters, as well
+as a set of vectors \(\{u_k\}\), such that the sum of the squares of the
+distances of each data point to its closest vector \(u_k\), is a
+minimum. We can think of \(u_k\) as the center of a cluster \(C\).
+</p>
+
+<p>
+\[min_{C_1, ..., C_k}\sum_{j=1}^kV(C_j)\]
+</p>
+
+<ul class="org-ul">
+<li>the variation is typically given by \(V(C_j) = \sum_{i\in
+  C_j} ||x_i-u_j||^2\) which is the euclidean distance squared.</li>
+<li>the <span class="underline">centroid</span> is computed with \(u_j = \mathbb{E}_{c\in C}[x\in C] = \frac{1}{|C_j|}\sum_{i\in C_j} x_i\)</li>
+</ul>
+</div>
+
+<div id="outline-container-orgd8f3552" class="outline-4">
+<h4 id="orgd8f3552">The algorithm</h4>
+<div class="outline-text-4" id="text-orgd8f3552">
+<p>
+```
+Initialization: Use some initialization strategy to get
+some initial cluster centroids u1,&#x2026;,uk
+</p>
+
+<p>
+while clusters change, do
+	Assign each datapoint to the closest centroid forming
+	new clusters
+</p>
+
+<p>
+Cj = i in N such taht j = argmin<sub>l</sub>(xi - ul)
+</p>
+
+<p>
+	Compute cluster centroids u1,&#x2026;,uk
+```
+</p>
+
+<p>
+The algorithm is guaranteed to converge, but not to find the global minimum.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org286b6a9" class="outline-4">
+<h4 id="org286b6a9">Initial Centroid Selection</h4>
+<div class="outline-text-4" id="text-org286b6a9">
+<ul class="org-ul">
+<li>random selection</li>
+<li>points least similar to any existing center</li>
+<li>try multiple starting points</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5758854" class="outline-4">
+<h4 id="org5758854">Running time</h4>
+<div class="outline-text-4" id="text-org5758854">
+<ul class="org-ul">
+<li>assignment: \(O(kn)\) time</li>
+<li>centroid computation: \(O(n)\) time</li>
+</ul>
+
+<p>
+In this case, euclidian distance is not the best so we use <span class="underline">consine similarity</span>
+\[sim(x, y)=\frac{x*y}{|x||y|}\]
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org12da2cf" class="outline-3">
+<h3 id="org12da2cf">Expectation Maximization</h3>
+<div class="outline-text-3" id="text-org12da2cf">
 <p>
 If we restrain our problem by assuming that the clusters are formed as
 a mixture of Gaussians (elliptical data) and we assign data to a
 cluster with a certain probability (soft clustering) we can use the
-<b><b>Expectation Maximization</b></b> (EM) algorithm. The algorithm proceeds
-like the following:
+<span class="underline">Expectation Maximization</span> (EM) algoritm. The algorithm proceeds as
+follows:
 </p>
 
 <ul class="org-ul">
 <li>Start with some initial cluster centers</li>
 <li>Iterate
 <ul class="org-ul">
-<li>Soft assign points to each cluster by calculating the probability
-of each point belonging to each cluster \(p(\theta _c | x)\).</li>
-<li>Recalculate the cluster centers by calculating the maximum
-likelihood cluster centers given the current soft clustering
-\(\theta _c\).</li>
+<li>Soft assign points to each cluster by calculating the probability of each point belonging to each cluster \(p(\theta _c | x)\).</li>
+<li>Train: Recalculate the cluster centers by calculating the maximum likelihood cluster centers given the current soft clustering \(\theta _c\).</li>
 </ul></li>
 </ul>
 
 <p>
-A Gaussian in 1 dimension is defined as:
-</p>
-
-<p>
+A Gaussian (ellipse) in 1 dimension is defined as:
 \[f(x)=\frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}\]
-</p>
-
-<p>
 A Gaussian in \(n\) dimensions is defined as:
-</p>
-
-<p>
 \[N[x;\mu , \Sigma] = \frac{1}{(2\pi)^{d/2}\sqrt{det(\Sigma)}}exp[-\frac{1}{2}(x-\mu)^T\Sigma ^{-1}(x-\mu)]\]
 </p>
 
 <p>
-Intuitively, each iteration of Expectation Maximization increases the
-likelihood of the data and is guaranteed to converge (though to a
-local optimum)
+We learn the means of each cluster (i.e. the center) and the covariance matrix (i.e. how spread out it is in any given direction).
+</p>
+
+<p>
+Intuitively, each iteration of Expectation Maximization increases the likelihood of the data and is guaranteed to converge (though to a local optimum).
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgbe54e70" class="outline-3">
-<h3 id="orgbe54e70">Non-Gaussian Data</h3>
-<div class="outline-text-3" id="text-orgbe54e70">
+<div id="outline-container-orgfa05ec1" class="outline-3">
+<h3 id="orgfa05ec1">Spectral Clustering</h3>
+<div class="outline-text-3" id="text-orgfa05ec1">
 <p>
-In case of non-gaussian data, we can use a technique called spectral
-clustering where we group points based on links in a graph.
+In case of non-gaussian data, we can use a technique called <span class="underline">spectral
+clustering</span> where we group points based on links in a graph.
 </p>
 
 <p>
@@ -146,7 +212,7 @@ j)=exp[\frac{-|x_i-x_j|^2}{\sigma ^2}]\).
 </p>
 
 <p>
-We then partition the graph by butting the graph: we want to find a
+We then partition the graph by cutting the graph: we want to find a
 partition of the graph into two parts \(A\) and \(B\) where we minimize
 the sum of the weights of the set of edges that connect the two
 groups, aka \(Cut(A, B)\). We observe that this problem can be
@@ -156,12 +222,18 @@ continuous domain and become a generalized eigenvalue problem.
 </div>
 </div>
 
-<div id="outline-container-org7420b28" class="outline-3">
-<h3 id="org7420b28">Hierarchical Clustering</h3>
-<div class="outline-text-3" id="text-org7420b28">
+<div id="outline-container-org8464569" class="outline-3">
+<h3 id="org8464569">Hierarchical Clustering</h3>
+<div class="outline-text-3" id="text-org8464569">
 <p>
 We are interested in producing a set of nested clusters organized as a
-hierarchical tree, also called <b><b>dendrogram</b></b>.
+hierarchical tree, also called <span class="underline">dendrogram</span>.
+</p>
+
+<p>
+The idea of the algorithm is to first mege very similar instances and
+then incrementally build larger clusters out of smaller clusters. The
+algorithm goes as follows:
 </p>
 
 <ul class="org-ul">
@@ -173,12 +245,6 @@ hierarchical tree, also called <b><b>dendrogram</b></b>.
 <li>Stop when there is only one cluster left</li>
 </ul></li>
 </ul>
-
-<p>
-The idea of the algorithm is to first merge very similar instances and
-then incrementally build larger clusters out of smaller clusters. The
-algorithm goes as follows:
-</p>
 
 <hr />
 

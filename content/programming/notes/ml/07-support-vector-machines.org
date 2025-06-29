@@ -5,22 +5,21 @@
 * Support Vector Machines
 #+INDEX: Giovanni's Diary!Programming!Notes!Intro to Machine Learning!Support Vector Machines
 
-Linear classifiers assume that data can be linearly separable. If this
+Linear classifiers assume the data can be linearly separable. If this
 does not hold, the chosen hyperplane will keep adjusting at each
 iteration without ever converging. Let's now discuss a particular type
 of classifier: support vector machines (SVM).
 
-*** Large margin classifiers
+** Large margin classifiers
 
-We define the **margin** of a classifier as the distance from the
+We define the _margin_ of a classifier as the distance from the
 classification hyperplane to the closest points of either class. We
-call **large margin classifiers** the classifiers that attempt to
+call _large margin classifiers_ the classifiers that attempt to
 maximize this measure.
 
-We call the sets of "closest points" from the hyperplane with
-**support vectors**. Note that for n dimensions, there will be at
-least n+1 support vectors; this is because a plane in n dimensions
-identified by n+1 points.
+We call the sets of "closest points" from the hyperplane with _support
+vectors_. Note that for n dimensions, there will be at least $n+1$
+support vectors; this is because a plane is identified by $n+1$ points in $n$ dimensions.
 
 Therefore, large margin classifiers only use support vectors and
 ignore all other training data.
@@ -39,58 +38,56 @@ hyperplane to a point p. We know that the distance vector must be
 perpendicular to the hyperplane, therefore It is parallel to the
 normal vector w, which when normalized is $\frac{\vec{w}}{||\vec{w}||}$.
 
-Therefore, the distance between the hyperplane and p1, referred to as
-r, is the difference between p1 and the closest point in
-the hyperplane p2, which is the intersection between the line parallel
-to the normal and point p1:
+Therefore, the distance between the hyperplane and $p_1$, referred to as
+$r$, is the difference between $p_1$ and the closest point in
+the hyperplane $p_2$, which is the intersection between the line parallel
+to the normal and point $p1$:
+$$(1)\ r\frac{\vec{w}}{||\vec{w}||} = \vec{p_1} - \vec{p_2}$$
 
-       $$(1)\ r\frac{\vec{w}}{||\vec{w}||} = \vec{p1} - \vec{p2}$$
-
-Moreover, since p2 lies on the hyperplane, It is ture that:
-
-                  $$(2)\ \vec{w}\vec{p2} + b = 0$$
-                           
-We find p2 from (1), $p2 = p1 - r\frac{\vec{w}}{||w||}$. We substitute
-p2 in (2) and solve for r, the distance, and we get 
-
-    $$r = \frac{(\vec{w}\vec{p1} + b) ||\vec{w}||}{\vec{w}\vec{w}}$$
-
-Since $\vec{w}\vec{w}=|w|^2$, this can be easily demonstrated because
+Moreover, since $p2$ lies on the hyperplane, It is ture that:
+$$(2)\ \vec{w}\vec{p_2} + b = 0$$
+We find $p2$ from $(1)$, $p_2 = p_1 - r\frac{\vec{w}}{||w||}$. We substitute
+$p_2$ in $(2)$ and solve for r, the distance, and we get 
+$$r = \frac{(\vec{w}\vec{p_1} + b) ||\vec{w}||}{\vec{w}\vec{w}}$$
+Since $\vec{w}\vec{w}=||w||^2$, this can be easily demonstrated because
 the modulo function uses the generalized pythagorean theorem, we get:
-
-          $$r = \frac{(\vec{w}\vec{p1} + b)}{||\vec{w}||}$$
+$$r = \frac{(\vec{w}\vec{p_1} + b)}{||\vec{w}||}$$
 
 We just demonstrated the formula for finding the distance between a
-point and a plane.  We now define the **classification function** as
-$f(x)= sign(\vec{w}\vec{x} + b)$, It will be +1 or -1 based on the
+point and a plane.  We now define the _classification function_ as
+$f(x)= sign(\vec{w}\vec{x} + b)$, It will be $+1$ or $-1$ based on the
 sign of the equation. Intuitively, points on one side of the plane
 should have a positive output and points on the other side should have
-a negative one. We decide to multiply the hyperplane equation times
-the expected classification to get the **functional margin** for each
-point x_i and classification y_i:
+a negative one.
 
-       $$margin = \frac{y_i(\vec{w}\vec{x_i})}{||\vec{w}||}$$
-
-For convenience, we require that the distance between the hyperplane
-and the support vectors is 1, therefore $y_i(\vec{w}\vec{x_i}+b) \ge 1 \forall i$
-because negative distances will be multiplied by y_i which is also
-negative, resulting in a positive value all the time, and greater
-than one because of the requirement.
+We want to maximize this distance, but the value is positive or
+negative depending on where the point is, hence we multiply the
+hyperplane equation times the expected classification in roder to make
+the distance always positive (labels are either $-1$ or $1$). Indeed,
+If we assign the label $y_i=-1$ for the negative distance points, we
+will always get a positive output (negative times negative is
+negative, and positive times positive is positive). We define the
+_functional margin_ as double such quantity: this represents the
+distance between the two closest points from the plane with different
+labels: $$margin = 2\frac{y_i(\vec{w}\vec{x_i}+b)}{||\vec{w}||}$$ For
+convenience, we require that the distance between the hyperplane and
+the support vectors is 1, therefore $y_i(\vec{w}\vec{x_i}+b) \ge 2
+\forall i$ because negative distances will be multiplied by $y_i$
+which is also negative, resulting in a positive value all the time,
+and a greater than $1$ because of the requirement.
 
 For the support vectors, the following holds:
+$$margin = \frac{1}{||\vec{w}||}$$
 
-                 $$margin = \frac{1}{||\vec{w}||}$$
+** Maximizing the margin
 
-*** Maximizing the margin
+We want to maximize this margin, therefore we need to minimize $\frac{1}{2}||\vec{w}||$
+with the constraint that $y_i(\vec{w}\vec{x_i}+b) \ge 1\ \forall i$. We
+may as well minimize $\frac{1}{2}||\vec{w}||^2$ which is an example of a _quadratic
+optimization problem_
+$$ min_{w, b}\ \frac{1}{2} ||w||^2,\ y_i(\vec{w}\vec{x_i}) \ge 1 \forall i $$
 
-We want to maximize this margin, therefore we need to minimize $||\vec{w}||$
-with the constraint that $y_i(\vec{w}\vec{x_i} \ge 1 \forall i$. We
-may as well minimize $||\vec{w}||^2$ which is an example of a **quadratic
-optimization problem**
-
-    $$ min_{w, b} ||w||^2,\ y_i(\vec{w}\vec{x_i}+b) \ge 1 \forall i $$
-
-*** Soft margin classification
+** Soft margin classification
 
 We may have data that is not perfect, for example we may have some
 values that lay on one side of the hyperplane but they are classified
@@ -98,138 +95,112 @@ as the other, so $y_i(\vec{w}\vec{x_i}+b) \ge 1 \forall i$ does not
 hold since you may have $\vec{w}\vec{x_i}+b \le 1$ and $y_i \ge 1$ or
 the opposite.
 
-To address this cases, we introduce **slack variabes** which are
-scalar values assigned for each x_i, and the **regularization
-parameter** $C > 0$:
-
-          $$ min_{w, b} ||\vec{w}||^2 + C \sum_{i} \zeta_i $$
-
+To address this cases, we introduce _slack variabes_ which are
+scalar values assigned for each $x_i$, and the _regularizaion
+parameter_ $C > 0$:
+$$ min_{w, b} ||\vec{w}||^2 + C \sum_{i} \zeta_i $$
 subject to:
-
-    $$y_i(\vec{w}\vec{x_i} + b) \ge 1 - \zeta_i \forall i, \zeta_i \ge 0$$
+$$y_i(\vec{w}\vec{x_i} + b) \ge 1 - \zeta_i \forall i, \zeta_i \ge 0$$
 
 with this correction, the values are "allowed to have mistakes", the
 margin is reduced by $\zeta$ if $\zeta < 1$ or are moved to the
 other side of the hyperplane if $\zeta > 1$.
 $C$ determines how strong are those corrections, that is the "trade off"
 between the slack variable penalty and the margin.
+
 - small C allows constrains to be easily ignored in order to have a
   larger margin
-- large C make constraints hard to ignore to get a narrow margin
+- large C makes constraints hard to ignore in order to get a narrow margin
   - if C goes to infinity, we have hard margins.
   
-We are now interested into calculating those slack variables. The
+We are now interested into calculating these slack variables. The
 first observation we make is that if the constraint is already
 satisfied, meaning that if $y_i(\vec{w}\vec{x_i} + b) \ge 1$ and the
 value has not been misclassified, then we don't need any correction and
 $\zeta = 0$. Otherwise, we want to correct the value by moving it on
-the other side, plus the distance to the margin 1, so $1 -
-y_i(\vec{w}\vec{x_i}+b)$. We are subtracting because if the value is
+the other side, plus the distance to the margin 1, so $1 - y_i(\vec{w}\vec{x_i}+b)$. We are subtracting because if the value is
 misclassified, then It's distance from the hyperplane times It's label
-is going to be a negative value (one of them needs to be positive and
+is going to be a negative value (one of them nedds to be positive and
 the other negative in order to have a misclassification).
 
 Therefore:
-
-         $$\zeta = 0\ if\ y_i(\vec{w}\vec{x_i}+b) \ge 1$$
-         $$\zeta = 1 - y_i(\vec{w}\vec{x_i}+b)\ otherwise$$
+$$\zeta = 0\ if\ y_i(\vec{w}\vec{x_i}+b) \ge 1$$
+$$\zeta = 1 - y_i(\vec{w}\vec{x_i}+b)\ otherwise$$
 
 which is the same as the following, using a notation introduced
 in previous lessons:
+$$\zeta = max(0, 1-y_i(\vec{w}\vec{x_i}+b)) = max(0, 1-yy')$$
 
-     $$\zeta = max(0, 1-y_i(\vec{w}\vec{x_i}+b)) = max(0, 1-yy')$$
-
-If you recall from the lesson of Gradiente Descente, this is the hinge
+If you recall from the lesson of Gradiente Descent, this is the hinge
 loss function.
 
 With this result, the objective is now to minimize the following:
-
 $$min_{w, b} ||\vec{w}||^2 + C \sum_i max(0, 1 - y_i(\vec{w}\vec{x_i} +b))$$
 
-** Non linearly separable data
+** Cases of optimization problems
 
-*** Cases of optimization problems
-
-For future analysis, It is useful to discuss what are the main classes
+For future analisys, It is useful to discuss what are the main classes
 of optimization problems:
 
-- **linear programming (LP)**: linear problem, linear constraints.
+- _linear programming) (LP): linear problem, linear constraints.
 
 $$min_{x} c^Tx\ s.t.\ Ax = b, x \ge 0$$
 
-- **quadratic programming (QP)**: quadratic objective and linear
+- _quadratic programming_ (QP): quadratic objective and linear
   constraints, it is convex if the matrix $Q$ is positive
-  semidefinite, that is the real number x^TQx is positive or zero for
-  every nonzero real column vector x, where x^T is the row vector
-  transpose of x.
+  semidefinite, that is the real number $x^TQx$ is positive or zero for
+  every nonzero real column vector $x$, where $x^T$ is the row vector
+  transpose of $x$.
   
 $$min_{x} c^Tx + \frac{1}{2}x^TQx\ s.t\ Ax = b, Cx \ge d$$
 
-- **nonlinear programming problem (NLP)**: in general non-convex.
+- _nonlinear programming_ (NLP): in general non-convex.
 
-*** Solving quadratic problems - Lagrange multipliers
+** Solving quadratic problems - Lagrange multipliers
 
-Quadratic optimization problems such as the one discussed above are a
-well-known class of mathematical programming models with several
-algorithms. We will now introduce a method so solve such problems
-using the Lagrange multiplier, that is a strategy for finding the local
-maxima and minima of a function subject to equation constraints.
+Quadratic optimization problems such as the one discussed above are a well-known class of mathematical programming models with several algorithms. We will now introduce a method so solve such problems using the Lagrange multiplier, that is a strategy for finding the local maxima and minima of a function subject to equation constraints.
 
 Given a function to optimize $f(x)$, a constraint $g(x)$ and an
-optimal solution x_* of the function that respects the constraints, there
-exists a **lagrangian multiplier** $\lambda$ such that:
-     
-    $$\frac{df(x_*)}{dx_*} = \lambda \frac{dg(x_*)}{dx_*},\ g(x) = 0$$
- 
- Or equivalently:
- 
-    $$\frac{df(x_*)}{dx_*} - \lambda \frac{dg(x_*)}{dx_*} = 0,\ g(x) = 0$$
-     
- We call this the lagrangian function or **Lagrangian**:
- 
-             $$L(x) = f(x) - \lambda g(x)$$
+optimal solution $x_*$ of the function that respects the contraints, there
+exists a _lagrangian multiplier_ $\lambda$ such that:
+$$\frac{df(x_*)}{dx_*} = \lambda \frac{dg(x_*)}{dx_*},\ g(x) = 0$$
+Or equivalently:
+ $$\frac{df(x_*)}{dx_*} - \lambda \frac{dg(x_*)}{dx_*} = 0,\ g(x) = 0$$
+ We call this the lagrangian function or _Lagrangian_:
+ $$L(x) = f(x) - \lambda g(x)$$
  
  Let's now apply this knowledge in our problem. Let $f(x)=||\vec{w}||^2$
  and $g(x, b, w)=y_i(\vec{w}\vec{x_i}+b)-1$, using $a$ as the lagrangian
  multiplier:
- 
- $$(a) L(x, \vec{w}, b, \vec{a}) = ||\vec{w}||^2 - \sum_i a_i (y_i(\vec{w}\vec{x_i} + b) - 1)$$
- 
+ $$(a) L(x, \vec{w}, b, \vec{a}) = \frac{1}{2}||\vec{w}||^2 - \sum_i a_i (y_i(\vec{w}^T\vec{x_i} + b) - 1)$$
  This is an example of Lagrangian dual problem, where we need to
- maximize the lagrangian multipliers to minimize w and b. We now
- derivative with respect to w and b and set them equal to 0:
+ maximize the Lagrangian multipliers to minimize $w$ and $b$. We now
+ derivate with respect to $w$ and $b$ and set them equal to $0$:
+ $$(b)\ \vec{w} - \sum_i a_i y_i x_i = 0$$
+$$(c)\ \sum_i a_i y_i = 0$$
  
-          $$(b)\ 2\vec{w} - \sum_i a_i y_i x_i = 0$$
-          $$(c)\ \sum_i a_n y_n = 0$$
+ From $(b)$ we get $\vec{w} = \sum_i a_i y_i x_i$. We now
+ substitute the new $(b)$ in $(a)$, observing that $||w||^2 = w^Tw$:
+ $$L(x, \vec{a}, b) = \frac{1}{2}\sum_i \sum_j a_i a_j y_i y_j x_i x_j - (\sum_i \sum_j a_i a_j y_i y_j x_i x_j - b\sum_i a_i j_i - \sum_i a_i) $$
+ $$ = -\frac{1}{2}\sum_i \sum_i \sum_j a_i a_j y_i y_j x_i x_j - (-b\sum_i a_i y_i - \sum_i a_i) $$
  
- 
- From (b) we get $\vec{w} = -\frac{1}{2}\sum_i a_i y_i x_i$. We now
- substitute the new (b) in (a), observing that $w^2 = ww$:
- 
- $$L(x, \lambda, b) = \frac{1}{2}\sum_i \sum_j a_i a_j y_i y_j x_i x_j - (\sum_i \sum_j a_i a_j y_i y_j x_i x_j - b\sum_i a_i j_i - \sum_i a_i) $$
- 
- $$ = -\frac{1}{2}\sum_i \sum_i \sum_j a_i a_j y_i y_j x_i x_j - b\sum_i a_i j_i - \sum_i a_i) $$
- 
- The second term is 0 because of (c), so It can be eliminated, finally
+ The second term is $0$ because of $(c)$, so It can be eliminated, finally
  we have:
+$$ L(x, \vec{a}) = \sum_i a_i -\frac{1}{2}\sum_i \sum_j \sum_j a_i a_j y_i y_j x_i x_j $$
+ such that $\sum_i a_i y_i = 0, 0 \le a_i \le C\ \forall i$.
  
-$$ L(x, \lambda) = \sum_i a_i -\frac{1}{2}\sum_i \sum_j \sum_j a_i a_j y_i y_j x_i x_j $$
- 
- such that $\sum_i a_i y_i = 0, 0 \le a_i \le C\ \forall i$
- 
- This is the final equation that we need to maximize over a_i to
+ This is the final equation that we need to maximize over $a_i$ to
  minimize w and b. To recap, we turned the original optimization
  problem $min_{w, b} ||\vec{w}||^2$ to a problem depending only on
  lagrangian multipliers, which is faster to compute. We let the
- computer solve this and get the a_i values, after that we can find w
- using (b) and b from $y_k = wx_k + b$ for any k and using again w
- from (b).
+ computer solve this and get the $a_i$ values, after that we can find $w$
+ using $(b)$ and b from $y_k = wx_k + b$ for any $k$ and using again $w$
+ from $(b)$.
  
- Finally, to make predictions, we use this same formula:
+ Finally, to make predictions, we use the perceptron formula with $(b)$:
+ $$(d)\ f(x) = \sum_i a_iy_i x_i x + b$$
  
-                   $$(d) f(x) = \sum_i a_iy_i x_i x + b$$
- 
- - each non-zero a_i indicates that the corresponding x_i is a support
+ - each non-zero $a_i$ indicates that the corresponding $x_i$ is a support
    vector.
  
 ** Non linear SVM - Kernel Trick
@@ -237,35 +208,29 @@ $$ L(x, \lambda) = \sum_i a_i -\frac{1}{2}\sum_i \sum_j \sum_j a_i a_j y_i y_j x
 What if the data is not linearly separable? In such situation we can
 map data to a higher-dimensional space where the training set is
 separable.
-
-                  $$\Phi: x \rightarrow \phi (x)$$
+$$\Phi: X \rightarrow H$$
+$$h=\phi(x)$$
 
 We notice that the linear classifier (d) relies on the product between
-x_i and x. We can abstract this product to happen in a higher dimension
-using a function called Kernel which computes the product over some
+$x_i$ and $x$. We can abstract this product to happen in a higher dimension
+using a function called Kernel which computes the dot product over some
 higher-dimensional feature mapping function $\phi(x)$:
-
-              $$K(x_i, x_j) = \phi(x_i)^T \phi(x_j)$$
-
-Therefore (d) becomes:
-
-              $$ f(x) = \sum_i a_iy_i K(x_i, x) + b $$
-
-- note that we transposed the vector before the multiplication because
-  of how matrix multiplication works. To clear misconceptions, all the
-  above formulas do this implicitly every time you find a vector times
-  itself.
+$$K(x_i, x_j) = \phi(x_i)\cdot \phi(x_j)$$
+Therefore $(d)$ becomes:
+$$ f(x) = \sum_i a_iy_i K(x_i, x) + b $$
 
 Mercer's Theorem: every positive semidefinite symmetric function is a
-kernel.
+kernel
 
 There are multiple types of kernels, such as
-- linear: $K(x_i, x_j) = x_i^T x_j$
-- polynomial of power p: $K(x_i, x_j) = (1+x_i^T x_j)^p$
-- Gaussian: $K(x_i, x_j) = e^{\frac{|x_i-x_j|^2}{2\sigma ^2}}$
 
-Support Vector Machines are often used in object recognition in
-computer vision.
+- linear: $K(x_i, x_j) = x_i^T x_j$
+- polinomial of power p: $K(x_i, x_j) = (1+x_i^T x_j)^p$
+- gaussian: $K(x_i, x_j) = e^{\frac{|x_i-x_j|^2}{2\sigma ^2}}$
+
+To recap, kernels are generalization of dot products to arbitrary domains.
+
+
 
 -----
 
