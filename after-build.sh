@@ -10,7 +10,7 @@ sed -i 's/<\/head>/<style>body { display: flex; justify-content: center; align-i
 sed -i 's/<\/head>/<style>body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; } .outline2 { padding: 2rem; border-radius: 8px;} .content {text-align: center;} <\/style><\/head>/' public/order.html
 
 WORDS=$(find content/ -type f -name "*.org" -print0 | xargs -0 cat | wc -w)
-FILES=$(find content/ -type f | wc -l)
+FILES=$(find content/ -type f -not -path "*ltximg*" | wc -l)
 sed -i "s/WORDS/$WORDS/" public/first-page.html
 sed -i "s/FILES/$FILES/" public/first-page.html
 
