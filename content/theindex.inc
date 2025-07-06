@@ -32,6 +32,8 @@
       - [[file:ephemeris/2025-07-03.org::*2025-07-03 - Willkommen in Linz][2025-07-03 - Willkommen in Linz]]
       - [[file:ephemeris/2025-07-04.org::*2025-07-04 - Set up][2025-07-04 - Set up]]
       - [[file:ephemeris/2025-07-05.org::*2025-07-05 - Stores closed][2025-07-05 - Stores closed]]
+      - [[file:ephemeris/2025-05-06.org::*2025-07-05 - Stores closed][2025-07-05 - Stores closed]]
+      - [[file:ephemeris/2025-07-06.org::*2025-07-06 - Writing math proofs][2025-07-06 - Writing math proofs]]
       - [[file:ephemeris/entries.org::*Ephemeris Entries][Entries]]
     - [[file:feeds.org::*RSS Feed][Feeds]]
       - [[file:rss-feed-guide.org::*RSS Guide][RSS Guide]]
