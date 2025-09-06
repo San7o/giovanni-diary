@@ -1,16 +1,16 @@
 #!/bin/sh
 
 # Generate the Surroundings amalgamated org file from the .org files
-# from content/reading/surroundings to latex/
+# from content/writing/surroundings to latex/
 
 # 0. Create the latex directory
 rm -rf latex 2&>/dev/null
 mkdir -p latex
-cp -r content/reading/surroundings/images latex/
+cp -r content/writing/surroundings/images latex/
 
 # 1. Copy the files to a temporary directory
 mkdir -p .tmp
-cp -r content/reading/surroundings .tmp/
+cp -r content/writing/surroundings .tmp/
 rm .tmp/surroundings/surroundings.org
 
 # 2. Trim the first line and the last line for each file

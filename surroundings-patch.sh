@@ -33,4 +33,4 @@ sed -i 's/-----/\\newpage/g' latex/surroundings-final.tex
 
 cd latex
 xelatex surroundings-final.tex
-cp surroundings-final.pdf ../public/reading/surroundings/Surroundings.pdf
+cp surroundings-final.pdf ../public/writing/surroundings/Surroundings.pdf

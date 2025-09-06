@@ -19,8 +19,8 @@ mkdir -p public/fonts
 cp -r fonts/Inconsolata public/fonts/
 
 # Images
-mkdir -p public/reading/surroundings
-cp -r content/reading/surroundings/images public/reading/surroundings/
+mkdir -p public/writing/surroundings
+cp -r content/writing/surroundings/images public/writing/surroundings/
 cp -r content/ephemeris/images public/ephemeris/
 cp -r content/stash/photography/images public/stash/photography
 
