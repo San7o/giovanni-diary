@@ -3,6 +3,7 @@
     - [[file:autobiography/chronological.org::*Chronological Order][Autobiography]]
       - [[file:autobiography/early-life.org::*Early Life][Early Life]]
       - [[file:autobiography/high-school.org::*High School][High School]]
+      - [[file:autobiography/high-school-2.org::*High School][High School 2]]
       - [[file:autobiography/middle-school.org::*Middle School][Middle School]]
       - [[file:autobiography/old-programs-cpp.org::*Old cpp programs][Old cpp programs]]
       - [[file:autobiography/university.org::*University][University]]
