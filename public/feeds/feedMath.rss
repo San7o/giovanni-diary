@@ -1,0 +1,769 @@
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel>
+<title>nil</title>
+<link>nil</link>
+<description><![CDATA[nil]]></description>
+<item>
+<title>Eigenvalues and Eigenvectors</title>
+<link>https://giovanni-diary.netlify.app/math/eigenvalues-and-eigenvectors.html</link>
+<author>Giovanni Santini</author>
+<pubDate>10 Jun 2025 00:00:00 GMT</pubDate>
+<description><![CDATA[<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd260b95">1. Definition</a></li>
+</ul>
+</div>
+</div>
+<p>
+Today we will look at Eigenvalues and Eigenvectors in linear
+algebra. I will use the great book "Algebra Lineare" by Marco Abate as
+my reference.
+</p>
+
+<p>
+Eigenvectors are an important theoretical and practical topic, they
+are is used in <a href="../programming/notes/ml/09-unsupervised-learning.html">machine learning</a> and are often used as the preferred
+axis for rotations or other transformations.
+</p>
+
+<div id="outline-container-orgd260b95" class="outline-2">
+<h2 id="orgd260b95"><span class="section-number-2">1.</span> Definition</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Let \(T: V\rightarrow V\) be an endomorphism (maps from a space to
+itself) of a vector space \(V\). A vector \(v_0 \ne 0\) of \(V\) is an
+eigenvector of \(T\) with respect to the <b>eigenvalue</b> \(\lambda\) if:
+</p>
+
+<p>
+\[T(v_0)=\lambda v_0\]
+</p>
+
+<p>
+The set of <b>eigenvalues</b> is called the spectre of \(T\). If \(\lambda \in
+\ space(T)\) then the set:
+</p>
+
+<p>
+\[V_{\lambda} = \{ v\in T\ |\ T(v)=\lambda v \}\]
+</p>
+
+<p>
+is called <b>eigenspace</b>.
+</p>
+
+<p>
+Notice that from the definition follows:
+</p>
+
+<p>
+\[Tv_0 - \lambda v_0 = 0\]
+\[(T - \lambda I)v_0 = 0\]
+</p>
+
+<p>
+Therefore \((T-\lambda I)=0\) (is singular) and It's determinant
+is 0.
+</p>
+
+<p>
+\[det(T-\lambda I)=0\]
+</p>
+
+<p>
+This is very useful to compute the eigenvalues. Once you have those,
+and T, you can use them in the definition to get the eigenspace and
+the eigenvectors.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="notes.html">Mathematics Notes</a>, <a href="../theindex.html">Index</a>
+</p>
+</div>
+</div>
+]]></description>
+</item>
+<item>
+<title>Probability Basics</title>
+<link>https://giovanni-diary.netlify.app/math/probability-basics.html</link>
+<author>Giovanni Santini</author>
+<pubDate>10 Jun 2025 00:00:00 GMT</pubDate>
+<description><![CDATA[<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org70d16ca">1. Basic Definitions</a></li>
+<li><a href="#org7f28482">2. Probability Function</a></li>
+<li><a href="#orgd4eecf7">3. Bayes Theorem:</a></li>
+<li><a href="#org78c2404">4. Stochastic Independence</a></li>
+<li><a href="#org46b3e9e">5. Distribution Function</a></li>
+<li><a href="#org05b90df">6. Random Variable</a></li>
+<li><a href="#org0cfaf0d">7. Notable Random Variables</a></li>
+<li><a href="#orgbe86f80">8. Expected Value</a></li>
+<li><a href="#org6c59c31">9. Variance</a></li>
+<li><a href="#org22935d2">10. Covariance</a></li>
+<li><a href="#orgc6f9fcf">11. Standardization</a></li>
+<li><a href="#org0a224d2">12. Markov Inequality</a></li>
+<li><a href="#org842ac6b">13. Chebyshev Inequality</a></li>
+</ul>
+</div>
+</div>
+<p>
+In this document I will summarize the core ideas of probability
+theory.
+</p>
+
+<div id="outline-container-org70d16ca" class="outline-2">
+<h2 id="org70d16ca"><span class="section-number-2">1.</span> Basic Definitions</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+There are two main interpretations of what probability is. The first
+one is to think of a probability as the frequency of a certain event
+occurring. If a coin has 0.5 probability of landing heads, then we
+expect the coin to land heads about half of the time. The other
+interpretation views probability as a quantity of uncertainty or
+ignorance about something, this is more related to information rather
+than repeated trials. In the coin example, here we mean that the
+coin is equally likely to land heads or tails on the next toss.
+</p>
+
+<p>
+We define the following terms:
+</p>
+
+<ul class="org-ul">
+<li>\(\Omega\) as the sample space, It is composed of independent events</li>
+<li>\(A\subset 2^{\Omega}\) is a subset of the sample space of a problem</li>
+<li>\(a\in A\) is an event</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7f28482" class="outline-2">
+<h2 id="org7f28482"><span class="section-number-2">2.</span> Probability Function</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+A function \(P\) is a probability function if:
+</p>
+
+<ul class="org-ul">
+<li>\(P\) is non negative: \(P(A)\ge 0\ \forall A\in \Omega\)</li>
+<li>\(P\) is normalized: \(P(\Omega)=1\)</li>
+<li><p>
+\(P\) is \(\sigma\) -additive: if \(A_i \cap A_j \ne \emptyset,\ A\in \Omega\) then  \(P(\cup_i A_i)=\sum_i P(A_i)\)
+</p>
+
+<p>
+From set theory, you can demonstrate that the following holds:
+</p></li>
+</ul>
+
+<p>
+\[P(A\cup B) = P(A) + P(B) - P(A\cap B)\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd4eecf7" class="outline-2">
+<h2 id="orgd4eecf7"><span class="section-number-2">3.</span> Bayes Theorem:</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Bayes theorem is a foundamental theorem that correlates the probabilty
+of variables given another variable. First, we define \(P(A|H)\) as the
+probability of A given H, and we can calculate this as:
+</p>
+
+<p>
+\[P(A|H)=\frac{P(A\cap H)}{P(H)},\ P(H)>0\]
+</p>
+
+<p>
+The Bayes theorem states:
+</p>
+
+<p>
+\[P(A_i|B)=\frac{P(B|A_i)P(A_i)}{\sum_j P(B|A_j)P(A_j)}=\frac{P(B|A_i)P(A_i)}{P(B)}\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org78c2404" class="outline-2">
+<h2 id="org78c2404"><span class="section-number-2">4.</span> Stochastic Independence</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Events \(A\in \Omega\) are said to be independent if:
+</p>
+
+<p>
+\[P(A_{i1} \cap A_{i2} \cap ... \cap A_{ik}) = \prod_{j=1}^k P(A_{ij}) = P(A_{i1})\cdot P(A_{i2})\cdot ...\cdot P(A_{ik})\]
+</p>
+
+<p>
+The same applies to bivaraite functions:
+</p>
+
+<p>
+\[P_{X, Y}(x, y) = P_X(x)\cdot P_Y(y),\ \forall (x, y)\in R_x \times R_y\]
+</p>
+
+<p>
+moreover:
+</p>
+
+<p>
+\[P_{X|Y}(x|y) = P_X(x)\]
+\[P_{Y|X}(y|x) = P_Y(y)\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org46b3e9e" class="outline-2">
+<h2 id="org46b3e9e"><span class="section-number-2">5.</span> Distribution Function</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+A function \(F\) is a probability distribution function if:
+</p>
+
+<ul class="org-ul">
+<li>\(F\) never decreases</li>
+<li>\(F\) is right-continuous</li>
+<li>\(F\) always has a left-limit</li>
+<li>\(\lim_{x\to - \infty} f(x)=0\)</li>
+<li><p>
+\(\lim_{x\to\infty}f(x)=1\)
+</p>
+
+<p>
+Then \(P((a, b])=^{(discrete)}F(b)-F(a^-) =^{(continuous)} \int_a^b f(x)dx\)
+</p></li>
+</ul>
+
+<p>
+Where \(f(x)\) is called density when if \(F\in C^1\) in the continuous
+formulation.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org05b90df" class="outline-2">
+<h2 id="org05b90df"><span class="section-number-2">6.</span> Random Variable</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Random variables are a mathematical formalization used to model
+quantities which depend on random events, It lets us quantify
+random events so that we can make probability calculations.
+</p>
+
+<p>
+More formally, a random variable is a function that maps event in
+some sample space \(\Omega\) to a set of outcomes in measurable space \(E\),
+which is often \(\mathbb{R}\).
+</p>
+
+<p>
+\[X:\Omega \to E\]
+</p>
+
+<p>
+The probability that \(X\) takes on a value in a measurable set
+\(S\subseteq E\) is written as
+</p>
+
+<p>
+\[P(X\in S) = P(\{ \omega \in \Omega \ |\ X(\omega)\in S \})\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0cfaf0d" class="outline-2">
+<h2 id="org0cfaf0d"><span class="section-number-2">7.</span> Notable Random Variables</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Some random variables appear more than others, so a few of them
+are worthy of their name. You will see those everywhere in nature,
+economics, populations, and more.
+</p>
+
+<p>
+Bernoulli:
+</p>
+
+<p>
+\[X(\omega)=\{0, 1\}\]
+</p>
+
+<p>
+Rademacher:
+</p>
+
+<p>
+\[Y(\omega)=\{ -1, 1 \}\]
+</p>
+
+<p>
+Binomial \(X\sim Bin(n, p)\):
+</p>
+
+<p>
+\[P_x(J)=\{ \binom{n}{k}p^J(1-p)^{n-J},\ j=1...n\ |\ 0\ otherwise \}\]
+</p>
+
+<p>
+Poissont \(X\sim Pois(\lambda)\):
+</p>
+
+<p>
+\[P_x\{\frac{\lambda^xe^{-\lambda}}{x!}, n\in \mathbb{N}\cup \{ 0 \}\ |\ 0\ otherwise\}\]
+</p>
+
+<p>
+Geometric:
+</p>
+
+<p>
+\[P(y)=\{ p(1-p)^{y-1},\ y\in \mathbb{N}\ |\ 0\ otherwise \}\]
+</p>
+
+<p>
+Uniform \(X\sim Unif[a, b]\):
+</p>
+
+<p>
+\[f_x(x)=\{ \frac{1}{b-a},\ x\in [a, b]\ |\ 0\ otherwise \}\]
+</p>
+
+<p>
+Normal (Gaussian) \(X\sim N(\mu , \sigma^2)\):
+</p>
+
+<p>
+\[f_x(x) = \frac{1}{\sqrt{2\pi \sigma^2}}e^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}}\]
+</p>
+
+<p>
+Exponential \(X\sim Exp(\lambda)\):
+</p>
+
+<p>
+\[f_x(x)=\lambda e^{\lambda x}\mathbb{1}(x>0)\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbe86f80" class="outline-2">
+<h2 id="orgbe86f80"><span class="section-number-2">8.</span> Expected Value</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+We define the expected value in a discrete space as:
+</p>
+
+<p>
+\[\mathbb{E}(x) = \sum_{x\in R_x} xp_x(x)\]
+</p>
+
+<p>
+and in the continuous:
+</p>
+
+<p>
+\[\mathbb{E}(x)=\int_{-\infty}^{\infty} xf_x(x)dx \]
+</p>
+
+<p>
+The expected value is a linear function:
+</p>
+
+<p>
+\[E(aX+b) = a\mathbb{E}(x)+b\]
+\[E(g(x))=\sum_{x\in R_x} g(x)p_x(x)\]
+</p>
+
+<p>
+Known formulas for notable random variables:
+</p>
+
+<ul class="org-ul">
+<li>Bernoulli: \(\mathbb{E}(x)=p\)</li>
+<li>Binomial: \(\mathbb{E}(x)=np\)</li>
+<li>Geometric: \(\mathbb{E}(x)= \frac{1}{p}-1\)</li>
+<li>Normal: \(\mathbb{E}(x)=\mu\)</li>
+<li>Exponential: \(\mathbb{E}(x)=\frac{1}{\lambda}\)</li>
+<li>Poisson: \(\mathbb{E}(x)=\lambda\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6c59c31" class="outline-2">
+<h2 id="org6c59c31"><span class="section-number-2">9.</span> Variance</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+We define variance as:
+</p>
+
+<p>
+\[\mathbb{V}ar(x)=\mathbb{E}(x^2)-\mathbb{E}(x)^2 = \mathbb{E}[(x-\mathbb{E}[x])^2]\]
+</p>
+
+<p>
+Moreover:
+</p>
+
+<p>
+\[\mathbb{V}ar(x)=\mathbb{E}(\mathbb{V}ar(x|y)) + \mathbb{V}ar(\mathbb{E}(x|y))\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org22935d2" class="outline-2">
+<h2 id="org22935d2"><span class="section-number-2">10.</span> Covariance</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+We define the covariance as:
+</p>
+
+<p>
+\[\mathbb{C}ov(x, y)=\mathbb{E}((x-\mathbb{E}(x))(y-\mathbb{E}(y)))=\mathbb{E}(XY)-\mathbb{E}(x)\mathbb{E}(y)\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc6f9fcf" class="outline-2">
+<h2 id="orgc6f9fcf"><span class="section-number-2">11.</span> Standardization</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+\[z=g(x)=\frac{x-\mathbb{E}(x)}{\sqrt{\mathbb{V}ar(x)}}\]
+</p>
+
+<p>
+After this transformation:
+</p>
+
+<ul class="org-ul">
+<li>\(\mathbb{E}(z)=0\)</li>
+<li>\(\mathbb{V}ar(z)=1\)</li>
+</ul>
+
+<p>
+The opposite can be achieved:
+</p>
+
+<p>
+\[x=\sigma z + \mu\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0a224d2" class="outline-2">
+<h2 id="org0a224d2"><span class="section-number-2">12.</span> Markov Inequality</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+Let \(Y\) be a random variable non negative, then \(\forall a>0\):
+</p>
+
+<p>
+\[P(Y\ge a)\le \frac{\mathbb{E}(y)}{a}\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org842ac6b" class="outline-2">
+<h2 id="org842ac6b"><span class="section-number-2">13.</span> Chebyshev Inequality</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+Let \(Y\) be a random variable, \(\mu = \mathbb{E}(y)\),
+\(\sigma^2=\mathbb{V}ar(y)\), then \(\forall \epsilon > 0\):
+</p>
+
+<p>
+\[P(|Y-\mu| \ge \epsilon)\le \frac{\sigma^2}{\epsilon^2}\]
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="notes.html">Mathematics Notes</a>, <a href="../theindex.html">Index</a>
+</p>
+</div>
+</div>
+]]></description>
+</item>
+<item>
+<title>The Lagrange dual function</title>
+<link>https://giovanni-diary.netlify.app/math/the-lagrange-dual-function.html</link>
+<author>Giovanni Santini</author>
+<pubDate>10 Jun 2025 00:00:00 GMT</pubDate>
+<description><![CDATA[<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf610550">1. Index</a></li>
+<li><a href="#orgb68e434">2. Optimization problems</a></li>
+<li><a href="#org6ad2aee">3. The Lagrangian</a></li>
+<li><a href="#orgf608f04">4. The dual problem</a></li>
+<li><a href="#orge2ba574">5. Convex optimization problems</a></li>
+</ul>
+</div>
+</div>
+<p>
+In this post we will delve into the realm of optimization and in
+particular we will look at the Lagrange dual function. I will be
+using the book "Convex Optimization" by Stephen Boyd and Lieven
+Vandenberghe as my reference.
+</p>
+
+<div id="outline-container-orgf610550" class="outline-2">
+<h2 id="orgf610550"><span class="section-number-2">1.</span> Index</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Optimization problems</li>
+<li>The Lagrangian</li>
+<li>The dual problem</li>
+<li>Convex optimization problems</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb68e434" class="outline-2">
+<h2 id="orgb68e434"><span class="section-number-2">2.</span> Optimization problems</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+A mathematical optimization problem, or just optimization problem, has
+the form:
+</p>
+
+<p>
+\[minimize\ f_0(x)\]
+</p>
+
+<p>
+subject to:
+</p>
+
+<p>
+\[f_i(x)\le b_i,\ i=1, ..., m\]
+\[h_i(x) = 0,\ i=1, ..., p\]
+</p>
+
+<p>
+Here the vector \(x=(x_1, ..., x_n)\) is the optimization variable of
+the problem, the function \(f_0: \mathbb{R}^n \rightarrow \mathbb{R}\)
+is the objective function, the functions \(f_i, h_i: \mathbb{R}^n \rightarrow
+\mathbb{R},\ i=1, ..., m\) are the constraint functions, and the
+constants \(b_i, ..., b_m\) are the limits, or bounds, of the
+constraints. A vector \(x*\) is called optimal, or a solution of the
+problem, if It has the smallest objective value among all vectors that
+satisfy the constraints.
+</p>
+
+<p>
+The optimal value \(x*\) of the above problem, also referred to as \(p*\),
+is defined as:
+</p>
+
+<p>
+\[x* = inf\{ f_0(x) | f_i(x) \le 0,\ i=1, ..., m,\ h_i(x)=0,\ i=1,
+..., p \}\]
+</p>
+
+<p>
+The optimal value for a maximization problem would be the greater
+value instead.
+</p>
+
+<p>
+The types of optimization problems can be divided into:
+</p>
+
+<ul class="org-ul">
+<li><b>linear programming</b> where the objective and all constraint
+functions are linear meaning they satisfy the equality \(f_i(\alpha
+  x+ \beta y) = \alpha f(x) + \beta f(y)\) for all \(x, y \in
+  \mathbb{R}^n\) and all \(\alpha, \beta \in \mathbb{R}\). There is no
+simple analytical formula for the solution of a linear program, but
+there are a variety of very effective methods including Dantzig's
+simplex method and interior-point methods.</li>
+
+<li><b>convex optimization</b> where the objective and constraint functions
+are convex meaning they satisfy the equation \(f_i(\alpha x+ \beta y)
+  \le \alpha f(x) + \beta f(y)\) for all \(x, y \in \mathbb{R}^n\) and
+all \(\alpha , \beta \in \mathbb{R},\ \alpha + \beta = 1, \alpha \ge
+  0, \beta \ge 0\). We say a function \(f\) is <b>concave</b> if \(-f\) is
+convex. If just the objective function is convex but not the
+constraints, the problem is called <b>quasiconvex</b>. Similar to linear
+programming, in general there is no analytical formula for solving
+these problems, but there are effective methods to do so like
+interior-point methods. Fortunately, those are quite efficient for
+computers and we are able to solve them quickly.</li>
+
+<li><b>non linear optimization</b> for problems with non linear objective or
+constraints which further divides into <b>local</b> optimization (finding
+a local best solution) or <b>global</b> optimization which is usually
+slower in terms of computation time. There is no general efficient
+solution.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6ad2aee" class="outline-2">
+<h2 id="org6ad2aee"><span class="section-number-2">3.</span> The Lagrangian</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Consider a minimization problem as defined above, we assume the domain
+\(D=\prod_{i=1}^m dom(f_i) \cap \prod_{i=1}^p dom(h_i)\) is non empty
+and denote the optimal value by \(p*\).
+</p>
+
+<p>
+The idea is to account for the constraints by augmenting the objective
+function with a weighted sum of the constraints. We define the
+<b>Lagrangian</b> \(L:\ \mathbb{R}^n \times \mathbb{R}^m \times \mathbb{R}^p
+\rightarrow \mathbb{R}\) as:
+</p>
+
+<p>
+\[L(x, \lambda, \nu) = f_0(x) + \sum_{i=1}^m \lambda_i f_i(x) +
+\sum_{i=1}^p \nu_i h_i(x)\]
+</p>
+
+<p>
+We refer to \(\lambda_i\) as the <b>Lagrange multiplier</b> associated with the
+i-th inequality constraint \(f_i\le 0\) and \(\nu_i\) as the Lagrange
+multiplier associated with the i-th equality constraint \(h_i(x)=0\). The
+vectors \(\lambda\) and \(\nu\) are called the dual variables or Lagrange
+multiplier vectors associated with the problem.
+</p>
+
+<p>
+We define the <b>Lagrange dual function</b> \(g: \mathbb{R}^m \times
+\mathbb{R}^p \rightarrow \mathbb{R}\) as the minimum value of the
+Lagrangian over \(x\) associated to the previous problem: for \(\lambda
+\in \mathbb{R}^n,\ \nu \in \mathbb{R}^p\),
+</p>
+
+<p>
+\[g(\lambda , \nu) = inf_{x\in D} L(x, \lambda , \nu ) = inf_{x\in
+D}(f_0(x) + \sum_{i=1}^m \lambda_i f_i(x) + \sum_{i=1}^p \nu_i
+h_i(x))\]
+</p>
+
+<p>
+It is easy to see that \(g(\lambda , \nu)\) is the lower bound of the
+optimal value \(p*\), in fact the sum of \(f_i(x)\) is negative and the
+sum of \(h_i(x)\) is zero for valid solutions, hence we are subtracting
+from \(f_0(x)\) and we are looking for the vectors \(\lambda\) and \(\nu\)
+that give the smaller valid value (or the greater subtraction), which
+is the lower bound.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf608f04" class="outline-2">
+<h2 id="orgf608f04"><span class="section-number-2">4.</span> The dual problem</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+We showed that \(g(\lambda , \nu)\) is the lower bound of the optimal
+value \(p*\). But to find the optimal value we need to find the highest
+lower bound. Hence, we need to maximize the dual function, meaning we need
+to solve the problem:
+</p>
+
+<p>
+\[maximize g(\lambda , \nu)\]
+</p>
+
+<p>
+subject to:
+</p>
+
+<p>
+\[\lambda \ge 0\]
+</p>
+
+<p>
+This problem is called the Lagrange dual problem associated with the
+original minimization problem. We refer to \((\lambda *, \nu *)\) as
+dual optimal or optimal Lagrange multipliers if they are optimal for
+the problem.
+</p>
+
+<p>
+The Lagrange dual problem is a <b>convex optimization problem</b>, since
+the objective to be maximized is concave (because "the dual function
+is the point-wise infium of a family of affine functions", gl) and the
+constraint is convex (indeed the constraint \(f(x) < \lambda_i\) has
+function \(f(x)=0\) which satisfies the definition of convex).  This is
+always the case whether or not the original problem (sometimes referred
+to as primal problem) is convex.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge2ba574" class="outline-2">
+<h2 id="orge2ba574"><span class="section-number-2">5.</span> Convex optimization problems</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Let's now consider convex optimization problems. A fundamental
+property of convex optimization problems is that any locally optimal
+point is also globally optimal, this can be proven my contradiction.
+</p>
+
+<p>
+The convex optimization problem is called a quadratic program if the
+objective function is convex and quadratic, and the constraint
+functions are affine (linear). A quadratic program can be expressed in
+the form:
+</p>
+
+<p>
+\[minimize\ \frac{1}{2}x^TPx + q^Tx+r\]
+</p>
+
+<p>
+subject to:
+</p>
+
+<p>
+\[Gx \le h\]
+\[Ax=b\]
+</p>
+
+<p>
+where \(P\) is a symmetric positive matrix where \(x^TPx\) is always
+positive.
+</p>
+
+<p>
+There are many techniques to solve these kind of problems. If the
+problem is unconstrained, you can use backtracking (move in steps and
+reduce the step size incrementally), <a href="../programming/notes/ml/06-gradient-descent.html">gradient descent</a>, steepest
+descent or newton's method. If It is also very simple, you can
+calculate the first and second derivatives and equal them to 0. In
+equality constrained problems you can use more sophisticated versions
+of the Newton step or using barriers.  In general, you can use the
+interior-point method.
+</p>
+
+<p>
+Explaining those falls outside of the scope of this blog, you can
+dig deeper if you want. I think gradient descent is the easier to
+understand and you can find my notes <a href="../programming/notes/ml/06-gradient-descent.html">here</a>.
+</p>
+
+<p>
+What we talked about here is used in practice in various areas, such
+as <a href="../programming/notes/ml/07-support-vector-machines.html">machine learning</a>.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="notes.html">Mathematics Notes</a>, <a href="../theindex.html">Index</a>
+</p>
+</div>
+</div>
+]]></description>
+</item>
+</channel></rss>
