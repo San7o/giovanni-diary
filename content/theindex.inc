@@ -138,6 +138,8 @@
     - [[file:writing/writing.org::*Writing][Writing]]
       - [[file:writing/poetry/poetry.org::*Poetry][Poetry]]
         - [[file:writing/poetry/and-again.org::*And again][And again]]
+        - [[file:writing/poetry/favourites/favourites.org::*Collected Favourites][Collected Favourites]]
+          - [[file:writing/poetry/favourites/to-the-unknown-journeyman.org::*To the unknown journeyman][To the unknown journeyman]]
         - [[file:writing/poetry/immense-power.org::*Immense Power][Immense power]]
         - [[file:writing/poetry/on-top-of-an-iceberg.org::*On top of an iceberg][On top of an iceberg]]
         - [[file:writing/poetry/poems.org::*My Poems][Poems]]
