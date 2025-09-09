@@ -629,11 +629,20 @@ figcaption {
 blockquote {
   margin-inline-start: 2rem;
   margin-inline-end: 0;
-  margin-block: 2rem;
-  padding: 0.4rem 0.8rem;
-  border-inline-start: 0.35rem solid var(--accent);
+  margin-block: 1rem;
+  padding: 2rem 2rem;
+  /* border-inline-start: 0.35rem solid var(--accent); */
   color: var(--text-light);
   font-style: italic;
+}
+
+blockquote p {
+  display: inline;
+  white-space: pre-line; /* respect single newlines */
+}
+blockquote p + p::before {
+  content: "\A";  /* line break */
+  white-space: pre;
 }
 
 cite {
