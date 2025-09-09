@@ -43,7 +43,7 @@ q(x_{1:T}|x_0)=\prod_{t=1}^Tq(x_t|x_{t-1})$$ Notice that we are
 multiplying the mean of the previous distribution times
 $\sqrt{1-\beta_t}$ and the variance by $\beta_t$, the two
 transformations are related in order to keep the distribution
-normalized. $\beta$ can be thought as the step size, It determins how
+normalized. $\beta$ can be thought as the step size, it determins how
 aggressively the noise build up. Additionally, we are using $I$ as the
 base variance that is the identity matrix where all the values are
 completely independent for eachother.
@@ -72,7 +72,7 @@ iteratively $x_{t-1}=q(x_{t-1}|x_t)$. Through Bayes theorem,
 $q(x_{i-1}|x+t) \propto q(x_{t-1})q(x_t|x_{t-1})$ but we cannot solve
 this since we don't know $q(x|x_{t-1})$ . In other words,
 $p(x_{i-1}|x)$ depends on the entire Markov chain which we do not
-have. To solve this, we can approximate It by learning a Gaussian.
+have. To solve this, we can approximate it by learning a Gaussian.
 
 - $p(x_T)\sim N(0, I)$
 - $p_{\theta}(x_{t-1}|x_t)\sim N(\mu_{\theta}(x_t, t), \sigma^2 I)$

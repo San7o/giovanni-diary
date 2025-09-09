@@ -51,7 +51,7 @@ understanding of how the operating system works in the context of
 power management. I will now give you a quick overview of power
 consumption on a linux system running on the x86 architecture.
 
-Let's start with the hardware and how we can interact with It, more
+Let's start with the hardware and how we can interact with it, more
 specifically the CPU. Similarly to other hardware components, intel
 CPUs implement the [[https://uefi.org/htmlspecs/ACPI_Spec_6_4_html/][ACPI]] specification which enables an ACPI compatible
 operating system to interface with hardware devices to fine tune
@@ -76,14 +76,14 @@ example).
 
 Going back to ACPI, other devices are also a great source of power
 consumption. Hardware other than processors have "device power states"
-D0 to D3 where D0 means that the device is fully on, D3 that It is
+D0 to D3 where D0 means that the device is fully on, D3 that it is
 off. ACPI further defines those states for many device types (network,
 storage...).
 
 *** Linux's ACPI
 
 An overview of the Linux's ACPI implementation can be found [[https://www.kernel.org/doc/ols/2005/ols2005v1-pages-59-76.pdf][here]].
-Briefly, It is composed of an OS Service Layer which abstracts the
+Briefly, it is composed of an OS Service Layer which abstracts the
 hardware, an user interface via sysfs and procfs, the core
 implementation which includes an AML interpreter which is used as a
 language between the firmware and the operating system, and other
@@ -98,7 +98,7 @@ like =acpid= or =upower= to dump ACPI info, if you are using some
 linux distribution you may have something similar already installed.
 
 Obviously, the more stuff you are doing with your computer, the more
-energy It will consume. You should prefer light software compiled to
+energy it will consume. You should prefer light software compiled to
 machine code, with optimizations enabled and stripped debug
 information. We will discuss more what other optimizations you can
 implement.
@@ -107,7 +107,7 @@ implement.
 
 While you may try to thinker with configuration files and settings
 following common heuristics (such as "less processes = less power
-consumption"), It is more effective to first evaluate the power
+consumption"), it is more effective to first evaluate the power
 consumption of your operating system and then make changes to the most
 power-draining sources in order to have a greater impact on the
 overall power consumption.
@@ -147,7 +147,7 @@ later we'll see an option in BTRFS that improves performance.
 
 To evaluate a change in your system, you can log and graph different
 statistics and compare changes. The following script records CPU power
-consumption in Watts on intel systems, It uses intel-rapl to fetch the
+consumption in Watts on intel systems, it uses intel-rapl to fetch the
 data, you may need to adapt the code if you are using a CPU from a
 different brand.
 
@@ -405,7 +405,7 @@ powersave in tlp's settings (which is the default setting).
 
 **** Maximum charge level
 
-To increase battery life, It is recommended to reduce the maximum
+To increase battery life, it is recommended to reduce the maximum
 charge level below 100% and prevent the charging process to happen for
 every short discharge from the maximum. By default, TLP does not set
 this. To enable it, set the variables =START_CHARGE_THRESH_BATx= and
@@ -419,9 +419,9 @@ laptops (like my HP one) this is not supported and the command
 
 If you are doing mostly lightweight work with long idle periods, you
 can limit the scheduling-clock interrupt to prevent waking up some
-cores when It is not needed. The linux kernel [[https://www.kernel.org/doc/html/latest/timers/no_hz.html#omit-scheduling-clock-ticks-for-cpus-with-only-one-runnable-task][documentation]] says that
+cores when it is not needed. The linux kernel [[https://www.kernel.org/doc/html/latest/timers/no_hz.html#omit-scheduling-clock-ticks-for-cpus-with-only-one-runnable-task][documentation]] says that
 if scheduling is set to periodic, the system would drain 2-3 times
-faster compared to a kernel with this disabled, so It is quite a big
+faster compared to a kernel with this disabled, so it is quite a big
 deal. You may need it if you are running aggressive real-time
 response constraints, but this is not our case.
 
@@ -434,7 +434,7 @@ Enable the following in your kernel configuration:
 
 **** Disable Atime in BTRFS
 
-BTRFS is a popular filesystem. A part of Its design is the CoW
+BTRFS is a popular filesystem. A part of its design is the CoW
 (Copy on Write) where a certain file would get copied in another
 location when a modification is made, this is necessary for
 the snapshotting functionality of the filesystem. However, this
@@ -507,7 +507,7 @@ background daemons to do things like reporting crashes.
 If your system uses systemd, you can check active services using the
 =systemctl status= command. Even though many of them may be idle and
 may not contribute much to the overall power consumption, they still
-consume resources so It is helpful to have less things running in
+consume resources so it is helpful to have less things running in
 your system.
 
 Disable things like Bluetooth if you don't need it, crash reporting

@@ -51,9 +51,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-orgd6c4f23" class="outline-2">
-<h2 id="orgd6c4f23">Neural Networks</h2>
-<div class="outline-text-2" id="text-orgd6c4f23">
+<div id="outline-container-orge42db66" class="outline-2">
+<h2 id="orge42db66">Neural Networks</h2>
+<div class="outline-text-2" id="text-orge42db66">
 <p>
 Previously we have discussed perceptrons as a non-linear parameterized
 function with restricted output range. It predicts the output by
@@ -112,7 +112,7 @@ The node then passes this result to a non-linear activation function \(h(x)\), w
 
 <p>
 There are many non-linear activation function, a popular one is called
-<span class="underline">Rectified Linear Units</span> aka ReLU and It looks like this:
+<span class="underline">Rectified Linear Units</span> aka ReLU and it looks like this:
 </p>
 
 <p>
@@ -158,9 +158,9 @@ solved through a technique called <span class="underline">backpropagation</span>
 </p>
 </div>
 
-<div id="outline-container-orgf0e7842" class="outline-3">
-<h3 id="orgf0e7842">Training with backpropagation</h3>
-<div class="outline-text-3" id="text-orgf0e7842">
+<div id="outline-container-org961c9c4" class="outline-3">
+<h3 id="org961c9c4">Training with backpropagation</h3>
+<div class="outline-text-3" id="text-org961c9c4">
 <p>
 Given training samples \(T=\{ (x_1, y_1), (x_2, y_2), ..., (x_n, y_n)
 \}\), we want to adjust all the weights of the network \(\Theta\) such
@@ -246,14 +246,14 @@ For the hidden layers you do not know the expected output \(y_i\) directly, so y
 </p>
 
 <p>
-We can finally perform gradient descent like we discussed in Its own chapter.
+We can finally perform gradient descent like we discussed in its own chapter.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org121918a" class="outline-3">
-<h3 id="org121918a">Example</h3>
-<div class="outline-text-3" id="text-org121918a">
+<div id="outline-container-org1f27134" class="outline-3">
+<h3 id="org1f27134">Example</h3>
+<div class="outline-text-3" id="text-org1f27134">
 <p>
 We will relax the notation now. Consider a two-layer network (that does not count the input layer). Given:
 </p>
@@ -321,9 +321,9 @@ the required derivatives</li>
 </div>
 </div>
 
-<div id="outline-container-org1f44ddc" class="outline-3">
-<h3 id="org1f44ddc">Convolutional Neural Networks</h3>
-<div class="outline-text-3" id="text-org1f44ddc">
+<div id="outline-container-org154b251" class="outline-3">
+<h3 id="org154b251">Convolutional Neural Networks</h3>
+<div class="outline-text-3" id="text-org154b251">
 <p>
 In computer vision, we have a lot of important spacial information we
 want to model, however this happens to be really difficult for neural
@@ -353,30 +353,30 @@ together, producing a <span class="underline">feature map</span>.
 
 <p>
 These convolutions matrices are learned by the convolutional neural
-network, this is how It can understand spacial features such as edges
-or certain arrangements of pixels on Its own. Suppose we are training
+network, this is how it can understand spacial features such as edges
+or certain arrangements of pixels on its own. Suppose we are training
 a CNN to classify human faces, the network may learn the features of
-the eyes and their position with respect to the nose and the mouth, It
+the eyes and their position with respect to the nose and the mouth, it
 may catch the shape of the ears or the color of the skin, and so on.
 </p>
 
 <p>
 Convolutional neural networks are feedforward neural networks composed
 of a set of filters that cover a spacially small portion of the input
-data and that are convoluted over It. The network may have many
+data and that are convoluted over it. The network may have many
 convolutions over the same input, and convolutions over
-convolutions. For classification, It is common to have multiple
+convolutions. For classification, it is common to have multiple
 convolutions chained together while reducing the spacial size of the
-representation and increasing Its depth with a process known as
+representation and increasing its depth with a process known as
 <span class="underline">spacial polling</span>, until the size is \(1\). Then, all the data is fed to
 a traditional neural network for classification.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6c963c1" class="outline-3">
-<h3 id="org6c963c1">Other neural networks</h3>
-<div class="outline-text-3" id="text-org6c963c1">
+<div id="outline-container-org742bf23" class="outline-3">
+<h3 id="org742bf23">Other neural networks</h3>
+<div class="outline-text-3" id="text-org742bf23">
 <p>
 Many other types of neural networks were developed over time for
 domain specific problems, some of the notable ones are:

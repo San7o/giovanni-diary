@@ -51,14 +51,14 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-orgc144432" class="outline-2">
-<h2 id="orgc144432">Gradient Descent</h2>
-<div class="outline-text-2" id="text-orgc144432">
+<div id="outline-container-orga0bf1c2" class="outline-2">
+<h2 id="orga0bf1c2">Gradient Descent</h2>
+<div class="outline-text-2" id="text-orga0bf1c2">
 </div>
 
-<div id="outline-container-org139586f" class="outline-3">
-<h3 id="org139586f">Model-Based Machine Learning</h3>
-<div class="outline-text-3" id="text-org139586f">
+<div id="outline-container-org5af4f0d" class="outline-3">
+<h3 id="org5af4f0d">Model-Based Machine Learning</h3>
+<div class="outline-text-3" id="text-org5af4f0d">
 <ol class="org-ol">
 <li>Pick a model (hyperplace, decision tree&#x2026;)</li>
 <li>Pick a criterion to optimize</li>
@@ -95,9 +95,9 @@ Let's look at linear binary classification
 </div>
 </div>
 
-<div id="outline-container-orgd138d67" class="outline-3">
-<h3 id="orgd138d67">Loss Functions</h3>
-<div class="outline-text-3" id="text-orgd138d67">
+<div id="outline-container-org16c9193" class="outline-3">
+<h3 id="org16c9193">Loss Functions</h3>
+<div class="outline-text-3" id="text-org16c9193">
 <p>
 How do we minimize the 0/1 loss? Finding \(w\) and \(b\) that optimize the
 0/1 loss is hard (in fact, NP-hard).
@@ -126,9 +126,9 @@ as the predicted value:
 </div>
 </div>
 
-<div id="outline-container-orgec0fe0a" class="outline-3">
-<h3 id="orgec0fe0a">Gradient Descent</h3>
-<div class="outline-text-3" id="text-orgec0fe0a">
+<div id="outline-container-org224573c" class="outline-3">
+<h3 id="org224573c">Gradient Descent</h3>
+<div class="outline-text-3" id="text-org224573c">
 <p>
 Pick a starting point \(w\). Repeat until loss doesn't decrease in any dimension:
 </p>
@@ -170,7 +170,7 @@ There are two types of gradient descent:
 <li><span class="underline">Batch Gradient Descent</span>: the estimates are stable however you need to compute gradients over the entire training for one update.</li>
 <li><span class="underline">Stochastic Gradient Descent</span>: we sample only one data point from
 the training set and compute the gradient. The learning rate changes
-at each step, It typically decays linearly. A problem arises with
+at each step, it typically decays linearly. A problem arises with
 flat error surfaces where the error would jump vividly. We can
 introduce a variable called <span class="underline">velocity</span> to counteract this, where the
 gradient updates the velocity.</li>
@@ -183,9 +183,9 @@ It is often useful to compute the gradient on set of samples.
 </div>
 
 
-<div id="outline-container-orgac1886b" class="outline-3">
-<h3 id="orgac1886b">Gradient</h3>
-<div class="outline-text-3" id="text-orgac1886b">
+<div id="outline-container-org41c1101" class="outline-3">
+<h3 id="org41c1101">Gradient</h3>
+<div class="outline-text-3" id="text-org41c1101">
 <p>
 The gradient is the vector of partial derivates w.r.t all the
 coordinates of the weights. For \(f: \mathbb{R}^n \rightarrow
@@ -193,7 +193,7 @@ coordinates of the weights. For \(f: \mathbb{R}^n \rightarrow
 \mathbb{R}^n\) is defined at the point \(p=(x_1, ..., x_n)\) in
 n-dimensional space as the vector: \[\nabla f(p) =
 [\frac{df}{dx_i}(p)\ ...\ \frac{df}{dx_n}(p) ]\] Explained to a
-programmer, the gradient is defined for each dimension and It is the
+programmer, the gradient is defined for each dimension and it is the
 vector where each element is the derivative with respect to that
 dimension.  Formally, the gradient of a scalar function \(f(x_1, x_2,
 x_3, ..., x_n)\) is denoted \(\nabla f\) where \(\nabla\) is the vector

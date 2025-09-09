@@ -50,7 +50,7 @@ $$q*\in arg\ min\ d_{q\in H}(p_{data}, q)$$
 
 *** KL-Divergence
 
-Before continuing, It is worth taking some time to study KL-divergence
+Before continuing, it is worth taking some time to study KL-divergence
 since we will use this later. The Kullback–Leibler divergence, denoted
 as $d_{kl}(P|Q)$ is a type of statistical distance that measures how
 much a model or theory probability distribution $Q$ is different from
@@ -141,7 +141,7 @@ are fed to an encoder which can be something like a normal neural
 network or a convolutional one. This encoder will reduce the
 dimensionality of the input into what's called a "latent space" which
 is composed of fewer nodes than the input layer. We are interested in
-the distribution of this latent space, so we assume that Its
+the distribution of this latent space, so we assume that its
 distribution follows a gaussian and we compute the mean and the
 covariance. We then feed this statistical model to the decoder which
 generates again some data. Finally, we compare the original samples
@@ -188,7 +188,7 @@ The generator is tasked to generate fake images, while the
 discriminator is tasked to recognize if an image is fake or not. The
 generator generates images for the discriminator to check, mixing real
 images with generated ones. If the generator fools the discriminator,
-than the latter needs to update Its weights, otherwise the opposite
+than the latter needs to update its weights, otherwise the opposite
 will happen.
 
 GANs enable the possibility of estimating implicit densities. We
@@ -220,7 +220,7 @@ $$=\log(2)+\frac{1}{2}max_t\ \{ \mathbb{E}_{x\sim p}[\log\ t(x)] + \mathbb{E}_{x
 
 The interpretation of the $JS$ divergence is that this mixes how the
 two distributions depend on one another, not just one over the other;
-It is useful when there is not a true reference distribution.
+it is useful when there is not a true reference distribution.
 
 Let $t_\phi (x)$ be a binary classifier (or discriminator) for data point in the training set predicting whether $x$ came from $p$ or $q$, we get the following lower bound on our objective:
 

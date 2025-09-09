@@ -47,7 +47,7 @@ The node then passes this result to a non-linear activation function $h(x)$, we 
 $$z_i^{(l)}(x, w)=h(a_i^{(l)}(x, w))$$
 
 There are many non-linear activation function, a popular one is called
-_Rectified Linear Units_ aka ReLU and It looks like this:
+_Rectified Linear Units_ aka ReLU and it looks like this:
 
 $$ReLU(x)=max(0, x)$$
 
@@ -127,7 +127,7 @@ For the hidden layers you do not know the expected output $y_i$ directly, so you
 
 $$\frac{\partial E^{(l)}}{\partial w_{ij}}=-\frac{\partial h}{\partial a_i^{(l)}}(\sum_j\delta^{(l+1)}_iw_{ij}^{(l+1)}) z_j^{(l-1)}$$
 
-We can finally perform gradient descent like we discussed in Its own chapter.
+We can finally perform gradient descent like we discussed in its own chapter.
 
 ** Example
 
@@ -194,19 +194,19 @@ together, producing a _feature map_.
 $$S(i, j) = (I*K)(i, j) = \sum_{m=-i}^i\sum_{n=-j}^jI(m, n)K(i-m,j-n)$$
 
 These convolutions matrices are learned by the convolutional neural
-network, this is how It can understand spacial features such as edges
-or certain arrangements of pixels on Its own. Suppose we are training
+network, this is how it can understand spacial features such as edges
+or certain arrangements of pixels on its own. Suppose we are training
 a CNN to classify human faces, the network may learn the features of
-the eyes and their position with respect to the nose and the mouth, It
+the eyes and their position with respect to the nose and the mouth, it
 may catch the shape of the ears or the color of the skin, and so on.
 
 Convolutional neural networks are feedforward neural networks composed
 of a set of filters that cover a spacially small portion of the input
-data and that are convoluted over It. The network may have many
+data and that are convoluted over it. The network may have many
 convolutions over the same input, and convolutions over
-convolutions. For classification, It is common to have multiple
+convolutions. For classification, it is common to have multiple
 convolutions chained together while reducing the spacial size of the
-representation and increasing Its depth with a process known as
+representation and increasing its depth with a process known as
 _spacial polling_, until the size is $1$. Then, all the data is fed to
 a traditional neural network for classification.
 

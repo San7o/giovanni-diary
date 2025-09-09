@@ -15,15 +15,15 @@
 Hi,
 
 today I spent most of my day setting up a local cluster for
-kubernetes.  I thought this would be nice and simple but It wasn't,
+kubernetes.  I thought this would be nice and simple but it wasn't,
 let me tell you why.
 
 The reason why I wanted to have my own custom cluster is mostly
 because I don't like popular solutions based on virtual machines. I
 have always done all my development in a cluster with Kind and that
 has been awesome, Kind is light weight and easy to setup. However,
-Kind uses docker containers and It works only locally. For my
-application, I need to test It on various cluster topologies,
+Kind uses docker containers and it works only locally. For my
+application, I need to test it on various cluster topologies,
 especially in multiple nodes running different kernels. I have this
 requirement because my application behaves differently based on the
 number of running kernels in the cluster since I need to load eBPF
@@ -45,7 +45,7 @@ KVM, all connected to the same network. The images would then run the
 various kubernetes daemons and I would control everything from a
 tmuxed terminal. All of this is managed centrally using a bunch of
 scripts. Since I am bootstrapping everything, I have full control on
-any part of my cluster, making It simple to hack. However, I have to
+any part of my cluster, making it simple to hack. However, I have to
 say that setting up this did not went exactly smoothly.
 
 To make the machines communicate with the internet and themselves I
@@ -87,7 +87,7 @@ echo "Bridge and tap devices ready."
 
 I also made a script to clean everything and can be found on the
 [[https://github.com/San7o/hive-operator/tree/main/k8s-lab][project's repo]]. Then I needed to setup a static IP in each machine and
-... It didn't quite work. The problem was that I also needed to set a
+... it didn't quite work. The problem was that I also needed to set a
 different MAC address for each virtual machine or the TCP/IP stack
 could not route the packets... that took a LOONG time to figure out
 because nothing hinted that this was the problem. I basically tried

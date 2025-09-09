@@ -19,13 +19,13 @@
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
 
-<div id="outline-container-org1b0aaf7" class="outline-2">
-<h2 id="org1b0aaf7">How to root a Samsung Galaxy J5 (2016)</h2>
-<div class="outline-text-2" id="text-org1b0aaf7">
+<div id="outline-container-org05ad70b" class="outline-2">
+<h2 id="org05ad70b">How to root a Samsung Galaxy J5 (2016)</h2>
+<div class="outline-text-2" id="text-org05ad70b">
 </div>
-<div id="outline-container-org13ad4ca" class="outline-4">
-<h4 id="org13ad4ca">Index</h4>
-<div class="outline-text-4" id="text-org13ad4ca">
+<div id="outline-container-org1adc063" class="outline-4">
+<h4 id="org1adc063">Index</h4>
+<div class="outline-text-4" id="text-org1adc063">
 <ul class="org-ul">
 <li>The processes</li>
 <li>1. Boot a custom recovery image</li>
@@ -52,9 +52,9 @@ first before attempting to root your phone.
 </div>
 </div>
 
-<div id="outline-container-org7e616df" class="outline-4">
-<h4 id="org7e616df">The process</h4>
-<div class="outline-text-4" id="text-org7e616df">
+<div id="outline-container-org4ea5615" class="outline-4">
+<h4 id="org4ea5615">The process</h4>
+<div class="outline-text-4" id="text-org4ea5615">
 <p>
 To root a phone we need something else with root privileges to grant
 us the same status. Of course, stock Android will never let us get
@@ -85,12 +85,12 @@ You have been warned :-)
 </div>
 </div>
 
-<div id="outline-container-orgb7ca4f6" class="outline-4">
-<h4 id="orgb7ca4f6">1. Boot a custom recovery image</h4>
-<div class="outline-text-4" id="text-orgb7ca4f6">
+<div id="outline-container-orgd0127b9" class="outline-4">
+<h4 id="orgd0127b9">1. Boot a custom recovery image</h4>
+<div class="outline-text-4" id="text-orgd0127b9">
 <p>
 We need to download a custom recovery image for your phone model.
-There are many cool looking alternatives, I used TWRP and It can be
+There are many cool looking alternatives, I used TWRP and it can be
 downloaded from the official website. Note that you need to choose the
 right version based on your phone.  I downloaded the <code>.img</code> file,
 compressed it in a tar archive and renamed it <code>recovery.tar</code>.
@@ -108,7 +108,7 @@ Now we need to put this into our device. We need to boot into download
 mode which on my smartphone is <code>VOL_DOWN + HOME + POWER</code>. After this
 we can interact with the device, I used <code>odin4</code> (linux version) for
 this. To check that oding can talk to the device, run <code>odin4 -l</code> and
-expect some output. If it does not show anything I cannot help you, It
+expect some output. If it does not show anything I cannot help you, it
 is probably a driver problem, good luck, I believe in you, trust in
 yourself, you are strong. If you get some permission error, you need
 to set something on your udev, just follow closely the help output
@@ -126,13 +126,13 @@ program.
 </div>
 </div>
 
-<div id="outline-container-org1690eb3" class="outline-4">
-<h4 id="org1690eb3">2. Install a special application</h4>
-<div class="outline-text-4" id="text-org1690eb3">
+<div id="outline-container-org486797e" class="outline-4">
+<h4 id="org486797e">2. Install a special application</h4>
+<div class="outline-text-4" id="text-org486797e">
 <p>
 We now need to install something that will make other things root. We
 can use Magisk, you can download the apk from the official github
-releases and rename it to a <code>.zip</code> file. We need to send It to the
+releases and rename it to a <code>.zip</code> file. We need to send it to the
 device and we will use <code>adb</code> from the official platform tools. Just
 extract the archive.
 </p>
@@ -142,7 +142,7 @@ On the device, select <code>advanced -&gt; sideload -&gt; swipe to start
 sideload</code>.  On your pc, run <code>adb sideload app-release.zip</code>, this
 should install magisk and it should show the installation on the
 phone. After this finishes, reboot your phone, go to your apps and
-open Magisk, It may ask to be installed again, just say yes, follow
+open Magisk, it may ask to be installed again, just say yes, follow
 the installation instructions (just tap two buttons), maybe close it
 and reopen it, reboot and&#x2026;  we are root!
 </p>
@@ -153,9 +153,9 @@ You can check this by installing RootChecker.
 </div>
 </div>
 
-<div id="outline-container-orgce6c64d" class="outline-4">
-<h4 id="orgce6c64d">3. Enjoy the power</h4>
-<div class="outline-text-4" id="text-orgce6c64d">
+<div id="outline-container-org9cb4fa7" class="outline-4">
+<h4 id="org9cb4fa7">3. Enjoy the power</h4>
+<div class="outline-text-4" id="text-org9cb4fa7">
 <p>
 Now that you are root you can do a bunch of cool things like wipe out
 everything and install gentoo. A more useful thing would be to install
@@ -165,15 +165,15 @@ and news in peace.
 </div>
 </div>
 
-<div id="outline-container-orgc7421a7" class="outline-4">
-<h4 id="orgc7421a7">Installing an alternative OS</h4>
-<div class="outline-text-4" id="text-orgc7421a7">
+<div id="outline-container-org0298051" class="outline-4">
+<h4 id="org0298051">Installing an alternative OS</h4>
+<div class="outline-text-4" id="text-org0298051">
 <p>
 There are plenty of alternatives and variations of Android out there,
 the only constraint is that they need to support your phone.  You
 could theoretically make your own build but I have no idea how you
 would resolve drivers. I aplogize for my ignorance, you'll have to
-figure It out some day.  I found <a href="https://community.e.foundation/t/unofficial-builds-samsung-galaxy-j5-series-for-e-os-r/56461/3">this</a> unofficial build of /e/OS,
+figure it out some day.  I found <a href="https://community.e.foundation/t/unofficial-builds-samsung-galaxy-j5-series-for-e-os-r/56461/3">this</a> unofficial build of /e/OS,
 hopefully the link still works.
 </p>
 
@@ -184,9 +184,9 @@ the downloaded archive. That is really it, you should have a working
 OS.  If the process fails and you cannot boot the OS correctly, you
 should be able to access the recovery mode on startup assuming that
 you can turn off your device. In my experience, when the boot broke, I
-could not power It off so I just removed the battery and
+could not power it off so I just removed the battery and
 rebooted. Unfortunately, you cannot do this in new phones (sight), so
-you may try to make It discharge until ti powerd off, gook luck.
+you may try to make it discharge until ti powerd off, gook luck.
 </p>
 
 <hr />

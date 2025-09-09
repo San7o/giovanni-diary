@@ -35,7 +35,7 @@ $$\vec{w}\vec{x} + b = 0$$
 We are interested in maximizing the distance from the hyperplane to
 the support vectors. Let us first find the distance from the
 hyperplane to a point p. We know that the distance vector must be
-perpendicular to the hyperplane, therefore It is parallel to the
+perpendicular to the hyperplane, therefore it is parallel to the
 normal vector w, which when normalized is $\frac{\vec{w}}{||\vec{w}||}$.
 
 Therefore, the distance between the hyperplane and $p_1$, referred to as
@@ -44,7 +44,7 @@ the hyperplane $p_2$, which is the intersection between the line parallel
 to the normal and point $p1$:
 $$(1)\ r\frac{\vec{w}}{||\vec{w}||} = \vec{p_1} - \vec{p_2}$$
 
-Moreover, since $p2$ lies on the hyperplane, It is ture that:
+Moreover, since $p2$ lies on the hyperplane, it is ture that:
 $$(2)\ \vec{w}\vec{p_2} + b = 0$$
 We find $p2$ from $(1)$, $p_2 = p_1 - r\frac{\vec{w}}{||w||}$. We substitute
 $p_2$ in $(2)$ and solve for r, the distance, and we get 
@@ -55,7 +55,7 @@ $$r = \frac{(\vec{w}\vec{p_1} + b)}{||\vec{w}||}$$
 
 We just demonstrated the formula for finding the distance between a
 point and a plane.  We now define the _classification function_ as
-$f(x)= sign(\vec{w}\vec{x} + b)$, It will be $+1$ or $-1$ based on the
+$f(x)= sign(\vec{w}\vec{x} + b)$, it will be $+1$ or $-1$ based on the
 sign of the equation. Intuitively, points on one side of the plane
 should have a positive output and points on the other side should have
 a negative one.
@@ -119,7 +119,7 @@ satisfied, meaning that if $y_i(\vec{w}\vec{x_i} + b) \ge 1$ and the
 value has not been misclassified, then we don't need any correction and
 $\zeta = 0$. Otherwise, we want to correct the value by moving it on
 the other side, plus the distance to the margin 1, so $1 - y_i(\vec{w}\vec{x_i}+b)$. We are subtracting because if the value is
-misclassified, then It's distance from the hyperplane times It's label
+misclassified, then it's distance from the hyperplane times It's label
 is going to be a negative value (one of them nedds to be positive and
 the other negative in order to have a misclassification).
 
@@ -139,7 +139,7 @@ $$min_{w, b} ||\vec{w}||^2 + C \sum_i max(0, 1 - y_i(\vec{w}\vec{x_i} +b))$$
 
 ** Cases of optimization problems
 
-For future analisys, It is useful to discuss what are the main classes
+For future analisys, it is useful to discuss what are the main classes
 of optimization problems:
 
 - _linear programming) (LP): linear problem, linear constraints.
@@ -184,7 +184,7 @@ $$(c)\ \sum_i a_i y_i = 0$$
  $$L(x, \vec{a}, b) = \frac{1}{2}\sum_i \sum_j a_i a_j y_i y_j x_i x_j - (\sum_i \sum_j a_i a_j y_i y_j x_i x_j - b\sum_i a_i j_i - \sum_i a_i) $$
  $$ = -\frac{1}{2}\sum_i \sum_i \sum_j a_i a_j y_i y_j x_i x_j - (-b\sum_i a_i y_i - \sum_i a_i) $$
  
- The second term is $0$ because of $(c)$, so It can be eliminated, finally
+ The second term is $0$ because of $(c)$, so it can be eliminated, finally
  we have:
 $$ L(x, \vec{a}) = \sum_i a_i -\frac{1}{2}\sum_i \sum_j \sum_j a_i a_j y_i y_j x_i x_j $$
  such that $\sum_i a_i y_i = 0, 0 \le a_i \le C\ \forall i$.

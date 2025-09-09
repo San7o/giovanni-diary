@@ -51,9 +51,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org837a9ff" class="outline-2">
-<h2 id="org837a9ff">Support Vector Machines</h2>
-<div class="outline-text-2" id="text-org837a9ff">
+<div id="outline-container-org3a5755d" class="outline-2">
+<h2 id="org3a5755d">Support Vector Machines</h2>
+<div class="outline-text-2" id="text-org3a5755d">
 <p>
 Linear classifiers assume the data can be linearly separable. If this
 does not hold, the chosen hyperplane will keep adjusting at each
@@ -62,9 +62,9 @@ of classifier: support vector machines (SVM).
 </p>
 </div>
 
-<div id="outline-container-orge280624" class="outline-3">
-<h3 id="orge280624">Large margin classifiers</h3>
-<div class="outline-text-3" id="text-orge280624">
+<div id="outline-container-org4e440fc" class="outline-3">
+<h3 id="org4e440fc">Large margin classifiers</h3>
+<div class="outline-text-3" id="text-org4e440fc">
 <p>
 We define the <span class="underline">margin</span> of a classifier as the distance from the
 classification hyperplane to the closest points of either class. We
@@ -101,7 +101,7 @@ choose:
 We are interested in maximizing the distance from the hyperplane to
 the support vectors. Let us first find the distance from the
 hyperplane to a point p. We know that the distance vector must be
-perpendicular to the hyperplane, therefore It is parallel to the
+perpendicular to the hyperplane, therefore it is parallel to the
 normal vector w, which when normalized is \(\frac{\vec{w}}{||\vec{w}||}\).
 </p>
 
@@ -114,7 +114,7 @@ to the normal and point \(p1\):
 </p>
 
 <p>
-Moreover, since \(p2\) lies on the hyperplane, It is ture that:
+Moreover, since \(p2\) lies on the hyperplane, it is ture that:
 \[(2)\ \vec{w}\vec{p_2} + b = 0\]
 We find \(p2\) from \((1)\), \(p_2 = p_1 - r\frac{\vec{w}}{||w||}\). We substitute
 \(p_2\) in \((2)\) and solve for r, the distance, and we get 
@@ -127,7 +127,7 @@ the modulo function uses the generalized pythagorean theorem, we get:
 <p>
 We just demonstrated the formula for finding the distance between a
 point and a plane.  We now define the <span class="underline">classification function</span> as
-\(f(x)= sign(\vec{w}\vec{x} + b)\), It will be \(+1\) or \(-1\) based on the
+\(f(x)= sign(\vec{w}\vec{x} + b)\), it will be \(+1\) or \(-1\) based on the
 sign of the equation. Intuitively, points on one side of the plane
 should have a positive output and points on the other side should have
 a negative one.
@@ -158,9 +158,9 @@ For the support vectors, the following holds:
 </div>
 </div>
 
-<div id="outline-container-org766d726" class="outline-3">
-<h3 id="org766d726">Maximizing the margin</h3>
-<div class="outline-text-3" id="text-org766d726">
+<div id="outline-container-orgfac387b" class="outline-3">
+<h3 id="orgfac387b">Maximizing the margin</h3>
+<div class="outline-text-3" id="text-orgfac387b">
 <p>
 We want to maximize this margin, therefore we need to minimize \(\frac{1}{2}||\vec{w}||\)
 with the constraint that \(y_i(\vec{w}\vec{x_i}+b) \ge 1\ \forall i\). We
@@ -171,9 +171,9 @@ optimization problem</span>
 </div>
 </div>
 
-<div id="outline-container-org95e7883" class="outline-3">
-<h3 id="org95e7883">Soft margin classification</h3>
-<div class="outline-text-3" id="text-org95e7883">
+<div id="outline-container-orga9b51fe" class="outline-3">
+<h3 id="orga9b51fe">Soft margin classification</h3>
+<div class="outline-text-3" id="text-orga9b51fe">
 <p>
 We may have data that is not perfect, for example we may have some
 values that lay on one side of the hyperplane but they are classified
@@ -215,7 +215,7 @@ satisfied, meaning that if \(y_i(\vec{w}\vec{x_i} + b) \ge 1\) and the
 value has not been misclassified, then we don't need any correction and
 \(\zeta = 0\). Otherwise, we want to correct the value by moving it on
 the other side, plus the distance to the margin 1, so \(1 - y_i(\vec{w}\vec{x_i}+b)\). We are subtracting because if the value is
-misclassified, then It's distance from the hyperplane times It's label
+misclassified, then it's distance from the hyperplane times It's label
 is going to be a negative value (one of them nedds to be positive and
 the other negative in order to have a misclassification).
 </p>
@@ -244,11 +244,11 @@ With this result, the objective is now to minimize the following:
 </div>
 </div>
 
-<div id="outline-container-orgbcad482" class="outline-3">
-<h3 id="orgbcad482">Cases of optimization problems</h3>
-<div class="outline-text-3" id="text-orgbcad482">
+<div id="outline-container-org297f743" class="outline-3">
+<h3 id="org297f743">Cases of optimization problems</h3>
+<div class="outline-text-3" id="text-org297f743">
 <p>
-For future analisys, It is useful to discuss what are the main classes
+For future analisys, it is useful to discuss what are the main classes
 of optimization problems:
 </p>
 
@@ -278,9 +278,9 @@ transpose of \(x\).</li>
 </div>
 </div>
 
-<div id="outline-container-org7ea23ff" class="outline-3">
-<h3 id="org7ea23ff">Solving quadratic problems - Lagrange multipliers</h3>
-<div class="outline-text-3" id="text-org7ea23ff">
+<div id="outline-container-org338deda" class="outline-3">
+<h3 id="org338deda">Solving quadratic problems - Lagrange multipliers</h3>
+<div class="outline-text-3" id="text-org338deda">
 <p>
 Quadratic optimization problems such as the one discussed above are a well-known class of mathematical programming models with several algorithms. We will now introduce a method so solve such problems using the Lagrange multiplier, that is a strategy for finding the local maxima and minima of a function subject to equation constraints.
 </p>
@@ -316,7 +316,7 @@ substitute the new \((b)\) in \((a)\), observing that \(||w||^2 = w^Tw\):
 </p>
 
 <p>
-The second term is \(0\) because of \((c)\), so It can be eliminated, finally
+The second term is \(0\) because of \((c)\), so it can be eliminated, finally
 we have:
 \[ L(x, \vec{a}) = \sum_i a_i -\frac{1}{2}\sum_i \sum_j \sum_j a_i a_j y_i y_j x_i x_j \]
 such that \(\sum_i a_i y_i = 0, 0 \le a_i \le C\ \forall i\).
@@ -344,9 +344,9 @@ vector.</li>
 </div>
 </div>
 
-<div id="outline-container-org75e0c60" class="outline-3">
-<h3 id="org75e0c60">Non linear SVM - Kernel Trick</h3>
-<div class="outline-text-3" id="text-org75e0c60">
+<div id="outline-container-org3cf9633" class="outline-3">
+<h3 id="org3cf9633">Non linear SVM - Kernel Trick</h3>
+<div class="outline-text-3" id="text-org3cf9633">
 <p>
 What if the data is not linearly separable? In such situation we can
 map data to a higher-dimensional space where the training set is

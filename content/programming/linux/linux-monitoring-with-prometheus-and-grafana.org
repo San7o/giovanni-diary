@@ -141,7 +141,7 @@ require {
 allow grafana_t websm_port_t:tcp_socket name_connect;
 #+end_src
 
-Then compile It and load It:
+Then compile it and load It:
 
 #+begin_src bash
   checkmodule -M -m -o grafana_websm.mod grafana_websm.te
@@ -226,7 +226,7 @@ scrape_configs:
 
 
 This script runs the tcp server in the background and updates the
-served content each =$INTERVAL= seconds and It exposes the =loadavg=
+served content each =$INTERVAL= seconds and it exposes the =loadavg=
 metric with the value of the average system load in the last
 minute. You can now add a new dashboard in grafana from the dashboard
 section and clicking "New > New Dashboard > Add Visualization". You
@@ -242,7 +242,7 @@ select prometheus as a source and you add your custom metric and clock
 [[../../ephemeris/images/grafana-custom.png]]
 
 You can create the http server in any other way, maybe integrate
-It with the application you have been working on, and so on.
+it with the application you have been working on, and so on.
 
 
 -----

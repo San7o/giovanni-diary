@@ -19,9 +19,9 @@
 <a href="../index.html">Giovanni's Diary</a> &gt; <a href="../autobiography/chronological.html">Chronological</a> &gt; <a href="ephemeris.html">Ephemeris</a> &gt; <a href="entries.html">Entries</a> &gt;
 </p>
 
-<div id="outline-container-orgc951129" class="outline-2">
-<h2 id="orgc951129">2025-05-20 - Struggles with NetworkManager</h2>
-<div class="outline-text-2" id="text-orgc951129">
+<div id="outline-container-org14419a7" class="outline-2">
+<h2 id="org14419a7">2025-05-20 - Struggles with NetworkManager</h2>
+<div class="outline-text-2" id="text-org14419a7">
 <p>
 Hi,
 </p>
@@ -39,7 +39,7 @@ same network, today I wanted to configure the kubernetes daemons but
 something was pissing me off. During the first boot of the machine,
 NetworkManager spawns up and looks for available networks for about 1
 minute and 30 seconds. But since I need to manually setup a static ip,
-It fails and the kernel boots with error messages, not really
+it fails and the kernel boots with error messages, not really
 pretty. Afterwards, cloud-init setups up the static ip, restarts
 NetworkManager and everything would work on next boots. Still this
 error was really bothering me, so I tried to fix this.
@@ -68,7 +68,7 @@ configuration at least 20 times but I got no feedback so I started
 thinking that maybe the network configuration was not being applied at
 all. Some struggling later I found out that the network configuration
 could not stay in the same yaml file as the rest of the configuration,
-but It needed to be a separate file. Additionally, I needed to pass
+but it needed to be a separate file. Additionally, I needed to pass
 this file to a program called cloud-localds via the &#x2013;network-config
 flag. I was using genisoimage previously and it does not have a
 similar flag, so I needed to use this other program. Very intuitive
@@ -79,7 +79,7 @@ things. So this finally worked and I have a static ip at boot time.
 Maybe there were many ways to solve this, but for the entire day I
 basically got zero feedback on my attempts. Journalctl would not log
 anything, genisoimage would not hint that I couldn't configure the
-network in the user-data file, It wouldn't say anything even for
+network in the user-data file, it wouldn't say anything even for
 spelling mistakes. NetworkManager and systemd was completely ignoring
 all the files that I changed or removed, everything was a black box to
 me. Error messages are important&#x2026;
@@ -88,7 +88,7 @@ me. Error messages are important&#x2026;
 <p>
 So finally I could boot the images nicely, I can now setup kubernetes.
 I wrote scripts to automate this, then I got missing certificates
-and I called It a day, see you tomorrow.
+and I called it a day, see you tomorrow.
 </p>
 
 <p>

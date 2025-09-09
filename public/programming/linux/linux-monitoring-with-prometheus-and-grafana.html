@@ -20,9 +20,9 @@
 </p>
 
 
-<div id="outline-container-orgc7dfce1" class="outline-2">
-<h2 id="orgc7dfce1">Monitor your Linux system with Prometheus and Grafana</h2>
-<div class="outline-text-2" id="text-orgc7dfce1">
+<div id="outline-container-org48f64c5" class="outline-2">
+<h2 id="org48f64c5">Monitor your Linux system with Prometheus and Grafana</h2>
+<div class="outline-text-2" id="text-org48f64c5">
 <p>
 If you are managing any system, you need to have an effective way to
 monitor, log and receive notifications about the state of the system.
@@ -38,9 +38,9 @@ be using Fedora 42 as a base.
 </p>
 </div>
 
-<div id="outline-container-org7cc8ec4" class="outline-3">
-<h3 id="org7cc8ec4">Index</h3>
-<div class="outline-text-3" id="text-org7cc8ec4">
+<div id="outline-container-org361369c" class="outline-3">
+<h3 id="org361369c">Index</h3>
+<div class="outline-text-3" id="text-org361369c">
 <ul class="org-ul">
 <li>Setting up node exporter</li>
 <li>Setting up Prometheus</li>
@@ -50,9 +50,9 @@ be using Fedora 42 as a base.
 </div>
 </div>
 
-<div id="outline-container-orgaf7723a" class="outline-3">
-<h3 id="orgaf7723a">Setting up node exporter</h3>
-<div class="outline-text-3" id="text-orgaf7723a">
+<div id="outline-container-orgd1ed7d6" class="outline-3">
+<h3 id="orgd1ed7d6">Setting up node exporter</h3>
+<div class="outline-text-3" id="text-orgd1ed7d6">
 <p>
 Node exporter is a service that collects various system information
 such as CPU load, ram usage and much more. Fedora already provides the
@@ -71,9 +71,9 @@ The service will listen on port 9100.
 </div>
 </div>
 
-<div id="outline-container-org6d3b954" class="outline-3">
-<h3 id="org6d3b954">Setting up Prometheus</h3>
-<div class="outline-text-3" id="text-org6d3b954">
+<div id="outline-container-orgb1b86fb" class="outline-3">
+<h3 id="orgb1b86fb">Setting up Prometheus</h3>
+<div class="outline-text-3" id="text-orgb1b86fb">
 <p>
 You can download the latest version of Prometheus from GitHub:
 </p>
@@ -153,9 +153,9 @@ the data.
 </div>
 
 
-<div id="outline-container-orgc87fa7e" class="outline-3">
-<h3 id="orgc87fa7e">Setting up Grafana</h3>
-<div class="outline-text-3" id="text-orgc87fa7e">
+<div id="outline-container-org59d1ab4" class="outline-3">
+<h3 id="org59d1ab4">Setting up Grafana</h3>
+<div class="outline-text-3" id="text-org59d1ab4">
 <p>
 Install Grafana from your favorite package manager:
 </p>
@@ -196,7 +196,7 @@ allow grafana_t websm_port_t:tcp_socket name_connect;
 </pre>
 
 <p>
-Then compile It and load It:
+Then compile it and load It:
 </p>
 
 <div class="org-src-container">
@@ -232,7 +232,7 @@ website</a>.
 
 
 
-<div id="orgfb9a363" class="figure">
+<div id="orgcc2b422" class="figure">
 <p><img src="../../ephemeris/images/grafana.png" alt="grafana.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Grafana dashboard I found online</p>
@@ -240,9 +240,9 @@ website</a>.
 </div>
 </div>
 
-<div id="outline-container-orgcf66605" class="outline-3">
-<h3 id="orgcf66605">Custom Exporter</h3>
-<div class="outline-text-3" id="text-orgcf66605">
+<div id="outline-container-org9f05e0a" class="outline-3">
+<h3 id="org9f05e0a">Custom Exporter</h3>
+<div class="outline-text-3" id="text-org9f05e0a">
 <p>
 What if you wanted to log something custom to your dashboard, you
 can easily do this by starting a tcp server and serving the data you
@@ -301,7 +301,7 @@ And update the <code>prometheus.yml</code> file:
 
 <p>
 This script runs the tcp server in the background and updates the
-served content each <code>$INTERVAL</code> seconds and It exposes the <code>loadavg</code>
+served content each <code>$INTERVAL</code> seconds and it exposes the <code>loadavg</code>
 metric with the value of the average system load in the last
 minute. You can now add a new dashboard in grafana from the dashboard
 section and clicking "New &gt; New Dashboard &gt; Add Visualization". You
@@ -310,7 +310,7 @@ select prometheus as a source and you add your custom metric and clock
 </p>
 
 
-<div id="orge3e6b02" class="figure">
+<div id="org76c4b66" class="figure">
 <p><img src="../../ephemeris/images/grafana-custom.png" alt="grafana-custom.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Custom dashboard</p>
@@ -318,7 +318,7 @@ select prometheus as a source and you add your custom metric and clock
 
 <p>
 You can create the http server in any other way, maybe integrate
-It with the application you have been working on, and so on.
+it with the application you have been working on, and so on.
 </p>
 
 

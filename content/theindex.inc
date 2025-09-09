@@ -33,7 +33,6 @@
       - [[file:ephemeris/2025-07-03.org::*2025-07-03 - Willkommen in Linz][2025-07-03 - Willkommen in Linz]]
       - [[file:ephemeris/2025-07-04.org::*2025-07-04 - Set up][2025-07-04 - Set up]]
       - [[file:ephemeris/2025-07-05.org::*2025-07-05 - Stores closed][2025-07-05 - Stores closed]]
-      - [[file:ephemeris/2025-05-06.org::*2025-07-05 - Stores closed][2025-07-05 - Stores closed]]
       - [[file:ephemeris/2025-07-06.org::*2025-07-06 - Writing math proofs][2025-07-06 - Writing math proofs]]
       - [[file:ephemeris/2025-07-07.org::*2025-07-07 - Math riddle][2025-07-07 - Math riddle]]
       - [[file:ephemeris/2025-07-12.org::*2025-07-12 - Unbalanced][2025-07-12 - Unbalanced]]
