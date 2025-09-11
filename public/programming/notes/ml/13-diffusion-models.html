@@ -51,9 +51,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org55f7f00" class="outline-2">
-<h2 id="org55f7f00">Diffusion Models</h2>
-<div class="outline-text-2" id="text-org55f7f00">
+<div id="outline-container-orgd0f53c5" class="outline-2">
+<h2 id="orgd0f53c5">Diffusion Models</h2>
+<div class="outline-text-2" id="text-orgd0f53c5">
 <p>
 To recap, generative models train a generator \(G\) from latent space to
 data space and approximate the real data distribution. Variational
@@ -65,9 +65,9 @@ discriminator.
 </p>
 </div>
 
-<div id="outline-container-org9451bc6" class="outline-3">
-<h3 id="org9451bc6">Denoising diffusion</h3>
-<div class="outline-text-3" id="text-org9451bc6">
+<div id="outline-container-org40117d0" class="outline-3">
+<h3 id="org40117d0">Denoising diffusion</h3>
+<div class="outline-text-3" id="text-org40117d0">
 <p>
 Denoising diffusion models consists of two processes:
 </p>
@@ -89,9 +89,9 @@ depends only on the state attained in the previous event.
 </div>
 </div>
 
-<div id="outline-container-org53fd934" class="outline-3">
-<h3 id="org53fd934">Forward Process</h3>
-<div class="outline-text-3" id="text-org53fd934">
+<div id="outline-container-orgffc5d6d" class="outline-3">
+<h3 id="orgffc5d6d">Forward Process</h3>
+<div class="outline-text-3" id="text-orgffc5d6d">
 <p>
 A forward process gradually adds noise to the images over \(T\) timesteps.
 </p>
@@ -155,9 +155,9 @@ A backward (denoising) process has the form:
 </div>
 </div>
 
-<div id="outline-container-org790e073" class="outline-3">
-<h3 id="org790e073">Generation Process</h3>
-<div class="outline-text-3" id="text-org790e073">
+<div id="outline-container-org5fa086f" class="outline-3">
+<h3 id="org5fa086f">Generation Process</h3>
+<div class="outline-text-3" id="text-org5fa086f">
 <p>
 Given that \(q(x_T)\approx N(0, I)\), a sample is \(x_T\sim N(0, I)\) and
 iteratively \(x_{t-1}=q(x_{t-1}|x_t)\). Through Bayes theorem,
@@ -179,9 +179,9 @@ Hence, we need to find the parameters \(\theta\) that approximate \(p(x_{t-1}|x_
 </div>
 </div>
 
-<div id="outline-container-org233f30a" class="outline-3">
-<h3 id="org233f30a">Noising schedule</h3>
-<div class="outline-text-3" id="text-org233f30a">
+<div id="outline-container-org34aa4dc" class="outline-3">
+<h3 id="org34aa4dc">Noising schedule</h3>
+<div class="outline-text-3" id="text-org34aa4dc">
 <p>
 We can control the variance of the forward diffusion and reverse
 denoising processes respectively. Often a linear schedule is used for
@@ -196,9 +196,9 @@ by minimizing the variance of the training objective.
 </div>
 </div>
 
-<div id="outline-container-orgb10d994" class="outline-3">
-<h3 id="orgb10d994">Connection to VAE, GANs</h3>
-<div class="outline-text-3" id="text-orgb10d994">
+<div id="outline-container-orgc2ea587" class="outline-3">
+<h3 id="orgc2ea587">Connection to VAE, GANs</h3>
+<div class="outline-text-3" id="text-orgc2ea587">
 <ul class="org-ul">
 <li>Latent variables have the same dimensionality of data.</li>
 <li>The same model is applied across different timesteps.</li>
@@ -207,9 +207,9 @@ by minimizing the variance of the training objective.
 </div>
 </div>
 
-<div id="outline-container-orgc1b51c1" class="outline-3">
-<h3 id="orgc1b51c1">Training Parametrisation</h3>
-<div class="outline-text-3" id="text-orgc1b51c1">
+<div id="outline-container-orgea4c2c7" class="outline-3">
+<h3 id="orgea4c2c7">Training Parametrisation</h3>
+<div class="outline-text-3" id="text-orgea4c2c7">
 <p>
 We can train the model in a similar fashion as VAE, with a Variational Upper Bound:
 </p>
@@ -281,9 +281,9 @@ The choice of the architecture is free. For images use U-NET.
 </div>
 </div>
 
-<div id="outline-container-orgf1097a3" class="outline-3">
-<h3 id="orgf1097a3">U-NET</h3>
-<div class="outline-text-3" id="text-orgf1097a3">
+<div id="outline-container-org10ef328" class="outline-3">
+<h3 id="org10ef328">U-NET</h3>
+<div class="outline-text-3" id="text-org10ef328">
 <p>
 The U-NET architecture contains two paths.
 </p>
@@ -309,9 +309,9 @@ for this reason it can accept image of any size.</li>
 </div>
 </div>
 
-<div id="outline-container-org3efd5eb" class="outline-3">
-<h3 id="org3efd5eb">Generative Trilemma</h3>
-<div class="outline-text-3" id="text-org3efd5eb">
+<div id="outline-container-orgd1d50cd" class="outline-3">
+<h3 id="orgd1d50cd">Generative Trilemma</h3>
+<div class="outline-text-3" id="text-orgd1d50cd">
 <p>
 Often fast sampling, mode coverage / diversity and high quality
 samples are difficult to coexist together.
@@ -329,9 +329,9 @@ quality samples but not fast sampling.</li>
 </div>
 </div>
 
-<div id="outline-container-org196fd1e" class="outline-3">
-<h3 id="org196fd1e">Diffusion GANs</h3>
-<div class="outline-text-3" id="text-org196fd1e">
+<div id="outline-container-org4971eab" class="outline-3">
+<h3 id="org4971eab">Diffusion GANs</h3>
+<div class="outline-text-3" id="text-org4971eab">
 <p>
 Generative denoising diffusion models typically assume that the
 denoising distribution can be modeled by a Gaussian distribution. This
@@ -354,9 +354,9 @@ Compared to a one-shot GAN generator:
 </ul>
 </div>
 
-<div id="outline-container-orgec941b2" class="outline-4">
-<h4 id="orgec941b2">Distillation</h4>
-<div class="outline-text-4" id="text-orgec941b2">
+<div id="outline-container-org44c7d5e" class="outline-4">
+<h4 id="org44c7d5e">Distillation</h4>
+<div class="outline-text-4" id="text-org44c7d5e">
 <p>
 Distill a deterministic DDIM (Denoising Diffusion Implicit Model)
 sampler to the same model architecture. At each stage, a <span class="underline">student</span>
@@ -369,9 +369,9 @@ method allows to "skip" some stages in order to speedup computation.
 </div>
 </div>
 
-<div id="outline-container-org44099d1" class="outline-3">
-<h3 id="org44099d1">Latent-space diffusion models</h3>
-<div class="outline-text-3" id="text-org44099d1">
+<div id="outline-container-orgac782b1" class="outline-3">
+<h3 id="orgac782b1">Latent-space diffusion models</h3>
+<div class="outline-text-3" id="text-orgac782b1">
 <p>
 The distribution of latent embeddings is close to Normal distribution,
 giving simpler denoising and faster synthesis. They allow augmented
@@ -380,9 +380,9 @@ latent space and tailored autoencoders (graphs, text. 3D data, etc).
 </div>
 </div>
 
-<div id="outline-container-orga87516c" class="outline-3">
-<h3 id="orga87516c">Text-to-image: CLIP (OpenAI)</h3>
-<div class="outline-text-3" id="text-orga87516c">
+<div id="outline-container-org683245b" class="outline-3">
+<h3 id="org683245b">Text-to-image: CLIP (OpenAI)</h3>
+<div class="outline-text-3" id="text-org683245b">
 <p>
 Jointly train a text encoder and an image encoder. Training by
 maximising the similarity between embeddings of (text, image)
@@ -391,9 +391,9 @@ pairs. The resuling space has semantics for both images and text.
 </div>
 </div>
 
-<div id="outline-container-orgcf632fe" class="outline-3">
-<h3 id="orgcf632fe">Diffusion usages</h3>
-<div class="outline-text-3" id="text-orgcf632fe">
+<div id="outline-container-org55b32ee" class="outline-3">
+<h3 id="org55b32ee">Diffusion usages</h3>
+<div class="outline-text-3" id="text-org55b32ee">
 <ul class="org-ul">
 <li>super resolution</li>
 <li>image-to-image (color a black and white image, extend and image's borders)</li>
