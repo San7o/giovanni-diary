@@ -145,6 +145,7 @@
         - [[file:writing/poetry/immense-power.org::*Immense Power][Immense power]]
         - [[file:writing/poetry/on-top-of-an-iceberg.org::*On top of an iceberg][On top of an iceberg]]
         - [[file:writing/poetry/poems.org::*My Poems][Poems]]
+      - [[file:writing/reflections/reflections.org::*Reflections][Reflections]]
       - [[file:writing/surroundings/surroundings.org::*Surroundings][Surroundings]]
         - [[file:writing/surroundings/chapters.org::*Chapters][Chapters]]
         - [[file:writing/surroundings/doss-trento.org::*Doss Trento][Doss Trento]]
