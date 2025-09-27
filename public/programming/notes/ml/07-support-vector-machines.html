@@ -8,6 +8,7 @@
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
@@ -51,9 +52,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org91d45f3" class="outline-2">
-<h2 id="org91d45f3">Support Vector Machines</h2>
-<div class="outline-text-2" id="text-org91d45f3">
+<div id="outline-container-org790a5ba" class="outline-2">
+<h2 id="org790a5ba">Support Vector Machines</h2>
+<div class="outline-text-2" id="text-org790a5ba">
 <p>
 Linear classifiers assume the data can be linearly separable. If this
 does not hold, the chosen hyperplane will keep adjusting at each
@@ -62,9 +63,9 @@ of classifier: support vector machines (SVM).
 </p>
 </div>
 
-<div id="outline-container-org8abdc7b" class="outline-3">
-<h3 id="org8abdc7b">Large margin classifiers</h3>
-<div class="outline-text-3" id="text-org8abdc7b">
+<div id="outline-container-org6766aea" class="outline-3">
+<h3 id="org6766aea">Large margin classifiers</h3>
+<div class="outline-text-3" id="text-org6766aea">
 <p>
 We define the <span class="underline">margin</span> of a classifier as the distance from the
 classification hyperplane to the closest points of either class. We
@@ -158,9 +159,9 @@ For the support vectors, the following holds:
 </div>
 </div>
 
-<div id="outline-container-orgc2988a1" class="outline-3">
-<h3 id="orgc2988a1">Maximizing the margin</h3>
-<div class="outline-text-3" id="text-orgc2988a1">
+<div id="outline-container-org4309163" class="outline-3">
+<h3 id="org4309163">Maximizing the margin</h3>
+<div class="outline-text-3" id="text-org4309163">
 <p>
 We want to maximize this margin, therefore we need to minimize \(\frac{1}{2}||\vec{w}||\)
 with the constraint that \(y_i(\vec{w}\vec{x_i}+b) \ge 1\ \forall i\). We
@@ -171,9 +172,9 @@ optimization problem</span>
 </div>
 </div>
 
-<div id="outline-container-org65d7385" class="outline-3">
-<h3 id="org65d7385">Soft margin classification</h3>
-<div class="outline-text-3" id="text-org65d7385">
+<div id="outline-container-orgbc0a7fa" class="outline-3">
+<h3 id="orgbc0a7fa">Soft margin classification</h3>
+<div class="outline-text-3" id="text-orgbc0a7fa">
 <p>
 We may have data that is not perfect, for example we may have some
 values that lay on one side of the hyperplane but they are classified
@@ -244,9 +245,9 @@ With this result, the objective is now to minimize the following:
 </div>
 </div>
 
-<div id="outline-container-org1398313" class="outline-3">
-<h3 id="org1398313">Cases of optimization problems</h3>
-<div class="outline-text-3" id="text-org1398313">
+<div id="outline-container-org39894bc" class="outline-3">
+<h3 id="org39894bc">Cases of optimization problems</h3>
+<div class="outline-text-3" id="text-org39894bc">
 <p>
 For future analisys, it is useful to discuss what are the main classes
 of optimization problems:
@@ -278,9 +279,9 @@ transpose of \(x\).</li>
 </div>
 </div>
 
-<div id="outline-container-org3b64177" class="outline-3">
-<h3 id="org3b64177">Solving quadratic problems - Lagrange multipliers</h3>
-<div class="outline-text-3" id="text-org3b64177">
+<div id="outline-container-orgb9cb729" class="outline-3">
+<h3 id="orgb9cb729">Solving quadratic problems - Lagrange multipliers</h3>
+<div class="outline-text-3" id="text-orgb9cb729">
 <p>
 Quadratic optimization problems such as the one discussed above are a well-known class of mathematical programming models with several algorithms. We will now introduce a method so solve such problems using the Lagrange multiplier, that is a strategy for finding the local maxima and minima of a function subject to equation constraints.
 </p>
@@ -344,9 +345,9 @@ vector.</li>
 </div>
 </div>
 
-<div id="outline-container-orgd159aa5" class="outline-3">
-<h3 id="orgd159aa5">Non linear SVM - Kernel Trick</h3>
-<div class="outline-text-3" id="text-orgd159aa5">
+<div id="outline-container-org3ed5b9f" class="outline-3">
+<h3 id="org3ed5b9f">Non linear SVM - Kernel Trick</h3>
+<div class="outline-text-3" id="text-org3ed5b9f">
 <p>
 What if the data is not linearly separable? In such situation we can
 map data to a higher-dimensional space where the training set is

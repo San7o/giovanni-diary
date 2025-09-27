@@ -117,6 +117,7 @@
         - [[file:reading/mauro-corona/mauro-corona-lunario-sentimentale.org::*Lunario Sentimentale][Lunario Sentimentale]]
         - [[file:reading/mauro-corona/notes.org::*Mauro Corona Notes][Notes]]
         - [[file:reading/mauro-corona/mauro-corona-vayont-quelli-del-dopo.org::*Vayont: Quelli del dopo][Vajot: Quelli del dopo]]
+      - [[file:reading/my-favourite-readings.org::*My Favourite Readings][My Favourite Readings]]
       - [[file:reading/stoicism/stoicism.org::*Stoicism][Stoicism]]
         - [[file:reading/stoicism/meditations-of-marcus-aurelius.org::*Meditations of Marcus Aurelius][Meditations of Marcus Aurelius]]
         - [[file:reading/stoicism/notes.org::*Stoicism Notes][Notes]]

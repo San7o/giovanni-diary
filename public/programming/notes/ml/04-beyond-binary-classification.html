@@ -8,6 +8,7 @@
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
@@ -51,9 +52,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-orgdad5078" class="outline-2">
-<h2 id="orgdad5078">Beyond binary classification</h2>
-<div class="outline-text-2" id="text-orgdad5078">
+<div id="outline-container-org669f1f4" class="outline-2">
+<h2 id="org669f1f4">Beyond binary classification</h2>
+<div class="outline-text-2" id="text-org669f1f4">
 <p>
 In multi-class classification problem, differently from binary
 classification, given:
@@ -84,9 +85,9 @@ we will discuss:
 </ul>
 </div>
 
-<div id="outline-container-orgc96e49b" class="outline-3">
-<h3 id="orgc96e49b">One vs All (OVA)</h3>
-<div class="outline-text-3" id="text-orgc96e49b">
+<div id="outline-container-org1e20238" class="outline-3">
+<h3 id="org1e20238">One vs All (OVA)</h3>
+<div class="outline-text-3" id="text-org1e20238">
 <p>
 For each label \(k=1, ..., K\) define a binary problem where:
 </p>
@@ -126,9 +127,9 @@ OneVsAllTest(f_1,...,f_k, x):
 </div>
 </div>
 
-<div id="outline-container-orge019e74" class="outline-3">
-<h3 id="orge019e74">All vs All (AVA)</h3>
-<div class="outline-text-3" id="text-orge019e74">
+<div id="outline-container-orgc6a6370" class="outline-3">
+<h3 id="orgc6a6370">All vs All (AVA)</h3>
+<div class="outline-text-3" id="text-orgc6a6370">
 <p>
 All vs All, sometimes called <span class="underline">all pairs</span>, trains \(K(K-1)/2\) classifiers:
 </p>
@@ -149,9 +150,9 @@ Note: The teacher might ask to explain the algorithm in more detail
 </div>
 </div>
 
-<div id="outline-container-orgb15208d" class="outline-3">
-<h3 id="orgb15208d">Ova vs Ava</h3>
-<div class="outline-text-3" id="text-orgb15208d">
+<div id="outline-container-org9aef5ed" class="outline-3">
+<h3 id="org9aef5ed">Ova vs Ava</h3>
+<div class="outline-text-3" id="text-org9aef5ed">
 <p>
 Train time:
 </p>
@@ -180,9 +181,9 @@ Error:
 </div>
 </div>
 
-<div id="outline-container-org22f1bca" class="outline-3">
-<h3 id="org22f1bca">Macroaveraging vs Microaveraging</h3>
-<div class="outline-text-3" id="text-org22f1bca">
+<div id="outline-container-orgae4e737" class="outline-3">
+<h3 id="orgae4e737">Macroaveraging vs Microaveraging</h3>
+<div class="outline-text-3" id="text-orgae4e737">
 <ul class="org-ul">
 <li>Microaveraging: average over examples</li>
 <li>Macroaveraging: calculate evaluation score (e.g. accuracy) for each
