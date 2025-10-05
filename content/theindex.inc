@@ -96,6 +96,7 @@
           - [[file:programming/notes/ml/07-support-vector-machines.org::*Support Vector Machines][Support Vector Machines]]
           - [[file:programming/notes/ml/09-unsupervised-learning.org::*Unsupervised Learning][Unsupervised Learning]]
         - [[file:programming/notes/offline-programming.org::*Offline Programming][Offline Programming]]
+        - [[file:programming/notes/programming-advice.org::*Programming advice][Programming advice]]
         - [[file:programming/notes/recreational-programming.org::*Recreational Programming?][Recreational Programming]]
         - [[file:programming/notes/root-a-samsung-galaxy-j5.org::*How to root a Samsung Galaxy J5 (2016)][Root a Samsung Galaxy j5]]
         - [[file:programming/notes/setting-up-a-minecraft-server.org::*Setting up a Minecraft server][Setting up a Minecraft server]]

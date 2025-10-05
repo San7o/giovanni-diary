@@ -21,9 +21,9 @@
 </p>
 
 
-<div id="outline-container-orgfc0d027" class="outline-2">
-<h2 id="orgfc0d027">Monitor your Linux system with Prometheus and Grafana</h2>
-<div class="outline-text-2" id="text-orgfc0d027">
+<div id="outline-container-org99de615" class="outline-2">
+<h2 id="org99de615">Monitor your Linux system with Prometheus and Grafana</h2>
+<div class="outline-text-2" id="text-org99de615">
 <p>
 If you are managing any system, you need to have an effective way to
 monitor, log and receive notifications about the state of the system.
@@ -39,9 +39,9 @@ be using Fedora 42 as a base.
 </p>
 </div>
 
-<div id="outline-container-org3f9e651" class="outline-3">
-<h3 id="org3f9e651">Index</h3>
-<div class="outline-text-3" id="text-org3f9e651">
+<div id="outline-container-orgcb498d1" class="outline-3">
+<h3 id="orgcb498d1">Index</h3>
+<div class="outline-text-3" id="text-orgcb498d1">
 <ul class="org-ul">
 <li>Setting up node exporter</li>
 <li>Setting up Prometheus</li>
@@ -51,9 +51,9 @@ be using Fedora 42 as a base.
 </div>
 </div>
 
-<div id="outline-container-org93e4a8c" class="outline-3">
-<h3 id="org93e4a8c">Setting up node exporter</h3>
-<div class="outline-text-3" id="text-org93e4a8c">
+<div id="outline-container-orgb2f1438" class="outline-3">
+<h3 id="orgb2f1438">Setting up node exporter</h3>
+<div class="outline-text-3" id="text-orgb2f1438">
 <p>
 Node exporter is a service that collects various system information
 such as CPU load, ram usage and much more. Fedora already provides the
@@ -72,9 +72,9 @@ The service will listen on port 9100.
 </div>
 </div>
 
-<div id="outline-container-orgabaa3aa" class="outline-3">
-<h3 id="orgabaa3aa">Setting up Prometheus</h3>
-<div class="outline-text-3" id="text-orgabaa3aa">
+<div id="outline-container-org26c46f6" class="outline-3">
+<h3 id="org26c46f6">Setting up Prometheus</h3>
+<div class="outline-text-3" id="text-org26c46f6">
 <p>
 You can download the latest version of Prometheus from GitHub:
 </p>
@@ -154,9 +154,9 @@ the data.
 </div>
 
 
-<div id="outline-container-org287ea9e" class="outline-3">
-<h3 id="org287ea9e">Setting up Grafana</h3>
-<div class="outline-text-3" id="text-org287ea9e">
+<div id="outline-container-orgbc185ed" class="outline-3">
+<h3 id="orgbc185ed">Setting up Grafana</h3>
+<div class="outline-text-3" id="text-orgbc185ed">
 <p>
 Install Grafana from your favorite package manager:
 </p>
@@ -233,7 +233,7 @@ website</a>.
 
 
 
-<div id="orgb15c0b1" class="figure">
+<div id="orgc66a746" class="figure">
 <p><img src="../../ephemeris/images/grafana.png" alt="grafana.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Grafana dashboard I found online</p>
@@ -241,9 +241,9 @@ website</a>.
 </div>
 </div>
 
-<div id="outline-container-orgb1aa200" class="outline-3">
-<h3 id="orgb1aa200">Custom Exporter</h3>
-<div class="outline-text-3" id="text-orgb1aa200">
+<div id="outline-container-org606958a" class="outline-3">
+<h3 id="org606958a">Custom Exporter</h3>
+<div class="outline-text-3" id="text-org606958a">
 <p>
 What if you wanted to log something custom to your dashboard, you
 can easily do this by starting a tcp server and serving the data you
@@ -258,30 +258,30 @@ average metric for prometheus.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">!/bin/</span><span style="color: #00ffff;">bash</span>
-
+<pre class="src src-bash"><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">!/bin/</span><span style="color: #00ffff;">bash</span><span style="color: #ff7f24;">
+</span>
 <span style="color: #b0c4de;">set</span> -e
 
-<span style="color: #eedd82;">INTERVAL</span>=5  <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">seconds</span>
-<span style="color: #eedd82;">METRICS_FILE</span>=<span style="color: #ffa07a;">"/tmp/power_metrics.prom"</span>
+<span style="color: #eedd82;">INTERVAL</span>=5  <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">seconds
+</span><span style="color: #eedd82;">METRICS_FILE</span>=<span style="color: #ffa07a;">"/tmp/power_metrics.prom"</span>
 <span style="color: #eedd82;">PORT</span>=9200
 touch $<span style="color: #eedd82;">METRICS_FILE</span>
 
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Start background HTTP server</span>
-socat TCP-LISTEN:$<span style="color: #eedd82;">PORT</span>,reuseaddr,fork SYSTEM:<span style="color: #ffa07a;">"echo HTTP/1.0 200; echo Content-Type\: text/plain; echo; cat \"$METRICS_FILE\""</span> &amp;
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Start background HTTP server
+</span>socat TCP-LISTEN:$<span style="color: #eedd82;">PORT</span>,reuseaddr,fork SYSTEM:<span style="color: #ffa07a;">"echo HTTP/1.0 200; echo Content-Type\: text/plain; echo; cat \"$METRICS_FILE\""</span> &amp;
 
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Metrics writer loop</span>
-<span style="color: #00ffff;">while</span> true; <span style="color: #00ffff;">do</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Metrics writer loop
+</span><span style="color: #00ffff;">while</span> true; <span style="color: #00ffff;">do</span>
     sleep <span style="color: #ffa07a;">"$INTERVAL"</span>
 
     <span style="color: #eedd82;">loadavg</span>=$(cat /proc/loadavg | awk <span style="color: #ffa07a;">'{print $1 }'</span>)
 
-    cat &lt;&lt;EOF &gt; <span style="color: #ffa07a;">"$METRICS_FILE"</span>
-<span style="color: #ffff00; font-weight: bold;">    # HELP loadavg Load Average</span>
-<span style="color: #ffff00; font-weight: bold;">    # TYPE loadavg gauge</span>
-<span style="color: #ffff00; font-weight: bold;">    loadavg $loadavg</span>
-<span style="color: #ffff00; font-weight: bold;">    EOF</span>
-<span style="color: #00ffff;">done</span>
+    cat &lt;&lt;EOF &gt; <span style="color: #ffa07a;">"$METRICS_FILE"</span><span style="color: #ffff00; font-weight: bold;">
+    # HELP loadavg Load Average
+    # TYPE loadavg gauge
+    loadavg $loadavg
+    EOF
+</span><span style="color: #00ffff;">done</span>
 </pre>
 </div>
 
@@ -311,7 +311,7 @@ select prometheus as a source and you add your custom metric and clock
 </p>
 
 
-<div id="org51f73f9" class="figure">
+<div id="org2140849" class="figure">
 <p><img src="../../ephemeris/images/grafana-custom.png" alt="grafana-custom.png" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Custom dashboard</p>

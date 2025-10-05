@@ -20,9 +20,9 @@
 <a href="../../index.html">Giovannis Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="emacs.html">Emacs</a> &gt;
 </p>
 
-<div id="outline-container-org39b3ca9" class="outline-2">
-<h2 id="org39b3ca9">Welcome</h2>
-<div class="outline-text-2" id="text-org39b3ca9">
+<div id="outline-container-orgdebbae3" class="outline-2">
+<h2 id="orgdebbae3">Welcome</h2>
+<div class="outline-text-2" id="text-orgdebbae3">
 <p>
 Hello and welcome to my Emacs configuration file. I use Emacs daily
 for a lot of tasks such as coding, writing, reading mailing lists
@@ -37,9 +37,9 @@ To load this configuration you first need to generate the <code>.el</code> via
 </div>
 </div>
 
-<div id="outline-container-org9587e80" class="outline-2">
-<h2 id="org9587e80">Early Init</h2>
-<div class="outline-text-2" id="text-org9587e80">
+<div id="outline-container-org38940a9" class="outline-2">
+<h2 id="org38940a9">Early Init</h2>
+<div class="outline-text-2" id="text-org38940a9">
 <p>
 This section generates the <code>early-init.el</code> file. This code gets
 executed very early during emacs' startup sequence.  It is useful to
@@ -66,9 +66,9 @@ one. I am setting this to 50MB, the default one is 800000 bytes, or
 </div>
 </div>
 
-<div id="outline-container-org163b687" class="outline-2">
-<h2 id="org163b687">Repositories</h2>
-<div class="outline-text-2" id="text-org163b687">
+<div id="outline-container-org0546440" class="outline-2">
+<h2 id="org0546440">Repositories</h2>
+<div class="outline-text-2" id="text-org0546440">
 <p>
 Those are the usual emacs repositories. Once in a while, you may have
 to run <code>M-x package-refresh-contents</code> to update the repositories,
@@ -88,9 +88,9 @@ sources during fetching.
 </div>
 </div>
 
-<div id="outline-container-orgca81f31" class="outline-2">
-<h2 id="orgca81f31">Theme</h2>
-<div class="outline-text-2" id="text-orgca81f31">
+<div id="outline-container-org2e1dd33" class="outline-2">
+<h2 id="org2e1dd33">Theme</h2>
+<div class="outline-text-2" id="text-org2e1dd33">
 <p>
 I really like the high-contrast <code>modus-vivendi</code> theme which is
 built in into emacs. It follows the higher standards of redibility,
@@ -109,21 +109,21 @@ below).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">(load-theme 'modus-vivendi t)</span>
-<span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">;; Default theme is white, unless the time is after 18 (6 pm)</span>
-<span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">(when (&lt; (decoded-time-hour (decode-time)) 18)</span>
-<span style="color: #ff7f24;">;;   </span><span style="color: #ff7f24;">(modus-themes-toggle))</span>
-
-<span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">(customize-set-variable 'modus-themes-common-palette-overrides</span>
-<span style="color: #ff7f24;">;;                         </span><span style="color: #ff7f24;">`(</span>
-<span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">;; Make the mode-line borderless</span>
-<span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">(bg-mode-line-active bg-inactive)</span>
-<span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">(fg-mode-line-active fg-main)</span>
-<span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">(bg-mode-line-inactive bg-inactive)</span>
-<span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">(fg-mode-line-inactive fg-dim)</span>
-<span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">(border-mode-line-active bg-inactive)</span>
-<span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">(border-mode-line-inactive bg-nactive)</span>
-<span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">))</span>
+<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">(load-theme 'modus-vivendi t)
+</span><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">;; Default theme is white, unless the time is after 18 (6 pm)
+</span><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">(when (&lt; (decoded-time-hour (decode-time)) 18)
+</span><span style="color: #ff7f24;">;;   </span><span style="color: #ff7f24;">(modus-themes-toggle))
+</span>
+<span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">(customize-set-variable 'modus-themes-common-palette-overrides
+</span><span style="color: #ff7f24;">;;                         </span><span style="color: #ff7f24;">`(
+</span><span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">;; Make the mode-line borderless
+</span><span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">(bg-mode-line-active bg-inactive)
+</span><span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">(fg-mode-line-active fg-main)
+</span><span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">(bg-mode-line-inactive bg-inactive)
+</span><span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">(fg-mode-line-inactive fg-dim)
+</span><span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">(border-mode-line-active bg-inactive)
+</span><span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">(border-mode-line-inactive bg-nactive)
+</span><span style="color: #ff7f24;">;;                           </span><span style="color: #ff7f24;">))</span>
 </pre>
 </div>
 
@@ -140,13 +140,13 @@ Add the directory for my custom themes:
 </div>
 </div>
 
-<div id="outline-container-org5873497" class="outline-2">
-<h2 id="org5873497">Packages</h2>
-<div class="outline-text-2" id="text-org5873497">
+<div id="outline-container-org3758edc" class="outline-2">
+<h2 id="org3758edc">Packages</h2>
+<div class="outline-text-2" id="text-org3758edc">
 </div>
-<div id="outline-container-org98be187" class="outline-3">
-<h3 id="org98be187">Use package</h3>
-<div class="outline-text-3" id="text-org98be187">
+<div id="outline-container-org451b5f4" class="outline-3">
+<h3 id="org451b5f4">Use package</h3>
+<div class="outline-text-3" id="text-org451b5f4">
 <p>
 I use <code>use-package</code> to manage all my packages.
 </p>
@@ -154,17 +154,17 @@ I use <code>use-package</code> to manage all my packages.
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #00ffff;">when</span> (&lt; emacs-major-version 29)
   (<span style="color: #00ffff;">unless</span> (package-installed-p 'use-package)
-    <span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(unless package-archive-contents</span>
-     <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">(package-refresh-contents))</span>
-    (package-install 'use-package)))
+    <span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(unless package-archive-contents
+</span>     <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">(package-refresh-contents))
+</span>    (package-install 'use-package)))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgca76c62" class="outline-3">
-<h3 id="orgca76c62">Org mode</h3>
-<div class="outline-text-3" id="text-orgca76c62">
+<div id="outline-container-orgaee3ad4" class="outline-3">
+<h3 id="orgaee3ad4">Org mode</h3>
+<div class="outline-text-3" id="text-orgaee3ad4">
 <p>
 Org mode settings. I use org mode everywhere in my life.
 </p>
@@ -175,60 +175,60 @@ To update completition percentage: <code>C-c C-c</code>.
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">  (<span style="color: #00ffff;">use-package</span> <span style="color: #7fffd4;">org</span>
-    <span style="color: #b0c4de;">:ensure</span> nil <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">do not try to install it as it is built-in</span>
-    <span style="color: #b0c4de;">:config</span>
+    <span style="color: #b0c4de;">:ensure</span> nil <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">do not try to install it as it is built-in
+</span>    <span style="color: #b0c4de;">:config</span>
     (<span style="color: #00ffff;">setq</span> org-todo-keywords
           '((sequence <span style="color: #ffa07a;">"TODO(t)"</span> <span style="color: #ffa07a;">"WAIT(w!)"</span> <span style="color: #ffa07a;">"|"</span> <span style="color: #ffa07a;">"CANCEL(c!)"</span> <span style="color: #ffa07a;">"DONE(d!)"</span>))))
 
-<span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Automatically toggle Latex</span>
-  (<span style="color: #00ffff;">use-package</span> <span style="color: #7fffd4;">org-fragtog</span>
+<span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Automatically toggle Latex
+</span>  (<span style="color: #00ffff;">use-package</span> <span style="color: #7fffd4;">org-fragtog</span>
     <span style="color: #b0c4de;">:ensure</span> t
     <span style="color: #b0c4de;">:config</span>
     (<span style="color: #00ffff;">setq</span> org-format-latex-options
         '(<span style="color: #b0c4de;">:foreground</span> <span style="color: #ffa07a;">"White"</span> 
                       <span style="color: #b0c4de;">:background</span> <span style="color: #ffa07a;">"Transparent"</span> 
-                      <span style="color: #b0c4de;">:scale</span> 3.0      <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Base scaling factor</span>
-                      <span style="color: #b0c4de;">:html-scale</span> 1.5 <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">For HTML export</span>
-                      <span style="color: #b0c4de;">:matchers</span> (<span style="color: #ffa07a;">"begin"</span> <span style="color: #ffa07a;">"$1"</span> <span style="color: #ffa07a;">"$"</span> <span style="color: #ffa07a;">"$$"</span> <span style="color: #ffa07a;">"</span><span style="color: #ffa07a; font-weight: bold;">\\</span><span style="color: #ffa07a; font-weight: bold;">(</span><span style="color: #ffa07a;">"</span> <span style="color: #ffa07a;">"\\["</span>))))
+                      <span style="color: #b0c4de;">:scale</span> 3.0      <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Base scaling factor
+</span>                      <span style="color: #b0c4de;">:html-scale</span> 1.5 <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">For HTML export
+</span>                      <span style="color: #b0c4de;">:matchers</span> (<span style="color: #ffa07a;">"begin"</span> <span style="color: #ffa07a;">"$1"</span> <span style="color: #ffa07a;">"$"</span> <span style="color: #ffa07a;">"$$"</span> <span style="color: #ffa07a;">"</span><span style="color: #ffa07a; font-weight: bold;">\\</span><span style="color: #ffa07a; font-weight: bold;">(</span><span style="color: #ffa07a;">"</span> <span style="color: #ffa07a;">"\\["</span>))))
   (add-hook 'org-mode-hook 'org-fragtog-mode)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org81c2c92" class="outline-3">
-<h3 id="org81c2c92">org-roam</h3>
-<div class="outline-text-3" id="text-org81c2c92">
+<div id="outline-container-org775660d" class="outline-3">
+<h3 id="org775660d">org-roam</h3>
+<div class="outline-text-3" id="text-org775660d">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #00ffff;">use-package</span> <span style="color: #7fffd4;">org-roam</span>
   <span style="color: #b0c4de;">:ensure</span> t
   <span style="color: #b0c4de;">:custom</span>
   (org-roam-directory <span style="color: #ffa07a;">"/home/santo/giovanni-diary/content"</span>)
   <span style="color: #b0c4de;">:init</span>
-  (<span style="color: #00ffff;">setq</span> org-roam-v2-ack t) <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">acknowledge v2</span>
-  <span style="color: #b0c4de;">:config</span>
+  (<span style="color: #00ffff;">setq</span> org-roam-v2-ack t) <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">acknowledge v2
+</span>  <span style="color: #b0c4de;">:config</span>
   (org-roam-db-autosync-mode))
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">(use-package org-roam-ui</span>
-<span style="color: #ff7f24;">;;   </span><span style="color: #ff7f24;">:ensure t</span>
-<span style="color: #ff7f24;">;;   </span><span style="color: #ff7f24;">:after org-roam</span>
-<span style="color: #ff7f24;">;;   </span><span style="color: #ff7f24;">:hook (after-init . org-roam-ui-mode)</span>
-<span style="color: #ff7f24;">;;   </span><span style="color: #ff7f24;">:config</span>
-<span style="color: #ff7f24;">;;   </span><span style="color: #ff7f24;">(setq org-roam-ui-sync-theme t</span>
-<span style="color: #ff7f24;">;;         </span><span style="color: #ff7f24;">org-roam-ui-follow t</span>
-<span style="color: #ff7f24;">;;         </span><span style="color: #ff7f24;">org-roam-ui-update-on-save t</span>
-        <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">org-roam-ui-open-on-start t))</span>
+<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">(use-package org-roam-ui
+</span><span style="color: #ff7f24;">;;   </span><span style="color: #ff7f24;">:ensure t
+</span><span style="color: #ff7f24;">;;   </span><span style="color: #ff7f24;">:after org-roam
+</span><span style="color: #ff7f24;">;;   </span><span style="color: #ff7f24;">:hook (after-init . org-roam-ui-mode)
+</span><span style="color: #ff7f24;">;;   </span><span style="color: #ff7f24;">:config
+</span><span style="color: #ff7f24;">;;   </span><span style="color: #ff7f24;">(setq org-roam-ui-sync-theme t
+</span><span style="color: #ff7f24;">;;         </span><span style="color: #ff7f24;">org-roam-ui-follow t
+</span><span style="color: #ff7f24;">;;         </span><span style="color: #ff7f24;">org-roam-ui-update-on-save t
+</span>        <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">org-roam-ui-open-on-start t))</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org054e219" class="outline-3">
-<h3 id="org054e219">Markdown mode</h3>
-<div class="outline-text-3" id="text-org054e219">
+<div id="outline-container-org5d8070d" class="outline-3">
+<h3 id="org5d8070d">Markdown mode</h3>
+<div class="outline-text-3" id="text-org5d8070d">
 <p>
 I use markdown mode when editing markdown document, mostly on
 github because that is the defacto standard format to use.
@@ -242,9 +242,9 @@ github because that is the defacto standard format to use.
 </div>
 </div>
 
-<div id="outline-container-orga9df102" class="outline-3">
-<h3 id="orga9df102">ggtags</h3>
-<div class="outline-text-3" id="text-orga9df102">
+<div id="outline-container-orgefa5df1" class="outline-3">
+<h3 id="orgefa5df1">ggtags</h3>
+<div class="outline-text-3" id="text-orgefa5df1">
 <p>
 GNU Global on emacs.
 </p>
@@ -266,9 +266,9 @@ Shortcuts:
 </div>
 </div>
 
-<div id="outline-container-orge45fbd8" class="outline-3">
-<h3 id="orge45fbd8">Which-key</h3>
-<div class="outline-text-3" id="text-orge45fbd8">
+<div id="outline-container-orgaa6a8cd" class="outline-3">
+<h3 id="orgaa6a8cd">Which-key</h3>
+<div class="outline-text-3" id="text-orgaa6a8cd">
 <p>
 This package displays the key bindings following an incomplete
 command, very useful if you do not remember one of the few shortcuts
@@ -284,9 +284,9 @@ that you can use.
 </div>
 </div>
 
-<div id="outline-container-org16848aa" class="outline-3">
-<h3 id="org16848aa">Markdown-mode</h3>
-<div class="outline-text-3" id="text-org16848aa">
+<div id="outline-container-org0256ce9" class="outline-3">
+<h3 id="org0256ce9">Markdown-mode</h3>
+<div class="outline-text-3" id="text-org0256ce9">
 <p>
 Enables markdown highlights on emacs.
 </p>
@@ -299,9 +299,9 @@ Enables markdown highlights on emacs.
 </div>
 </div>
 
-<div id="outline-container-org2545609" class="outline-3">
-<h3 id="org2545609">Ivy</h3>
-<div class="outline-text-3" id="text-org2545609">
+<div id="outline-container-orgee4a250" class="outline-3">
+<h3 id="orgee4a250">Ivy</h3>
+<div class="outline-text-3" id="text-orgee4a250">
 <p>
 Ivy is a generic completition mechanism for emacs.
 </p>
@@ -318,9 +318,9 @@ Ivy is a generic completition mechanism for emacs.
 </div>
 </div>
 
-<div id="outline-container-org7b0350f" class="outline-3">
-<h3 id="org7b0350f">Avy</h3>
-<div class="outline-text-3" id="text-org7b0350f">
+<div id="outline-container-org825376f" class="outline-3">
+<h3 id="org825376f">Avy</h3>
+<div class="outline-text-3" id="text-org825376f">
 <p>
 Jump to visible text using a char-based decision tree. Lovely!
 </p>
@@ -330,16 +330,16 @@ Jump to visible text using a char-based decision tree. Lovely!
   <span style="color: #b0c4de;">:ensure</span> t
   <span style="color: #b0c4de;">:bind</span>
   (<span style="color: #ffa07a;">"C-:"</span> . avy-goto-char))
-<span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Alternative way of setting a keybinding:</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(global-set-key (kbd "C-:") 'avy-goto-char)</span>
+<span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Alternative way of setting a keybinding:
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(global-set-key (kbd "C-:") 'avy-goto-char)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org0b2fbbf" class="outline-3">
-<h3 id="org0b2fbbf">Diff-hl</h3>
-<div class="outline-text-3" id="text-org0b2fbbf">
+<div id="outline-container-org32946b7" class="outline-3">
+<h3 id="org32946b7">Diff-hl</h3>
+<div class="outline-text-3" id="text-org32946b7">
 <p>
 Highlights uncommitted changes on the left of the buffer window.
 </p>
@@ -353,9 +353,9 @@ Highlights uncommitted changes on the left of the buffer window.
 </div>
 </div>
 
-<div id="outline-container-orgc16ec74" class="outline-3">
-<h3 id="orgc16ec74">Emms</h3>
-<div class="outline-text-3" id="text-orgc16ec74">
+<div id="outline-container-orge2300b2" class="outline-3">
+<h3 id="orge2300b2">Emms</h3>
+<div class="outline-text-3" id="text-orge2300b2">
 <p>
 Emms is an emacs music player. You either need vlc or mpv as a
 backend.
@@ -375,9 +375,9 @@ backend.
 </div>
 </div>
 
-<div id="outline-container-org74db39d" class="outline-3">
-<h3 id="org74db39d">Gnus</h3>
-<div class="outline-text-3" id="text-org74db39d">
+<div id="outline-container-org928fb70" class="outline-3">
+<h3 id="org928fb70">Gnus</h3>
+<div class="outline-text-3" id="text-org928fb70">
 <p>
 THE best email / rss client. I read all my mailing lists and blogs
 here.
@@ -446,11 +446,13 @@ download <code>atom2rss.xsl</code> first from <a href="https://atom.geekhood.net
 </div>
 </div>
 
-<div id="outline-container-orgce47717" class="outline-3">
-<h3 id="orgce47717">Yasnippet</h3>
-<div class="outline-text-3" id="text-orgce47717">
+<div id="outline-container-org267b158" class="outline-3">
+<h3 id="org267b158">Yasnippet</h3>
+<div class="outline-text-3" id="text-org267b158">
 <p>
-Create macros "snippets" for text. Really really cool.
+Create macros "snippets" for text, I use them often. The snippets are
+stored in the directory <code>snippets/</code>. To update them, first run
+<code>yas-recompile-all</code> and then <code>yas-reload-all</code>.
 </p>
 
 <div class="org-src-container">
@@ -463,9 +465,9 @@ Create macros "snippets" for text. Really really cool.
 </div>
 </div>
 
-<div id="outline-container-org0ae3573" class="outline-3">
-<h3 id="org0ae3573">Olivetti</h3>
-<div class="outline-text-3" id="text-org0ae3573">
+<div id="outline-container-org12f6273" class="outline-3">
+<h3 id="org12f6273">Olivetti</h3>
+<div class="outline-text-3" id="text-org12f6273">
 <p>
 Center text in the window.
 </p>
@@ -478,9 +480,9 @@ Center text in the window.
 </div>
 </div>
 
-<div id="outline-container-orga264913" class="outline-3">
-<h3 id="orga264913">Marginalia</h3>
-<div class="outline-text-3" id="text-orga264913">
+<div id="outline-container-org4a6c140" class="outline-3">
+<h3 id="org4a6c140">Marginalia</h3>
+<div class="outline-text-3" id="text-org4a6c140">
 <p>
 Add commands' description to minibuffer.
 </p>
@@ -494,9 +496,9 @@ Add commands' description to minibuffer.
 </div>
 </div>
 
-<div id="outline-container-org7b8b05b" class="outline-3">
-<h3 id="org7b8b05b">Nerd-icons</h3>
-<div class="outline-text-3" id="text-org7b8b05b">
+<div id="outline-container-orgce42120" class="outline-3">
+<h3 id="orgce42120">Nerd-icons</h3>
+<div class="outline-text-3" id="text-orgce42120">
 <p>
 The first time, the user must run <code>M-x nerd-icons-install-fonts</code>.
 </p>
@@ -525,9 +527,9 @@ The first time, the user must run <code>M-x nerd-icons-install-fonts</code>.
 </div>
 </div>
 
-<div id="outline-container-orgf084464" class="outline-3">
-<h3 id="orgf084464">Swiper</h3>
-<div class="outline-text-3" id="text-orgf084464">
+<div id="outline-container-org4de983f" class="outline-3">
+<h3 id="org4de983f">Swiper</h3>
+<div class="outline-text-3" id="text-org4de983f">
 <p>
 Grep in minibuffer.
 </p>
@@ -540,9 +542,9 @@ Grep in minibuffer.
 </div>
 </div>
 
-<div id="outline-container-org355e0dc" class="outline-3">
-<h3 id="org355e0dc">Kubernetes</h3>
-<div class="outline-text-3" id="text-org355e0dc">
+<div id="outline-container-orgf1d939b" class="outline-3">
+<h3 id="orgf1d939b">Kubernetes</h3>
+<div class="outline-text-3" id="text-orgf1d939b">
 <p>
 Manage kubernetes clusters in emacs.
 </p>
@@ -555,26 +557,26 @@ Manage kubernetes clusters in emacs.
 </div>
 </div>
 
-<div id="outline-container-orgbfa5fe7" class="outline-3">
-<h3 id="orgbfa5fe7">Ox-publish + simple-httpd</h3>
-<div class="outline-text-3" id="text-orgbfa5fe7">
+<div id="outline-container-org0e5e34b" class="outline-3">
+<h3 id="org0e5e34b">Ox-publish + simple-httpd</h3>
+<div class="outline-text-3" id="text-org0e5e34b">
 <p>
 Generate static websites from org-mode.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(use-package ox-publish</span>
-<span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">:ensure t)</span>
-(<span style="color: #00ffff;">use-package</span> <span style="color: #7fffd4;">simple-httpd</span>
+<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(use-package ox-publish
+</span><span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">:ensure t)
+</span>(<span style="color: #00ffff;">use-package</span> <span style="color: #7fffd4;">simple-httpd</span>
   <span style="color: #b0c4de;">:ensure</span> t)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org1c13bcc" class="outline-3">
-<h3 id="org1c13bcc">Mastodon</h3>
-<div class="outline-text-3" id="text-org1c13bcc">
+<div id="outline-container-org617e902" class="outline-3">
+<h3 id="org617e902">Mastodon</h3>
+<div class="outline-text-3" id="text-org617e902">
 <p>
 Mastodon client in emacs.
 </p>
@@ -590,9 +592,9 @@ Mastodon client in emacs.
 </div>
 </div>
 
-<div id="outline-container-org6cf2965" class="outline-3">
-<h3 id="org6cf2965">auto-complete</h3>
-<div class="outline-text-3" id="text-org6cf2965">
+<div id="outline-container-org5290ae3" class="outline-3">
+<h3 id="org5290ae3">auto-complete</h3>
+<div class="outline-text-3" id="text-org5290ae3">
 <p>
 Available by default in emacs 30.
 </p>
@@ -606,9 +608,9 @@ Available by default in emacs 30.
 </div>
 </div>
 
-<div id="outline-container-org210da68" class="outline-3">
-<h3 id="org210da68">Flycheck</h3>
-<div class="outline-text-3" id="text-org210da68">
+<div id="outline-container-org7ed7695" class="outline-3">
+<h3 id="org7ed7695">Flycheck</h3>
+<div class="outline-text-3" id="text-org7ed7695">
 <p>
 Modern on-the-fly syntax checking extension for GNU Emacs.
 </p>
@@ -626,9 +628,9 @@ Modern on-the-fly syntax checking extension for GNU Emacs.
 </div>
 </div>
 
-<div id="outline-container-orgf40c0e5" class="outline-3">
-<h3 id="orgf40c0e5">rfc-mode</h3>
-<div class="outline-text-3" id="text-orgf40c0e5">
+<div id="outline-container-org78675b9" class="outline-3">
+<h3 id="org78675b9">rfc-mode</h3>
+<div class="outline-text-3" id="text-org78675b9">
 <p>
 Browse and read RFC documents.
 </p>
@@ -643,9 +645,9 @@ Browse and read RFC documents.
 </div>
 </div>
 
-<div id="outline-container-orgde24a50" class="outline-3">
-<h3 id="orgde24a50">hledger</h3>
-<div class="outline-text-3" id="text-orgde24a50">
+<div id="outline-container-orgc79bd5b" class="outline-3">
+<h3 id="orgc79bd5b">hledger</h3>
+<div class="outline-text-3" id="text-orgc79bd5b">
 <p>
 An Emacs major mode for writing hledger journals and generating useful
 accounting reports.
@@ -668,13 +670,13 @@ report features won't work.
 </div>
 </div>
 
-<div id="outline-container-orga407f32" class="outline-2">
-<h2 id="orga407f32">Customization</h2>
-<div class="outline-text-2" id="text-orga407f32">
+<div id="outline-container-org345ac4b" class="outline-2">
+<h2 id="org345ac4b">Customization</h2>
+<div class="outline-text-2" id="text-org345ac4b">
 </div>
-<div id="outline-container-orgda216ee" class="outline-3">
-<h3 id="orgda216ee">Cleanup the screen</h3>
-<div class="outline-text-3" id="text-orgda216ee">
+<div id="outline-container-orgbbbaf10" class="outline-3">
+<h3 id="orgbbbaf10">Cleanup the screen</h3>
+<div class="outline-text-3" id="text-orgbbbaf10">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -685,9 +687,9 @@ report features won't work.
 </div>
 </div>
 
-<div id="outline-container-orgf0a4cd2" class="outline-3">
-<h3 id="orgf0a4cd2">Startup screen</h3>
-<div class="outline-text-3" id="text-orgf0a4cd2">
+<div id="outline-container-org1f1d6e1" class="outline-3">
+<h3 id="org1f1d6e1">Startup screen</h3>
+<div class="outline-text-3" id="text-org1f1d6e1">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #00ffff;">setq-default</span> inhibit-startup-screen t)
 (<span style="color: #00ffff;">setq</span> inhibit-splash-screen t)
@@ -698,9 +700,9 @@ report features won't work.
 </div>
 </div>
 
-<div id="outline-container-orgdc9157e" class="outline-3">
-<h3 id="orgdc9157e">Dired</h3>
-<div class="outline-text-3" id="text-orgdc9157e">
+<div id="outline-container-orgfbcb6f7" class="outline-3">
+<h3 id="orgfbcb6f7">Dired</h3>
+<div class="outline-text-3" id="text-orgfbcb6f7">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #00ffff;">use-package</span> <span style="color: #7fffd4;">dired</span>
   <span style="color: #b0c4de;">:hook</span> ((dired-mode . dired-hide-details-mode)))
@@ -709,9 +711,9 @@ report features won't work.
 </div>
 </div>
 
-<div id="outline-container-org232011f" class="outline-3">
-<h3 id="org232011f">Line numbers</h3>
-<div class="outline-text-3" id="text-org232011f">
+<div id="outline-container-org86352fe" class="outline-3">
+<h3 id="org86352fe">Line numbers</h3>
+<div class="outline-text-3" id="text-org86352fe">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(global-display-line-numbers-mode)
 (<span style="color: #00ffff;">setq</span> display-line-numbers 'relative)
@@ -720,9 +722,9 @@ report features won't work.
 </div>
 </div>
 
-<div id="outline-container-org37a89bf" class="outline-3">
-<h3 id="org37a89bf">Time</h3>
-<div class="outline-text-3" id="text-org37a89bf">
+<div id="outline-container-org341c9be" class="outline-3">
+<h3 id="org341c9be">Time</h3>
+<div class="outline-text-3" id="text-org341c9be">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #00ffff;">setq</span> display-time-format <span style="color: #ffa07a;">"%I:%M"</span>)
 </pre>
@@ -730,9 +732,9 @@ report features won't work.
 </div>
 </div>
 
-<div id="outline-container-org1fc1b53" class="outline-3">
-<h3 id="org1fc1b53">Battery</h3>
-<div class="outline-text-3" id="text-org1fc1b53">
+<div id="outline-container-org0dfd585" class="outline-3">
+<h3 id="org0dfd585">Battery</h3>
+<div class="outline-text-3" id="text-org0dfd585">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #00ffff;">require</span> '<span style="color: #7fffd4;">battery</span>)
 (<span style="color: #00ffff;">when</span> (<span style="color: #00ffff;">and</span> battery-status-function
@@ -745,9 +747,9 @@ report features won't work.
 </div>
 </div>
 
-<div id="outline-container-org54dd789" class="outline-3">
-<h3 id="org54dd789">Font</h3>
-<div class="outline-text-3" id="text-org54dd789">
+<div id="outline-container-orgfac13a7" class="outline-3">
+<h3 id="orgfac13a7">Font</h3>
+<div class="outline-text-3" id="text-orgfac13a7">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(set-face-attribute 'default nil <span style="color: #b0c4de;">:height</span> 130)
 </pre>
@@ -755,9 +757,9 @@ report features won't work.
 </div>
 </div>
 
-<div id="outline-container-orgaeb0e2b" class="outline-3">
-<h3 id="orgaeb0e2b">TLS</h3>
-<div class="outline-text-3" id="text-orgaeb0e2b">
+<div id="outline-container-org90a76a6" class="outline-3">
+<h3 id="org90a76a6">TLS</h3>
+<div class="outline-text-3" id="text-org90a76a6">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #00ffff;">setq-default</span> gnutls-trustfiles (list <span style="color: #ffa07a;">"~/.emacs.d/cacert.pem"</span>
                                      <span style="color: #ffa07a;">"/etc/pki/tls/certs/ca-bundle.pem"</span>))
@@ -766,9 +768,9 @@ report features won't work.
 </div>
 </div>
 
-<div id="outline-container-org759c044" class="outline-3">
-<h3 id="org759c044">Column Line</h3>
-<div class="outline-text-3" id="text-org759c044">
+<div id="outline-container-org2d6f9e2" class="outline-3">
+<h3 id="org2d6f9e2">Column Line</h3>
+<div class="outline-text-3" id="text-org2d6f9e2">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(global-display-fill-column-indicator-mode 1)
 (<span style="color: #00ffff;">setq</span> global-display-fill-column-indicator-column 80)
@@ -777,25 +779,25 @@ report features won't work.
 </div>
 </div>
 
-<div id="outline-container-orgdeb5309" class="outline-3">
-<h3 id="orgdeb5309">Clean ~ files</h3>
-<div class="outline-text-3" id="text-orgdeb5309">
+<div id="outline-container-orgbeb04df" class="outline-3">
+<h3 id="orgbeb04df">Clean ~ files</h3>
+<div class="outline-text-3" id="text-orgbeb04df">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #00ffff;">setq</span> backup-directory-alist '((<span style="color: #ffa07a;">"."</span> . <span style="color: #ffa07a;">"~/.emacs.d/backup"</span>))
-  backup-by-copying t    <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">Don't delink hardlinks</span>
-  version-control t      <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">Use version numbers on backups</span>
-  delete-old-versions t  <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">Automatically delete excess backups</span>
-  kept-new-versions 20   <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">how many of the newest versions to keep</span>
-  kept-old-versions 5    <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">and how many of the old</span>
- )
+  backup-by-copying t    <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">Don't delink hardlinks
+</span>  version-control t      <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">Use version numbers on backups
+</span>  delete-old-versions t  <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">Automatically delete excess backups
+</span>  kept-new-versions 20   <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">how many of the newest versions to keep
+</span>  kept-old-versions 5    <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">and how many of the old
+</span> )
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org2b04e68" class="outline-3">
-<h3 id="org2b04e68">Move Autogenerated Code</h3>
-<div class="outline-text-3" id="text-org2b04e68">
+<div id="outline-container-org950ff6c" class="outline-3">
+<h3 id="org950ff6c">Move Autogenerated Code</h3>
+<div class="outline-text-3" id="text-org950ff6c">
 <p>
 Emacs has a graphical interface to configure emacs. The generated
 code should live in a separate file.
@@ -809,9 +811,9 @@ code should live in a separate file.
 </div>
 </div>
 
-<div id="outline-container-orgb1f0d6b" class="outline-3">
-<h3 id="orgb1f0d6b">Tabs size</h3>
-<div class="outline-text-3" id="text-orgb1f0d6b">
+<div id="outline-container-org20b6fd5" class="outline-3">
+<h3 id="org20b6fd5">Tabs size</h3>
+<div class="outline-text-3" id="text-org20b6fd5">
 <p>
 Change the tab size as 2 spaces.
 </p>
@@ -825,24 +827,24 @@ Change the tab size as 2 spaces.
 </div>
 </div>
 
-<div id="outline-container-org27556e2" class="outline-2">
-<h2 id="org27556e2">Games</h2>
-<div class="outline-text-2" id="text-org27556e2">
+<div id="outline-container-org7a4654d" class="outline-2">
+<h2 id="org7a4654d">Games</h2>
+<div class="outline-text-2" id="text-org7a4654d">
 <p>
 A collection of some games.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Monkey-type game</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'typit)</span>
+<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Monkey-type game
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'typit)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orge47be9e" class="outline-2">
-<h2 id="orge47be9e">Shortcuts</h2>
-<div class="outline-text-2" id="text-orge47be9e">
+<div id="outline-container-org6b06beb" class="outline-2">
+<h2 id="org6b06beb">Shortcuts</h2>
+<div class="outline-text-2" id="text-org6b06beb">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #ffa07a;">"C-c c"</span>) 'compile)
 (global-set-key (kbd <span style="color: #ffa07a;">"C-c v"</span>) 'modus-themes-toggle)
@@ -850,9 +852,9 @@ A collection of some games.
 </div>
 </div>
 
-<div id="outline-container-org64bde43" class="outline-3">
-<h3 id="org64bde43">Open Links</h3>
-<div class="outline-text-3" id="text-org64bde43">
+<div id="outline-container-org08cddee" class="outline-3">
+<h3 id="org08cddee">Open Links</h3>
+<div class="outline-text-3" id="text-org08cddee">
 <p>
 Open a web link from cursor position or selected region.
 Thank you Sacha Chua!
@@ -860,8 +862,8 @@ Thank you Sacha Chua!
 
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #00ffff;">defcustom</span> <span style="color: #eedd82;">my-search-web-handler</span> <span style="color: #ffa07a;">"https://duckduckgo.com/html/?q="</span>
-  <span style="color: #ffa07a;">"How to search. Could be a string that accepts the search query at the end (URL-encoded)</span>
-<span style="color: #ffa07a;">or a function that accepts the text (unencoded)."</span>
+  <span style="color: #ffa07a;">"How to search. Could be a string that accepts the search query at the end (URL-encoded)
+or a function that accepts the text (unencoded)."</span>
   <span style="color: #b0c4de;">:type</span> '(choice (string <span style="color: #b0c4de;">:tag</span> <span style="color: #ffa07a;">"Prefix URL to search engine."</span>)
                  (<span style="color: #00ffff;">function</span> <span style="color: #b0c4de;">:tag</span> <span style="color: #ffa07a;">"Handler function."</span>)))
 
@@ -885,21 +887,21 @@ Thank you Sacha Chua!
           (insert text-or-url)
           (org-mode)
           (goto-char (point-min))
-          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">We add all the links to a list first because following them may change the point</span>
-          (<span style="color: #00ffff;">while</span> (re-search-forward org-any-link-re nil t)
+          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">We add all the links to a list first because following them may change the point
+</span>          (<span style="color: #00ffff;">while</span> (re-search-forward org-any-link-re nil t)
             (add-to-list 'list (match-string-no-properties 0)))
           (<span style="color: #00ffff;">when</span> list
             (<span style="color: #00ffff;">dolist</span> (link list)
               (org-link-open-from-string link))
             (<span style="color: #00ffff;">throw</span> '<span style="color: #7fffd4;">done</span> list))
-          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Try emails</span>
-          (<span style="color: #00ffff;">while</span> (re-search-forward thing-at-point-email-regexp nil t)
+          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Try emails
+</span>          (<span style="color: #00ffff;">while</span> (re-search-forward thing-at-point-email-regexp nil t)
             (add-to-list 'list (match-string-no-properties 0)))
           (<span style="color: #00ffff;">when</span> list
             (compose-mail (string-join list <span style="color: #ffa07a;">", "</span>))
             (<span style="color: #00ffff;">throw</span> '<span style="color: #7fffd4;">done</span> list)))
-        <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Open filename if specified, or do a web search</span>
-        (<span style="color: #00ffff;">cond</span>
+        <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Open filename if specified, or do a web search
+</span>        (<span style="color: #00ffff;">cond</span>
          ((ffap-guesser) (find-file-at-point))
          ((functionp my-search-web-handler)
           (funcall my-search-web-handler text-or-url))
@@ -912,21 +914,21 @@ Thank you Sacha Chua!
 </div>
 </div>
 
-<div id="outline-container-org91ca312" class="outline-3">
-<h3 id="org91ca312">copy-line</h3>
-<div class="outline-text-3" id="text-org91ca312">
+<div id="outline-container-org1f4f198" class="outline-3">
+<h3 id="org1f4f198">copy-line</h3>
+<div class="outline-text-3" id="text-org1f4f198">
 <p>
 <a href="https://www.emacswiki.org/emacs/CopyingWholeLines">https://www.emacswiki.org/emacs/CopyingWholeLines</a>
 </p>
 
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #00ffff;">defun</span> <span style="color: #87cefa;">copy-line</span> (arg)
-  <span style="color: #ffa07a;">"Copy lines (as many as prefix argument) in the kill ring.</span>
-<span style="color: #ffa07a;">  Ease of use features:</span>
-<span style="color: #ffa07a;">  - Move to start of next line.</span>
-<span style="color: #ffa07a;">  - Appends the copy on sequential calls.</span>
-<span style="color: #ffa07a;">  - Use newline as last char even on the last line of the buffer.</span>
-<span style="color: #ffa07a;">  - If region is active, copy its lines."</span>
+  <span style="color: #ffa07a;">"Copy lines (as many as prefix argument) in the kill ring.
+  Ease of use features:
+  - Move to start of next line.
+  - Appends the copy on sequential calls.
+  - Use newline as last char even on the last line of the buffer.
+  - If region is active, copy its lines."</span>
   (<span style="color: #00ffff;">interactive</span> <span style="color: #ffa07a;">"p"</span>)
   (<span style="color: #00ffff;">let</span> ((beg (line-beginning-position))
         (end (line-end-position arg)))
@@ -949,127 +951,127 @@ Thank you Sacha Chua!
 </div>
 
 
-<div id="outline-container-org51eb428" class="outline-2">
-<h2 id="org51eb428">Depricated</h2>
-<div class="outline-text-2" id="text-org51eb428">
+<div id="outline-container-orgdcc0f65" class="outline-2">
+<h2 id="orgdcc0f65">Depricated</h2>
+<div class="outline-text-2" id="text-orgdcc0f65">
 </div>
-<div id="outline-container-orgff5f5d6" class="outline-3">
-<h3 id="orgff5f5d6">Undo Tree</h3>
-<div class="outline-text-3" id="text-orgff5f5d6">
+<div id="outline-container-orgb266537" class="outline-3">
+<h3 id="orgb266537">Undo Tree</h3>
+<div class="outline-text-3" id="text-orgb266537">
 <p>
 Show and manage history as a tree of changes.
 Try <code>undo-tree-visualize</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'undo-tree)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(global-undo-tree-mode)</span>
+<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'undo-tree)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(global-undo-tree-mode)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7de65b8" class="outline-3">
-<h3 id="org7de65b8">Obsidian</h3>
-<div class="outline-text-3" id="text-org7de65b8">
+<div id="outline-container-orgf4cd43a" class="outline-3">
+<h3 id="orgf4cd43a">Obsidian</h3>
+<div class="outline-text-3" id="text-orgf4cd43a">
 <p>
 I dont use this anymore. Also, It did not work.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'obsidian)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(obsidian-specify-path "~/ObsidianVault")</span>
+<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'obsidian)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(obsidian-specify-path "~/ObsidianVault")</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org190c2c0" class="outline-3">
-<h3 id="org190c2c0">Elfeed</h3>
-<div class="outline-text-3" id="text-org190c2c0">
+<div id="outline-container-org38666a4" class="outline-3">
+<h3 id="org38666a4">Elfeed</h3>
+<div class="outline-text-3" id="text-org38666a4">
 <p>
 Local Rss feed reader. I like it and It works fine, but I moved
 to gnus.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'elfeed)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'elfeed-dashboard)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(setq elfeed-feeds</span>
-<span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">'("http://www.kroah.com/log/index.rss"</span>
-<span style="color: #ff7f24;">;;        </span><span style="color: #ff7f24;">"https://www.dragonflydigest.com/feed/"</span>
-<span style="color: #ff7f24;">;;        </span><span style="color: #ff7f24;">"https://protesilaos.com/master.xml"</span>
-<span style="color: #ff7f24;">;;        </span><span style="color: #ff7f24;">"http://feeds.feedburner.com/linuxquestions/latest"))</span>
+<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'elfeed)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'elfeed-dashboard)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(setq elfeed-feeds
+</span><span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">'("http://www.kroah.com/log/index.rss"
+</span><span style="color: #ff7f24;">;;        </span><span style="color: #ff7f24;">"https://www.dragonflydigest.com/feed/"
+</span><span style="color: #ff7f24;">;;        </span><span style="color: #ff7f24;">"https://protesilaos.com/master.xml"
+</span><span style="color: #ff7f24;">;;        </span><span style="color: #ff7f24;">"http://feeds.feedburner.com/linuxquestions/latest"))</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orge1a8692" class="outline-3">
-<h3 id="orge1a8692">PDF Reader</h3>
-<div class="outline-text-3" id="text-orge1a8692">
+<div id="outline-container-orgdc4a091" class="outline-3">
+<h3 id="orgdc4a091">PDF Reader</h3>
+<div class="outline-text-3" id="text-orgdc4a091">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(pdf-tools-install)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(pdf-loader-install)</span>
+<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(pdf-tools-install)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(pdf-loader-install)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgacfd713" class="outline-3">
-<h3 id="orgacfd713">LSP</h3>
-<div class="outline-text-3" id="text-orgacfd713">
+<div id="outline-container-org78ab3d3" class="outline-3">
+<h3 id="org78ab3d3">LSP</h3>
+<div class="outline-text-3" id="text-org78ab3d3">
 <p>
 Who needs a language server, pff.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">LSP</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'lsp-mode)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'helm-lsp)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'helm-mode)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'helm-xref)</span>
+<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">LSP
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'lsp-mode)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'helm-lsp)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'helm-mode)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'helm-xref)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgbf40a43" class="outline-3">
-<h3 id="orgbf40a43">C3</h3>
-<div class="outline-text-3" id="text-orgbf40a43">
+<div id="outline-container-orge5dd252" class="outline-3">
+<h3 id="orge5dd252">C3</h3>
+<div class="outline-text-3" id="text-orge5dd252">
 <p>
 Sometime I use this, but It does not belong in the main init file.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Language highlight</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(setq treesit-language-source-alist</span>
-<span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">'((c3 "https://github.com/c3lang/tree-sitter-c3")))</span>
-
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(add-to-list 'load-path "~/.emacs.d/c3-ts-mode")</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'c3-ts-mode)</span>
+<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Language highlight
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(setq treesit-language-source-alist
+</span><span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">'((c3 "https://github.com/c3lang/tree-sitter-c3")))
+</span>
+<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(add-to-list 'load-path "~/.emacs.d/c3-ts-mode")
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'c3-ts-mode)</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org1b5e560" class="outline-3">
-<h3 id="org1b5e560">Evil</h3>
-<div class="outline-text-3" id="text-org1b5e560">
+<div id="outline-container-org21feecc" class="outline-3">
+<h3 id="org21feecc">Evil</h3>
+<div class="outline-text-3" id="text-org21feecc">
 <p>
 I am happy to say that I don't use evil anymore, the transition
 is now complete.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">(use-package evil</span>
-<span style="color: #ff7f24;">;;    </span><span style="color: #ff7f24;">:ensure t)</span>
+<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">(use-package evil
+</span><span style="color: #ff7f24;">;;    </span><span style="color: #ff7f24;">:ensure t)</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org96c566d" class="outline-3">
-<h3 id="org96c566d">Save Session</h3>
-<div class="outline-text-3" id="text-org96c566d">
+<div id="outline-container-orgc38d345" class="outline-3">
+<h3 id="orgc38d345">Save Session</h3>
+<div class="outline-text-3" id="text-orgc38d345">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(desktop-save-mode 1)</span>
 </pre>
@@ -1077,9 +1079,9 @@ is now complete.
 </div>
 </div>
 
-<div id="outline-container-orgf8f256c" class="outline-3">
-<h3 id="orgf8f256c">EXWM</h3>
-<div class="outline-text-3" id="text-orgf8f256c">
+<div id="outline-container-org348f0a0" class="outline-3">
+<h3 id="org348f0a0">EXWM</h3>
+<div class="outline-text-3" id="text-org348f0a0">
 <p>
 Emacs' X window manager. I have used this for a while, but
 sometimes emacs would bug and It needed to be restarted. With
@@ -1089,86 +1091,86 @@ a heppy human being.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">############## EXWM BEGIN ##################</span>
-<span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Emac's X window manager, works fine</span>
-
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'exwm)</span>
-  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Set the default number of workspaces</span>
-<span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">(setq exwm-workspace-number 5)</span>
-
-  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">When window "class" updates, use it to set the buffer name</span>
-  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">(add-hook 'exwm-update-class-hook #'efs/exwm-update-class)</span>
-
-  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">These keys should always pass through to Emacs</span>
-<span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">(setq exwm-input-prefix-keys</span>
-<span style="color: #ff7f24;">;;    </span><span style="color: #ff7f24;">'(?\C-x</span>
-<span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\C-u</span>
-<span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\C-h</span>
-<span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\M-x</span>
-<span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\M-`</span>
-<span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\M-&amp;</span>
-<span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\M-:</span>
-<span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\C-\M-j  ;; Buffer list</span>
-<span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\C-\ ))  ;; Ctrl+Space</span>
-
-  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Ctrl+Q will enable the next key to be sent directly</span>
-<span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">(define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)</span>
-
-  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Set up global key bindings.  These always work, no matter the input state!</span>
-  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Keep in mind that changing this list after EXWM initializes has no effect.</span>
-<span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">(setq exwm-input-global-keys</span>
-<span style="color: #ff7f24;">;;       </span><span style="color: #ff7f24;">`(</span>
-          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Reset to line-mode (C-c C-k switches to char-mode via exwm-input-release-keyboard)</span>
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([?\s-r] . exwm-reset)</span>
-
-          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Move between windows</span>
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([s-left] . windmove-left)</span>
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([s-right] . windmove-right)</span>
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([s-up] . windmove-up)</span>
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([s-down] . windmove-down)</span>
-
-          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Launch applications via shell command</span>
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([?\s-&amp;] . (lambda (command)</span>
-<span style="color: #ff7f24;">;;                       </span><span style="color: #ff7f24;">(interactive (list (read-shell-command "$ ")))</span>
-<span style="color: #ff7f24;">;;                       </span><span style="color: #ff7f24;">(start-process-shell-command command nil command)))</span>
-
-          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Switch workspace</span>
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([?\s-w] . exwm-workspace-switch)</span>
-
-          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">'</span><span style="color: #7fffd4;">s-N</span><span style="color: #ff7f24;">': Switch to certain workspace with Super (Win) plus a number key (0 - 9)</span>
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">,@(mapcar (lambda (i)</span>
-<span style="color: #ff7f24;">;;                      </span><span style="color: #ff7f24;">`(,(kbd (format "s-%d" i)) .</span>
-<span style="color: #ff7f24;">;;                        </span><span style="color: #ff7f24;">(lambda ()</span>
-<span style="color: #ff7f24;">;;                          </span><span style="color: #ff7f24;">(interactive)</span>
-<span style="color: #ff7f24;">;;                          </span><span style="color: #ff7f24;">(exwm-workspace-switch-create ,i))))</span>
-<span style="color: #ff7f24;">;;                    </span><span style="color: #ff7f24;">(number-sequence 0 9))</span>
-
-          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Audio keys</span>
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([XF86AudioRaiseVolume] . (lambda ()</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">              (interactive)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">              (shell-command "amixer set Master 5%+")))</span>
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([XF86AudioLowerVolume] . (lambda ()</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">              (interactive)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">              (shell-command "amixer set Master 5%-")))</span>
-
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([XF86AudioMute] . (lambda()</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">             (interactive)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">             (shell-command "amixer set Master toggle")))</span>
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([XF86AudioMicMute] . (lambda()</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">           (interactive)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">           (shell-command "amixer set Master toggle")))</span>
-          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Brightness</span>
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([XF86MonBrightnessUp] . (lambda()</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">           (interactive)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">           (shell-command "echo $(( $(cat /sys/class/backlight/intel_backlight/brightness) + 10000)) &gt; /sys/class/backlight/intel_backlight/brightness")))</span>
-<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([XF86MonBrightnessDown] . (lambda()</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">           (interactive)</span>
-<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">           (shell-command "echo $(( $(cat /sys/class/backlight/intel_backlight/brightness) - 10000)) &gt; /sys/class/backlight/intel_backlight/brightness")))</span>
-<span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">))</span>
-
-<span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">(exwm-enable)</span>
-<span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">############### EXWM END ##################</span>
-
+<pre class="src src-emacs-lisp"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">############## EXWM BEGIN ##################
+</span><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Emac's X window manager, works fine
+</span>
+<span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">(require 'exwm)
+</span>  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Set the default number of workspaces
+</span><span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">(setq exwm-workspace-number 5)
+</span>
+  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">When window "class" updates, use it to set the buffer name
+</span>  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">(add-hook 'exwm-update-class-hook #'efs/exwm-update-class)
+</span>
+  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">These keys should always pass through to Emacs
+</span><span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">(setq exwm-input-prefix-keys
+</span><span style="color: #ff7f24;">;;    </span><span style="color: #ff7f24;">'(?\C-x
+</span><span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\C-u
+</span><span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\C-h
+</span><span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\M-x
+</span><span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\M-`
+</span><span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\M-&amp;
+</span><span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\M-:
+</span><span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\C-\M-j  ;; Buffer list
+</span><span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">?\C-\ ))  ;; Ctrl+Space
+</span>
+  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Ctrl+Q will enable the next key to be sent directly
+</span><span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">(define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
+</span>
+  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Set up global key bindings.  These always work, no matter the input state!
+</span>  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Keep in mind that changing this list after EXWM initializes has no effect.
+</span><span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">(setq exwm-input-global-keys
+</span><span style="color: #ff7f24;">;;       </span><span style="color: #ff7f24;">`(
+</span>          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Reset to line-mode (C-c C-k switches to char-mode via exwm-input-release-keyboard)
+</span><span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([?\s-r] . exwm-reset)
+</span>
+          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Move between windows
+</span><span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([s-left] . windmove-left)
+</span><span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([s-right] . windmove-right)
+</span><span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([s-up] . windmove-up)
+</span><span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([s-down] . windmove-down)
+</span>
+          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Launch applications via shell command
+</span><span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([?\s-&amp;] . (lambda (command)
+</span><span style="color: #ff7f24;">;;                       </span><span style="color: #ff7f24;">(interactive (list (read-shell-command "$ ")))
+</span><span style="color: #ff7f24;">;;                       </span><span style="color: #ff7f24;">(start-process-shell-command command nil command)))
+</span>
+          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Switch workspace
+</span><span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([?\s-w] . exwm-workspace-switch)
+</span>
+          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">'</span><span style="color: #7fffd4;">s-N</span><span style="color: #ff7f24;">': Switch to certain workspace with Super (Win) plus a number key (0 - 9)
+</span><span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">,@(mapcar (lambda (i)
+</span><span style="color: #ff7f24;">;;                      </span><span style="color: #ff7f24;">`(,(kbd (format "s-%d" i)) .
+</span><span style="color: #ff7f24;">;;                        </span><span style="color: #ff7f24;">(lambda ()
+</span><span style="color: #ff7f24;">;;                          </span><span style="color: #ff7f24;">(interactive)
+</span><span style="color: #ff7f24;">;;                          </span><span style="color: #ff7f24;">(exwm-workspace-switch-create ,i))))
+</span><span style="color: #ff7f24;">;;                    </span><span style="color: #ff7f24;">(number-sequence 0 9))
+</span>
+          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Audio keys
+</span><span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([XF86AudioRaiseVolume] . (lambda ()
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">              (interactive)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">              (shell-command "amixer set Master 5%+")))
+</span><span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([XF86AudioLowerVolume] . (lambda ()
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">              (interactive)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">              (shell-command "amixer set Master 5%-")))
+</span>
+<span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([XF86AudioMute] . (lambda()
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">             (interactive)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">             (shell-command "amixer set Master toggle")))
+</span><span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([XF86AudioMicMute] . (lambda()
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">           (interactive)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">           (shell-command "amixer set Master toggle")))
+</span>          <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Brightness
+</span><span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([XF86MonBrightnessUp] . (lambda()
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">           (interactive)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">           (shell-command "echo $(( $(cat /sys/class/backlight/intel_backlight/brightness) + 10000)) &gt; /sys/class/backlight/intel_backlight/brightness")))
+</span><span style="color: #ff7f24;">;;          </span><span style="color: #ff7f24;">([XF86MonBrightnessDown] . (lambda()
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">           (interactive)
+</span><span style="color: #ff7f24;">;;</span><span style="color: #ff7f24;">           (shell-command "echo $(( $(cat /sys/class/backlight/intel_backlight/brightness) - 10000)) &gt; /sys/class/backlight/intel_backlight/brightness")))
+</span><span style="color: #ff7f24;">;;      </span><span style="color: #ff7f24;">))
+</span>
+<span style="color: #ff7f24;">;;  </span><span style="color: #ff7f24;">(exwm-enable)
+</span><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">############### EXWM END ##################
+</span>
 </pre>
 </div>
 
