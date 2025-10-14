@@ -80,6 +80,7 @@
           - [[file:programming/notes/fisica/01-cinematica.org::*Cinematica][Cinematica]]
           - [[file:programming/notes/fisica/02-dinamica.org::*Dinamica][Dinamica]]
           - [[file:programming/notes/fisica/03-lavoro-ed-energia.org::*Lavoro ed Energia][Lavoro ed Energia]]
+        - [[file:programming/notes/how-do-header-only-libraries-work.org::*How do header only libraries work?][How do header only libraries work?]]
         - [[file:programming/notes/ml/intro-to-machine-learning.org::*Introduciton to Machine Learning][Intro to Machine Learning]]
           - [[file:programming/notes/ml/01-basics.org::*Machine Learning Basics][Basics]]
           - [[file:programming/notes/ml/04-beyond-binary-classification.org::*Beyond binary classification][Beyond Binary Classification]]

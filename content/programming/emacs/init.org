@@ -554,6 +554,14 @@ Change the tab size as 2 spaces.
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 2)
 #+end_src
+** Coding
+
+Recognize =.inl= files as cpp files.
+
+#+begin_src emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.inl\\'" . c++-mode))
+#+end_src
+
 
 * Games
 
@@ -655,7 +663,6 @@ https://www.emacswiki.org/emacs/CopyingWholeLines
 
   (keymap-global-set "C-c l" #'copy-line)
 #+end_src
-
 
 * Depricated
 ** Undo Tree

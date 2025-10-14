@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="notes.html">Notes</a> &gt;
+</p>
+
+<div id="outline-container-orgc3972ee" class="outline-2">
+<h2 id="orgc3972ee">How do header only libraries work?</h2>
+<div class="outline-text-2" id="text-orgc3972ee">
+<p>
+C code is commonly split over two types of files: .h headers
+containing declarations, and .c files for their definitions. Usually,
+.c files include header files in their translation unit; one header
+may be imported in multiple .c files for sharing common declarations
+such as structs, typedefs and functions. The separation of the two
+files is necessary because the presence of multiple definitions for
+the same declaration with external linkage is not allowed (in C++,
+this is referred to as the One Definition Rule or ODR), hence they
+should only appear in a single translation unit (the .c file).
+</p>
+
+<p>
+C11 - 6.9 External definitions:
+</p>
+
+<pre class="example">
+&gt; There shall be no more than one external definition for each
+&gt; identifier declared with internal linkage in a translation
+&gt; unit. Moreover, if an identifier declared with internal linkage is
+&gt; used in an expression (other than as a part of the operand of a
+&gt; sizeof or _Alignof operator whose result is an integer constant),
+&gt; there shall be exactly one external definition for the identifier in
+&gt; the translation unit
+</pre>
+
+<p>
+Note that this only applies to external definitions. For `static`
+storage class there may be multiple definitions of the same symbol in
+multiple translation units.
+</p>
+
+<p>
+Header-only libraries break the convention of .c and .h files by
+providing both declarations and definitions in a single file, usually
+an header since it is supposed to be included elsewhere. To make this
+possible without providing the same definition more than once, all
+user-facing definitions are guarded by an IMPLEMENTATION symbol
+defined at compile time in a single translation unit.
+</p>
+
+<p>
+The structure of a header-only library looks like the following:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">License: MIT
+</span>
+<span style="color: #b0c4de;">#if</span><span style="color: #b0c4de;">n</span><span style="color: #b0c4de;">def</span> MY_LIBRARY
+<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">MY_LIBRARY</span>
+
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Declarations
+</span>
+<span style="color: #98fb98;">int</span> <span style="color: #87cefa;">my_library_sum</span>(<span style="color: #98fb98;">int</span> <span style="color: #eedd82;">a</span>, <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">b</span>);
+
+<span style="color: #b0c4de;">#ifdef</span> MY_LIBRARY_IMPLEMENTATION
+
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Definitions
+</span>
+<span style="color: #98fb98;">int</span> <span style="color: #87cefa;">my_library_sum</span>(<span style="color: #98fb98;">int</span> <span style="color: #eedd82;">a</span>, <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">b</span>)
+{
+  <span style="color: #00ffff;">return</span> a + b;
+}
+
+<span style="color: #b0c4de;">#endif</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">MY_LIBRARY_IMPLEMENTATION
+</span>
+<span style="color: #b0c4de;">#endif</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">MY_LIBRARY</span>
+</pre>
+</div>
+
+<p>
+For a full template project you can check out micro-example.h:
+<a href="https://github.com/San7o/micro-example.h">https://github.com/San7o/micro-example.h</a>
+</p>
+
+<p>
+Practically, if you define the IMPLEMENTATION in a single translation
+unit, all the definitions will be included and compiled in that
+translation unit. Hence, they will be available for linkage by the
+other translation units (assuming the symbols were defined
+externally).
+</p>
+
+<p>
+The main advantage of this style of writing libraries is the
+convenience of using an entire library just by including a single
+file. That file can be easily managed in your version control system
+like git, and often contains all the documentation you need to use
+it. Quick, nice and simple.
+</p>
+
+<p>
+Obviously this type of headers make sense for libraries that are
+limited in size and provide only a few functionalities, not for
+writing an operating system.
+</p>
+</div>
+
+
+<div id="outline-container-orgfaf5b83" class="outline-3">
+<h3 id="orgfaf5b83">A note on inlining</h3>
+<div class="outline-text-3" id="text-orgfaf5b83">
+<p>
+For performance reasons, you may want the compiler to inline certain
+functions. By inlining a function, you remove all the function calling
+setup needed by your system, like copying the arguments to the stack
+and saving some registers. In C, the function specifier `inline` hints
+the compiler to do so.
+</p>
+
+<p>
+C11 Draft - 6.7.4 Function specifiers:
+</p>
+
+<pre class="example">
+&gt; A function declared with an inline function specifier is an inline
+&gt; function. Making a function an inline function suggests that calls
+&gt; to the function be as fast as possible. The extent to which such
+&gt; suggestions are effective is implementation-defined.
+&gt;
+&gt; Any function with internal linkage can be an inline function. For a
+&gt; function with external linkage, the following restrictions apply: If
+&gt; a function is declared with an inline function specifier, then it
+&gt; shall also be defined in the same translation unit. [...] An inline
+&gt; definition does not provide an external definition for the function,
+&gt; and does not forbid an external definition in another translation
+&gt; unit. An inline definition provides an alternative to an external
+&gt; definition, which a translator may use to implement any call to the
+&gt; function in the same translation unit. It is unspecified whether a
+&gt; call to the function uses the inline definition or the external
+&gt; definition.
+</pre>
+
+
+<p>
+When it comes to inlining, your options are the following:
+</p>
+
+<ul class="org-ul">
+<li>you can use just the `inline` specifier and provide the definition
+in the same translation unit, but you also need to provide an
+external symbol.</li>
+<li>You can use `extern inline` to also export the symbol, but then
+the compiler will not be able to inline it in other translation
+units because he does not know the definition.</li>
+<li>Lastly, you can use `static inline` to both define a symbol that
+is valid only in this translation unit (so we don't have problems
+with multiple definitions) and that can be inlined since you also
+need to provide the definition. Although the binary size will be
+larger and compilation time will be slower, since multiple copies
+of the same function will be compiled.</li>
+</ul>
+
+<p>
+This last option is the best one for inlining. If you want to allow
+the compiler to inline the functions, you need to both define the
+IMPLEMENTATION in every .c file, and set the storage class to static
+inline. This usually can be done by defining a known value specified
+in the header that will be placed before any declaration and
+definition, for example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">MICRO_TEST_DEF</span> <span style="color: #00ffff;">static</span> <span style="color: #00ffff;">inline</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org11a8244" class="outline-3">
+<h3 id="org11a8244">About the micro-headers</h3>
+<div class="outline-text-3" id="text-org11a8244">
+<p>
+I spent a lot of my free time writing the micro-headers recently and
+going deep into this "subgenre" of programming, you can find my code
+here for some examples:
+</p>
+
+<p>
+<a href="https://github.com/San7o/micro-headers/tree/main">https://github.com/San7o/micro-headers/tree/main</a>
+</p>
+
+<p>
+The micro headers are a very useful collection of header-only
+libraries. I use them for my own projects and needs, but I believe
+they can be useful to other programmer's too.
+</p>
+
+<p>
+The choice of C99 is more stylistic / preferential than a technical
+one. I deeply enjoy C for its simplicity, stability and the comfort
+that I feel when programming and having everything under my
+control. Very few languages are able to achieve all of the above.
+</p>
+
+<p>
+As a last note, and as my honest opinion, these header-only libraries
+are really cool and incredibly easy to use. I have had a lot of fun
+writing my own and learning a lot. Hopefully I made you want to write
+code some more.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="notes.html">Programming Notes</a>, <a href="../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
