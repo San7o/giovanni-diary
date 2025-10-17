@@ -20,9 +20,9 @@
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
 
-<div id="outline-container-orgc3972ee" class="outline-2">
-<h2 id="orgc3972ee">How do header only libraries work?</h2>
-<div class="outline-text-2" id="text-orgc3972ee">
+<div id="outline-container-org14706df" class="outline-2">
+<h2 id="org14706df">How do header only libraries work?</h2>
+<div class="outline-text-2" id="text-org14706df">
 <p>
 C code is commonly split over two types of files: .h headers
 containing declarations, and .c files for their definitions. Usually,
@@ -122,9 +122,9 @@ writing an operating system.
 </div>
 
 
-<div id="outline-container-orgfaf5b83" class="outline-3">
-<h3 id="orgfaf5b83">A note on inlining</h3>
-<div class="outline-text-3" id="text-orgfaf5b83">
+<div id="outline-container-org9eb3db0" class="outline-3">
+<h3 id="org9eb3db0">A note on inlining</h3>
+<div class="outline-text-3" id="text-org9eb3db0">
 <p>
 For performance reasons, you may want the compiler to inline certain
 functions. By inlining a function, you remove all the function calling
@@ -171,9 +171,9 @@ units because he does not know the definition.</li>
 <li>Lastly, you can use `static inline` to both define a symbol that
 is valid only in this translation unit (so we don't have problems
 with multiple definitions) and that can be inlined since you also
-need to provide the definition. Although the binary size will be
-larger and compilation time will be slower, since multiple copies
-of the same function will be compiled.</li>
+need to provide the definition. Although compilation time and link
+time will be slower, since multiple copies of the same function
+will be compiled.</li>
 </ul>
 
 <p>
@@ -193,9 +193,9 @@ definition, for example:
 </div>
 
 
-<div id="outline-container-org11a8244" class="outline-3">
-<h3 id="org11a8244">About the micro-headers</h3>
-<div class="outline-text-3" id="text-org11a8244">
+<div id="outline-container-org91348dd" class="outline-3">
+<h3 id="org91348dd">About the micro-headers</h3>
+<div class="outline-text-3" id="text-org91348dd">
 <p>
 I spent a lot of my free time writing the micro-headers recently and
 going deep into this "subgenre" of programming, you can find my code

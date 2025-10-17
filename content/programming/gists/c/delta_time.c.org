@@ -1,0 +1,49 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / delta_time.c
+#+INDEX: Giovanni's Diary!Programming!Gists!C/delta_time.c
+
+Calculate the frame delta time and render a certain number of times per seconds in C99.
+
+#+begin_src c
+// SPDX-License-Identifier: MIT
+// Author: Giovanni Santini
+// Github: @San7o
+
+#include <time.h>
+#include <assert.h>
+#include <stdio.h>
+
+int main(void)
+{
+  double delta_time = 0;
+  double fps = 30;
+  struct timespec frame_start, frame_end; 
+  while (1) {
+    clock_gettime(CLOCK_MONOTONIC, &frame_start);
+
+    // Input...
+    // Calculate...
+    if (delta_time > 1 / fps)
+    {
+      delta_time = 0;
+
+      printf("Drawing!\n");
+      // Draw...
+    }
+    
+    clock_gettime(CLOCK_MONOTONIC, &frame_end);
+    double diff = (frame_end.tv_sec - frame_start.tv_sec)
+      + (frame_end.tv_nsec - frame_start.tv_nsec) / 1e9;
+    delta_time += diff;
+  }
+  return 0;
+}
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

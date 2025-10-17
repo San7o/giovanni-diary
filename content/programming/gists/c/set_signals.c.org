@@ -1,0 +1,58 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / set_signals.c
+#+INDEX: Giovanni's Diary!Programming!Gists!C/set_signals.c
+
+Setup an handler for various POSIX signals.
+
+#+begin_src c
+// SPDX-License-Identifier: MIT
+// Author: Giovanni Santini
+// Github: @San7o
+
+#define _POSIX_SOURCE
+#include <signal.h>
+#include <stddef.h>
+#include <stdio.h>
+
+void sig_shutdown_handler(int signum)
+{
+  (void) signum;
+    
+  // ...
+  
+  return;
+}
+
+// Setup SIGINT, SIGTERM and SIGQUIT
+int set_signals(void)
+{
+  struct sigaction act;
+  act.sa_handler = sig_shutdown_handler;
+  act.sa_flags = 0;
+  sigemptyset(&act.sa_mask);
+  if (sigaction(SIGINT, &act, NULL) == -1)  // Ctrl+C
+  {
+    perror("Error setting SIGINT");
+    return 1;
+  }
+  if (sigaction(SIGTERM, &act, NULL) == -1) // hard shutdown
+  {
+    perror("Error setting SIGTERM");
+    return 1;
+  }
+  if (sigaction(SIGQUIT, &act, NULL) == -1) // hard shutdown
+  {
+    perror("Error setting SIGQUIT");
+    return 1;
+  }
+  return 0;
+}
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

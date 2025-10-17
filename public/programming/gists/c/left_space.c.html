@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
+</p>
+
+<div id="outline-container-org0313c99" class="outline-2">
+<h2 id="org0313c99">C / left_space.c</h2>
+<div class="outline-text-2" id="text-org0313c99">
+<p>
+Get number of separator charactes from the left of a string in C99.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Author: Giovanni Santini
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Github: @San7o
+</span>
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Get number of separator charactes from the left of string
+</span><span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Get the number of separator characters from the left of [input]
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">until the first non-separator or [input_size]. Separator characters
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">are specs, new lines and tabs. Updates [line] and/or [column] if
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">non null.
+</span><span style="color: #98fb98;">int</span> <span style="color: #87cefa;">left_space</span>(<span style="color: #00ffff;">const</span> <span style="color: #98fb98;">char</span>* <span style="color: #eedd82;">input</span>, <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">input_size</span>,
+               <span style="color: #98fb98;">unsigned</span> <span style="color: #98fb98;">int</span>* <span style="color: #eedd82;">line</span>, <span style="color: #98fb98;">unsigned</span> <span style="color: #98fb98;">int</span>* <span style="color: #eedd82;">column</span>)
+{
+  <span style="color: #00ffff;">if</span> (!input || input_size == 0) <span style="color: #00ffff;">return</span> 0;
+
+  <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">pos</span> = 0;
+  <span style="color: #00ffff;">while</span>(pos &lt; input_size &amp;&amp;
+        (input[pos] == <span style="color: #ffa07a;">' '</span> ||
+         input[pos] == <span style="color: #ffa07a;">'\n'</span> ||
+         input[pos] == <span style="color: #ffa07a;">'\t'</span>))
+  {
+    <span style="color: #00ffff;">if</span> (input[pos] == <span style="color: #ffa07a;">'\n'</span>) {
+      <span style="color: #00ffff;">if</span> (line) (*line)++;
+      <span style="color: #00ffff;">if</span> (column) *column = 0;
+    } <span style="color: #00ffff;">else</span> {
+      <span style="color: #00ffff;">if</span> (column) (*column)++;
+    }
+    pos++;
+  }
+
+  <span style="color: #00ffff;">return</span> pos;
+}
+</pre>
+</div>
+
+
+<hr />
+
+<p>
+Travel: <a href="../gists.html">Gists</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

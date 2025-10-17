@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
+</p>
+
+<div id="outline-container-org5faf42e" class="outline-2">
+<h2 id="org5faf42e">Config / i3config</h2>
+<div class="outline-text-2" id="text-org5faf42e">
+<p>
+My configuration file for i3. Should be called "config"
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">i3 config file
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Author: Giovanni Santini
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">GitHub: @San7o
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Please see https://i3wm.org/docs/userguide.html for a complete reference!
+</span>
+set $mod Mod4
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Remove the title bar
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">default_border pixel 0
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">default_floating_border pixel 0
+</span>default_border none
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Berders
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">default_border pixel 3
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">default_floating_border pixel 3
+</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Colors
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">client.focused  #fcba03 #fcba03 #fcba03 #fcba03 #fcba03
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">client.focused #FFFFFF #FFFFFF #FFFFFF #FFFFFF #FFFFFF 
+</span>client.focused <span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">000000 #000000 #000000 #000000 #000000
+</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Gaps!
+</span>gaps inner 0
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Smart gaps (gaps used if only more than one container on the workspace)
+</span>smart_gaps on
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Font for window titles. Will also be used by the bar unless a different font
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">is used in the bar {} block below.
+</span>font pango:monospace 8
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">This font is widely installed, provides lots of unicode glyphs, right-to-left
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">text rendering and scalability on retina/hidpi displays (thanks to pango).
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">font pango:DejaVu Sans Mono 8
+</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Focus
+</span>bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Movement
+</span>bindsym $mod+Ctrl+h move left
+bindsym $mod+Ctrl+j move down
+bindsym $mod+Ctrl+k move up
+bindsym $mod+Ctrl+l move right
+
+bindsym $mod+Ctrl+Left move left
+bindsym $mod+Ctrl+Down move down
+bindsym $mod+Ctrl+Up move up
+bindsym $mod+Ctrl+Right move right
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Resize
+</span>bindsym $mod+Shift+j resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+k resize grow height 10 px or 10 ppt
+bindsym $mod+Shift+l resize shrink width 10 px or 10 ppt
+bindsym $mod+Shift+h resize grow width 10 px or 10 ppt
+
+bindsym $mod+Shift+Down resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+Up resize grow height 10 px or 10 ppt
+bindsym $mod+Shift+Right resize shrink width 10 px or 10 ppt
+bindsym $mod+Shift+Left resize grow width 10 px or 10 ppt
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">switch to workspace
+</span>bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">move focused container to workspace
+</span>bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Adjust audio
+</span>set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 10%+ &amp;&amp; $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 10%- &amp;&amp; $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle &amp;&amp; $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id amixer set Master toggle &amp;&amp; $refresh_i3status
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Brightness controls
+</span>bindsym XF86MonBrightnessUp exec echo $(( $(cat /sys/class/backlight/intel_backlight/brightness) +10000)) &gt; /sys/class/backlight/intel_backlight/brightness 
+bindsym XF86MonBrightnessDown exec echo $(( $(cat /sys/class/backlight/intel_backlight/brightness) -10000)) &gt; /sys/class/backlight/intel_backlight/brightness 
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Use Mouse+$mod to drag floating windows to their wanted position
+</span>floating_modifier $mod
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">move tiling windows via drag &amp; drop by left-clicking into the title bar,
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">or left-clicking anywhere into the window while holding the floating modifier.
+</span>tiling_drag modifier titlebar
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">start a terminal
+</span>bindsym $mod+Return exec xterm
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">kill focused window
+</span>bindsym $mod+q kill
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">start dmenu (a program launcher)
+</span>bindsym $mod+d exec <span style="color: #ffa07a;">"dmenu_run"</span>
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">split in horizontal orientation
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">bindsym $mod+h split h
+</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">split in vertical orientation
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">bindsym $mod+v split v
+</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">enter fullscreen mode for the focused container
+</span>bindsym $mod+f fullscreen toggle
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">change container layout (stacked, tabbed, toggle split)
+</span>bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">toggle tiling / floating
+</span>bindsym $mod+Shift+space floating toggle
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">change focus between tiling / floating windows
+</span>bindsym $mod+space focus mode_toggle
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">focus the parent container
+</span>bindsym $mod+a focus parent
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">focus the child container
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">bindsym $mod+d focus child
+</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Define names for default workspaces for which we configure key bindings later on.
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">We use variables to avoid repeating the names in multiple places.
+</span>set $ws1 <span style="color: #ffa07a;">"1"</span>
+set $ws2 <span style="color: #ffa07a;">"2"</span>
+set $ws3 <span style="color: #ffa07a;">"3"</span>
+set $ws4 <span style="color: #ffa07a;">"4"</span>
+set $ws5 <span style="color: #ffa07a;">"5"</span>
+set $ws6 <span style="color: #ffa07a;">"6"</span>
+set $ws7 <span style="color: #ffa07a;">"7"</span>
+set $ws8 <span style="color: #ffa07a;">"8"</span>
+set $ws9 <span style="color: #ffa07a;">"9"</span>
+set $ws10 <span style="color: #ffa07a;">"10"</span>
+
+bindsym $mod+Shift+q exec --no-startup-id pkill i3bar
+bindsym $mod+Shift+w exec --no-startup-id i3bar
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">reload the configuration file
+</span>bindsym $mod+Shift+c reload
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+</span>bindsym $mod+Shift+r restart
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">exit i3 (logs you out of your X session)
+</span>bindsym $mod+Shift+e exec <span style="color: #ffa07a;">"i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"</span>
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Start i3bar to display a workspace bar (plus the system information i3status
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">finds out, if available)
+</span><span style="color: #98fb98;">bar</span> {
+  position top
+  status_command i3status
+
+  <span style="color: #98fb98;">colors</span> {
+       background <span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">282c34
+</span>       statusline <span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">ffffff
+</span>       focused_workspace  <span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">282c34 #ffffff
+</span>       active_workspace   <span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">282c34 #ffffff
+</span>       inactive_workspace <span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">ffffff #282c34
+</span>       urgent_workspace   <span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">282c34 #ffffff
+</span>  }
+}
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Start XDG autostart .desktop files using dex. See also
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">https://wiki.archlinux.org/index.php/XDG_Autostart
+</span>exec --no-startup-id dex --autostart --environment i3
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">The combination of xss-lock, nm-applet and pactl is a popular choice, so
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">they are included here as an example. Modify as you see fit.
+</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">screen before suspend. Use loginctl lock-session to lock your screen.
+</span>exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">NetworkManager is the most popular way to manage wireless networks on Linux,
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">and nm-applet is a desktop environment-independent system tray GUI for it.
+</span>exec --no-startup-id nm-applet
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Set wallpaper background
+</span>exec_always --no-startup-id /usr/bin/feh --bg-scale /home/santo/.config/i3/flower.png
+</pre>
+</div>
+
+<p>
+i3status config:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #98fb98;">general</span> {
+        <span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">output_format = "dzen2"
+</span>        <span style="color: #eedd82;">colors</span> = true
+        <span style="color: #eedd82;">interval</span> = 5
+}
+
+<span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">order += "ipv6"
+</span><span style="color: #eedd82;">order +</span>= <span style="color: #ffa07a;">"disk /"</span>
+<span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">order += "run_watch DHCP"
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">order += "run_watch VPNC"
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">order += "path_exists VPN"
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">order += "wireless wlan0"
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">order += "ethernet eth0"
+</span><span style="color: #eedd82;">order +</span>= <span style="color: #ffa07a;">"battery 0"</span>
+<span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">order += "cpu_temperature 0"
+</span><span style="color: #eedd82;">order +</span>= <span style="color: #ffa07a;">"memory"</span>
+<span style="color: #eedd82;">order +</span>= <span style="color: #ffa07a;">"load"</span>
+<span style="color: #eedd82;">order +</span>= <span style="color: #ffa07a;">"uptime"</span>
+<span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">order += "tztime local"
+</span><span style="color: #eedd82;">order +</span>= <span style="color: #ffa07a;">"tztime rome"</span>
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">wireless wlan0 {
+</span><span style="color: #ff7f24;">#         </span><span style="color: #ff7f24;">format_up = "W: (%quality at %essid, %bitrate) %ip"
+</span><span style="color: #ff7f24;">#         </span><span style="color: #ff7f24;">format_down = "W: down"
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">}
+</span>
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">ethernet eth0 {
+</span><span style="color: #ff7f24;">#         </span><span style="color: #ff7f24;">format_up = "E: %ip (%speed)"
+</span><span style="color: #ff7f24;">#         </span><span style="color: #ff7f24;">format_down = "E: down"
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">}
+</span>
+<span style="color: #98fb98;">battery 0</span> {
+        <span style="color: #eedd82;">format</span> = <span style="color: #ffa07a;">"%status %percentage %remaining %emptytime"</span>
+        <span style="color: #eedd82;">format_down</span> = <span style="color: #ffa07a;">"No battery"</span>
+        <span style="color: #eedd82;">status_chr</span> = <span style="color: #ffa07a;">"charging: "</span>
+        <span style="color: #eedd82;">status_bat</span> = <span style="color: #ffa07a;">"battery:"</span>
+        <span style="color: #eedd82;">status_unk</span> = <span style="color: #ffa07a;">"unknown battery"</span>
+        <span style="color: #eedd82;">status_full</span> = <span style="color: #ffa07a;">"battery full"</span>
+        <span style="color: #eedd82;">status_idle</span> = <span style="color: #ffa07a;">"battery idle"</span>
+        <span style="color: #eedd82;">path</span> = <span style="color: #ffa07a;">"/sys/class/power_supply/BAT1/uevent"</span>
+        <span style="color: #eedd82;">low_threshold</span> = 10
+}
+
+<span style="color: #98fb98;">tztime local</span> {
+        <span style="color: #eedd82;">format</span> = <span style="color: #ffa07a;">"%Y-%m-%d %H:%M:%S"</span>
+        <span style="color: #eedd82;">hide_if_equals_localtime</span> = true
+}
+
+<span style="color: #98fb98;">tztime rome</span> {
+        <span style="color: #eedd82;">format</span> = <span style="color: #ffa07a;">"time: %Y-%m-%d %H:%M:%S %Z"</span>
+        <span style="color: #eedd82;">timezone</span> = <span style="color: #ffa07a;">"Europe/Rome"</span>
+}
+
+<span style="color: #98fb98;">load</span> {
+        <span style="color: #eedd82;">format</span> = <span style="color: #ffa07a;">"load: %5min"</span>
+}
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">cpu_temperature 0 {
+</span><span style="color: #ff7f24;">#         </span><span style="color: #ff7f24;">format = "T: %degrees &#176;C"
+</span><span style="color: #ff7f24;">#         </span><span style="color: #ff7f24;">path = "/sys/devices/platform/coretemp.0/temp1_input"
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">}
+</span>
+<span style="color: #98fb98;">memory</span> {
+        <span style="color: #eedd82;">format</span> = <span style="color: #ffa07a;">"used mem: %used"</span>
+        <span style="color: #eedd82;">threshold_degraded</span> = <span style="color: #ffa07a;">"10%"</span>
+        <span style="color: #eedd82;">format_degraded</span> = <span style="color: #ffa07a;">"MEMORY: %free"</span>
+}
+
+<span style="color: #98fb98;">disk </span><span style="color: #98fb98;">"/"</span> {
+        <span style="color: #eedd82;">format</span> = <span style="color: #ffa07a;">"free disk: %free"</span>
+}
+
+<span style="color: #98fb98;">read_file uptime</span> {
+  <span style="color: #eedd82;">format</span> = <span style="color: #ffa07a;">"uptime %content"</span>
+        <span style="color: #eedd82;">path</span> = <span style="color: #ffa07a;">"/proc/uptime"</span>
+}
+</pre>
+</div>
+
+
+<hr />
+
+<p>
+Travel: <a href="../gists.html">Gists</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

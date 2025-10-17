@@ -1,0 +1,27 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / hash_djb2.c
+#+INDEX: Giovanni's Diary!Programming!Gists!C/hash_djb2.c
+
+Simple hash function for strings.
+
+#+begin_src c
+// SPDX-License-Identifier: MIT
+
+// hash [bytes] of size [len]
+// Credits to http://www.cse.yorku.ca/~oz/hash.html
+unsigned int djb2(const char *bytes, unsigned int len)
+{
+  unsigned int hash = 5381;
+  for (unsigned int i = 0; i < len; ++i)
+    hash = hash * 33 + bytes[i];
+  return hash;
+}
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

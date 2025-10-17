@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
+</p>
+
+<div id="outline-container-org04b3197" class="outline-2">
+<h2 id="org04b3197">Misc / hello_world.asm</h2>
+<div class="outline-text-2" id="text-org04b3197">
+<p>
+Hello world x86-64 Linux assembly example.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
+</span><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Author: Giovanni Santini
+</span><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Github: @San7o
+</span>
+<span style="color: #87cefa;">extern</span> <span style="color: #00ffff;">printf</span>
+
+  <span style="color: #00ffff;">SECTION</span> .data
+<span style="color: #87cefa;">fmt</span>:
+  <span style="color: #00ffff;">db</span> <span style="color: #ffa07a;">"Hello!"</span>, 10, 0
+
+  <span style="color: #00ffff;">SECTION</span> .text
+  <span style="color: #00ffff;">global</span> main
+
+<span style="color: #87cefa;">main</span>:
+  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">align stack: call pushes return addr (8 bytes),
+</span>  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">so subtract 8 more to make 16-byte alignment
+</span>  <span style="color: #00ffff;">sub</span> rsp, 8
+
+  <span style="color: #00ffff;">lea</span> rdi, [rel fmt]            <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">first arg
+</span>  <span style="color: #00ffff;">xor</span> eax, eax                  <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">set AL=0 for 0 varargs
+</span>  <span style="color: #00ffff;">call</span> printf
+
+  <span style="color: #00ffff;">add</span> rsp, 8                    <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">restore stack
+</span>  <span style="color: #00ffff;">mov</span> rax, 0                    <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">return number
+</span>  <span style="color: #00ffff;">ret</span>
+</pre>
+</div>
+
+
+<hr />
+
+<p>
+Travel: <a href="../gists.html">Gists</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / mmap_file.c
+#+INDEX: Giovanni's Diary!Programming!Gists!C/mmap_file.c
+
+Read a file's contents using mmap. This is faster than read(2), and
+returns a pointer to the content of the file without needing to call
+read(2) each time. Neat optimization on POSIX systems.
+
+#+begin_src c
+// SPDX-License-Identifier: MIT
+// Author: Giovanni Santini
+// Github: @San7o
+
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdio.h>
+
+// Much faster than read(2) or fread since it does not copy the
+// contents in a new buffer. Not portable.
+char* mmap_file(const char* filename, size_t* out_size) {
+    int fd = open(filename, O_RDONLY);
+    if (fd == -1)
+    {
+        perror("open");
+        return NULL;
+    }
+
+    struct stat st;
+    if (fstat(fd, &st) == -1)
+    {
+        perror("fstat");
+        close(fd);
+        return NULL;
+    }
+
+    size_t size = st.st_size;
+    if (size == 0)
+    {
+        // empty file
+        close(fd);
+        if (out_size) *out_size = 0;
+        return NULL;
+    }
+
+    void* addr = mmap(NULL, size, PROT_READ, MAP_PRIVATE, fd, 0);
+    close(fd);
+    if (addr == MAP_FAILED)
+    {
+        perror("mmap");
+        return NULL;
+    }
+
+    if (out_size)
+    {
+        *out_size = size;
+    }
+    return (char*)addr;
+}
+
+void unmap_file(char* addr, size_t size) {
+    if (addr)
+        munmap(addr, size);
+}
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

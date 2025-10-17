@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
+</p>
+
+<div id="outline-container-orgf67afac" class="outline-2">
+<h2 id="orgf67afac">C / lcg.c</h2>
+<div class="outline-text-2" id="text-orgf67afac">
+<p>
+LCG algorithm for fast speudo random number generation. Not
+cryptographically secure but good enough and really fast for other
+use cases.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
+</span>
+<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">MAGIC1</span> 1664525    <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">a
+</span><span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">MAGIC2</span> 1013904223 <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">c
+</span><span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">MAGIC3</span> (1&lt;&lt;31)    <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">m
+</span>
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">LCG pseudo random number generator
+</span><span style="color: #98fb98;">unsigned</span> <span style="color: #98fb98;">int</span> <span style="color: #87cefa;">lcg</span>(<span style="color: #00ffff;">const</span> <span style="color: #98fb98;">unsigned</span> <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">seed</span>)
+{
+  <span style="color: #00ffff;">return</span> (MAGIC1 * seed + MAGIC2) % MAGIC3;
+}
+</pre>
+</div>
+
+
+<hr />
+
+<p>
+Travel: <a href="../gists.html">Gists</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

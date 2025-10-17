@@ -1,0 +1,29 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / lcg.c
+#+INDEX: Giovanni's Diary!Programming!Gists!C/lcg.c
+
+LCG algorithm for fast speudo random number generation. Not
+cryptographically secure but good enough and really fast for other
+use cases.
+
+#+begin_src c
+// SPDX-License-Identifier: MIT
+
+#define MAGIC1 1664525    // a
+#define MAGIC2 1013904223 // c
+#define MAGIC3 (1<<31)    // m
+
+// LCG pseudo random number generator
+unsigned int lcg(const unsigned int seed)
+{
+  return (MAGIC1 * seed + MAGIC2) % MAGIC3;
+}
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

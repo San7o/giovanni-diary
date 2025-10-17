@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
+</p>
+
+<div id="outline-container-org0e05e9a" class="outline-2">
+<h2 id="org0e05e9a">Web / micro-style.css</h2>
+<div class="outline-text-2" id="text-org0e05e9a">
+<p>
+Very simple css style for minimalistic websites.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css"><span style="color: #ff7f24;">/*</span><span style="color: #ff7f24;">
+ *
+ *  micro-style.css
+ *  ===============
+ *
+ *  by Giovanni Santini
+ *
+</span><span style="color: #ff7f24;"> */</span>
+
+<span style="color: #ff7f24;">/* </span><span style="color: #ff7f24;">Global colors</span><span style="color: #ff7f24;"> */</span>
+<span style="color: #87cefa;">:root</span> {
+  <span style="color: #eedd82;">--bg</span>: <span style="color: #000000; background-color: #FFFFFF;">#FFFFFF</span>;
+  <span style="color: #eedd82;">--text</span>: <span style="color: #ffffff; background-color: #000000;">#000000</span>;
+  <span style="color: #eedd82;">--link</span>: <span style="color: #ffffff; background-color: #0000ff;">#0000ff</span>;
+  <span style="color: #eedd82;">--link-visited</span>: <span style="color: #ffffff; background-color: #000099;">#000099</span>;
+  <span style="color: #eedd82;">--link-hover</span>: <span style="color: #ffffff; background-color: #0000aa;">#0000aa</span>;
+  <span style="color: #eedd82;">--link-active</span>: <span style="color: #ffffff; background-color: #0000cc;">#0000cc</span>;
+}
+
+<span style="color: #ff7f24;">/* </span><span style="color: #ff7f24;">Dark mode</span><span style="color: #ff7f24;"> */</span>
+<span style="color: #b0c4de;">@media</span> (prefers-color-scheme: dark) {
+  <span style="color: #87cefa;">:root</span> {
+    <span style="color: #00ffff;">color-scheme</span>: dark;
+    <span style="color: #eedd82;">--bg</span>: <span style="color: #ffffff; background-color: #000000;">#000000</span>;
+    <span style="color: #eedd82;">--text</span>: <span style="color: #000000; background-color: #FFFFFF;">#FFFFFF</span>;
+    <span style="color: #eedd82;">--link</span>: <span style="color: #000000; background-color: #4dc5ff;">#4dc5ff</span>;
+    <span style="color: #eedd82;">--link-visited</span>: <span style="color: #000000; background-color: #39a7d9;">#39a7d9</span>;
+    <span style="color: #eedd82;">--link-hover</span>: <span style="color: #000000; background-color: #66d9ff;">#66d9ff</span>;
+    <span style="color: #eedd82;">--link-active</span>: <span style="color: #000000; background-color: #1fb6ff;">#1fb6ff</span>;
+  }
+}
+
+<span style="color: #87cefa;">body</span> {
+  <span style="color: #00ffff;">color</span>: var(<span style="color: #eedd82;">--text</span>);
+  <span style="color: #00ffff;">background-color</span>: var(<span style="color: #eedd82;">--bg</span>);
+
+  <span style="color: #00ffff;">display</span>: grid;
+  <span style="color: #00ffff;">grid-template-columns</span>: 1fr min(80rem, 65%) 1fr;
+
+  <span style="color: #00ffff;">font-family</span>: monospace;
+  <span style="color: #00ffff;">font-size</span>: 1rem;
+  <span style="color: #00ffff;">text-align</span>: justify;
+  <span style="color: #00ffff;">text-justify</span>: inter-word;
+}
+
+<span style="color: #87cefa;">body &gt; *</span> {
+  <span style="color: #00ffff;">grid-column</span>: 2;
+}
+
+<span style="color: #87cefa;">body &gt; .topnav</span> {
+  <span style="color: #00ffff;">margin-top</span>: 2rem;
+  <span style="color: #00ffff;">text-align</span>: center;
+}
+
+<span style="color: #ff7f24;">/* </span><span style="color: #ff7f24;">Headings</span><span style="color: #ff7f24;"> */</span>
+
+<span style="color: #87cefa;">h1</span> {
+  <span style="color: #00ffff;">margin-top</span>: 3rem;
+  <span style="color: #00ffff;">font-size</span>: 3rem;
+}
+
+<span style="color: #87cefa;">h2</span> {
+  <span style="color: #00ffff;">font-size</span>: 1.5rem;
+}
+
+<span style="color: #87cefa;">h3</span> {
+  <span style="color: #00ffff;">font-size</span>: 1.5rem;
+}
+
+<span style="color: #87cefa;">h4</span> {
+  <span style="color: #00ffff;">font-size</span>: 1.2rem;
+}
+
+<span style="color: #ff7f24;">/* </span><span style="color: #ff7f24;">Links</span><span style="color: #ff7f24;"> */</span>
+
+<span style="color: #87cefa;">a:link</span> {
+  <span style="color: #00ffff;">color</span>: var(<span style="color: #eedd82;">--link</span>);
+}
+
+<span style="color: #87cefa;">a:visited</span> {
+  <span style="color: #00ffff;">color</span>: var(<span style="color: #eedd82;">--link-visited</span>);
+}
+
+<span style="color: #87cefa;">a:hover</span> {
+  <span style="color: #00ffff;">color</span>: var(<span style="color: #eedd82;">--link-hover</span>);
+}
+
+<span style="color: #87cefa;">a:active</span> {
+  <span style="color: #00ffff;">color</span>: var(<span style="color: #eedd82;">--link-active</span>);
+}
+
+<span style="color: #ff7f24;">/* </span><span style="color: #ff7f24;">Horizontal separator</span><span style="color: #ff7f24;"> */</span>
+<span style="color: #87cefa;">hr</span> {
+  <span style="color: #00ffff;">margin</span>: 1rem auto;
+  <span style="color: #00ffff;">width</span>: 100%;
+}
+
+<span style="color: #ff7f24;">/* </span><span style="color: #ff7f24;">Different screen sizes</span><span style="color: #ff7f24;"> */</span>
+<span style="color: #b0c4de;">@media</span> only screen and (max-width: 1200px) {
+
+  <span style="color: #87cefa;">body</span> {
+    <span style="color: #00ffff;">grid-template-columns</span>: 1fr min(80rem, 85%) 1fr;
+  }
+
+  <span style="color: #87cefa;">h1</span> {
+    <span style="color: #00ffff;">font-size</span>: 2.5rem;
+  }
+
+  <span style="color: #87cefa;">h2</span> {
+    <span style="color: #00ffff;">font-size</span>: 1.7rem;
+  }
+
+  <span style="color: #87cefa;">h3</span> {
+    <span style="color: #00ffff;">font-size</span>: 1.2rem;
+  }
+}
+
+<span style="color: #b0c4de;">@media</span> only screen and (max-width: 750px) {
+
+  <span style="color: #87cefa;">body</span> {
+    <span style="color: #00ffff;">grid-template-columns</span>: 1fr min(80rem, 90%) 1fr;
+    <span style="color: #00ffff;">font-size</span>: 0.8rem;
+  }
+}
+</pre>
+</div>
+
+
+<hr />
+
+<p>
+Travel: <a href="../gists.html">Gists</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

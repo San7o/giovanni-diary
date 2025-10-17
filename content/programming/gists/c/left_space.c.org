@@ -1,0 +1,48 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / left_space.c
+#+INDEX: Giovanni's Diary!Programming!Gists!C/left_space.c
+
+Get number of separator charactes from the left of a string in C99.
+
+#+begin_src c
+// SPDX-License-Identifier: MIT
+// Author: Giovanni Santini
+// Github: @San7o
+
+// Get number of separator charactes from the left of string
+//
+// Get the number of separator characters from the left of [input]
+// until the first non-separator or [input_size]. Separator characters
+// are specs, new lines and tabs. Updates [line] and/or [column] if
+// non null.
+int left_space(const char* input, int input_size,
+               unsigned int* line, unsigned int* column)
+{
+  if (!input || input_size == 0) return 0;
+
+  int pos = 0;
+  while(pos < input_size &&
+        (input[pos] == ' ' ||
+         input[pos] == '\n' ||
+         input[pos] == '\t'))
+  {
+    if (input[pos] == '\n') {
+      if (line) (*line)++;
+      if (column) *column = 0;
+    } else {
+      if (column) (*column)++;
+    }
+    pos++;
+  }
+
+  return pos;
+}
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

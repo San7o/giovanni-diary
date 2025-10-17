@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
+</p>
+
+<div id="outline-container-org8d40c0e" class="outline-2">
+<h2 id="org8d40c0e">Scripts / win2usb.sh</h2>
+<div class="outline-text-2" id="text-org8d40c0e">
+<p>
+Copy the windows installer to an USB pen from Linux.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">!/bin/</span><span style="color: #00ffff;">sh</span><span style="color: #ff7f24;">
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">win2usb.sh
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">==========
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Copy the windows installer to an USB pen from Linux
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">The installer may complain if you are not installing
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">windows on an NTFS partition, in such case you can
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">format one of your disks with
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
+</span><span style="color: #ff7f24;">#    </span><span style="color: #ff7f24;">sudo mkntfs --fast /dev/sdX1
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Author: Giovanni Santini
+</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Github: @San7o
+</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
+</span>
+<span style="color: #b0c4de;">set</span> -ex
+
+<span style="color: #00ffff;">if</span> [ ! command -v woeusb &gt;/dev/null 2&gt;&amp;1 ]; <span style="color: #00ffff;">then</span>
+        <span style="color: #b0c4de;">echo</span> <span style="color: #ffa07a;">"You need to have woeusb installed"</span>
+        <span style="color: #b0c4de;">echo</span> <span style="color: #ffa07a;">"ubuntu: sudo apt install woeusb"</span>
+        <span style="color: #b0c4de;">echo</span> <span style="color: #ffa07a;">"fedora: sudo dnf install WoeUSB"</span>
+        <span style="color: #00ffff;">exit</span> 1
+<span style="color: #00ffff;">fi</span>
+
+<span style="color: #00ffff;">if</span> [ $<span style="color: #eedd82;">#</span> -ne 2 ]; <span style="color: #00ffff;">then</span>
+        <span style="color: #b0c4de;">echo</span> <span style="color: #ffa07a;">"usage: ./win2usb.sh &lt;device&gt; &lt;windowsX.iso&gt;"</span>
+        <span style="color: #00ffff;">exit</span> 1
+<span style="color: #00ffff;">fi</span>
+
+
+<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Use lkblk to get the name of the device
+</span><span style="color: #eedd82;">DEVICE</span>=<span style="color: #ffa07a;">"$1"</span>
+<span style="color: #eedd82;">ISO</span>=<span style="color: #ffa07a;">"$2"</span>
+
+wipefs -a /dev/$<span style="color: #eedd82;">DEVICE</span>
+parted /dev/$<span style="color: #eedd82;">DEVICE</span> mklabel gpt
+parted -a optimal /dev/$<span style="color: #eedd82;">DEVICE</span> mkpart primary ntfs 0% 100%
+mkfs.ntfs -f /dev/${<span style="color: #eedd82;">DEVICE</span>}1
+woeusb --device $<span style="color: #eedd82;">ISO</span> /dev/$<span style="color: #eedd82;">DEVICE</span> --target-filesystem NTFS
+
+<span style="color: #b0c4de;">echo</span> <span style="color: #ffa07a;">"$ISO installed in /dev/$DEVICE. You can boot the system now."</span>
+</pre>
+</div>
+
+
+<hr />
+
+<p>
+Travel: <a href="../gists.html">Gists</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

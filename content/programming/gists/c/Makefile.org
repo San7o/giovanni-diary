@@ -1,0 +1,58 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / Makefile
+#+INDEX: Giovanni's Diary!Programming!Gists!C/Makefile
+
+Simple Makefile template for C projects.
+ 
+#+begin_src sh
+# SPDX-License-Identifier: MIT
+# Author:  Giovanni Santini
+# Mail:    giovanni.santini@proton.me
+# License: MIT
+
+#
+# Compiler flags
+#
+CFLAGS      = -Wall -Werror -Wpedantic -std=c99
+DEBUG_FLAGS = -ggdb
+LDFLAGS     =
+CC?         = gcc
+
+#
+# Project files
+#
+OUT_NAME = hello
+OBJ      = hello.o
+
+#
+# Commands
+#
+all: $(OUT_NAME)
+
+debug: CFLAGS += $(DEBUG_FLAGS)
+debug: $(OUT_NAME)
+
+run: $(OUT_NAME)
+	chmod +x $(OUT_NAME)
+	./$(OUT_NAME)
+
+clean:
+	rm -f $(OBJ)
+
+distclean:
+	rm -f $(OUT_NAME)
+
+$(OUT_NAME): $(OBJ)
+	$(CC) $(OBJ) $(LDFLAGS) $(CFLAGS) -o $(OUT_NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

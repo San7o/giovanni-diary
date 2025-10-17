@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
+</p>
+
+<div id="outline-container-org93a7a19" class="outline-2">
+<h2 id="org93a7a19">C / mandelbrot.c</h2>
+<div class="outline-text-2" id="text-org93a7a19">
+<p>
+Get the number of iterations of a point in the Mandelbrot set.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Author: Giovanni Santini
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Github: @San7o
+</span>
+<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">ITERATIONS</span> 50
+
+<span style="color: #98fb98;">int</span> <span style="color: #87cefa;">mandelbrot</span>(<span style="color: #98fb98;">int</span> <span style="color: #eedd82;">x</span>, <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">y</span>, <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">width</span>, <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">height</span>)
+{
+  <span style="color: #98fb98;">double</span> <span style="color: #eedd82;">x_norm</span> = (x / (<span style="color: #98fb98;">double</span>) width) * 2.47 - 2;
+  <span style="color: #98fb98;">double</span> <span style="color: #eedd82;">y_norm</span> = (y / (<span style="color: #98fb98;">double</span>) height) * 2.24 - 1.12;
+
+  <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">it</span> = 0;
+  <span style="color: #98fb98;">double</span> <span style="color: #eedd82;">x_it</span> = 0.0;
+  <span style="color: #98fb98;">double</span> <span style="color: #eedd82;">y_it</span> = 0.0;
+  <span style="color: #00ffff;">while</span> (x_it * x_it + y_it * y_it &lt;= 2*2
+         &amp;&amp; it &lt; ITERATIONS)
+  {
+    <span style="color: #98fb98;">double</span> <span style="color: #eedd82;">tmp</span> = x_it * x_it - y_it * y_it + x_norm;
+    y_it = 2 * x_it * y_it + y_norm;
+    x_it = tmp;
+    it++;
+  }
+
+  <span style="color: #00ffff;">return</span> it;
+}
+</pre>
+</div>
+
+
+<hr />
+
+<p>
+Travel: <a href="../gists.html">Gists</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

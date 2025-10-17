@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
+</p>
+
+<div id="outline-container-org525eae5" class="outline-2">
+<h2 id="org525eae5">C / unix_server.c</h2>
+<div class="outline-text-2" id="text-org525eae5">
+<p>
+Create an unix socket server that reads data sent to it.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Author: Giovanni Santini
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Github: @San7o
+</span>
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Create an unix socket server that reads data sent to it
+</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;sys/socket.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;netinet/in.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;arpa/inet.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;stdlib.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;unistd.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;errno.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;string.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;sys/types.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;time.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;sys/un.h&gt;</span>
+
+<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">MSG_BUFF_SIZE</span> 1024
+<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">UNIX_SOCKET_FILE</span> <span style="color: #ffa07a;">"/tmp/my-unix-socket"</span>
+
+<span style="color: #98fb98;">int</span> <span style="color: #87cefa;">main</span>(<span style="color: #98fb98;">void</span>)
+{
+  <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">listenfd</span> = 0, <span style="color: #eedd82;">connfd</span> = 0;
+  <span style="color: #00ffff;">struct</span> <span style="color: #98fb98;">sockaddr_un</span> <span style="color: #eedd82;">serv_addr</span>; 
+
+  <span style="color: #98fb98;">char</span> <span style="color: #eedd82;">msg_buff</span>[MSG_BUFF_SIZE];
+
+  listenfd = socket(AF_UNIX, SOCK_STREAM, 0);
+  <span style="color: #00ffff;">if</span> (listenfd &lt; 0)
+  {
+    perror(<span style="color: #ffa07a;">"Error creating socket"</span>);
+    <span style="color: #00ffff;">return</span> 1;
+  }
+
+  memset(&amp;serv_addr, 0, <span style="color: #00ffff;">sizeof</span>(serv_addr));
+  memset(msg_buff, 0, MSG_BUFF_SIZE); 
+
+  serv_addr.sun_family = AF_UNIX;
+  strcpy(serv_addr.sun_path, UNIX_SOCKET_FILE);
+  <span style="color: #00ffff;">if</span> (bind(listenfd, (<span style="color: #00ffff;">struct</span> <span style="color: #98fb98;">sockaddr</span>*)&amp;serv_addr,
+           <span style="color: #00ffff;">sizeof</span>(serv_addr)) &lt; 0)
+  {
+    perror(<span style="color: #ffa07a;">"Error binding"</span>);
+    <span style="color: #00ffff;">return</span> 1;
+  }
+
+  printf(<span style="color: #ffa07a;">"Listening on file %s\n"</span>, UNIX_SOCKET_FILE);
+
+  <span style="color: #00ffff;">if</span> (listen(listenfd, 10) &lt; 0)
+  {
+    perror(<span style="color: #ffa07a;">"Error listening for connections"</span>);
+    <span style="color: #00ffff;">return</span> 1;
+  }
+
+  connfd = accept(listenfd, (<span style="color: #00ffff;">struct</span> <span style="color: #98fb98;">sockaddr</span>*)<span style="color: #7fffd4;">NULL</span>, <span style="color: #7fffd4;">NULL</span>);
+  <span style="color: #00ffff;">if</span> (connfd &lt; 0)
+  {
+    perror(<span style="color: #ffa07a;">"Error accepting connection"</span>);
+    <span style="color: #00ffff;">return</span> 1;
+  }
+
+  <span style="color: #98fb98;">ssize_t</span> <span style="color: #eedd82;">bytes</span>;
+  <span style="color: #00ffff;">while</span> (1)
+  {
+    bytes = read(connfd, msg_buff, MSG_BUFF_SIZE);
+    <span style="color: #00ffff;">if</span> (bytes == 0) <span style="color: #00ffff;">continue</span>;
+    printf(<span style="color: #ffa07a;">"Server received: %s\n"</span>, msg_buff);
+    memset(msg_buff, 0, MSG_BUFF_SIZE);
+  }
+
+  close(connfd);
+  <span style="color: #00ffff;">return</span> 0;
+}
+</pre>
+</div>
+
+
+<hr />
+
+<p>
+Travel: <a href="../gists.html">Gists</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

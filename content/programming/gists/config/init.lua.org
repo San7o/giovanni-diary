@@ -1,0 +1,97 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* Config / init.lua
+#+INDEX: Giovanni's Diary!Programming!Gists!config/init.lua
+
+Simple Neovim configuration without too much bloat.
+ 
+#+begin_src lua
+--[[
+--
+--  init.lua
+--  by Giovanni Santini
+--
+--  Clone this repository in .config/nvim
+--
+--]]
+
+-- vim options
+vim.opt.number         = true
+vim.opt.relativenumber = true
+vim.opt.clipboard      = "unnamedplus" -- system clipboard
+vim.opt.expandtab      = true
+vim.opt.shiftwidth     = 4
+vim.opt.tabstop        = 4
+vim.opt.colorcolumn    = '80'
+vim.g.loaded_netrw       = 1  -- Disable default tree view for nvim-tree
+vim.g.loaded_netrwPlugin = 1
+
+-- I use plug
+local Plug = vim.fn['plug#']
+
+vim.call('plug#begin')
+
+-- Modus themes from Prot
+Plug('miikanissi/modus-themes.nvim')
+Plug('nvim-lua/plenary.nvim')          -- dependency for telescope
+Plug('nvim-telescope/telescope.nvim')  -- fuzz strings
+Plug('nvim-tree/nvim-web-devicons')    -- some icons
+Plug('nvim-tree/nvim-tree.lua')        -- directory tree
+-- From orgmode release 0.7.1, support for Neovim < 0.11.0 was dropped
+Plug('nvim-orgmode/orgmode', { ['commit'] = '4da28a0' }) -- org view
+Plug('nvim-mini/mini.icons', { ['branch'] = 'stable'})   -- some icons
+Plug('goolord/alpha-nvim')             -- Cool startup screen
+Plug('lewis6991/gitsigns.nvim')        -- Show modified lines
+
+vim.call('plug#end')
+
+require('modus-themes').setup({
+    style = "modus_vivendi",  -- modus_vivendi or modus_operandi (dark and light)
+    variant = "default",      -- default, tinted, deuteranopia, and tritanopia
+})
+vim.cmd([[colorscheme modus]])
+
+local telescope = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', telescope.find_files,
+                { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fg', telescope.live_grep,
+                { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fb', telescope.buffers,
+                { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fh', telescope.help_tags,
+                { desc = 'Telescope help tags' })
+
+require('nvim-web-devicons').setup()
+local tree = require('nvim-tree.api')
+vim.keymap.set('n', '<C-t>', function() tree.tree.toggle() end,
+                { desc = 'Toggle nvim-tree' })
+require('nvim-tree').setup()
+vim.cmd [[
+  highlight link NvimTreeNormal Normal
+  highlight link NvimTreeFolderName Directory
+  highlight link NvimTreeIndentMarker LineNr
+  highlight link NvimTreeVertSplit VertSplit
+  highlight NvimTreeNormal guibg=NONE ctermbg=NONE
+]]
+
+require('orgmode').setup({
+  org_agenda_files = '~/todo.org/todo.org',
+  org_default_notes_file = '~/giovanni-diary/content/index.org',
+})
+
+require('mini.icons').setup()
+require('alpha').setup(require('alpha.themes.startify').config)
+
+--[[
+--
+-- End of init.lua
+--
+--]]
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

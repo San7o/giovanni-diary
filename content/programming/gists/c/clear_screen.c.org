@@ -1,0 +1,28 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / clear_screen.c
+#+INDEX: Giovanni's Diary!Programming!Gists!C/clear_screen.c
+
+Clear the terminal screen using ANSI control sequences.
+
+#+begin_src c
+// SPDX-License-Identifier: MIT
+// Author: Giovanni Santini
+// Github: @San7o
+
+#include <stdio.h>
+
+// Clear screen using ANSI control sequences
+// Supported by most Linux / Unix terminals and windows 10+ cmd
+void clear_screen(void) {
+    printf("\033[2J\033[H");
+    fflush(stdout);
+}
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

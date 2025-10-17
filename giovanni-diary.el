@@ -30,6 +30,7 @@
 							 :with-toc nil              ;; Don't include a table of contents
                :makeindex t               ;; Generate the index
 							 :section-numbers nil       ;; Don't include section numbers
+               :with-sub-superscript nil  ;; Disable sub/superscripts
 							 :time-stamp-file nil)))    ;; Don't include time stamp in file
 	;; Customize the HTML output
 	(setq org-html-validation-link nil            ;; Don't show validation link

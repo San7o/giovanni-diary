@@ -1,0 +1,57 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* Scripts / win2usb.sh
+#+INDEX: Giovanni's Diary!Programming!Gists!scripts/win2usb.sh
+
+Copy the windows installer to an USB pen from Linux.
+
+#+begin_src sh
+#!/bin/sh
+# win2usb.sh
+# ==========
+#
+# Copy the windows installer to an USB pen from Linux
+# The installer may complain if you are not installing
+# windows on an NTFS partition, in such case you can
+# format one of your disks with
+#
+#    sudo mkntfs --fast /dev/sdX1
+#
+# Author: Giovanni Santini
+# Github: @San7o
+#
+
+set -ex
+
+if [ ! command -v woeusb >/dev/null 2>&1 ]; then
+        echo "You need to have woeusb installed"
+        echo "ubuntu: sudo apt install woeusb"
+        echo "fedora: sudo dnf install WoeUSB"
+        exit 1
+fi
+
+if [ $# -ne 2 ]; then
+        echo "usage: ./win2usb.sh <device> <windowsX.iso>"
+        exit 1
+fi
+
+
+# Use lkblk to get the name of the device
+DEVICE="$1"
+ISO="$2"
+
+wipefs -a /dev/$DEVICE
+parted /dev/$DEVICE mklabel gpt
+parted -a optimal /dev/$DEVICE mkpart primary ntfs 0% 100%
+mkfs.ntfs -f /dev/${DEVICE}1
+woeusb --device $ISO /dev/$DEVICE --target-filesystem NTFS
+
+echo "$ISO installed in /dev/$DEVICE. You can boot the system now."
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
+</p>
+
+<div id="outline-container-orgae0d6d0" class="outline-2">
+<h2 id="orgae0d6d0">C / clear_screen.c</h2>
+<div class="outline-text-2" id="text-orgae0d6d0">
+<p>
+Clear the terminal screen using ANSI control sequences.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Author: Giovanni Santini
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Github: @San7o
+</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Clear screen using ANSI control sequences
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Supported by most Linux / Unix terminals and windows 10+ cmd
+</span><span style="color: #98fb98;">void</span> <span style="color: #87cefa;">clear_screen</span>(<span style="color: #98fb98;">void</span>) {
+    printf(<span style="color: #ffa07a;">"\033[2J\033[H"</span>);
+    fflush(stdout);
+}
+</pre>
+</div>
+
+
+<hr />
+
+<p>
+Travel: <a href="../gists.html">Gists</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

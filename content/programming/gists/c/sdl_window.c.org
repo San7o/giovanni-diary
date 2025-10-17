@@ -1,0 +1,91 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / sdl_window.c
+#+INDEX: Giovanni's Diary!Programming!Gists!C/sdl_window.c
+
+Create an SDL3 window and poll events.
+
+#+begin_src c
+// SPDX-License-Identifier: MIT
+// Author: Giovanni Santini
+// Github: @San7o
+
+// Create an SDL3 window and poll events
+
+#include <stdio.h>
+#include <SDL3/SDL_init.h>
+#include <SDL3/SDL_video.h>
+#include <SDL3/SDL_error.h>
+#include <SDL3/SDL_render.h>
+#include <SDL3/SDL_events.h>
+#include <SDL3/SDL_keyboard.h>
+
+#define WINDOW_NAME   "hello world window"
+#define WINDOW_WIDTH  500
+#define WINDOW_HEIGHT 500
+#define WINDOW_FLAGS  0
+
+int main(void)
+{
+  if (!SDL_Init(SDL_INIT_VIDEO))
+  {
+    fprintf(stderr, "Error initializing SDL: %s\n", SDL_GetError());
+    return 1;
+  }
+
+  SDL_Window *window;
+  SDL_Renderer *renderer;
+  SDL_Event event;
+  
+  bool ret = SDL_CreateWindowAndRenderer(WINDOW_NAME, WINDOW_WIDTH,
+                                         WINDOW_HEIGHT, WINDOW_FLAGS,
+                                         &window, &renderer);
+  if (!ret)
+  {
+    fprintf(stderr, "Error Creating SDL Window: %s\n", SDL_GetError());
+    return 1;
+  }
+
+  while(1)
+  {  
+    if (SDL_PollEvent(&event))
+    {
+      if (SDL_EVENT_KEY_DOWN == event.type)
+      {
+        if (event.key.key == 'q' || event.key.key == 0x1b /* ESC */)
+          break;
+      }
+    }
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    if (!SDL_RenderClear(renderer))
+    {
+      fprintf(stderr, "Error Clearing SDL Window: %s\n", SDL_GetError());    
+      goto cleanup;
+    }
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+    // Render frame...
+    
+    if (!SDL_RenderPresent(renderer))
+    {
+      fprintf(stderr, "Error Rendering SDL Window: %s\n", SDL_GetError());    
+      goto cleanup;
+    }
+  }
+
+ cleanup:
+
+  SDL_DestroyRenderer(renderer);
+  SDL_DestroyWindow(window);
+  SDL_Quit();
+  return 0;
+}
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

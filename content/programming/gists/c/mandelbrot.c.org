@@ -1,0 +1,41 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / mandelbrot.c
+#+INDEX: Giovanni's Diary!Programming!Gists!C/mandelbrot.c
+
+Get the number of iterations of a point in the Mandelbrot set.
+
+#+begin_src c
+// SPDX-License-Identifier: MIT
+// Author: Giovanni Santini
+// Github: @San7o
+
+#define ITERATIONS 50
+
+int mandelbrot(int x, int y, int width, int height)
+{
+  double x_norm = (x / (double) width) * 2.47 - 2;
+  double y_norm = (y / (double) height) * 2.24 - 1.12;
+
+  int it = 0;
+  double x_it = 0.0;
+  double y_it = 0.0;
+  while (x_it * x_it + y_it * y_it <= 2*2
+         && it < ITERATIONS)
+  {
+    double tmp = x_it * x_it - y_it * y_it + x_norm;
+    y_it = 2 * x_it * y_it + y_norm;
+    x_it = tmp;
+    it++;
+  }
+  
+  return it;
+}
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

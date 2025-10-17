@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
+</p>
+
+<div id="outline-container-org1637169" class="outline-2">
+<h2 id="org1637169">C / mmap_file.c</h2>
+<div class="outline-text-2" id="text-org1637169">
+<p>
+Read a file's contents using mmap. This is faster than read(2), and
+returns a pointer to the content of the file without needing to call
+read(2) each time. Neat optimization on POSIX systems.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Author: Giovanni Santini
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Github: @San7o
+</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;sys/mman.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;sys/stat.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;fcntl.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;unistd.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Much faster than read(2) or fread since it does not copy the
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">contents in a new buffer. Not portable.
+</span><span style="color: #98fb98;">char</span>* <span style="color: #87cefa;">mmap_file</span>(<span style="color: #00ffff;">const</span> <span style="color: #98fb98;">char</span>* <span style="color: #eedd82;">filename</span>, <span style="color: #98fb98;">size_t</span>* <span style="color: #eedd82;">out_size</span>) {
+    <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">fd</span> = open(filename, O_RDONLY);
+    <span style="color: #00ffff;">if</span> (fd == -1)
+    {
+        perror(<span style="color: #ffa07a;">"open"</span>);
+        <span style="color: #00ffff;">return</span> <span style="color: #7fffd4;">NULL</span>;
+    }
+
+    <span style="color: #00ffff;">struct</span> <span style="color: #98fb98;">stat</span> <span style="color: #eedd82;">st</span>;
+    <span style="color: #00ffff;">if</span> (fstat(fd, &amp;st) == -1)
+    {
+        perror(<span style="color: #ffa07a;">"fstat"</span>);
+        close(fd);
+        <span style="color: #00ffff;">return</span> <span style="color: #7fffd4;">NULL</span>;
+    }
+
+    <span style="color: #98fb98;">size_t</span> <span style="color: #eedd82;">size</span> = st.st_size;
+    <span style="color: #00ffff;">if</span> (size == 0)
+    {
+        <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">empty file
+</span>        close(fd);
+        <span style="color: #00ffff;">if</span> (out_size) *out_size = 0;
+        <span style="color: #00ffff;">return</span> <span style="color: #7fffd4;">NULL</span>;
+    }
+
+    <span style="color: #98fb98;">void</span>* <span style="color: #eedd82;">addr</span> = mmap(<span style="color: #7fffd4;">NULL</span>, size, PROT_READ, MAP_PRIVATE, fd, 0);
+    close(fd);
+    <span style="color: #00ffff;">if</span> (addr == MAP_FAILED)
+    {
+        perror(<span style="color: #ffa07a;">"mmap"</span>);
+        <span style="color: #00ffff;">return</span> <span style="color: #7fffd4;">NULL</span>;
+    }
+
+    <span style="color: #00ffff;">if</span> (out_size)
+    {
+        *out_size = size;
+    }
+    <span style="color: #00ffff;">return</span> (<span style="color: #98fb98;">char</span>*)addr;
+}
+
+<span style="color: #98fb98;">void</span> <span style="color: #87cefa;">unmap_file</span>(<span style="color: #98fb98;">char</span>* <span style="color: #eedd82;">addr</span>, <span style="color: #98fb98;">size_t</span> <span style="color: #eedd82;">size</span>) {
+    <span style="color: #00ffff;">if</span> (addr)
+        munmap(addr, size);
+}
+</pre>
+</div>
+
+
+<hr />
+
+<p>
+Travel: <a href="../gists.html">Gists</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

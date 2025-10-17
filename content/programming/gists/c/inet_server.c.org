@@ -1,0 +1,89 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / inet_server.c
+#+INDEX: Giovanni's Diary!Programming!Gists!C/inet_server.c
+
+Create an inet server that reads data sent to it.
+
+#+begin_src c
+// SPDX-License-Identifier: MIT
+// Author: Giovanni Santini
+// Github: @San7o
+
+// Create an inet server that reads data sent to it
+
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <errno.h>
+#include <string.h>
+#include <sys/types.h>
+#include <time.h> 
+
+#define MSG_BUFF_SIZE 1024
+#define PORT 5000
+
+int main(void)
+{
+  int listenfd = 0, connfd = 0;
+  struct sockaddr_in serv_addr; 
+
+  char msg_buff[MSG_BUFF_SIZE];
+
+  listenfd = socket(AF_INET, SOCK_STREAM, 0);
+  if (listenfd < 0)
+  {
+    perror("Error creating socket");
+    return 1;
+  }
+  memset(&serv_addr, 0, sizeof(serv_addr));
+  memset(msg_buff, 0, MSG_BUFF_SIZE); 
+
+  serv_addr.sin_family = AF_INET;
+  serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  serv_addr.sin_port = htons(PORT);
+
+  if (bind(listenfd, (struct sockaddr*)&serv_addr,
+           sizeof(serv_addr)) < 0)
+  {
+    perror("Error during binding");
+    return 1;
+  }
+
+  printf("Listening 0.0.0.0 on port %d\n", PORT);
+  
+  if (listen(listenfd, 10) < 0)
+  {
+    perror("Error listening on socket");
+    return 1;
+  }
+
+  connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
+  if (connfd < 0)
+  {
+    perror("Error accepting connection");
+    return 1;
+  }
+  
+  ssize_t bytes;
+  while (1)
+  {
+    bytes = read(connfd, msg_buff, MSG_BUFF_SIZE);
+    if (bytes == 0) continue;
+    printf("Server received: %s\n", msg_buff);
+    memset(msg_buff, 0, MSG_BUFF_SIZE);
+  }
+
+  close(connfd);
+}
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]
