@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
+</p>
+
+<div id="outline-container-org5a8c95e" class="outline-2">
+<h2 id="org5a8c95e">C / traverse_dir.c</h2>
+<div class="outline-text-2" id="text-org5a8c95e">
+<p>
+Traverse a directory recursively and call handle_file on each file,
+optinoally specifying how many levels deep to go.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Author:  Giovanni Santini
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Mail:    giovanni.santini@proton.me
+</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Github:  @San7o
+</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;fts.h&gt;</span>
+
+<span style="color: #98fb98;">int</span> <span style="color: #87cefa;">handle_file</span>(<span style="color: #98fb98;">char</span>* <span style="color: #eedd82;">filename</span>)
+{
+  printf(<span style="color: #ffa07a;">"Handling file %s\n"</span>, filename);
+  <span style="color: #00ffff;">return</span> 0;
+}
+
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Traverse [dir] recursively two levels deep and call handle_file on each file
+</span><span style="color: #98fb98;">int</span> <span style="color: #87cefa;">traverse_dir</span>(<span style="color: #98fb98;">char</span> *<span style="color: #eedd82;">dir</span>)
+{
+  <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">err</span> = 0;
+  <span style="color: #98fb98;">char</span> *<span style="color: #eedd82;">path_argv</span>[] = { dir, <span style="color: #7fffd4;">NULL</span> };
+  <span style="color: #98fb98;">FTSENT</span> *<span style="color: #eedd82;">file_entry</span> = <span style="color: #7fffd4;">NULL</span>;
+  <span style="color: #98fb98;">FTS</span> *<span style="color: #eedd82;">files</span> = fts_open(path_argv, FTS_PHYSICAL | FTS_NOCHDIR, <span style="color: #7fffd4;">NULL</span>);
+  <span style="color: #00ffff;">if</span> (!files) <span style="color: #00ffff;">return</span> -1;
+
+  <span style="color: #00ffff;">while</span> ((file_entry = fts_read(files)))
+  {
+    <span style="color: #00ffff;">switch</span> (file_entry-&gt;fts_info)
+    {
+    <span style="color: #00ffff;">case</span> FTS_D: <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Directory
+</span>      <span style="color: #00ffff;">if</span> (file_entry-&gt;fts_level == 0)
+      {
+        <span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">Top-level directory itself, continue
+</span>        <span style="color: #00ffff;">continue</span>;
+      } <span style="color: #00ffff;">else</span> {
+        <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Skip descending into subdirectories
+</span>        <span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">fts_set(files, file_entry, FTS_SKIP);
+</span>      }
+      <span style="color: #00ffff;">break</span>;
+    <span style="color: #00ffff;">case</span> FTS_F:  <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Regular file
+</span>    <span style="color: #00ffff;">case</span> FTS_SL: <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Symbolic link
+</span>    <span style="color: #00ffff;">case</span> FTS_DEFAULT:
+      <span style="color: #00ffff;">if</span> (file_entry-&gt;fts_level &lt;= 2) <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Go only two levels deep
+</span>      {
+        err = handle_file(file_entry-&gt;fts_path);
+        <span style="color: #00ffff;">if</span> (err != 0)
+        {
+          <span style="color: #00ffff;">goto</span> <span style="color: #7fffd4;">exit</span>;
+        }
+      }
+      <span style="color: #00ffff;">break</span>;
+    <span style="color: #00ffff;">default</span>:
+      <span style="color: #00ffff;">break</span>;
+    }
+  }
+
+ <span style="color: #7fffd4;">exit</span>:
+  <span style="color: #00ffff;">if</span> (fts_close(files) &lt; 0 &amp;&amp; err == 0)
+    <span style="color: #00ffff;">return</span> -2;
+  <span style="color: #00ffff;">return</span> err;
+}
+</pre>
+</div>
+
+
+<hr />
+
+<p>
+Travel: <a href="../gists.html">Gists</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

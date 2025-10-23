@@ -20,9 +20,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
 
-<div id="outline-container-org14ae88d" class="outline-2">
-<h2 id="org14ae88d">C / CMakeLists.txt</h2>
-<div class="outline-text-2" id="text-org14ae88d">
+<div id="outline-container-org504e51c" class="outline-2">
+<h2 id="org504e51c">C / CMakeLists.txt</h2>
+<div class="outline-text-2" id="text-org504e51c">
 <p>
 Modern Cmake template for C++ projects.
 </p>
@@ -60,7 +60,7 @@ find_program(CCACHE_PROGRAM ccache) # use ccache <span style="color: #00ffff;">i
   <span style="color: #87cefa;">set</span>(RELEASE_FLAGS /O2)
   <span style="color: #87cefa;">set</span>(<span style="color: #98fb98;">DEBUG_DEFINES</span> <span style="color: #eedd82;">_DEBUG</span>)
 <span style="color: #00ffff;">else</span>()
-  <span style="color: #87cefa;">set</span>(WARNING_FLAGS -Wall -Wextra -Wpedantic)
+  <span style="color: #87cefa;">set</span>(WARNING_FLAGS -Wall -Wextra -Werror -Wpedantic)
   <span style="color: #87cefa;">set</span>(DEBUG_FLAGS -O0 -ggdb -fsanitize=address)
   <span style="color: #87cefa;">set</span>(RELEASE_FLAGS -O3)
   <span style="color: #87cefa;">set</span>(<span style="color: #98fb98;">DEBUG_DEFINES</span> <span style="color: #eedd82;">DEBUG</span>)

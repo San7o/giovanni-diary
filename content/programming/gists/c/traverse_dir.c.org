@@ -1,0 +1,76 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / traverse_dir.c
+#+INDEX: Giovanni's Diary!Programming!Gists!C/traevrse_dir.c
+
+Traverse a directory recursively and call handle_file on each file,
+optinoally specifying how many levels deep to go.
+ 
+#+begin_src c
+// SPDX-License-Identifier: MIT
+// Author:  Giovanni Santini
+// Mail:    giovanni.santini@proton.me
+// Github:  @San7o
+
+#include <stdio.h>
+#include <fts.h>
+
+int handle_file(char* filename)
+{
+  printf("Handling file %s\n", filename);
+  return 0;
+}
+
+// Traverse [dir] recursively two levels deep and call handle_file on each file
+int traverse_dir(char *dir)
+{
+  int err = 0;
+  char *path_argv[] = { dir, NULL };
+  FTSENT *file_entry = NULL;
+  FTS *files = fts_open(path_argv, FTS_PHYSICAL | FTS_NOCHDIR, NULL);
+  if (!files) return -1;
+
+  while ((file_entry = fts_read(files)))
+  {
+    switch (file_entry->fts_info)
+    {
+    case FTS_D: // Directory
+      if (file_entry->fts_level == 0)
+      {
+        //Top-level directory itself, continue
+        continue;
+      } else {
+        // Skip descending into subdirectories
+        //fts_set(files, file_entry, FTS_SKIP);
+      }
+      break;
+    case FTS_F:  // Regular file
+    case FTS_SL: // Symbolic link
+    case FTS_DEFAULT:
+      if (file_entry->fts_level <= 2) // Go only two levels deep
+      {
+        err = handle_file(file_entry->fts_path);
+        if (err != 0)
+        {
+          goto exit;
+        }
+      }
+      break;
+    default:
+      break;
+    }
+  }
+
+ exit:
+  if (fts_close(files) < 0 && err == 0)
+    return -2;
+  return err;
+}
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

@@ -1,0 +1,54 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / utils.h
+#+INDEX: Giovanni's Diary!Programming!Gists!C/utils.h
+
+Utility macros for C projects.
+
+#+begin_src c
+// SPDX-License-Identifier: MIT
+// Author:  Giovanni Santini
+// Mail:    giovanni.santini@proton.me
+// Github:  @San7o
+
+#ifndef UTILS_H
+#define UTILS_H
+
+#include <stdio.h>
+#include <stdlib.h>
+
+//
+// Macros
+//
+
+#define UNUSED(value) (void)(value)
+#define TODO(message) do { fprintf(stderr, "%s:%d: TODO: %s\n", __FILE__, __LINE__, message); abort(); } while(0)
+#define UNREACHABLE(message) do { fprintf(stderr, "%s:%d: UNREACHABLE: %s\n", __FILE__, __LINE__, message); abort(); } while(0)
+
+#define cleanup_free __attribute__ ((cleanup (cleanup_freep)))
+
+#ifdef __GNUC__
+  #define LIKELY(x)     __builtin_expect(!!(x), 1)
+  #define UNLIKELY(x)   __builtin_expect(!!(x), 0)
+#else
+ #define LIKELY(x)     (x)
+ #define UNLIKELY(x)   (x)
+#endif
+
+//
+// Functions
+//
+
+static inline void cleanup_freep(void *p) {
+    free(*(void **)p);
+}
+
+#endif // UTILS_H
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]
