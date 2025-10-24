@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
+</p>
+
+<div id="outline-container-org70552ae" class="outline-2">
+<h2 id="org70552ae">Misc / windows-commands.ps1</h2>
+<div class="outline-text-2" id="text-org70552ae">
+<p>
+Useful Microsoft Windows commands.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-asm"># Windows commands
+# ================
+# Author: Giovanni Santini
+# Mail: giovanni.santini@proton.me
+# License: MIT
+#
+# Quick tip: you can use the new windows terminal on windows
+# 10 by installing it from the microsoft store. The windows
+# terminal has some multiplexing features built-in which are
+# very useful.
+#
+# To get an up to date powershell, you need to download it
+# and install it from the official website -- do not use the
+# default powershell because it is really old! -- and then
+# configure the terminal to use the new shell.
+#
+# To install program, you can use `winget` which is a command
+<span style="color: #b0c4de;"># line</span> <span style="color: #eedd82;">packet</span> manager, in the style of Linux's packet managers.
+#
+# Note: to run some of the following commands you need to run
+# the shell as administrator.
+#
+
+# Command utilities
+# -----------------
+
+# Network Utilities
+
+# Show ip information
+<span style="color: #87cefa;">ipconfig</span> /all
+
+# Drop / reassing ip
+<span style="color: #87cefa;">ipconfig</span> /release
+<span style="color: #87cefa;">ipconfig</span> /renew
+
+# Get interfaces with netsh.
+# This tool offers a broader range of capabilities than ipconfig
+<span style="color: #87cefa;">netsh</span> <span style="color: #00ffff;">interface</span> show interface
+
+# List ports
+<span style="color: #87cefa;">netstat</span> -af
+
+# Filesystem utilities
+
+# Check and repair issues in /f disk and /r sectors
+<span style="color: #87cefa;">chkdsk</span> /f
+<span style="color: #87cefa;">chkdsk</span> /r
+
+# Repair corrupted filesystem files
+<span style="color: #87cefa;">sfc</span> /scannnow
+
+# Format a drive
+<span style="color: #87cefa;">format</span> [drive letter]: /fs:[file system] /q
+
+# Manage, create and delete disk partitions
+<span style="color: #87cefa;">diskpart</span>
+
+# Encrypt all files in current folder
+<span style="color: #87cefa;">cipher</span> /E
+
+# Robust file copy, better than simple copy
+<span style="color: #87cefa;">robocopy</span> <span style="color: #00ffff;">source</span> dest /E
+
+# General utilities
+
+# Get info about the system
+<span style="color: #87cefa;">systeminfo</span>
+
+# Find a substring
+<span style="color: #87cefa;">findstr</span>
+
+# Copy to clipboard
+<span style="color: #87cefa;">clip</span>
+
+# Get a report on power consumption
+<span style="color: #87cefa;">powercfg</span> /energy
+<span style="color: #87cefa;">powercfg</span> /batteryreport
+
+# List and kill processes
+<span style="color: #87cefa;">tasklist</span>
+<span style="color: #87cefa;">taskkill</span>
+
+# Reboot to bios
+<span style="color: #87cefa;">shutdown</span> /r /fw /f /t 0
+
+# Get the windows version
+<span style="color: #87cefa;">winver</span>
+
+# Powershell examples
+# -------------------
+
+# Install latest Powershell (the one that is pre-installed is very old)
+<span style="color: #87cefa;">winget</span> <span style="color: #00ffff;">install</span> --id Microsoft.PowerShell --source winget
+
+# Update the help documentation
+<span style="color: #87cefa;">Update-Help</span> -Verbose -Force -ErrorAction SilentlyContinue
+
+# Get all processes, print their members
+<span style="color: #87cefa;">Get-Process</span> | Get-Member
+
+# Format objects
+<span style="color: #87cefa;">dir</span> | Format-List
+<span style="color: #87cefa;">dir</span> | Format-Table
+
+# Get the number of objects
+<span style="color: #87cefa;">Get-Process</span> | Measure
+
+# Where filters the objects that meet a condition
+<span style="color: #87cefa;">dir</span> | Where { $_.Extension -eq '.json' }
+
+<span style="color: #87cefa;">Get-Process</span> | Where { $_.CPU -ge 10 } | Sort { $_.id }
+
+# Get just the name of the directories
+<span style="color: #87cefa;">ls</span> | ForEach { $_.Name }
+
+# Get all processes with an ID above 4000, and work out the average CPU time
+<span style="color: #87cefa;">Get-Process</span> | Where { $_.Id -ge 4000 } | ForEach { $_.CPU } | Measure -Average
+
+# Get the drives
+<span style="color: #87cefa;">Get-PSDrive</span>
+
+# Get the commands using a filter
+<span style="color: #87cefa;">Get-Command</span> | Where { $_.Name -like '*process*' }
+# in this case, Get-Command already accepts a wildcard as argument
+<span style="color: #87cefa;">Get-Command</span> *process*
+
+# Windows sandbox
+# ---------------
+
+# Windows Sandbox is a lightweight, isolated desktop
+# environment that allows users to safely run applications
+# without affecting their main operating system.
+#
+# To enable Windows Sandbox, you need to open <span style="color: #ffa07a;">"Turn
+# Windows features off and off"</span> and enable it, then
+# restart the machie.
+#
+# Sandboxes are defines as a XML file, for example the
+# following creates an isolated sandbox that can access
+# the Download folder in read only mode, and it runs
+# the explorer when it starts:
+#
+# &lt;Configuration&gt;
+#   &lt;VGpu&gt;Disable&lt;/VGpu&gt;
+#   &lt;Networking&gt;Disable&lt;/Networking&gt;
+#   &lt;MappedFolders&gt;
+#     &lt;MappedFolder&gt;
+#       &lt;HostFolder&gt;C:\Users\Public\Downloads&lt;/HostFolder&gt;
+#       &lt;SandboxFolder&gt;C:\temp&lt;/SandboxFolder&gt;
+#       &lt;ReadOnly&gt;true&lt;/ReadOnly&gt;
+#     &lt;/MappedFolder&gt;
+#   &lt;/MappedFolders&gt;
+#   &lt;LogonCommand&gt;
+#     &lt;Command&gt;explorer.exe C:\temp&lt;/Command&gt;
+#   &lt;/LogonCommand&gt;
+# &lt;/Configuration&gt;
+#
+# To run the sandbox, you need to save the XML as
+# a .wsb file and then double click or run `start`
+# on it.
+
+# WSL
+# ===
+
+# Installing WSL is quite straight forward, just run
+#     wsl --install
+</pre>
+</div>
+
+
+<hr />
+
+<p>
+Travel: <a href="../gists.html">Gists</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

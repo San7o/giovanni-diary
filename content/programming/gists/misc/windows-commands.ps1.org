@@ -1,0 +1,182 @@
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* Misc / windows-commands.ps1
+#+INDEX: Giovanni's Diary!Programming!Gists!misc/windows-commands.ps1
+
+Useful Microsoft Windows commands.
+
+#+begin_src asm
+# Windows commands
+# ================
+# Author: Giovanni Santini
+# Mail: giovanni.santini@proton.me
+# License: MIT
+#
+# Quick tip: you can use the new windows terminal on windows
+# 10 by installing it from the microsoft store. The windows
+# terminal has some multiplexing features built-in which are
+# very useful.
+#
+# To get an up to date powershell, you need to download it
+# and install it from the official website -- do not use the
+# default powershell because it is really old! -- and then
+# configure the terminal to use the new shell.
+#
+# To install program, you can use `winget` which is a command
+# line packet manager, in the style of Linux's packet managers.
+#
+# Note: to run some of the following commands you need to run
+# the shell as administrator.
+#
+
+# Command utilities
+# -----------------
+
+# Network Utilities
+
+# Show ip information
+ipconfig /all
+
+# Drop / reassing ip
+ipconfig /release
+ipconfig /renew
+
+# Get interfaces with netsh.
+# This tool offers a broader range of capabilities than ipconfig
+netsh interface show interface
+
+# List ports
+netstat -af
+
+# Filesystem utilities
+
+# Check and repair issues in /f disk and /r sectors
+chkdsk /f
+chkdsk /r
+
+# Repair corrupted filesystem files
+sfc /scannnow
+
+# Format a drive
+format [drive letter]: /fs:[file system] /q
+
+# Manage, create and delete disk partitions
+diskpart
+
+# Encrypt all files in current folder
+cipher /E
+
+# Robust file copy, better than simple copy
+robocopy source dest /E
+
+# General utilities
+
+# Get info about the system
+systeminfo
+
+# Find a substring
+findstr
+
+# Copy to clipboard
+clip
+
+# Get a report on power consumption
+powercfg /energy
+powercfg /batteryreport
+
+# List and kill processes
+tasklist
+taskkill
+
+# Reboot to bios
+shutdown /r /fw /f /t 0
+
+# Get the windows version
+winver
+
+# Powershell examples
+# -------------------
+
+# Install latest Powershell (the one that is pre-installed is very old)
+winget install --id Microsoft.PowerShell --source winget
+
+# Update the help documentation
+Update-Help -Verbose -Force -ErrorAction SilentlyContinue
+
+# Get all processes, print their members
+Get-Process | Get-Member
+
+# Format objects
+dir | Format-List
+dir | Format-Table
+
+# Get the number of objects
+Get-Process | Measure
+
+# Where filters the objects that meet a condition
+dir | Where { $_.Extension -eq '.json' }
+
+Get-Process | Where { $_.CPU -ge 10 } | Sort { $_.id }
+
+# Get just the name of the directories
+ls | ForEach { $_.Name }
+
+# Get all processes with an ID above 4000, and work out the average CPU time
+Get-Process | Where { $_.Id -ge 4000 } | ForEach { $_.CPU } | Measure -Average
+
+# Get the drives
+Get-PSDrive
+
+# Get the commands using a filter
+Get-Command | Where { $_.Name -like '*process*' }
+# in this case, Get-Command already accepts a wildcard as argument
+Get-Command *process*
+
+# Windows sandbox
+# ---------------
+
+# Windows Sandbox is a lightweight, isolated desktop
+# environment that allows users to safely run applications
+# without affecting their main operating system.
+#
+# To enable Windows Sandbox, you need to open "Turn
+# Windows features off and off" and enable it, then
+# restart the machie.
+#
+# Sandboxes are defines as a XML file, for example the
+# following creates an isolated sandbox that can access
+# the Download folder in read only mode, and it runs
+# the explorer when it starts:
+#
+# <Configuration>
+#   <VGpu>Disable</VGpu>
+#   <Networking>Disable</Networking>
+#   <MappedFolders>
+#     <MappedFolder>
+#       <HostFolder>C:\Users\Public\Downloads</HostFolder>
+#       <SandboxFolder>C:\temp</SandboxFolder>
+#       <ReadOnly>true</ReadOnly>
+#     </MappedFolder>
+#   </MappedFolders>
+#   <LogonCommand>
+#     <Command>explorer.exe C:\temp</Command>
+#   </LogonCommand>
+# </Configuration>
+#
+# To run the sandbox, you need to save the XML as
+# a .wsb file and then double click or run `start`
+# on it.
+
+# WSL
+# ===
+
+# Installing WSL is quite straight forward, just run
+#     wsl --install
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

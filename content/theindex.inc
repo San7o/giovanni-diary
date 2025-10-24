@@ -73,6 +73,7 @@
         - [[file:programming/gists/config/i3config.org::*Config / i3config][config/i3config]]
         - [[file:programming/gists/config/init.lua.org::*Config / init.lua][config/init.lua]]
         - [[file:programming/gists/misc/hello_world.asm.org::*Misc / hello_world.asm][misc/hello_world.asm]]
+        - [[file:programming/gists/misc/windows-commands.ps1.org::*Misc / windows-commands.ps1][misc/windows-commands.ps1]]
         - [[file:programming/gists/scripts/win2usb.sh.org::*Scripts / win2usb.sh][scripts/win2usb.sh]]
         - [[file:programming/gists/web/micro-style.css.org::*Web / micro-style.css][web/micro-style.css]]
       - [[file:programming/kubernetes/kubernetes.org::*Kubernetes][Kubernetes]]
