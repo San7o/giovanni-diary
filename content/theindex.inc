@@ -134,6 +134,7 @@
       - [[file:reading/economics/economics.org::*Economics][Economics]]
         - [[file:reading/economics/henry-hazltt-economics-in-one-lesson.org::*Economics in One Lesson - Henry Hazlitt][Economics in One Lesson]]
         - [[file:reading/economics/finance-theory.org::*15.401 - Finance Theory @ MIT][Finance Theory]]
+        - [[file:reading/economics/itermediate-micro-economics.org::*Itermediate Micro Economics - Hal. R. Varian][Intermediate Micro Economics]]
       - [[file:reading/mauro-corona/mauro-corona.org::*Mauro Corona][Mauro Corona]]
         - [[file:reading/mauro-corona/mauro-corona-la-casa-dei-sette-ponti.org::*La casa dei sette ponti][La casa dei sette ponti]]
         - [[file:reading/mauro-corona/mauro-corona-la-via-del-sole.org::*La via del sole][La via del sole]]
