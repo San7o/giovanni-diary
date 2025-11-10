@@ -1,0 +1,47 @@
+
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* C / generate-debuginfo
+#+INDEX: Giovanni's Diary!Programming!Gists!C/generate-debuginfo
+
+Separate debuginfo and executable in two different files.
+
+#+begin_src
+# generate-debuginfo
+# ==================
+#
+# This is a tiny example that shows how to have a debug-stripped
+# executable and a separate debug information file that can be
+# loaded by GDB. This is useful since you may not want to ship
+# the executable with debuginfo, but you may optionally provide
+# the info seperately.
+#
+# Credits: https://davidisaksson.dev/posts/detached-debug-symbols/
+#
+
+# Build executable
+$ cat > main.c << EOF
+#include <stdio.h>
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}
+EOF
+$ gcc -g -o main main.c
+
+# Separate debug symbols from the executable
+$ objcopy --only-keep-debug main main.debug
+$ strip --strip-debug maon
+$ ls
+main  main.c  main.debug
+
+# Debug with GDB
+$ gdb --exec=main --symbols=main.debug
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/simple.css" />
+<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
+<meta property="og:url" content="https://giovanni-diary.netlify.app/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
+</p>
+
+<div id="outline-container-orgb06c1e4" class="outline-2">
+<h2 id="orgb06c1e4">C / generate-debuginfo</h2>
+<div class="outline-text-2" id="text-orgb06c1e4">
+<p>
+Separate debuginfo and executable in two different files.
+</p>
+
+<pre class="example">
+# generate-debuginfo
+# ==================
+#
+# This is a tiny example that shows how to have a debug-stripped
+# executable and a separate debug information file that can be
+# loaded by GDB. This is useful since you may not want to ship
+# the executable with debuginfo, but you may optionally provide
+# the info seperately.
+#
+# Credits: https://davidisaksson.dev/posts/detached-debug-symbols/
+#
+
+# Build executable
+$ cat &gt; main.c &lt;&lt; EOF
+#include &lt;stdio.h&gt;
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}
+EOF
+$ gcc -g -o main main.c
+
+# Separate debug symbols from the executable
+$ objcopy --only-keep-debug main main.debug
+$ strip --strip-debug maon
+$ ls
+main  main.c  main.debug
+
+# Debug with GDB
+$ gdb --exec=main --symbols=main.debug
+</pre>
+
+
+<hr />
+
+<p>
+Travel: <a href="../gists.html">Gists</a>, <a href="../../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

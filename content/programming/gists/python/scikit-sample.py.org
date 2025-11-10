@@ -1,0 +1,61 @@
+
+#+startup: content indent
+
+[[file:../../../index.org][Giovanni's Diary]] > [[file:../../../subjects.org][Subjects]] > [[file:../../programming.org][Programming]] > [[file:../gists.org][Gists]] >
+
+* Python / scikit-sample.py
+#+INDEX: Giovanni's Diary!Programming!Gists!Python/scikit-sample.py
+
+Example of using a ML model with scikit-learn.
+
+#+begin_src python
+# scikit-sample.py
+# ================
+#
+# Example of using a ML model with scikit-learn.
+#
+# Requirements:
+#
+#  - matplotlib
+#  - scikit-learn
+#  - pandas
+
+from sklearn.datasets import fetch_california_housing
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import GridSearchCV
+import matplotlib.pylab as plt
+import pandas as pd
+
+# Sample dataset
+X, y = fetch_california_housing(return_X_y=True)
+
+# We create a pipeline where we scale the data and specify a model
+pipe = Pipeline([
+    ("scale", StandardScaler()),
+    ("model", KNeighborsRegressor(n_neighbors=1))
+])
+
+# Get all the pipeline settings
+# print(pipe.get_params())
+
+# We can try different hyperparameters on the pipeline via the GridSearch
+mod = GridSearchCV(estimator=pipe,
+                   param_grid={'model__n_neighbors': [1, 2, 3, 4, 5, 6]},
+                   cv=3)
+
+mod.fit(X, y)
+
+df = pd.DataFrame(mod.cv_results_)
+plt.plot([i for i in range(6)],
+         df['mean_test_score'])
+plt.xlabel('n_neighbors')
+plt.ylabel('mean_tests_score')
+plt.show()
+#+end_src
+
+
+-----
+
+Travel: [[file:../gists.org][Gists]], [[file:../../../theindex.org][Index]]
