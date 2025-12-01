@@ -8,7 +8,7 @@
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/simple.css" />
-<link rel="stylesheet" href="/giovanni-diary/simple.css" />
+<link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://giovanni-diary.netlify.app/logo.png">
@@ -20,9 +20,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
 
-<div id="outline-container-org7aba812" class="outline-2">
-<h2 id="org7aba812">C / sdl_window.c</h2>
-<div class="outline-text-2" id="text-org7aba812">
+<div id="outline-container-orga9bbaa9" class="outline-2">
+<h2 id="orga9bbaa9">C / sdl_window.c</h2>
+<div class="outline-text-2" id="text-orga9bbaa9">
 <p>
 Create an SDL3 window and poll events.
 </p>
@@ -74,7 +74,7 @@ Create an SDL3 window and poll events.
     {
       <span style="color: #00ffff;">if</span> (SDL_EVENT_KEY_DOWN == event.type)
       {
-        <span style="color: #00ffff;">if</span> (event.key.key == <span style="color: #ffa07a;">'q'</span> || event.key.key == 0x1b <span style="color: #ff7f24;">/* </span><span style="color: #ff7f24;">ESC</span><span style="color: #ff7f24;"> */</span>)
+        <span style="color: #00ffff;">if</span> (event.key.key == <span style="color: #ffa07a;">'q'</span> || event.key.key == SDLK_ESCAPE)
           <span style="color: #00ffff;">break</span>;
       }
     }

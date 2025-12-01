@@ -38,7 +38,7 @@
 				org-html-head-include-default-style nil ;; Use our own styles
 				;; org-html-head "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
 				org-html-head "<link rel=\"stylesheet\" href=\"/simple.css\" />
-<link rel=\"stylesheet\" href=\"/giovanni-diary/simple.css\" />
+<link rel=\"stylesheet\" href=\"https://san7o.github.io/micro-style.css/micro-style.css\" />
 <meta property=\"og:title\" content=\"Giovanni's Diary\">
 <meta property=\"og:description\" content=\"Diary of Giovanni's adventures.\">
 <meta property=\"og:image\" content=\"https://giovanni-diary.netlify.app/logo.png\">

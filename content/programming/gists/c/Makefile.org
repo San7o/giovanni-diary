@@ -8,48 +8,52 @@
 Simple Makefile template for C projects.
  
 #+begin_src sh
-# SPDX-License-Identifier: MIT
-# Author:  Giovanni Santini
-# Mail:    giovanni.santini@proton.me
-# License: MIT
+  # SPDX-License-Identifier: MIT
+  # Author:  Giovanni Santini
+  # Mail:    giovanni.santini@proton.me
+  # License: MIT
 
-#
-# Compiler flags
-#
-CFLAGS      = -Wall -Werror -Wextra -Wpedantic -std=c99
-DEBUG_FLAGS = -ggdb
-LDFLAGS     =
-CC?         = gcc
+  #
+  # Compiler flags
+  #
+  CFLAGS        = -Wall -Werror -Wextra -Wpedantic -std=c99
+  DEBUG_FLAGS   = -ggdb
+  RELEASE_FLAGS = -DCOMMIT_HASH=$(shell git rev-parse --verify HEAD)
+  LDFLAGS       =
+  CC?           = gcc
 
-#
-# Project files
-#
-OUT_NAME = hello
-OBJ      = hello.o
+  #
+  # Project files
+  #
+  OUT_NAME = hello
+  OBJ      = hello.o
 
-#
-# Commands
-#
-all: $(OUT_NAME)
+  #
+  # Commands
+  #
+  all: $(OUT_NAME)
 
-debug: CFLAGS += $(DEBUG_FLAGS)
-debug: $(OUT_NAME)
+  debug: CFLAGS += $(DEBUG_FLAGS)
+  debug: $(OUT_NAME)
 
-run: $(OUT_NAME)
-	chmod +x $(OUT_NAME)
-	./$(OUT_NAME)
+  release: CFLAGS += $(RELEASE_FLAGS) 
+  release: $(OUT_NAME)
 
-clean:
-	rm -f $(OBJ)
+  run: $(OUT_NAME)
+    chmod +x $(OUT_NAME)
+    ./$(OUT_NAME)
 
-distclean:
-	rm -f $(OUT_NAME)
+  clean:
+    rm -f $(OBJ)
 
-$(OUT_NAME): $(OBJ)
-	$(CC) $(OBJ) $(LDFLAGS) $(CFLAGS) -o $(OUT_NAME)
+  distclean:
+    rm -f $(OUT_NAME)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+  $(OUT_NAME): $(OBJ)
+    $(CC) $(OBJ) $(LDFLAGS) $(CFLAGS) -o $(OUT_NAME)
+
+  %.o: %.c
+    $(CC) $(CFLAGS) -c $< -o $@
 #+end_src
 
 
