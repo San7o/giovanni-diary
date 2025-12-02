@@ -25,3 +25,6 @@ cp -r content/stash/photography/images public/stash/photography
 
 # Dump git commit history
 git log --pretty=format:"- %ad %s" --date=short > content/git-history.txt
+
+# Html
+cp me.html public/
