@@ -7,8 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="/simple.css" />
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
+<style>
+  html, body {
+      height: 100%;
+      margin: 0;
+  }
+
+  body {
+      display: grid;
+      place-items: center;  /* centers vertically & horizontally */
+  }
+</style>
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -52,9 +62,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org02dae6f" class="outline-2">
-<h2 id="org02dae6f">Unsupervised Learning</h2>
-<div class="outline-text-2" id="text-org02dae6f">
+<div id="outline-container-orge020a6b" class="outline-2">
+<h2 id="orge020a6b">Unsupervised Learning</h2>
+<div class="outline-text-2" id="text-orge020a6b">
 <p>
 In unsupervised learning we observe data from an unknown distribution without class labels. It is quite useful for the following tasks:
 </p>
@@ -72,9 +82,9 @@ Principal Component Analysis, which we will now discuss.
 </p>
 </div>
 
-<div id="outline-container-org6f70147" class="outline-3">
-<h3 id="org6f70147">Principal Component Analysis</h3>
-<div class="outline-text-3" id="text-org6f70147">
+<div id="outline-container-orgad16570" class="outline-3">
+<h3 id="orgad16570">Principal Component Analysis</h3>
+<div class="outline-text-3" id="text-orgad16570">
 <p>
 In Principal Component Analysis, or PCA for short, the data is
 linearly transformed onto a new coordinate system such that the
@@ -100,9 +110,9 @@ To understand this, first we need to revise some linear algebra theory.
 </div>
 </div>
 
-<div id="outline-container-org84c0f0f" class="outline-3">
-<h3 id="org84c0f0f">Recap: Linear algebra</h3>
-<div class="outline-text-3" id="text-org84c0f0f">
+<div id="outline-container-org30664d0" class="outline-3">
+<h3 id="org30664d0">Recap: Linear algebra</h3>
+<div class="outline-text-3" id="text-org30664d0">
 <p>
 The <span class="underline">variance</span> is the measure of the deviation from the mean of a
 point, and is calculated as: \[Var(X)= \mathbb{E}[(X-\mu)^2] =
@@ -140,9 +150,9 @@ Q^{-1}\] moreover, if we assume that Q is a unit matrix, meaning \(QQ^T
 </div>
 </div>
 
-<div id="outline-container-org241cd67" class="outline-3">
-<h3 id="org241cd67">Back to PCA</h3>
-<div class="outline-text-3" id="text-org241cd67">
+<div id="outline-container-org892b977" class="outline-3">
+<h3 id="org892b977">Back to PCA</h3>
+<div class="outline-text-3" id="text-org892b977">
 <p>
 Armed with this knowledge, we can finally proceed to discuss principal
 component analysis. The i-th principal component can be taken as a
@@ -226,9 +236,9 @@ is known as the <span class="underline">first principal component</span>.
 </div>
 </div>
 
-<div id="outline-container-org3bb8ad6" class="outline-3">
-<h3 id="org3bb8ad6">Principal Component Analysis using eigenvalue decomposition</h3>
-<div class="outline-text-3" id="text-org3bb8ad6">
+<div id="outline-container-org763af61" class="outline-3">
+<h3 id="org763af61">Principal Component Analysis using eigenvalue decomposition</h3>
+<div class="outline-text-3" id="text-org763af61">
 <p>
 Algorithm:
 </p>
@@ -253,9 +263,9 @@ C_{jj}}\), to estimate the amount of information loss.
 </div>
 </div>
 
-<div id="outline-container-orgc54b2b3" class="outline-3">
-<h3 id="orgc54b2b3">PCA using Singular Value Decomposition</h3>
-<div class="outline-text-3" id="text-orgc54b2b3">
+<div id="outline-container-orgd69a4f3" class="outline-3">
+<h3 id="orgd69a4f3">PCA using Singular Value Decomposition</h3>
+<div class="outline-text-3" id="text-orgd69a4f3">
 <p>
 Here is presented an alternative solution to PCA. Singular Value
 Decomposition is a factorization o a real or complex matrix into a
@@ -293,9 +303,9 @@ Algorithm:
 </div>
 </div>
 
-<div id="outline-container-org745f76b" class="outline-3">
-<h3 id="org745f76b">Kernel PCA (KPCA)</h3>
-<div class="outline-text-3" id="text-org745f76b">
+<div id="outline-container-orga5c7cfc" class="outline-3">
+<h3 id="orga5c7cfc">Kernel PCA (KPCA)</h3>
+<div class="outline-text-3" id="text-orga5c7cfc">
 <p>
 By using the kernel trick one can apply PCA in a higher dimensional
 space, yielding a non-linear transormation in the original space
@@ -303,9 +313,9 @@ space, yielding a non-linear transormation in the original space
 </div>
 </div>
 
-<div id="outline-container-orgddea602" class="outline-3">
-<h3 id="orgddea602">Other dimensionality reduction techniques</h3>
-<div class="outline-text-3" id="text-orgddea602">
+<div id="outline-container-org463df26" class="outline-3">
+<h3 id="org463df26">Other dimensionality reduction techniques</h3>
+<div class="outline-text-3" id="text-org463df26">
 <ul class="org-ul">
 <li>PCA: find projection that maximize the variance</li>
 <li>Multidimensional Scaling: find projection that best preserves
@@ -316,9 +326,9 @@ class-separation.</li>
 </div>
 </div>
 
-<div id="outline-container-org004f4ff" class="outline-3">
-<h3 id="org004f4ff">Limitations</h3>
-<div class="outline-text-3" id="text-org004f4ff">
+<div id="outline-container-orgcebb3f5" class="outline-3">
+<h3 id="orgcebb3f5">Limitations</h3>
+<div class="outline-text-3" id="text-orgcebb3f5">
 <ul class="org-ul">
 <li>the data must be linearly separable (which is a strong assumption)</li>
 </ul>

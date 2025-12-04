@@ -7,8 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="/simple.css" />
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
+<style>
+  html, body {
+      height: 100%;
+      margin: 0;
+  }
+
+  body {
+      display: grid;
+      place-items: center;  /* centers vertically & horizontally */
+  }
+</style>
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -52,9 +62,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
 </p>
 
-<div id="outline-container-orgcb4ac24" class="outline-2">
-<h2 id="orgcb4ac24">Greedy</h2>
-<div class="outline-text-2" id="text-orgcb4ac24">
+<div id="outline-container-org7e43f57" class="outline-2">
+<h2 id="org7e43f57">Greedy</h2>
+<div class="outline-text-2" id="text-org7e43f57">
 <p>
 La tecnica greedy può essere utilizzata se fra le molte scelte
 possibili, ne può essere facilmente individuata una che porta
@@ -80,9 +90,9 @@ possibile pre-processing dell'input.</li>
 </ul>
 </div>
 
-<div id="outline-container-orga5439b9" class="outline-3">
-<h3 id="orga5439b9">Insieme indipendente di intervalli</h3>
-<div class="outline-text-3" id="text-orga5439b9">
+<div id="outline-container-org0f7b286" class="outline-3">
+<h3 id="org0f7b286">Insieme indipendente di intervalli</h3>
+<div class="outline-text-3" id="text-org0f7b286">
 <p>
 Sia \(S=\{ 1, 2, .., n \}\) un insieme di intervalli della retta
 reale. Ogni intervallo \([a_i, b_i)\), con \(i\in S\), e' chiuso a
@@ -98,9 +108,9 @@ alla soluzione ottima. Vediamo entrambi gli approcci
 </p>
 </div>
 
-<div id="outline-container-org6505ec8" class="outline-4">
-<h4 id="org6505ec8">Soluzione con Programmazione Dinamica</h4>
-<div class="outline-text-4" id="text-org6505ec8">
+<div id="outline-container-org481c01b" class="outline-4">
+<h4 id="org481c01b">Soluzione con Programmazione Dinamica</h4>
+<div class="outline-text-4" id="text-org481c01b">
 <p>
 Si assuma che gli intervalli siano ordinati per tempo di
 fine. Definiamo il sottoproblema\(S[i..j]\) come l'insieme di
@@ -153,9 +163,9 @@ il peso a 1.
 </div>
 </div>
 
-<div id="outline-container-org9e00dd4" class="outline-4">
-<h4 id="org9e00dd4">Soluzione Greedy</h4>
-<div class="outline-text-4" id="text-org9e00dd4">
+<div id="outline-container-org8c7b378" class="outline-4">
+<h4 id="org8c7b378">Soluzione Greedy</h4>
+<div class="outline-text-4" id="text-org8c7b378">
 <p>
 Teorema: Sia \(S[i..j]\) un sottoproblema non vuoto, e \(m\) l'intervallo
 di \(S[i..j]\) con <b><b>minor tempo di fine</b></b>, allora:
@@ -214,9 +224,9 @@ Costo \(O(nlogn)\) se l'input non e' ordinato, altrimenti \(O(n)\).
 </div>
 </div>
 
-<div id="outline-container-org309b0ba" class="outline-3">
-<h3 id="org309b0ba">Resto</h3>
-<div class="outline-text-3" id="text-org309b0ba">
+<div id="outline-container-org180ad9e" class="outline-3">
+<h3 id="org180ad9e">Resto</h3>
+<div class="outline-text-3" id="text-org180ad9e">
 <p>
 Dato un'insieme di "tagli" di monete memorizzati in un vettore di
 interi positivi \(t[1..n]\) e un intero \(R\) rappresentante il resto che
@@ -282,9 +292,9 @@ dall'algoritmo.
 </div>
 </div>
 
-<div id="outline-container-org6b9d357" class="outline-3">
-<h3 id="org6b9d357">Scheduling</h3>
-<div class="outline-text-3" id="text-org6b9d357">
+<div id="outline-container-org78e90e0" class="outline-3">
+<h3 id="org78e90e0">Scheduling</h3>
+<div class="outline-text-3" id="text-org78e90e0">
 <p>
 Supponiamo di avere un processore e \(n\) job da eseguire su di esso,
 ognuno caratterizzato da un tempo di esecuzione \(t[i]\) noto a
@@ -316,9 +326,9 @@ e' ottima.
 </div>
 </div>
 
-<div id="outline-container-org2a4e1dd" class="outline-3">
-<h3 id="org2a4e1dd">Zaino frazionario</h3>
-<div class="outline-text-3" id="text-org2a4e1dd">
+<div id="outline-container-org7d6c303" class="outline-3">
+<h3 id="org7d6c303">Zaino frazionario</h3>
+<div class="outline-text-3" id="text-org7d6c303">
 <p>
 Dati un'intero positivo \(C\) che rappresenta la capacita' dello zaino,
 e \(n\) oggetti ognuno con un profitto \(p\) e un peso \(w\) in
@@ -344,9 +354,9 @@ capacita'.
 </div>
 </div>
 
-<div id="outline-container-org3284821" class="outline-3">
-<h3 id="org3284821">Compressione di Huffman</h3>
-<div class="outline-text-3" id="text-org3284821">
+<div id="outline-container-orgb38f9c3" class="outline-3">
+<h3 id="orgb38f9c3">Compressione di Huffman</h3>
+<div class="outline-text-3" id="text-orgb38f9c3">
 <p>
 In un codice a prefisso, <b><b>nessun codice e' prefisso di un altro
 codice</b></b>. Ad esempio con \(a\rightarrow 0,\ b\rightarrow 10,\
@@ -426,18 +436,18 @@ e, scambiando i due caratteri, abbiamo ancora una soluzione ottima.
 </div>
 </div>
 
-<div id="outline-container-org9cfa676" class="outline-3">
-<h3 id="org9cfa676">Alberi di copertura di peso minimo</h3>
-<div class="outline-text-3" id="text-org9cfa676">
+<div id="outline-container-orga82e0ff" class="outline-3">
+<h3 id="orga82e0ff">Alberi di copertura di peso minimo</h3>
+<div class="outline-text-3" id="text-orga82e0ff">
 <p>
 Dato un grafo pesato, determinare come interconnettere tutti i suoi
 nodi minimizzando il costo del peso associato ai suoi archi.
 </p>
 </div>
 
-<div id="outline-container-org83aba45" class="outline-4">
-<h4 id="org83aba45">Algoritmo Generico</h4>
-<div class="outline-text-4" id="text-org83aba45">
+<div id="outline-container-org582fd77" class="outline-4">
+<h4 id="org582fd77">Algoritmo Generico</h4>
+<div class="outline-text-4" id="text-org582fd77">
 <p>
 Definizioni:
 </p>
@@ -481,9 +491,9 @@ leggero (e' il minimo tra tutti gli archi tra i due tagli), allora
 </div>
 </div>
 
-<div id="outline-container-orgde44dad" class="outline-4">
-<h4 id="orgde44dad">Algoritmo di Kruskal</h4>
-<div class="outline-text-4" id="text-orgde44dad">
+<div id="outline-container-org65de519" class="outline-4">
+<h4 id="org65de519">Algoritmo di Kruskal</h4>
+<div class="outline-text-4" id="text-org65de519">
 <p>
 Ordiniamo gli alberi in modo crescente. Ogni volta, aggiungo alla
 foresta l'arco di peso minimo fino ad avere n-1 archi, evitando cicli.
@@ -519,9 +529,9 @@ Tempo computazionale: \(O(mlogn)\)
 </div>
 </div>
 
-<div id="outline-container-orgba05dc2" class="outline-4">
-<h4 id="orgba05dc2">Algoritmo di Primm</h4>
-<div class="outline-text-4" id="text-orgba05dc2">
+<div id="outline-container-orgbb6e453" class="outline-4">
+<h4 id="orgbb6e453">Algoritmo di Primm</h4>
+<div class="outline-text-4" id="text-orgbb6e453">
 <p>
 L'algoritmo di Prim procede mantenendo in \(A\) un singolo albero la cui
 frontiera cresce fino a quando non ricopre tutti i vertici.

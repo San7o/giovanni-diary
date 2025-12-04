@@ -7,8 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="/simple.css" />
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
+<style>
+  html, body {
+      height: 100%;
+      margin: 0;
+  }
+
+  body {
+      display: grid;
+      place-items: center;  /* centers vertically & horizontally */
+  }
+</style>
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -52,9 +62,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
 </p>
 
-<div id="outline-container-orgec91d9e" class="outline-2">
-<h2 id="orgec91d9e">Sorting</h2>
-<div class="outline-text-2" id="text-orgec91d9e">
+<div id="outline-container-org828b08d" class="outline-2">
+<h2 id="org828b08d">Sorting</h2>
+<div class="outline-text-2" id="text-org828b08d">
 <p>
 Algoritmi noti:
 </p>
@@ -84,9 +94,9 @@ foglie.
 </p>
 </div>
 
-<div id="outline-container-orgc8b3374" class="outline-3">
-<h3 id="orgc8b3374">Counting Sort</h3>
-<div class="outline-text-3" id="text-orgc8b3374">
+<div id="outline-container-orgefc0cdb" class="outline-3">
+<h3 id="orgefc0cdb">Counting Sort</h3>
+<div class="outline-text-3" id="text-orgefc0cdb">
 <p>
 Assumiamo che i numeri da ordinare sono compresi in un intervallo
 \([1..k]\). Costruiamo un array \(B[1..k]\) che conta il numero di volte
@@ -116,9 +126,9 @@ Complessità \(O(n+k)\), se \(k=O(n)\) allora la complessità e'
 </div>
 </div>
 
-<div id="outline-container-org1a14e70" class="outline-3">
-<h3 id="org1a14e70">Pigeonhole Sort</h3>
-<div class="outline-text-3" id="text-org1a14e70">
+<div id="outline-container-org2e0ec56" class="outline-3">
+<h3 id="org2e0ec56">Pigeonhole Sort</h3>
+<div class="outline-text-3" id="text-org2e0ec56">
 <p>
 Se i valori non sono numeri interi, ma record associati ad una chiave
 da ordinare, possiamo usare una lista concatenata per chiave e poi
@@ -132,9 +142,9 @@ aggiuntiva. iterativo. Molto veloce quando \(k=O(n)\).
 </div>
 </div>
 
-<div id="outline-container-orgc5626ff" class="outline-3">
-<h3 id="orgc5626ff">Bucket Sort</h3>
-<div class="outline-text-3" id="text-orgc5626ff">
+<div id="outline-container-orgb34453f" class="outline-3">
+<h3 id="orgb34453f">Bucket Sort</h3>
+<div class="outline-text-3" id="text-orgb34453f">
 <p>
 Allora possiamo dividere l'intervallo in \(n\) sotto-intervalli di dimensione \(\frac{1}{n}\) detti bucket e poi distribuire gli \(n\) numeri nei bucket. Per l'ipotesi di uniformità, il numero atteso di valori nei bucket e' 1 dunque bucket può essere ordinato con Insertion Sort in \(O(n)\) ammortizzato.
 </p>
@@ -148,9 +158,9 @@ lineare.
 </div>
 </div>
 
-<div id="outline-container-orga376911" class="outline-3">
-<h3 id="orga376911">Proprietà degli algoritmi di ordinamento</h3>
-<div class="outline-text-3" id="text-orga376911">
+<div id="outline-container-org6863908" class="outline-3">
+<h3 id="org6863908">Proprietà degli algoritmi di ordinamento</h3>
+<div class="outline-text-3" id="text-org6863908">
 <p>
 Un algoritmo di ordinamento e' detto <b><b>stabile</b></b> se preserva l'ordine
 iniziale tra due elementi con la stessa chiave.

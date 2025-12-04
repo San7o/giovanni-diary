@@ -7,8 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="/simple.css" />
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
+<style>
+  html, body {
+      height: 100%;
+      margin: 0;
+  }
+
+  body {
+      display: grid;
+      place-items: center;  /* centers vertically & horizontally */
+  }
+</style>
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -52,9 +62,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-orga600e01" class="outline-2">
-<h2 id="orga600e01">Linear Models</h2>
-<div class="outline-text-2" id="text-orga600e01">
+<div id="outline-container-org0bb8189" class="outline-2">
+<h2 id="org0bb8189">Linear Models</h2>
+<div class="outline-text-2" id="text-org0bb8189">
 <p>
 We have seen the KNN algorithm for classification. Said algorithm
 works everywhere as long as there is some spacial correlation in the
@@ -107,9 +117,9 @@ Compute: A function \(f\) minimizing \(\mathbb{E}_{(x, y)\sim D}[f(x) \ne  y]\)
 </p>
 </div>
 
-<div id="outline-container-org75e759a" class="outline-3">
-<h3 id="org75e759a">Training a linear model</h3>
-<div class="outline-text-3" id="text-org75e759a">
+<div id="outline-container-orga851487" class="outline-3">
+<h3 id="orga851487">Training a linear model</h3>
+<div class="outline-text-3" id="text-orga851487">
 <p>
 Differently from KNN, linear models use <span class="underline">online learning</span>. The
 learning algorithm follows the following structure:
@@ -150,9 +160,9 @@ will be obvious later when we will discuss gradient descent.
 </p>
 </div>
 
-<div id="outline-container-org56e48f3" class="outline-4">
-<h4 id="org56e48f3">Learning Rate</h4>
-<div class="outline-text-4" id="text-org56e48f3">
+<div id="outline-container-org0ed9ae4" class="outline-4">
+<h4 id="org0ed9ae4">Learning Rate</h4>
+<div class="outline-text-4" id="text-org0ed9ae4">
 <p>
 When the model makes an incorrect prediction, you hay have noticed
 that the correction of the weights are multiple of the label

@@ -7,8 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="/simple.css" />
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
+<style>
+  html, body {
+      height: 100%;
+      margin: 0;
+  }
+
+  body {
+      display: grid;
+      place-items: center;  /* centers vertically & horizontally */
+  }
+</style>
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -52,9 +62,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
 
-<div id="outline-container-org0c0bccb" class="outline-2">
-<h2 id="org0c0bccb">Beyond binary classification</h2>
-<div class="outline-text-2" id="text-org0c0bccb">
+<div id="outline-container-org092cf19" class="outline-2">
+<h2 id="org092cf19">Beyond binary classification</h2>
+<div class="outline-text-2" id="text-org092cf19">
 <p>
 In multi-class classification problem, differently from binary
 classification, given:
@@ -85,9 +95,9 @@ we will discuss:
 </ul>
 </div>
 
-<div id="outline-container-orgb0a77a3" class="outline-3">
-<h3 id="orgb0a77a3">One vs All (OVA)</h3>
-<div class="outline-text-3" id="text-orgb0a77a3">
+<div id="outline-container-org868baa4" class="outline-3">
+<h3 id="org868baa4">One vs All (OVA)</h3>
+<div class="outline-text-3" id="text-org868baa4">
 <p>
 For each label \(k=1, ..., K\) define a binary problem where:
 </p>
@@ -127,9 +137,9 @@ OneVsAllTest(f_1,...,f_k, x):
 </div>
 </div>
 
-<div id="outline-container-orgcaebe8c" class="outline-3">
-<h3 id="orgcaebe8c">All vs All (AVA)</h3>
-<div class="outline-text-3" id="text-orgcaebe8c">
+<div id="outline-container-org7f65a22" class="outline-3">
+<h3 id="org7f65a22">All vs All (AVA)</h3>
+<div class="outline-text-3" id="text-org7f65a22">
 <p>
 All vs All, sometimes called <span class="underline">all pairs</span>, trains \(K(K-1)/2\) classifiers:
 </p>
@@ -150,9 +160,9 @@ Note: The teacher might ask to explain the algorithm in more detail
 </div>
 </div>
 
-<div id="outline-container-org261620f" class="outline-3">
-<h3 id="org261620f">Ova vs Ava</h3>
-<div class="outline-text-3" id="text-org261620f">
+<div id="outline-container-org726a092" class="outline-3">
+<h3 id="org726a092">Ova vs Ava</h3>
+<div class="outline-text-3" id="text-org726a092">
 <p>
 Train time:
 </p>
@@ -181,9 +191,9 @@ Error:
 </div>
 </div>
 
-<div id="outline-container-orgacfec7b" class="outline-3">
-<h3 id="orgacfec7b">Macroaveraging vs Microaveraging</h3>
-<div class="outline-text-3" id="text-orgacfec7b">
+<div id="outline-container-orgf5344c1" class="outline-3">
+<h3 id="orgf5344c1">Macroaveraging vs Microaveraging</h3>
+<div class="outline-text-3" id="text-orgf5344c1">
 <ul class="org-ul">
 <li>Microaveraging: average over examples</li>
 <li>Macroaveraging: calculate evaluation score (e.g. accuracy) for each

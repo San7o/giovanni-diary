@@ -7,8 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="/simple.css" />
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
+<style>
+  html, body {
+      height: 100%;
+      margin: 0;
+  }
+
+  body {
+      display: grid;
+      place-items: center;  /* centers vertically & horizontally */
+  }
+</style>
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -52,9 +62,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
 </p>
 
-<div id="outline-container-org0152a98" class="outline-2">
-<h2 id="org0152a98">Dynamic Programming</h2>
-<div class="outline-text-2" id="text-org0152a98">
+<div id="outline-container-org9b7d98c" class="outline-2">
+<h2 id="org9b7d98c">Dynamic Programming</h2>
+<div class="outline-text-2" id="text-org9b7d98c">
 <p>
 Approccio generale per decidere che tecnica utilizzare:
 </p>
@@ -66,9 +76,9 @@ Approccio generale per decidere che tecnica utilizzare:
 </ul>
 </div>
 
-<div id="outline-container-org9d663c2" class="outline-3">
-<h3 id="org9d663c2">Domino</h3>
-<div class="outline-text-3" id="text-org9d663c2">
+<div id="outline-container-org9986381" class="outline-3">
+<h3 id="org9986381">Domino</h3>
+<div class="outline-text-3" id="text-org9986381">
 <p>
 Scrivere un algoritmo efficiente che prenda in input un intero \(n\) e
 restituisca il numero di possibili disposizioni di \(n\) tessere di
@@ -122,9 +132,9 @@ fattore \(n\).
 </div>
 </div>
 
-<div id="outline-container-org022689a" class="outline-3">
-<h3 id="org022689a">Hateville</h3>
-<div class="outline-text-3" id="text-org022689a">
+<div id="outline-container-org3a4a69e" class="outline-3">
+<h3 id="org3a4a69e">Hateville</h3>
+<div class="outline-text-3" id="text-org3a4a69e">
 <p>
 Ogni abitante di Hateville \(i\) ha intenzione di donare una quantità
 \(D[i]\). ma non intende partecipare ad una raccolta fondi a cui
@@ -162,9 +172,9 @@ int hateville(int[] D, int n)
 </div>
 </div>
 
-<div id="outline-container-orgaaa912a" class="outline-3">
-<h3 id="orgaaa912a">Zaino</h3>
-<div class="outline-text-3" id="text-orgaaa912a">
+<div id="outline-container-orga51a954" class="outline-3">
+<h3 id="orga51a954">Zaino</h3>
+<div class="outline-text-3" id="text-orga51a954">
 <p>
 Dato un insieme di oggetti, ognuno caratterizzato da un peso e un
 profitto, e uno zaino con un limite di capacita', individuate un
@@ -206,9 +216,9 @@ Complessità computazionale: \(O(nc)\)
 </div>
 </div>
 
-<div id="outline-container-org647d0b6" class="outline-3">
-<h3 id="org647d0b6">Zaino senza limiti</h3>
-<div class="outline-text-3" id="text-org647d0b6">
+<div id="outline-container-orgcfc2431" class="outline-3">
+<h3 id="orgcfc2431">Zaino senza limiti</h3>
+<div class="outline-text-3" id="text-orgcfc2431">
 <p>
 Dato uno zaino con capacita' \(C\) e \(n\) oggetti caratterizzati da un
 peso \(w\) e un profitto \(p\), definiamo \(DP[c]\) come il massimo profitto
@@ -249,9 +259,9 @@ Complessità temporale \(O(nC)\) e spaziale \(\Theta (C)\).
 </div>
 </div>
 
-<div id="outline-container-orgbc5698e" class="outline-3">
-<h3 id="orgbc5698e">Sottosequenza comune massimale</h3>
-<div class="outline-text-3" id="text-orgbc5698e">
+<div id="outline-container-orgb1687e1" class="outline-3">
+<h3 id="orgb1687e1">Sottosequenza comune massimale</h3>
+<div class="outline-text-3" id="text-orgb1687e1">
 <p>
 Una sequenza \(P\) e' una sottosequenza di \(T\) se \(P\) e' ottenuto da \(T\)
 rimuovendo uno o più dei suoi elementi. La sequenza vuota e'
@@ -324,9 +334,9 @@ Complessità \(O(nm)\).
 </div>
 </div>
 
-<div id="outline-container-orgd432261" class="outline-3">
-<h3 id="orgd432261">String matching approssimato</h3>
-<div class="outline-text-3" id="text-orgd432261">
+<div id="outline-container-org62d1301" class="outline-3">
+<h3 id="org62d1301">String matching approssimato</h3>
+<div class="outline-text-3" id="text-org62d1301">
 <p>
 Siano \(P\) e \(T\) due stringhe. Un'occorrenza k-approssimata di \(P\) in
 \(T\) e' una copia di \(P\) in \(T\) in cui sono ammessi k "errori" tra \(P\)
@@ -364,9 +374,9 @@ Si potrebbe dimostrare per assurdo come nell'algoritmo precedente. Intuitivament
 </div>
 </div>
 
-<div id="outline-container-org022a019" class="outline-3">
-<h3 id="org022a019">Prodotto di catena di matrici</h3>
-<div class="outline-text-3" id="text-org022a019">
+<div id="outline-container-org7864e9f" class="outline-3">
+<h3 id="org7864e9f">Prodotto di catena di matrici</h3>
+<div class="outline-text-3" id="text-org7864e9f">
 <p>
 Data una sequenza di \(n\) matrici \(A_n\) compatibili due a due al
 prodotto, vogliamo calcolare il loro prodotto impiegando il più basso
@@ -403,9 +413,9 @@ aver iterato su \(k\).
 </div>
 </div>
 
-<div id="outline-container-org3539cef" class="outline-3">
-<h3 id="org3539cef">Insieme indipendente di intervalli pesati</h3>
-<div class="outline-text-3" id="text-org3539cef">
+<div id="outline-container-orgc0804f3" class="outline-3">
+<h3 id="orgc0804f3">Insieme indipendente di intervalli pesati</h3>
+<div class="outline-text-3" id="text-orgc0804f3">
 <p>
 Siano dati \(n\) intervalli distinti della retta reale, aperti a destra,
 dove all'intervallo \(i\) e' associato un profitto \(w_i\).  Trovare un

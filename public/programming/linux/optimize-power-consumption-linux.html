@@ -7,8 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="/simple.css" />
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
+<style>
+  html, body {
+      height: 100%;
+      margin: 0;
+  }
+
+  body {
+      display: grid;
+      place-items: center;  /* centers vertically & horizontally */
+  }
+</style>
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -20,9 +30,9 @@
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
 
-<div id="outline-container-orgd0c302b" class="outline-2">
-<h2 id="orgd0c302b">Optimize power consumption on Linux</h2>
-<div class="outline-text-2" id="text-orgd0c302b">
+<div id="outline-container-org7ef4dc6" class="outline-2">
+<h2 id="org7ef4dc6">Optimize power consumption on Linux</h2>
+<div class="outline-text-2" id="text-org7ef4dc6">
 <p>
 This documents contains notes regarding my efforts to increase
 battery life on my Linux laptop[s]. I don't use my laptop for
@@ -39,9 +49,9 @@ me on Mastodon <a href="https://mastodon.social/@santo7">@santo7@mastodon.social
 </p>
 </div>
 
-<div id="outline-container-org11a30cc" class="outline-4">
-<h4 id="org11a30cc">Index</h4>
-<div class="outline-text-4" id="text-org11a30cc">
+<div id="outline-container-orge8b80eb" class="outline-4">
+<h4 id="orge8b80eb">Index</h4>
+<div class="outline-text-4" id="text-orge8b80eb">
 <ul class="org-ul">
 <li>ACPI Specification</li>
 <li>Linux's ACPI</li>
@@ -71,9 +81,9 @@ me on Mastodon <a href="https://mastodon.social/@santo7">@santo7@mastodon.social
 </div>
 </div>
 
-<div id="outline-container-org1d3f873" class="outline-4">
-<h4 id="org1d3f873">ACPI Specification</h4>
-<div class="outline-text-4" id="text-org1d3f873">
+<div id="outline-container-org6a660b4" class="outline-4">
+<h4 id="org6a660b4">ACPI Specification</h4>
+<div class="outline-text-4" id="text-org6a660b4">
 <p>
 Before tinkering with your system, you should have a decent
 understanding of how the operating system works in the context of
@@ -122,9 +132,9 @@ storage&#x2026;).
 </div>
 </div>
 
-<div id="outline-container-org1de452f" class="outline-4">
-<h4 id="org1de452f">Linux's ACPI</h4>
-<div class="outline-text-4" id="text-org1de452f">
+<div id="outline-container-orgdd62486" class="outline-4">
+<h4 id="orgdd62486">Linux's ACPI</h4>
+<div class="outline-text-4" id="text-orgdd62486">
 <p>
 An overview of the Linux's ACPI implementation can be found <a href="https://www.kernel.org/doc/ols/2005/ols2005v1-pages-59-76.pdf">here</a>.
 Briefly, it is composed of an OS Service Layer which abstracts the
@@ -154,9 +164,9 @@ implement.
 </div>
 </div>
 
-<div id="outline-container-org641c111" class="outline-4">
-<h4 id="org641c111">Understand what consumes the most</h4>
-<div class="outline-text-4" id="text-org641c111">
+<div id="outline-container-org4f53377" class="outline-4">
+<h4 id="org4f53377">Understand what consumes the most</h4>
+<div class="outline-text-4" id="text-org4f53377">
 <p>
 While you may try to thinker with configuration files and settings
 following common heuristics (such as "less processes = less power
@@ -177,8 +187,8 @@ what you can get greately depends on what your hardware provides.
 </div>
 
 <ul class="org-ul">
-<li><a id="orgcf5ef86"></a>Powertop<br />
-<div class="outline-text-5" id="text-orgcf5ef86">
+<li><a id="orgfd798b0"></a>Powertop<br />
+<div class="outline-text-5" id="text-orgfd798b0">
 <p>
 A general tool that works well is <a href="https://linux.die.net/man/8/powertop">powertop</a> which will give you
 per-process power consumption and information about CPU states,
@@ -197,8 +207,8 @@ between logs, and so on.
 </div>
 </li>
 
-<li><a id="org2334ee8"></a>Iotop<br />
-<div class="outline-text-5" id="text-org2334ee8">
+<li><a id="org433617a"></a>Iotop<br />
+<div class="outline-text-5" id="text-org433617a">
 <p>
 Another useful tool is <a href="https://www.man7.org/linux/man-pages/man8/iotop.8.html">iotop</a> which will give you information about
 disk usage. Even though this does not directly list power
@@ -213,8 +223,8 @@ later we'll see an option in BTRFS that improves performance.
 </div>
 </li>
 
-<li><a id="orged186ee"></a>Plot CPU power usage<br />
-<div class="outline-text-5" id="text-orged186ee">
+<li><a id="orgee321f5"></a>Plot CPU power usage<br />
+<div class="outline-text-5" id="text-orgee321f5">
 <p>
 To evaluate a change in your system, you can log and graph different
 statistics and compare changes. The following script records CPU power
@@ -302,7 +312,7 @@ plot <span style="color: #ffa07a;">"power_log.csv"</span> using 1:2 with lines t
 
 
 
-<div id="orgd590258" class="figure">
+<div id="orgfb4b598" class="figure">
 <p><img src="../../ephemeris/images/gnuplot-power.jpeg" alt="gnuplot-power.jpeg" width="600px" align="center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Gnuplot output</p>
@@ -384,9 +394,9 @@ And you need to add this to the <code>prometheus.yaml</code> file:
 </div>
 
 
-<div id="outline-container-org2a04fad" class="outline-4">
-<h4 id="org2a04fad">Save yourself time: TLP</h4>
-<div class="outline-text-4" id="text-org2a04fad">
+<div id="outline-container-orgf92ff68" class="outline-4">
+<h4 id="orgf92ff68">Save yourself time: TLP</h4>
+<div class="outline-text-4" id="text-orgf92ff68">
 <p>
 To save yourself some time configuring your system, you can use <a href="https://linrunner.de/tlp/introduction.html">TLP</a>
 (or any similar tool) which automatically configures the kernel with
@@ -422,9 +432,9 @@ There are plenty of utilities like this, use them at your own risk.
 </div>
 </div>
 
-<div id="outline-container-org7bc4281" class="outline-4">
-<h4 id="org7bc4281">Kernel Settings</h4>
-<div class="outline-text-4" id="text-org7bc4281">
+<div id="outline-container-org2fb4b9e" class="outline-4">
+<h4 id="org2fb4b9e">Kernel Settings</h4>
+<div class="outline-text-4" id="text-org2fb4b9e">
 <p>
 There are many settings you can tune on linux, which will mostly
 depend on your hardware and drivers. A decent list can be found in the
@@ -501,8 +511,8 @@ the settings, <code>tlp.conf</code> is a good place to start.
 </div>
 
 <ul class="org-ul">
-<li><a id="org1015f3e"></a>Frequency Scaling<br />
-<div class="outline-text-5" id="text-org1015f3e">
+<li><a id="orgf7df0e9"></a>Frequency Scaling<br />
+<div class="outline-text-5" id="text-orgf7df0e9">
 <p>
 You can choose a frequency scaling governor to manage throttling.
 This will dynamically change the clock's frequency and voltage
@@ -522,8 +532,8 @@ powersave in tlp's settings (which is the default setting).
 </div>
 </li>
 
-<li><a id="org8d1e740"></a>Maximum charge level<br />
-<div class="outline-text-5" id="text-org8d1e740">
+<li><a id="org4d328fa"></a>Maximum charge level<br />
+<div class="outline-text-5" id="text-org4d328fa">
 <p>
 To increase battery life, it is recommended to reduce the maximum
 charge level below 100% and prevent the charging process to happen for
@@ -538,8 +548,8 @@ laptops (like my HP one) this is not supported and the command
 </div>
 </li>
 
-<li><a id="org31505ef"></a>Omit Scheduling-Clock ticks for idle CPUs<br />
-<div class="outline-text-5" id="text-org31505ef">
+<li><a id="org3d16adf"></a>Omit Scheduling-Clock ticks for idle CPUs<br />
+<div class="outline-text-5" id="text-org3d16adf">
 <p>
 If you are doing mostly lightweight work with long idle periods, you
 can limit the scheduling-clock interrupt to prevent waking up some
@@ -561,8 +571,8 @@ CONFIG_HZ_100=y
 </div>
 </li>
 
-<li><a id="org90315b4"></a>Disable Atime in BTRFS<br />
-<div class="outline-text-5" id="text-org90315b4">
+<li><a id="org2b71d27"></a>Disable Atime in BTRFS<br />
+<div class="outline-text-5" id="text-org2b71d27">
 <p>
 BTRFS is a popular filesystem. A part of its design is the CoW
 (Copy on Write) where a certain file would get copied in another
@@ -596,8 +606,8 @@ keep this in mind.
 </div>
 </li>
 
-<li><a id="orgd7e404d"></a>Kernel Flags<br />
-<div class="outline-text-5" id="text-orgd7e404d">
+<li><a id="org96144bf"></a>Kernel Flags<br />
+<div class="outline-text-5" id="text-org96144bf">
 <p>
 You can add the following kernel flags when booting your system:
 </p>
@@ -622,9 +632,9 @@ redrawing.</li>
 </ul>
 </div>
 
-<div id="outline-container-org62a403d" class="outline-4">
-<h4 id="org62a403d">Helpful tips</h4>
-<div class="outline-text-4" id="text-org62a403d">
+<div id="outline-container-org1d42fff" class="outline-4">
+<h4 id="org1d42fff">Helpful tips</h4>
+<div class="outline-text-4" id="text-org1d42fff">
 <p>
 Here is a list of other helpful things that will make your operating
 system lighter and more efficient.
@@ -632,8 +642,8 @@ system lighter and more efficient.
 </div>
 
 <ul class="org-ul">
-<li><a id="org36e6df2"></a>Light graphical session<br />
-<div class="outline-text-5" id="text-org36e6df2">
+<li><a id="org7a1b16d"></a>Light graphical session<br />
+<div class="outline-text-5" id="text-org7a1b16d">
 <p>
 If you are using a graphical environment, chances are that you do not
 need a full blown desktop environment to manage the position of your
@@ -654,8 +664,8 @@ are the best.
 </div>
 </li>
 
-<li><a id="org8cf7601"></a>Have less background processes running<br />
-<div class="outline-text-5" id="text-org8cf7601">
+<li><a id="orgd72cea8"></a>Have less background processes running<br />
+<div class="outline-text-5" id="text-orgd72cea8">
 <p>
 If you are using a linux distribution instead of compiling your system
 on your own, chances are that the maintainers of said distribution
@@ -679,8 +689,8 @@ daemons, etc&#x2026;
 </div>
 </li>
 
-<li><a id="org84bf0d8"></a>Lower the backlight<br />
-<div class="outline-text-5" id="text-org84bf0d8">
+<li><a id="org31f7ef0"></a>Lower the backlight<br />
+<div class="outline-text-5" id="text-org31f7ef0">
 <p>
 Lower the backlight of your laptop as much as you are comfortable
 with.
@@ -690,9 +700,9 @@ with.
 </ul>
 </div>
 
-<div id="outline-container-org9af1de7" class="outline-4">
-<h4 id="org9af1de7">Conclusions</h4>
-<div class="outline-text-4" id="text-org9af1de7">
+<div id="outline-container-org00f43b5" class="outline-4">
+<h4 id="org00f43b5">Conclusions</h4>
+<div class="outline-text-4" id="text-org00f43b5">
 <p>
 I hope you learned something new from this article. I will keep this
 updated with new information I gain overtime, if you have any
