@@ -62,9 +62,9 @@
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
 </p>
 
-<div id="outline-container-orgb566ea4" class="outline-2">
-<h2 id="orgb566ea4">Disjoint Sets</h2>
-<div class="outline-text-2" id="text-orgb566ea4">
+<div id="outline-container-org52633e3" class="outline-2">
+<h2 id="org52633e3">Disjoint Sets</h2>
+<div class="outline-text-2" id="text-org52633e3">
 <p>
 API:
 </p>
@@ -90,9 +90,9 @@ stesso rappresentante. Questo ha una complessità di \(O(n)+m\) volte
 </p>
 </div>
 
-<div id="outline-container-org2b840b2" class="outline-3">
-<h3 id="org2b840b2">Implementazione su liste</h3>
-<div class="outline-text-3" id="text-org2b840b2">
+<div id="outline-container-org6a02332" class="outline-3">
+<h3 id="org6a02332">Implementazione su liste</h3>
+<div class="outline-text-3" id="text-org6a02332">
 <p>
 Possiamo implementare disjoint sets in modo tale che ogni insieme
 viene rappresentato da una lista concatenata, dove il primo elemento
@@ -108,9 +108,9 @@ stesso.
 </div>
 </div>
 
-<div id="outline-container-orgb02f67d" class="outline-3">
-<h3 id="orgb02f67d">Implementazione su alberi</h3>
-<div class="outline-text-3" id="text-orgb02f67d">
+<div id="outline-container-org7f23165" class="outline-3">
+<h3 id="org7f23165">Implementazione su alberi</h3>
+<div class="outline-text-3" id="text-org7f23165">
 <p>
 Possiamo implementare disjoint sets in modo tale che ogni insieme
 viene rappresentato da un albero, dove la radice e' il rappresentante
@@ -125,9 +125,9 @@ padre. Senza ribilanciare l'albero al merge, vale:
 </div>
 </div>
 
-<div id="outline-container-orgc8bd3bc" class="outline-3">
-<h3 id="orgc8bd3bc">Euristiche</h3>
-<div class="outline-text-3" id="text-orgc8bd3bc">
+<div id="outline-container-orgb687228" class="outline-3">
+<h3 id="orgb687228">Euristiche</h3>
+<div class="outline-text-3" id="text-orgb687228">
 <p>
 Le tecniche euristiche vengono utilizzate per trovare una soluzione
 approssimata, qualora i metodi classici falliscano nel trovare una
@@ -146,9 +146,9 @@ Possiamo applicare tre euristiche nel caso degli insiemi disgiunti:
 </ul>
 </div>
 
-<div id="outline-container-org2f8a8ff" class="outline-4">
-<h4 id="org2f8a8ff">Euristica sul peso (Liste)</h4>
-<div class="outline-text-4" id="text-org2f8a8ff">
+<div id="outline-container-org3dd481b" class="outline-4">
+<h4 id="org3dd481b">Euristica sul peso (Liste)</h4>
+<div class="outline-text-4" id="text-org3dd481b">
 <p>
 Durante la \(merge()\) si aggancia la lista più' corta a quella più
 lunga, salvandosi la lunghezza della lista. E' possibile dimostrare
@@ -157,9 +157,9 @@ che il costo di \(merge()\) e' limitato superiormente da \(O(logn)\).
 </div>
 </div>
 
-<div id="outline-container-org436a596" class="outline-4">
-<h4 id="org436a596">Euristica del rango (Alberi)</h4>
-<div class="outline-text-4" id="text-org436a596">
+<div id="outline-container-orgad341a3" class="outline-4">
+<h4 id="orgad341a3">Euristica del rango (Alberi)</h4>
+<div class="outline-text-4" id="text-orgad341a3">
 <p>
 Ogni nodo \(x\) mantiene informazioni sul proprio rango ossia l'altezza
 tra \(x\) e la foglia più bassa discendente da \(x\). Quando facciamo
@@ -176,9 +176,9 @@ piccolo di \(log(n)\) dunque l'operazione \(find(x)\) ha costo \(O(logn)\).
 </div>
 </div>
 
-<div id="outline-container-orgeccdf4a" class="outline-4">
-<h4 id="orgeccdf4a">Euristica della compressione dei cammini (Alberi)</h4>
-<div class="outline-text-4" id="text-orgeccdf4a">
+<div id="outline-container-orgd544abe" class="outline-4">
+<h4 id="orgd544abe">Euristica della compressione dei cammini (Alberi)</h4>
+<div class="outline-text-4" id="text-orgd544abe">
 <p>
 L'albero viene "appiattito" in modo che ricerche successive di \(x\)
 siano svolte in \(O(1)\).
@@ -186,9 +186,9 @@ siano svolte in \(O(1)\).
 </div>
 </div>
 
-<div id="outline-container-org9a2f32d" class="outline-4">
-<h4 id="org9a2f32d">Rango + compressione dei cammini</h4>
-<div class="outline-text-4" id="text-org9a2f32d">
+<div id="outline-container-org6d466bc" class="outline-4">
+<h4 id="org6d466bc">Rango + compressione dei cammini</h4>
+<div class="outline-text-4" id="text-org6d466bc">
 <p>
 Se applichiamo entrambe le ultime due euristiche, vale che il rango
 non e' più l'altezza del nodo, ma il limite superiore all'altezza del

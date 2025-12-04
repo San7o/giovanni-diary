@@ -5,6 +5,106 @@
 * Changelog
 #+INDEX: Giovanni's Diary!Changelog
 
+#+BEGIN_EXPORT html
+
+<h2>Commits per Week</h2>
+
+<canvas id="commitChart" width="900" height="400"></canvas>
+
+<style>
+#chartContainer {
+  width: 100%;
+  max-width: 100%;
+  height: 400px;
+}
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  // helper to get ISO week string YYYY-Www
+  function getISOWeek(date) {
+    const d = new Date(date);
+    d.setUTCHours(0,0,0,0);
+    // Thursday in current week decides the year
+    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+    const yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+    const weekNo = Math.ceil((((d - yearStart)/86400000) + 1)/7);
+    return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2,'0')}`;
+  }
+
+  async function renderChart() {
+    const endpoint = "./commits.json";
+    const res = await fetch(endpoint);
+    const data = await res.json();  // expects {"YYYY-MM-DD": count}
+
+    // aggregate per week
+    const perWeek = {};
+    const days = Object.keys(data).sort();
+    for (const day of days) {
+      const week = getISOWeek(day);
+      perWeek[week] = (perWeek[week] || 0) + data[day];
+    }
+
+    // continuous weeks between first and last
+    const weekKeys = Object.keys(perWeek).sort();
+    if (weekKeys.length === 0) return;
+
+    const [firstYear, firstWeek] = weekKeys[0].split('-W').map(Number);
+    const [lastYear, lastWeek] = weekKeys[weekKeys.length-1].split('-W').map(Number);
+
+    const fullWeeks = [];
+    const values = [];
+
+    let y = firstYear, w = firstWeek;
+    while (y < lastYear || (y === lastYear && w <= lastWeek)) {
+      const key = `${y}-W${String(w).padStart(2,'0')}`;
+      fullWeeks.push(key);
+      values.push(perWeek[key] || 0);
+
+      w++;
+      // estimate weeks in year
+      const weeksInYear = new Date(Date.UTC(y+1,0,4)).getUTCDay()===4 ? 53 : 52;
+      if (w > weeksInYear) {
+        w = 1;
+        y++;
+      }
+    }
+
+    const ctx = document.getElementById("commitChart").getContext("2d");
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: fullWeeks,
+        datasets: [{
+          label: "Commits per Week",
+          data: values,
+          fill: false,
+          borderWidth: 2,
+        }],
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: { title: { display: true, text: "Week" } },
+          y: { beginAtZero: true, title: { display: true, text: "Commits" } }
+        }
+      }
+    });
+  }
+
+  renderChart();
+</script>
+
+<h2>Commits</h2>
+
+#+END_EXPORT
+
+
 #+INCLUDE: "git-history.txt"
 
 

@@ -28,3 +28,6 @@ git log --pretty=format:"- %ad %s" --date=short > content/git-history.txt
 
 # Html
 cp me.html public/
+
+# Generate commits
+node gather.js
