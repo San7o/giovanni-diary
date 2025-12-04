@@ -15,7 +15,7 @@ sed -i "s/WORDS/$WORDS/" public/first-page.html
 sed -i "s/FILES/$FILES/" public/first-page.html
 
 # Generate sitemap
-find public/ -type f | sed 's/public/https:\/\/giovanni-diary.netlify.app/g' > public/sitemap.txt
+find public/ -type f | sed 's/public/https:\/\/san7o.github.io/giovanni-diary/g' > public/sitemap.txt
 
 # Copy robots.txt
 cp robots.txt public/

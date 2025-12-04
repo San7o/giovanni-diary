@@ -41,8 +41,8 @@
 <link rel=\"stylesheet\" href=\"https://san7o.github.io/micro-style.css/micro-style.css\" />
 <meta property=\"og:title\" content=\"Giovanni's Diary\">
 <meta property=\"og:description\" content=\"Diary of Giovanni's adventures.\">
-<meta property=\"og:image\" content=\"https://giovanni-diary.netlify.app/logo.png\">
-<meta property=\"og:url\" content=\"https://giovanni-diary.netlify.app/\">")
+<meta property=\"og:image\" content=\"https://san7o.github.io/giovanni-diary/logo.png\">
+<meta property=\"og:url\" content=\"https://san7o.github.io/giovanni-diary/\">")
 	;; Generate the site output
 	(org-publish-all t)
   (shell-command "./after-build.sh")
@@ -67,7 +67,7 @@
 	 :output-directory (concat root-dir "/public/feeds")
    :category-info '((:category "Ephemeris"
                                :title "Giovanni's Diary Ephemeris"
-                               :link "giovanni-diary.netlify.app/ephemeris/ephemeris.html"
+                               :link "san7o.github.io/giovanni-diary/ephemeris/ephemeris.html"
                                :description "Ephemeris (ἐφημερίς) is an ancient greek word meaning diary, journal. In astronomy, ephemeris refers to a book of tables describing the trajectory of astronomical objects. Here I will keep a sort of public diary with various thoughts and stuff I find interesting for the record.")
                     (:category "Surroundings"
                                :title "Giovanni's Diary Surroundings"
