@@ -37,7 +37,8 @@
 				org-html-head-include-scripts nil       ;; Use our own scripts
 				org-html-head-include-default-style nil ;; Use our own styles
 				;; org-html-head "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
-				org-html-head "<link rel=\"stylesheet\" href=\"https://san7o.github.io/micro-style.css/micro-style.css\" />
+				org-html-head "
+<link rel=\"stylesheet\" href=\"https://san7o.github.io/micro-style.css/micro-style.css\" />
 <style>
   html, body {
       height: 100%;
@@ -49,6 +50,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel=\"icon\" href=\"/giovanni-diary/favicon.ico\" type=\"image/x-icon\">
 <meta property=\"og:title\" content=\"Giovanni's Diary\">
 <meta property=\"og:description\" content=\"Diary of Giovanni's adventures.\">
 <meta property=\"og:image\" content=\"https://san7o.github.io/giovanni-diary/logo.png\">
