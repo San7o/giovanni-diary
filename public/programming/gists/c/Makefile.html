@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -29,10 +31,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-
-<div id="outline-container-org020f5a2" class="outline-2">
-<h2 id="org020f5a2">C / Makefile</h2>
-<div class="outline-text-2" id="text-org020f5a2">
+<div id="outline-container-orgabac155" class="outline-2">
+<h2 id="orgabac155">C / Makefile</h2>
+<div class="outline-text-2" id="text-orgabac155">
 <p>
 Simple Makefile template for C projects.
 </p>
@@ -48,7 +49,7 @@ Simple Makefile template for C projects.
 </span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
 </span>CFLAGS        = -Wall -Werror -Wextra -Wpedantic -std=c99
 DEBUG_FLAGS   = -ggdb
-RELEASE_FLAGS = -DCOMMIT_HASH=$(shell git rev-parse --verify HEAD)
+RELEASE_FLAGS = -DCOMMIT_HASH=$(<span style="color: #fa8072;">shell git rev-parse --verify HEAD</span>)
 LDFLAGS       =
 CC?           = gcc
 
@@ -61,29 +62,29 @@ OBJ      = hello.o
 <span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
 </span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Commands
 </span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
-</span>all: $(OUT_NAME)
+</span>all: $(<span style="color: #fa8072;">OUT_NAME</span>)
 
-debug: CFLAGS += $(DEBUG_FLAGS)
-debug: $(OUT_NAME)
+debug: CFLAGS += $(<span style="color: #fa8072;">DEBUG_FLAGS</span>)
+debug: $(<span style="color: #fa8072;">OUT_NAME</span>)
 
-release: CFLAGS += $(RELEASE_FLAGS) 
-release: $(OUT_NAME)
+release: CFLAGS += $(<span style="color: #fa8072;">RELEASE_FLAGS</span>) 
+release: $(<span style="color: #fa8072;">OUT_NAME</span>)
 
-run: $(OUT_NAME)
-  chmod +x $(OUT_NAME)
-  ./$(OUT_NAME)
+run: $(<span style="color: #fa8072;">OUT_NAME</span>)
+  chmod +x $(<span style="color: #fa8072;">OUT_NAME</span>)
+  ./$(<span style="color: #fa8072;">OUT_NAME</span>)
 
 clean:
-  rm -f $(OBJ)
+  rm -f $(<span style="color: #fa8072;">OBJ</span>)
 
 distclean:
-  rm -f $(OUT_NAME)
+  rm -f $(<span style="color: #fa8072;">OUT_NAME</span>)
 
-$(OUT_NAME): $(OBJ)
-  $(CC) $(OBJ) $(LDFLAGS) $(CFLAGS) -o $(OUT_NAME)
+$(<span style="color: #fa8072;">OUT_NAME</span>): $(<span style="color: #fa8072;">OBJ</span>)
+  $(<span style="color: #fa8072;">CC</span>) $(<span style="color: #fa8072;">OBJ</span>) $(<span style="color: #fa8072;">LDFLAGS</span>) $(<span style="color: #fa8072;">CFLAGS</span>) -o $(<span style="color: #fa8072;">OUT_NAME</span>)
 
 %.o: %.c
-  $(CC) $(CFLAGS) -c $&lt; -o $<span style="color: #eedd82;">@</span>
+  $(<span style="color: #fa8072;">CC</span>) $(<span style="color: #fa8072;">CFLAGS</span>) -c $&lt; -o $<span style="color: #eedd82;">@</span>
 </pre>
 </div>
 

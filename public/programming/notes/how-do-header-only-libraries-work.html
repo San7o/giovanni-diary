@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -29,10 +31,9 @@
 <p>
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
-
-<div id="outline-container-orgeff2f04" class="outline-2">
-<h2 id="orgeff2f04">How do header only libraries work?</h2>
-<div class="outline-text-2" id="text-orgeff2f04">
+<div id="outline-container-orgcf39dbe" class="outline-2">
+<h2 id="orgcf39dbe">How do header only libraries work?</h2>
+<div class="outline-text-2" id="text-orgcf39dbe">
 <p>
 C code is commonly split over two types of files: .h headers
 containing declarations, and .c files for their definitions. Usually,
@@ -49,8 +50,8 @@ should only appear in a single translation unit (the .c file).
 C11 - 6.9 External definitions:
 </p>
 
-<pre class="example">
-&gt; There shall be no more than one external definition for each
+<div class="org-src-container">
+<pre class="src src-nil">&gt; There shall be no more than one external definition for each
 &gt; identifier declared with internal linkage in a translation
 &gt; unit. Moreover, if an identifier declared with internal linkage is
 &gt; used in an expression (other than as a part of the operand of a
@@ -58,6 +59,7 @@ C11 - 6.9 External definitions:
 &gt; there shall be exactly one external definition for the identifier in
 &gt; the translation unit
 </pre>
+</div>
 
 <p>
 Note that this only applies to external definitions. For `static`
@@ -130,11 +132,9 @@ limited in size and provide only a few functionalities, not for
 writing an operating system.
 </p>
 </div>
-
-
-<div id="outline-container-orgaa83e3e" class="outline-3">
-<h3 id="orgaa83e3e">A note on inlining</h3>
-<div class="outline-text-3" id="text-orgaa83e3e">
+<div id="outline-container-org5a4a593" class="outline-3">
+<h3 id="org5a4a593">A note on inlining</h3>
+<div class="outline-text-3" id="text-org5a4a593">
 <p>
 For performance reasons, you may want the compiler to inline certain
 functions. By inlining a function, you remove all the function calling
@@ -147,8 +147,8 @@ the compiler to do so.
 C11 Draft - 6.7.4 Function specifiers:
 </p>
 
-<pre class="example">
-&gt; A function declared with an inline function specifier is an inline
+<div class="org-src-container">
+<pre class="src src-nil">&gt; A function declared with an inline function specifier is an inline
 &gt; function. Making a function an inline function suggests that calls
 &gt; to the function be as fast as possible. The extent to which such
 &gt; suggestions are effective is implementation-defined.
@@ -165,6 +165,7 @@ C11 Draft - 6.7.4 Function specifiers:
 &gt; call to the function uses the inline definition or the external
 &gt; definition.
 </pre>
+</div>
 
 
 <p>
@@ -201,11 +202,9 @@ definition, for example:
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org28572a6" class="outline-3">
-<h3 id="org28572a6">About the micro-headers</h3>
-<div class="outline-text-3" id="text-org28572a6">
+<div id="outline-container-orgafd4ede" class="outline-3">
+<h3 id="orgafd4ede">About the micro-headers</h3>
+<div class="outline-text-3" id="text-orgafd4ede">
 <p>
 I spent a lot of my free time writing the micro-headers recently and
 going deep into this "subgenre" of programming, you can find my code

@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -61,10 +63,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-
-<div id="outline-container-org49baa60" class="outline-2">
-<h2 id="org49baa60">Machine Learning Basics</h2>
-<div class="outline-text-2" id="text-org49baa60">
+<div id="outline-container-org1d2c664" class="outline-2">
+<h2 id="org1d2c664">Machine Learning Basics</h2>
+<div class="outline-text-2" id="text-org1d2c664">
 <p>
 Machine Learning is the study of computer algorithms that improve
 automatically through experience. How they achieve this is the
@@ -93,19 +94,17 @@ information.</li>
 <li><span class="underline">Model testing</span>: the model is evaluated using a test set.</li>
 </ul>
 </div>
-
-<div id="outline-container-orgd1c7307" class="outline-3">
-<h3 id="orgd1c7307">Types of learning</h3>
-<div class="outline-text-3" id="text-orgd1c7307">
+<div id="outline-container-orge63a0f4" class="outline-3">
+<h3 id="orge63a0f4">Types of learning</h3>
+<div class="outline-text-3" id="text-orge63a0f4">
 <p>
 Below are described the types of learning which will be discussed in
 this book:
 </p>
 </div>
-
-<div id="outline-container-orgf6f151c" class="outline-4">
-<h4 id="orgf6f151c">Supervised Learning</h4>
-<div class="outline-text-4" id="text-orgf6f151c">
+<div id="outline-container-orge071e87" class="outline-4">
+<h4 id="orge071e87">Supervised Learning</h4>
+<div class="outline-text-4" id="text-orge071e87">
 <p>
 Given labeled examples, create the model to predict the label, and
 test if the predicted label is correct.
@@ -124,7 +123,7 @@ learn a function to predict \(y\) given \(x\):
 
 <p>
 \(x\) is generally multidimensional (multiple features).
-Applications include:
+      Applications include:
 </p>
 <ul class="org-ul">
 <li>Face recognition</li>
@@ -132,6 +131,8 @@ Applications include:
 <li>Spam detection (classical problem)</li>
 <li>Medical diagnosis</li>
 <li>Biometrics</li>
+</ul>
+<ul class="org-ul">
 <li><span class="underline">Regression</span>: the label is real value:</li>
 </ul></li>
 </ul>
@@ -143,10 +144,9 @@ Applications include:
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org7557dcb" class="outline-4">
-<h4 id="org7557dcb">Unsupervised Learning</h4>
-<div class="outline-text-4" id="text-org7557dcb">
+<div id="outline-container-orgbcd39e5" class="outline-4">
+<h4 id="orgbcd39e5">Unsupervised Learning</h4>
+<div class="outline-text-4" id="text-orgbcd39e5">
 <p>
 The input is given with no labels. The main problems include:
 </p>
@@ -173,10 +173,9 @@ the data.</li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgd8add94" class="outline-4">
-<h4 id="orgd8add94"><b><b>Reinforcement learning</b></b></h4>
-<div class="outline-text-4" id="text-orgd8add94">
+<div id="outline-container-org58ce993" class="outline-4">
+<h4 id="org58ce993"><b><b>Reinforcement learning</b></b></h4>
+<div class="outline-text-4" id="text-org58ce993">
 <p>
 The idea of reinforcement learning is that an <span class="underline">agent</span> learns from the
 <span class="underline">environment</span> by interacting with it and receiving <span class="underline">rewards</span> for
@@ -186,10 +185,9 @@ to take given a state to maximize the overall reward collected.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org8786928" class="outline-4">
-<h4 id="org8786928">Other learning variations</h4>
-<div class="outline-text-4" id="text-org8786928">
+<div id="outline-container-org58ebd31" class="outline-4">
+<h4 id="org58ebd31">Other learning variations</h4>
+<div class="outline-text-4" id="text-org58ebd31">
 <ul class="org-ul">
 <li><span class="underline">semi-supervised</span>: some data have have labels, and some don't.</li>
 <li><span class="underline">active learning</span>: the model learns a labeled dataset, and it
@@ -210,21 +208,18 @@ data point or small batches of data.
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgb7c1c3a" class="outline-3">
-<h3 id="orgb7c1c3a">Features</h3>
-<div class="outline-text-3" id="text-orgb7c1c3a">
+<div id="outline-container-orgf5fe1bf" class="outline-3">
+<h3 id="orgf5fe1bf">Features</h3>
+<div class="outline-text-3" id="text-orgf5fe1bf">
 <p>
 Features are the questions we can ask about the examples. They are
 generally represented as <span class="underline">vectors</span>.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org5edf026" class="outline-3">
-<h3 id="org5edf026">Generalization</h3>
-<div class="outline-text-3" id="text-org5edf026">
+<div id="outline-container-org00fc420" class="outline-3">
+<h3 id="org00fc420">Generalization</h3>
+<div class="outline-text-3" id="text-org00fc420">
 <p>
 Machine learning is about generalization of data.
 </p>
@@ -259,10 +254,9 @@ This is valid for every kind of machine learning.
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgd770e4b" class="outline-3">
-<h3 id="orgd770e4b">Learning process</h3>
-<div class="outline-text-3" id="text-orgd770e4b">
+<div id="outline-container-orgd5f4b52" class="outline-3">
+<h3 id="orgd5f4b52">Learning process</h3>
+<div class="outline-text-3" id="text-orgd5f4b52">
 <p>
 The steps to take in order to learn a model are:
 </p>
@@ -298,24 +292,23 @@ often caused by a bad selection of training samples.</li>
 </ul></li>
 <li><span class="underline">model hypotheses</span>: a model \(Ftask\) is an implementation of a function \(f\):
 \[f \in Ftask\]
-A set of models forms an hypothesis space:
+      A set of models forms an hypothesis space:
 \[Hip \subseteq Ftask\]
-We use an hypothesis space to reduce the number of possible models in order to make our life easier.</li>
+      We use an hypothesis space to reduce the number of possible models in order to make our life easier.</li>
 <li><span class="underline">learning algorithm</span>: the algorithm of your choice based on the problem</li>
 <li><span class="underline">objective</span>: we want to minimize a (generalization) error function
-\(E(f, p)\).
+      \(E(f, p)\).
 \[f* \in arg\ min\ E(f,p), f \in Ftask\]
-\(Ftask\) is too big of a function space, we need an implementation
-(model hypotheses) so we define a model hypothesis space \(Hip \in Ftask\) and seek a solution within that space.
+      \(Ftask\) is too big of a function space, we need an implementation
+      (model hypotheses) so we define a model hypothesis space \(Hip \in Ftask\) and seek a solution within that space.
 \[f_{Hip}*(D) \in arg\ min_{f \in Hip_M} E(f, D)\]
-With \(D=\{z_1, ..., z_n\}\) being the training data.</li>
+      With \(D=\{z_1, ..., z_n\}\) being the training data.</li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org16d0087" class="outline-3">
-<h3 id="org16d0087">Error function</h3>
-<div class="outline-text-3" id="text-org16d0087">
+<div id="outline-container-orgbb66729" class="outline-3">
+<h3 id="orgbb66729">Error function</h3>
+<div class="outline-text-3" id="text-orgbb66729">
 <p>
 Let \(l(f, z)\) be a pointwise loss (a sum of point-losses). The error is computed from a function in an hypothesis space and a training set.
 \[E(f, p) = \mathbb{E}_{z\sim pdata} [l(f, z)]\]
@@ -324,10 +317,9 @@ We want to minimize such error.
 </p>
 </div>
 </div>
-
-<div id="outline-container-orga384f4e" class="outline-3">
-<h3 id="orga384f4e">Underfitting and Overfitting</h3>
-<div class="outline-text-3" id="text-orga384f4e">
+<div id="outline-container-org7d6ede2" class="outline-3">
+<h3 id="org7d6ede2">Underfitting and Overfitting</h3>
+<div class="outline-text-3" id="text-org7d6ede2">
 <ul class="org-ul">
 <li><span class="underline">Underfitting</span>: the error is very big, the output is very "far" from the ideal solution</li>
 <li><span class="underline">Overfitting</span>: there is a large gap between the generalization
@@ -335,10 +327,9 @@ We want to minimize such error.
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgff4a9a6" class="outline-3">
-<h3 id="orgff4a9a6">How to improve generalization</h3>
-<div class="outline-text-3" id="text-orgff4a9a6">
+<div id="outline-container-org50da6bb" class="outline-3">
+<h3 id="org50da6bb">How to improve generalization</h3>
+<div class="outline-text-3" id="text-org50da6bb">
 <p>
 Common techniques to improve generalization include:
 </p>
@@ -377,10 +368,9 @@ Common techniques to improve generalization include:
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgbfa92b7" class="outline-3">
-<h3 id="orgbfa92b7">Parametric vs Non-parametric Models</h3>
-<div class="outline-text-3" id="text-orgbfa92b7">
+<div id="outline-container-org41bfc1e" class="outline-3">
+<h3 id="org41bfc1e">Parametric vs Non-parametric Models</h3>
+<div class="outline-text-3" id="text-org41bfc1e">
 <ul class="org-ul">
 <li><span class="underline">Parametric models</span> have a finite number of parameters
 <ul class="org-ul">
@@ -393,10 +383,9 @@ Common techniques to improve generalization include:
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgd615194" class="outline-3">
-<h3 id="orgd615194">Bias</h3>
-<div class="outline-text-3" id="text-orgd615194">
+<div id="outline-container-org440a1ea" class="outline-3">
+<h3 id="org440a1ea">Bias</h3>
+<div class="outline-text-3" id="text-org440a1ea">
 <p>
 The bias of a model is a measure of how strong the model assumptions are
 </p>

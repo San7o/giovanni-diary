@@ -3,6 +3,8 @@
 # This script is automatically run before generating the static
 # content. Any preparation should be done here.
 
+set -e
+
 mkdir -p public
 
 cp $HOME/.emacs.d/init.org content/programming/emacs/init.org

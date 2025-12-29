@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -61,10 +63,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-
-<div id="outline-container-org2ac42a2" class="outline-2">
-<h2 id="org2ac42a2">Support Vector Machines</h2>
-<div class="outline-text-2" id="text-org2ac42a2">
+<div id="outline-container-org799c41c" class="outline-2">
+<h2 id="org799c41c">Support Vector Machines</h2>
+<div class="outline-text-2" id="text-org799c41c">
 <p>
 Linear classifiers assume the data can be linearly separable. If this
 does not hold, the chosen hyperplane will keep adjusting at each
@@ -72,10 +73,9 @@ iteration without ever converging. Let's now discuss a particular type
 of classifier: support vector machines (SVM).
 </p>
 </div>
-
-<div id="outline-container-org9f5d0ca" class="outline-3">
-<h3 id="org9f5d0ca">Large margin classifiers</h3>
-<div class="outline-text-3" id="text-org9f5d0ca">
+<div id="outline-container-org7ab7aa1" class="outline-3">
+<h3 id="org7ab7aa1">Large margin classifiers</h3>
+<div class="outline-text-3" id="text-org7ab7aa1">
 <p>
 We define the <span class="underline">margin</span> of a classifier as the distance from the
 classification hyperplane to the closest points of either class. We
@@ -168,10 +168,9 @@ For the support vectors, the following holds:
 </p>
 </div>
 </div>
-
-<div id="outline-container-org5aeffb1" class="outline-3">
-<h3 id="org5aeffb1">Maximizing the margin</h3>
-<div class="outline-text-3" id="text-org5aeffb1">
+<div id="outline-container-org2fe6819" class="outline-3">
+<h3 id="org2fe6819">Maximizing the margin</h3>
+<div class="outline-text-3" id="text-org2fe6819">
 <p>
 We want to maximize this margin, therefore we need to minimize \(\frac{1}{2}||\vec{w}||\)
 with the constraint that \(y_i(\vec{w}\vec{x_i}+b) \ge 1\ \forall i\). We
@@ -181,10 +180,9 @@ optimization problem</span>
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgde33058" class="outline-3">
-<h3 id="orgde33058">Soft margin classification</h3>
-<div class="outline-text-3" id="text-orgde33058">
+<div id="outline-container-org1897b2f" class="outline-3">
+<h3 id="org1897b2f">Soft margin classification</h3>
+<div class="outline-text-3" id="text-org1897b2f">
 <p>
 We may have data that is not perfect, for example we may have some
 values that lay on one side of the hyperplane but they are classified
@@ -254,10 +252,9 @@ With this result, the objective is now to minimize the following:
 </p>
 </div>
 </div>
-
-<div id="outline-container-org50242bf" class="outline-3">
-<h3 id="org50242bf">Cases of optimization problems</h3>
-<div class="outline-text-3" id="text-org50242bf">
+<div id="outline-container-orgfec7525" class="outline-3">
+<h3 id="orgfec7525">Cases of optimization problems</h3>
+<div class="outline-text-3" id="text-orgfec7525">
 <p>
 For future analisys, it is useful to discuss what are the main classes
 of optimization problems:
@@ -288,10 +285,9 @@ transpose of \(x\).</li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org1697d09" class="outline-3">
-<h3 id="org1697d09">Solving quadratic problems - Lagrange multipliers</h3>
-<div class="outline-text-3" id="text-org1697d09">
+<div id="outline-container-org0601a72" class="outline-3">
+<h3 id="org0601a72">Solving quadratic problems - Lagrange multipliers</h3>
+<div class="outline-text-3" id="text-org0601a72">
 <p>
 Quadratic optimization problems such as the one discussed above are a well-known class of mathematical programming models with several algorithms. We will now introduce a method so solve such problems using the Lagrange multiplier, that is a strategy for finding the local maxima and minima of a function subject to equation constraints.
 </p>
@@ -354,10 +350,9 @@ vector.</li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgcee8dd9" class="outline-3">
-<h3 id="orgcee8dd9">Non linear SVM - Kernel Trick</h3>
-<div class="outline-text-3" id="text-orgcee8dd9">
+<div id="outline-container-orgac9703e" class="outline-3">
+<h3 id="orgac9703e">Non linear SVM - Kernel Trick</h3>
+<div class="outline-text-3" id="text-orgac9703e">
 <p>
 What if the data is not linearly separable? In such situation we can
 map data to a higher-dimensional space where the training set is

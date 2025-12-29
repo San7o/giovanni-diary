@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -29,20 +31,18 @@
 <p>
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
-
-<div id="outline-container-org4105f68" class="outline-2">
-<h2 id="org4105f68">Setting up an IRC client</h2>
-<div class="outline-text-2" id="text-org4105f68">
+<div id="outline-container-org05c018c" class="outline-2">
+<h2 id="org05c018c">Setting up an IRC client</h2>
+<div class="outline-text-2" id="text-org05c018c">
 <p>
 I have been playing with IRC lately. In this note I will explain how
 to setup your client to connect to an IRC server just in case I need
 to do it again, nothing difficult or impressive really.
 </p>
 </div>
-
-<div id="outline-container-orgdd0dc64" class="outline-3">
-<h3 id="orgdd0dc64">Bouncer</h3>
-<div class="outline-text-3" id="text-orgdd0dc64">
+<div id="outline-container-orgd604c7e" class="outline-3">
+<h3 id="orgd604c7e">Bouncer</h3>
+<div class="outline-text-3" id="text-orgd604c7e">
 <p>
 You want to have a bouncer running on your network, this is needed
 because when you close any IRC client you will loose all the messages.
@@ -78,8 +78,8 @@ This will prompt you a few settings. I will configure so that it will
 connect to libera and disable ssl because it gave me problems.
 </p>
 
-<pre class="example">
-$ znc --makeconf
+<div class="org-src-container">
+<pre class="src src-nil">$ znc --makeconf
 
 [ .. ] Checking for list of available modules...
 [ ** ]
@@ -131,6 +131,7 @@ $ znc --makeconf
 [ ** ]
 [ ?? ] Launch ZNC now? (yes/no) [yes]: no
 </pre>
+</div>
 
 <p>
 You can finally run ZNC by running the command <code>znc</code>, <code>znc --debug</code>
@@ -143,15 +144,15 @@ Additionally, you can accesses an admin panel via http, as the
 output of makeconf suggested.
 </p>
 
-<pre class="example">
-https://&lt;znc_server_ip&gt;:1025/
+<div class="org-src-container">
+<pre class="src src-nil">https://&lt;znc_server_ip&gt;:1025/
 </pre>
 </div>
 </div>
-
-<div id="outline-container-orge0bb02e" class="outline-3">
-<h3 id="orge0bb02e">Clients</h3>
-<div class="outline-text-3" id="text-orge0bb02e">
+</div>
+<div id="outline-container-org15cc189" class="outline-3">
+<h3 id="org15cc189">Clients</h3>
+<div class="outline-text-3" id="text-org15cc189">
 <p>
 There are as many IRC clients as you want. Now I use <a href="https://weechat.org/">weechat</a> which is
 tui based, it is probably already packaged by your distribution.
@@ -167,10 +168,11 @@ Once you run weechat, you can connect to your server by first
 adding a server and connecting to it:
 </p>
 
-<pre class="example">
-/server add local localhost/1025
+<div class="org-src-container">
+<pre class="src src-nil">/server add local localhost/1025
 /connect local -username=santo_ -password=my-password
 </pre>
+</div>
 
 <p>
 You should see a buffer opening with a welcome message. If this is not
@@ -187,18 +189,20 @@ restart the server with a different nickname.
 To join a channel use the <code>join</code> command:
 </p>
 
-<pre class="example">
-/join #&lt;channel-name&gt;
+<div class="org-src-container">
+<pre class="src src-nil">/join #&lt;channel-name&gt;
 </pre>
+</div>
 
 
 <p>
 A useful command in weechat is to enable mouse support:
 </p>
 
-<pre class="example">
-/mouse enable
+<div class="org-src-container">
+<pre class="src src-nil">/mouse enable
 </pre>
+</div>
 
 
 <hr />

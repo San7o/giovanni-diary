@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -29,96 +31,95 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-
-<div id="outline-container-org620300f" class="outline-2">
-<h2 id="org620300f">Config / init.lua</h2>
-<div class="outline-text-2" id="text-org620300f">
+<div id="outline-container-org6c440ff" class="outline-2">
+<h2 id="org6c440ff">Config / init.lua</h2>
+<div class="outline-text-2" id="text-org6c440ff">
 <p>
 Simple Neovim configuration without too much bloat.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #ff7f24;">--</span><span style="color: #ff7f24;">[[
+<pre class="src src-lua">--[[
 --
 --  init.lua
 --  by Giovanni Santini
 --
 --  Clone this repository in .config/nvim
 --
---]]</span>
+--]]
 
-<span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">vim options
-</span>vim.opt.number         = <span style="color: #7fffd4;">true</span>
-vim.opt.relativenumber = <span style="color: #7fffd4;">true</span>
-vim.opt.clipboard      = <span style="color: #ffa07a;">"unnamedplus"</span> <span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">system clipboard
-</span>vim.opt.expandtab      = <span style="color: #7fffd4;">true</span>
+-- vim options
+vim.opt.number         = true
+vim.opt.relativenumber = true
+vim.opt.clipboard      = "unnamedplus" -- system clipboard
+vim.opt.expandtab      = true
 vim.opt.shiftwidth     = 4
 vim.opt.tabstop        = 4
-vim.opt.colorcolumn    = <span style="color: #ffa07a;">'80'</span>
-vim.g.loaded_netrw       = 1  <span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">Disable default tree view for nvim-tree
-</span>vim.g.loaded_netrwPlugin = 1
+vim.opt.colorcolumn    = '80'
+vim.g.loaded_netrw       = 1  -- Disable default tree view for nvim-tree
+vim.g.loaded_netrwPlugin = 1
 
-<span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">I use plug
-</span><span style="color: #00ffff;">local</span> <span style="color: #eedd82;">Plug</span> = vim.fn[<span style="color: #ffa07a;">'plug#'</span>]
+-- I use plug
+local Plug = vim.fn['plug#']
 
-vim.call(<span style="color: #ffa07a;">'plug#begin'</span>)
+vim.call('plug#begin')
 
-<span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">Modus themes from Prot
-</span>Plug(<span style="color: #ffa07a;">'miikanissi/modus-themes.nvim'</span>)
-Plug(<span style="color: #ffa07a;">'nvim-lua/plenary.nvim'</span>)          <span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">dependency for telescope
-</span>Plug(<span style="color: #ffa07a;">'nvim-telescope/telescope.nvim'</span>)  <span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">fuzz strings
-</span>Plug(<span style="color: #ffa07a;">'nvim-tree/nvim-web-devicons'</span>)    <span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">some icons
-</span>Plug(<span style="color: #ffa07a;">'nvim-tree/nvim-tree.lua'</span>)        <span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">directory tree
-</span><span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">From orgmode release 0.7.1, support for Neovim &lt; 0.11.0 was dropped
-</span>Plug(<span style="color: #ffa07a;">'nvim-orgmode/orgmode'</span>, { [<span style="color: #ffa07a;">'commit'</span>] = <span style="color: #ffa07a;">'4da28a0'</span> }) <span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">org view
-</span>Plug(<span style="color: #ffa07a;">'nvim-mini/mini.icons'</span>, { [<span style="color: #ffa07a;">'branch'</span>] = <span style="color: #ffa07a;">'stable'</span>})   <span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">some icons
-</span>Plug(<span style="color: #ffa07a;">'goolord/alpha-nvim'</span>)             <span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">Cool startup screen
-</span>Plug(<span style="color: #ffa07a;">'lewis6991/gitsigns.nvim'</span>)        <span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">Show modified lines
-</span>
-vim.call(<span style="color: #ffa07a;">'plug#end'</span>)
+-- Modus themes from Prot
+Plug('miikanissi/modus-themes.nvim')
+Plug('nvim-lua/plenary.nvim')          -- dependency for telescope
+Plug('nvim-telescope/telescope.nvim')  -- fuzz strings
+Plug('nvim-tree/nvim-web-devicons')    -- some icons
+Plug('nvim-tree/nvim-tree.lua')        -- directory tree
+-- From orgmode release 0.7.1, support for Neovim &lt; 0.11.0 was dropped
+Plug('nvim-orgmode/orgmode', { ['commit'] = '4da28a0' }) -- org view
+Plug('nvim-mini/mini.icons', { ['branch'] = 'stable'})   -- some icons
+Plug('goolord/alpha-nvim')             -- Cool startup screen
+Plug('lewis6991/gitsigns.nvim')        -- Show modified lines
 
-<span style="color: #b0c4de;">require</span>(<span style="color: #ffa07a;">'modus-themes'</span>).setup({
-    style = <span style="color: #ffa07a;">"modus_vivendi"</span>,  <span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">modus_vivendi or modus_operandi (dark and light)
-</span>    variant = <span style="color: #ffa07a;">"default"</span>,      <span style="color: #ff7f24;">-- </span><span style="color: #ff7f24;">default, tinted, deuteranopia, and tritanopia
-</span>})
-vim.cmd(<span style="color: #ffa07a;">[[colorscheme modus]]</span>)
+vim.call('plug#end')
 
-<span style="color: #00ffff;">local</span> <span style="color: #eedd82;">telescope</span> = <span style="color: #b0c4de;">require</span>(<span style="color: #ffa07a;">'telescope.builtin'</span>)
-vim.keymap.set(<span style="color: #ffa07a;">'n'</span>, <span style="color: #ffa07a;">'&lt;leader&gt;ff'</span>, telescope.find_files,
-                { desc = <span style="color: #ffa07a;">'Telescope find files'</span> })
-vim.keymap.set(<span style="color: #ffa07a;">'n'</span>, <span style="color: #ffa07a;">'&lt;leader&gt;fg'</span>, telescope.live_grep,
-                { desc = <span style="color: #ffa07a;">'Telescope live grep'</span> })
-vim.keymap.set(<span style="color: #ffa07a;">'n'</span>, <span style="color: #ffa07a;">'&lt;leader&gt;fb'</span>, telescope.buffers,
-                { desc = <span style="color: #ffa07a;">'Telescope buffers'</span> })
-vim.keymap.set(<span style="color: #ffa07a;">'n'</span>, <span style="color: #ffa07a;">'&lt;leader&gt;fh'</span>, telescope.help_tags,
-                { desc = <span style="color: #ffa07a;">'Telescope help tags'</span> })
+require('modus-themes').setup({
+    style = "modus_vivendi",  -- modus_vivendi or modus_operandi (dark and light)
+    variant = "default",      -- default, tinted, deuteranopia, and tritanopia
+})
+vim.cmd([[colorscheme modus]])
 
-<span style="color: #b0c4de;">require</span>(<span style="color: #ffa07a;">'nvim-web-devicons'</span>).setup()
-<span style="color: #00ffff;">local</span> <span style="color: #eedd82;">tree</span> = <span style="color: #b0c4de;">require</span>(<span style="color: #ffa07a;">'nvim-tree.api'</span>)
-vim.keymap.set(<span style="color: #ffa07a;">'n'</span>, <span style="color: #ffa07a;">'&lt;C-t&gt;'</span>, <span style="color: #00ffff;">function</span>() tree.tree.toggle() <span style="color: #00ffff;">end</span>,
-                { desc = <span style="color: #ffa07a;">'Toggle nvim-tree'</span> })
-<span style="color: #b0c4de;">require</span>(<span style="color: #ffa07a;">'nvim-tree'</span>).setup()
-vim.cmd <span style="color: #ffa07a;">[[
+local telescope = require('telescope.builtin')
+vim.keymap.set('n', '&lt;leader&gt;ff', telescope.find_files,
+                { desc = 'Telescope find files' })
+vim.keymap.set('n', '&lt;leader&gt;fg', telescope.live_grep,
+                { desc = 'Telescope live grep' })
+vim.keymap.set('n', '&lt;leader&gt;fb', telescope.buffers,
+                { desc = 'Telescope buffers' })
+vim.keymap.set('n', '&lt;leader&gt;fh', telescope.help_tags,
+                { desc = 'Telescope help tags' })
+
+require('nvim-web-devicons').setup()
+local tree = require('nvim-tree.api')
+vim.keymap.set('n', '&lt;C-t&gt;', function() tree.tree.toggle() end,
+                { desc = 'Toggle nvim-tree' })
+require('nvim-tree').setup()
+vim.cmd [[
   highlight link NvimTreeNormal Normal
   highlight link NvimTreeFolderName Directory
   highlight link NvimTreeIndentMarker LineNr
   highlight link NvimTreeVertSplit VertSplit
   highlight NvimTreeNormal guibg=NONE ctermbg=NONE
-]]</span>
+]]
 
-<span style="color: #b0c4de;">require</span>(<span style="color: #ffa07a;">'orgmode'</span>).setup({
-  org_agenda_files = <span style="color: #ffa07a;">'~/todo.org/todo.org'</span>,
-  org_default_notes_file = <span style="color: #ffa07a;">'~/giovanni-diary/content/index.org'</span>,
+require('orgmode').setup({
+  org_agenda_files = '~/todo.org/todo.org',
+  org_default_notes_file = '~/giovanni-diary/content/index.org',
 })
 
-<span style="color: #b0c4de;">require</span>(<span style="color: #ffa07a;">'mini.icons'</span>).setup()
-<span style="color: #b0c4de;">require</span>(<span style="color: #ffa07a;">'alpha'</span>).setup(<span style="color: #b0c4de;">require</span>(<span style="color: #ffa07a;">'alpha.themes.startify'</span>).config)
+require('mini.icons').setup()
+require('alpha').setup(require('alpha.themes.startify').config)
 
-<span style="color: #ff7f24;">--</span><span style="color: #ff7f24;">[[
+--[[
 --
 -- End of init.lua
 --
---]]</span>
+--]]
 </pre>
 </div>
 

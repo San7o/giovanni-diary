@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -61,10 +63,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-
-<div id="outline-container-org32e451e" class="outline-2">
-<h2 id="org32e451e">Linear Models</h2>
-<div class="outline-text-2" id="text-org32e451e">
+<div id="outline-container-orga71c985" class="outline-2">
+<h2 id="orga71c985">Linear Models</h2>
+<div class="outline-text-2" id="text-orga71c985">
 <p>
 We have seen the KNN algorithm for classification. Said algorithm
 works everywhere as long as there is some spacial correlation in the
@@ -116,10 +117,9 @@ More formally, given:
 Compute: A function \(f\) minimizing \(\mathbb{E}_{(x, y)\sim D}[f(x) \ne  y]\) 
 </p>
 </div>
-
-<div id="outline-container-org2ff7b96" class="outline-3">
-<h3 id="org2ff7b96">Training a linear model</h3>
-<div class="outline-text-3" id="text-org2ff7b96">
+<div id="outline-container-orge4ae9da" class="outline-3">
+<h3 id="orge4ae9da">Training a linear model</h3>
+<div class="outline-text-3" id="text-orge4ae9da">
 <p>
 Differently from KNN, linear models use <span class="underline">online learning</span>. The
 learning algorithm follows the following structure:
@@ -134,17 +134,21 @@ learning algorithm follows the following structure:
 <ul class="org-ul">
 <li>Evaluate the sum equation \(b+\sum_{i=1}^n w_ix_i\): \(1*(-1)+0*1 = -1\)</li>
 </ul></li>
-<li>the algorithm is them told the correct answer \(y_i\) and it updates
+<li><p>
+the algorithm is them told the correct answer \(y_i\) and it updates
 the model only if the answer is incorrect
+</p>
 <ul class="org-ul">
-<li>check if the sign of the equation represents the right label, if
+<li>check if the sign of the equation represents the right label, if</li>
+</ul>
+<p>
 not, add to each weight the current input times the label
-(assuming the label is either \(+1\) or \(-1\))</li>
-</ul></li>
+(assuming the label is either \(+1\) or \(-1\))
+</p></li>
 </ul>
 
-<pre class="example">
-repeat until convergence (or some # of iterations):
+<div class="org-src-container">
+<pre class="src src-nil">repeat until convergence (or some # of iterations):
   for each random training example (x1, x2, ..., xn, label):
     check if prediction is correct based on the current model
     if not correct, update all the weights:
@@ -152,6 +156,7 @@ repeat until convergence (or some # of iterations):
         wi = wi + xi*label
       b = b + label
 </pre>
+</div>
 
 <p>
 The algorithm will converge only if the data can be linearly
@@ -159,10 +164,9 @@ separated. The reason why \(w_i + f_i\cdot label\) improves the solution
 will be obvious later when we will discuss gradient descent.
 </p>
 </div>
-
-<div id="outline-container-org3d3f6a6" class="outline-4">
-<h4 id="org3d3f6a6">Learning Rate</h4>
-<div class="outline-text-4" id="text-org3d3f6a6">
+<div id="outline-container-org58d8f36" class="outline-4">
+<h4 id="org58d8f36">Learning Rate</h4>
+<div class="outline-text-4" id="text-org58d8f36">
 <p>
 When the model makes an incorrect prediction, you hay have noticed
 that the correction of the weights are multiple of the label

@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -61,10 +63,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-
-<div id="outline-container-org36804f5" class="outline-2">
-<h2 id="org36804f5">Regularization</h2>
-<div class="outline-text-2" id="text-org36804f5">
+<div id="outline-container-org61b145b" class="outline-2">
+<h2 id="org61b145b">Regularization</h2>
+<div class="outline-text-2" id="text-org61b145b">
 <p>
 A recap on model based machine learning:
 </p>
@@ -91,10 +92,9 @@ A recap on model based machine learning:
 <li>repeat: pick a dimension and move a small amount towards the opposite of the derivative</li>
 </ul>
 </div>
-
-<div id="outline-container-org040b5fc" class="outline-3">
-<h3 id="org040b5fc">Regularizer</h3>
-<div class="outline-text-3" id="text-org040b5fc">
+<div id="outline-container-org725bb50" class="outline-3">
+<h3 id="org725bb50">Regularizer</h3>
+<div class="outline-text-3" id="text-org725bb50">
 <p>
 A <span class="underline">regularizer</span> is an additional criterion to the loss function to make sure that we do not <span class="underline">overfit</span>
 \[argmin_{w, b}\sum_{i=1}^nloss(yy')+\lambda regularizer(w, b)\]
@@ -115,10 +115,9 @@ So, how do we encourage small weights or penalize large weights?
 </p>
 </div>
 </div>
-
-<div id="outline-container-org70db466" class="outline-3">
-<h3 id="org70db466">Common regularizers</h3>
-<div class="outline-text-3" id="text-org70db466">
+<div id="outline-container-org6badf78" class="outline-3">
+<h3 id="org6badf78">Common regularizers</h3>
+<div class="outline-text-3" id="text-org6badf78">
 <p>
 Sum of the weights
 \[r(w, b)=\sum |w_j|\]
@@ -136,10 +135,9 @@ In general, we can call this formula <span class="underline">p-norm</span> or \(
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgbe755ef" class="outline-3">
-<h3 id="orgbe755ef">Using Gradient Descent</h3>
-<div class="outline-text-3" id="text-orgbe755ef">
+<div id="outline-container-orgd32f929" class="outline-3">
+<h3 id="orgd32f929">Using Gradient Descent</h3>
+<div class="outline-text-3" id="text-orgd32f929">
 <p>
 Example using 2-norm:
 \[argmin_{w, b}\sum_{i=1}^n exp(-y_i(wx_i+b))+\frac{\lambda}{2}||w||^2\]
@@ -152,10 +150,9 @@ Note that gradient descent is not the only minimization method.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org3036b75" class="outline-3">
-<h3 id="org3036b75">Logistic Regression</h3>
-<div class="outline-text-3" id="text-org3036b75">
+<div id="outline-container-org5e04b8a" class="outline-3">
+<h3 id="org5e04b8a">Logistic Regression</h3>
+<div class="outline-text-3" id="text-org5e04b8a">
 <p>
 Log loss or binary cross-entropy loss
 \[L(w) = -\sum_{i=1}^n [y_i\log(\hat{y_i})+(1-y_i)\log(1-\hat{y_i})]\]

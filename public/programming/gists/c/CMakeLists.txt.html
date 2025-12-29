@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -29,10 +31,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-
-<div id="outline-container-orgf415cf0" class="outline-2">
-<h2 id="orgf415cf0">C / CMakeLists.txt</h2>
-<div class="outline-text-2" id="text-orgf415cf0">
+<div id="outline-container-org28e8512" class="outline-2">
+<h2 id="org28e8512">C / CMakeLists.txt</h2>
+<div class="outline-text-2" id="text-org28e8512">
 <p>
 Modern Cmake template for C++ projects.
 </p>
@@ -112,29 +113,29 @@ set(SOURCES src/main.cpp)
 #
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
-target_include_directories(${PROJECT_NAME}
-  PRIVATE ${PROJECT_SOURCE_DIR}/include)
+<span style="color: #87cefa;">target_include_directories</span>(${PROJECT_NAME}
+  <span style="color: #98fb98;">PRIVATE</span> <span style="color: #eedd82;">$</span>{PROJECT_SOURCE_DIR}/include)
 
 <span style="color: #00ffff;">if</span>(CMAKE_BUILD_TYPE STREQUAL <span style="color: #ffa07a;">"Debug"</span>)
   <span style="color: #87cefa;">message</span>(STATUS <span style="color: #ffa07a;">"Configuring Debug build options..."</span>)
 
-  target_compile_definitions(${PROJECT_NAME} PRIVATE ${DEBUG_DEFINES})
-  target_compile_options(${PROJECT_NAME}
-    PRIVATE ${DEBUG_FLAGS} ${WARNING_FLAGS})
+  <span style="color: #87cefa;">target_compile_definitions</span>(${PROJECT_NAME} <span style="color: #98fb98;">PRIVATE</span> <span style="color: #eedd82;">$</span>{DEBUG_DEFINES})
+  <span style="color: #87cefa;">target_compile_options</span>(${PROJECT_NAME}
+    <span style="color: #98fb98;">PRIVATE</span> <span style="color: #eedd82;">$</span>{DEBUG_FLAGS} ${WARNING_FLAGS})
   <span style="color: #00ffff;">if</span>(NOT MSVC)
-    target_link_options(${PROJECT_NAME} PRIVATE ${DEBUG_LINK_FLAGS})
+    <span style="color: #87cefa;">target_link_options</span>(${PROJECT_NAME} <span style="color: #98fb98;">PRIVATE</span> <span style="color: #eedd82;">$</span>{DEBUG_LINK_FLAGS})
   <span style="color: #87cefa;">endif</span>()
 <span style="color: #87cefa;">elseif</span>(<span style="color: #98fb98;">CMAKE_BUILD_TYPE</span> <span style="color: #eedd82;">STREQUAL</span> <span style="color: #ffa07a;">"Release"</span>)
   <span style="color: #87cefa;">message</span>(STATUS <span style="color: #ffa07a;">"Configuring Release build options..."</span>)
-  target_compile_options(${PROJECT_NAME}
-    PRIVATE ${RELEASE_FLAGS} ${WARNING_FLAGS})
+  <span style="color: #87cefa;">target_compile_options</span>(${PROJECT_NAME}
+    <span style="color: #98fb98;">PRIVATE</span> <span style="color: #eedd82;">$</span>{RELEASE_FLAGS} ${WARNING_FLAGS})
 <span style="color: #87cefa;">endif</span>()
 
 #
 <span style="color: #b0c4de;"># Installation</span>
 #
 
-install(TARGETS ${PROJECT_NAME}
+install(<span style="color: #98fb98;">TARGETS</span> <span style="color: #eedd82;">$</span>{PROJECT_NAME}
   RUNTIME DESTINATION bin
 )
 <span style="color: #87cefa;">install</span>(<span style="color: #98fb98;">DIRECTORY</span> <span style="color: #eedd82;">include</span>/ DESTINATION include)
@@ -150,7 +151,7 @@ install(TARGETS ${PROJECT_NAME}
 <span style="color: #b0c4de;">  #enable_testing</span>()
 
 <span style="color: #b0c4de;">  #add_executable</span>(tests test/test_main.cpp)
-<span style="color: #b0c4de;">  #target_link_libraries</span>(tests PRIVATE ${PROJECT_NAME})
+<span style="color: #b0c4de;">  #target_link_libraries</span>(tests <span style="color: #98fb98;">PRIVATE</span> <span style="color: #eedd82;">$</span>{PROJECT_NAME})
 
 <span style="color: #b0c4de;">  #add_test</span>(NAME MyTests COMMAND tests)
 <span style="color: #87cefa;">endif</span>()

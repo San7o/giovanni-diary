@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -61,10 +63,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
 </p>
-
-<div id="outline-container-org8e9f0bb" class="outline-2">
-<h2 id="org8e9f0bb">Dynamic Programming</h2>
-<div class="outline-text-2" id="text-org8e9f0bb">
+<div id="outline-container-org5d6a5ca" class="outline-2">
+<h2 id="org5d6a5ca">Dynamic Programming</h2>
+<div class="outline-text-2" id="text-org5d6a5ca">
 <p>
 Approccio generale per decidere che tecnica utilizzare:
 </p>
@@ -75,10 +76,9 @@ Approccio generale per decidere che tecnica utilizzare:
 <li>Se bisogna risolverne solo alcuni: memoization</li>
 </ul>
 </div>
-
-<div id="outline-container-org1b913cf" class="outline-3">
-<h3 id="org1b913cf">Domino</h3>
-<div class="outline-text-3" id="text-org1b913cf">
+<div id="outline-container-orgf34fa4f" class="outline-3">
+<h3 id="orgf34fa4f">Domino</h3>
+<div class="outline-text-3" id="text-orgf34fa4f">
 <p>
 Scrivere un algoritmo efficiente che prenda in input un intero \(n\) e
 restituisca il numero di possibili disposizioni di \(n\) tessere di
@@ -96,14 +96,15 @@ memorizzare i risultati possiamo ottenere una complessità sul tempo di
 \(O(n)\) e su spazio di \(O(n)\).
 </p>
 
-<pre class="example">
-int domino(int n)
+<div class="org-src-container">
+<pre class="src src-nil">int domino(int n)
   DP = new int[0..n]
   DP[0] = DP[1] = 1
   for i=2 to n do
     DP[i] = DP[i-1]+DP[i-2]
   return DP[n]
 </pre>
+</div>
 
 <p>
 Posso migliorare ancora lo spazio salvandomi soltanto i due risultati
@@ -111,8 +112,8 @@ precedenti durante il ciclo for cosi da avere uno spazio costante su
 \(n\) per ottenere uno spazio che cresce come \(O(1)\).
 </p>
 
-<pre class="example">
-int domino(int n)
+<div class="org-src-container">
+<pre class="src src-nil">int domino(int n)
   int DP0 = 1
   int DP1 = 1
   int DP2 = 1
@@ -122,6 +123,7 @@ int domino(int n)
     DP2 = DP0 + DP1
   return DP2
 </pre>
+</div>
 
 <p>
 Da notare che posso adottare un modello di costo logaritmico per
@@ -131,10 +133,9 @@ fattore \(n\).
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgb75e87f" class="outline-3">
-<h3 id="orgb75e87f">Hateville</h3>
-<div class="outline-text-3" id="text-orgb75e87f">
+<div id="outline-container-org800cf00" class="outline-3">
+<h3 id="org800cf00">Hateville</h3>
+<div class="outline-text-3" id="text-org800cf00">
 <p>
 Ogni abitante di Hateville \(i\) ha intenzione di donare una quantità
 \(D[i]\). ma non intende partecipare ad una raccolta fondi a cui
@@ -155,8 +156,8 @@ max(DP[i-1], DP[i-2] + D[i])
 \end{cases}\]
 </p>
 
-<pre class="example">
-int hateville(int[] D, int n)
+<div class="org-src-container">
+<pre class="src src-nil">int hateville(int[] D, int n)
   int[] DP = new int[0..n]
   DP[0]=0
   DP[1]=D[1]
@@ -164,6 +165,7 @@ int hateville(int[] D, int n)
     DP[i]=max(DP[i-1],DP[i-2]+D[i])
   return DP[n]
 </pre>
+</div>
 
 <ul class="org-ul">
 <li>Tempo computazionale: \(\Theta(n)\)</li>
@@ -171,10 +173,9 @@ int hateville(int[] D, int n)
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org1da3730" class="outline-3">
-<h3 id="org1da3730">Zaino</h3>
-<div class="outline-text-3" id="text-org1da3730">
+<div id="outline-container-org02e9858" class="outline-3">
+<h3 id="org02e9858">Zaino</h3>
+<div class="outline-text-3" id="text-org02e9858">
 <p>
 Dato un insieme di oggetti, ognuno caratterizzato da un peso e un
 profitto, e uno zaino con un limite di capacita', individuate un
@@ -198,8 +199,8 @@ max(DP[i - w[i]][j-1] + p[i], DP[i][j-1]) & altrimenti
 \end{cases}\]
 </p>
 
-<pre class="example">
-int knapsack(int[] w, int[] p, int n, int c)
+<div class="org-src-container">
+<pre class="src src-nil">int knapsack(int[] w, int[] p, int n, int c)
   int[] DP = new int[0..c][0..n]
   for i=0 to c do
     for j=0 to n do
@@ -209,16 +210,16 @@ int knapsack(int[] w, int[] p, int n, int c)
         DP[i][j] = DP[i][j-1]
   return DP[c][n]
 </pre>
+</div>
 
 <p>
 Complessità computazionale: \(O(nc)\)
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgb22bc1b" class="outline-3">
-<h3 id="orgb22bc1b">Zaino senza limiti</h3>
-<div class="outline-text-3" id="text-orgb22bc1b">
+<div id="outline-container-org3e5fdf1" class="outline-3">
+<h3 id="org3e5fdf1">Zaino senza limiti</h3>
+<div class="outline-text-3" id="text-org3e5fdf1">
 <p>
 Dato uno zaino con capacita' \(C\) e \(n\) oggetti caratterizzati da un
 peso \(w\) e un profitto \(p\), definiamo \(DP[c]\) come il massimo profitto
@@ -235,8 +236,8 @@ argmax_{j \in [0,n)\ and\ w[j] < i }(DP[i-w[j]]+p[j])
 \end{cases}\]
 </p>
 
-<pre class="example">
-int knapsack(int[] w, int[] p, int n, int C)
+<div class="org-src-container">
+<pre class="src src-nil">int knapsack(int[] w, int[] p, int n, int C)
   int[] DP = new int[0..C] = {-1}
   return knapsackRec(w, p, n, C, DP)
 
@@ -252,16 +253,16 @@ int knapsackRec(int[] w, int[] p, int n, int c, int[] DP)
     DP[c] = maxSoFar
   return DP[c]
 </pre>
+</div>
 
 <p>
 Complessità temporale \(O(nC)\) e spaziale \(\Theta (C)\).
 </p>
 </div>
 </div>
-
-<div id="outline-container-org680c86b" class="outline-3">
-<h3 id="org680c86b">Sottosequenza comune massimale</h3>
-<div class="outline-text-3" id="text-org680c86b">
+<div id="outline-container-orgaa9a3a7" class="outline-3">
+<h3 id="orgaa9a3a7">Sottosequenza comune massimale</h3>
+<div class="outline-text-3" id="text-orgaa9a3a7">
 <p>
 Una sequenza \(P\) e' una sottosequenza di \(T\) se \(P\) e' ottenuto da \(T\)
 rimuovendo uno o più dei suoi elementi. La sequenza vuota e'
@@ -308,8 +309,8 @@ appartiene alla soluzione ed e' più grande di X che e' assurdo.</li>
 Versione che restituisce la lunghezza:
 </p>
 
-<pre class="example">
-int lcs(Item[] T, Item[] U, int n, int m)
+<div class="org-src-container">
+<pre class="src src-nil">int lcs(Item[] T, Item[] U, int n, int m)
   int[][] DP = new int[0..n][0..m]
   for i=1 to n do
     DP[i][0]=0
@@ -323,6 +324,7 @@ int lcs(Item[] T, Item[] U, int n, int m)
         DP[i][j] = max(DP[i-1][j], DP[i][j-1])
   return DP[n][m]
 </pre>
+</div>
 
 <p>
 La soluzione può essere ricostruita riguardando la tabella \(DP\).
@@ -333,10 +335,9 @@ Complessità \(O(nm)\).
 </p>
 </div>
 </div>
-
-<div id="outline-container-org8d1f145" class="outline-3">
-<h3 id="org8d1f145">String matching approssimato</h3>
-<div class="outline-text-3" id="text-org8d1f145">
+<div id="outline-container-org16ddd73" class="outline-3">
+<h3 id="org16ddd73">String matching approssimato</h3>
+<div class="outline-text-3" id="text-org16ddd73">
 <p>
 Siano \(P\) e \(T\) due stringhe. Un'occorrenza k-approssimata di \(P\) in
 \(T\) e' una copia di \(P\) in \(T\) in cui sono ammessi k "errori" tra \(P\)
@@ -373,10 +374,9 @@ Si potrebbe dimostrare per assurdo come nell'algoritmo precedente. Intuitivament
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgf31616c" class="outline-3">
-<h3 id="orgf31616c">Prodotto di catena di matrici</h3>
-<div class="outline-text-3" id="text-orgf31616c">
+<div id="outline-container-org0b98e6e" class="outline-3">
+<h3 id="org0b98e6e">Prodotto di catena di matrici</h3>
+<div class="outline-text-3" id="text-org0b98e6e">
 <p>
 Data una sequenza di \(n\) matrici \(A_n\) compatibili due a due al
 prodotto, vogliamo calcolare il loro prodotto impiegando il più basso
@@ -412,10 +412,9 @@ aver iterato su \(k\).
 </p>
 </div>
 </div>
-
-<div id="outline-container-org0e592a4" class="outline-3">
-<h3 id="org0e592a4">Insieme indipendente di intervalli pesati</h3>
-<div class="outline-text-3" id="text-org0e592a4">
+<div id="outline-container-org95a48c4" class="outline-3">
+<h3 id="org95a48c4">Insieme indipendente di intervalli pesati</h3>
+<div class="outline-text-3" id="text-org95a48c4">
 <p>
 Siano dati \(n\) intervalli distinti della retta reale, aperti a destra,
 dove all'intervallo \(i\) e' associato un profitto \(w_i\).  Trovare un

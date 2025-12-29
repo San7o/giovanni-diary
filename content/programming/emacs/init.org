@@ -102,6 +102,14 @@ I use =use-package= to manage all my packages.
     (package-install 'use-package)))
 #+end_src
 
+** Xah fly keys
+
+#+begin_src emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/lisp")
+  (require 'xah-fly-keys)
+  (xah-fly-keys-set-layout "qwerty")
+  (xah-fly-keys 1)
+#+end_src
 ** Org mode
 
 Org mode settings. I use org mode everywhere in my life.
@@ -127,32 +135,6 @@ To update completition percentage: =C-c C-c=.
                         :matchers ("begin" "$1" "$" "$$" "\\(" "\\["))))
     (add-hook 'org-mode-hook 'org-fragtog-mode)
 #+end_src
-
-** org-roam
-
-#+begin_src emacs-lisp
-  (use-package org-roam
-    :ensure t
-    :custom
-    (org-roam-directory "/home/santo/giovanni-diary/content")
-    :init
-    (setq org-roam-v2-ack t) ;; acknowledge v2
-    :config
-    (org-roam-db-autosync-mode))
-#+end_src
-
-#+begin_src emacs-lisp
-  ;; (use-package org-roam-ui
-  ;;   :ensure t
-  ;;   :after org-roam
-  ;;   :hook (after-init . org-roam-ui-mode)
-  ;;   :config
-  ;;   (setq org-roam-ui-sync-theme t
-  ;;         org-roam-ui-follow t
-  ;;         org-roam-ui-update-on-save t
-          ;; org-roam-ui-open-on-start t))
-#+end_src
-
 ** Markdown mode
 
 I use markdown mode when editing markdown document, mostly on
@@ -189,15 +171,6 @@ that you can use.
     :hook (after-init . which-key-mode))
 #+end_src
 
-** Markdown-mode
-
-Enables markdown highlights on emacs.
-
-#+begin_src emacs-lisp
-  (use-package markdown-mode
-    :ensure t)
-#+end_src
-
 ** Ivy
 
 Ivy is a generic completition mechanism for emacs.
@@ -207,8 +180,9 @@ Ivy is a generic completition mechanism for emacs.
     :ensure t
     :hook (after-init . ivy-mode)
     :config
-    (setq ivy-use-virtual-buffers t)
-    (setq enable-recursive-minibuffers t))
+    (setopt ivy-use-virtual-buffers t)
+    (setopt enable-recursive-minibuffers t)
+    (setopt ivy-count-format "(%d/%d) "))
 #+end_src
 
 ** Avy
@@ -217,11 +191,20 @@ Jump to visible text using a char-based decision tree. Lovely!
 
 #+begin_src emacs-lisp
   (use-package avy
-    :ensure t
-    :bind
-    ("C-:" . avy-goto-char))
+    :ensure t)
   ;; Alternative way of setting a keybinding:
   ;;(global-set-key (kbd "C-:") 'avy-goto-char)
+#+end_src
+
+** Multiple cursors
+
+#+begin_src emacs-lisp
+  (use-package multiple-cursors
+    :ensure t)
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 #+end_src
 
 ** Diff-hl
@@ -264,29 +247,27 @@ Some useful shortcuts:
 - =A u=: show all sources
 - =G R=: register a new rss feed
 
-Some blogs use Atom feeds instead of RSS feeds, and Gnus does not
-support them. As a temporay solution, I am subscribing to them
-via newsticker. I will write some code to convert Atom into rss
-so that gnus can read them.
-
 #+begin_src emacs-lisp
-  (require 'newsticker)
-  (setq newsticker-url-list
-        '(("Eli Bendersky" "https://eli.thegreenplace.net/feeds/all.atom.xml")
-          ("Emacs Redux" "https://emacsredux.com/atom.xml")))
   (use-package gnus
       :ensure t
       :config
-      (setq gnus-select-method '(nntp "news.gmane.io"))
       (setq gnus-directory "~/.emacs.d/news/")
       (setq gnus-home-directory "~/.emacs.d/")
       (setq gnus-startup-file "~/.emacs.d/.newsrc")
       (setq gnus-current-startup-file "~/.emacs.d/.newsrc")
-      (setq gnus-init-file "~/.emacs.d/"))
+      (setq gnus-init-file "~/.emacs.d/")
+
+      (require 'nnrss)
+      (setq gnus-select-method '(nntp "news.gmane.io"))
+      (setq gnus-secondary-select-methods
+            '((nnrss ""))))
 #+end_src
 
-Read atom feeds with gnus. Stolen from the emacswiki, you need to
-download =atom2rss.xsl= first from https://atom.geekhood.net/.
+Some blogs use Atom feeds instead of RSS feeds, and Gnus does not
+support them by default. To enable atom feeds, you need to install
+=xsltproc= (usually packaged by your distribution, for example
+=apt-get install xsltproc=). Then load the following code (copied from
+the emacs wiki):
 
 #+begin_src emacs-lisp
   (require 'mm-url)
@@ -372,15 +353,6 @@ Grep in minibuffer.
     :ensure t)
 #+end_src
 
-** Kubernetes
-
-Manage kubernetes clusters in emacs.
-
-#+begin_src emacs-lisp
-(use-package kubernetes
-  :ensure t)
-#+end_src
-
 ** Ox-publish + simple-httpd
 
 Generate static websites from org-mode.
@@ -392,26 +364,14 @@ Generate static websites from org-mode.
     :ensure t)
 #+end_src
 
-** Mastodon
-
-Mastodon client in emacs.
-
-#+begin_src emacs-lisp
-  (use-package mastodon
-    :ensure t
-    :config
-    (setq mastodon-instance-url "https://mastodon.social"
-          mastodon-active-user "santo7"))
-#+end_src
-
 ** auto-complete
 
 Available by default in emacs 30.
 #+begin_src emacs-lisp
-    (when (< emacs-major-version 30)
-      (use-package auto-complete
-        :ensure t
-        :hook (after-init . auto-complete-mode)))
+  (when (< emacs-major-version 30)
+    (use-package auto-complete
+      :ensure t
+      :hook (after-init . global-auto-complete-mode)))
 #+end_src
 
 ** Flycheck
@@ -439,22 +399,15 @@ Browse and read RFC documents.
     (setq rfc-mode-directory (expand-file-name "~/.emacs.d/rfc/")))
 #+end_src
 
-** hledger
-An Emacs major mode for writing hledger journals and generating useful
-accounting reports.
+* Customization
 
-The external hledger program should be installed first, or most of the
-report features won't work.
+** Movement
+
 #+begin_src emacs-lisp
-  (use-package hledger-mode
-    :ensure
-    :config
-    (add-to-list 'auto-mode-alist '("\\.journal\\'" . hledger-mode))
-    (setq hledger-jfile "/home/santo/todo.org/expenses.journal")
-    (global-set-key (kbd "C-c j") 'hledger-run-command))
+  (keymap-global-set "C-s" #'isearch-forward-regexp)
+  (keymap-global-set "C-:" #'avy-goto-char-timer)
 #+end_src
 
-* Customization
 ** Cleanup the screen
  
  #+begin_src emacs-lisp
@@ -562,14 +515,28 @@ Recognize =.inl= files as cpp files.
   (add-to-list 'auto-mode-alist '("\\.inl\\'" . c++-mode))
 #+end_src
 
+** Writer mode
 
-* Games
-
-A collection of some games.
+Enter a minimal zen writer mode.
 
 #+begin_src emacs-lisp
-  ;; Monkey-type game
-  ;;(require 'typit)
+  (defun writer-mode-enable ()
+    (interactive)
+    (olivetti-mode 1)
+    (display-line-numbers-mode 0)
+    (global-display-fill-column-indicator-mode 0)
+    (global-diff-hl-mode 0)
+    (display-time-mode 0)
+    (display-battery-mode 0))
+
+  (defun writer-mode-disable ()
+    (interactive)
+    (olivetti-mode 0)
+    (display-line-numbers-mode 1)
+    (global-display-fill-column-indicator-mode 1)
+    (global-diff-hl-mode 1)
+    (display-time-mode 1)
+    (display-battery-mode 1))
 #+end_src
 
 * Shortcuts
@@ -745,6 +712,46 @@ is now complete.
 ;;(desktop-save-mode 1)
 #+end_src
 
+** hledger
+An Emacs major mode for writing hledger journals and generating useful
+accounting reports.
+
+The external hledger program should be installed first, or most of the
+report features won't work.
+#+begin_src emacs-lisp
+;;  (use-package hledger-mode
+;;    :ensure
+;;    :config
+;;    (add-to-list 'auto-mode-alist '("\\.journal\\'" . hledger-mode))
+;;    (setq hledger-jfile "/home/santo/todo.org/expenses.journal")
+;;    (global-set-key (kbd "C-c j") 'hledger-run-command))
+#+end_src
+
+** org-roam
+
+#+begin_src emacs-lisp
+  ;; (use-package org-roam
+  ;;  :ensure t
+  ;;  :custom
+  ;;  (org-roam-directory "/home/santo/giovanni-diary/content")
+  ;;  :init
+  ;;  (setq org-roam-v2-ack t) ;; acknowledge v2
+  ;;  :config
+  ;;  (org-roam-db-autosync-mode))
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; (use-package org-roam-ui
+  ;;   :ensure t
+  ;;   :after org-roam
+  ;;   :hook (after-init . org-roam-ui-mode)
+  ;;   :config
+  ;;   (setq org-roam-ui-sync-theme t
+  ;;         org-roam-ui-follow t
+  ;;         org-roam-ui-update-on-save t
+          ;; org-roam-ui-open-on-start t))
+#+end_src
+
 ** EXWM
 
 Emacs' X window manager. I have used this for a while, but
@@ -836,7 +843,7 @@ a heppy human being.
 
  #+end_src
  
-
+-e 
 -----
 
  Travel: [[file:emacs.org][Emacs]], [[file:../../theindex.org][Index]]

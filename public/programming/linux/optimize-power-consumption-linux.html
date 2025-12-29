@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -29,10 +31,9 @@
 <p>
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
-
-<div id="outline-container-orgd5e795b" class="outline-2">
-<h2 id="orgd5e795b">Optimize power consumption on Linux</h2>
-<div class="outline-text-2" id="text-orgd5e795b">
+<div id="outline-container-org4692c3d" class="outline-2">
+<h2 id="org4692c3d">Optimize power consumption on Linux</h2>
+<div class="outline-text-2" id="text-org4692c3d">
 <p>
 This documents contains notes regarding my efforts to increase
 battery life on my Linux laptop[s]. I don't use my laptop for
@@ -48,10 +49,9 @@ me know by sending me an email at <a href="mailto:giovanni.santini@proton.me">gi
 me on Mastodon <a href="https://mastodon.social/@santo7">@santo7@mastodon.social</a>.
 </p>
 </div>
-
-<div id="outline-container-orgecb7c2a" class="outline-4">
-<h4 id="orgecb7c2a">Index</h4>
-<div class="outline-text-4" id="text-orgecb7c2a">
+<div id="outline-container-orged72594" class="outline-4">
+<h4 id="orged72594">Index</h4>
+<div class="outline-text-4" id="text-orged72594">
 <ul class="org-ul">
 <li>ACPI Specification</li>
 <li>Linux's ACPI</li>
@@ -80,10 +80,9 @@ me on Mastodon <a href="https://mastodon.social/@santo7">@santo7@mastodon.social
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgcfe0bf6" class="outline-4">
-<h4 id="orgcfe0bf6">ACPI Specification</h4>
-<div class="outline-text-4" id="text-orgcfe0bf6">
+<div id="outline-container-orgf2b62d3" class="outline-4">
+<h4 id="orgf2b62d3">ACPI Specification</h4>
+<div class="outline-text-4" id="text-orgf2b62d3">
 <p>
 Before tinkering with your system, you should have a decent
 understanding of how the operating system works in the context of
@@ -131,10 +130,9 @@ storage&#x2026;).
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgbb8dc3d" class="outline-4">
-<h4 id="orgbb8dc3d">Linux's ACPI</h4>
-<div class="outline-text-4" id="text-orgbb8dc3d">
+<div id="outline-container-org5b24bc9" class="outline-4">
+<h4 id="org5b24bc9">Linux's ACPI</h4>
+<div class="outline-text-4" id="text-org5b24bc9">
 <p>
 An overview of the Linux's ACPI implementation can be found <a href="https://www.kernel.org/doc/ols/2005/ols2005v1-pages-59-76.pdf">here</a>.
 Briefly, it is composed of an OS Service Layer which abstracts the
@@ -163,10 +161,9 @@ implement.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org73c7be3" class="outline-4">
-<h4 id="org73c7be3">Understand what consumes the most</h4>
-<div class="outline-text-4" id="text-org73c7be3">
+<div id="outline-container-orge433944" class="outline-4">
+<h4 id="orge433944">Understand what consumes the most</h4>
+<div class="outline-text-4" id="text-orge433944">
 <p>
 While you may try to thinker with configuration files and settings
 following common heuristics (such as "less processes = less power
@@ -185,10 +182,9 @@ software side of things and get best-effort data.  Even with software,
 what you can get greately depends on what your hardware provides.
 </p>
 </div>
-
 <ul class="org-ul">
-<li><a id="orge236cf9"></a>Powertop<br />
-<div class="outline-text-5" id="text-orge236cf9">
+<li><a id="orgaea40f4"></a>Powertop<br />
+<div class="outline-text-5" id="text-orgaea40f4">
 <p>
 A general tool that works well is <a href="https://linux.die.net/man/8/powertop">powertop</a> which will give you
 per-process power consumption and information about CPU states,
@@ -206,9 +202,8 @@ between logs, and so on.
 </p>
 </div>
 </li>
-
-<li><a id="orgb153b0d"></a>Iotop<br />
-<div class="outline-text-5" id="text-orgb153b0d">
+<li><a id="org5366a1d"></a>Iotop<br />
+<div class="outline-text-5" id="text-org5366a1d">
 <p>
 Another useful tool is <a href="https://www.man7.org/linux/man-pages/man8/iotop.8.html">iotop</a> which will give you information about
 disk usage. Even though this does not directly list power
@@ -222,9 +217,8 @@ later we'll see an option in BTRFS that improves performance.
 </p>
 </div>
 </li>
-
-<li><a id="org64559f5"></a>Plot CPU power usage<br />
-<div class="outline-text-5" id="text-org64559f5">
+<li><a id="org193a381"></a>Plot CPU power usage<br />
+<div class="outline-text-5" id="text-org193a381">
 <p>
 To evaluate a change in your system, you can log and graph different
 statistics and compare changes. The following script records CPU power
@@ -255,8 +249,8 @@ different brand.
 <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Overwrites $OUTFILE
 </span><span style="color: #b0c4de;">echo</span> <span style="color: #ffa07a;">"timestamp,power_watts"</span> &gt; <span style="color: #ffa07a;">"$OUTFILE"</span>
 
-<span style="color: #eedd82;">prev_energy</span>=$(get_energy)
-<span style="color: #eedd82;">prev_time</span>=$(get_time_seconds)
+<span style="color: #eedd82;">prev_energy</span>=$(<span style="color: #fa8072;">get_energy</span>)
+<span style="color: #eedd82;">prev_time</span>=$(<span style="color: #fa8072;">get_time_seconds</span>)
 
 <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Calculate and append power consumption in watts to $OUTFILE with
 </span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">a timestamp. Watts are calculated by dividing the difference in
@@ -264,19 +258,19 @@ different brand.
 </span><span style="color: #00ffff;">while</span> true; <span style="color: #00ffff;">do</span>
     sleep <span style="color: #ffa07a;">"$INTERVAL"</span>
 
-    <span style="color: #eedd82;">curr_energy</span>=$(get_energy)
-    <span style="color: #eedd82;">curr_time</span>=$(get_time_seconds)
-    <span style="color: #eedd82;">delta_energy</span>=$((curr_energy - prev_energy))
-    <span style="color: #eedd82;">delta_time</span>=$((curr_time - prev_time))
+    <span style="color: #eedd82;">curr_energy</span>=$(<span style="color: #fa8072;">get_energy</span>)
+    <span style="color: #eedd82;">curr_time</span>=$(<span style="color: #fa8072;">get_time_seconds</span>)
+    <span style="color: #eedd82;">delta_energy</span>=$(<span style="color: #fa8072;">(curr_energy - prev_energy</span>))
+    <span style="color: #eedd82;">delta_time</span>=$(<span style="color: #fa8072;">(curr_time - prev_time</span>))
 
     <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Handle energy wraparound (32-bit counter)
 </span>    <span style="color: #00ffff;">if</span> [[ $<span style="color: #eedd82;">delta_energy</span> -lt 0 ]]; <span style="color: #00ffff;">then</span>
-        <span style="color: #eedd82;">delta_energy</span>=$(( (2**32 + delta_energy) ))
+        <span style="color: #eedd82;">delta_energy</span>=$(<span style="color: #fa8072;">( (2**32 + delta_energy</span>) ))
     <span style="color: #00ffff;">fi</span>
 
     <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Convert to watts
-</span>    <span style="color: #eedd82;">power</span>=$(awk <span style="color: #ffa07a;">"BEGIN { printf \"%.2f\", ($delta_energy / 1000000) / $delta_time }"</span>)
-    <span style="color: #eedd82;">timestamp</span>=$(date +<span style="color: #ffa07a;">"%H:%M:%S"</span>)
+</span>    <span style="color: #eedd82;">power</span>=$(<span style="color: #fa8072;">awk "BEGIN { printf \"%.2f\", ($delta_energy / 1000000</span><span style="color: #ffa07a;">) / $delta_time }"</span>)
+    <span style="color: #eedd82;">timestamp</span>=$(<span style="color: #fa8072;">date +"%H:%M:%S"</span>)
     <span style="color: #b0c4de;">echo</span> <span style="color: #ffa07a;">"$timestamp,$power"</span> | tee -a <span style="color: #ffa07a;">"$OUTFILE"</span>
 
     <span style="color: #eedd82;">prev_energy</span>=$<span style="color: #eedd82;">curr_energy</span>
@@ -312,8 +306,8 @@ plot <span style="color: #ffa07a;">"power_log.csv"</span> using 1:2 with lines t
 
 
 
-<div id="orgde011a9" class="figure">
-<p><img src="../../ephemeris/images/gnuplot-power.jpeg" alt="gnuplot-power.jpeg" width="600px" align="center" />
+<div id="org97a08a5" class="figure">
+<p><img src="../../ephemeris/images/gnuplot-power.jpeg" alt="gnuplot-power.jpeg" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Gnuplot output</p>
 </div>
@@ -341,8 +335,8 @@ script so that it integrates with the <a href="linux-monitoring-with-prometheus-
     date +%s
 }
 
-<span style="color: #eedd82;">prev_energy</span>=$(get_energy)
-<span style="color: #eedd82;">prev_time</span>=$(get_time)
+<span style="color: #eedd82;">prev_energy</span>=$(<span style="color: #fa8072;">get_energy</span>)
+<span style="color: #eedd82;">prev_time</span>=$(<span style="color: #fa8072;">get_time</span>)
 
 <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Start background HTTP server
 </span>socat TCP-LISTEN:$<span style="color: #eedd82;">PORT</span>,reuseaddr,fork SYSTEM:<span style="color: #ffa07a;">"echo HTTP/1.0 200; echo Content-Type\: text/plain; echo; cat \"$METRICS_FILE\""</span> &amp;
@@ -351,19 +345,19 @@ script so that it integrates with the <a href="linux-monitoring-with-prometheus-
 </span><span style="color: #00ffff;">while</span> true; <span style="color: #00ffff;">do</span>
     sleep <span style="color: #ffa07a;">"$INTERVAL"</span>
 
-    <span style="color: #eedd82;">curr_energy</span>=$(get_energy)
-    <span style="color: #eedd82;">curr_time</span>=$(get_time)
+    <span style="color: #eedd82;">curr_energy</span>=$(<span style="color: #fa8072;">get_energy</span>)
+    <span style="color: #eedd82;">curr_time</span>=$(<span style="color: #fa8072;">get_time</span>)
 
-    <span style="color: #eedd82;">delta_energy</span>=$((curr_energy - prev_energy))
-    <span style="color: #eedd82;">delta_time</span>=$((curr_time - prev_time))
+    <span style="color: #eedd82;">delta_energy</span>=$(<span style="color: #fa8072;">(curr_energy - prev_energy</span>))
+    <span style="color: #eedd82;">delta_time</span>=$(<span style="color: #fa8072;">(curr_time - prev_time</span>))
 
     <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Handle 32-bit wraparound
 </span>    <span style="color: #00ffff;">if</span> [[ $<span style="color: #eedd82;">delta_energy</span> -lt 0 ]]; <span style="color: #00ffff;">then</span>
-        <span style="color: #eedd82;">delta_energy</span>=$(( (2**32 + delta_energy) ))
+        <span style="color: #eedd82;">delta_energy</span>=$(<span style="color: #fa8072;">( (2**32 + delta_energy</span>) ))
     <span style="color: #00ffff;">fi</span>
 
     <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Calculate power in watts
-</span>    <span style="color: #eedd82;">power</span>=$(awk <span style="color: #ffa07a;">"BEGIN { printf \"%.2f\", ($delta_energy / 1000000) / $delta_time }"</span>)
+</span>    <span style="color: #eedd82;">power</span>=$(<span style="color: #fa8072;">awk "BEGIN { printf \"%.2f\", ($delta_energy / 1000000</span><span style="color: #ffa07a;">) / $delta_time }"</span>)
 
     cat &lt;&lt;EOF &gt; <span style="color: #ffa07a;">"$METRICS_FILE"</span><span style="color: #ffff00; font-weight: bold;">
 # HELP node_power_watts Estimated power usage from RAPL
@@ -382,21 +376,19 @@ And you need to add this to the <code>prometheus.yaml</code> file:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-yaml"><span style="color: #eedd82;">scrape_configs</span>:
-- <span style="color: #eedd82;">job_name</span>: <span style="color: #ffa07a;">'cpu_power'</span>
-  <span style="color: #eedd82;">static_configs</span>:
-    - <span style="color: #eedd82;">targets</span>: [<span style="color: #ffa07a;">'localhost:9200'</span>]
+<pre class="src src-yaml">scrape_configs:
+- job_name: 'cpu_power'
+  static_configs:
+    - targets: ['localhost:9200']
 </pre>
 </div>
 </div>
 </li>
 </ul>
 </div>
-
-
-<div id="outline-container-org187c775" class="outline-4">
-<h4 id="org187c775">Save yourself time: TLP</h4>
-<div class="outline-text-4" id="text-org187c775">
+<div id="outline-container-org5ba57a2" class="outline-4">
+<h4 id="org5ba57a2">Save yourself time: TLP</h4>
+<div class="outline-text-4" id="text-org5ba57a2">
 <p>
 To save yourself some time configuring your system, you can use <a href="https://linrunner.de/tlp/introduction.html">TLP</a>
 (or any similar tool) which automatically configures the kernel with
@@ -431,10 +423,9 @@ There are plenty of utilities like this, use them at your own risk.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org66cb8e8" class="outline-4">
-<h4 id="org66cb8e8">Kernel Settings</h4>
-<div class="outline-text-4" id="text-org66cb8e8">
+<div id="outline-container-org59b6ae3" class="outline-4">
+<h4 id="org59b6ae3">Kernel Settings</h4>
+<div class="outline-text-4" id="text-org59b6ae3">
 <p>
 There are many settings you can tune on linux, which will mostly
 depend on your hardware and drivers. A decent list can be found in the
@@ -446,8 +437,8 @@ To access the ACPI subsystem you need to have the following
 enabled in your <a href="https://wiki.gentoo.org/wiki/Power_management/Guide">kernel</a>:
 </p>
 
-<pre class="example">
-Power management and ACPI options ---&gt;
+<div class="org-src-container">
+<pre class="src src-nil">Power management and ACPI options ---&gt;
 -*- Device power management core functionality
 [*] ACPI (Advanced Configuration and Power Interface) Support ---&gt;
   &lt;*&gt; AC Adapter
@@ -467,13 +458,14 @@ Power management and ACPI options ---&gt;
   &lt;*&gt; 'conservative' cpufreq governor
   &lt;*&gt; ACPI Processor P-States driver
 </pre>
+</div>
 
 <p>
 Additionally, enable Thermal and Powercap sysfs for your CPU:
 </p>
 
-<pre class="example">
-Device Drivers ---&gt;
+<div class="org-src-container">
+<pre class="src src-nil">Device Drivers ---&gt;
 -*- Thermal drivers ---&gt;
   (0)   Emergency poweroff delay in milli-seconds                                                                              
   [*]   Expose thermal sensors as hwmon device                                                                                
@@ -493,26 +485,27 @@ Device Drivers ---&gt;
       ACPI INT340X thermal drivers  ---&gt;                                                                                     
           &lt;M&gt; ACPI INT340X thermal drivers
 </pre>
+</div>
 
 <p>
 And RAPL, which gives additional information about the processor:
 </p>
 
-<pre class="example">
-Device Drivers ---&gt;
+<div class="org-src-container">
+<pre class="src src-nil">Device Drivers ---&gt;
 [*] Generic powercap sysfs driver ---&gt;
   &lt;M&gt;   Intel RAPL Support
 </pre>
+</div>
 
 <p>
 Now you should have all the requirements to start playing with
 the settings, <code>tlp.conf</code> is a good place to start.
 </p>
 </div>
-
 <ul class="org-ul">
-<li><a id="orga8e03d9"></a>Frequency Scaling<br />
-<div class="outline-text-5" id="text-orga8e03d9">
+<li><a id="orgced093e"></a>Frequency Scaling<br />
+<div class="outline-text-5" id="text-orgced093e">
 <p>
 You can choose a frequency scaling governor to manage throttling.
 This will dynamically change the clock's frequency and voltage
@@ -531,9 +524,8 @@ powersave in tlp's settings (which is the default setting).
 </p>
 </div>
 </li>
-
-<li><a id="orgf837181"></a>Maximum charge level<br />
-<div class="outline-text-5" id="text-orgf837181">
+<li><a id="org373c831"></a>Maximum charge level<br />
+<div class="outline-text-5" id="text-org373c831">
 <p>
 To increase battery life, it is recommended to reduce the maximum
 charge level below 100% and prevent the charging process to happen for
@@ -547,9 +539,8 @@ laptops (like my HP one) this is not supported and the command
 </p>
 </div>
 </li>
-
-<li><a id="org8cc9974"></a>Omit Scheduling-Clock ticks for idle CPUs<br />
-<div class="outline-text-5" id="text-org8cc9974">
+<li><a id="org31414d6"></a>Omit Scheduling-Clock ticks for idle CPUs<br />
+<div class="outline-text-5" id="text-org31414d6">
 <p>
 If you are doing mostly lightweight work with long idle periods, you
 can limit the scheduling-clock interrupt to prevent waking up some
@@ -564,15 +555,15 @@ response constraints, but this is not our case.
 Enable the following in your kernel configuration:
 </p>
 
-<pre class="example">
-CONFIG_NO_HZ_IDLE=y
+<div class="org-src-container">
+<pre class="src src-nil">CONFIG_NO_HZ_IDLE=y
 CONFIG_HZ_100=y 
 </pre>
 </div>
+</div>
 </li>
-
-<li><a id="orga43498d"></a>Disable Atime in BTRFS<br />
-<div class="outline-text-5" id="text-orga43498d">
+<li><a id="org684f1d2"></a>Disable Atime in BTRFS<br />
+<div class="outline-text-5" id="text-org684f1d2">
 <p>
 BTRFS is a popular filesystem. A part of its design is the CoW
 (Copy on Write) where a certain file would get copied in another
@@ -605,9 +596,8 @@ keep this in mind.
 </p>
 </div>
 </li>
-
-<li><a id="org3e997c2"></a>Kernel Flags<br />
-<div class="outline-text-5" id="text-org3e997c2">
+<li><a id="orgac2d0a9"></a>Kernel Flags<br />
+<div class="outline-text-5" id="text-orgac2d0a9">
 <p>
 You can add the following kernel flags when booting your system:
 </p>
@@ -631,19 +621,17 @@ redrawing.</li>
 </li>
 </ul>
 </div>
-
-<div id="outline-container-orgeffd728" class="outline-4">
-<h4 id="orgeffd728">Helpful tips</h4>
-<div class="outline-text-4" id="text-orgeffd728">
+<div id="outline-container-orgec31ac8" class="outline-4">
+<h4 id="orgec31ac8">Helpful tips</h4>
+<div class="outline-text-4" id="text-orgec31ac8">
 <p>
 Here is a list of other helpful things that will make your operating
 system lighter and more efficient.
 </p>
 </div>
-
 <ul class="org-ul">
-<li><a id="org2e1adb8"></a>Light graphical session<br />
-<div class="outline-text-5" id="text-org2e1adb8">
+<li><a id="org92ecc7c"></a>Light graphical session<br />
+<div class="outline-text-5" id="text-org92ecc7c">
 <p>
 If you are using a graphical environment, chances are that you do not
 need a full blown desktop environment to manage the position of your
@@ -663,9 +651,8 @@ are the best.
 </p>
 </div>
 </li>
-
-<li><a id="org962af8f"></a>Have less background processes running<br />
-<div class="outline-text-5" id="text-org962af8f">
+<li><a id="org12d81b3"></a>Have less background processes running<br />
+<div class="outline-text-5" id="text-org12d81b3">
 <p>
 If you are using a linux distribution instead of compiling your system
 on your own, chances are that the maintainers of said distribution
@@ -688,9 +675,8 @@ daemons, etc&#x2026;
 </p>
 </div>
 </li>
-
-<li><a id="org38dc2c1"></a>Lower the backlight<br />
-<div class="outline-text-5" id="text-org38dc2c1">
+<li><a id="org2cedf3b"></a>Lower the backlight<br />
+<div class="outline-text-5" id="text-org2cedf3b">
 <p>
 Lower the backlight of your laptop as much as you are comfortable
 with.
@@ -699,10 +685,9 @@ with.
 </li>
 </ul>
 </div>
-
-<div id="outline-container-org4d76ada" class="outline-4">
-<h4 id="org4d76ada">Conclusions</h4>
-<div class="outline-text-4" id="text-org4d76ada">
+<div id="outline-container-org321cbaa" class="outline-4">
+<h4 id="org321cbaa">Conclusions</h4>
+<div class="outline-text-4" id="text-org321cbaa">
 <p>
 I hope you learned something new from this article. I will keep this
 updated with new information I gain overtime, if you have any

@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -29,11 +31,9 @@
 <p>
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
-
-
-<div id="outline-container-orgd4bc358" class="outline-2">
-<h2 id="orgd4bc358">Monitor your Linux system with Prometheus and Grafana</h2>
-<div class="outline-text-2" id="text-orgd4bc358">
+<div id="outline-container-org87d1690" class="outline-2">
+<h2 id="org87d1690">Monitor your Linux system with Prometheus and Grafana</h2>
+<div class="outline-text-2" id="text-org87d1690">
 <p>
 If you are managing any system, you need to have an effective way to
 monitor, log and receive notifications about the state of the system.
@@ -48,10 +48,9 @@ various system statistics which are fetched by node exporter. I will
 be using Fedora 42 as a base.
 </p>
 </div>
-
-<div id="outline-container-org31db6bc" class="outline-3">
-<h3 id="org31db6bc">Index</h3>
-<div class="outline-text-3" id="text-org31db6bc">
+<div id="outline-container-org6afd969" class="outline-3">
+<h3 id="org6afd969">Index</h3>
+<div class="outline-text-3" id="text-org6afd969">
 <ul class="org-ul">
 <li>Setting up node exporter</li>
 <li>Setting up Prometheus</li>
@@ -60,10 +59,9 @@ be using Fedora 42 as a base.
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgcf036eb" class="outline-3">
-<h3 id="orgcf036eb">Setting up node exporter</h3>
-<div class="outline-text-3" id="text-orgcf036eb">
+<div id="outline-container-org752677c" class="outline-3">
+<h3 id="org752677c">Setting up node exporter</h3>
+<div class="outline-text-3" id="text-org752677c">
 <p>
 Node exporter is a service that collects various system information
 such as CPU load, ram usage and much more. Fedora already provides the
@@ -81,16 +79,15 @@ The service will listen on port 9100.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org2aee5d9" class="outline-3">
-<h3 id="org2aee5d9">Setting up Prometheus</h3>
-<div class="outline-text-3" id="text-org2aee5d9">
+<div id="outline-container-orge00f9d3" class="outline-3">
+<h3 id="orge00f9d3">Setting up Prometheus</h3>
+<div class="outline-text-3" id="text-orge00f9d3">
 <p>
 You can download the latest version of Prometheus from GitHub:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #eedd82;">LATEST</span>=$(curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | jq -cr .tag_name)
+<pre class="src src-bash"><span style="color: #eedd82;">LATEST</span>=$(<span style="color: #fa8072;">curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | jq -cr .tag_name</span>)
 wget https://github.com/prometheus/prometheus/releases/download/$<span style="color: #eedd82;">LATEST</span>/prometheus-<span style="color: #ffa07a;">"${LATEST:1}"</span>.linux-amd64.tar.gz
 tar -xf prometheus-*
 <span style="color: #b0c4de;">cd</span> prometheus-<span style="color: #ffa07a;">"${LATEST:1}"</span>.linux-amd64
@@ -105,11 +102,11 @@ following Item in the "scrape configs" section:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-yaml"><span style="color: #eedd82;">scrape_configs</span>:
-  - <span style="color: #eedd82;">job_name</span>: <span style="color: #ffa07a;">'linux-server'</span>
-    <span style="color: #eedd82;">scrape_interval</span>: 5s
-    <span style="color: #eedd82;">static_configs</span>:
-      - <span style="color: #eedd82;">targets</span>: [<span style="color: #ffa07a;">'localhost:9100'</span>]
+<pre class="src src-yaml">scrape_configs:
+  - job_name: 'linux-server'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9100']
 </pre>
 </div>
 
@@ -162,11 +159,9 @@ the data.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org84f91b3" class="outline-3">
-<h3 id="org84f91b3">Setting up Grafana</h3>
-<div class="outline-text-3" id="text-org84f91b3">
+<div id="outline-container-orgfe672c9" class="outline-3">
+<h3 id="orgfe672c9">Setting up Grafana</h3>
+<div class="outline-text-3" id="text-orgfe672c9">
 <p>
 Install Grafana from your favorite package manager:
 </p>
@@ -193,8 +188,8 @@ policy. Create the file "grafana [underscore] websm.te" and add the
 following content:
 </p>
 
-<pre class="example">
-module grafana_websm 1.0;
+<div class="org-src-container">
+<pre class="src src-nil">module grafana_websm 1.0;
 
 require {
     type grafana_t;
@@ -205,6 +200,7 @@ require {
 # Allow Grafana to connect to ports labeled websm_port_t
 allow grafana_t websm_port_t:tcp_socket name_connect;
 </pre>
+</div>
 
 <p>
 Then compile it and load It:
@@ -243,17 +239,16 @@ website</a>.
 
 
 
-<div id="org25dceea" class="figure">
-<p><img src="../../ephemeris/images/grafana.png" alt="grafana.png" width="600px" align="center" />
+<div id="org5d1ad71" class="figure">
+<p><img src="../../ephemeris/images/grafana.png" alt="grafana.png" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Grafana dashboard I found online</p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org95a0a07" class="outline-3">
-<h3 id="org95a0a07">Custom Exporter</h3>
-<div class="outline-text-3" id="text-org95a0a07">
+<div id="outline-container-org80ffed6" class="outline-3">
+<h3 id="org80ffed6">Custom Exporter</h3>
+<div class="outline-text-3" id="text-org80ffed6">
 <p>
 What if you wanted to log something custom to your dashboard, you
 can easily do this by starting a tcp server and serving the data you
@@ -284,7 +279,7 @@ touch $<span style="color: #eedd82;">METRICS_FILE</span>
 </span><span style="color: #00ffff;">while</span> true; <span style="color: #00ffff;">do</span>
     sleep <span style="color: #ffa07a;">"$INTERVAL"</span>
 
-    <span style="color: #eedd82;">loadavg</span>=$(cat /proc/loadavg | awk <span style="color: #ffa07a;">'{print $1 }'</span>)
+    <span style="color: #eedd82;">loadavg</span>=$(<span style="color: #fa8072;">cat /proc/loadavg | awk '{print $1 }'</span>)
 
     cat &lt;&lt;EOF &gt; <span style="color: #ffa07a;">"$METRICS_FILE"</span><span style="color: #ffff00; font-weight: bold;">
     # HELP loadavg Load Average
@@ -300,12 +295,12 @@ And update the <code>prometheus.yml</code> file:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-yaml"><span style="color: #eedd82;">scrape_configs</span>:
+<pre class="src src-yaml">scrape_configs:
   ...
-  - <span style="color: #eedd82;">job_name</span>: <span style="color: #ffa07a;">'load-average'</span>
-    <span style="color: #eedd82;">scrape_interval</span>: 5s
-    <span style="color: #eedd82;">static_configs</span>:
-      - <span style="color: #eedd82;">targets</span>: [<span style="color: #ffa07a;">'localhost:9200'</span>]
+  - job_name: 'load-average'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9200']
 </pre>
 </div>
 
@@ -321,8 +316,8 @@ select prometheus as a source and you add your custom metric and clock
 </p>
 
 
-<div id="org2f26d18" class="figure">
-<p><img src="../../ephemeris/images/grafana-custom.png" alt="grafana-custom.png" width="600px" align="center" />
+<div id="orgddfdf00" class="figure">
+<p><img src="../../ephemeris/images/grafana-custom.png" alt="grafana-custom.png" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Custom dashboard</p>
 </div>

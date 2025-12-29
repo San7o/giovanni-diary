@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -61,10 +63,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
 </p>
-
-<div id="outline-container-org1f3908d" class="outline-2">
-<h2 id="org1f3908d">Probabilistic Algorithms</h2>
-<div class="outline-text-2" id="text-org1f3908d">
+<div id="outline-container-org420bbcb" class="outline-2">
+<h2 id="org420bbcb">Probabilistic Algorithms</h2>
+<div class="outline-text-2" id="text-org420bbcb">
 <p>
 Negli algoritmi probabilistici, il calcolo delle probabilità e'
 applicato non ai dati di input, ma ai dati di output.
@@ -76,27 +77,27 @@ probabilistica (Montecarlo) e algoritmi corretti il cui tempo di
 funzionamento e' probabilistico (Las Vegas).
 </p>
 </div>
-
-<div id="outline-container-org9c01c74" class="outline-3">
-<h3 id="org9c01c74">Algoritmi Montecarlo</h3>
-<div class="outline-text-3" id="text-org9c01c74">
+<div id="outline-container-org95ea62b" class="outline-3">
+<h3 id="org95ea62b">Algoritmi Montecarlo</h3>
+<div class="outline-text-3" id="text-org95ea62b">
 </div>
-<div id="outline-container-org0abbf3c" class="outline-4">
-<h4 id="org0abbf3c">Test di primalità</h4>
-<div class="outline-text-4" id="text-org0abbf3c">
+<div id="outline-container-org712a08f" class="outline-4">
+<h4 id="org712a08f">Test di primalità</h4>
+<div class="outline-text-4" id="text-org712a08f">
 <p>
 Vogliamo trovare un algoritmo per determinare se un numero in input
 \(n\) e' primo. Una soluzione inefficiente testa tutti gli interi fra
 \(2\) e \(\sqrt{n}\).
 </p>
 
-<pre class="example">
-boolean isPrimeNaif(int n)
+<div class="org-src-container">
+<pre class="src src-nil">boolean isPrimeNaif(int n)
   for i=1 to sqrt(n) do
     if n/i == floor(n/i) then
       return false
   return true
 </pre>
+</div>
 
 <p>
 Per migliorare l'algoritmo possiamo ricordare il piccolo teorema di
@@ -111,13 +112,14 @@ Fermat che dimostra che se \(n\) e' primo, allora:
 Allora:
 </p>
 
-<pre class="example">
-boolean isPrime1(int n)
+<div class="org-src-container">
+<pre class="src src-nil">boolean isPrime1(int n)
   b = random(2, n-1)
   if b^{n-1} mod n != 1 then
     return false
   return true
 </pre>
+</div>
 
 <p>
 Tuttavia esistono dei numeri composti che non sono primi ma rispettano
@@ -155,14 +157,15 @@ almeno una delle seguenti condizione e' vera:
 allora \(n\) e' <b><b>composto</b></b>.
 </p>
 
-<pre class="example">
-boolean isPrime(int n)
+<div class="org-src-container">
+<pre class="src src-nil">boolean isPrime(int n)
   for i =1 to k do
     b=random(2, n-1)
     if isComposize(n, b) then
       return false
   return true
 </pre>
+</div>
 
 <p>
 Complessità: \(O(klog^2(n)log(log(n))log(log(log(n))))\).  Rabin ha
@@ -172,10 +175,9 @@ probabilità inferiore a \(1/4\) di rispondere erroneamente.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org1c997b1" class="outline-4">
-<h4 id="org1c997b1">Espressione polinomiale nulla</h4>
-<div class="outline-text-4" id="text-org1c997b1">
+<div id="outline-container-orgb80d306" class="outline-4">
+<h4 id="orgb80d306">Espressione polinomiale nulla</h4>
+<div class="outline-text-4" id="text-orgb80d306">
 <p>
 Data un'espressione algebrica polinomiale \(p(x_1, ..., x_n)\) in \(n\)
 variabili, determinare se \(p\) e' identicamente nulla oppure no. Una
@@ -202,10 +204,9 @@ non supera \(\frac{1}{2}\).</li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org51079b5" class="outline-4">
-<h4 id="org51079b5">Strutture dati probabilistiche</h4>
-<div class="outline-text-4" id="text-org51079b5">
+<div id="outline-container-orgb40ba9d" class="outline-4">
+<h4 id="orgb40ba9d">Strutture dati probabilistiche</h4>
+<div class="outline-text-4" id="text-orgb40ba9d">
 <p>
 Alcune strutture dati utili viste in precedenza sono:
 </p>
@@ -244,8 +245,8 @@ inizializzato a <b><b>false</b></b> e \(k\) funzioni hash \(h_1, h_2, ...,
 h_k:U\rightarrow [0, m-1]\).
 </p>
 
-<pre class="example">
-insert(key)
+<div class="org-src-container">
+<pre class="src src-nil">insert(key)
   for i=1 to k do
     A[h_i(key)]=true
 
@@ -255,6 +256,7 @@ boolean contains(key)
       return false
   return true
 </pre>
+</div>
 
 <p>
 Qualche formula ora senza dimostrazione:
@@ -272,20 +274,18 @@ numero di bit \(m\) richiesti e' pari a
 </div>
 </div>
 </div>
-
-<div id="outline-container-org9ba9149" class="outline-3">
-<h3 id="org9ba9149">Algoritmi Las Vegas</h3>
-<div class="outline-text-3" id="text-org9ba9149">
+<div id="outline-container-org3a798f0" class="outline-3">
+<h3 id="org3a798f0">Algoritmi Las Vegas</h3>
+<div class="outline-text-3" id="text-org3a798f0">
 <p>
 Agli algoritmi statistici sui vettore estraggono alcune
 caratteristiche statisticamente rilevanti da un vettore numerico, come
 la media, la varianza o la moda.
 </p>
 </div>
-
-<div id="outline-container-org2eb974f" class="outline-4">
-<h4 id="org2eb974f">Problema della selezione</h4>
-<div class="outline-text-4" id="text-org2eb974f">
+<div id="outline-container-orgf0e2df9" class="outline-4">
+<h4 id="orgf0e2df9">Problema della selezione</h4>
+<div class="outline-text-4" id="text-orgf0e2df9">
 <p>
 Dato un array \(A\) contenente \(n\) valore e un valore \(1\le k \le n\),
 trovare l'elemento che occuperebbe la posizione \(k\) se il vettore
@@ -311,8 +311,8 @@ i numeri del vettore. A questo punto si può dimostrare che il tempo
 medio e' \(O(n)\).
 </p>
 
-<pre class="example">
-Item selection(Item[] A, int start, int end, int k)
+<div class="org-src-container">
+<pre class="src src-nil">Item selection(Item[] A, int start, int end, int k)
   if start==end then
     return A[start]
   else
@@ -325,6 +325,7 @@ Item selection(Item[] A, int start, int end, int k)
     else
       return selection(A, j+1, end, k-q)
 </pre>
+</div>
 
 <hr />
 

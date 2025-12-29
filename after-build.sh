@@ -2,6 +2,8 @@
 
 # This script will be run after the build
 
+set -e
+
 # Remove unwanted index title
 sed -i '/G<\/h2>/d' public/theindex.html
 

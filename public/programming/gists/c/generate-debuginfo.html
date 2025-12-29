@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
+
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
 <style>
   html, body {
@@ -19,6 +20,7 @@
       place-items: center;  /* centers vertically & horizontally */
   }
 </style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
 <meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
@@ -29,16 +31,15 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-
-<div id="outline-container-org1d8e39e" class="outline-2">
-<h2 id="org1d8e39e">C / generate-debuginfo</h2>
-<div class="outline-text-2" id="text-org1d8e39e">
+<div id="outline-container-orgd80f0c7" class="outline-2">
+<h2 id="orgd80f0c7">C / generate-debuginfo</h2>
+<div class="outline-text-2" id="text-orgd80f0c7">
 <p>
 Separate debuginfo and executable in two different files.
 </p>
 
-<pre class="example">
-# generate-debuginfo
+<div class="org-src-container">
+<pre class="src src-nil"># generate-debuginfo
 # ==================
 #
 # This is a tiny example that shows how to have a debug-stripped
@@ -69,6 +70,7 @@ main  main.c  main.debug
 # Debug with GDB
 $ gdb --exec=main --symbols=main.debug
 </pre>
+</div>
 
 
 <hr />
