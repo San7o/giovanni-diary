@@ -90,6 +90,7 @@
         - [[file:programming/linux/performance-analysis-on-linux.org::*Performance analysis on Linux][Performance analysis on Linux]]
       - [[file:programming/repositories.org::*My public repositories][My public repositories]]
       - [[file:programming/notes/notes.org::*Programming Notes][Notes]]
+        - [[file:programming/notes/akin-laws-of-spacecraft-design.org::*Akin's Laws of Spacecraft Design][Akin's Laws of Spacecraft Design]]
         - [[file:programming/notes/algoritmi/algoritmi.org::*Algoritmi][Algoritmi]]
           - [[file:programming/notes/algoritmi/05-backtracking.org::*Backtracking][Backtracking]]
           - [[file:programming/notes/algoritmi/04-disjoint-sets.org::*Disjoint Sets][Disjoint Sets]]
