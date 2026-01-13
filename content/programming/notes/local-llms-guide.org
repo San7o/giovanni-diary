@@ -1,0 +1,55 @@
+
+#+startup: content indent
+
+[[file:../../index.org][Giovanni's Diary]] > [[file:../../subjects.org][Subjects]] > [[file:../programming.org][Programming]] > [[file:notes.org][Notes]] >
+
+* Local LLMS
+:PROPERTIES:
+:RSS: true
+:DATE: 10 Sep 2025 00:00:00 GMT
+:CATEGORY: Programming
+:AUTHOR: Giovanni Santini
+:LINK: https://san7o.github.io/giovanni-diary/programming/notes/local-llms.html
+:END:
+#+INDEX: Giovanni's Diary!Programming!Notes!Local LLMS
+
+
+** Ollama
+
+[[https://github.com/ollama/ollama][Ollama]] is a simple frontend for [[https://github.com/ggml-org/llama.cpp][llama.cpp]] which is an inference
+engine. You can download models from the ollama repository with:
+
+#+begin_src bash
+ollama pull ministral-3:3b
+#+end_src
+
+Additionally, all llama.cpp compatible models also work with
+ollama. This means that you can download a =.gguf= model from a
+different repository like [[https://huggingface.co/][huggingface]] and create a =Modelfile= like
+this:
+
+#+begin_src dockerfile
+FROM ./LFM2.5-1.2B-Instruct-Q4_K_M.gguf
+ 
+PARAMETER temperature 0.7
+PARAMETER top_p 0.9
+PARAMETER stop "</s>"
+ 
+SYSTEM """
+You are a helpful assistant.
+"""
+#+end_src
+
+And load it with:
+
+#+begin_src
+ollama create mymodel:latest -f ./Modelfile
+#+end_src
+
+** Flowise
+
+You can use flowrise to build AI agents.
+
+-----
+
+Travel: [[file:notes.org][Programming Notes]], [[../../theindex.org][Index]]
