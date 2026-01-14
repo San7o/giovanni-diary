@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+
+<link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
+<style>
+  html, body {
+      height: 100%;
+      margin: 0;
+  }
+
+  body {
+      display: grid;
+      place-items: center;  /* centers vertically & horizontally */
+  }
+</style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
+<meta property="og:url" content="https://san7o.github.io/giovanni-diary/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="notes.html">Notes</a> &gt;
+</p>
+<div id="outline-container-org1cabb5f" class="outline-2">
+<h2 id="org1cabb5f">Local LLMS</h2>
+<div class="outline-text-2" id="text-org1cabb5f">
+</div>
+<div id="outline-container-org99ce203" class="outline-3">
+<h3 id="org99ce203">Ollama</h3>
+<div class="outline-text-3" id="text-org99ce203">
+<p>
+<a href="https://github.com/ollama/ollama">Ollama</a> is a simple frontend for <a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a> which is an inference
+engine. You can download models from the ollama repository with:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">ollama pull ministral-3:3b
+</pre>
+</div>
+
+<p>
+Additionally, all llama.cpp compatible models also work with
+ollama. This means that you can download a <code>.gguf</code> model from a
+different repository like <a href="https://huggingface.co/">huggingface</a> and create a <code>Modelfile</code> like
+this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-dockerfile">FROM ./LFM2.5-1.2B-Instruct-Q4_K_M.gguf
+
+PARAMETER temperature 0.15
+PARAMETER top_p 0.9
+PARAMETER stop "&lt;/s&gt;"
+
+SYSTEM """
+You are a helpful assistant.
+"""
+</pre>
+</div>
+
+<p>
+A more elaborated Modelfile would look like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-dockerfile">FROM ./LFM2.5-1.2B-Instruct-Q8_0.gguf
+
+PARAMETER temperature 0.15
+PARAMETER top_p 0.9
+PARAMETER stop "&lt;/s&gt;"
+
+TEMPLATE """{{- $lastUserIndex := -1 }}
+{{- $hasSystemPrompt := false }}
+{{- range $index, $_ := .Messages }}
+{{- if eq .Role "user" }}{{ $lastUserIndex = $index }}{{ end }}
+{{- if eq .Role "system" }}{{ $hasSystemPrompt = true }}{{ end }}
+{{- end }}
+{{- if not $hasSystemPrompt }}[SYSTEM_PROMPT]You are Ministral-3-3B-Instruct-2512, a Large Language Model (LLM) created by Mistral AI, a French startup headquartered in Paris.
+You power an AI assistant called Le Chat.
+Your knowledge base was last updated on 2023-10-01.
+The current date is {{ currentDate }}.
+
+When you are not sure about some information, or when the user's request requires up-to-date or specific data beyond your knowledge base, clearly state that you do not have the information and avoid making anything up.
+
+If the user's question is not clear, ambiguous, or does not provide enough context for you to accurately answer, do not answer it right away. Instead, ask the user to clarify their request (e.g. "What are some good restaurants around me?" → "Where are you?" or "When is the next flight to Tokyo?" → "Where do you travel from?").
+
+You are always very attentive to dates. You try to resolve relative dates (e.g. "yesterday" is {{ yesterdayDate }}), and when asked about information at specific dates, you discard information that applies to a different date.
+
+You follow these instructions in all languages, and always respond to the user in the language they use or request.
+
+# WEB BROWSING LIMITATIONS
+
+You cannot perform any web search or access the internet, including opening URLs or links. If the user expects you to do so, clearly explain this limitation and ask them to paste the relevant content directly into the chat.
+
+# MULTI-MODAL INSTRUCTIONS
+
+You can read images, but you cannot generate images.
+You cannot read, transcribe, or process audio files or videos.[/SYSTEM_PROMPT]
+{{- end }}
+{{- range $index, $_ := .Messages }}
+{{- if eq .Role "system" }}[SYSTEM_PROMPT]{{ .Content }}[/SYSTEM_PROMPT]
+{{- else if eq .Role "user" }}[INST]{{ .Content }}[/INST]
+{{- else if eq .Role "assistant" }}
+{{- if .Content }}{{ .Content }}
+{{- if not (eq (len (slice $.Messages $index)) 1) }}&lt;/s&gt;
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+"""
+</pre>
+</div>
+
+<p>
+And load it with:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">ollama create mymodel:latest -f ./Modelfile
+</pre>
+</div>
+
+<p>
+To read the modelfile of a model you downloaded from the ollama
+repository, run:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">ollama show --modelfile ministral-3:3b
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org43941c1" class="outline-3">
+<h3 id="org43941c1">Flowise</h3>
+<div class="outline-text-3" id="text-org43941c1">
+<p>
+You can use <a href="https://github.com/FlowiseAI/Flowise">flowise</a> to build AI agents.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="notes.html">Programming Notes</a>, <a href="../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
