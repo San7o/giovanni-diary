@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+
+<link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
+<style>
+  html, body {
+      height: 100%;
+      margin: 0;
+  }
+
+  body {
+      display: grid;
+      place-items: center;  /* centers vertically & horizontally */
+  }
+</style>
+<link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
+<meta property="og:title" content="Giovanni's Diary">
+<meta property="og:description" content="Diary of Giovanni's adventures.">
+<meta property="og:image" content="https://san7o.github.io/giovanni-diary/logo.png">
+<meta property="og:url" content="https://san7o.github.io/giovanni-diary/">
+</head>
+<body>
+<div id="content" class="content">
+<p>
+<a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt; <a href="notes.html">Notes</a> &gt;
+</p>
+<div id="outline-container-orga07e6a9" class="outline-2">
+<h2 id="orga07e6a9">Setting up a VPN</h2>
+<div class="outline-text-2" id="text-orga07e6a9">
+<p>
+In this quick note I want to document a very useful service I have
+been using, <a href="https://tailscale.com/">tailscale</a>. This blog post is not sponsored, I genually
+benefit from their service and I think it is awesome.
+</p>
+
+<p>
+Tailscale is a VPN with a generous free tier which lets up to 3
+concurrent users access 100 devices on their VPN. Differently from
+other free VPNs, they give you a lot of freedom, for example you can
+open any port and host your services. This is awesome if you just need
+to connect to your computer / server remotely and you do not have
+control on port-forwarding in the router (which is my situation).
+</p>
+</div>
+<div id="outline-container-org5f526d5" class="outline-3">
+<h3 id="org5f526d5">Installing tailscale</h3>
+<div class="outline-text-3" id="text-org5f526d5">
+<p>
+Installing tailscale is quite straight forward, there are instructions
+on their website for each linux distribution. For debian, the
+installation looks like this:
+</p>
+
+<ul class="org-ul">
+<li>Add Tailscale's package signing key and repository:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash">curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg &gt;/dev/null
+curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Install Tailscale:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo apt-get update
+sudo apt-get install tailscale
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Connect your machine to your Tailscale network and authenticate in your browser:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo tailscale up
+<span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">+end_src bash
+</span>
+- You can find your Tailscale IPv4 address by running:
+
+<span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">+begin_src bash
+</span>tailscale ip -4
+</pre>
+</div>
+
+<p>
+Once you installed the application and logged in the platform, you
+have a dashboard with all your connected machines. Pretty amazing.
+</p>
+
+<p>
+I have been using this service all the time to connect to my machines,
+and I can easily recommend it.
+</p>
+
+<hr />
+
+<p>
+Travel: <a href="./notes.html">Linux Notes</a>, <a href="../../theindex.html">Index</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

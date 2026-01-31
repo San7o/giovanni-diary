@@ -1,0 +1,66 @@
+#+startup: content indent
+
+[[file:../../index.org][Giovanni's Diary]] > [[file:../../subjects.org][Subjects]] > [[file:../programming.org][Programming]] > [[file:linux.org][Linux]] > [[file:notes.org][Notes]] >
+
+* Setting up a VPN
+:PROPERTIES:
+:RSS: true
+:DATE: 24 May 2025 00:00:00 GMT
+:CATEGORY: Programming
+:AUTHOR: Giovanni Santini
+:LINK: https://san7o.github.io/giovanni-diary/programming/linux/setting-up-a-vpn.html
+:END:
+#+INDEX: Giovanni's Diary!Programming!Linux!Setting up a VPN
+
+In this quick note I want to document a very useful service I have
+been using, [[https://tailscale.com/][tailscale]]. This blog post is not sponsored, I genually
+benefit from their service and I think it is awesome.
+
+Tailscale is a VPN with a generous free tier which lets up to 3
+concurrent users access 100 devices on their VPN. Differently from
+other free VPNs, they give you a lot of freedom, for example you can
+open any port and host your services. This is awesome if you just need
+to connect to your computer / server remotely and you do not have
+control on port-forwarding in the router (which is my situation).
+
+** Installing tailscale
+
+Installing tailscale is quite straight forward, there are instructions
+on their website for each linux distribution. For debian, the
+installation looks like this:
+
+- Add Tailscale's package signing key and repository:
+
+#+begin_src bash
+curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
+curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
+#+end_src
+
+- Install Tailscale:
+
+#+begin_src bash
+sudo apt-get update
+sudo apt-get install tailscale
+#+end_src
+
+- Connect your machine to your Tailscale network and authenticate in your browser:
+
+#+begin_src bash
+sudo tailscale up
+#+end_src bash
+
+- You can find your Tailscale IPv4 address by running:
+
+#+begin_src bash
+tailscale ip -4
+#+end_src
+
+Once you installed the application and logged in the platform, you
+have a dashboard with all your connected machines. Pretty amazing.
+
+I have been using this service all the time to connect to my machines,
+and I can easily recommend it.
+
+-----
+
+Travel: [[file:./notes.org][Linux Notes]], [[../../theindex.org][Index]]

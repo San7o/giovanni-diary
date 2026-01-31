@@ -1,0 +1,64 @@
+#+startup: content indent
+
+[[file:../../index.org][Giovanni's Diary]] > [[file:../../subjects.org][Subjects]] > [[file:../programming.org][Programming]] > [[file:linux.org][Linux]] > [[file:notes.org][Notes]] >
+
+* Security Management Solutions
+:PROPERTIES:
+:RSS: true
+:DATE: 24 May 2025 00:00:00 GMT
+:CATEGORY: Programming
+:AUTHOR: Giovanni Santini
+:LINK: https://san7o.github.io/giovanni-diary/programming/linux/security-management-solutions.html
+:END:
+#+INDEX: Giovanni's Diary!Programming!Linux!Security Management Solutions
+
+** Wazh
+
+[[https://wazuh.com/][Website]]. Install wazuh on a docker container:
+
+#+begin_src bash
+git clone https://github.com/wazuh/wazuh-docker.git -b v4.14.2
+cd wazuh-docker/single-node/
+#+end_src
+
+If you are using SELinux, add a =:z= after each volume so SELinux does
+not complain:
+
+#+begin_src yaml
+volumes:
+      - ./config/wazuh_indexer_ssl_certs/:/certificates/:z
+      - ./config/certs.yml:/config/certs.yml:z
+#+end_src
+
+First you need to generate the certificate, then you can deploy the
+server. Use =sudo= because the container needs to bind to the network
+interface.
+
+#+begin_src bash
+sudo docker compose -f generate-indexer-certs.yml run --rm generator
+sudo docker compose up -d
+#+end_src
+
+You can finally connect to the interface and start using the manager:
+
+#+begin_src bash
+https://<DOCKER_HOST_IP>
+#+end_src
+
+- Username: =admin=
+- Password: =SecretPassword=
+
+For configuration, check the file in =/var/ossec/etc/ossec.conf=.
+
+ps: there is a dark mode in Dashboard Management > Advanced Settings.
+
+*** Useful panels
+
+- Endpoint security > Configuration Assessment: correct configuration
+- Threat Intelligence > Vulnerability Detection: CVEs
+- Thread Intelligence > Threat Hunting: live monitor activity
+- Security operations > IT Hygene: general overview of the system
+
+-----
+
+Travel: [[file:./notes.org][Linux Notes]], [[../../theindex.org][Index]]
