@@ -31,9 +31,9 @@
 <p>
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
-<div id="outline-container-org5e740c1" class="outline-2">
-<h2 id="org5e740c1">Performance analysis on Linux</h2>
-<div class="outline-text-2" id="text-org5e740c1">
+<div id="outline-container-org6cb6fbc" class="outline-2">
+<h2 id="org6cb6fbc">Performance analysis on Linux</h2>
+<div class="outline-text-2" id="text-org6cb6fbc">
 <p>
 In this document I will discuss several method to analyze the
 performance of a process on a Linux system. This page will be
@@ -41,9 +41,9 @@ incrementally updated as I get more experience over time, with the aim
 to be a useful resource to everyone.
 </p>
 </div>
-<div id="outline-container-orgc3ade14" class="outline-3">
-<h3 id="orgc3ade14">Introduction</h3>
-<div class="outline-text-3" id="text-orgc3ade14">
+<div id="outline-container-orgb161853" class="outline-3">
+<h3 id="orgb161853">Introduction</h3>
+<div class="outline-text-3" id="text-orgb161853">
 <p>
 Consider the following problem: given a native application, I want to
 know which parts or functions are impacting performance the most so
@@ -66,9 +66,9 @@ in the following chapters.
 </p>
 </div>
 </div>
-<div id="outline-container-org06bcfe5" class="outline-3">
-<h3 id="org06bcfe5">Perf</h3>
-<div class="outline-text-3" id="text-org06bcfe5">
+<div id="outline-container-org067a30c" class="outline-3">
+<h3 id="org067a30c">Perf</h3>
+<div class="outline-text-3" id="text-org067a30c">
 <p>
 Perf is incredibly powerful tool for retrieving performance data on a
 Linux system. The userspace tool is maintained in the kernel source
@@ -123,7 +123,7 @@ will see something like this:
 </p>
 
 
-<div id="orgf716181" class="figure">
+<div id="org9c652f9" class="figure">
 <p><img src="../../ephemeris/images/perf-report.png" alt="perf-report.png" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 1: </span>perf report output</p>
@@ -137,7 +137,7 @@ more time to run.
 </p>
 
 
-<div id="org8499633" class="figure">
+<div id="org5ad3ac0" class="figure">
 <p><img src="../../ephemeris/images/perf-report-asm.png" alt="perf-report-asm.png" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 2: </span>assembly instructions and their usage</p>
@@ -150,9 +150,9 @@ examples</a> from Brendan Gregg. You should also check out his <a href="https://
 pages</a> and his <a href="https://www.brendangregg.com/blog/index.html">blog</a>, he is an expert on performance analysis.
 </p>
 </div>
-<div id="outline-container-org1ba1df2" class="outline-4">
-<h4 id="org1ba1df2">Flamegraphs</h4>
-<div class="outline-text-4" id="text-org1ba1df2">
+<div id="outline-container-orgb8b71fe" class="outline-4">
+<h4 id="orgb8b71fe">Flamegraphs</h4>
+<div class="outline-text-4" id="text-orgb8b71fe">
 <p>
 Flamegraphs are a different and more intuitive visualization of the
 same data: functions are represented as boxes and the width of the box
@@ -176,16 +176,16 @@ flamegraph.pl out.kern_folded &gt; kernel.svg
 </div>
 
 
-<div id="org89feb38" class="figure">
+<div id="orgda292bb" class="figure">
 <p><img src="../../ephemeris/images/perf-flame-graph.svg" alt="perf-flame-graph.svg" class="org-svg" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 3: </span>example flame graph</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org63b98c3" class="outline-4">
-<h4 id="org63b98c3">Hotspot</h4>
-<div class="outline-text-4" id="text-org63b98c3">
+<div id="outline-container-orgfa6bd47" class="outline-4">
+<h4 id="orgfa6bd47">Hotspot</h4>
+<div class="outline-text-4" id="text-orgfa6bd47">
 <p>
 There are various GUI applications to visualize perf data. One
 good example if <a href="https://github.com/KDAB/hotspot">Hotspot</a> which shows you flame graphs and a
@@ -193,7 +193,7 @@ timeline. It is really easy to play around, check it out.
 </p>
 
 
-<div id="orgdb74541" class="figure">
+<div id="orga3022f0" class="figure">
 <p><img src="../../ephemeris/images/perf-hotspot.png" alt="perf-hotspot.png" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 4: </span>hotspot screenshot</p>
@@ -201,9 +201,9 @@ timeline. It is really easy to play around, check it out.
 </div>
 </div>
 </div>
-<div id="outline-container-org7dd336a" class="outline-3">
-<h3 id="org7dd336a">Valgrind + kcachegrind</h3>
-<div class="outline-text-3" id="text-org7dd336a">
+<div id="outline-container-org9119779" class="outline-3">
+<h3 id="org9119779">Valgrind + kcachegrind</h3>
+<div class="outline-text-3" id="text-org9119779">
 <p>
 Valgrind is another powerful program for debugging and profiling Linux
 executables. In the context of profiling, you can use the callgrind
@@ -220,16 +220,16 @@ Then you can use a GUI tool like <a href="https://github.com/KDE/kcachegrind">kc
 </p>
 
 
-<div id="org7326397" class="figure">
+<div id="orgfcb7786" class="figure">
 <p><img src="../../ephemeris/images/kcallgrind.png" alt="kcallgrind.png" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 5: </span>kcallgrind screenshot</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org080381d" class="outline-3">
-<h3 id="org080381d">Conclusions</h3>
-<div class="outline-text-3" id="text-org080381d">
+<div id="outline-container-org4439b9c" class="outline-3">
+<h3 id="org4439b9c">Conclusions</h3>
+<div class="outline-text-3" id="text-org4439b9c">
 <p>
 We have seen a few solutions to get performance information of our
 program. If you have any suggestion or comments about the page, please
