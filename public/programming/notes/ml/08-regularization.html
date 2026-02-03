@@ -63,9 +63,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-org5c453bb" class="outline-2">
-<h2 id="org5c453bb">Regularization</h2>
-<div class="outline-text-2" id="text-org5c453bb">
+<div id="outline-container-org0067f09" class="outline-2">
+<h2 id="org0067f09">Regularization</h2>
+<div class="outline-text-2" id="text-org0067f09">
 <p>
 A recap on model based machine learning:
 </p>
@@ -92,9 +92,9 @@ A recap on model based machine learning:
 <li>repeat: pick a dimension and move a small amount towards the opposite of the derivative</li>
 </ul>
 </div>
-<div id="outline-container-orgdedd974" class="outline-3">
-<h3 id="orgdedd974">Regularizer</h3>
-<div class="outline-text-3" id="text-orgdedd974">
+<div id="outline-container-org5c0aa9a" class="outline-3">
+<h3 id="org5c0aa9a">Regularizer</h3>
+<div class="outline-text-3" id="text-org5c0aa9a">
 <p>
 A <span class="underline">regularizer</span> is an additional criterion to the loss function to make sure that we do not <span class="underline">overfit</span>
 \[argmin_{w, b}\sum_{i=1}^nloss(yy')+\lambda regularizer(w, b)\]
@@ -115,9 +115,9 @@ So, how do we encourage small weights or penalize large weights?
 </p>
 </div>
 </div>
-<div id="outline-container-org70d614a" class="outline-3">
-<h3 id="org70d614a">Common regularizers</h3>
-<div class="outline-text-3" id="text-org70d614a">
+<div id="outline-container-orgfa45263" class="outline-3">
+<h3 id="orgfa45263">Common regularizers</h3>
+<div class="outline-text-3" id="text-orgfa45263">
 <p>
 Sum of the weights
 \[r(w, b)=\sum |w_j|\]
@@ -135,9 +135,9 @@ In general, we can call this formula <span class="underline">p-norm</span> or \(
 </p>
 </div>
 </div>
-<div id="outline-container-orgaf4ef59" class="outline-3">
-<h3 id="orgaf4ef59">Using Gradient Descent</h3>
-<div class="outline-text-3" id="text-orgaf4ef59">
+<div id="outline-container-org2dd691f" class="outline-3">
+<h3 id="org2dd691f">Using Gradient Descent</h3>
+<div class="outline-text-3" id="text-org2dd691f">
 <p>
 Example using 2-norm:
 \[argmin_{w, b}\sum_{i=1}^n exp(-y_i(wx_i+b))+\frac{\lambda}{2}||w||^2\]
@@ -150,9 +150,9 @@ Note that gradient descent is not the only minimization method.
 </p>
 </div>
 </div>
-<div id="outline-container-org8493713" class="outline-3">
-<h3 id="org8493713">Logistic Regression</h3>
-<div class="outline-text-3" id="text-org8493713">
+<div id="outline-container-org696ffff" class="outline-3">
+<h3 id="org696ffff">Logistic Regression</h3>
+<div class="outline-text-3" id="text-org696ffff">
 <p>
 Log loss or binary cross-entropy loss
 \[L(w) = -\sum_{i=1}^n [y_i\log(\hat{y_i})+(1-y_i)\log(1-\hat{y_i})]\]

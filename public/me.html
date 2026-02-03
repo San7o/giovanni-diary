@@ -26,6 +26,14 @@
         padding: 1rem;
         border-right: 1px solid var(--text);
     }
+
+    nav > ul {
+        list-style-type: none;
+    }
+
+    footer {
+        margin-bottom: 2rem;
+    }
     
   </style>
 </head>
@@ -34,143 +42,129 @@
 <header>
     <h1>Giovanni Santini</h1>
 
-    <p><strong>
-        Systems Engineer • Linux Internals • C/C++ Developer • OSS Maintainer
-    </strong></p>
-
-    <p>
-    I build reliable, well documented, low-level software: from system
-    libraries and tools, to graphics renderers, eBPF tooling, cloud
-    native applications and advanced C/C++ infrastructure. My work
-    spans embedded environments, developer tooling, graphics,
-    performance engineering, and distributed systems.
-    </p>
-    
 </header>
 
-  <nav id="sidebar">
-    <a class="active" href="#home">Home</a></br>
-    <a href="#news">News</a></br>
-    <a href="#contact">Contact</a></br>
-    <a href="#about">About</a></br>
-  </nav>
+<nav id="sidebar">
+  <ul>
+    <li>Me</li>
+    <li><a href="/blog.html">Blog</a></li>
+    <li><a href="/programming/repositories.html">Projects</a></li>
+  </ul>
+</nav>
 
 <main>
 
   <section>
+
+    <p>
+    I am an Italian software developer working on Linux system
+    libraries and tools, and a bit of everything else!
+    </p>
+
+    <br>
+
     
-    <h2>What I Do</h2>
+    <h2>My Projects</h2>
+    
     <div class="card-grid">
       
         <div class="card">
-            <h3>Systems Programming</h3>
+            <h3>Kivebpf</h3>
             <p>
-            High‑performance C and C++ development, system libraries,
-            interfacing with POSIX APIs and the operating system.
+               Kubernetes operator using eBPF for file access
+               monitoring and observability.
             </p>
+
+            <a href="https://san7o.github.io/kivebpf/">website</a>
+            <a href="https://github.com/San7o/kivebpf">gitub</a>
+            
         </div>
         
         <div class="card">
-            <h3>Linux & Tooling</h3>
-            <p>
-            eBPF tools, kernel modules, low‑level debugging,
-            performance profiling, sandboxing, and OS‑level
-            instrumentation.
-            </p>
+          <h3>Brenta-Engine</h3>
+
+          <p>
+          A modern 3D renderer and game
+          engine. Features a custom <a href="https://github.com/San7o/valFuzz">testing</a>,
+          <a href="https://github.com/San7o/oak">logging</a>,
+          and <a href="https://github.com/San7o/viotecs">ECS framework</a>.
+          </p>
+
+          <a href="https://san7o.github.io/Brenta-Engine/">website</a>
+          <a href="https://github.com/San7o/Brenta-Engine/">github</a>          
         </div>
         
         <div class="card">
-            <h3>Graphics & Game Engines</h3>
+            <h3>micro-headers</h3>
             <p>
-            2D/3D rendering, software rasterizers, ECS, OpenGL/WebGL
-            experiments.
+              A suite of 20 lightweight, dependency‑free, easy to use
+              libraries for C developers.
             </p>
+
+            <a href="https://san7o.github.io/micro-headers/">website</a>
+            <a href="https://github.com/San7o/micro-headers/">github</a>              
+            
         </div>
         
         <div class="card">
-            <h3>Developer Tools</h3>
+            <h3>Baldo-Scanner</h3>
             <p>
-            Testing frameworks, benchmarking tools, logging systems,
-            command‑line parsers, lexers, templating engines, and much
-            more.
+            Baldo is a malware scanner for Linux, with static and
+            dynamic capabilities.
             </p>
+
+            <a href="https://github.com/San7o/Baldo-Scanner/">github</a>            
         </div>
         
-        <!--  Cards: Observability Tools, Developer Tools, Linux & Cloud Native development, Graphics & Game Engines -->
+        <div class="card">
+            <h3>povOS</h3>
+            <p>
+            x86_64 bootloader and minial operating system (work in
+            progress).
+            </p>
+
+            <a href="https://github.com/San7o/povOS/">github</a>            
+        </div>
+        
+        <div class="card">
+            <h3>Haplolang</h3>
+            <p>
+              Interpreted lisp programming language, inspired by Emacs Lisp.
+            </p>
+
+            <a href="https://san7o.github.io/haplolang/">website</a>
+            <a href="https://github.com/San7o/haplolang/">github</a>
+        </div>
+            
     </div>
     
+</section>
+
+<section>
+    <h2>Demos and other projects</h2>
+    <p>
+    For a full list, check out <a href="/programming/repositories.html">this page</a> or
+    my <a href="https://github.com/San7o/">github</a>.
+    </p>
 </section>
 
 <section>
     
   <h2>Contact me</h2>
   <p>
-  Email: <a href="mailto:giovanni.santini@proton.me">giovanni.santini@proton.me</a><br>
-  Mastodon: <a href="https://mastodon.social/@santo7">@santo7@mastodon.social</a><br>
-  Blog: <a href="./index.html">giovanni-diary: Notes and experiments</a><br>
+    Email: <a href="mailto:giovanni.santini@proton.me">giovanni.santini@proton.me</a><br>
+    GitHub: <a href="https://github.com/San7o/">@San7o</a><br>
+    Mastodon: <a href="https://mastodon.social/@santo7">@santo7@mastodon.social</a><br>
+    Blog: <a href="/blog.html">giovanni's diary</a><br>
   </p>
     
-</section>
-
-<section>
-    <h2>Selected Work</h2>
-
-    <h3>micro‑headers (C99)</h3>
-    
-    <p>
-    A suite of lightweight, dependency‑free, easy to use libraries for
-    C developers. The micro headers provide functionalities for
-    testing, logging, rendering, memory allocation, lexing, common
-    data structures, and much much more.
-    </p>
-    <a href="https://san7o.github.io/micro-headers/">website</a>
-    <ul>
-        <li><a href="https://github.com/San7o/micro-tests.h">micro‑tests.h</a>
-        — testing framework</li>
-        <li><a href="https://github.com/San7o/micro-log.h">micro‑log.h</a>
-        — thread‑safe logger</li>
-        <li><a href="https://github.com/San7o/micro-draw.h">micro‑draw.h</a>
-        — 2D software renderer</li>
-        <li>micro‑arena.h, micro‑flag.h, micro‑module.h,
-        micro‑serde.h...</li>
-    </ul>
-
-    <h3>kivebpf (C, Go, Kubernetes)</h3>
-    
-    <p>
-    Kubernetes operator using eBPF for file access monitoring and
-    observability tooling.
-    </p>
-    <a href="https://san7o.github.io/kivebpf/">website</a>
-    
-    <h3>Brenta Engine (C++23, OpenGL)</h3>
-
-    <p>
-    A modern 3D renderer and game engine with a custom ECS. Includes
-    testing (<a href="https://github.com/San7o/valFuzz">valfuzz</a>),
-    logging (<a href="https://github.com/San7o/oak">oak</a>), and an
-    ECS framework
-    (<a href="https://github.com/San7o/viotecs">viotecs</a>).
-    </p>
-    <a href="https://san7o.github.io/Brenta-Engine/">website</a>
-
-</section>
-
-<section>
-    <h2>Other Projects</h2>
-    <p>
-    For a full list, check out
-    my <a href="https://github.com/San7o/">GitHub homepage</a>
-    </p>
 </section>
 
 </main>
 
 <footer>
   <hr>
-  Giovanni Santini <br>
   Theme: <a href="https://github.com/San7o/micro-style.css/">micro-style.css</a>
 </footer>
-
 </body>
 </html>
