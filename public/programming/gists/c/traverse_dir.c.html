@@ -31,73 +31,73 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-<div id="outline-container-org2f39b77" class="outline-2">
-<h2 id="org2f39b77">C / traverse_dir.c</h2>
-<div class="outline-text-2" id="text-org2f39b77">
+<div id="outline-container-orgb54259b" class="outline-2">
+<h2 id="orgb54259b">C / traverse_dir.c</h2>
+<div class="outline-text-2" id="text-orgb54259b">
 <p>
 Traverse a directory recursively and call handle_file on each file,
 optinoally specifying how many levels deep to go.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Author:  Giovanni Santini
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Mail:    giovanni.santini@proton.me
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Github:  @San7o
+<pre class="src src-c"><span style="color: #989898;">// </span><span style="color: #989898;">SPDX-License-Identifier: MIT
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Author:  Giovanni Santini
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Mail:    giovanni.santini@proton.me
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Github:  @San7o
 </span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;fts.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;stdio.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;fts.h&gt;</span>
 
-<span style="color: #98fb98;">int</span> <span style="color: #87cefa;">handle_file</span>(<span style="color: #98fb98;">char</span>* <span style="color: #eedd82;">filename</span>)
+<span style="color: #6ae4b9;">int</span> <span style="color: #feacd0;">handle_file</span>(<span style="color: #6ae4b9;">char</span>* <span style="color: #00d3d0;">filename</span>)
 {
-  printf(<span style="color: #ffa07a;">"Handling file %s\n"</span>, filename);
-  <span style="color: #00ffff;">return</span> 0;
+  printf(<span style="color: #79a8ff;">"Handling file %s\n"</span>, filename);
+  <span style="color: #b6a0ff;">return</span> 0;
 }
 
-<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Traverse [dir] recursively two levels deep and call handle_file on each file
-</span><span style="color: #98fb98;">int</span> <span style="color: #87cefa;">traverse_dir</span>(<span style="color: #98fb98;">char</span> *<span style="color: #eedd82;">dir</span>)
+<span style="color: #989898;">// </span><span style="color: #989898;">Traverse [dir] recursively two levels deep and call handle_file on each file
+</span><span style="color: #6ae4b9;">int</span> <span style="color: #feacd0;">traverse_dir</span>(<span style="color: #6ae4b9;">char</span> *<span style="color: #00d3d0;">dir</span>)
 {
-  <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">err</span> = 0;
-  <span style="color: #98fb98;">char</span> *<span style="color: #eedd82;">path_argv</span>[] = { dir, <span style="color: #7fffd4;">NULL</span> };
-  <span style="color: #98fb98;">FTSENT</span> *<span style="color: #eedd82;">file_entry</span> = <span style="color: #7fffd4;">NULL</span>;
-  <span style="color: #98fb98;">FTS</span> *<span style="color: #eedd82;">files</span> = fts_open(path_argv, FTS_PHYSICAL | FTS_NOCHDIR, <span style="color: #7fffd4;">NULL</span>);
-  <span style="color: #00ffff;">if</span> (!files) <span style="color: #00ffff;">return</span> -1;
+  <span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">err</span> = 0;
+  <span style="color: #6ae4b9;">char</span> *<span style="color: #00d3d0;">path_argv</span>[] = { dir, <span style="color: #00bcff;">NULL</span> };
+  <span style="color: #6ae4b9;">FTSENT</span> *<span style="color: #00d3d0;">file_entry</span> = <span style="color: #00bcff;">NULL</span>;
+  <span style="color: #6ae4b9;">FTS</span> *<span style="color: #00d3d0;">files</span> = fts_open(path_argv, FTS_PHYSICAL | FTS_NOCHDIR, <span style="color: #00bcff;">NULL</span>);
+  <span style="color: #b6a0ff;">if</span> (<span style="color: #ff5f59; font-weight: bold;">!</span>files) <span style="color: #b6a0ff;">return</span> -1;
 
-  <span style="color: #00ffff;">while</span> ((file_entry = fts_read(files)))
+  <span style="color: #b6a0ff;">while</span> ((file_entry = fts_read(files)))
   {
-    <span style="color: #00ffff;">switch</span> (file_entry-&gt;fts_info)
+    <span style="color: #b6a0ff;">switch</span> (file_entry-&gt;fts_info)
     {
-    <span style="color: #00ffff;">case</span> FTS_D: <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Directory
-</span>      <span style="color: #00ffff;">if</span> (file_entry-&gt;fts_level == 0)
+    <span style="color: #b6a0ff;">case</span> FTS_D: <span style="color: #989898;">// </span><span style="color: #989898;">Directory
+</span>      <span style="color: #b6a0ff;">if</span> (file_entry-&gt;fts_level == 0)
       {
-        <span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">Top-level directory itself, continue
-</span>        <span style="color: #00ffff;">continue</span>;
-      } <span style="color: #00ffff;">else</span> {
-        <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Skip descending into subdirectories
-</span>        <span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">fts_set(files, file_entry, FTS_SKIP);
+        <span style="color: #989898;">//</span><span style="color: #989898;">Top-level directory itself, continue
+</span>        <span style="color: #b6a0ff;">continue</span>;
+      } <span style="color: #b6a0ff;">else</span> {
+        <span style="color: #989898;">// </span><span style="color: #989898;">Skip descending into subdirectories
+</span>        <span style="color: #989898;">//</span><span style="color: #989898;">fts_set(files, file_entry, FTS_SKIP);
 </span>      }
-      <span style="color: #00ffff;">break</span>;
-    <span style="color: #00ffff;">case</span> FTS_F:  <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Regular file
-</span>    <span style="color: #00ffff;">case</span> FTS_SL: <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Symbolic link
-</span>    <span style="color: #00ffff;">case</span> FTS_DEFAULT:
-      <span style="color: #00ffff;">if</span> (file_entry-&gt;fts_level &lt;= 2) <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Go only two levels deep
+      <span style="color: #b6a0ff;">break</span>;
+    <span style="color: #b6a0ff;">case</span> FTS_F:  <span style="color: #989898;">// </span><span style="color: #989898;">Regular file
+</span>    <span style="color: #b6a0ff;">case</span> FTS_SL: <span style="color: #989898;">// </span><span style="color: #989898;">Symbolic link
+</span>    <span style="color: #b6a0ff;">case</span> FTS_DEFAULT:
+      <span style="color: #b6a0ff;">if</span> (file_entry-&gt;fts_level &lt;= 2) <span style="color: #989898;">// </span><span style="color: #989898;">Go only two levels deep
 </span>      {
         err = handle_file(file_entry-&gt;fts_path);
-        <span style="color: #00ffff;">if</span> (err != 0)
+        <span style="color: #b6a0ff;">if</span> (err != 0)
         {
-          <span style="color: #00ffff;">goto</span> <span style="color: #7fffd4;">exit</span>;
+          <span style="color: #b6a0ff;">goto</span> <span style="color: #00bcff;">exit</span>;
         }
       }
-      <span style="color: #00ffff;">break</span>;
-    <span style="color: #00ffff;">default</span>:
-      <span style="color: #00ffff;">break</span>;
+      <span style="color: #b6a0ff;">break</span>;
+    <span style="color: #b6a0ff;">default</span>:
+      <span style="color: #b6a0ff;">break</span>;
     }
   }
 
- <span style="color: #7fffd4;">exit</span>:
-  <span style="color: #00ffff;">if</span> (fts_close(files) &lt; 0 &amp;&amp; err == 0)
-    <span style="color: #00ffff;">return</span> -2;
-  <span style="color: #00ffff;">return</span> err;
+ <span style="color: #00bcff;">exit</span>:
+  <span style="color: #b6a0ff;">if</span> (fts_close(files) &lt; 0 &amp;&amp; err == 0)
+    <span style="color: #b6a0ff;">return</span> -2;
+  <span style="color: #b6a0ff;">return</span> err;
 }
 </pre>
 </div>

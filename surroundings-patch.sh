@@ -4,6 +4,7 @@
 # It adds various modifications to the tex file and compiles It to
 # pdf using elatex.
 
+set -e
 
 sed -i '24i\\\begin{titlepage}\
   \\centering\

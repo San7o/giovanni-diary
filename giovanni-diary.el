@@ -1,6 +1,7 @@
 ;; Load the publishing system
 (require 'ox-publish)
 (require 'org-agenda)
+(require 'htmlize)
 
 (defgroup giovanni-diary nil
 	"Options for giovanni-diary"

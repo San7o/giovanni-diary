@@ -31,9 +31,9 @@
 <p>
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
-<div id="outline-container-org7f34cc0" class="outline-2">
-<h2 id="org7f34cc0">Monitor your Linux system with Prometheus and Grafana</h2>
-<div class="outline-text-2" id="text-org7f34cc0">
+<div id="outline-container-org53ae5f7" class="outline-2">
+<h2 id="org53ae5f7">Monitor your Linux system with Prometheus and Grafana</h2>
+<div class="outline-text-2" id="text-org53ae5f7">
 <p>
 If you are managing any system, you need to have an effective way to
 monitor, log and receive notifications about the state of the system.
@@ -48,9 +48,9 @@ various system statistics which are fetched by node exporter. I will
 be using Fedora 42 as a base.
 </p>
 </div>
-<div id="outline-container-orgdbe0dff" class="outline-3">
-<h3 id="orgdbe0dff">Index</h3>
-<div class="outline-text-3" id="text-orgdbe0dff">
+<div id="outline-container-org9323f07" class="outline-3">
+<h3 id="org9323f07">Index</h3>
+<div class="outline-text-3" id="text-org9323f07">
 <ul class="org-ul">
 <li>Setting up node exporter</li>
 <li>Setting up Prometheus</li>
@@ -59,9 +59,9 @@ be using Fedora 42 as a base.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc8b460c" class="outline-3">
-<h3 id="orgc8b460c">Setting up node exporter</h3>
-<div class="outline-text-3" id="text-orgc8b460c">
+<div id="outline-container-orge6853ef" class="outline-3">
+<h3 id="orge6853ef">Setting up node exporter</h3>
+<div class="outline-text-3" id="text-orge6853ef">
 <p>
 Node exporter is a service that collects various system information
 such as CPU load, ram usage and much more. Fedora already provides the
@@ -79,18 +79,18 @@ The service will listen on port 9100.
 </p>
 </div>
 </div>
-<div id="outline-container-orga8c1b75" class="outline-3">
-<h3 id="orga8c1b75">Setting up Prometheus</h3>
-<div class="outline-text-3" id="text-orga8c1b75">
+<div id="outline-container-orgc7edc90" class="outline-3">
+<h3 id="orgc7edc90">Setting up Prometheus</h3>
+<div class="outline-text-3" id="text-orgc7edc90">
 <p>
 You can download the latest version of Prometheus from GitHub:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #eedd82;">LATEST</span>=$(<span style="color: #fa8072;">curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | jq -cr .tag_name</span>)
-wget https://github.com/prometheus/prometheus/releases/download/$<span style="color: #eedd82;">LATEST</span>/prometheus-<span style="color: #ffa07a;">"${LATEST:1}"</span>.linux-amd64.tar.gz
+<pre class="src src-bash"><span style="color: #00d3d0;">LATEST</span>=$(<span style="color: #f78fe7;">curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | jq -cr .tag_name</span>)
+wget https://github.com/prometheus/prometheus/releases/download/$<span style="color: #00d3d0;">LATEST</span>/prometheus-<span style="color: #79a8ff;">"${LATEST:1}"</span>.linux-amd64.tar.gz
 tar -xf prometheus-*
-<span style="color: #b0c4de;">cd</span> prometheus-<span style="color: #ffa07a;">"${LATEST:1}"</span>.linux-amd64
+<span style="color: #f78fe7;">cd</span> prometheus-<span style="color: #79a8ff;">"${LATEST:1}"</span>.linux-amd64
 sudo cp prometheus /usr/local/bin/
 </pre>
 </div>
@@ -102,11 +102,11 @@ following Item in the "scrape configs" section:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-yaml"><span style="color: #eedd82;">scrape_configs</span>:
-  - <span style="color: #eedd82;">job_name</span>: <span style="color: #ffa07a;">'linux-server'</span>
-    <span style="color: #eedd82;">scrape_interval</span>: 5s
-    <span style="color: #eedd82;">static_configs</span>:
-      - <span style="color: #eedd82;">targets</span>: [<span style="color: #ffa07a;">'localhost:9100'</span>]
+<pre class="src src-yaml">scrape_configs:
+  - job_name: 'linux-server'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9100']
 </pre>
 </div>
 
@@ -120,24 +120,24 @@ following content to the file
 </p>
 
 <div class="org-src-container">
-<pre class="src src-toml">[<span style="color: #98fb98;">Unit</span>]
-<span style="color: #eedd82;">Description</span>=Prometheus
-<span style="color: #eedd82;">Documentation</span>=https://github.com/prometheus/prometheus
-<span style="color: #eedd82;">Wants</span>=network-online.target
-<span style="color: #eedd82;">After</span>=network-online.target
+<pre class="src src-toml">[<span style="color: #6ae4b9;">Unit</span>]
+<span style="color: #00d3d0;">Description</span>=Prometheus
+<span style="color: #00d3d0;">Documentation</span>=https://github.com/prometheus/prometheus
+<span style="color: #00d3d0;">Wants</span>=network-online.target
+<span style="color: #00d3d0;">After</span>=network-online.target
 
-[<span style="color: #98fb98;">Install</span>]
-<span style="color: #eedd82;">WantedBy</span>=multi-user.target
+[<span style="color: #6ae4b9;">Install</span>]
+<span style="color: #00d3d0;">WantedBy</span>=multi-user.target
 
-[<span style="color: #98fb98;">Service</span>]
-<span style="color: #eedd82;">Type</span>=simple
-<span style="color: #eedd82;">User</span>=prometheus
-<span style="color: #eedd82;">Group</span>=prometheus
-<span style="color: #eedd82;">ExecReload</span>=/bin/kill -HUP $MAINPID
-<span style="color: #eedd82;">ExecStart</span>=/usr/local/bin/prometheus \
-  <span style="color: #eedd82;">--config.file</span>=/etc/prometheus/prometheus.yml \
-  <span style="color: #eedd82;">--storage.tsdb.path</span>=/etc/prometheus/data \
-  <span style="color: #eedd82;">--storage.tsdb.retention.time</span>=30d
+[<span style="color: #6ae4b9;">Service</span>]
+<span style="color: #00d3d0;">Type</span>=simple
+<span style="color: #00d3d0;">User</span>=prometheus
+<span style="color: #00d3d0;">Group</span>=prometheus
+<span style="color: #00d3d0;">ExecReload</span>=/bin/kill -HUP $MAINPID
+<span style="color: #00d3d0;">ExecStart</span>=/usr/local/bin/prometheus \
+  <span style="color: #00d3d0;">--config.file</span>=/etc/prometheus/prometheus.yml \
+  <span style="color: #00d3d0;">--storage.tsdb.path</span>=/etc/prometheus/data \
+  <span style="color: #00d3d0;">--storage.tsdb.retention.time</span>=30d
 </pre>
 </div>
 
@@ -159,9 +159,9 @@ the data.
 </p>
 </div>
 </div>
-<div id="outline-container-orgad17bb2" class="outline-3">
-<h3 id="orgad17bb2">Setting up Grafana</h3>
-<div class="outline-text-3" id="text-orgad17bb2">
+<div id="outline-container-org52689c9" class="outline-3">
+<h3 id="org52689c9">Setting up Grafana</h3>
+<div class="outline-text-3" id="text-org52689c9">
 <p>
 Install Grafana from your favorite package manager:
 </p>
@@ -239,16 +239,16 @@ website</a>.
 
 
 
-<div id="orgbc9b955" class="figure">
+<div id="orgb2cd460" class="figure">
 <p><img src="../../ephemeris/images/grafana.png" alt="grafana.png" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Grafana dashboard I found online</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org5e3a065" class="outline-3">
-<h3 id="org5e3a065">Custom Exporter</h3>
-<div class="outline-text-3" id="text-org5e3a065">
+<div id="outline-container-orgcb0b4f6" class="outline-3">
+<h3 id="orgcb0b4f6">Custom Exporter</h3>
+<div class="outline-text-3" id="text-orgcb0b4f6">
 <p>
 What if you wanted to log something custom to your dashboard, you
 can easily do this by starting a tcp server and serving the data you
@@ -263,30 +263,30 @@ average metric for prometheus.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">!/bin/</span><span style="color: #00ffff;">bash</span><span style="color: #ff7f24;">
+<pre class="src src-bash"><span style="color: #989898;">#</span><span style="color: #989898;">!/bin/</span><span style="color: #b6a0ff;">bash</span><span style="color: #989898;">
 </span>
-<span style="color: #b0c4de;">set</span> -e
+<span style="color: #f78fe7;">set</span> -e
 
-<span style="color: #eedd82;">INTERVAL</span>=5  <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">seconds
-</span><span style="color: #eedd82;">METRICS_FILE</span>=<span style="color: #ffa07a;">"/tmp/power_metrics.prom"</span>
-<span style="color: #eedd82;">PORT</span>=9200
-touch $<span style="color: #eedd82;">METRICS_FILE</span>
+<span style="color: #00d3d0;">INTERVAL</span>=5  <span style="color: #989898;"># </span><span style="color: #989898;">seconds
+</span><span style="color: #00d3d0;">METRICS_FILE</span>=<span style="color: #79a8ff;">"/tmp/power_metrics.prom"</span>
+<span style="color: #00d3d0;">PORT</span>=9200
+touch $<span style="color: #00d3d0;">METRICS_FILE</span>
 
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Start background HTTP server
-</span>socat TCP-LISTEN:$<span style="color: #eedd82;">PORT</span>,reuseaddr,fork SYSTEM:<span style="color: #ffa07a;">"echo HTTP/1.0 200; echo Content-Type\: text/plain; echo; cat \"$METRICS_FILE\""</span> &amp;
+<span style="color: #989898;"># </span><span style="color: #989898;">Start background HTTP server
+</span>socat TCP-LISTEN:$<span style="color: #00d3d0;">PORT</span>,reuseaddr,fork SYSTEM:<span style="color: #79a8ff;">"echo HTTP/1.0 200; echo Content-Type\: text/plain; echo; cat \"$METRICS_FILE\""</span> &amp;
 
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Metrics writer loop
-</span><span style="color: #00ffff;">while</span> true; <span style="color: #00ffff;">do</span>
-    sleep <span style="color: #ffa07a;">"$INTERVAL"</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Metrics writer loop
+</span><span style="color: #b6a0ff;">while</span> true; <span style="color: #b6a0ff;">do</span>
+    sleep <span style="color: #79a8ff;">"$INTERVAL"</span>
 
-    <span style="color: #eedd82;">loadavg</span>=$(<span style="color: #fa8072;">cat /proc/loadavg | awk '{print $1 }'</span>)
+    <span style="color: #00d3d0;">loadavg</span>=$(<span style="color: #f78fe7;">cat /proc/loadavg | awk '{print $1 }'</span>)
 
-    cat &lt;&lt;EOF &gt; <span style="color: #ffa07a;">"$METRICS_FILE"</span><span style="color: #ffff00; font-weight: bold;">
+    cat &lt;&lt;EOF &gt; <span style="color: #79a8ff;">"$METRICS_FILE"</span><span style="color: #79a8ff;">
     # HELP loadavg Load Average
     # TYPE loadavg gauge
     loadavg $loadavg
     EOF
-</span><span style="color: #00ffff;">done</span>
+</span><span style="color: #b6a0ff;">done</span>
 </pre>
 </div>
 
@@ -295,12 +295,12 @@ And update the <code>prometheus.yml</code> file:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-yaml"><span style="color: #eedd82;">scrape_configs</span>:
+<pre class="src src-yaml">scrape_configs:
   ...
-  - <span style="color: #eedd82;">job_name</span>: <span style="color: #ffa07a;">'load-average'</span>
-    <span style="color: #eedd82;">scrape_interval</span>: 5s
-    <span style="color: #eedd82;">static_configs</span>:
-      - <span style="color: #eedd82;">targets</span>: [<span style="color: #ffa07a;">'localhost:9200'</span>]
+  - job_name: 'load-average'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9200']
 </pre>
 </div>
 
@@ -316,7 +316,7 @@ select prometheus as a source and you add your custom metric and clock
 </p>
 
 
-<div id="org3dfccf5" class="figure">
+<div id="org65bf3d2" class="figure">
 <p><img src="../../ephemeris/images/grafana-custom.png" alt="grafana-custom.png" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Custom dashboard</p>

@@ -31,38 +31,38 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-<div id="outline-container-org41834df" class="outline-2">
-<h2 id="org41834df">C / mandelbrot.c</h2>
-<div class="outline-text-2" id="text-org41834df">
+<div id="outline-container-org4a79c81" class="outline-2">
+<h2 id="org4a79c81">C / mandelbrot.c</h2>
+<div class="outline-text-2" id="text-org4a79c81">
 <p>
 Get the number of iterations of a point in the Mandelbrot set.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Author: Giovanni Santini
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Github: @San7o
+<pre class="src src-c"><span style="color: #989898;">// </span><span style="color: #989898;">SPDX-License-Identifier: MIT
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Author: Giovanni Santini
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Github: @San7o
 </span>
-<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">ITERATIONS</span> 50
+<span style="color: #ff7f9f;">#define</span> <span style="color: #00d3d0;">ITERATIONS</span> 50
 
-<span style="color: #98fb98;">int</span> <span style="color: #87cefa;">mandelbrot</span>(<span style="color: #98fb98;">int</span> <span style="color: #eedd82;">x</span>, <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">y</span>, <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">width</span>, <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">height</span>)
+<span style="color: #6ae4b9;">int</span> <span style="color: #feacd0;">mandelbrot</span>(<span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">x</span>, <span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">y</span>, <span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">width</span>, <span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">height</span>)
 {
-  <span style="color: #98fb98;">double</span> <span style="color: #eedd82;">x_norm</span> = (x / (<span style="color: #98fb98;">double</span>) width) * 2.47 - 2;
-  <span style="color: #98fb98;">double</span> <span style="color: #eedd82;">y_norm</span> = (y / (<span style="color: #98fb98;">double</span>) height) * 2.24 - 1.12;
+  <span style="color: #6ae4b9;">double</span> <span style="color: #00d3d0;">x_norm</span> = (x / (<span style="color: #6ae4b9;">double</span>) width) * 2.47 - 2;
+  <span style="color: #6ae4b9;">double</span> <span style="color: #00d3d0;">y_norm</span> = (y / (<span style="color: #6ae4b9;">double</span>) height) * 2.24 - 1.12;
 
-  <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">it</span> = 0;
-  <span style="color: #98fb98;">double</span> <span style="color: #eedd82;">x_it</span> = 0.0;
-  <span style="color: #98fb98;">double</span> <span style="color: #eedd82;">y_it</span> = 0.0;
-  <span style="color: #00ffff;">while</span> (x_it * x_it + y_it * y_it &lt;= 2*2
+  <span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">it</span> = 0;
+  <span style="color: #6ae4b9;">double</span> <span style="color: #00d3d0;">x_it</span> = 0.0;
+  <span style="color: #6ae4b9;">double</span> <span style="color: #00d3d0;">y_it</span> = 0.0;
+  <span style="color: #b6a0ff;">while</span> (x_it * x_it + y_it * y_it &lt;= 2*2
          &amp;&amp; it &lt; ITERATIONS)
   {
-    <span style="color: #98fb98;">double</span> <span style="color: #eedd82;">tmp</span> = x_it * x_it - y_it * y_it + x_norm;
+    <span style="color: #6ae4b9;">double</span> <span style="color: #00d3d0;">tmp</span> = x_it * x_it - y_it * y_it + x_norm;
     y_it = 2 * x_it * y_it + y_norm;
     x_it = tmp;
     it++;
   }
 
-  <span style="color: #00ffff;">return</span> it;
+  <span style="color: #b6a0ff;">return</span> it;
 }
 </pre>
 </div>

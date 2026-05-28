@@ -31,39 +31,39 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-<div id="outline-container-org0af8560" class="outline-2">
-<h2 id="org0af8560">Misc / hello_world.asm</h2>
-<div class="outline-text-2" id="text-org0af8560">
+<div id="outline-container-org35f0c4e" class="outline-2">
+<h2 id="org35f0c4e">Misc / hello_world.asm</h2>
+<div class="outline-text-2" id="text-org35f0c4e">
 <p>
 Hello world x86-64 Linux assembly example.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-asm"><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
-</span><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Author: Giovanni Santini
-</span><span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">Github: @San7o
+<pre class="src src-asm"><span style="color: #989898;">;; </span><span style="color: #989898;">SPDX-License-Identifier: MIT
+</span><span style="color: #989898;">;; </span><span style="color: #989898;">Author: Giovanni Santini
+</span><span style="color: #989898;">;; </span><span style="color: #989898;">Github: @San7o
 </span>
-<span style="color: #87cefa;">extern</span> <span style="color: #00ffff;">printf</span>
+<span style="color: #feacd0;">extern</span> <span style="color: #b6a0ff;">printf</span>
 
-  <span style="color: #00ffff;">SECTION</span> .data
-<span style="color: #87cefa;">fmt</span>:
-  <span style="color: #00ffff;">db</span> <span style="color: #ffa07a;">"Hello!"</span>, 10, 0
+  <span style="color: #b6a0ff;">SECTION</span> .data
+<span style="color: #feacd0;">fmt</span>:
+  <span style="color: #b6a0ff;">db</span> <span style="color: #79a8ff;">"Hello!"</span>, 10, 0
 
-  <span style="color: #00ffff;">SECTION</span> .text
-  <span style="color: #00ffff;">global</span> main
+  <span style="color: #b6a0ff;">SECTION</span> .text
+  <span style="color: #b6a0ff;">global</span> main
 
-<span style="color: #87cefa;">main</span>:
-  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">align stack: call pushes return addr (8 bytes),
-</span>  <span style="color: #ff7f24;">;; </span><span style="color: #ff7f24;">so subtract 8 more to make 16-byte alignment
-</span>  <span style="color: #00ffff;">sub</span> rsp, 8
+<span style="color: #feacd0;">main</span>:
+  <span style="color: #989898;">;; </span><span style="color: #989898;">align stack: call pushes return addr (8 bytes),
+</span>  <span style="color: #989898;">;; </span><span style="color: #989898;">so subtract 8 more to make 16-byte alignment
+</span>  <span style="color: #b6a0ff;">sub</span> rsp, 8
 
-  <span style="color: #00ffff;">lea</span> rdi, [rel fmt]            <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">first arg
-</span>  <span style="color: #00ffff;">xor</span> eax, eax                  <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">set AL=0 for 0 varargs
-</span>  <span style="color: #00ffff;">call</span> printf
+  <span style="color: #b6a0ff;">lea</span> rdi, [rel fmt]            <span style="color: #989898;">; </span><span style="color: #989898;">first arg
+</span>  <span style="color: #b6a0ff;">xor</span> eax, eax                  <span style="color: #989898;">; </span><span style="color: #989898;">set AL=0 for 0 varargs
+</span>  <span style="color: #b6a0ff;">call</span> printf
 
-  <span style="color: #00ffff;">add</span> rsp, 8                    <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">restore stack
-</span>  <span style="color: #00ffff;">mov</span> rax, 0                    <span style="color: #ff7f24;">; </span><span style="color: #ff7f24;">return number
-</span>  <span style="color: #00ffff;">ret</span>
+  <span style="color: #b6a0ff;">add</span> rsp, 8                    <span style="color: #989898;">; </span><span style="color: #989898;">restore stack
+</span>  <span style="color: #b6a0ff;">mov</span> rax, 0                    <span style="color: #989898;">; </span><span style="color: #989898;">return number
+</span>  <span style="color: #b6a0ff;">ret</span>
 </pre>
 </div>
 

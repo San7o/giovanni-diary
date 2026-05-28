@@ -31,60 +31,60 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-<div id="outline-container-org1b52399" class="outline-2">
-<h2 id="org1b52399">C / Makefile</h2>
-<div class="outline-text-2" id="text-org1b52399">
+<div id="outline-container-orgd2cba7b" class="outline-2">
+<h2 id="orgd2cba7b">C / Makefile</h2>
+<div class="outline-text-2" id="text-orgd2cba7b">
 <p>
 Simple Makefile template for C projects.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Author:  Giovanni Santini
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Mail:    giovanni.santini@proton.me
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">License: MIT
+<pre class="src src-sh"><span style="color: #989898;"># </span><span style="color: #989898;">SPDX-License-Identifier: MIT
+</span><span style="color: #989898;"># </span><span style="color: #989898;">Author:  Giovanni Santini
+</span><span style="color: #989898;"># </span><span style="color: #989898;">Mail:    giovanni.santini@proton.me
+</span><span style="color: #989898;"># </span><span style="color: #989898;">License: MIT
 </span>
-<span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Compiler flags
-</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
+<span style="color: #989898;">#</span><span style="color: #989898;">
+</span><span style="color: #989898;"># </span><span style="color: #989898;">Compiler flags
+</span><span style="color: #989898;">#</span><span style="color: #989898;">
 </span>CFLAGS        = -Wall -Werror -Wextra -Wpedantic -std=c99
 DEBUG_FLAGS   = -ggdb
-RELEASE_FLAGS = -DCOMMIT_HASH=$(<span style="color: #fa8072;">shell git rev-parse --verify HEAD</span>)
+RELEASE_FLAGS = -DCOMMIT_HASH=$(<span style="color: #f78fe7;">shell git rev-parse --verify HEAD</span>)
 LDFLAGS       =
 CC?           = gcc
 
-<span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Project files
-</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
+<span style="color: #989898;">#</span><span style="color: #989898;">
+</span><span style="color: #989898;"># </span><span style="color: #989898;">Project files
+</span><span style="color: #989898;">#</span><span style="color: #989898;">
 </span>OUT_NAME = hello
 OBJ      = hello.o
 
-<span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Commands
-</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
-</span>all: $(<span style="color: #fa8072;">OUT_NAME</span>)
+<span style="color: #989898;">#</span><span style="color: #989898;">
+</span><span style="color: #989898;"># </span><span style="color: #989898;">Commands
+</span><span style="color: #989898;">#</span><span style="color: #989898;">
+</span>all: $(<span style="color: #f78fe7;">OUT_NAME</span>)
 
-debug: CFLAGS += $(<span style="color: #fa8072;">DEBUG_FLAGS</span>)
-debug: $(<span style="color: #fa8072;">OUT_NAME</span>)
+debug: CFLAGS += $(<span style="color: #f78fe7;">DEBUG_FLAGS</span>)
+debug: $(<span style="color: #f78fe7;">OUT_NAME</span>)
 
-release: CFLAGS += $(<span style="color: #fa8072;">RELEASE_FLAGS</span>) 
-release: $(<span style="color: #fa8072;">OUT_NAME</span>)
+release: CFLAGS += $(<span style="color: #f78fe7;">RELEASE_FLAGS</span>) 
+release: $(<span style="color: #f78fe7;">OUT_NAME</span>)
 
-run: $(<span style="color: #fa8072;">OUT_NAME</span>)
-  chmod +x $(<span style="color: #fa8072;">OUT_NAME</span>)
-  ./$(<span style="color: #fa8072;">OUT_NAME</span>)
+run: $(<span style="color: #f78fe7;">OUT_NAME</span>)
+  chmod +x $(<span style="color: #f78fe7;">OUT_NAME</span>)
+  ./$(<span style="color: #f78fe7;">OUT_NAME</span>)
 
 clean:
-  rm -f $(<span style="color: #fa8072;">OBJ</span>)
+  rm -f $(<span style="color: #f78fe7;">OBJ</span>)
 
 distclean:
-  rm -f $(<span style="color: #fa8072;">OUT_NAME</span>)
+  rm -f $(<span style="color: #f78fe7;">OUT_NAME</span>)
 
-$(<span style="color: #fa8072;">OUT_NAME</span>): $(<span style="color: #fa8072;">OBJ</span>)
-  $(<span style="color: #fa8072;">CC</span>) $(<span style="color: #fa8072;">OBJ</span>) $(<span style="color: #fa8072;">LDFLAGS</span>) $(<span style="color: #fa8072;">CFLAGS</span>) -o $(<span style="color: #fa8072;">OUT_NAME</span>)
+$(<span style="color: #f78fe7;">OUT_NAME</span>): $(<span style="color: #f78fe7;">OBJ</span>)
+  $(<span style="color: #f78fe7;">CC</span>) $(<span style="color: #f78fe7;">OBJ</span>) $(<span style="color: #f78fe7;">LDFLAGS</span>) $(<span style="color: #f78fe7;">CFLAGS</span>) -o $(<span style="color: #f78fe7;">OUT_NAME</span>)
 
 %.o: %.c
-  $(<span style="color: #fa8072;">CC</span>) $(<span style="color: #fa8072;">CFLAGS</span>) -c $&lt; -o $<span style="color: #eedd82;">@</span>
+  $(<span style="color: #f78fe7;">CC</span>) $(<span style="color: #f78fe7;">CFLAGS</span>) -c $&lt; -o $<span style="color: #00d3d0;">@</span>
 </pre>
 </div>
 

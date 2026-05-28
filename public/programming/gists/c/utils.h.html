@@ -31,52 +31,52 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-<div id="outline-container-orgf5908cc" class="outline-2">
-<h2 id="orgf5908cc">C / utils.h</h2>
-<div class="outline-text-2" id="text-orgf5908cc">
+<div id="outline-container-org9147128" class="outline-2">
+<h2 id="org9147128">C / utils.h</h2>
+<div class="outline-text-2" id="text-org9147128">
 <p>
 Utility macros for C projects.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Author:  Giovanni Santini
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Mail:    giovanni.santini@proton.me
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Github:  @San7o
+<pre class="src src-c"><span style="color: #989898;">// </span><span style="color: #989898;">SPDX-License-Identifier: MIT
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Author:  Giovanni Santini
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Mail:    giovanni.santini@proton.me
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Github:  @San7o
 </span>
-<span style="color: #b0c4de;">#if</span><span style="color: #b0c4de;">n</span><span style="color: #b0c4de;">def</span> UTILS_H
-<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">UTILS_H</span>
+<span style="color: #ff7f9f;">#if</span><span style="color: #ff7f9f; font-weight: bold;">n</span><span style="color: #ff7f9f;">def</span> UTILS_H
+<span style="color: #ff7f9f;">#define</span> <span style="color: #00d3d0;">UTILS_H</span>
 
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;stdlib.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;stdio.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;stdlib.h&gt;</span>
 
-<span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Macros
-</span><span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">
+<span style="color: #989898;">//</span><span style="color: #989898;">
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Macros
+</span><span style="color: #989898;">//</span><span style="color: #989898;">
 </span>
-<span style="color: #b0c4de;">#define</span> <span style="color: #87cefa;">UNUSED</span>(<span style="color: #eedd82;">value</span>) (<span style="color: #98fb98;">void</span>)(value)
-<span style="color: #b0c4de;">#define</span> <span style="color: #87cefa;">TODO</span>(<span style="color: #eedd82;">message</span>) <span style="color: #00ffff;">do</span> { fprintf(stderr, <span style="color: #ffa07a;">"%s:%d: TODO: %s\n"</span>, __FILE__, __LINE__, message); abort(); } <span style="color: #00ffff;">while</span>(0)
-<span style="color: #b0c4de;">#define</span> <span style="color: #87cefa;">UNREACHABLE</span>(<span style="color: #eedd82;">message</span>) <span style="color: #00ffff;">do</span> { fprintf(stderr, <span style="color: #ffa07a;">"%s:%d: UNREACHABLE: %s\n"</span>, __FILE__, __LINE__, message); abort(); } <span style="color: #00ffff;">while</span>(0)
+<span style="color: #ff7f9f;">#define</span> <span style="color: #feacd0;">UNUSED</span>(<span style="color: #00d3d0;">value</span>) (<span style="color: #6ae4b9;">void</span>)(value)
+<span style="color: #ff7f9f;">#define</span> <span style="color: #feacd0;">TODO</span>(<span style="color: #00d3d0;">message</span>) <span style="color: #b6a0ff;">do</span> { fprintf(stderr, <span style="color: #79a8ff;">"%s:%d: TODO: %s\n"</span>, __FILE__, __LINE__, message); abort(); } <span style="color: #b6a0ff;">while</span>(0)
+<span style="color: #ff7f9f;">#define</span> <span style="color: #feacd0;">UNREACHABLE</span>(<span style="color: #00d3d0;">message</span>) <span style="color: #b6a0ff;">do</span> { fprintf(stderr, <span style="color: #79a8ff;">"%s:%d: UNREACHABLE: %s\n"</span>, __FILE__, __LINE__, message); abort(); } <span style="color: #b6a0ff;">while</span>(0)
 
-<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">cleanup_free</span> <span style="color: #00ffff;">__attribute__</span> ((cleanup (cleanup_freep)))
+<span style="color: #ff7f9f;">#define</span> <span style="color: #00d3d0;">cleanup_free</span> <span style="color: #b6a0ff;">__attribute__</span> ((cleanup (cleanup_freep)))
 
-<span style="color: #b0c4de;">#ifdef</span> __GNUC__
-<span style="color: #b0c4de;">  #define</span> <span style="color: #87cefa;">LIKELY</span>(<span style="color: #eedd82;">x</span>)     __builtin_expect(!!(x), 1)
-<span style="color: #b0c4de;">  #define</span> <span style="color: #87cefa;">UNLIKELY</span>(<span style="color: #eedd82;">x</span>)   __builtin_expect(!!(x), 0)
-<span style="color: #b0c4de;">#else</span>
-<span style="color: #b0c4de;"> #define</span> <span style="color: #87cefa;">LIKELY</span>(<span style="color: #eedd82;">x</span>)     (x)
-<span style="color: #b0c4de;"> #define</span> <span style="color: #87cefa;">UNLIKELY</span>(<span style="color: #eedd82;">x</span>)   (x)
-<span style="color: #b0c4de;">#endif</span>
+<span style="color: #ff7f9f;">#ifdef</span> __GNUC__
+<span style="color: #ff7f9f;">  #define</span> <span style="color: #feacd0;">LIKELY</span>(<span style="color: #00d3d0;">x</span>)     __builtin_expect(<span style="color: #ff5f59; font-weight: bold;">!</span>!(x), 1)
+<span style="color: #ff7f9f;">  #define</span> <span style="color: #feacd0;">UNLIKELY</span>(<span style="color: #00d3d0;">x</span>)   __builtin_expect(<span style="color: #ff5f59; font-weight: bold;">!</span>!(x), 0)
+<span style="color: #ff7f9f;">#else</span>
+<span style="color: #ff7f9f;"> #define</span> <span style="color: #feacd0;">LIKELY</span>(<span style="color: #00d3d0;">x</span>)     (x)
+<span style="color: #ff7f9f;"> #define</span> <span style="color: #feacd0;">UNLIKELY</span>(<span style="color: #00d3d0;">x</span>)   (x)
+<span style="color: #ff7f9f;">#endif</span>
 
-<span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Functions
-</span><span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">
+<span style="color: #989898;">//</span><span style="color: #989898;">
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Functions
+</span><span style="color: #989898;">//</span><span style="color: #989898;">
 </span>
-<span style="color: #00ffff;">static</span> <span style="color: #00ffff;">inline</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">cleanup_freep</span>(<span style="color: #98fb98;">void</span> *<span style="color: #eedd82;">p</span>) {
-    free(*(<span style="color: #98fb98;">void</span> **)p);
+<span style="color: #b6a0ff;">static</span> <span style="color: #b6a0ff;">inline</span> <span style="color: #6ae4b9;">void</span> <span style="color: #feacd0;">cleanup_freep</span>(<span style="color: #6ae4b9;">void</span> *<span style="color: #00d3d0;">p</span>) {
+    free(*(<span style="color: #6ae4b9;">void</span> **)p);
 }
 
-<span style="color: #b0c4de;">#endif</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">UTILS_H</span>
+<span style="color: #ff7f9f;">#endif</span> <span style="color: #989898;">// </span><span style="color: #989898;">UTILS_H</span>
 </pre>
 </div>
 

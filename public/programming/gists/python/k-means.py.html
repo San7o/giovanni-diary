@@ -31,126 +31,126 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-<div id="outline-container-org6e55b59" class="outline-2">
-<h2 id="org6e55b59">Python / k-means.py</h2>
-<div class="outline-text-2" id="text-org6e55b59">
+<div id="outline-container-org612fa1a" class="outline-2">
+<h2 id="org612fa1a">Python / k-means.py</h2>
+<div class="outline-text-2" id="text-org612fa1a">
 <p>
 Implementation of k-means clustering in Python.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">k-means
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">=======
-</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Implementation of k-means clustering in Python.
-</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Credits to: https://towardsdatascience.com/create-your-own-k-means-clustering-algorithm-in-python-d7d4c9077670/
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Requirements:
-</span><span style="color: #ff7f24;">#  </span><span style="color: #ff7f24;">- matplotlib
-</span><span style="color: #ff7f24;">#  </span><span style="color: #ff7f24;">- seaborn
-</span><span style="color: #ff7f24;">#  </span><span style="color: #ff7f24;">- scikit-learn
-</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
+<pre class="src src-python"><span style="color: #989898;"># </span><span style="color: #989898;">k-means
+</span><span style="color: #989898;"># </span><span style="color: #989898;">=======
+</span><span style="color: #989898;">#</span><span style="color: #989898;">
+</span><span style="color: #989898;"># </span><span style="color: #989898;">Implementation of k-means clustering in Python.
+</span><span style="color: #989898;">#</span><span style="color: #989898;">
+</span><span style="color: #989898;"># </span><span style="color: #989898;">Credits to: https://towardsdatascience.com/create-your-own-k-means-clustering-algorithm-in-python-d7d4c9077670/
+</span><span style="color: #989898;"># </span><span style="color: #989898;">Requirements:
+</span><span style="color: #989898;">#  </span><span style="color: #989898;">- matplotlib
+</span><span style="color: #989898;">#  </span><span style="color: #989898;">- seaborn
+</span><span style="color: #989898;">#  </span><span style="color: #989898;">- scikit-learn
+</span><span style="color: #989898;">#</span><span style="color: #989898;">
 </span>
-<span style="color: #00ffff;">import</span> seaborn <span style="color: #00ffff;">as</span> sns
-<span style="color: #00ffff;">import</span> matplotlib
-matplotlib.use(<span style="color: #ffa07a;">"TkAgg"</span>)
-<span style="color: #00ffff;">import</span> matplotlib.pyplot <span style="color: #00ffff;">as</span> plt
-<span style="color: #00ffff;">import</span> sklearn.preprocessing <span style="color: #00ffff;">as</span> skp
-<span style="color: #00ffff;">import</span> sklearn.datasets <span style="color: #00ffff;">as</span> skd
-<span style="color: #00ffff;">import</span> numpy <span style="color: #00ffff;">as</span> np
-<span style="color: #00ffff;">import</span> numpy.random <span style="color: #00ffff;">as</span> npr
-<span style="color: #00ffff;">import</span> random
+<span style="color: #b6a0ff;">import</span> seaborn <span style="color: #b6a0ff;">as</span> sns
+<span style="color: #b6a0ff;">import</span> matplotlib
+matplotlib.use(<span style="color: #79a8ff;">"TkAgg"</span>)
+<span style="color: #b6a0ff;">import</span> matplotlib.pyplot <span style="color: #b6a0ff;">as</span> plt
+<span style="color: #b6a0ff;">import</span> sklearn.preprocessing <span style="color: #b6a0ff;">as</span> skp
+<span style="color: #b6a0ff;">import</span> sklearn.datasets <span style="color: #b6a0ff;">as</span> skd
+<span style="color: #b6a0ff;">import</span> numpy <span style="color: #b6a0ff;">as</span> np
+<span style="color: #b6a0ff;">import</span> numpy.random <span style="color: #b6a0ff;">as</span> npr
+<span style="color: #b6a0ff;">import</span> random
 
-<span style="color: #00ffff;">def</span> <span style="color: #87cefa;">euclidean</span>(point, data):
-    <span style="color: #ffa07a;">"""
+<span style="color: #b6a0ff;">def</span> <span style="color: #feacd0;">euclidean</span>(point, data):
+    <span style="color: #9ac8e0;">"""
     Euclidean distance between point and data.
     Point has dimensions (m,), data has dimensions (n,m),
     and output will be of size (n,).
     """</span>
-    <span style="color: #00ffff;">return</span> np.sqrt(np.<span style="color: #b0c4de;">sum</span>((point - data)**2, axis=1))
+    <span style="color: #b6a0ff;">return</span> np.sqrt(np.<span style="color: #f78fe7;">sum</span>((point - data)**2, axis=1))
 
-<span style="color: #00ffff;">class</span> <span style="color: #98fb98;">KMeans</span>:
+<span style="color: #b6a0ff;">class</span> <span style="color: #6ae4b9;">KMeans</span>:
 
-    <span style="color: #00ffff;">def</span> <span style="color: #87cefa;">__init__</span>(<span style="color: #00ffff;">self</span>, n_clusters=8, max_iter=300):
-        <span style="color: #00ffff;">self</span>.<span style="color: #eedd82;">n_clusters</span> = n_clusters
-        <span style="color: #00ffff;">self</span>.<span style="color: #eedd82;">max_iter</span> = max_iter
+    <span style="color: #b6a0ff;">def</span> <span style="color: #feacd0;">__init__</span>(<span style="color: #b6a0ff;">self</span>, n_clusters=8, max_iter=300):
+        <span style="color: #b6a0ff;">self</span>.<span style="color: #00d3d0;">n_clusters</span> = n_clusters
+        <span style="color: #b6a0ff;">self</span>.<span style="color: #00d3d0;">max_iter</span> = max_iter
 
-    <span style="color: #00ffff;">def</span> <span style="color: #87cefa;">fit</span>(<span style="color: #00ffff;">self</span>, X_train):
-        <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Randomly select centroid start points, uniformly
-</span>        <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">distributed across the domain of the dataset
-</span>        <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">min_ = np.min(X_train, axis=0)
-</span>        <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">max_ = np.max(X_train, axis=0)
-</span>        <span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">self.centroids = [npr.uniform(min_, max_) for _ in range(self.n_clusters)]
+    <span style="color: #b6a0ff;">def</span> <span style="color: #feacd0;">fit</span>(<span style="color: #b6a0ff;">self</span>, X_train):
+        <span style="color: #989898;"># </span><span style="color: #989898;">Randomly select centroid start points, uniformly
+</span>        <span style="color: #989898;"># </span><span style="color: #989898;">distributed across the domain of the dataset
+</span>        <span style="color: #989898;"># </span><span style="color: #989898;">min_ = np.min(X_train, axis=0)
+</span>        <span style="color: #989898;"># </span><span style="color: #989898;">max_ = np.max(X_train, axis=0)
+</span>        <span style="color: #989898;">#</span><span style="color: #989898;">self.centroids = [npr.uniform(min_, max_) for _ in range(self.n_clusters)]
 </span>
-        <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Initialize the centroids, using k-means++ method
-</span>        <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">where a random datapoint is selected as the first,
-</span>        <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">then the rest are initialized w/ probabilities
-</span>        <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">proportional to their distances to the first
-</span>        <span style="color: #00ffff;">self</span>.<span style="color: #eedd82;">centroids</span> = [random.choice(X_train)]
-        <span style="color: #00ffff;">for</span> _ <span style="color: #00ffff;">in</span> <span style="color: #b0c4de;">range</span>(<span style="color: #00ffff;">self</span>.n_clusters-1):
-            <span style="color: #eedd82;">dists</span> = np.<span style="color: #b0c4de;">sum</span>([euclidean(centroid, X_train) <span style="color: #00ffff;">for</span> centroid <span style="color: #00ffff;">in</span> <span style="color: #00ffff;">self</span>.centroids], axis=0)
-            <span style="color: #eedd82;">dists</span> /= np.<span style="color: #b0c4de;">sum</span>(dists)
-            <span style="color: #eedd82;">new_centroid_idx</span>, = np.random.choice(<span style="color: #b0c4de;">range</span>(<span style="color: #b0c4de;">len</span>(X_train)), size=1, p=dists)
-            <span style="color: #00ffff;">self</span>.<span style="color: #eedd82;">centroids</span> += [X_train[new_centroid_idx]]
+        <span style="color: #989898;"># </span><span style="color: #989898;">Initialize the centroids, using k-means++ method
+</span>        <span style="color: #989898;"># </span><span style="color: #989898;">where a random datapoint is selected as the first,
+</span>        <span style="color: #989898;"># </span><span style="color: #989898;">then the rest are initialized w/ probabilities
+</span>        <span style="color: #989898;"># </span><span style="color: #989898;">proportional to their distances to the first
+</span>        <span style="color: #b6a0ff;">self</span>.<span style="color: #00d3d0;">centroids</span> = [random.choice(X_train)]
+        <span style="color: #b6a0ff;">for</span> _ <span style="color: #b6a0ff;">in</span> <span style="color: #f78fe7;">range</span>(<span style="color: #b6a0ff;">self</span>.n_clusters-1):
+            <span style="color: #00d3d0;">dists</span> = np.<span style="color: #f78fe7;">sum</span>([euclidean(centroid, X_train) <span style="color: #b6a0ff;">for</span> centroid <span style="color: #b6a0ff;">in</span> <span style="color: #b6a0ff;">self</span>.centroids], axis=0)
+            <span style="color: #00d3d0;">dists</span> /= np.<span style="color: #f78fe7;">sum</span>(dists)
+            <span style="color: #00d3d0;">new_centroid_idx</span>, = np.random.choice(<span style="color: #f78fe7;">range</span>(<span style="color: #f78fe7;">len</span>(X_train)), size=1, p=dists)
+            <span style="color: #b6a0ff;">self</span>.<span style="color: #00d3d0;">centroids</span> += [X_train[new_centroid_idx]]
 
-        <span style="color: #eedd82;">iteration</span> = 0
-        <span style="color: #eedd82;">prev_centroids</span> = <span style="color: #7fffd4;">None</span>
-        <span style="color: #00ffff;">while</span> np.not_equal(<span style="color: #00ffff;">self</span>.centroids, prev_centroids).<span style="color: #b0c4de;">any</span>() <span style="color: #00ffff;">and</span> iteration &lt; <span style="color: #00ffff;">self</span>.max_iter:
-            <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Sort each data point, assigning to nearest centroid
-</span>            <span style="color: #eedd82;">sorted_points</span> = [[] <span style="color: #00ffff;">for</span> _ <span style="color: #00ffff;">in</span> <span style="color: #b0c4de;">range</span>(<span style="color: #00ffff;">self</span>.n_clusters)]
-            <span style="color: #00ffff;">for</span> x <span style="color: #00ffff;">in</span> X_train:
-                <span style="color: #eedd82;">dists</span> = euclidean(x, <span style="color: #00ffff;">self</span>.centroids)
-                <span style="color: #eedd82;">centroid_idx</span> = np.argmin(dists)
+        <span style="color: #00d3d0;">iteration</span> = 0
+        <span style="color: #00d3d0;">prev_centroids</span> = <span style="color: #00bcff;">None</span>
+        <span style="color: #b6a0ff;">while</span> np.not_equal(<span style="color: #b6a0ff;">self</span>.centroids, prev_centroids).<span style="color: #f78fe7;">any</span>() <span style="color: #b6a0ff;">and</span> iteration &lt; <span style="color: #b6a0ff;">self</span>.max_iter:
+            <span style="color: #989898;"># </span><span style="color: #989898;">Sort each data point, assigning to nearest centroid
+</span>            <span style="color: #00d3d0;">sorted_points</span> = [[] <span style="color: #b6a0ff;">for</span> _ <span style="color: #b6a0ff;">in</span> <span style="color: #f78fe7;">range</span>(<span style="color: #b6a0ff;">self</span>.n_clusters)]
+            <span style="color: #b6a0ff;">for</span> x <span style="color: #b6a0ff;">in</span> X_train:
+                <span style="color: #00d3d0;">dists</span> = euclidean(x, <span style="color: #b6a0ff;">self</span>.centroids)
+                <span style="color: #00d3d0;">centroid_idx</span> = np.argmin(dists)
                 sorted_points[centroid_idx].append(x)
 
-            <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Push current centroids to previous, reassign
-</span>            <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">centroids as mean of the points belonging to them
-</span>            <span style="color: #eedd82;">prev_centroids</span> = <span style="color: #00ffff;">self</span>.centroids
-            <span style="color: #00ffff;">self</span>.<span style="color: #eedd82;">centroids</span> = [np.mean(cluster, axis=0) <span style="color: #00ffff;">for</span> cluster <span style="color: #00ffff;">in</span> sorted_points]
-            <span style="color: #00ffff;">for</span> i, centroid <span style="color: #00ffff;">in</span> <span style="color: #b0c4de;">enumerate</span>(<span style="color: #00ffff;">self</span>.centroids):
-                <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Catch any np.nans, resulting from a centroid
-</span>                <span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">having no points
-</span>                <span style="color: #00ffff;">if</span> np.isnan(centroid).<span style="color: #b0c4de;">any</span>():
-                    <span style="color: #00ffff;">self</span>.<span style="color: #eedd82;">centroids</span>[i] = prev_centroids[i]
-            <span style="color: #eedd82;">iteration</span> += 1
+            <span style="color: #989898;"># </span><span style="color: #989898;">Push current centroids to previous, reassign
+</span>            <span style="color: #989898;"># </span><span style="color: #989898;">centroids as mean of the points belonging to them
+</span>            <span style="color: #00d3d0;">prev_centroids</span> = <span style="color: #b6a0ff;">self</span>.centroids
+            <span style="color: #b6a0ff;">self</span>.<span style="color: #00d3d0;">centroids</span> = [np.mean(cluster, axis=0) <span style="color: #b6a0ff;">for</span> cluster <span style="color: #b6a0ff;">in</span> sorted_points]
+            <span style="color: #b6a0ff;">for</span> i, centroid <span style="color: #b6a0ff;">in</span> <span style="color: #f78fe7;">enumerate</span>(<span style="color: #b6a0ff;">self</span>.centroids):
+                <span style="color: #989898;"># </span><span style="color: #989898;">Catch any np.nans, resulting from a centroid
+</span>                <span style="color: #989898;"># </span><span style="color: #989898;">having no points
+</span>                <span style="color: #b6a0ff;">if</span> np.isnan(centroid).<span style="color: #f78fe7;">any</span>():
+                    <span style="color: #b6a0ff;">self</span>.<span style="color: #00d3d0;">centroids</span>[i] = prev_centroids[i]
+            <span style="color: #00d3d0;">iteration</span> += 1
 
-    <span style="color: #00ffff;">def</span> <span style="color: #87cefa;">evaluate</span>(<span style="color: #00ffff;">self</span>, X):
-        <span style="color: #eedd82;">centroids</span> = []
-        <span style="color: #eedd82;">centroid_idxs</span> = []
-        <span style="color: #00ffff;">for</span> x <span style="color: #00ffff;">in</span> X:
-            <span style="color: #eedd82;">dists</span> = euclidean(x, <span style="color: #00ffff;">self</span>.centroids)
-            <span style="color: #eedd82;">centroid_idx</span> = np.argmin(dists)
-            centroids.append(<span style="color: #00ffff;">self</span>.centroids[centroid_idx])
+    <span style="color: #b6a0ff;">def</span> <span style="color: #feacd0;">evaluate</span>(<span style="color: #b6a0ff;">self</span>, X):
+        <span style="color: #00d3d0;">centroids</span> = []
+        <span style="color: #00d3d0;">centroid_idxs</span> = []
+        <span style="color: #b6a0ff;">for</span> x <span style="color: #b6a0ff;">in</span> X:
+            <span style="color: #00d3d0;">dists</span> = euclidean(x, <span style="color: #b6a0ff;">self</span>.centroids)
+            <span style="color: #00d3d0;">centroid_idx</span> = np.argmin(dists)
+            centroids.append(<span style="color: #b6a0ff;">self</span>.centroids[centroid_idx])
             centroid_idxs.append(centroid_idx)
 
-        <span style="color: #00ffff;">return</span> centroids, centroid_idx
+        <span style="color: #b6a0ff;">return</span> centroids, centroid_idx
 
-<span style="color: #eedd82;">centers</span> = 5
+<span style="color: #00d3d0;">centers</span> = 5
 
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Generate random data
-</span><span style="color: #eedd82;">X_train</span>, <span style="color: #eedd82;">true_labels</span> = skd.make_blobs(n_samples=100,
+<span style="color: #989898;"># </span><span style="color: #989898;">Generate random data
+</span><span style="color: #00d3d0;">X_train</span>, <span style="color: #00d3d0;">true_labels</span> = skd.make_blobs(n_samples=100,
                                      centers=centers,
                                      random_state=42)
-<span style="color: #eedd82;">X_train</span> = skp.StandardScaler().fit_transform(X_train)
+<span style="color: #00d3d0;">X_train</span> = skp.StandardScaler().fit_transform(X_train)
 
-<span style="color: #eedd82;">kmeans</span> = KMeans(n_clusters=centers)
+<span style="color: #00d3d0;">kmeans</span> = KMeans(n_clusters=centers)
 kmeans.fit(X_train)
 
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">View results
-</span><span style="color: #eedd82;">class_centers</span>, <span style="color: #eedd82;">classification</span> = kmeans.evaluate(X_train)
-sns.scatterplot(x=[X[0] <span style="color: #00ffff;">for</span> X <span style="color: #00ffff;">in</span> X_train],
-                y=[X[1] <span style="color: #00ffff;">for</span> X <span style="color: #00ffff;">in</span> X_train],
+<span style="color: #989898;"># </span><span style="color: #989898;">View results
+</span><span style="color: #00d3d0;">class_centers</span>, <span style="color: #00d3d0;">classification</span> = kmeans.evaluate(X_train)
+sns.scatterplot(x=[X[0] <span style="color: #b6a0ff;">for</span> X <span style="color: #b6a0ff;">in</span> X_train],
+                y=[X[1] <span style="color: #b6a0ff;">for</span> X <span style="color: #b6a0ff;">in</span> X_train],
                 hue=true_labels,
                 style=classification,
-                palette=<span style="color: #ffa07a;">"deep"</span>,
-                legend=<span style="color: #7fffd4;">None</span>)
+                palette=<span style="color: #79a8ff;">"deep"</span>,
+                legend=<span style="color: #00bcff;">None</span>)
 
-plt.plot([x <span style="color: #00ffff;">for</span> x, _ <span style="color: #00ffff;">in</span> kmeans.centroids],
-         [y <span style="color: #00ffff;">for</span> _, y <span style="color: #00ffff;">in</span> kmeans.centroids],
-         <span style="color: #ffa07a;">'+'</span>,
+plt.plot([x <span style="color: #b6a0ff;">for</span> x, _ <span style="color: #b6a0ff;">in</span> kmeans.centroids],
+         [y <span style="color: #b6a0ff;">for</span> _, y <span style="color: #b6a0ff;">in</span> kmeans.centroids],
+         <span style="color: #79a8ff;">'+'</span>,
          markersize=10);
-plt.xlabel(<span style="color: #ffa07a;">"x"</span>)
-plt.ylabel(<span style="color: #ffa07a;">"y"</span>)
+plt.xlabel(<span style="color: #79a8ff;">"x"</span>)
+plt.ylabel(<span style="color: #79a8ff;">"y"</span>)
 plt.show()
 </pre>
 </div>

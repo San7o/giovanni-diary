@@ -31,20 +31,20 @@
 <p>
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
-<div id="outline-container-org53e9c4a" class="outline-2">
-<h2 id="org53e9c4a">Security Management Solutions</h2>
-<div class="outline-text-2" id="text-org53e9c4a">
+<div id="outline-container-org98a3a39" class="outline-2">
+<h2 id="org98a3a39">Security Management Solutions</h2>
+<div class="outline-text-2" id="text-org98a3a39">
 </div>
-<div id="outline-container-org349486f" class="outline-3">
-<h3 id="org349486f">Wazuh</h3>
-<div class="outline-text-3" id="text-org349486f">
+<div id="outline-container-org782b7da" class="outline-3">
+<h3 id="org782b7da">Wazuh</h3>
+<div class="outline-text-3" id="text-org782b7da">
 <p>
 <a href="https://wazuh.com/">Website</a>. Install wazuh on a docker container:
 </p>
 
 <div class="org-src-container">
 <pre class="src src-bash">git clone https://github.com/wazuh/wazuh-docker.git -b v4.14.2
-<span style="color: #b0c4de;">cd</span> wazuh-docker/single-node/
+<span style="color: #f78fe7;">cd</span> wazuh-docker/single-node/
 </pre>
 </div>
 
@@ -54,7 +54,7 @@ not complain:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-yaml"><span style="color: #eedd82;">volumes</span>:
+<pre class="src src-yaml">volumes:
       - ./config/wazuh_indexer_ssl_certs/:/certificates/:z
       - ./config/certs.yml:/config/certs.yml:z
 </pre>
@@ -94,9 +94,9 @@ For configuration, check the file in <code>/var/ossec/etc/ossec.conf</code>.
 ps: there is a dark mode in Dashboard Management &gt; Advanced Settings.
 </p>
 </div>
-<div id="outline-container-org0fcda38" class="outline-4">
-<h4 id="org0fcda38">Useful panels</h4>
-<div class="outline-text-4" id="text-org0fcda38">
+<div id="outline-container-orgb21b4e4" class="outline-4">
+<h4 id="orgb21b4e4">Useful panels</h4>
+<div class="outline-text-4" id="text-orgb21b4e4">
 <ul class="org-ul">
 <li>Endpoint security &gt; Configuration Assessment: correct configuration</li>
 <li>Threat Intelligence &gt; Vulnerability Detection: CVEs</li>

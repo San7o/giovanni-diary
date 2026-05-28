@@ -3,6 +3,8 @@
 # Generate the Surroundings amalgamated org file from the .org files
 # from content/writing/surroundings to latex/
 
+set -e
+
 # 0. Create the latex directory
 rm -rf latex 2&>/dev/null
 mkdir -p latex

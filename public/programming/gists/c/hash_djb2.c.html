@@ -31,24 +31,24 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-<div id="outline-container-orgfe233c7" class="outline-2">
-<h2 id="orgfe233c7">C / hash_djb2.c</h2>
-<div class="outline-text-2" id="text-orgfe233c7">
+<div id="outline-container-orgf610eab" class="outline-2">
+<h2 id="orgf610eab">C / hash_djb2.c</h2>
+<div class="outline-text-2" id="text-orgf610eab">
 <p>
 Simple hash function for strings.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
+<pre class="src src-c"><span style="color: #989898;">// </span><span style="color: #989898;">SPDX-License-Identifier: MIT
 </span>
-<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">hash [bytes] of size [len]
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Credits to http://www.cse.yorku.ca/~oz/hash.html
-</span><span style="color: #98fb98;">unsigned</span> <span style="color: #98fb98;">int</span> <span style="color: #87cefa;">djb2</span>(<span style="color: #00ffff;">const</span> <span style="color: #98fb98;">char</span> *<span style="color: #eedd82;">bytes</span>, <span style="color: #98fb98;">unsigned</span> <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">len</span>)
+<span style="color: #989898;">// </span><span style="color: #989898;">hash [bytes] of size [len]
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Credits to http://www.cse.yorku.ca/~oz/hash.html
+</span><span style="color: #6ae4b9;">unsigned</span> <span style="color: #6ae4b9;">int</span> <span style="color: #feacd0;">djb2</span>(<span style="color: #b6a0ff;">const</span> <span style="color: #6ae4b9;">char</span> *<span style="color: #00d3d0;">bytes</span>, <span style="color: #6ae4b9;">unsigned</span> <span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">len</span>)
 {
-  <span style="color: #98fb98;">unsigned</span> <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">hash</span> = 5381;
-  <span style="color: #00ffff;">for</span> (<span style="color: #98fb98;">unsigned</span> <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">i</span> = 0; i &lt; len; ++i)
+  <span style="color: #6ae4b9;">unsigned</span> <span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">hash</span> = 5381;
+  <span style="color: #b6a0ff;">for</span> (<span style="color: #6ae4b9;">unsigned</span> <span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">i</span> = 0; i &lt; len; ++i)
     hash = hash * 33 + bytes[i];
-  <span style="color: #00ffff;">return</span> hash;
+  <span style="color: #b6a0ff;">return</span> hash;
 }
 </pre>
 </div>

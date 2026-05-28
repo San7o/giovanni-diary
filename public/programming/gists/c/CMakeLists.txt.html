@@ -31,145 +31,145 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-<div id="outline-container-org0b67780" class="outline-2">
-<h2 id="org0b67780">C / CMakeLists.txt</h2>
-<div class="outline-text-2" id="text-org0b67780">
+<div id="outline-container-org51f0344" class="outline-2">
+<h2 id="org51f0344">C / CMakeLists.txt</h2>
+<div class="outline-text-2" id="text-org51f0344">
 <p>
 Modern Cmake template for C++ projects.
 </p>
 
 <div class="org-src-container">
 <pre class="src src-c"># ====================================================================
-<span style="color: #b0c4de;"># Project</span>:   myproject
-<span style="color: #b0c4de;"># Author</span>:    Giovanni Santini
-<span style="color: #b0c4de;"># Mail</span>:      giovanni.santini@proton.me
-<span style="color: #b0c4de;"># Github</span>:    @San7o
-<span style="color: #b0c4de;"># License</span>:   MIT
+<span style="color: #ff7f9f;"># Project</span>:   myproject
+<span style="color: #ff7f9f;"># Author</span>:    Giovanni Santini
+<span style="color: #ff7f9f;"># Mail</span>:      giovanni.santini@proton.me
+<span style="color: #ff7f9f;"># Github</span>:    @San7o
+<span style="color: #ff7f9f;"># License</span>:   MIT
 # ====================================================================
 
 cmake_minimum_required(VERSION 3.16)
 
-<span style="color: #87cefa;">project</span>(<span style="color: #98fb98;">myproject</span>
-  <span style="color: #eedd82;">VERSION</span> 1.0
-  DESCRIPTION <span style="color: #ffa07a;">"C++ project with Cmake"</span>
+<span style="color: #feacd0;">project</span>(<span style="color: #6ae4b9;">myproject</span>
+  <span style="color: #00d3d0;">VERSION</span> 1.0
+  DESCRIPTION <span style="color: #79a8ff;">"C++ project with Cmake"</span>
   LANGUAGES CXX
 )
 
-<span style="color: #87cefa;">set</span>(CMAKE_CXX_STANDARD 17)
-<span style="color: #87cefa;">set</span>(<span style="color: #98fb98;">CMAKE_CXX_STANDARD_REQUIRED</span> <span style="color: #eedd82;">ON</span>)
-<span style="color: #87cefa;">set</span>(<span style="color: #98fb98;">CMAKE_CXX_EXTENSIONS</span> <span style="color: #eedd82;">OFF</span>)  # no gnu extensions
+<span style="color: #feacd0;">set</span>(CMAKE_CXX_STANDARD 17)
+<span style="color: #feacd0;">set</span>(<span style="color: #6ae4b9;">CMAKE_CXX_STANDARD_REQUIRED</span> <span style="color: #00d3d0;">ON</span>)
+<span style="color: #feacd0;">set</span>(<span style="color: #6ae4b9;">CMAKE_CXX_EXTENSIONS</span> <span style="color: #00d3d0;">OFF</span>)  # no gnu extensions
 
-find_program(CCACHE_PROGRAM ccache) # use ccache <span style="color: #00ffff;">if</span> available
-<span style="color: #00ffff;">if</span>(CCACHE_PROGRAM)
-  <span style="color: #87cefa;">message</span>(STATUS <span style="color: #ffa07a;">"Using ccache: ${CCACHE_PROGRAM}"</span>)
-  <span style="color: #87cefa;">set</span>(CMAKE_CXX_COMPILER_LAUNCHER <span style="color: #ffa07a;">"${CCACHE_PROGRAM}"</span>)
-<span style="color: #87cefa;">endif</span>()
+find_program(CCACHE_PROGRAM ccache) # use ccache <span style="color: #b6a0ff;">if</span> available
+<span style="color: #b6a0ff;">if</span>(CCACHE_PROGRAM)
+  <span style="color: #feacd0;">message</span>(STATUS <span style="color: #79a8ff;">"Using ccache: ${CCACHE_PROGRAM}"</span>)
+  <span style="color: #feacd0;">set</span>(CMAKE_CXX_COMPILER_LAUNCHER <span style="color: #79a8ff;">"${CCACHE_PROGRAM}"</span>)
+<span style="color: #feacd0;">endif</span>()
 
-<span style="color: #00ffff;">if</span>(MSVC)
-  <span style="color: #87cefa;">set</span>(WARNING_FLAGS /W4 /permissive-)
-  <span style="color: #87cefa;">set</span>(DEBUG_FLAGS /Zi /Od)
-  <span style="color: #87cefa;">set</span>(RELEASE_FLAGS /O2)
-  <span style="color: #87cefa;">set</span>(<span style="color: #98fb98;">DEBUG_DEFINES</span> <span style="color: #eedd82;">_DEBUG</span>)
-<span style="color: #87cefa;">elseif</span>(MINGW)
-  <span style="color: #87cefa;">set</span>(WARNING_FLAGS -Wall -Wextra -Wpedantic)
-  <span style="color: #87cefa;">set</span>(DEBUG_FLAGS -O0 -ggdb)
-  <span style="color: #87cefa;">set</span>(RELEASE_FLAGS -O3)
-  <span style="color: #87cefa;">set</span>(<span style="color: #98fb98;">DEBUG_DEFINES</span> <span style="color: #eedd82;">DEBUG</span>)
-<span style="color: #00ffff;">else</span>()
-  <span style="color: #87cefa;">set</span>(WARNING_FLAGS -Wall -Wextra -Werror -Wpedantic)
-  <span style="color: #87cefa;">set</span>(DEBUG_FLAGS -O0 -ggdb -fsanitize=address)
-  <span style="color: #87cefa;">set</span>(RELEASE_FLAGS -O3)
-  <span style="color: #87cefa;">set</span>(<span style="color: #98fb98;">DEBUG_DEFINES</span> <span style="color: #eedd82;">DEBUG</span>)
-  <span style="color: #87cefa;">set</span>(DEBUG_LINK_FLAGS -fsanitize=address)
-<span style="color: #87cefa;">endif</span>()
-
-#
-<span style="color: #b0c4de;"># Options</span>
-#
-
-<span style="color: #b0c4de;">#option</span>(BUILD_SHARED_LIBS <span style="color: #ffa07a;">"Build libraries as shared"</span> ON)
-option(ENABLE_TESTING <span style="color: #ffa07a;">"Enable unit tests"</span> ON)
-
-<span style="color: #00ffff;">if</span>(NOT CMAKE_BUILD_TYPE)
-  <span style="color: #87cefa;">set</span>(<span style="color: #98fb98;">CMAKE_BUILD_TYPE</span> Release <span style="color: #98fb98;">CACHE</span> <span style="color: #eedd82;">STRING</span> <span style="color: #ffa07a;">"Build type (Debug, Release)"</span> FORCE)
-<span style="color: #87cefa;">endif</span>()
-<span style="color: #87cefa;">message</span>(STATUS <span style="color: #ffa07a;">"Build type: ${CMAKE_BUILD_TYPE}"</span>)
+<span style="color: #b6a0ff;">if</span>(MSVC)
+  <span style="color: #feacd0;">set</span>(WARNING_FLAGS /W4 /permissive-)
+  <span style="color: #feacd0;">set</span>(DEBUG_FLAGS /Zi /Od)
+  <span style="color: #feacd0;">set</span>(RELEASE_FLAGS /O2)
+  <span style="color: #feacd0;">set</span>(<span style="color: #6ae4b9;">DEBUG_DEFINES</span> <span style="color: #00d3d0;">_DEBUG</span>)
+<span style="color: #feacd0;">elseif</span>(MINGW)
+  <span style="color: #feacd0;">set</span>(WARNING_FLAGS -Wall -Wextra -Wpedantic)
+  <span style="color: #feacd0;">set</span>(DEBUG_FLAGS -O0 -ggdb)
+  <span style="color: #feacd0;">set</span>(RELEASE_FLAGS -O3)
+  <span style="color: #feacd0;">set</span>(<span style="color: #6ae4b9;">DEBUG_DEFINES</span> <span style="color: #00d3d0;">DEBUG</span>)
+<span style="color: #b6a0ff;">else</span>()
+  <span style="color: #feacd0;">set</span>(WARNING_FLAGS -Wall -Wextra -Werror -Wpedantic)
+  <span style="color: #feacd0;">set</span>(DEBUG_FLAGS -O0 -ggdb -fsanitize=address)
+  <span style="color: #feacd0;">set</span>(RELEASE_FLAGS -O3)
+  <span style="color: #feacd0;">set</span>(<span style="color: #6ae4b9;">DEBUG_DEFINES</span> <span style="color: #00d3d0;">DEBUG</span>)
+  <span style="color: #feacd0;">set</span>(DEBUG_LINK_FLAGS -fsanitize=address)
+<span style="color: #feacd0;">endif</span>()
 
 #
-<span style="color: #b0c4de;"># Dependencies</span>
+<span style="color: #ff7f9f;"># Options</span>
 #
 
-<span style="color: #b0c4de;"># add_subdirectory</span>(external/SFML)
+<span style="color: #ff7f9f;">#option</span>(BUILD_SHARED_LIBS <span style="color: #79a8ff;">"Build libraries as shared"</span> ON)
+option(ENABLE_TESTING <span style="color: #79a8ff;">"Enable unit tests"</span> ON)
+
+<span style="color: #b6a0ff;">if</span>(NOT CMAKE_BUILD_TYPE)
+  <span style="color: #feacd0;">set</span>(<span style="color: #6ae4b9;">CMAKE_BUILD_TYPE</span> Release <span style="color: #6ae4b9;">CACHE</span> <span style="color: #00d3d0;">STRING</span> <span style="color: #79a8ff;">"Build type (Debug, Release)"</span> FORCE)
+<span style="color: #feacd0;">endif</span>()
+<span style="color: #feacd0;">message</span>(STATUS <span style="color: #79a8ff;">"Build type: ${CMAKE_BUILD_TYPE}"</span>)
 
 #
-<span style="color: #b0c4de;"># Sources</span> and headers
+<span style="color: #ff7f9f;"># Dependencies</span>
+#
+
+<span style="color: #ff7f9f;"># add_subdirectory</span>(external/SFML)
+
+#
+<span style="color: #ff7f9f;"># Sources</span> and headers
 #
 
 set(SOURCES src/main.cpp)
-<span style="color: #b0c4de;">#set</span>(HEADERS include/myproject.hpp)
+<span style="color: #ff7f9f;">#set</span>(HEADERS include/myproject.hpp)
 
 #
-<span style="color: #b0c4de;"># Targets</span>
+<span style="color: #ff7f9f;"># Targets</span>
 #
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
-<span style="color: #87cefa;">target_include_directories</span>(${PROJECT_NAME}
-  <span style="color: #98fb98;">PRIVATE</span> <span style="color: #eedd82;">$</span>{PROJECT_SOURCE_DIR}/include)
+<span style="color: #feacd0;">target_include_directories</span>(${PROJECT_NAME}
+  <span style="color: #6ae4b9;">PRIVATE</span> <span style="color: #00d3d0;">$</span>{PROJECT_SOURCE_DIR}/include)
 
-<span style="color: #00ffff;">if</span>(CMAKE_BUILD_TYPE STREQUAL <span style="color: #ffa07a;">"Debug"</span>)
-  <span style="color: #87cefa;">message</span>(STATUS <span style="color: #ffa07a;">"Configuring Debug build options..."</span>)
+<span style="color: #b6a0ff;">if</span>(CMAKE_BUILD_TYPE STREQUAL <span style="color: #79a8ff;">"Debug"</span>)
+  <span style="color: #feacd0;">message</span>(STATUS <span style="color: #79a8ff;">"Configuring Debug build options..."</span>)
 
-  <span style="color: #87cefa;">target_compile_definitions</span>(${PROJECT_NAME} <span style="color: #98fb98;">PRIVATE</span> <span style="color: #eedd82;">$</span>{DEBUG_DEFINES})
-  <span style="color: #87cefa;">target_compile_options</span>(${PROJECT_NAME}
-    <span style="color: #98fb98;">PRIVATE</span> <span style="color: #eedd82;">$</span>{DEBUG_FLAGS} ${WARNING_FLAGS})
-  <span style="color: #00ffff;">if</span>(NOT MSVC)
-    <span style="color: #87cefa;">target_link_options</span>(${PROJECT_NAME} <span style="color: #98fb98;">PRIVATE</span> <span style="color: #eedd82;">$</span>{DEBUG_LINK_FLAGS})
-  <span style="color: #87cefa;">endif</span>()
-<span style="color: #87cefa;">elseif</span>(<span style="color: #98fb98;">CMAKE_BUILD_TYPE</span> <span style="color: #eedd82;">STREQUAL</span> <span style="color: #ffa07a;">"Release"</span>)
-  <span style="color: #87cefa;">message</span>(STATUS <span style="color: #ffa07a;">"Configuring Release build options..."</span>)
-  <span style="color: #87cefa;">target_compile_options</span>(${PROJECT_NAME}
-    <span style="color: #98fb98;">PRIVATE</span> <span style="color: #eedd82;">$</span>{RELEASE_FLAGS} ${WARNING_FLAGS})
-<span style="color: #87cefa;">endif</span>()
+  <span style="color: #feacd0;">target_compile_definitions</span>(${PROJECT_NAME} <span style="color: #6ae4b9;">PRIVATE</span> <span style="color: #00d3d0;">$</span>{DEBUG_DEFINES})
+  <span style="color: #feacd0;">target_compile_options</span>(${PROJECT_NAME}
+    <span style="color: #6ae4b9;">PRIVATE</span> <span style="color: #00d3d0;">$</span>{DEBUG_FLAGS} ${WARNING_FLAGS})
+  <span style="color: #b6a0ff;">if</span>(NOT MSVC)
+    <span style="color: #feacd0;">target_link_options</span>(${PROJECT_NAME} <span style="color: #6ae4b9;">PRIVATE</span> <span style="color: #00d3d0;">$</span>{DEBUG_LINK_FLAGS})
+  <span style="color: #feacd0;">endif</span>()
+<span style="color: #feacd0;">elseif</span>(<span style="color: #6ae4b9;">CMAKE_BUILD_TYPE</span> <span style="color: #00d3d0;">STREQUAL</span> <span style="color: #79a8ff;">"Release"</span>)
+  <span style="color: #feacd0;">message</span>(STATUS <span style="color: #79a8ff;">"Configuring Release build options..."</span>)
+  <span style="color: #feacd0;">target_compile_options</span>(${PROJECT_NAME}
+    <span style="color: #6ae4b9;">PRIVATE</span> <span style="color: #00d3d0;">$</span>{RELEASE_FLAGS} ${WARNING_FLAGS})
+<span style="color: #feacd0;">endif</span>()
 
 #
-<span style="color: #b0c4de;"># Installation</span>
+<span style="color: #ff7f9f;"># Installation</span>
 #
 
-install(<span style="color: #98fb98;">TARGETS</span> <span style="color: #eedd82;">$</span>{PROJECT_NAME}
+install(<span style="color: #6ae4b9;">TARGETS</span> <span style="color: #00d3d0;">$</span>{PROJECT_NAME}
   RUNTIME DESTINATION bin
 )
-<span style="color: #87cefa;">install</span>(<span style="color: #98fb98;">DIRECTORY</span> <span style="color: #eedd82;">include</span>/ DESTINATION include)
+<span style="color: #feacd0;">install</span>(<span style="color: #6ae4b9;">DIRECTORY</span> <span style="color: #00d3d0;">include</span>/ DESTINATION include)
 
 #
-<span style="color: #b0c4de;"># Testing</span>
+<span style="color: #ff7f9f;"># Testing</span>
 #
 
-<span style="color: #00ffff;">if</span>(ENABLE_TESTING)
-  <span style="color: #87cefa;">message</span>(WARNING <span style="color: #ffa07a;">"Tests not present"</span>)
+<span style="color: #b6a0ff;">if</span>(ENABLE_TESTING)
+  <span style="color: #feacd0;">message</span>(WARNING <span style="color: #79a8ff;">"Tests not present"</span>)
 
-<span style="color: #b0c4de;">  #include</span>(CTest)
-<span style="color: #b0c4de;">  #enable_testing</span>()
+<span style="color: #ff7f9f;">  #include</span>(CTest)
+<span style="color: #ff7f9f;">  #enable_testing</span>()
 
-<span style="color: #b0c4de;">  #add_executable</span>(tests test/test_main.cpp)
-<span style="color: #b0c4de;">  #target_link_libraries</span>(tests <span style="color: #98fb98;">PRIVATE</span> <span style="color: #eedd82;">$</span>{PROJECT_NAME})
+<span style="color: #ff7f9f;">  #add_executable</span>(tests test/test_main.cpp)
+<span style="color: #ff7f9f;">  #target_link_libraries</span>(tests <span style="color: #6ae4b9;">PRIVATE</span> <span style="color: #00d3d0;">$</span>{PROJECT_NAME})
 
-<span style="color: #b0c4de;">  #add_test</span>(NAME MyTests COMMAND tests)
-<span style="color: #87cefa;">endif</span>()
+<span style="color: #ff7f9f;">  #add_test</span>(NAME MyTests COMMAND tests)
+<span style="color: #feacd0;">endif</span>()
 
 #
-<span style="color: #b0c4de;"># Packaging</span> support
+<span style="color: #ff7f9f;"># Packaging</span> support
 #
 
 include(CMakePackageConfigHelpers)
 
 write_basic_package_version_file(
-  <span style="color: #ffa07a;">"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"</span>
+  <span style="color: #79a8ff;">"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"</span>
   VERSION ${PROJECT_VERSION}
   COMPATIBILITY AnyNewerVersion
 )
 
 #
-<span style="color: #b0c4de;"># End</span> of CMakeLists.txt
+<span style="color: #ff7f9f;"># End</span> of CMakeLists.txt
 # ====================================================================
 </pre>
 </div>

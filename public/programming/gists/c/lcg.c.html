@@ -31,9 +31,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-<div id="outline-container-orga3ef6ac" class="outline-2">
-<h2 id="orga3ef6ac">C / lcg.c</h2>
-<div class="outline-text-2" id="text-orga3ef6ac">
+<div id="outline-container-org5fb4596" class="outline-2">
+<h2 id="org5fb4596">C / lcg.c</h2>
+<div class="outline-text-2" id="text-org5fb4596">
 <p>
 LCG algorithm for fast speudo random number generation. Not
 cryptographically secure but good enough and really fast for other
@@ -41,16 +41,16 @@ use cases.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
+<pre class="src src-c"><span style="color: #989898;">// </span><span style="color: #989898;">SPDX-License-Identifier: MIT
 </span>
-<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">MAGIC1</span> 1664525    <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">a
-</span><span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">MAGIC2</span> 1013904223 <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">c
-</span><span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">MAGIC3</span> (1&lt;&lt;31)    <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">m
+<span style="color: #ff7f9f;">#define</span> <span style="color: #00d3d0;">MAGIC1</span> 1664525    <span style="color: #989898;">// </span><span style="color: #989898;">a
+</span><span style="color: #ff7f9f;">#define</span> <span style="color: #00d3d0;">MAGIC2</span> 1013904223 <span style="color: #989898;">// </span><span style="color: #989898;">c
+</span><span style="color: #ff7f9f;">#define</span> <span style="color: #00d3d0;">MAGIC3</span> (1&lt;&lt;31)    <span style="color: #989898;">// </span><span style="color: #989898;">m
 </span>
-<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">LCG pseudo random number generator
-</span><span style="color: #98fb98;">unsigned</span> <span style="color: #98fb98;">int</span> <span style="color: #87cefa;">lcg</span>(<span style="color: #00ffff;">const</span> <span style="color: #98fb98;">unsigned</span> <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">seed</span>)
+<span style="color: #989898;">// </span><span style="color: #989898;">LCG pseudo random number generator
+</span><span style="color: #6ae4b9;">unsigned</span> <span style="color: #6ae4b9;">int</span> <span style="color: #feacd0;">lcg</span>(<span style="color: #b6a0ff;">const</span> <span style="color: #6ae4b9;">unsigned</span> <span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">seed</span>)
 {
-  <span style="color: #00ffff;">return</span> (MAGIC1 * seed + MAGIC2) % MAGIC3;
+  <span style="color: #b6a0ff;">return</span> (MAGIC1 * seed + MAGIC2) % MAGIC3;
 }
 </pre>
 </div>

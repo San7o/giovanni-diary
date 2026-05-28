@@ -31,24 +31,24 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-<div id="outline-container-org0e6123d" class="outline-2">
-<h2 id="org0e6123d">C / clear_screen.c</h2>
-<div class="outline-text-2" id="text-org0e6123d">
+<div id="outline-container-org71f90b2" class="outline-2">
+<h2 id="org71f90b2">C / clear_screen.c</h2>
+<div class="outline-text-2" id="text-org71f90b2">
 <p>
 Clear the terminal screen using ANSI control sequences.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Author: Giovanni Santini
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Github: @San7o
+<pre class="src src-c"><span style="color: #989898;">// </span><span style="color: #989898;">SPDX-License-Identifier: MIT
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Author: Giovanni Santini
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Github: @San7o
 </span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;stdio.h&gt;</span>
 
-<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Clear screen using ANSI control sequences
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Supported by most Linux / Unix terminals and windows 10+ cmd
-</span><span style="color: #98fb98;">void</span> <span style="color: #87cefa;">clear_screen</span>(<span style="color: #98fb98;">void</span>) {
-    printf(<span style="color: #ffa07a;">"\033[2J\033[H"</span>);
+<span style="color: #989898;">// </span><span style="color: #989898;">Clear screen using ANSI control sequences
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Supported by most Linux / Unix terminals and windows 10+ cmd
+</span><span style="color: #6ae4b9;">void</span> <span style="color: #feacd0;">clear_screen</span>(<span style="color: #6ae4b9;">void</span>) {
+    printf(<span style="color: #79a8ff;">"\033[2J\033[H"</span>);
     fflush(stdout);
 }
 </pre>

@@ -31,88 +31,88 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-<div id="outline-container-orgf26345c" class="outline-2">
-<h2 id="orgf26345c">C / sdl_window.c</h2>
-<div class="outline-text-2" id="text-orgf26345c">
+<div id="outline-container-orgf460780" class="outline-2">
+<h2 id="orgf460780">C / sdl_window.c</h2>
+<div class="outline-text-2" id="text-orgf460780">
 <p>
 Create an SDL3 window and poll events.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Author: Giovanni Santini
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Github: @San7o
+<pre class="src src-c"><span style="color: #989898;">// </span><span style="color: #989898;">SPDX-License-Identifier: MIT
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Author: Giovanni Santini
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Github: @San7o
 </span>
-<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Create an SDL3 window and poll events
+<span style="color: #989898;">// </span><span style="color: #989898;">Create an SDL3 window and poll events
 </span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;SDL3/SDL_init.h&gt;</span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;SDL3/SDL_video.h&gt;</span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;SDL3/SDL_error.h&gt;</span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;SDL3/SDL_render.h&gt;</span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;SDL3/SDL_events.h&gt;</span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;SDL3/SDL_keyboard.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;stdio.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;SDL3/SDL_init.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;SDL3/SDL_video.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;SDL3/SDL_error.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;SDL3/SDL_render.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;SDL3/SDL_events.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;SDL3/SDL_keyboard.h&gt;</span>
 
-<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">WINDOW_NAME</span>   <span style="color: #ffa07a;">"hello world window"</span>
-<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">WINDOW_WIDTH</span>  500
-<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">WINDOW_HEIGHT</span> 500
-<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">WINDOW_FLAGS</span>  0
+<span style="color: #ff7f9f;">#define</span> <span style="color: #00d3d0;">WINDOW_NAME</span>   <span style="color: #79a8ff;">"hello world window"</span>
+<span style="color: #ff7f9f;">#define</span> <span style="color: #00d3d0;">WINDOW_WIDTH</span>  500
+<span style="color: #ff7f9f;">#define</span> <span style="color: #00d3d0;">WINDOW_HEIGHT</span> 500
+<span style="color: #ff7f9f;">#define</span> <span style="color: #00d3d0;">WINDOW_FLAGS</span>  0
 
-<span style="color: #98fb98;">int</span> <span style="color: #87cefa;">main</span>(<span style="color: #98fb98;">void</span>)
+<span style="color: #6ae4b9;">int</span> <span style="color: #feacd0;">main</span>(<span style="color: #6ae4b9;">void</span>)
 {
-  <span style="color: #00ffff;">if</span> (!SDL_Init(SDL_INIT_VIDEO))
+  <span style="color: #b6a0ff;">if</span> (<span style="color: #ff5f59; font-weight: bold;">!</span>SDL_Init(SDL_INIT_VIDEO))
   {
-    fprintf(stderr, <span style="color: #ffa07a;">"Error initializing SDL: %s\n"</span>, SDL_GetError());
-    <span style="color: #00ffff;">return</span> 1;
+    fprintf(stderr, <span style="color: #79a8ff;">"Error initializing SDL: %s\n"</span>, SDL_GetError());
+    <span style="color: #b6a0ff;">return</span> 1;
   }
 
-  <span style="color: #98fb98;">SDL_Window</span> *<span style="color: #eedd82;">window</span>;
-  <span style="color: #98fb98;">SDL_Renderer</span> *<span style="color: #eedd82;">renderer</span>;
-  <span style="color: #98fb98;">SDL_Event</span> <span style="color: #eedd82;">event</span>;
+  <span style="color: #6ae4b9;">SDL_Window</span> *<span style="color: #00d3d0;">window</span>;
+  <span style="color: #6ae4b9;">SDL_Renderer</span> *<span style="color: #00d3d0;">renderer</span>;
+  <span style="color: #6ae4b9;">SDL_Event</span> <span style="color: #00d3d0;">event</span>;
 
-  <span style="color: #98fb98;">bool</span> <span style="color: #eedd82;">ret</span> = SDL_CreateWindowAndRenderer(WINDOW_NAME, WINDOW_WIDTH,
+  <span style="color: #6ae4b9;">bool</span> <span style="color: #00d3d0;">ret</span> = SDL_CreateWindowAndRenderer(WINDOW_NAME, WINDOW_WIDTH,
                                          WINDOW_HEIGHT, WINDOW_FLAGS,
                                          &amp;window, &amp;renderer);
-  <span style="color: #00ffff;">if</span> (!ret)
+  <span style="color: #b6a0ff;">if</span> (<span style="color: #ff5f59; font-weight: bold;">!</span>ret)
   {
-    fprintf(stderr, <span style="color: #ffa07a;">"Error Creating SDL Window: %s\n"</span>, SDL_GetError());
-    <span style="color: #00ffff;">return</span> 1;
+    fprintf(stderr, <span style="color: #79a8ff;">"Error Creating SDL Window: %s\n"</span>, SDL_GetError());
+    <span style="color: #b6a0ff;">return</span> 1;
   }
 
-  <span style="color: #00ffff;">while</span>(1)
+  <span style="color: #b6a0ff;">while</span>(1)
   {  
-    <span style="color: #00ffff;">if</span> (SDL_PollEvent(&amp;event))
+    <span style="color: #b6a0ff;">if</span> (SDL_PollEvent(&amp;event))
     {
-      <span style="color: #00ffff;">if</span> (SDL_EVENT_KEY_DOWN == event.type)
+      <span style="color: #b6a0ff;">if</span> (SDL_EVENT_KEY_DOWN == event.type)
       {
-        <span style="color: #00ffff;">if</span> (event.key.key == <span style="color: #ffa07a;">'q'</span> || event.key.key == SDLK_ESCAPE)
-          <span style="color: #00ffff;">break</span>;
+        <span style="color: #b6a0ff;">if</span> (event.key.key == <span style="color: #79a8ff;">'q'</span> || event.key.key == SDLK_ESCAPE)
+          <span style="color: #b6a0ff;">break</span>;
       }
     }
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    <span style="color: #00ffff;">if</span> (!SDL_RenderClear(renderer))
+    <span style="color: #b6a0ff;">if</span> (<span style="color: #ff5f59; font-weight: bold;">!</span>SDL_RenderClear(renderer))
     {
-      fprintf(stderr, <span style="color: #ffa07a;">"Error Clearing SDL Window: %s\n"</span>, SDL_GetError());    
-      <span style="color: #00ffff;">goto</span> <span style="color: #7fffd4;">cleanup</span>;
+      fprintf(stderr, <span style="color: #79a8ff;">"Error Clearing SDL Window: %s\n"</span>, SDL_GetError());    
+      <span style="color: #b6a0ff;">goto</span> <span style="color: #00bcff;">cleanup</span>;
     }
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-    <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Render frame...
+    <span style="color: #989898;">// </span><span style="color: #989898;">Render frame...
 </span>
-    <span style="color: #00ffff;">if</span> (!SDL_RenderPresent(renderer))
+    <span style="color: #b6a0ff;">if</span> (<span style="color: #ff5f59; font-weight: bold;">!</span>SDL_RenderPresent(renderer))
     {
-      fprintf(stderr, <span style="color: #ffa07a;">"Error Rendering SDL Window: %s\n"</span>, SDL_GetError());    
-      <span style="color: #00ffff;">goto</span> <span style="color: #7fffd4;">cleanup</span>;
+      fprintf(stderr, <span style="color: #79a8ff;">"Error Rendering SDL Window: %s\n"</span>, SDL_GetError());    
+      <span style="color: #b6a0ff;">goto</span> <span style="color: #00bcff;">cleanup</span>;
     }
   }
 
- <span style="color: #7fffd4;">cleanup</span>:
+ <span style="color: #00bcff;">cleanup</span>:
 
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   SDL_Quit();
-  <span style="color: #00ffff;">return</span> 0;
+  <span style="color: #b6a0ff;">return</span> 0;
 }
 </pre>
 </div>

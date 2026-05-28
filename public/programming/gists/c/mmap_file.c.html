@@ -31,9 +31,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-<div id="outline-container-orgc59b000" class="outline-2">
-<h2 id="orgc59b000">C / mmap_file.c</h2>
-<div class="outline-text-2" id="text-orgc59b000">
+<div id="outline-container-org90530d4" class="outline-2">
+<h2 id="org90530d4">C / mmap_file.c</h2>
+<div class="outline-text-2" id="text-org90530d4">
 <p>
 Read a file's contents using mmap. This is faster than read(2), and
 returns a pointer to the content of the file without needing to call
@@ -41,60 +41,60 @@ read(2) each time. Neat optimization on POSIX systems.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">SPDX-License-Identifier: MIT
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Author: Giovanni Santini
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Github: @San7o
+<pre class="src src-c"><span style="color: #989898;">// </span><span style="color: #989898;">SPDX-License-Identifier: MIT
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Author: Giovanni Santini
+</span><span style="color: #989898;">// </span><span style="color: #989898;">Github: @San7o
 </span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;sys/mman.h&gt;</span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;sys/stat.h&gt;</span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;fcntl.h&gt;</span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;unistd.h&gt;</span>
-<span style="color: #b0c4de;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;sys/mman.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;sys/stat.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;fcntl.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;unistd.h&gt;</span>
+<span style="color: #ff7f9f;">#include</span> <span style="color: #79a8ff;">&lt;stdio.h&gt;</span>
 
-<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Much faster than read(2) or fread since it does not copy the
-</span><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">contents in a new buffer. Not portable.
-</span><span style="color: #98fb98;">char</span>* <span style="color: #87cefa;">mmap_file</span>(<span style="color: #00ffff;">const</span> <span style="color: #98fb98;">char</span>* <span style="color: #eedd82;">filename</span>, <span style="color: #98fb98;">size_t</span>* <span style="color: #eedd82;">out_size</span>) {
-    <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">fd</span> = open(filename, O_RDONLY);
-    <span style="color: #00ffff;">if</span> (fd == -1)
+<span style="color: #989898;">// </span><span style="color: #989898;">Much faster than read(2) or fread since it does not copy the
+</span><span style="color: #989898;">// </span><span style="color: #989898;">contents in a new buffer. Not portable.
+</span><span style="color: #6ae4b9;">char</span>* <span style="color: #feacd0;">mmap_file</span>(<span style="color: #b6a0ff;">const</span> <span style="color: #6ae4b9;">char</span>* <span style="color: #00d3d0;">filename</span>, <span style="color: #6ae4b9;">size_t</span>* <span style="color: #00d3d0;">out_size</span>) {
+    <span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">fd</span> = open(filename, O_RDONLY);
+    <span style="color: #b6a0ff;">if</span> (fd == -1)
     {
-        perror(<span style="color: #ffa07a;">"open"</span>);
-        <span style="color: #00ffff;">return</span> <span style="color: #7fffd4;">NULL</span>;
+        perror(<span style="color: #79a8ff;">"open"</span>);
+        <span style="color: #b6a0ff;">return</span> <span style="color: #00bcff;">NULL</span>;
     }
 
-    <span style="color: #00ffff;">struct</span> <span style="color: #98fb98;">stat</span> <span style="color: #eedd82;">st</span>;
-    <span style="color: #00ffff;">if</span> (fstat(fd, &amp;st) == -1)
+    <span style="color: #b6a0ff;">struct</span> <span style="color: #6ae4b9;">stat</span> <span style="color: #00d3d0;">st</span>;
+    <span style="color: #b6a0ff;">if</span> (fstat(fd, &amp;st) == -1)
     {
-        perror(<span style="color: #ffa07a;">"fstat"</span>);
+        perror(<span style="color: #79a8ff;">"fstat"</span>);
         close(fd);
-        <span style="color: #00ffff;">return</span> <span style="color: #7fffd4;">NULL</span>;
+        <span style="color: #b6a0ff;">return</span> <span style="color: #00bcff;">NULL</span>;
     }
 
-    <span style="color: #98fb98;">size_t</span> <span style="color: #eedd82;">size</span> = st.st_size;
-    <span style="color: #00ffff;">if</span> (size == 0)
+    <span style="color: #6ae4b9;">size_t</span> <span style="color: #00d3d0;">size</span> = st.st_size;
+    <span style="color: #b6a0ff;">if</span> (size == 0)
     {
-        <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">empty file
+        <span style="color: #989898;">// </span><span style="color: #989898;">empty file
 </span>        close(fd);
-        <span style="color: #00ffff;">if</span> (out_size) *out_size = 0;
-        <span style="color: #00ffff;">return</span> <span style="color: #7fffd4;">NULL</span>;
+        <span style="color: #b6a0ff;">if</span> (out_size) *out_size = 0;
+        <span style="color: #b6a0ff;">return</span> <span style="color: #00bcff;">NULL</span>;
     }
 
-    <span style="color: #98fb98;">void</span>* <span style="color: #eedd82;">addr</span> = mmap(<span style="color: #7fffd4;">NULL</span>, size, PROT_READ, MAP_PRIVATE, fd, 0);
+    <span style="color: #6ae4b9;">void</span>* <span style="color: #00d3d0;">addr</span> = mmap(<span style="color: #00bcff;">NULL</span>, size, PROT_READ, MAP_PRIVATE, fd, 0);
     close(fd);
-    <span style="color: #00ffff;">if</span> (addr == MAP_FAILED)
+    <span style="color: #b6a0ff;">if</span> (addr == MAP_FAILED)
     {
-        perror(<span style="color: #ffa07a;">"mmap"</span>);
-        <span style="color: #00ffff;">return</span> <span style="color: #7fffd4;">NULL</span>;
+        perror(<span style="color: #79a8ff;">"mmap"</span>);
+        <span style="color: #b6a0ff;">return</span> <span style="color: #00bcff;">NULL</span>;
     }
 
-    <span style="color: #00ffff;">if</span> (out_size)
+    <span style="color: #b6a0ff;">if</span> (out_size)
     {
         *out_size = size;
     }
-    <span style="color: #00ffff;">return</span> (<span style="color: #98fb98;">char</span>*)addr;
+    <span style="color: #b6a0ff;">return</span> (<span style="color: #6ae4b9;">char</span>*)addr;
 }
 
-<span style="color: #98fb98;">void</span> <span style="color: #87cefa;">unmap_file</span>(<span style="color: #98fb98;">char</span>* <span style="color: #eedd82;">addr</span>, <span style="color: #98fb98;">size_t</span> <span style="color: #eedd82;">size</span>) {
-    <span style="color: #00ffff;">if</span> (addr)
+<span style="color: #6ae4b9;">void</span> <span style="color: #feacd0;">unmap_file</span>(<span style="color: #6ae4b9;">char</span>* <span style="color: #00d3d0;">addr</span>, <span style="color: #6ae4b9;">size_t</span> <span style="color: #00d3d0;">size</span>) {
+    <span style="color: #b6a0ff;">if</span> (addr)
         munmap(addr, size);
 }
 </pre>

@@ -31,9 +31,9 @@
 <p>
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
-<div id="outline-container-org6d69d19" class="outline-2">
-<h2 id="org6d69d19">How do header only libraries work?</h2>
-<div class="outline-text-2" id="text-org6d69d19">
+<div id="outline-container-org5dd243d" class="outline-2">
+<h2 id="org5dd243d">How do header only libraries work?</h2>
+<div class="outline-text-2" id="text-org5dd243d">
 <p>
 C code is commonly split over two types of files: .h headers
 containing declarations, and .c files for their definitions. Usually,
@@ -81,27 +81,27 @@ The structure of a header-only library looks like the following:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">License: MIT
+<pre class="src src-C"><span style="color: #989898;">// </span><span style="color: #989898;">License: MIT
 </span>
-<span style="color: #b0c4de;">#if</span><span style="color: #b0c4de;">n</span><span style="color: #b0c4de;">def</span> MY_LIBRARY
-<span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">MY_LIBRARY</span>
+<span style="color: #ff7f9f;">#if</span><span style="color: #ff7f9f; font-weight: bold;">n</span><span style="color: #ff7f9f;">def</span> MY_LIBRARY
+<span style="color: #ff7f9f;">#define</span> <span style="color: #00d3d0;">MY_LIBRARY</span>
 
-<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Declarations
+<span style="color: #989898;">// </span><span style="color: #989898;">Declarations
 </span>
-<span style="color: #98fb98;">int</span> <span style="color: #87cefa;">my_library_sum</span>(<span style="color: #98fb98;">int</span> <span style="color: #eedd82;">a</span>, <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">b</span>);
+<span style="color: #6ae4b9;">int</span> <span style="color: #feacd0;">my_library_sum</span>(<span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">a</span>, <span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">b</span>);
 
-<span style="color: #b0c4de;">#ifdef</span> MY_LIBRARY_IMPLEMENTATION
+<span style="color: #ff7f9f;">#ifdef</span> MY_LIBRARY_IMPLEMENTATION
 
-<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Definitions
+<span style="color: #989898;">// </span><span style="color: #989898;">Definitions
 </span>
-<span style="color: #98fb98;">int</span> <span style="color: #87cefa;">my_library_sum</span>(<span style="color: #98fb98;">int</span> <span style="color: #eedd82;">a</span>, <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">b</span>)
+<span style="color: #6ae4b9;">int</span> <span style="color: #feacd0;">my_library_sum</span>(<span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">a</span>, <span style="color: #6ae4b9;">int</span> <span style="color: #00d3d0;">b</span>)
 {
-  <span style="color: #00ffff;">return</span> a + b;
+  <span style="color: #b6a0ff;">return</span> a + b;
 }
 
-<span style="color: #b0c4de;">#endif</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">MY_LIBRARY_IMPLEMENTATION
+<span style="color: #ff7f9f;">#endif</span> <span style="color: #989898;">// </span><span style="color: #989898;">MY_LIBRARY_IMPLEMENTATION
 </span>
-<span style="color: #b0c4de;">#endif</span> <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">MY_LIBRARY</span>
+<span style="color: #ff7f9f;">#endif</span> <span style="color: #989898;">// </span><span style="color: #989898;">MY_LIBRARY</span>
 </pre>
 </div>
 
@@ -132,9 +132,9 @@ limited in size and provide only a few functionalities, not for
 writing an operating system.
 </p>
 </div>
-<div id="outline-container-org526cc29" class="outline-3">
-<h3 id="org526cc29">A note on inlining</h3>
-<div class="outline-text-3" id="text-org526cc29">
+<div id="outline-container-org9e70b5b" class="outline-3">
+<h3 id="org9e70b5b">A note on inlining</h3>
+<div class="outline-text-3" id="text-org9e70b5b">
 <p>
 For performance reasons, you may want the compiler to inline certain
 functions. By inlining a function, you remove all the function calling
@@ -197,14 +197,14 @@ definition, for example:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C"><span style="color: #b0c4de;">#define</span> <span style="color: #eedd82;">MICRO_TEST_DEF</span> <span style="color: #00ffff;">static</span> <span style="color: #00ffff;">inline</span>
+<pre class="src src-C"><span style="color: #ff7f9f;">#define</span> <span style="color: #00d3d0;">MICRO_TEST_DEF</span> <span style="color: #b6a0ff;">static</span> <span style="color: #b6a0ff;">inline</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org25fbaf9" class="outline-3">
-<h3 id="org25fbaf9">About the micro-headers</h3>
-<div class="outline-text-3" id="text-org25fbaf9">
+<div id="outline-container-org571fc6b" class="outline-3">
+<h3 id="org571fc6b">About the micro-headers</h3>
+<div class="outline-text-3" id="text-org571fc6b">
 <p>
 I spent a lot of my free time writing the micro-headers recently and
 going deep into this "subgenre" of programming, you can find my code

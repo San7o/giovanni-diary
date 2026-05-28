@@ -31,57 +31,57 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../gists.html">Gists</a> &gt;
 </p>
-<div id="outline-container-org963acdc" class="outline-2">
-<h2 id="org963acdc">Python / scikit-sample.py</h2>
-<div class="outline-text-2" id="text-org963acdc">
+<div id="outline-container-orgc7a9b75" class="outline-2">
+<h2 id="orgc7a9b75">Python / scikit-sample.py</h2>
+<div class="outline-text-2" id="text-orgc7a9b75">
 <p>
 Example of using a ML model with scikit-learn.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">scikit-sample.py
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">================
-</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Example of using a ML model with scikit-learn.
-</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Requirements:
-</span><span style="color: #ff7f24;">#</span><span style="color: #ff7f24;">
-</span><span style="color: #ff7f24;">#  </span><span style="color: #ff7f24;">- matplotlib
-</span><span style="color: #ff7f24;">#  </span><span style="color: #ff7f24;">- scikit-learn
-</span><span style="color: #ff7f24;">#  </span><span style="color: #ff7f24;">- pandas
+<pre class="src src-python"><span style="color: #989898;"># </span><span style="color: #989898;">scikit-sample.py
+</span><span style="color: #989898;"># </span><span style="color: #989898;">================
+</span><span style="color: #989898;">#</span><span style="color: #989898;">
+</span><span style="color: #989898;"># </span><span style="color: #989898;">Example of using a ML model with scikit-learn.
+</span><span style="color: #989898;">#</span><span style="color: #989898;">
+</span><span style="color: #989898;"># </span><span style="color: #989898;">Requirements:
+</span><span style="color: #989898;">#</span><span style="color: #989898;">
+</span><span style="color: #989898;">#  </span><span style="color: #989898;">- matplotlib
+</span><span style="color: #989898;">#  </span><span style="color: #989898;">- scikit-learn
+</span><span style="color: #989898;">#  </span><span style="color: #989898;">- pandas
 </span>
-<span style="color: #00ffff;">from</span> sklearn.datasets <span style="color: #00ffff;">import</span> fetch_california_housing
-<span style="color: #00ffff;">from</span> sklearn.neighbors <span style="color: #00ffff;">import</span> KNeighborsRegressor
-<span style="color: #00ffff;">from</span> sklearn.preprocessing <span style="color: #00ffff;">import</span> StandardScaler
-<span style="color: #00ffff;">from</span> sklearn.pipeline <span style="color: #00ffff;">import</span> Pipeline
-<span style="color: #00ffff;">from</span> sklearn.model_selection <span style="color: #00ffff;">import</span> GridSearchCV
-<span style="color: #00ffff;">import</span> matplotlib.pylab <span style="color: #00ffff;">as</span> plt
-<span style="color: #00ffff;">import</span> pandas <span style="color: #00ffff;">as</span> pd
+<span style="color: #b6a0ff;">from</span> sklearn.datasets <span style="color: #b6a0ff;">import</span> fetch_california_housing
+<span style="color: #b6a0ff;">from</span> sklearn.neighbors <span style="color: #b6a0ff;">import</span> KNeighborsRegressor
+<span style="color: #b6a0ff;">from</span> sklearn.preprocessing <span style="color: #b6a0ff;">import</span> StandardScaler
+<span style="color: #b6a0ff;">from</span> sklearn.pipeline <span style="color: #b6a0ff;">import</span> Pipeline
+<span style="color: #b6a0ff;">from</span> sklearn.model_selection <span style="color: #b6a0ff;">import</span> GridSearchCV
+<span style="color: #b6a0ff;">import</span> matplotlib.pylab <span style="color: #b6a0ff;">as</span> plt
+<span style="color: #b6a0ff;">import</span> pandas <span style="color: #b6a0ff;">as</span> pd
 
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Sample dataset
-</span><span style="color: #eedd82;">X</span>, <span style="color: #eedd82;">y</span> = fetch_california_housing(return_X_y=<span style="color: #7fffd4;">True</span>)
+<span style="color: #989898;"># </span><span style="color: #989898;">Sample dataset
+</span><span style="color: #00d3d0;">X</span>, <span style="color: #00d3d0;">y</span> = fetch_california_housing(return_X_y=<span style="color: #00bcff;">True</span>)
 
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">We create a pipeline where we scale the data and specify a model
-</span><span style="color: #eedd82;">pipe</span> = Pipeline([
-    (<span style="color: #ffa07a;">"scale"</span>, StandardScaler()),
-    (<span style="color: #ffa07a;">"model"</span>, KNeighborsRegressor(n_neighbors=1))
+<span style="color: #989898;"># </span><span style="color: #989898;">We create a pipeline where we scale the data and specify a model
+</span><span style="color: #00d3d0;">pipe</span> = Pipeline([
+    (<span style="color: #79a8ff;">"scale"</span>, StandardScaler()),
+    (<span style="color: #79a8ff;">"model"</span>, KNeighborsRegressor(n_neighbors=1))
 ])
 
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">Get all the pipeline settings
-</span><span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">print(pipe.get_params())
+<span style="color: #989898;"># </span><span style="color: #989898;">Get all the pipeline settings
+</span><span style="color: #989898;"># </span><span style="color: #989898;">print(pipe.get_params())
 </span>
-<span style="color: #ff7f24;"># </span><span style="color: #ff7f24;">We can try different hyperparameters on the pipeline via the GridSearch
-</span><span style="color: #eedd82;">mod</span> = GridSearchCV(estimator=pipe,
-                   param_grid={<span style="color: #ffa07a;">'model__n_neighbors'</span>: [1, 2, 3, 4, 5, 6]},
+<span style="color: #989898;"># </span><span style="color: #989898;">We can try different hyperparameters on the pipeline via the GridSearch
+</span><span style="color: #00d3d0;">mod</span> = GridSearchCV(estimator=pipe,
+                   param_grid={<span style="color: #79a8ff;">'model__n_neighbors'</span>: [1, 2, 3, 4, 5, 6]},
                    cv=3)
 
 mod.fit(X, y)
 
-<span style="color: #eedd82;">df</span> = pd.DataFrame(mod.cv_results_)
-plt.plot([i <span style="color: #00ffff;">for</span> i <span style="color: #00ffff;">in</span> <span style="color: #b0c4de;">range</span>(6)],
-         df[<span style="color: #ffa07a;">'mean_test_score'</span>])
-plt.xlabel(<span style="color: #ffa07a;">'n_neighbors'</span>)
-plt.ylabel(<span style="color: #ffa07a;">'mean_tests_score'</span>)
+<span style="color: #00d3d0;">df</span> = pd.DataFrame(mod.cv_results_)
+plt.plot([i <span style="color: #b6a0ff;">for</span> i <span style="color: #b6a0ff;">in</span> <span style="color: #f78fe7;">range</span>(6)],
+         df[<span style="color: #79a8ff;">'mean_test_score'</span>])
+plt.xlabel(<span style="color: #79a8ff;">'n_neighbors'</span>)
+plt.ylabel(<span style="color: #79a8ff;">'mean_tests_score'</span>)
 plt.show()
 </pre>
 </div>
