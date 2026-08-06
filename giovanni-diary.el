@@ -39,7 +39,7 @@
 				org-html-head-include-default-style nil ;; Use our own styles
 				;; org-html-head "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
 				org-html-head "
-<link rel=\"stylesheet\" href=\"https://san7o.github.io/micro-style.css/micro-style.css\" />
+<link rel=\"stylesheet\" href=\"https://san7o.github.io/micro-style.css/micro-style.css?foo=bar123\" />
 <style>
   html, body {
       height: 100%;

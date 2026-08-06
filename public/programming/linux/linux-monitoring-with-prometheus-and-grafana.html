@@ -8,7 +8,7 @@
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
 
-<link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
+<link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css?foo=bar123" />
 <style>
   html, body {
       height: 100%;
@@ -31,9 +31,9 @@
 <p>
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
-<div id="outline-container-orgf77c6c4" class="outline-2">
-<h2 id="orgf77c6c4">Monitor your Linux system with Prometheus and Grafana</h2>
-<div class="outline-text-2" id="text-orgf77c6c4">
+<div id="outline-container-org9fb97ab" class="outline-2">
+<h2 id="org9fb97ab">Monitor your Linux system with Prometheus and Grafana</h2>
+<div class="outline-text-2" id="text-org9fb97ab">
 <p>
 If you are managing any system, you need to have an effective way to
 monitor, log and receive notifications about the state of the system.
@@ -48,9 +48,9 @@ various system statistics which are fetched by node exporter. I will
 be using Fedora 42 as a base.
 </p>
 </div>
-<div id="outline-container-orgfd67c62" class="outline-3">
-<h3 id="orgfd67c62">Index</h3>
-<div class="outline-text-3" id="text-orgfd67c62">
+<div id="outline-container-orgb912dfa" class="outline-3">
+<h3 id="orgb912dfa">Index</h3>
+<div class="outline-text-3" id="text-orgb912dfa">
 <ul class="org-ul">
 <li>Setting up node exporter</li>
 <li>Setting up Prometheus</li>
@@ -59,9 +59,9 @@ be using Fedora 42 as a base.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgeff4fae" class="outline-3">
-<h3 id="orgeff4fae">Setting up node exporter</h3>
-<div class="outline-text-3" id="text-orgeff4fae">
+<div id="outline-container-org8d55dbf" class="outline-3">
+<h3 id="org8d55dbf">Setting up node exporter</h3>
+<div class="outline-text-3" id="text-org8d55dbf">
 <p>
 Node exporter is a service that collects various system information
 such as CPU load, ram usage and much more. Fedora already provides the
@@ -79,9 +79,9 @@ The service will listen on port 9100.
 </p>
 </div>
 </div>
-<div id="outline-container-orgbfc1e73" class="outline-3">
-<h3 id="orgbfc1e73">Setting up Prometheus</h3>
-<div class="outline-text-3" id="text-orgbfc1e73">
+<div id="outline-container-org508b823" class="outline-3">
+<h3 id="org508b823">Setting up Prometheus</h3>
+<div class="outline-text-3" id="text-org508b823">
 <p>
 You can download the latest version of Prometheus from GitHub:
 </p>
@@ -159,9 +159,9 @@ the data.
 </p>
 </div>
 </div>
-<div id="outline-container-org47878d6" class="outline-3">
-<h3 id="org47878d6">Setting up Grafana</h3>
-<div class="outline-text-3" id="text-org47878d6">
+<div id="outline-container-org3a94072" class="outline-3">
+<h3 id="org3a94072">Setting up Grafana</h3>
+<div class="outline-text-3" id="text-org3a94072">
 <p>
 Install Grafana from your favorite package manager:
 </p>
@@ -239,16 +239,16 @@ website</a>.
 
 
 
-<div id="org59d35c3" class="figure">
+<div id="org515e931" class="figure">
 <p><img src="../../ephemeris/images/grafana.png" alt="grafana.png" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Grafana dashboard I found online</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org5a22ed8" class="outline-3">
-<h3 id="org5a22ed8">Custom Exporter</h3>
-<div class="outline-text-3" id="text-org5a22ed8">
+<div id="outline-container-org48f57d7" class="outline-3">
+<h3 id="org48f57d7">Custom Exporter</h3>
+<div class="outline-text-3" id="text-org48f57d7">
 <p>
 What if you wanted to log something custom to your dashboard, you
 can easily do this by starting a tcp server and serving the data you
@@ -316,7 +316,7 @@ select prometheus as a source and you add your custom metric and clock
 </p>
 
 
-<div id="org4df3d13" class="figure">
+<div id="orgb23b05b" class="figure">
 <p><img src="../../ephemeris/images/grafana-custom.png" alt="grafana-custom.png" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Custom dashboard</p>
