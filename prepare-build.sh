@@ -25,6 +25,9 @@ cp -r content/writing/surroundings/images public/writing/surroundings/
 cp -r content/ephemeris/images public/ephemeris/
 cp -r content/stash/photography/images public/stash/photography
 
+# Audio
+cp content/v2/piano/*.mp3 public/v2/piano/
+
 # Dump git commit history
 git log --pretty=format:"- %ad %s" --date=short > content/git-history.txt
 
