@@ -20,10 +20,11 @@ mkdir -p public/fonts
 cp -r fonts/Inconsolata public/fonts/
 
 # Images
-mkdir -p public/writing/surroundings
+mkdir -p public/writing/surroundings public/v2/images
 cp -r content/writing/surroundings/images public/writing/surroundings/
 cp -r content/ephemeris/images public/ephemeris/
 cp -r content/stash/photography/images public/stash/photography
+cp -r content/v2/images public/v2/
 
 # Audio
 cp content/v2/piano/*.mp3 public/v2/piano/
