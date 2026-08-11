@@ -31,9 +31,9 @@
 <p>
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
-<div id="outline-container-org8958f94" class="outline-2">
-<h2 id="org8958f94">Monitor your Linux system with Prometheus and Grafana</h2>
-<div class="outline-text-2" id="text-org8958f94">
+<div id="outline-container-org3053be5" class="outline-2">
+<h2 id="org3053be5">Monitor your Linux system with Prometheus and Grafana</h2>
+<div class="outline-text-2" id="text-org3053be5">
 <p>
 If you are managing any system, you need to have an effective way to
 monitor, log and receive notifications about the state of the system.
@@ -48,9 +48,9 @@ various system statistics which are fetched by node exporter. I will
 be using Fedora 42 as a base.
 </p>
 </div>
-<div id="outline-container-org8ba08e8" class="outline-3">
-<h3 id="org8ba08e8">Index</h3>
-<div class="outline-text-3" id="text-org8ba08e8">
+<div id="outline-container-org5d674a8" class="outline-3">
+<h3 id="org5d674a8">Index</h3>
+<div class="outline-text-3" id="text-org5d674a8">
 <ul class="org-ul">
 <li>Setting up node exporter</li>
 <li>Setting up Prometheus</li>
@@ -59,9 +59,9 @@ be using Fedora 42 as a base.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfc6ad38" class="outline-3">
-<h3 id="orgfc6ad38">Setting up node exporter</h3>
-<div class="outline-text-3" id="text-orgfc6ad38">
+<div id="outline-container-org32415e6" class="outline-3">
+<h3 id="org32415e6">Setting up node exporter</h3>
+<div class="outline-text-3" id="text-org32415e6">
 <p>
 Node exporter is a service that collects various system information
 such as CPU load, ram usage and much more. Fedora already provides the
@@ -79,9 +79,9 @@ The service will listen on port 9100.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb8aa681" class="outline-3">
-<h3 id="orgb8aa681">Setting up Prometheus</h3>
-<div class="outline-text-3" id="text-orgb8aa681">
+<div id="outline-container-orge3d6d24" class="outline-3">
+<h3 id="orge3d6d24">Setting up Prometheus</h3>
+<div class="outline-text-3" id="text-orge3d6d24">
 <p>
 You can download the latest version of Prometheus from GitHub:
 </p>
@@ -159,9 +159,9 @@ the data.
 </p>
 </div>
 </div>
-<div id="outline-container-org0512c27" class="outline-3">
-<h3 id="org0512c27">Setting up Grafana</h3>
-<div class="outline-text-3" id="text-org0512c27">
+<div id="outline-container-org56d938c" class="outline-3">
+<h3 id="org56d938c">Setting up Grafana</h3>
+<div class="outline-text-3" id="text-org56d938c">
 <p>
 Install Grafana from your favorite package manager:
 </p>
@@ -239,16 +239,16 @@ website</a>.
 
 
 
-<div id="org8e55846" class="figure">
+<div id="org01146c0" class="figure">
 <p><img src="../../ephemeris/images/grafana.png" alt="grafana.png" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Grafana dashboard I found online</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org298ae88" class="outline-3">
-<h3 id="org298ae88">Custom Exporter</h3>
-<div class="outline-text-3" id="text-org298ae88">
+<div id="outline-container-orgcbd6c2b" class="outline-3">
+<h3 id="orgcbd6c2b">Custom Exporter</h3>
+<div class="outline-text-3" id="text-orgcbd6c2b">
 <p>
 What if you wanted to log something custom to your dashboard, you
 can easily do this by starting a tcp server and serving the data you
@@ -316,7 +316,7 @@ select prometheus as a source and you add your custom metric and clock
 </p>
 
 
-<div id="orgb2699da" class="figure">
+<div id="org24124a2" class="figure">
 <p><img src="../../ephemeris/images/grafana-custom.png" alt="grafana-custom.png" align="center" width="600px" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Custom dashboard</p>
