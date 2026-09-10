@@ -63,9 +63,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-orge28c21d" class="outline-2">
-<h2 id="orge28c21d">Unsupervised Learning</h2>
-<div class="outline-text-2" id="text-orge28c21d">
+<div id="outline-container-org3e5620e" class="outline-2">
+<h2 id="org3e5620e">Unsupervised Learning</h2>
+<div class="outline-text-2" id="text-org3e5620e">
 <p>
 In unsupervised learning we observe data from an unknown distribution without class labels. It is quite useful for the following tasks:
 </p>
@@ -82,9 +82,9 @@ data compression, feature extraction and data visualization is called
 Principal Component Analysis, which we will now discuss.
 </p>
 </div>
-<div id="outline-container-org8339354" class="outline-3">
-<h3 id="org8339354">Principal Component Analysis</h3>
-<div class="outline-text-3" id="text-org8339354">
+<div id="outline-container-orgaf920b5" class="outline-3">
+<h3 id="orgaf920b5">Principal Component Analysis</h3>
+<div class="outline-text-3" id="text-orgaf920b5">
 <p>
 In Principal Component Analysis, or PCA for short, the data is
 linearly transformed onto a new coordinate system such that the
@@ -109,9 +109,9 @@ To understand this, first we need to revise some linear algebra theory.
 </p>
 </div>
 </div>
-<div id="outline-container-org8c10eb7" class="outline-3">
-<h3 id="org8c10eb7">Recap: Linear algebra</h3>
-<div class="outline-text-3" id="text-org8c10eb7">
+<div id="outline-container-orga62d426" class="outline-3">
+<h3 id="orga62d426">Recap: Linear algebra</h3>
+<div class="outline-text-3" id="text-orga62d426">
 <p>
 The <span class="underline">variance</span> is the measure of the deviation from the mean of a
 point, and is calculated as: \[Var(X)= \mathbb{E}[(X-\mu)^2] =
@@ -148,9 +148,9 @@ Q^{-1}\] moreover, if we assume that Q is a unit matrix, meaning \(QQ^T
 </p>
 </div>
 </div>
-<div id="outline-container-orgcfa024a" class="outline-3">
-<h3 id="orgcfa024a">Back to PCA</h3>
-<div class="outline-text-3" id="text-orgcfa024a">
+<div id="outline-container-orgc47c16a" class="outline-3">
+<h3 id="orgc47c16a">Back to PCA</h3>
+<div class="outline-text-3" id="text-orgc47c16a">
 <p>
 Armed with this knowledge, we can finally proceed to discuss principal
 component analysis. The i-th principal component can be taken as a
@@ -233,9 +233,9 @@ is known as the <span class="underline">first principal component</span>.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc7cd417" class="outline-3">
-<h3 id="orgc7cd417">Principal Component Analysis using eigenvalue decomposition</h3>
-<div class="outline-text-3" id="text-orgc7cd417">
+<div id="outline-container-org21428b8" class="outline-3">
+<h3 id="org21428b8">Principal Component Analysis using eigenvalue decomposition</h3>
+<div class="outline-text-3" id="text-org21428b8">
 <p>
 Algorithm:
 </p>
@@ -259,9 +259,9 @@ C_{jj}}\), to estimate the amount of information loss.
 </p>
 </div>
 </div>
-<div id="outline-container-org89a6a2b" class="outline-3">
-<h3 id="org89a6a2b">PCA using Singular Value Decomposition</h3>
-<div class="outline-text-3" id="text-org89a6a2b">
+<div id="outline-container-orga0a8f9f" class="outline-3">
+<h3 id="orga0a8f9f">PCA using Singular Value Decomposition</h3>
+<div class="outline-text-3" id="text-orga0a8f9f">
 <p>
 Here is presented an alternative solution to PCA. Singular Value
 Decomposition is a factorization o a real or complex matrix into a
@@ -298,18 +298,18 @@ Algorithm:
 </ul>
 </div>
 </div>
-<div id="outline-container-org3f6c2fb" class="outline-3">
-<h3 id="org3f6c2fb">Kernel PCA (KPCA)</h3>
-<div class="outline-text-3" id="text-org3f6c2fb">
+<div id="outline-container-org69ba93d" class="outline-3">
+<h3 id="org69ba93d">Kernel PCA (KPCA)</h3>
+<div class="outline-text-3" id="text-org69ba93d">
 <p>
 By using the kernel trick one can apply PCA in a higher dimensional
 space, yielding a non-linear transormation in the original space
 </p>
 </div>
 </div>
-<div id="outline-container-orgcc3159d" class="outline-3">
-<h3 id="orgcc3159d">Other dimensionality reduction techniques</h3>
-<div class="outline-text-3" id="text-orgcc3159d">
+<div id="outline-container-org8a9f95a" class="outline-3">
+<h3 id="org8a9f95a">Other dimensionality reduction techniques</h3>
+<div class="outline-text-3" id="text-org8a9f95a">
 <ul class="org-ul">
 <li>PCA: find projection that maximize the variance</li>
 <li>Multidimensional Scaling: find projection that best preserves
@@ -319,9 +319,9 @@ class-separation.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orga1c76d5" class="outline-3">
-<h3 id="orga1c76d5">Limitations</h3>
-<div class="outline-text-3" id="text-orga1c76d5">
+<div id="outline-container-org4955f71" class="outline-3">
+<h3 id="org4955f71">Limitations</h3>
+<div class="outline-text-3" id="text-org4955f71">
 <ul class="org-ul">
 <li>the data must be linearly separable (which is a strong assumption)</li>
 </ul>
