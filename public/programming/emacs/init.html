@@ -18,8 +18,18 @@
   body {
       display: grid;
       place-items: center;  /* centers vertically & horizontally */
+      font-family: "Cormorant Garamond", monospace;
+  }
+
+  blockquote {
+      font-style: normal;
   }
 </style>
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+
 <link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
@@ -31,9 +41,9 @@
 <p>
 <a href="../../index.html">Giovannis Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="emacs.html">Emacs</a> &gt;
 </p>
-<div id="outline-container-org9fd5125" class="outline-2">
-<h2 id="org9fd5125">Welcome</h2>
-<div class="outline-text-2" id="text-org9fd5125">
+<div id="outline-container-orgc60a5d7" class="outline-2">
+<h2 id="orgc60a5d7">Welcome</h2>
+<div class="outline-text-2" id="text-orgc60a5d7">
 <p>
 Hello and welcome to my Emacs configuration file. I use Emacs daily
 for a lot of tasks such as coding, writing, reading mailing lists
@@ -47,9 +57,9 @@ To load this configuration you first need to generate the <code>.el</code> via
 </p>
 </div>
 </div>
-<div id="outline-container-org04ff977" class="outline-2">
-<h2 id="org04ff977">Early Init</h2>
-<div class="outline-text-2" id="text-org04ff977">
+<div id="outline-container-orga626e83" class="outline-2">
+<h2 id="orga626e83">Early Init</h2>
+<div class="outline-text-2" id="text-orga626e83">
 <p>
 This section generates the <code>early-init.el</code> file. This code gets
 executed very early during emacs' startup sequence.  It is useful to
@@ -75,9 +85,9 @@ one. I am setting this to 50MB, the default one is 800000 bytes, or
 </div>
 </div>
 </div>
-<div id="outline-container-org95a9659" class="outline-2">
-<h2 id="org95a9659">Repositories</h2>
-<div class="outline-text-2" id="text-org95a9659">
+<div id="outline-container-org98350b7" class="outline-2">
+<h2 id="org98350b7">Repositories</h2>
+<div class="outline-text-2" id="text-org98350b7">
 <p>
 Those are the usual emacs repositories. Once in a while, you may have
 to run <code>M-x package-refresh-contents</code> to update the repositories,
@@ -96,9 +106,9 @@ sources during fetching.
 </div>
 </div>
 </div>
-<div id="outline-container-org752566b" class="outline-2">
-<h2 id="org752566b">Theme</h2>
-<div class="outline-text-2" id="text-org752566b">
+<div id="outline-container-org0ab6807" class="outline-2">
+<h2 id="org0ab6807">Theme</h2>
+<div class="outline-text-2" id="text-org0ab6807">
 <p>
 I really like the high-contrast <code>modus-vivendi</code> theme which is
 built in into emacs. It follows the higher standards of redibility,
@@ -145,13 +155,13 @@ Add the directory for my custom themes:
 </div>
 </div>
 </div>
-<div id="outline-container-org49d8b05" class="outline-2">
-<h2 id="org49d8b05">Packages</h2>
-<div class="outline-text-2" id="text-org49d8b05">
+<div id="outline-container-org27ea092" class="outline-2">
+<h2 id="org27ea092">Packages</h2>
+<div class="outline-text-2" id="text-org27ea092">
 </div>
-<div id="outline-container-org3c6ef78" class="outline-3">
-<h3 id="org3c6ef78">Use package</h3>
-<div class="outline-text-3" id="text-org3c6ef78">
+<div id="outline-container-org9e69a07" class="outline-3">
+<h3 id="org9e69a07">Use package</h3>
+<div class="outline-text-3" id="text-org9e69a07">
 <p>
 I use <code>use-package</code> to manage all my packages.
 </p>
@@ -166,9 +176,9 @@ I use <code>use-package</code> to manage all my packages.
 </div>
 </div>
 </div>
-<div id="outline-container-org88f9289" class="outline-3">
-<h3 id="org88f9289">Xah fly keys</h3>
-<div class="outline-text-3" id="text-org88f9289">
+<div id="outline-container-orgbf14328" class="outline-3">
+<h3 id="orgbf14328">Xah fly keys</h3>
+<div class="outline-text-3" id="text-orgbf14328">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(add-to-list 'load-path <span style="color: #79a8ff;">"~/.emacs.d/lisp"</span>)
 (<span style="color: #b6a0ff;">require</span> '<span style="color: #00bcff;">xah-fly-keys</span>)
@@ -178,9 +188,9 @@ I use <code>use-package</code> to manage all my packages.
 </div>
 </div>
 </div>
-<div id="outline-container-orgc739153" class="outline-3">
-<h3 id="orgc739153">Org mode</h3>
-<div class="outline-text-3" id="text-orgc739153">
+<div id="outline-container-org09e5673" class="outline-3">
+<h3 id="org09e5673">Org mode</h3>
+<div class="outline-text-3" id="text-org09e5673">
 <p>
 Org mode settings. I use org mode everywhere in my life.
 </p>
@@ -211,9 +221,9 @@ To update completition percentage: <code>C-c C-c</code>.
 </div>
 </div>
 </div>
-<div id="outline-container-orgc549b37" class="outline-3">
-<h3 id="orgc549b37">Markdown mode</h3>
-<div class="outline-text-3" id="text-orgc549b37">
+<div id="outline-container-org9b58dfc" class="outline-3">
+<h3 id="org9b58dfc">Markdown mode</h3>
+<div class="outline-text-3" id="text-org9b58dfc">
 <p>
 I use markdown mode when editing markdown document, mostly on
 github because that is the defacto standard format to use.
@@ -226,9 +236,9 @@ github because that is the defacto standard format to use.
 </div>
 </div>
 </div>
-<div id="outline-container-org6a0827b" class="outline-3">
-<h3 id="org6a0827b">ggtags</h3>
-<div class="outline-text-3" id="text-org6a0827b">
+<div id="outline-container-org99f24cc" class="outline-3">
+<h3 id="org99f24cc">ggtags</h3>
+<div class="outline-text-3" id="text-org99f24cc">
 <p>
 GNU Global on emacs.
 </p>
@@ -249,9 +259,9 @@ Shortcuts:
 </div>
 </div>
 </div>
-<div id="outline-container-org5baee34" class="outline-3">
-<h3 id="org5baee34">Which-key</h3>
-<div class="outline-text-3" id="text-org5baee34">
+<div id="outline-container-org38551a4" class="outline-3">
+<h3 id="org38551a4">Which-key</h3>
+<div class="outline-text-3" id="text-org38551a4">
 <p>
 This package displays the key bindings following an incomplete
 command, very useful if you do not remember one of the few shortcuts
@@ -266,9 +276,9 @@ that you can use.
 </div>
 </div>
 </div>
-<div id="outline-container-org144cb09" class="outline-3">
-<h3 id="org144cb09">Ivy</h3>
-<div class="outline-text-3" id="text-org144cb09">
+<div id="outline-container-org1f42f03" class="outline-3">
+<h3 id="org1f42f03">Ivy</h3>
+<div class="outline-text-3" id="text-org1f42f03">
 <p>
 Ivy is a generic completition mechanism for emacs.
 </p>
@@ -285,9 +295,9 @@ Ivy is a generic completition mechanism for emacs.
 </div>
 </div>
 </div>
-<div id="outline-container-org5b08d17" class="outline-3">
-<h3 id="org5b08d17">Avy</h3>
-<div class="outline-text-3" id="text-org5b08d17">
+<div id="outline-container-orgd86ef81" class="outline-3">
+<h3 id="orgd86ef81">Avy</h3>
+<div class="outline-text-3" id="text-orgd86ef81">
 <p>
 Jump to visible text using a char-based decision tree. Lovely!
 </p>
@@ -301,9 +311,9 @@ Jump to visible text using a char-based decision tree. Lovely!
 </div>
 </div>
 </div>
-<div id="outline-container-org8ca4589" class="outline-3">
-<h3 id="org8ca4589">Multiple cursors</h3>
-<div class="outline-text-3" id="text-org8ca4589">
+<div id="outline-container-org05d99a9" class="outline-3">
+<h3 id="org05d99a9">Multiple cursors</h3>
+<div class="outline-text-3" id="text-org05d99a9">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">use-package</span> multiple-cursors
   <span style="color: #f78fe7;">:ensure</span> t)
@@ -315,9 +325,9 @@ Jump to visible text using a char-based decision tree. Lovely!
 </div>
 </div>
 </div>
-<div id="outline-container-org3770f8a" class="outline-3">
-<h3 id="org3770f8a">Diff-hl</h3>
-<div class="outline-text-3" id="text-org3770f8a">
+<div id="outline-container-orgbd5e41f" class="outline-3">
+<h3 id="orgbd5e41f">Diff-hl</h3>
+<div class="outline-text-3" id="text-orgbd5e41f">
 <p>
 Highlights uncommitted changes on the left of the buffer window.
 </p>
@@ -330,9 +340,9 @@ Highlights uncommitted changes on the left of the buffer window.
 </div>
 </div>
 </div>
-<div id="outline-container-org3f0b872" class="outline-3">
-<h3 id="org3f0b872">Emms</h3>
-<div class="outline-text-3" id="text-org3f0b872">
+<div id="outline-container-org8b379bd" class="outline-3">
+<h3 id="org8b379bd">Emms</h3>
+<div class="outline-text-3" id="text-org8b379bd">
 <p>
 Emms is an emacs music player. You either need vlc or mpv as a
 backend.
@@ -351,9 +361,9 @@ backend.
 </div>
 </div>
 </div>
-<div id="outline-container-org87416ac" class="outline-3">
-<h3 id="org87416ac">Gnus</h3>
-<div class="outline-text-3" id="text-org87416ac">
+<div id="outline-container-org31b75bc" class="outline-3">
+<h3 id="org31b75bc">Gnus</h3>
+<div class="outline-text-3" id="text-org31b75bc">
 <p>
 THE best email / rss client. I read all my mailing lists and blogs
 here.
@@ -418,9 +428,9 @@ the emacs wiki):
 </div>
 </div>
 </div>
-<div id="outline-container-orgc6084d3" class="outline-3">
-<h3 id="orgc6084d3">Yasnippet</h3>
-<div class="outline-text-3" id="text-orgc6084d3">
+<div id="outline-container-org8e3ed91" class="outline-3">
+<h3 id="org8e3ed91">Yasnippet</h3>
+<div class="outline-text-3" id="text-org8e3ed91">
 <p>
 Create macros "snippets" for text, I use them often. The snippets are
 stored in the directory <code>snippets/</code>. To update them, first run
@@ -436,9 +446,9 @@ stored in the directory <code>snippets/</code>. To update them, first run
 </div>
 </div>
 </div>
-<div id="outline-container-orgf872366" class="outline-3">
-<h3 id="orgf872366">Olivetti</h3>
-<div class="outline-text-3" id="text-orgf872366">
+<div id="outline-container-orgbe1b481" class="outline-3">
+<h3 id="orgbe1b481">Olivetti</h3>
+<div class="outline-text-3" id="text-orgbe1b481">
 <p>
 Center text in the window.
 </p>
@@ -450,9 +460,9 @@ Center text in the window.
 </div>
 </div>
 </div>
-<div id="outline-container-org70e14b8" class="outline-3">
-<h3 id="org70e14b8">Marginalia</h3>
-<div class="outline-text-3" id="text-org70e14b8">
+<div id="outline-container-org96843ed" class="outline-3">
+<h3 id="org96843ed">Marginalia</h3>
+<div class="outline-text-3" id="text-org96843ed">
 <p>
 Add commands' description to minibuffer.
 </p>
@@ -465,9 +475,9 @@ Add commands' description to minibuffer.
 </div>
 </div>
 </div>
-<div id="outline-container-org708ca0c" class="outline-3">
-<h3 id="org708ca0c">Nerd-icons</h3>
-<div class="outline-text-3" id="text-org708ca0c">
+<div id="outline-container-org398edb0" class="outline-3">
+<h3 id="org398edb0">Nerd-icons</h3>
+<div class="outline-text-3" id="text-org398edb0">
 <p>
 The first time, the user must run <code>M-x nerd-icons-install-fonts</code>.
 </p>
@@ -495,9 +505,9 @@ The first time, the user must run <code>M-x nerd-icons-install-fonts</code>.
 </div>
 </div>
 </div>
-<div id="outline-container-orge787288" class="outline-3">
-<h3 id="orge787288">Swiper</h3>
-<div class="outline-text-3" id="text-orge787288">
+<div id="outline-container-org8c5e050" class="outline-3">
+<h3 id="org8c5e050">Swiper</h3>
+<div class="outline-text-3" id="text-org8c5e050">
 <p>
 Grep in minibuffer.
 </p>
@@ -509,9 +519,9 @@ Grep in minibuffer.
 </div>
 </div>
 </div>
-<div id="outline-container-org5ab043c" class="outline-3">
-<h3 id="org5ab043c">Ox-publish + simple-httpd</h3>
-<div class="outline-text-3" id="text-org5ab043c">
+<div id="outline-container-org0fd9059" class="outline-3">
+<h3 id="org0fd9059">Ox-publish + simple-httpd</h3>
+<div class="outline-text-3" id="text-org0fd9059">
 <p>
 Generate static websites from org-mode.
 </p>
@@ -525,9 +535,9 @@ Generate static websites from org-mode.
 </div>
 </div>
 </div>
-<div id="outline-container-org58e91f0" class="outline-3">
-<h3 id="org58e91f0">auto-complete</h3>
-<div class="outline-text-3" id="text-org58e91f0">
+<div id="outline-container-org73fbf57" class="outline-3">
+<h3 id="org73fbf57">auto-complete</h3>
+<div class="outline-text-3" id="text-org73fbf57">
 <p>
 Available by default in emacs 30.
 </p>
@@ -540,9 +550,9 @@ Available by default in emacs 30.
 </div>
 </div>
 </div>
-<div id="outline-container-org4e18fa3" class="outline-3">
-<h3 id="org4e18fa3">Flycheck</h3>
-<div class="outline-text-3" id="text-org4e18fa3">
+<div id="outline-container-org985fa5d" class="outline-3">
+<h3 id="org985fa5d">Flycheck</h3>
+<div class="outline-text-3" id="text-org985fa5d">
 <p>
 Modern on-the-fly syntax checking extension for GNU Emacs.
 </p>
@@ -559,9 +569,9 @@ Modern on-the-fly syntax checking extension for GNU Emacs.
 </div>
 </div>
 </div>
-<div id="outline-container-org96b9d5e" class="outline-3">
-<h3 id="org96b9d5e">rfc-mode</h3>
-<div class="outline-text-3" id="text-org96b9d5e">
+<div id="outline-container-org6dbede6" class="outline-3">
+<h3 id="org6dbede6">rfc-mode</h3>
+<div class="outline-text-3" id="text-org6dbede6">
 <p>
 Browse and read RFC documents.
 </p>
@@ -576,13 +586,13 @@ Browse and read RFC documents.
 </div>
 </div>
 </div>
-<div id="outline-container-org1a02f35" class="outline-2">
-<h2 id="org1a02f35">Customization</h2>
-<div class="outline-text-2" id="text-org1a02f35">
+<div id="outline-container-orgdbe7f10" class="outline-2">
+<h2 id="orgdbe7f10">Customization</h2>
+<div class="outline-text-2" id="text-orgdbe7f10">
 </div>
-<div id="outline-container-orgcd3a8c3" class="outline-3">
-<h3 id="orgcd3a8c3">Movement</h3>
-<div class="outline-text-3" id="text-orgcd3a8c3">
+<div id="outline-container-orgbcac416" class="outline-3">
+<h3 id="orgbcac416">Movement</h3>
+<div class="outline-text-3" id="text-orgbcac416">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(keymap-global-set <span style="color: #79a8ff;">"C-s"</span> #'isearch-forward-regexp)
 (keymap-global-set <span style="color: #79a8ff;">"C-:"</span> #'avy-goto-char-timer)
@@ -590,9 +600,9 @@ Browse and read RFC documents.
 </div>
 </div>
 </div>
-<div id="outline-container-org9e22f62" class="outline-3">
-<h3 id="org9e22f62">Cleanup the screen</h3>
-<div class="outline-text-3" id="text-org9e22f62">
+<div id="outline-container-orgd5e6393" class="outline-3">
+<h3 id="orgd5e6393">Cleanup the screen</h3>
+<div class="outline-text-3" id="text-orgd5e6393">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -602,9 +612,9 @@ Browse and read RFC documents.
 </div>
 </div>
 </div>
-<div id="outline-container-orgf686ea7" class="outline-3">
-<h3 id="orgf686ea7">Startup screen</h3>
-<div class="outline-text-3" id="text-orgf686ea7">
+<div id="outline-container-orgb84dcbb" class="outline-3">
+<h3 id="orgb84dcbb">Startup screen</h3>
+<div class="outline-text-3" id="text-orgb84dcbb">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">setq-default</span> inhibit-startup-screen t)
 (<span style="color: #b6a0ff;">setq</span> inhibit-splash-screen t)
@@ -614,9 +624,9 @@ Browse and read RFC documents.
 </div>
 </div>
 </div>
-<div id="outline-container-org28343c4" class="outline-3">
-<h3 id="org28343c4">Dired</h3>
-<div class="outline-text-3" id="text-org28343c4">
+<div id="outline-container-org65c1847" class="outline-3">
+<h3 id="org65c1847">Dired</h3>
+<div class="outline-text-3" id="text-org65c1847">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">use-package</span> dired
   <span style="color: #f78fe7;">:hook</span> ((dired-mode . dired-hide-details-mode)))
@@ -624,9 +634,9 @@ Browse and read RFC documents.
 </div>
 </div>
 </div>
-<div id="outline-container-org95d4cee" class="outline-3">
-<h3 id="org95d4cee">Line numbers</h3>
-<div class="outline-text-3" id="text-org95d4cee">
+<div id="outline-container-org4809574" class="outline-3">
+<h3 id="org4809574">Line numbers</h3>
+<div class="outline-text-3" id="text-org4809574">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(global-display-line-numbers-mode)
 (<span style="color: #b6a0ff;">setq</span> display-line-numbers 'relative)
@@ -634,18 +644,18 @@ Browse and read RFC documents.
 </div>
 </div>
 </div>
-<div id="outline-container-org0763f25" class="outline-3">
-<h3 id="org0763f25">Time</h3>
-<div class="outline-text-3" id="text-org0763f25">
+<div id="outline-container-orgf45784f" class="outline-3">
+<h3 id="orgf45784f">Time</h3>
+<div class="outline-text-3" id="text-orgf45784f">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">setq</span> display-time-format <span style="color: #79a8ff;">"%I:%M"</span>)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org7cd5eea" class="outline-3">
-<h3 id="org7cd5eea">Battery</h3>
-<div class="outline-text-3" id="text-org7cd5eea">
+<div id="outline-container-orgf077064" class="outline-3">
+<h3 id="orgf077064">Battery</h3>
+<div class="outline-text-3" id="text-orgf077064">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">require</span> '<span style="color: #00bcff;">battery</span>)
 (<span style="color: #b6a0ff;">when</span> (<span style="color: #b6a0ff;">and</span> battery-status-function
@@ -657,18 +667,18 @@ Browse and read RFC documents.
 </div>
 </div>
 </div>
-<div id="outline-container-org4271465" class="outline-3">
-<h3 id="org4271465">Font</h3>
-<div class="outline-text-3" id="text-org4271465">
+<div id="outline-container-org0b07816" class="outline-3">
+<h3 id="org0b07816">Font</h3>
+<div class="outline-text-3" id="text-org0b07816">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(set-face-attribute 'default nil <span style="color: #f78fe7;">:height</span> 130)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org910fd8b" class="outline-3">
-<h3 id="org910fd8b">TLS</h3>
-<div class="outline-text-3" id="text-org910fd8b">
+<div id="outline-container-orgc49a3de" class="outline-3">
+<h3 id="orgc49a3de">TLS</h3>
+<div class="outline-text-3" id="text-orgc49a3de">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">setq-default</span> gnutls-trustfiles (list <span style="color: #79a8ff;">"~/.emacs.d/cacert.pem"</span>
                                      <span style="color: #79a8ff;">"/etc/pki/tls/certs/ca-bundle.pem"</span>))
@@ -676,9 +686,9 @@ Browse and read RFC documents.
 </div>
 </div>
 </div>
-<div id="outline-container-org071cb32" class="outline-3">
-<h3 id="org071cb32">Column Line</h3>
-<div class="outline-text-3" id="text-org071cb32">
+<div id="outline-container-org48923c2" class="outline-3">
+<h3 id="org48923c2">Column Line</h3>
+<div class="outline-text-3" id="text-org48923c2">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">setq-default</span> display-fill-column-indicator-column 80)
 (<span style="color: #b6a0ff;">setq-default</span> fill-column 80)
@@ -687,9 +697,9 @@ Browse and read RFC documents.
 </div>
 </div>
 </div>
-<div id="outline-container-orgfa81012" class="outline-3">
-<h3 id="orgfa81012">Clean ~ files</h3>
-<div class="outline-text-3" id="text-orgfa81012">
+<div id="outline-container-org7e76f0b" class="outline-3">
+<h3 id="org7e76f0b">Clean ~ files</h3>
+<div class="outline-text-3" id="text-org7e76f0b">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">setq</span> backup-directory-alist '((<span style="color: #79a8ff;">"."</span> . <span style="color: #79a8ff;">"~/.emacs.d/backup"</span>))
   backup-by-copying t    <span style="color: #989898;">; </span><span style="color: #989898;">Don't delink hardlinks
@@ -702,9 +712,9 @@ Browse and read RFC documents.
 </div>
 </div>
 </div>
-<div id="outline-container-org6219afa" class="outline-3">
-<h3 id="org6219afa">Move Autogenerated Code</h3>
-<div class="outline-text-3" id="text-org6219afa">
+<div id="outline-container-org39cab77" class="outline-3">
+<h3 id="org39cab77">Move Autogenerated Code</h3>
+<div class="outline-text-3" id="text-org39cab77">
 <p>
 Emacs has a graphical interface to configure emacs. The generated
 code should live in a separate file.
@@ -717,9 +727,9 @@ code should live in a separate file.
 </div>
 </div>
 </div>
-<div id="outline-container-orgddd5d89" class="outline-3">
-<h3 id="orgddd5d89">Tabs size</h3>
-<div class="outline-text-3" id="text-orgddd5d89">
+<div id="outline-container-orgc9b5491" class="outline-3">
+<h3 id="orgc9b5491">Tabs size</h3>
+<div class="outline-text-3" id="text-orgc9b5491">
 <p>
 Change the tab size as 2 spaces.
 </p>
@@ -731,9 +741,9 @@ Change the tab size as 2 spaces.
 </div>
 </div>
 </div>
-<div id="outline-container-org99704ed" class="outline-3">
-<h3 id="org99704ed">Coding</h3>
-<div class="outline-text-3" id="text-org99704ed">
+<div id="outline-container-orgd0e3f5f" class="outline-3">
+<h3 id="orgd0e3f5f">Coding</h3>
+<div class="outline-text-3" id="text-orgd0e3f5f">
 <p>
 Recognize <code>.inl</code> files as cpp files.
 </p>
@@ -744,9 +754,9 @@ Recognize <code>.inl</code> files as cpp files.
 </div>
 </div>
 </div>
-<div id="outline-container-org5674cc0" class="outline-3">
-<h3 id="org5674cc0">Writer mode</h3>
-<div class="outline-text-3" id="text-org5674cc0">
+<div id="outline-container-orgc9b3752" class="outline-3">
+<h3 id="orgc9b3752">Writer mode</h3>
+<div class="outline-text-3" id="text-orgc9b3752">
 <p>
 Enter a minimal zen writer mode.
 </p>
@@ -774,18 +784,18 @@ Enter a minimal zen writer mode.
 </div>
 </div>
 </div>
-<div id="outline-container-orgbaa2648" class="outline-2">
-<h2 id="orgbaa2648">Shortcuts</h2>
-<div class="outline-text-2" id="text-orgbaa2648">
+<div id="outline-container-org1d38743" class="outline-2">
+<h2 id="org1d38743">Shortcuts</h2>
+<div class="outline-text-2" id="text-org1d38743">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #79a8ff;">"C-c c"</span>) 'compile)
 (global-set-key (kbd <span style="color: #79a8ff;">"C-c v"</span>) 'modus-themes-toggle)
 </pre>
 </div>
 </div>
-<div id="outline-container-orgafef1ad" class="outline-3">
-<h3 id="orgafef1ad">Open Links</h3>
-<div class="outline-text-3" id="text-orgafef1ad">
+<div id="outline-container-orgd76c287" class="outline-3">
+<h3 id="orgd76c287">Open Links</h3>
+<div class="outline-text-3" id="text-orgd76c287">
 <p>
 Open a web link from cursor position or selected region.
 Thank you Sacha Chua!
@@ -844,9 +854,9 @@ or a function that accepts the text (unencoded)."</span>
 </div>
 </div>
 </div>
-<div id="outline-container-org171491c" class="outline-3">
-<h3 id="org171491c">copy-line</h3>
-<div class="outline-text-3" id="text-org171491c">
+<div id="outline-container-org64349cc" class="outline-3">
+<h3 id="org64349cc">copy-line</h3>
+<div class="outline-text-3" id="text-org64349cc">
 <p>
 <a href="https://www.emacswiki.org/emacs/CopyingWholeLines">https://www.emacswiki.org/emacs/CopyingWholeLines</a>
 </p>
@@ -879,13 +889,13 @@ or a function that accepts the text (unencoded)."</span>
 </div>
 </div>
 </div>
-<div id="outline-container-org69aee5b" class="outline-2">
-<h2 id="org69aee5b">Depricated</h2>
-<div class="outline-text-2" id="text-org69aee5b">
+<div id="outline-container-org710e5df" class="outline-2">
+<h2 id="org710e5df">Depricated</h2>
+<div class="outline-text-2" id="text-org710e5df">
 </div>
-<div id="outline-container-orgbd0abdf" class="outline-3">
-<h3 id="orgbd0abdf">Undo Tree</h3>
-<div class="outline-text-3" id="text-orgbd0abdf">
+<div id="outline-container-org5fc8da6" class="outline-3">
+<h3 id="org5fc8da6">Undo Tree</h3>
+<div class="outline-text-3" id="text-org5fc8da6">
 <p>
 Show and manage history as a tree of changes.
 Try <code>undo-tree-visualize</code>.
@@ -898,9 +908,9 @@ Try <code>undo-tree-visualize</code>.
 </div>
 </div>
 </div>
-<div id="outline-container-orge5e64d0" class="outline-3">
-<h3 id="orge5e64d0">Obsidian</h3>
-<div class="outline-text-3" id="text-orge5e64d0">
+<div id="outline-container-orgf25aaf6" class="outline-3">
+<h3 id="orgf25aaf6">Obsidian</h3>
+<div class="outline-text-3" id="text-orgf25aaf6">
 <p>
 I dont use this anymore. Also, It did not work.
 </p>
@@ -912,9 +922,9 @@ I dont use this anymore. Also, It did not work.
 </div>
 </div>
 </div>
-<div id="outline-container-org159b16d" class="outline-3">
-<h3 id="org159b16d">Elfeed</h3>
-<div class="outline-text-3" id="text-org159b16d">
+<div id="outline-container-org46c0013" class="outline-3">
+<h3 id="org46c0013">Elfeed</h3>
+<div class="outline-text-3" id="text-org46c0013">
 <p>
 Local Rss feed reader. I like it and It works fine, but I moved
 to gnus.
@@ -932,9 +942,9 @@ to gnus.
 </div>
 </div>
 </div>
-<div id="outline-container-org31f5593" class="outline-3">
-<h3 id="org31f5593">PDF Reader</h3>
-<div class="outline-text-3" id="text-org31f5593">
+<div id="outline-container-org7a3293e" class="outline-3">
+<h3 id="org7a3293e">PDF Reader</h3>
+<div class="outline-text-3" id="text-org7a3293e">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #989898;">;;</span><span style="color: #989898;">(pdf-tools-install)
 </span><span style="color: #989898;">;;</span><span style="color: #989898;">(pdf-loader-install)</span>
@@ -942,9 +952,9 @@ to gnus.
 </div>
 </div>
 </div>
-<div id="outline-container-org40941e0" class="outline-3">
-<h3 id="org40941e0">LSP</h3>
-<div class="outline-text-3" id="text-org40941e0">
+<div id="outline-container-org2a26750" class="outline-3">
+<h3 id="org2a26750">LSP</h3>
+<div class="outline-text-3" id="text-org2a26750">
 <p>
 Who needs a language server, pff.
 </p>
@@ -959,9 +969,9 @@ Who needs a language server, pff.
 </div>
 </div>
 </div>
-<div id="outline-container-org3361539" class="outline-3">
-<h3 id="org3361539">C3</h3>
-<div class="outline-text-3" id="text-org3361539">
+<div id="outline-container-org320b139" class="outline-3">
+<h3 id="org320b139">C3</h3>
+<div class="outline-text-3" id="text-org320b139">
 <p>
 Sometime I use this, but It does not belong in the main init file.
 </p>
@@ -977,9 +987,9 @@ Sometime I use this, but It does not belong in the main init file.
 </div>
 </div>
 </div>
-<div id="outline-container-org48d411e" class="outline-3">
-<h3 id="org48d411e">Evil</h3>
-<div class="outline-text-3" id="text-org48d411e">
+<div id="outline-container-orgf4299cc" class="outline-3">
+<h3 id="orgf4299cc">Evil</h3>
+<div class="outline-text-3" id="text-orgf4299cc">
 <p>
 I am happy to say that I don't use evil anymore, the transition
 is now complete.
@@ -992,18 +1002,18 @@ is now complete.
 </div>
 </div>
 </div>
-<div id="outline-container-org162d2ef" class="outline-3">
-<h3 id="org162d2ef">Save Session</h3>
-<div class="outline-text-3" id="text-org162d2ef">
+<div id="outline-container-orgb4c5b84" class="outline-3">
+<h3 id="orgb4c5b84">Save Session</h3>
+<div class="outline-text-3" id="text-orgb4c5b84">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #989898;">;;</span><span style="color: #989898;">(desktop-save-mode 1)</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org9b11680" class="outline-3">
-<h3 id="org9b11680">hledger</h3>
-<div class="outline-text-3" id="text-org9b11680">
+<div id="outline-container-orgb4de8ca" class="outline-3">
+<h3 id="orgb4de8ca">hledger</h3>
+<div class="outline-text-3" id="text-orgb4de8ca">
 <p>
 An Emacs major mode for writing hledger journals and generating useful
 accounting reports.
@@ -1024,9 +1034,9 @@ report features won't work.
 </div>
 </div>
 </div>
-<div id="outline-container-orgdcf3b70" class="outline-3">
-<h3 id="orgdcf3b70">org-roam</h3>
-<div class="outline-text-3" id="text-orgdcf3b70">
+<div id="outline-container-org5c983e5" class="outline-3">
+<h3 id="org5c983e5">org-roam</h3>
+<div class="outline-text-3" id="text-org5c983e5">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #989898;">;; </span><span style="color: #989898;">(use-package org-roam
 </span><span style="color: #989898;">;;  </span><span style="color: #989898;">:ensure t
@@ -1053,9 +1063,9 @@ report features won't work.
 </div>
 </div>
 </div>
-<div id="outline-container-org75c9a20" class="outline-3">
-<h3 id="org75c9a20">EXWM</h3>
-<div class="outline-text-3" id="text-org75c9a20">
+<div id="outline-container-orga451215" class="outline-3">
+<h3 id="orga451215">EXWM</h3>
+<div class="outline-text-3" id="text-orga451215">
 <p>
 Emacs' X window manager. I have used this for a while, but
 sometimes emacs would bug and It needed to be restarted. With

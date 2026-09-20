@@ -18,8 +18,18 @@
   body {
       display: grid;
       place-items: center;  /* centers vertically & horizontally */
+      font-family: "Cormorant Garamond", monospace;
+  }
+
+  blockquote {
+      font-style: normal;
   }
 </style>
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+
 <link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
@@ -63,9 +73,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
 </p>
-<div id="outline-container-org93d5526" class="outline-2">
-<h2 id="org93d5526">Sorting</h2>
-<div class="outline-text-2" id="text-org93d5526">
+<div id="outline-container-org207e4dc" class="outline-2">
+<h2 id="org207e4dc">Sorting</h2>
+<div class="outline-text-2" id="text-org207e4dc">
 <p>
 Algoritmi noti:
 </p>
@@ -94,9 +104,9 @@ eseguiti nel caso pessimo, questa e' almeno \(logk\) con \(k\) numero di
 foglie.
 </p>
 </div>
-<div id="outline-container-orgee893b1" class="outline-3">
-<h3 id="orgee893b1">Counting Sort</h3>
-<div class="outline-text-3" id="text-orgee893b1">
+<div id="outline-container-org6a1c535" class="outline-3">
+<h3 id="org6a1c535">Counting Sort</h3>
+<div class="outline-text-3" id="text-org6a1c535">
 <p>
 Assumiamo che i numeri da ordinare sono compresi in un intervallo
 \([1..k]\). Costruiamo un array \(B[1..k]\) che conta il numero di volte
@@ -126,9 +136,9 @@ Complessità \(O(n+k)\), se \(k=O(n)\) allora la complessità e'
 </p>
 </div>
 </div>
-<div id="outline-container-orgd83c33d" class="outline-3">
-<h3 id="orgd83c33d">Pigeonhole Sort</h3>
-<div class="outline-text-3" id="text-orgd83c33d">
+<div id="outline-container-orgd866bde" class="outline-3">
+<h3 id="orgd866bde">Pigeonhole Sort</h3>
+<div class="outline-text-3" id="text-orgd866bde">
 <p>
 Se i valori non sono numeri interi, ma record associati ad una chiave
 da ordinare, possiamo usare una lista concatenata per chiave e poi
@@ -141,9 +151,9 @@ aggiuntiva. iterativo. Molto veloce quando \(k=O(n)\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgeb6bf3a" class="outline-3">
-<h3 id="orgeb6bf3a">Bucket Sort</h3>
-<div class="outline-text-3" id="text-orgeb6bf3a">
+<div id="outline-container-org992a0ba" class="outline-3">
+<h3 id="org992a0ba">Bucket Sort</h3>
+<div class="outline-text-3" id="text-org992a0ba">
 <p>
 Allora possiamo dividere l'intervallo in \(n\) sotto-intervalli di dimensione \(\frac{1}{n}\) detti bucket e poi distribuire gli \(n\) numeri nei bucket. Per l'ipotesi di uniformità, il numero atteso di valori nei bucket e' 1 dunque bucket può essere ordinato con Insertion Sort in \(O(n)\) ammortizzato.
 </p>
@@ -156,9 +166,9 @@ lineare.
 </p>
 </div>
 </div>
-<div id="outline-container-org9c2b1c6" class="outline-3">
-<h3 id="org9c2b1c6">Proprietà degli algoritmi di ordinamento</h3>
-<div class="outline-text-3" id="text-org9c2b1c6">
+<div id="outline-container-org57b96c9" class="outline-3">
+<h3 id="org57b96c9">Proprietà degli algoritmi di ordinamento</h3>
+<div class="outline-text-3" id="text-org57b96c9">
 <p>
 Un algoritmo di ordinamento e' detto <b><b>stabile</b></b> se preserva l'ordine
 iniziale tra due elementi con la stessa chiave.

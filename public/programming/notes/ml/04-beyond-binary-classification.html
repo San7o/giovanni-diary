@@ -18,8 +18,18 @@
   body {
       display: grid;
       place-items: center;  /* centers vertically & horizontally */
+      font-family: "Cormorant Garamond", monospace;
+  }
+
+  blockquote {
+      font-style: normal;
   }
 </style>
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+
 <link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
@@ -63,9 +73,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-org1a072ea" class="outline-2">
-<h2 id="org1a072ea">Beyond binary classification</h2>
-<div class="outline-text-2" id="text-org1a072ea">
+<div id="outline-container-org8d7f605" class="outline-2">
+<h2 id="org8d7f605">Beyond binary classification</h2>
+<div class="outline-text-2" id="text-org8d7f605">
 <p>
 In multi-class classification problem, differently from binary
 classification, given:
@@ -95,9 +105,9 @@ we will discuss:
 <li>all vs all</li>
 </ul>
 </div>
-<div id="outline-container-org4f4e46f" class="outline-3">
-<h3 id="org4f4e46f">One vs All (OVA)</h3>
-<div class="outline-text-3" id="text-org4f4e46f">
+<div id="outline-container-orgf255e49" class="outline-3">
+<h3 id="orgf255e49">One vs All (OVA)</h3>
+<div class="outline-text-3" id="text-orgf255e49">
 <p>
 For each label \(k=1, ..., K\) define a binary problem where:
 </p>
@@ -138,9 +148,9 @@ positive, pick least confident negative.
 </div>
 </div>
 </div>
-<div id="outline-container-org71e85c3" class="outline-3">
-<h3 id="org71e85c3">All vs All (AVA)</h3>
-<div class="outline-text-3" id="text-org71e85c3">
+<div id="outline-container-org7e66a02" class="outline-3">
+<h3 id="org7e66a02">All vs All (AVA)</h3>
+<div class="outline-text-3" id="text-org7e66a02">
 <p>
 All vs All, sometimes called <span class="underline">all pairs</span>, trains \(K(K-1)/2\) classifiers:
 </p>
@@ -160,9 +170,9 @@ Note: The teacher might ask to explain the algorithm in more detail
 </p>
 </div>
 </div>
-<div id="outline-container-orgebd5367" class="outline-3">
-<h3 id="orgebd5367">Ova vs Ava</h3>
-<div class="outline-text-3" id="text-orgebd5367">
+<div id="outline-container-org1b8fc7a" class="outline-3">
+<h3 id="org1b8fc7a">Ova vs Ava</h3>
+<div class="outline-text-3" id="text-org1b8fc7a">
 <p>
 Train time:
 </p>
@@ -190,9 +200,9 @@ Error:
 </ul>
 </div>
 </div>
-<div id="outline-container-org4234f60" class="outline-3">
-<h3 id="org4234f60">Macroaveraging vs Microaveraging</h3>
-<div class="outline-text-3" id="text-org4234f60">
+<div id="outline-container-org6327ace" class="outline-3">
+<h3 id="org6327ace">Macroaveraging vs Microaveraging</h3>
+<div class="outline-text-3" id="text-org6327ace">
 <ul class="org-ul">
 <li>Microaveraging: average over examples</li>
 <li>Macroaveraging: calculate evaluation score (e.g. accuracy) for each

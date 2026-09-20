@@ -18,8 +18,18 @@
   body {
       display: grid;
       place-items: center;  /* centers vertically & horizontally */
+      font-family: "Cormorant Garamond", monospace;
+  }
+
+  blockquote {
+      font-style: normal;
   }
 </style>
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+
 <link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
@@ -63,9 +73,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-orgb35700a" class="outline-2">
-<h2 id="orgb35700a">Linear Models</h2>
-<div class="outline-text-2" id="text-orgb35700a">
+<div id="outline-container-orgdc0ea6c" class="outline-2">
+<h2 id="orgdc0ea6c">Linear Models</h2>
+<div class="outline-text-2" id="text-orgdc0ea6c">
 <p>
 We have seen the KNN algorithm for classification. Said algorithm
 works everywhere as long as there is some spacial correlation in the
@@ -117,9 +127,9 @@ More formally, given:
 Compute: A function \(f\) minimizing \(\mathbb{E}_{(x, y)\sim D}[f(x) \ne  y]\) 
 </p>
 </div>
-<div id="outline-container-org05650d1" class="outline-3">
-<h3 id="org05650d1">Training a linear model</h3>
-<div class="outline-text-3" id="text-org05650d1">
+<div id="outline-container-org979de00" class="outline-3">
+<h3 id="org979de00">Training a linear model</h3>
+<div class="outline-text-3" id="text-org979de00">
 <p>
 Differently from KNN, linear models use <span class="underline">online learning</span>. The
 learning algorithm follows the following structure:
@@ -164,9 +174,9 @@ separated. The reason why \(w_i + f_i\cdot label\) improves the solution
 will be obvious later when we will discuss gradient descent.
 </p>
 </div>
-<div id="outline-container-org5324360" class="outline-4">
-<h4 id="org5324360">Learning Rate</h4>
-<div class="outline-text-4" id="text-org5324360">
+<div id="outline-container-org7648f6d" class="outline-4">
+<h4 id="org7648f6d">Learning Rate</h4>
+<div class="outline-text-4" id="text-org7648f6d">
 <p>
 When the model makes an incorrect prediction, you hay have noticed
 that the correction of the weights are multiple of the label

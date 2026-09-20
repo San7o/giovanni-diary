@@ -18,8 +18,18 @@
   body {
       display: grid;
       place-items: center;  /* centers vertically & horizontally */
+      font-family: "Cormorant Garamond", monospace;
+  }
+
+  blockquote {
+      font-style: normal;
   }
 </style>
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+
 <link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
@@ -31,9 +41,9 @@
 <p>
 <a href="../../index.html">Giovanni's Diary</a> &gt; <a href="../../subjects.html">Subjects</a> &gt; <a href="../programming.html">Programming</a> &gt; <a href="linux.html">Linux</a> &gt; <a href="notes.html">Notes</a> &gt;
 </p>
-<div id="outline-container-org5123908" class="outline-2">
-<h2 id="org5123908">The Linux From Scratch Experience</h2>
-<div class="outline-text-2" id="text-org5123908">
+<div id="outline-container-orga7a9b0a" class="outline-2">
+<h2 id="orga7a9b0a">The Linux From Scratch Experience</h2>
+<div class="outline-text-2" id="text-orga7a9b0a">
 <p>
 In this article I want to talk about one of the best educational
 projects I have ever done: Linux From Scratch.
@@ -57,9 +67,9 @@ userspace technologies, cutting down on high abstractions and
 pre-configured linux distributions by making my own "distribution".
 </p>
 </div>
-<div id="outline-container-orga02cd5d" class="outline-4">
-<h4 id="orga02cd5d">Index</h4>
-<div class="outline-text-4" id="text-orga02cd5d">
+<div id="outline-container-orgfa061fe" class="outline-4">
+<h4 id="orgfa061fe">Index</h4>
+<div class="outline-text-4" id="text-orgfa061fe">
 <ul class="org-ul">
 <li>What is LFS</li>
 <li>Motivation</li>
@@ -69,9 +79,9 @@ pre-configured linux distributions by making my own "distribution".
 </ul>
 </div>
 </div>
-<div id="outline-container-orgee287f9" class="outline-4">
-<h4 id="orgee287f9">What is LFS</h4>
-<div class="outline-text-4" id="text-orgee287f9">
+<div id="outline-container-orgc0ddb31" class="outline-4">
+<h4 id="orgc0ddb31">What is LFS</h4>
+<div class="outline-text-4" id="text-orgc0ddb31">
 <p>
 The idea is that you compile all your system from scratch by yourself,
 without a packet manager. This is what distinguishes LFS from a
@@ -87,9 +97,9 @@ adds additional programs like a graphics session or a browser.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf559831" class="outline-4">
-<h4 id="orgf559831">Motivation</h4>
-<div class="outline-text-4" id="text-orgf559831">
+<div id="outline-container-orga54ef10" class="outline-4">
+<h4 id="orga54ef10">Motivation</h4>
+<div class="outline-text-4" id="text-orga54ef10">
 <p>
 It all started at the end of October 2024. I was really frustrated
 with NixOS because of how you need to do everything "then NixOS
@@ -106,9 +116,9 @@ wanted something more challenging.
 </p>
 </div>
 </div>
-<div id="outline-container-orga5f7eaf" class="outline-4">
-<h4 id="orga5f7eaf">Humble beginnings</h4>
-<div class="outline-text-4" id="text-orga5f7eaf">
+<div id="outline-container-org694b1fb" class="outline-4">
+<h4 id="org694b1fb">Humble beginnings</h4>
+<div class="outline-text-4" id="text-org694b1fb">
 <p>
 You start off as with any distribution by setting up the partitions
 from a live environment. Then, you start compiling your compiler, gcc,
@@ -138,9 +148,9 @@ Now the real experience begins.
 </p>
 </div>
 </div>
-<div id="outline-container-org28d8762" class="outline-4">
-<h4 id="org28d8762">Level up</h4>
-<div class="outline-text-4" id="text-org28d8762">
+<div id="outline-container-orgeb792ca" class="outline-4">
+<h4 id="orgeb792ca">Level up</h4>
+<div class="outline-text-4" id="text-orgeb792ca">
 <p>
 One big thing you probably need is a graphical session, and this is no
 joke. Compiling all the dependencies for i3 took a while, but
@@ -170,9 +180,9 @@ desire that will not greatly improve your life.
 </p>
 </div>
 </div>
-<div id="outline-container-org3c8eca0" class="outline-4">
-<h4 id="org3c8eca0">Maintaining the build</h4>
-<div class="outline-text-4" id="text-org3c8eca0">
+<div id="outline-container-orgf5182cd" class="outline-4">
+<h4 id="orgf5182cd">Maintaining the build</h4>
+<div class="outline-text-4" id="text-orgf5182cd">
 <p>
 You can now focus on maintaining your system. You should subscribe to
 some security updates mailing lists and update programs when some

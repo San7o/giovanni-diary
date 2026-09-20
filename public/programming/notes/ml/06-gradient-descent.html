@@ -18,8 +18,18 @@
   body {
       display: grid;
       place-items: center;  /* centers vertically & horizontally */
+      font-family: "Cormorant Garamond", monospace;
+  }
+
+  blockquote {
+      font-style: normal;
   }
 </style>
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+
 <link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
@@ -63,13 +73,13 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-org76464cc" class="outline-2">
-<h2 id="org76464cc">Gradient Descent</h2>
-<div class="outline-text-2" id="text-org76464cc">
+<div id="outline-container-orgce11bbe" class="outline-2">
+<h2 id="orgce11bbe">Gradient Descent</h2>
+<div class="outline-text-2" id="text-orgce11bbe">
 </div>
-<div id="outline-container-org42ad5c0" class="outline-3">
-<h3 id="org42ad5c0">Model-Based Machine Learning</h3>
-<div class="outline-text-3" id="text-org42ad5c0">
+<div id="outline-container-org0071ae6" class="outline-3">
+<h3 id="org0071ae6">Model-Based Machine Learning</h3>
+<div class="outline-text-3" id="text-org0071ae6">
 <ol class="org-ol">
 <li>Pick a model (hyperplace, decision tree&#x2026;)</li>
 <li>Pick a criterion to optimize</li>
@@ -109,9 +119,9 @@ Let's look at linear binary classification
 </p>
 </div>
 </div>
-<div id="outline-container-orgcf802d9" class="outline-3">
-<h3 id="orgcf802d9">Loss Functions</h3>
-<div class="outline-text-3" id="text-orgcf802d9">
+<div id="outline-container-org04745a4" class="outline-3">
+<h3 id="org04745a4">Loss Functions</h3>
+<div class="outline-text-3" id="text-org04745a4">
 <p>
 How do we minimize the 0/1 loss? Finding \(w\) and \(b\) that optimize the
 0/1 loss is hard (in fact, NP-hard).
@@ -139,9 +149,9 @@ as the predicted value:
 </ul>
 </div>
 </div>
-<div id="outline-container-org4aefa89" class="outline-3">
-<h3 id="org4aefa89">Gradient Descent</h3>
-<div class="outline-text-3" id="text-org4aefa89">
+<div id="outline-container-orgf61860a" class="outline-3">
+<h3 id="orgf61860a">Gradient Descent</h3>
+<div class="outline-text-3" id="text-orgf61860a">
 <p>
 Pick a starting point \(w\). Repeat until loss doesn't decrease in any dimension:
 </p>
@@ -194,9 +204,9 @@ It is often useful to compute the gradient on set of samples.
 </p>
 </div>
 </div>
-<div id="outline-container-orgfefd750" class="outline-3">
-<h3 id="orgfefd750">Gradient</h3>
-<div class="outline-text-3" id="text-orgfefd750">
+<div id="outline-container-orge67638a" class="outline-3">
+<h3 id="orge67638a">Gradient</h3>
+<div class="outline-text-3" id="text-orge67638a">
 <p>
 The gradient is the vector of partial derivates w.r.t all the
 coordinates of the weights. For \(f: \mathbb{R}^n \rightarrow

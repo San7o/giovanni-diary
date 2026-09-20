@@ -18,8 +18,18 @@
   body {
       display: grid;
       place-items: center;  /* centers vertically & horizontally */
+      font-family: "Cormorant Garamond", monospace;
+  }
+
+  blockquote {
+      font-style: normal;
   }
 </style>
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+
 <link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
@@ -63,9 +73,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="algoritmi.html">Algoritmi</a> &gt;
 </p>
-<div id="outline-container-org2126599" class="outline-2">
-<h2 id="org2126599">Shortest Path</h2>
-<div class="outline-text-2" id="text-org2126599">
+<div id="outline-container-orga518d71" class="outline-2">
+<h2 id="orga518d71">Shortest Path</h2>
+<div class="outline-text-2" id="text-orga518d71">
 <p>
 Dato un grafo orientato \(G=(V, E)\), un nodo sorgente s e una funzione
 di peso \(w: E \rightarrow R\), trovare un cammino \(p=<v_1, v_2, ...,
@@ -73,9 +83,9 @@ v_k>\) con \(k>1\) con costo minimo. Il costo e' dato da
 \(w(p)=\sum_{i=2}^k w(v_{i-1}, v_i)\).
 </p>
 </div>
-<div id="outline-container-org5f081bf" class="outline-3">
-<h3 id="org5f081bf">Sorgente singola</h3>
-<div class="outline-text-3" id="text-org5f081bf">
+<div id="outline-container-org187f0f8" class="outline-3">
+<h3 id="org187f0f8">Sorgente singola</h3>
+<div class="outline-text-3" id="text-org187f0f8">
 <p>
 Definiamo l'albero dei cammini minimi l'albero di copertura radicato
 in \(s\) avente un cammino da \(s\) a tutti i nodi raggiungibili da
@@ -85,9 +95,9 @@ valori \(d[u]\) rappresentano il costo del cammino da \(s\) a \(u\) in \(T\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgb256b5c" class="outline-3">
-<h3 id="orgb256b5c">Teorema di Bellman</h3>
-<div class="outline-text-3" id="text-orgb256b5c">
+<div id="outline-container-org27be710" class="outline-3">
+<h3 id="org27be710">Teorema di Bellman</h3>
+<div class="outline-text-3" id="text-org27be710">
 <p>
 Una soluzione ammissibile \(T\) e' ottima se e solo se:
 </p>
@@ -104,9 +114,9 @@ che e' assurdo.
 </p>
 </div>
 </div>
-<div id="outline-container-org9fba9ef" class="outline-3">
-<h3 id="org9fba9ef">Algoritmo Generico</h3>
-<div class="outline-text-3" id="text-org9fba9ef">
+<div id="outline-container-org4c12a0f" class="outline-3">
+<h3 id="org4c12a0f">Algoritmo Generico</h3>
+<div class="outline-text-3" id="text-org4c12a0f">
 <div class="org-src-container">
 <pre class="src src-nil">shortestPath(Graph G, Node s)
   DataStructure S = DataStructure(); S.add(s)
@@ -126,9 +136,9 @@ che e' assurdo.
 </pre>
 </div>
 </div>
-<div id="outline-container-org23495e0" class="outline-4">
-<h4 id="org23495e0">Implementazione con Priority Queue</h4>
-<div class="outline-text-4" id="text-org23495e0">
+<div id="outline-container-orgdb849e3" class="outline-4">
+<h4 id="orgdb849e3">Implementazione con Priority Queue</h4>
+<div class="outline-text-4" id="text-orgdb849e3">
 <div class="org-src-container">
 <pre class="src src-nil">shortestPath(Graph G, Node s)
   DataStructure Q = PriorityQueue(); Q.insert(s, 0)
@@ -159,9 +169,9 @@ Costo computazionale con priority queue basata su:
 </ul>
 </div>
 </div>
-<div id="outline-container-org6608c43" class="outline-4">
-<h4 id="org6608c43">Coda - Bellam-Ford-Moore</h4>
-<div class="outline-text-4" id="text-org6608c43">
+<div id="outline-container-orgc297703" class="outline-4">
+<h4 id="orgc297703">Coda - Bellam-Ford-Moore</h4>
+<div class="outline-text-4" id="text-orgc297703">
 <p>
 Computazionalmente più pesante di Dijkstra ma funziona anche con archi
 di peso negativo.
@@ -189,9 +199,9 @@ Costo: \(O(nm)\).
 </p>
 </div>
 </div>
-<div id="outline-container-orge36061b" class="outline-4">
-<h4 id="orge36061b">Casi speciali - DAG</h4>
-<div class="outline-text-4" id="text-orge36061b">
+<div id="outline-container-org8706282" class="outline-4">
+<h4 id="org8706282">Casi speciali - DAG</h4>
+<div class="outline-text-4" id="text-org8706282">
 <p>
 I cammini minimi di un DAG sono sempre ben definiti; anche in presenza di pesi negativi, non esistono cicli negativi. E' possibile rilassare gli archi in ordine topologico, una volta sola.
 </p>
@@ -232,9 +242,9 @@ Riassunto:
 </div>
 </div>
 </div>
-<div id="outline-container-org28965ed" class="outline-3">
-<h3 id="org28965ed">Sorgente multipla</h3>
-<div class="outline-text-3" id="text-org28965ed">
+<div id="outline-container-orgf2e1986" class="outline-3">
+<h3 id="orgf2e1986">Sorgente multipla</h3>
+<div class="outline-text-3" id="text-orgf2e1986">
 <p>
 Posso ripetere gli algoritmi precedenti più volte.
 </p>
@@ -246,9 +256,9 @@ Posso ripetere gli algoritmi precedenti più volte.
 </ul>
 </div>
 </div>
-<div id="outline-container-org1982d5d" class="outline-3">
-<h3 id="org1982d5d">Floyd-Warshall</h3>
-<div class="outline-text-3" id="text-org1982d5d">
+<div id="outline-container-org77f6b3e" class="outline-3">
+<h3 id="org77f6b3e">Floyd-Warshall</h3>
+<div class="outline-text-3" id="text-org77f6b3e">
 <p>
 Sia \(k\) un valore in \(\{ 0,...,n \}\). Diciamo che un cammino
 \(p_{xy}^k\) e' un cammino minimo k-vincolato fra \(x\) e \(y\) se esso ha
@@ -266,9 +276,9 @@ min(d^{k-1}[x][y], d^{k-1}[x][k] + d^{k-1}[k][y]) & k > 0
 \end{cases}\]
 </p>
 </div>
-<div id="outline-container-orgb12fe56" class="outline-4">
-<h4 id="orgb12fe56">Chiusura transitiva</h4>
-<div class="outline-text-4" id="text-orgb12fe56">
+<div id="outline-container-org2f46d7f" class="outline-4">
+<h4 id="org2f46d7f">Chiusura transitiva</h4>
+<div class="outline-text-4" id="text-org2f46d7f">
 <p>
 La chiusura transitiva \(G*=(V, E*)\) di un grafo \(G=(V, E)\) e' il grafo
 orientato tale che \((u, v)\in E*\) se e solo se esiste un cammino da

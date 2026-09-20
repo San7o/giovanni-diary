@@ -18,8 +18,18 @@
   body {
       display: grid;
       place-items: center;  /* centers vertically & horizontally */
+      font-family: "Cormorant Garamond", monospace;
+  }
+
+  blockquote {
+      font-style: normal;
   }
 </style>
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+
 <link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
@@ -63,9 +73,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-org73bed50" class="outline-2">
-<h2 id="org73bed50">Neural Networks</h2>
-<div class="outline-text-2" id="text-org73bed50">
+<div id="outline-container-org65cd8c5" class="outline-2">
+<h2 id="org65cd8c5">Neural Networks</h2>
+<div class="outline-text-2" id="text-org65cd8c5">
 <p>
 Previously we have discussed perceptrons as a non-linear parameterized
 function with restricted output range. It predicts the output by
@@ -169,9 +179,9 @@ desired target output for the hidden layers. We will see how this is
 solved through a technique called <span class="underline">backpropagation</span>.
 </p>
 </div>
-<div id="outline-container-orgef7c4cf" class="outline-3">
-<h3 id="orgef7c4cf">Training with backpropagation</h3>
-<div class="outline-text-3" id="text-orgef7c4cf">
+<div id="outline-container-org517defc" class="outline-3">
+<h3 id="org517defc">Training with backpropagation</h3>
+<div class="outline-text-3" id="text-org517defc">
 <p>
 Given training samples \(T=\{ (x_1, y_1), (x_2, y_2), ..., (x_n, y_n)
 \}\), we want to adjust all the weights of the network \(\Theta\) such
@@ -261,9 +271,9 @@ We can finally perform gradient descent like we discussed in its own chapter.
 </p>
 </div>
 </div>
-<div id="outline-container-orgbe17523" class="outline-3">
-<h3 id="orgbe17523">Example</h3>
-<div class="outline-text-3" id="text-orgbe17523">
+<div id="outline-container-orga707bf3" class="outline-3">
+<h3 id="orga707bf3">Example</h3>
+<div class="outline-text-3" id="text-orga707bf3">
 <p>
 We will relax the notation now. Consider a two-layer network (that does not count the input layer). Given:
 </p>
@@ -330,9 +340,9 @@ the required derivatives</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org7478fcb" class="outline-3">
-<h3 id="org7478fcb">Convolutional Neural Networks</h3>
-<div class="outline-text-3" id="text-org7478fcb">
+<div id="outline-container-orgf534eee" class="outline-3">
+<h3 id="orgf534eee">Convolutional Neural Networks</h3>
+<div class="outline-text-3" id="text-orgf534eee">
 <p>
 In computer vision, we have a lot of important spacial information we
 want to model, however this happens to be really difficult for neural
@@ -382,9 +392,9 @@ a traditional neural network for classification.
 </p>
 </div>
 </div>
-<div id="outline-container-orgfe7d361" class="outline-3">
-<h3 id="orgfe7d361">Other neural networks</h3>
-<div class="outline-text-3" id="text-orgfe7d361">
+<div id="outline-container-org1cf9338" class="outline-3">
+<h3 id="org1cf9338">Other neural networks</h3>
+<div class="outline-text-3" id="text-org1cf9338">
 <p>
 Many other types of neural networks were developed over time for
 domain specific problems, some of the notable ones are:

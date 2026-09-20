@@ -18,8 +18,18 @@
   body {
       display: grid;
       place-items: center;  /* centers vertically & horizontally */
+      font-family: "Cormorant Garamond", monospace;
+  }
+
+  blockquote {
+      font-style: normal;
   }
 </style>
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+
 <link rel="icon" href="/giovanni-diary/favicon.ico" type="image/x-icon">
 <meta property="og:title" content="Giovanni's Diary">
 <meta property="og:description" content="Diary of Giovanni's adventures.">
@@ -63,9 +73,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-orgfd067d1" class="outline-2">
-<h2 id="orgfd067d1">Reinforcement Learning</h2>
-<div class="outline-text-2" id="text-orgfd067d1">
+<div id="outline-container-org9f8c38a" class="outline-2">
+<h2 id="org9f8c38a">Reinforcement Learning</h2>
+<div class="outline-text-2" id="text-org9f8c38a">
 <p>
 Reinforcement learning in inspired by research on psychology and
 animal learning. The problems involve an agent interacting with an
@@ -77,9 +87,9 @@ The model is asked to take actions with an effect on the state of the
 environment in order to maximize reward.
 </p>
 </div>
-<div id="outline-container-org3a420c4" class="outline-3">
-<h3 id="org3a420c4">Markov Decision Process</h3>
-<div class="outline-text-3" id="text-org3a420c4">
+<div id="outline-container-org4c2793c" class="outline-3">
+<h3 id="org4c2793c">Markov Decision Process</h3>
+<div class="outline-text-3" id="text-org4c2793c">
 <p>
 <span class="underline">Markov Decision Process</span> (MDP) is a framework used to help to make
 decisions on a stochastic environment. Our goal is to find a policy,
@@ -135,9 +145,9 @@ term or long term actions.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf16941a" class="outline-3">
-<h3 id="orgf16941a">Loop</h3>
-<div class="outline-text-3" id="text-orgf16941a">
+<div id="outline-container-orge400026" class="outline-3">
+<h3 id="orge400026">Loop</h3>
+<div class="outline-text-3" id="text-orge400026">
 <p>
 In Supervised learning: given an input \(x_i\) sampled from data
 distribution, we use the model with parameters \(w\) to predict output
@@ -170,13 +180,13 @@ directly.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org66ef6b3" class="outline-3">
-<h3 id="org66ef6b3">Value Based Methods</h3>
-<div class="outline-text-3" id="text-org66ef6b3">
+<div id="outline-container-org09ae52d" class="outline-3">
+<h3 id="org09ae52d">Value Based Methods</h3>
+<div class="outline-text-3" id="text-org09ae52d">
 </div>
-<div id="outline-container-org18c10d8" class="outline-4">
-<h4 id="org18c10d8">Value Function</h4>
-<div class="outline-text-4" id="text-org18c10d8">
+<div id="outline-container-org264240f" class="outline-4">
+<h4 id="org264240f">Value Function</h4>
+<div class="outline-text-4" id="text-org264240f">
 <p>
 The <span class="underline">value function</span> gives the total amount of rewards the agent can
 expect from a particular state to all possible states from that state.
@@ -213,9 +223,9 @@ The optimal Q-value can be used to compute the optimal policy:
 </p>
 </div>
 </div>
-<div id="outline-container-orgf8f3e04" class="outline-4">
-<h4 id="orgf8f3e04">Bellman Equation</h4>
-<div class="outline-text-4" id="text-orgf8f3e04">
+<div id="outline-container-org5a8d835" class="outline-4">
+<h4 id="org5a8d835">Bellman Equation</h4>
+<div class="outline-text-4" id="text-org5a8d835">
 <p>
 There is a recursive relationship between optimal values of succesive
 states and actions:
@@ -233,9 +243,9 @@ maximizes the expected value.
 </p>
 </div>
 </div>
-<div id="outline-container-orgad1ecc2" class="outline-4">
-<h4 id="orgad1ecc2">Algorithm</h4>
-<div class="outline-text-4" id="text-orgad1ecc2">
+<div id="outline-container-orgcee6930" class="outline-4">
+<h4 id="orgcee6930">Algorithm</h4>
+<div class="outline-text-4" id="text-orgcee6930">
 <ul class="org-ul">
 <li>Initialize the matrix \(Q\) with zeros</li>
 <li>Select a random initial state</li>
@@ -308,9 +318,9 @@ Instead of having expecatations, we sample <span class="underline">experiences</
 </div>
 </div>
 </div>
-<div id="outline-container-orga842129" class="outline-3">
-<h3 id="orga842129">Policy Gradient Methods</h3>
-<div class="outline-text-3" id="text-orga842129">
+<div id="outline-container-org7707c93" class="outline-3">
+<h3 id="org7707c93">Policy Gradient Methods</h3>
+<div class="outline-text-3" id="text-org7707c93">
 <p>
 We have seen that the space of the Q-value function can be very
 complicated. Instead of indirectly representing the policy using
