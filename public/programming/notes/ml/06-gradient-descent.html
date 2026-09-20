@@ -19,6 +19,7 @@
       display: grid;
       place-items: center;  /* centers vertically & horizontally */
       font-family: "Cormorant Garamond", monospace;
+      font-size: 1.2rem;
   }
 
   blockquote {
@@ -73,13 +74,13 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-orgce11bbe" class="outline-2">
-<h2 id="orgce11bbe">Gradient Descent</h2>
-<div class="outline-text-2" id="text-orgce11bbe">
+<div id="outline-container-org941a376" class="outline-2">
+<h2 id="org941a376">Gradient Descent</h2>
+<div class="outline-text-2" id="text-org941a376">
 </div>
-<div id="outline-container-org0071ae6" class="outline-3">
-<h3 id="org0071ae6">Model-Based Machine Learning</h3>
-<div class="outline-text-3" id="text-org0071ae6">
+<div id="outline-container-org711026c" class="outline-3">
+<h3 id="org711026c">Model-Based Machine Learning</h3>
+<div class="outline-text-3" id="text-org711026c">
 <ol class="org-ol">
 <li>Pick a model (hyperplace, decision tree&#x2026;)</li>
 <li>Pick a criterion to optimize</li>
@@ -119,9 +120,9 @@ Let's look at linear binary classification
 </p>
 </div>
 </div>
-<div id="outline-container-org04745a4" class="outline-3">
-<h3 id="org04745a4">Loss Functions</h3>
-<div class="outline-text-3" id="text-org04745a4">
+<div id="outline-container-org01f35ef" class="outline-3">
+<h3 id="org01f35ef">Loss Functions</h3>
+<div class="outline-text-3" id="text-org01f35ef">
 <p>
 How do we minimize the 0/1 loss? Finding \(w\) and \(b\) that optimize the
 0/1 loss is hard (in fact, NP-hard).
@@ -149,9 +150,9 @@ as the predicted value:
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf61860a" class="outline-3">
-<h3 id="orgf61860a">Gradient Descent</h3>
-<div class="outline-text-3" id="text-orgf61860a">
+<div id="outline-container-orgba97f70" class="outline-3">
+<h3 id="orgba97f70">Gradient Descent</h3>
+<div class="outline-text-3" id="text-orgba97f70">
 <p>
 Pick a starting point \(w\). Repeat until loss doesn't decrease in any dimension:
 </p>
@@ -204,9 +205,9 @@ It is often useful to compute the gradient on set of samples.
 </p>
 </div>
 </div>
-<div id="outline-container-orge67638a" class="outline-3">
-<h3 id="orge67638a">Gradient</h3>
-<div class="outline-text-3" id="text-orge67638a">
+<div id="outline-container-org8cb8c99" class="outline-3">
+<h3 id="org8cb8c99">Gradient</h3>
+<div class="outline-text-3" id="text-org8cb8c99">
 <p>
 The gradient is the vector of partial derivates w.r.t all the
 coordinates of the weights. For \(f: \mathbb{R}^n \rightarrow
