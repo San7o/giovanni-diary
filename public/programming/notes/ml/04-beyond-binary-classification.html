@@ -8,6 +8,7 @@
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
 
+<link rel="stylesheet" href="/micro-style.css" />
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css?foo=bar123" />
 <style>
   html, body {
@@ -74,9 +75,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-orgd466178" class="outline-2">
-<h2 id="orgd466178">Beyond binary classification</h2>
-<div class="outline-text-2" id="text-orgd466178">
+<div id="outline-container-orge5bea08" class="outline-2">
+<h2 id="orge5bea08">Beyond binary classification</h2>
+<div class="outline-text-2" id="text-orge5bea08">
 <p>
 In multi-class classification problem, differently from binary
 classification, given:
@@ -106,9 +107,9 @@ we will discuss:
 <li>all vs all</li>
 </ul>
 </div>
-<div id="outline-container-orgb239529" class="outline-3">
-<h3 id="orgb239529">One vs All (OVA)</h3>
-<div class="outline-text-3" id="text-orgb239529">
+<div id="outline-container-org27a983c" class="outline-3">
+<h3 id="org27a983c">One vs All (OVA)</h3>
+<div class="outline-text-3" id="text-org27a983c">
 <p>
 For each label \(k=1, ..., K\) define a binary problem where:
 </p>
@@ -149,9 +150,9 @@ positive, pick least confident negative.
 </div>
 </div>
 </div>
-<div id="outline-container-org51982b9" class="outline-3">
-<h3 id="org51982b9">All vs All (AVA)</h3>
-<div class="outline-text-3" id="text-org51982b9">
+<div id="outline-container-orga438023" class="outline-3">
+<h3 id="orga438023">All vs All (AVA)</h3>
+<div class="outline-text-3" id="text-orga438023">
 <p>
 All vs All, sometimes called <span class="underline">all pairs</span>, trains \(K(K-1)/2\) classifiers:
 </p>
@@ -171,9 +172,9 @@ Note: The teacher might ask to explain the algorithm in more detail
 </p>
 </div>
 </div>
-<div id="outline-container-orgd7b3d65" class="outline-3">
-<h3 id="orgd7b3d65">Ova vs Ava</h3>
-<div class="outline-text-3" id="text-orgd7b3d65">
+<div id="outline-container-orga461fe6" class="outline-3">
+<h3 id="orga461fe6">Ova vs Ava</h3>
+<div class="outline-text-3" id="text-orga461fe6">
 <p>
 Train time:
 </p>
@@ -201,9 +202,9 @@ Error:
 </ul>
 </div>
 </div>
-<div id="outline-container-org358505a" class="outline-3">
-<h3 id="org358505a">Macroaveraging vs Microaveraging</h3>
-<div class="outline-text-3" id="text-org358505a">
+<div id="outline-container-orgea82657" class="outline-3">
+<h3 id="orgea82657">Macroaveraging vs Microaveraging</h3>
+<div class="outline-text-3" id="text-orgea82657">
 <ul class="org-ul">
 <li>Microaveraging: average over examples</li>
 <li>Macroaveraging: calculate evaluation score (e.g. accuracy) for each

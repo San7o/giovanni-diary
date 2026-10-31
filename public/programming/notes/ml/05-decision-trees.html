@@ -8,6 +8,7 @@
 <title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
 
+<link rel="stylesheet" href="/micro-style.css" />
 <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css?foo=bar123" />
 <style>
   html, body {
@@ -74,9 +75,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-org62bc198" class="outline-2">
-<h2 id="org62bc198">Decision Trees</h2>
-<div class="outline-text-2" id="text-org62bc198">
+<div id="outline-container-orgefcd5a2" class="outline-2">
+<h2 id="orgefcd5a2">Decision Trees</h2>
+<div class="outline-text-2" id="text-orgefcd5a2">
 <p>
 Decision trees are simple, intuitive and powerful supervised learning
 algorithms used for both classification and regression. They make
@@ -96,9 +97,9 @@ Given a training dataset, we need to learn:
 <li>what value of that attribute to use for splitting</li>
 </ul>
 </div>
-<div id="outline-container-org47f9008" class="outline-3">
-<h3 id="org47f9008">Classification and Regression</h3>
-<div class="outline-text-3" id="text-org47f9008">
+<div id="outline-container-org2fe38c6" class="outline-3">
+<h3 id="org2fe38c6">Classification and Regression</h3>
+<div class="outline-text-3" id="text-org2fe38c6">
 <p>
 Training examples that fall into the region \(R_m\)
 \[\{ (x^{m_1}, t^{m_1}),...,(x^{m_k}, t^{m_k}) \}\]
@@ -132,9 +133,9 @@ the set of labels in the region, i.e.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgccc7dee" class="outline-3">
-<h3 id="orgccc7dee">Train a decision tree</h3>
-<div class="outline-text-3" id="text-orgccc7dee">
+<div id="outline-container-orga7939e6" class="outline-3">
+<h3 id="orga7939e6">Train a decision tree</h3>
+<div class="outline-text-3" id="text-orga7939e6">
 <p>
 We want to find a simple tree that explains data well. A good enough
 approach would be to use a greedy heuristic: start with an empty
@@ -146,9 +147,9 @@ the best attributes.
 We will now discuss three ways to decide which split is the best.
 </p>
 </div>
-<div id="outline-container-org9b40ad8" class="outline-4">
-<h4 id="org9b40ad8">Accuracy Gain</h4>
-<div class="outline-text-4" id="text-org9b40ad8">
+<div id="outline-container-orgbaf5b91" class="outline-4">
+<h4 id="orgbaf5b91">Accuracy Gain</h4>
+<div class="outline-text-4" id="text-orgbaf5b91">
 <p>
 A <span class="underline">gain</span> is defined based on change in some criteria before and after
 a split. Let us define <span class="underline">accuracy gain</span>.
@@ -176,9 +177,9 @@ another possibility inspired by information theory.
 </p>
 </div>
 </div>
-<div id="outline-container-orgbc52e51" class="outline-4">
-<h4 id="orgbc52e51">Basic of information theory and entropy</h4>
-<div class="outline-text-4" id="text-orgbc52e51">
+<div id="outline-container-orgfce357f" class="outline-4">
+<h4 id="orgfce357f">Basic of information theory and entropy</h4>
+<div class="outline-text-4" id="text-orgfce357f">
 <p>
 Which coin result is more uncertain between those two?
 </p>
@@ -225,9 +226,9 @@ Entropy can be a better option than accuracy gain to measure certainty.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb480dc2" class="outline-4">
-<h4 id="orgb480dc2">Information Gain</h4>
-<div class="outline-text-4" id="text-orgb480dc2">
+<div id="outline-container-org35f7e5a" class="outline-4">
+<h4 id="org35f7e5a">Information Gain</h4>
+<div class="outline-text-4" id="text-org35f7e5a">
 <p>
 Information Gain measures the expected reduction in entropy. It is defined as
 </p>
@@ -244,9 +245,9 @@ The feature and the corresponding value with the highest information gain will b
 </p>
 </div>
 </div>
-<div id="outline-container-org2a58ac7" class="outline-4">
-<h4 id="org2a58ac7">Gini index</h4>
-<div class="outline-text-4" id="text-org2a58ac7">
+<div id="outline-container-orgf530b12" class="outline-4">
+<h4 id="orgf530b12">Gini index</h4>
+<div class="outline-text-4" id="text-orgf530b12">
 <p>
 Gini Index is another widely used metric for choosing a good split in
 decision trees.  The Gini index measures the "impurity" (or
@@ -264,9 +265,9 @@ having misclassificaiton</li>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd3abfcc" class="outline-3">
-<h3 id="orgd3abfcc">Overfitting</h3>
-<div class="outline-text-3" id="text-orgd3abfcc">
+<div id="outline-container-orgf400a4c" class="outline-3">
+<h3 id="orgf400a4c">Overfitting</h3>
+<div class="outline-text-3" id="text-orgf400a4c">
 <ul class="org-ul">
 <li>decision trees have a structure that is determined by the data</li>
 <li>as a result they are flexible and can easily fit the training set,
@@ -276,9 +277,9 @@ leath node (<span class="underline">pruning</span>)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org405f704" class="outline-3">
-<h3 id="org405f704">Limitations</h3>
-<div class="outline-text-3" id="text-org405f704">
+<div id="outline-container-orgea46170" class="outline-3">
+<h3 id="orgea46170">Limitations</h3>
+<div class="outline-text-3" id="text-orgea46170">
 <ul class="org-ul">
 <li>you have exponentially less data al lower levels</li>
 <li>a large tree can overfit the data</li>
@@ -293,9 +294,9 @@ gain.
 </p>
 </div>
 </div>
-<div id="outline-container-org544b62e" class="outline-3">
-<h3 id="org544b62e">Comparison to KNN</h3>
-<div class="outline-text-3" id="text-org544b62e">
+<div id="outline-container-org6e3cf52" class="outline-3">
+<h3 id="org6e3cf52">Comparison to KNN</h3>
+<div class="outline-text-3" id="text-org6e3cf52">
 <p>
 Advantages and Decision Trees over KNN
 </p>
@@ -336,9 +337,9 @@ Disadvantages:
 </div>
 </div>
 </div>
-<div id="outline-container-orgdb13e2b" class="outline-2">
-<h2 id="orgdb13e2b">Improvement to decision trees: Random Forests</h2>
-<div class="outline-text-2" id="text-orgdb13e2b">
+<div id="outline-container-org6cad66f" class="outline-2">
+<h2 id="org6cad66f">Improvement to decision trees: Random Forests</h2>
+<div class="outline-text-2" id="text-org6cad66f">
 <p>
 <span class="underline">Bootstrapping</span> is a resampling technique that involves repeatedly
 drawing samples from the dataset with replacement (the same element

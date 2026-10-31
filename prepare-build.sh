@@ -14,6 +14,7 @@ echo -e "\n-----\n\n Travel: [[file:emacs.org][Emacs]], [[file:../../theindex.or
 # Style
 cp style/favicon.ico public/
 cp style/logo.png public/
+cp style/micro-style.css public/
 
 # Fonts
 mkdir -p public/fonts
