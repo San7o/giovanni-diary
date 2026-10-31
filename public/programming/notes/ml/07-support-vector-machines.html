@@ -75,9 +75,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-org0d9debe" class="outline-2">
-<h2 id="org0d9debe">Support Vector Machines</h2>
-<div class="outline-text-2" id="text-org0d9debe">
+<div id="outline-container-org83db67e" class="outline-2">
+<h2 id="org83db67e">Support Vector Machines</h2>
+<div class="outline-text-2" id="text-org83db67e">
 <p>
 Linear classifiers assume the data can be linearly separable. If this
 does not hold, the chosen hyperplane will keep adjusting at each
@@ -85,9 +85,9 @@ iteration without ever converging. Let's now discuss a particular type
 of classifier: support vector machines (SVM).
 </p>
 </div>
-<div id="outline-container-org26be461" class="outline-3">
-<h3 id="org26be461">Large margin classifiers</h3>
-<div class="outline-text-3" id="text-org26be461">
+<div id="outline-container-org2a3c4b7" class="outline-3">
+<h3 id="org2a3c4b7">Large margin classifiers</h3>
+<div class="outline-text-3" id="text-org2a3c4b7">
 <p>
 We define the <span class="underline">margin</span> of a classifier as the distance from the
 classification hyperplane to the closest points of either class. We
@@ -180,9 +180,9 @@ For the support vectors, the following holds:
 </p>
 </div>
 </div>
-<div id="outline-container-org1409a8f" class="outline-3">
-<h3 id="org1409a8f">Maximizing the margin</h3>
-<div class="outline-text-3" id="text-org1409a8f">
+<div id="outline-container-org34858fe" class="outline-3">
+<h3 id="org34858fe">Maximizing the margin</h3>
+<div class="outline-text-3" id="text-org34858fe">
 <p>
 We want to maximize this margin, therefore we need to minimize \(\frac{1}{2}||\vec{w}||\)
 with the constraint that \(y_i(\vec{w}\vec{x_i}+b) \ge 1\ \forall i\). We
@@ -192,9 +192,9 @@ optimization problem</span>
 </p>
 </div>
 </div>
-<div id="outline-container-orgccd41a5" class="outline-3">
-<h3 id="orgccd41a5">Soft margin classification</h3>
-<div class="outline-text-3" id="text-orgccd41a5">
+<div id="outline-container-org1c7a55b" class="outline-3">
+<h3 id="org1c7a55b">Soft margin classification</h3>
+<div class="outline-text-3" id="text-org1c7a55b">
 <p>
 We may have data that is not perfect, for example we may have some
 values that lay on one side of the hyperplane but they are classified
@@ -264,9 +264,9 @@ With this result, the objective is now to minimize the following:
 </p>
 </div>
 </div>
-<div id="outline-container-orgde74d12" class="outline-3">
-<h3 id="orgde74d12">Cases of optimization problems</h3>
-<div class="outline-text-3" id="text-orgde74d12">
+<div id="outline-container-orgd26b2e9" class="outline-3">
+<h3 id="orgd26b2e9">Cases of optimization problems</h3>
+<div class="outline-text-3" id="text-orgd26b2e9">
 <p>
 For future analisys, it is useful to discuss what are the main classes
 of optimization problems:
@@ -297,9 +297,9 @@ transpose of \(x\).</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgea1bf9c" class="outline-3">
-<h3 id="orgea1bf9c">Solving quadratic problems - Lagrange multipliers</h3>
-<div class="outline-text-3" id="text-orgea1bf9c">
+<div id="outline-container-org33cc32f" class="outline-3">
+<h3 id="org33cc32f">Solving quadratic problems - Lagrange multipliers</h3>
+<div class="outline-text-3" id="text-org33cc32f">
 <p>
 Quadratic optimization problems such as the one discussed above are a well-known class of mathematical programming models with several algorithms. We will now introduce a method so solve such problems using the Lagrange multiplier, that is a strategy for finding the local maxima and minima of a function subject to equation constraints.
 </p>
@@ -362,9 +362,9 @@ vector.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orga9bf7f2" class="outline-3">
-<h3 id="orga9bf7f2">Non linear SVM - Kernel Trick</h3>
-<div class="outline-text-3" id="text-orga9bf7f2">
+<div id="outline-container-org59b5347" class="outline-3">
+<h3 id="org59b5347">Non linear SVM - Kernel Trick</h3>
+<div class="outline-text-3" id="text-org59b5347">
 <p>
 What if the data is not linearly separable? In such situation we can
 map data to a higher-dimensional space where the training set is
