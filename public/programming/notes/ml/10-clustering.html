@@ -75,9 +75,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-org3af0674" class="outline-2">
-<h2 id="org3af0674">Clustering</h2>
-<div class="outline-text-2" id="text-org3af0674">
+<div id="outline-container-orgfebd77d" class="outline-2">
+<h2 id="orgfebd77d">Clustering</h2>
+<div class="outline-text-2" id="text-orgfebd77d">
 <p>
 Given unlabeled data, we want to group them into clusters. The first
 thing to think about is how should these clusters be represented. We
@@ -101,9 +101,9 @@ belongs to exactly one cluster, and <span class="underline">soft clustering</spa
 can belong to more than one cluster (probabilistic).
 </p>
 </div>
-<div id="outline-container-orga86b8ef" class="outline-3">
-<h3 id="orga86b8ef">K-means clustering</h3>
-<div class="outline-text-3" id="text-orga86b8ef">
+<div id="outline-container-org48ef8ab" class="outline-3">
+<h3 id="org48ef8ab">K-means clustering</h3>
+<div class="outline-text-3" id="text-org48ef8ab">
 <p>
 First, we are assuming that we know the number of clusters. This is a
 strong assumption to make and may be impossible for some problems. Our
@@ -123,9 +123,9 @@ minimum. We can think of \(u_k\) as the center of a cluster \(C\).
 <li>the <span class="underline">centroid</span> is computed with \(u_j = \mathbb{E}_{c\in C}[x\in C] = \frac{1}{|C_j|}\sum_{i\in C_j} x_i\)</li>
 </ul>
 </div>
-<div id="outline-container-org75057f0" class="outline-4">
-<h4 id="org75057f0">The algorithm</h4>
-<div class="outline-text-4" id="text-org75057f0">
+<div id="outline-container-org6202774" class="outline-4">
+<h4 id="org6202774">The algorithm</h4>
+<div class="outline-text-4" id="text-org6202774">
 <p>
 ```
 Initialization: Use some initialization strategy to get
@@ -152,9 +152,9 @@ The algorithm is guaranteed to converge, but not to find the global minimum.
 </p>
 </div>
 </div>
-<div id="outline-container-org1d860b9" class="outline-4">
-<h4 id="org1d860b9">Initial Centroid Selection</h4>
-<div class="outline-text-4" id="text-org1d860b9">
+<div id="outline-container-org9354479" class="outline-4">
+<h4 id="org9354479">Initial Centroid Selection</h4>
+<div class="outline-text-4" id="text-org9354479">
 <ul class="org-ul">
 <li>random selection</li>
 <li>points least similar to any existing center</li>
@@ -162,9 +162,9 @@ The algorithm is guaranteed to converge, but not to find the global minimum.
 </ul>
 </div>
 </div>
-<div id="outline-container-org5cebeb1" class="outline-4">
-<h4 id="org5cebeb1">Running time</h4>
-<div class="outline-text-4" id="text-org5cebeb1">
+<div id="outline-container-org738d261" class="outline-4">
+<h4 id="org738d261">Running time</h4>
+<div class="outline-text-4" id="text-org738d261">
 <ul class="org-ul">
 <li>assignment: \(O(kn)\) time</li>
 <li>centroid computation: \(O(n)\) time</li>
@@ -177,9 +177,9 @@ In this case, euclidian distance is not the best so we use <span class="underlin
 </div>
 </div>
 </div>
-<div id="outline-container-orgf3d11ae" class="outline-3">
-<h3 id="orgf3d11ae">Expectation Maximization</h3>
-<div class="outline-text-3" id="text-orgf3d11ae">
+<div id="outline-container-org3ed3eba" class="outline-3">
+<h3 id="org3ed3eba">Expectation Maximization</h3>
+<div class="outline-text-3" id="text-org3ed3eba">
 <p>
 If we restrain our problem by assuming that the clusters are formed as
 a mixture of Gaussians (elliptical data) and we assign data to a
@@ -213,9 +213,9 @@ Intuitively, each iteration of Expectation Maximization increases the likelihood
 </p>
 </div>
 </div>
-<div id="outline-container-org0646266" class="outline-3">
-<h3 id="org0646266">Spectral Clustering</h3>
-<div class="outline-text-3" id="text-org0646266">
+<div id="outline-container-org735c7cd" class="outline-3">
+<h3 id="org735c7cd">Spectral Clustering</h3>
+<div class="outline-text-3" id="text-org735c7cd">
 <p>
 In case of non-gaussian data, we can use a technique called <span class="underline">spectral
 clustering</span> where we group points based on links in a graph.
@@ -239,9 +239,9 @@ continuous domain and become a generalized eigenvalue problem.
 </p>
 </div>
 </div>
-<div id="outline-container-orgdd2956a" class="outline-3">
-<h3 id="orgdd2956a">Hierarchical Clustering</h3>
-<div class="outline-text-3" id="text-orgdd2956a">
+<div id="outline-container-orgdb04073" class="outline-3">
+<h3 id="orgdb04073">Hierarchical Clustering</h3>
+<div class="outline-text-3" id="text-orgdb04073">
 <p>
 We are interested in producing a set of nested clusters organized as a
 hierarchical tree, also called <span class="underline">dendrogram</span>.
