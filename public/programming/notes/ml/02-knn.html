@@ -75,9 +75,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-orgf834b5c" class="outline-2">
-<h2 id="orgf834b5c">The K-nearest neighbor algorithm</h2>
-<div class="outline-text-2" id="text-orgf834b5c">
+<div id="outline-container-org8ac56db" class="outline-2">
+<h2 id="org8ac56db">The K-nearest neighbor algorithm</h2>
+<div class="outline-text-2" id="text-org8ac56db">
 <p>
 In this chapter we will discuss our first supervised learning
 algorithm: <span class="underline">K-nearest neighbors</span>, aka <span class="underline">K-NN</span>. Remember that supervised
@@ -125,18 +125,18 @@ An example speudocode:
 </pre>
 </div>
 </div>
-<div id="outline-container-org582d303" class="outline-3">
-<h3 id="org582d303">How do we measure distance?</h3>
-<div class="outline-text-3" id="text-org582d303">
+<div id="outline-container-org556d165" class="outline-3">
+<h3 id="org556d165">How do we measure distance?</h3>
+<div class="outline-text-3" id="text-org556d165">
 <p>
 Measuring distance / similarity is a domain-specific problem and there
 are many different alternatives. We will now see different methods to
 model distance.
 </p>
 </div>
-<div id="outline-container-orgc1d5283" class="outline-4">
-<h4 id="orgc1d5283">Euclidean distance</h4>
-<div class="outline-text-4" id="text-orgc1d5283">
+<div id="outline-container-org9929f8e" class="outline-4">
+<h4 id="org9929f8e">Euclidean distance</h4>
+<div class="outline-text-4" id="text-org9929f8e">
 <p>
 Euclidean distance is measured in \(n\) dimensions with the formula:
 </p>
@@ -175,9 +175,9 @@ the mean is 0 and the standard deviation from the mean is 1.
 </ul>
 </div>
 </div>
-<div id="outline-container-org6b05a4c" class="outline-4">
-<h4 id="org6b05a4c">Manhatthan Distance</h4>
-<div class="outline-text-4" id="text-org6b05a4c">
+<div id="outline-container-org94bd86b" class="outline-4">
+<h4 id="org94bd86b">Manhatthan Distance</h4>
+<div class="outline-text-4" id="text-org94bd86b">
 <p>
 The Manhatthan distance is used to find the distance of two paths in a
 grid, it was originally invented for the city o Manatthan
@@ -188,9 +188,9 @@ grid, it was originally invented for the city o Manatthan
 </p>
 </div>
 </div>
-<div id="outline-container-org1bf06bf" class="outline-4">
-<h4 id="org1bf06bf">Checysher Distance</h4>
-<div class="outline-text-4" id="text-org1bf06bf">
+<div id="outline-container-org2858fb4" class="outline-4">
+<h4 id="org2858fb4">Checysher Distance</h4>
+<div class="outline-text-4" id="text-org2858fb4">
 <p>
 The checkysher distance is useful to calculate distances in the chess
 board, in particular the number of moved of the kind to reach a
@@ -202,9 +202,9 @@ certain square.
 </p>
 </div>
 </div>
-<div id="outline-container-org8e616ba" class="outline-4">
-<h4 id="org8e616ba">Minkowsky distance</h4>
-<div class="outline-text-4" id="text-org8e616ba">
+<div id="outline-container-org01c198f" class="outline-4">
+<h4 id="org01c198f">Minkowsky distance</h4>
+<div class="outline-text-4" id="text-org01c198f">
 <p>
 All the three aforementioned distances can be generalized with the
 following formula (Minkowsky Distance) also called $p$-norm or
@@ -230,9 +230,9 @@ don't tend to shrink the weights enough.
 </p>
 </div>
 </div>
-<div id="outline-container-org1b61e15" class="outline-4">
-<h4 id="org1b61e15">Cosine Similarity</h4>
-<div class="outline-text-4" id="text-org1b61e15">
+<div id="outline-container-orgea07911" class="outline-4">
+<h4 id="orgea07911">Cosine Similarity</h4>
+<div class="outline-text-4" id="text-orgea07911">
 <p>
 Given two different vectors \(d_1\) and \(d_2\), we can find the cosine
 \(cos\) with the formula:
@@ -268,9 +268,9 @@ independently of the length of the documents.
 </div>
 </div>
 </div>
-<div id="outline-container-org564073f" class="outline-3">
-<h3 id="org564073f">Decision Boundaries</h3>
-<div class="outline-text-3" id="text-org564073f">
+<div id="outline-container-org4aa5d2d" class="outline-3">
+<h3 id="org4aa5d2d">Decision Boundaries</h3>
+<div class="outline-text-3" id="text-org4aa5d2d">
 <p>
 The KNN algorithm can be thought of as assigning a label to an object
 withing the space enclosed by a <span class="underline">decision boundary</span>. Decision
@@ -278,9 +278,9 @@ boundaries are places in the features space where the classification
 of a point / example changes.
 </p>
 </div>
-<div id="outline-container-org93276a8" class="outline-4">
-<h4 id="org93276a8">Voronoi Diagram / Partitioning</h4>
-<div class="outline-text-4" id="text-org93276a8">
+<div id="outline-container-orgadcecd9" class="outline-4">
+<h4 id="orgadcecd9">Voronoi Diagram / Partitioning</h4>
+<div class="outline-text-4" id="text-orgadcecd9">
 <p>
 A Voronoi diagram describes the areas that are nearest to any given
 point, given a set of data where each line segment is equidistant
@@ -299,9 +299,9 @@ of the Voronoi diagram for the training data.
 </div>
 </div>
 </div>
-<div id="outline-container-orgd6da8e4" class="outline-3">
-<h3 id="orgd6da8e4">Choosing K</h3>
-<div class="outline-text-3" id="text-orgd6da8e4">
+<div id="outline-container-org50aefd3" class="outline-3">
+<h3 id="org50aefd3">Choosing K</h3>
+<div class="outline-text-3" id="text-org50aefd3">
 <p>
 Some techniques to pick \(k\) include:
 </p>
@@ -318,9 +318,9 @@ In general, bugger values of \(k\) give a smoother decision boundary.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb83df72" class="outline-3">
-<h3 id="orgb83df72">Lazy Learner vs Eager Learner</h3>
-<div class="outline-text-3" id="text-orgb83df72">
+<div id="outline-container-org6b1d1fb" class="outline-3">
+<h3 id="org6b1d1fb">Lazy Learner vs Eager Learner</h3>
+<div class="outline-text-3" id="text-org6b1d1fb">
 <p>
 k-NN belongs to the class of lazy learning algorithms.
 </p>
@@ -338,9 +338,9 @@ This means that k-NN is not really fast during inference, but no training is req
 </p>
 </div>
 </div>
-<div id="outline-container-org0052d4a" class="outline-3">
-<h3 id="org0052d4a">Curse of Dimensionality</h3>
-<div class="outline-text-3" id="text-org0052d4a">
+<div id="outline-container-org55ce452" class="outline-3">
+<h3 id="org55ce452">Curse of Dimensionality</h3>
+<div class="outline-text-3" id="text-org55ce452">
 <p>
 There is a big problem in high dimensional data that may degrade the
 performance of the algorithm. That is, in high dimensions almost all
@@ -369,9 +369,9 @@ it requires points to be close in every dimension.
 </p>
 </div>
 </div>
-<div id="outline-container-org56667b9" class="outline-3">
-<h3 id="org56667b9">Computational Cost</h3>
-<div class="outline-text-3" id="text-org56667b9">
+<div id="outline-container-org70ec2b0" class="outline-3">
+<h3 id="org70ec2b0">Computational Cost</h3>
+<div class="outline-text-3" id="text-org70ec2b0">
 <ul class="org-ul">
 <li>Linear algorithm (no preprocessing) is \(O(kN)\) to compute the
 distance for all N datapoints</li>
