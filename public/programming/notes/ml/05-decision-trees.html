@@ -75,9 +75,9 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-org11399f5" class="outline-2">
-<h2 id="org11399f5">Decision Trees</h2>
-<div class="outline-text-2" id="text-org11399f5">
+<div id="outline-container-org3012e9a" class="outline-2">
+<h2 id="org3012e9a">Decision Trees</h2>
+<div class="outline-text-2" id="text-org3012e9a">
 <p>
 Decision trees are simple, intuitive and powerful supervised learning
 algorithms used for both classification and regression. They make
@@ -97,9 +97,9 @@ Given a training dataset, we need to learn:
 <li>what value of that attribute to use for splitting</li>
 </ul>
 </div>
-<div id="outline-container-org15569f2" class="outline-3">
-<h3 id="org15569f2">Classification and Regression</h3>
-<div class="outline-text-3" id="text-org15569f2">
+<div id="outline-container-orgc75d03f" class="outline-3">
+<h3 id="orgc75d03f">Classification and Regression</h3>
+<div class="outline-text-3" id="text-orgc75d03f">
 <p>
 Training examples that fall into the region \(R_m\)
 \[\{ (x^{m_1}, t^{m_1}),...,(x^{m_k}, t^{m_k}) \}\]
@@ -133,9 +133,9 @@ the set of labels in the region, i.e.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcb258ed" class="outline-3">
-<h3 id="orgcb258ed">Train a decision tree</h3>
-<div class="outline-text-3" id="text-orgcb258ed">
+<div id="outline-container-orgc069ba5" class="outline-3">
+<h3 id="orgc069ba5">Train a decision tree</h3>
+<div class="outline-text-3" id="text-orgc069ba5">
 <p>
 We want to find a simple tree that explains data well. A good enough
 approach would be to use a greedy heuristic: start with an empty
@@ -147,9 +147,9 @@ the best attributes.
 We will now discuss three ways to decide which split is the best.
 </p>
 </div>
-<div id="outline-container-org2414186" class="outline-4">
-<h4 id="org2414186">Accuracy Gain</h4>
-<div class="outline-text-4" id="text-org2414186">
+<div id="outline-container-org9b66952" class="outline-4">
+<h4 id="org9b66952">Accuracy Gain</h4>
+<div class="outline-text-4" id="text-org9b66952">
 <p>
 A <span class="underline">gain</span> is defined based on change in some criteria before and after
 a split. Let us define <span class="underline">accuracy gain</span>.
@@ -177,9 +177,9 @@ another possibility inspired by information theory.
 </p>
 </div>
 </div>
-<div id="outline-container-org5f34290" class="outline-4">
-<h4 id="org5f34290">Basic of information theory and entropy</h4>
-<div class="outline-text-4" id="text-org5f34290">
+<div id="outline-container-org2b3fc02" class="outline-4">
+<h4 id="org2b3fc02">Basic of information theory and entropy</h4>
+<div class="outline-text-4" id="text-org2b3fc02">
 <p>
 Which coin result is more uncertain between those two?
 </p>
@@ -226,9 +226,9 @@ Entropy can be a better option than accuracy gain to measure certainty.
 </p>
 </div>
 </div>
-<div id="outline-container-orgfaaefab" class="outline-4">
-<h4 id="orgfaaefab">Information Gain</h4>
-<div class="outline-text-4" id="text-orgfaaefab">
+<div id="outline-container-orgffc4e38" class="outline-4">
+<h4 id="orgffc4e38">Information Gain</h4>
+<div class="outline-text-4" id="text-orgffc4e38">
 <p>
 Information Gain measures the expected reduction in entropy. It is defined as
 </p>
@@ -245,9 +245,9 @@ The feature and the corresponding value with the highest information gain will b
 </p>
 </div>
 </div>
-<div id="outline-container-org408503e" class="outline-4">
-<h4 id="org408503e">Gini index</h4>
-<div class="outline-text-4" id="text-org408503e">
+<div id="outline-container-org32222bf" class="outline-4">
+<h4 id="org32222bf">Gini index</h4>
+<div class="outline-text-4" id="text-org32222bf">
 <p>
 Gini Index is another widely used metric for choosing a good split in
 decision trees.  The Gini index measures the "impurity" (or
@@ -265,9 +265,9 @@ having misclassificaiton</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org4925be0" class="outline-3">
-<h3 id="org4925be0">Overfitting</h3>
-<div class="outline-text-3" id="text-org4925be0">
+<div id="outline-container-orge0e23de" class="outline-3">
+<h3 id="orge0e23de">Overfitting</h3>
+<div class="outline-text-3" id="text-orge0e23de">
 <ul class="org-ul">
 <li>decision trees have a structure that is determined by the data</li>
 <li>as a result they are flexible and can easily fit the training set,
@@ -277,9 +277,9 @@ leath node (<span class="underline">pruning</span>)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org83599dd" class="outline-3">
-<h3 id="org83599dd">Limitations</h3>
-<div class="outline-text-3" id="text-org83599dd">
+<div id="outline-container-org7e3b84d" class="outline-3">
+<h3 id="org7e3b84d">Limitations</h3>
+<div class="outline-text-3" id="text-org7e3b84d">
 <ul class="org-ul">
 <li>you have exponentially less data al lower levels</li>
 <li>a large tree can overfit the data</li>
@@ -294,9 +294,9 @@ gain.
 </p>
 </div>
 </div>
-<div id="outline-container-org32964a4" class="outline-3">
-<h3 id="org32964a4">Comparison to KNN</h3>
-<div class="outline-text-3" id="text-org32964a4">
+<div id="outline-container-org709a23b" class="outline-3">
+<h3 id="org709a23b">Comparison to KNN</h3>
+<div class="outline-text-3" id="text-org709a23b">
 <p>
 Advantages and Decision Trees over KNN
 </p>
@@ -337,9 +337,9 @@ Disadvantages:
 </div>
 </div>
 </div>
-<div id="outline-container-orgbdabfc7" class="outline-2">
-<h2 id="orgbdabfc7">Improvement to decision trees: Random Forests</h2>
-<div class="outline-text-2" id="text-orgbdabfc7">
+<div id="outline-container-orgc7fda96" class="outline-2">
+<h2 id="orgc7fda96">Improvement to decision trees: Random Forests</h2>
+<div class="outline-text-2" id="text-orgc7fda96">
 <p>
 <span class="underline">Bootstrapping</span> is a resampling technique that involves repeatedly
 drawing samples from the dataset with replacement (the same element
