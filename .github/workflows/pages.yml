@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 
@@ -24,30 +25,16 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Verify website files
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "Public directory:"
-          ls -lah public/
-          echo "Website files:"
-          find public/ -maxdepth 3 -type f
-
-      - name: Upload artifact
-        id: upload
+      - name: Upload website
         uses: actions/upload-pages-artifact@v4
         with:
           path: public/
 
-      - name: Verify artifact upload
-        run: |
-          echo "Artifact ID: ${{ steps.upload.outputs.artifact_id }}"
-
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
