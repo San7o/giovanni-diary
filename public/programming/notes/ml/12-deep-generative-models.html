@@ -75,17 +75,17 @@
 <p>
 <a href="../../../index.html">Giovanni's Diary</a> &gt; <a href="../../../subjects.html">Subjects</a> &gt; <a href="../../programming.html">Programming</a> &gt; <a href="../notes.html">Notes</a> &gt; <a href="intro-to-machine-learning.html">Intro to Machine Learning</a> &gt;
 </p>
-<div id="outline-container-org21169cc" class="outline-2">
-<h2 id="org21169cc">Deep Generative Models</h2>
-<div class="outline-text-2" id="text-org21169cc">
+<div id="outline-container-orga1dcdc3" class="outline-2">
+<h2 id="orga1dcdc3">Deep Generative Models</h2>
+<div class="outline-text-2" id="text-orga1dcdc3">
 </div>
-<div id="outline-container-org7fa7a9f" class="outline-3">
-<h3 id="org7fa7a9f">Definitions</h3>
-<div class="outline-text-3" id="text-org7fa7a9f">
+<div id="outline-container-org2b81427" class="outline-3">
+<h3 id="org2b81427">Definitions</h3>
+<div class="outline-text-3" id="text-org2b81427">
 </div>
-<div id="outline-container-orgd312627" class="outline-4">
-<h4 id="orgd312627">Generative Models</h4>
-<div class="outline-text-4" id="text-orgd312627">
+<div id="outline-container-orge52b9f5" class="outline-4">
+<h4 id="orge52b9f5">Generative Models</h4>
+<div class="outline-text-4" id="text-orge52b9f5">
 <p>
 <span class="underline">Generative models</span> are statistical models of the data distribution
 \(p_X\) or \(p_{XY}\), depending on the availability of target data, where
@@ -93,9 +93,9 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org49440cc" class="outline-4">
-<h4 id="org49440cc">Discriminative models</h4>
-<div class="outline-text-4" id="text-org49440cc">
+<div id="outline-container-org0fa9dd7" class="outline-4">
+<h4 id="org0fa9dd7">Discriminative models</h4>
+<div class="outline-text-4" id="text-org0fa9dd7">
 <p>
 <span class="underline">Discriminative models</span> are statistical models of the conditional
 distribution \(p_{Y|X}\).
@@ -112,9 +112,9 @@ model via Bayes rule but not viceversa.
 </div>
 </div>
 </div>
-<div id="outline-container-org1ee0d4d" class="outline-3">
-<h3 id="org1ee0d4d">Density Estimation</h3>
-<div class="outline-text-3" id="text-org1ee0d4d">
+<div id="outline-container-orgbe2fd75" class="outline-3">
+<h3 id="orgbe2fd75">Density Estimation</h3>
+<div class="outline-text-3" id="text-orgbe2fd75">
 <p>
 Explicit problem: Find a probability distribution \(f\in \Delta (Z)\)
 that fits the data, where \(z\in Z\) is sampled from an unknown data
@@ -147,9 +147,9 @@ hypothesis \(q*\in H\) that best fits the data distributed according to
 \[q*\in arg\ min\ d_{q\in H}(p_{data}, q)\]
 </p>
 </div>
-<div id="outline-container-org959aada" class="outline-4">
-<h4 id="org959aada">KL-Divergence</h4>
-<div class="outline-text-4" id="text-org959aada">
+<div id="outline-container-orgb560bfc" class="outline-4">
+<h4 id="orgb560bfc">KL-Divergence</h4>
+<div class="outline-text-4" id="text-orgb560bfc">
 <p>
 Before continuing, it is worth taking some time to study KL-divergence
 since we will use this later. The Kullback–Leibler divergence, denoted
@@ -170,9 +170,9 @@ distribution, the KL-divergence is \(0\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgf365e80" class="outline-4">
-<h4 id="orgf365e80">Jensen's Inequality</h4>
-<div class="outline-text-4" id="text-orgf365e80">
+<div id="outline-container-org0c143c1" class="outline-4">
+<h4 id="org0c143c1">Jensen's Inequality</h4>
+<div class="outline-text-4" id="text-org0c143c1">
 <p>
 Jensen's inequality generalizes the definition of convex function as a
 function that satisfies the following inequality:
@@ -196,9 +196,9 @@ where \(\phi\) is a convex function.
 </div>
 </div>
 </div>
-<div id="outline-container-orga443484" class="outline-3">
-<h3 id="orga443484">Autoencoders</h3>
-<div class="outline-text-3" id="text-orga443484">
+<div id="outline-container-orgf9cc28f" class="outline-3">
+<h3 id="orgf9cc28f">Autoencoders</h3>
+<div class="outline-text-3" id="text-orgf9cc28f">
 <p>
 The basic idea behind autoencoders is to encode information (as in
 compress) automatically, hence the name. Autoencoders are neural
@@ -217,9 +217,9 @@ smaller latent space where another neural network can be connected to.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb9f98f4" class="outline-3">
-<h3 id="orgb9f98f4">Variational AutoEncoders (VAE)</h3>
-<div class="outline-text-3" id="text-orgb9f98f4">
+<div id="outline-container-org6032a17" class="outline-3">
+<h3 id="org6032a17">Variational AutoEncoders (VAE)</h3>
+<div class="outline-text-3" id="text-org6032a17">
 <p>
 Variational Autoencoders add a "probabilistic spin" to traditional
 Autoencoders by finding a probability distribution in the latent space
@@ -302,9 +302,9 @@ both the encoder and decoder to minimize the difference.
 </p>
 </div>
 </div>
-<div id="outline-container-org4334ffb" class="outline-3">
-<h3 id="org4334ffb">Issues with VAE</h3>
-<div class="outline-text-3" id="text-org4334ffb">
+<div id="outline-container-org8d86be4" class="outline-3">
+<h3 id="org8d86be4">Issues with VAE</h3>
+<div class="outline-text-3" id="text-org8d86be4">
 <p>
 The problem with this approach is underfitting, since at initial
 stages the regularizer is too strong and tends to annihilate the model
@@ -318,9 +318,9 @@ Autoencoders. It produces images that are high quality by leveraging a
 <span class="underline">discrete latent space</span>.
 </p>
 </div>
-<div id="outline-container-org47776c2" class="outline-4">
-<h4 id="org47776c2">Conditional VAE</h4>
-<div class="outline-text-4" id="text-org47776c2">
+<div id="outline-container-orgb6cadb2" class="outline-4">
+<h4 id="orgb6cadb2">Conditional VAE</h4>
+<div class="outline-text-4" id="text-orgb6cadb2">
 <p>
 Variatonal Auto Encoders do not need lables. Conditional VAE are a
 variation of VAE that accept labels.
@@ -344,9 +344,9 @@ Define priors conditioned on side information \(p_{\omega}(\omega |y)\).
 </div>
 </div>
 </div>
-<div id="outline-container-orgea413ce" class="outline-3">
-<h3 id="orgea413ce">Generative Adversial Networks (GAN)</h3>
-<div class="outline-text-3" id="text-orgea413ce">
+<div id="outline-container-orgaa91a86" class="outline-3">
+<h3 id="orgaa91a86">Generative Adversial Networks (GAN)</h3>
+<div class="outline-text-3" id="text-orgaa91a86">
 <p>
 VAE are able to find explicit densities, GAN enables the possibility
 to find implicit ones.
